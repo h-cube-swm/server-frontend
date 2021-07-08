@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+    margin: 0;
+}
+
+a {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.btn-make-survey {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 50px;
+    color: #fff;
+    border: 0;
+    border-radius: 50px;
+    text-decoration: none;
+    background-color: #2B44FF;
+    font-weight: 700;
+}
