@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="358" height="484.001" viewBox="0 0 358 484.001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f2f2f2;
+      }
+
+      .cls-1, .cls-10, .cls-11, .cls-12, .cls-13, .cls-14, .cls-15, .cls-18, .cls-19, .cls-2, .cls-3, .cls-7, .cls-8, .cls-9 {
+        fill-rule: evenodd;
+      }
+
+      .cls-17, .cls-2 {
+        fill: #42a5ff;
+      }
+
+      .cls-3 {
+        fill: #c5cfd6;
+      }
+
+      .cls-4 {
+        fill: #c1dee2;
+      }
+
+      .cls-5 {
+        fill: #89c5cc;
+      }
+
+      .cls-6 {
+        fill: #56919c;
+      }
+
+      .cls-7 {
+        fill: #eac7a8;
+      }
+
+      .cls-8 {
+        fill: #181658;
+      }
+
+      .cls-9 {
+        fill: rgba(0,0,0,0.1);
+      }
+
+      .cls-10 {
+        fill: #1820bf;
+      }
+
+      .cls-11 {
+        fill: #e4e4e4;
+      }
+
+      .cls-12, .cls-16 {
+        fill: #2b44ff;
+      }
+
+      .cls-13 {
+        fill: #dcae92;
+      }
+
+      .cls-14 {
+        fill: #ffe760;
+      }
+
+      .cls-15 {
+        fill: #ffd800;
+      }
+
+      .cls-18 {
+        fill: #afb9c5;
+      }
+
+      .cls-19 {
+        fill: #8991dc;
+      }
+    </style>
+  </defs>
+  <g id="Master_Composition_Graphs" data-name="Master/Composition/Graphs" transform="translate(-24 -33)">
+    <g id="Chart" transform="translate(40 41)">
+      <path id="Value" class="cls-1" d="M48.661,47.713a13.52,13.52,0,1,1-9.884-22.688V0A38.758,38.758,0,0,0,0,38.5,38.758,38.758,0,0,0,38.777,77,38.325,38.325,0,0,0,67,64.811Z"/>
+      <path id="Value-2" data-name="Value" class="cls-2" d="M38,0V25.35A13.65,13.65,0,0,1,51.65,39H77A39.12,39.12,0,0,0,38,0Z"/>
+      <path id="Value-3" data-name="Value" class="cls-3" d="M51.292,38A13.743,13.743,0,0,1,46,48.838L61.838,69A39.283,39.283,0,0,0,77,38Z"/>
+    </g>
+    <g id="Circles" transform="translate(24 112)">
+      <circle id="Oval-2-Copy-17" class="cls-4" cx="20" cy="20" r="20" transform="translate(315)"/>
+      <circle id="Oval-2-Copy-6" class="cls-5" cx="13.5" cy="13.5" r="13.5" transform="translate(51 221)"/>
+      <circle id="Oval-2-Copy-14" class="cls-6" cx="13.5" cy="13.5" r="13.5" transform="translate(127 6)"/>
+      <circle id="Oval-2-Copy-10" class="cls-6" cx="13.5" cy="13.5" r="13.5" transform="translate(100 201)"/>
+      <circle id="Oval-2-Copy-11" class="cls-4" cx="18.5" cy="18.5" r="18.5" transform="translate(144 100)"/>
+      <circle id="Oval-2-Copy-16" class="cls-5" cx="27" cy="27" r="27" transform="translate(274 9)"/>
+      <circle id="Oval-2-Copy-7" class="cls-4" cx="13.5" cy="13.5" r="13.5" transform="translate(24 174)"/>
+      <circle id="Oval-2-Copy-7-2" data-name="Oval-2-Copy-7" class="cls-4" cx="9.5" cy="9.5" r="9.5" transform="translate(0 238)"/>
+      <circle id="Oval-2-Copy-9" class="cls-4" cx="10" cy="10" r="10" transform="translate(104 153)"/>
+      <circle id="Oval-2-Copy-12" class="cls-4" cx="17" cy="17" r="17" transform="translate(187 117)"/>
+      <circle id="Oval-2-Copy-13" class="cls-4" cx="17" cy="17" r="17" transform="translate(194 46)"/>
+      <circle id="Oval-2-Copy-8" class="cls-5" cx="17" cy="17" r="17" transform="translate(61 119)"/>
+      <circle id="Oval-2-Copy-15" class="cls-5" cx="20" cy="20" r="20" transform="translate(242 71)"/>
+    </g>
+    <g id="Head_Front" data-name="Head/Front" transform="translate(101.859 127.148)">
+      <g id="Head_Front_Short_2" data-name="Head/Front/Short 2">
+        <g id="Head" transform="translate(59.485 34.236)">
+          <path id="SKIN" class="cls-7" d="M42.018,10.087c6.383,11.929,5.625,42.187-2.625,44.319-3.29.85-10.3-1.232-17.432-5.543L26.438,80.62H0L9.1,38.09C4.025,32.116.59,24.8,1.164,16.594,2.818-7.041,35.634-1.841,42.018,10.087Z"/>
+        </g>
+        <path id="Hair" class="cls-8" d="M66.555,77.647c-3.318-14.8-12.771-24.889-11.327-31.5q1.444-6.615,7.7-8.227Q66.157,24.8,83.781,26.76c17.624,1.958,28.381,9.3,23.735,25.442-4.27,0-9.425-1.548-16.553,1.1q-3.393,1.262-4.853,7.83H82.889q-4.689-7.794-9.248-5.728T71.568,65.445l-1.587,12.2Z"/>
+      </g>
+    </g>
+    <g id="Bottom_Sitting" data-name="Bottom/Sitting" transform="translate(11.531 333.67)">
+      <g id="Bottom_Sitting_Skinny_Jeans_1" data-name="Bottom/Sitting/Skinny Jeans 1">
+        <g id="Objects_Seat" data-name="Objects/Seat" transform="translate(11.016 46.385)">
+          <g id="Objects_Seat_Cube" data-name="Objects/Seat/Cube">
+            <g id="Seat" transform="translate(60.586)">
+              <path id="Seat-Stuff" class="cls-3" d="M30.428,0h85.1l11.151,136.946H0Z"/>
+              <path id="Seat-Stuff-2" data-name="Seat-Stuff" class="cls-9" d="M30.428,0H56.6L72.266,136.946H0Z"/>
+            </g>
+          </g>
+        </g>
+        <path id="LegBack" class="cls-7" d="M284.152,22.924l.317-.186c9.106-5.115,23.978,1.831,23.968,9.553-.031,23.374-21.308,133.536-22.419,140.5s-13.011,8.8-13.7.023c-1.1-13.971-3.151-62.337-1.1-84.724.846-9.242,1.757-18.043,2.655-25.895q-16.744,30.318-51.8,86.826l-12.686-5.811q14.943-49.36,24.506-69.694c10.916-23.211,21.152-43.088,25.46-50.089C266.124,12.413,277.92,16.256,284.152,22.924Z"/>
+        <path id="LegLower" class="cls-10" d="M230.1,136.176,235.735,24.1c4.064-19.379,38.463-10.385,38.449,0-.032,23.578-14.167,105.026-14.177,112.051Z" transform="matrix(0.939, 0.343, -0.341, 0.94, 40.602, -81.943)"/>
+        <path id="shoe" class="cls-11" d="M207.87,136.689a23.688,23.688,0,0,0-5.293,5.485,55.489,55.489,0,0,0-3.488,8.048L252.9,181.368q6.1-5.738,1.9-8.908t-6.931-5.347L229.293,141.46a1.1,1.1,0,0,0-1.539-.245l-.025.019-3.859,2.979h0a19.77,19.77,0,0,1-7.925-1.978,17.8,17.8,0,0,1-4.878-5.118h0a2.2,2.2,0,0,0-3.072-.522Q207.931,136.639,207.87,136.689Z"/>
+        <path id="shoe-2" data-name="shoe" class="cls-11" d="M269.528,167.208a23.763,23.763,0,0,0-1.849,7.4,55.555,55.555,0,0,0,.993,8.719H330.8q2.422-8.027-2.8-8.667t-8.669-1.156L290.459,160.6a1.1,1.1,0,0,0-1.455.559l-.012.029-1.856,4.514h0q-4.83,2.26-7.85,2.26a17.743,17.743,0,0,1-6.777-1.987h0a2.2,2.2,0,0,0-2.921,1.087Q269.555,167.134,269.528,167.208Z"/>
+        <path id="Leg-and-Butt" class="cls-12" d="M311.489,40.237c0,29.341-13.9,97.781-13.907,104.241l-29.9.023q6.565-91.6,4.656-92.589c-1.909-.987-78.267,7.643-101.168,7.643-33.023,0-46.684-20.878-47.793-59.555h65.418c13.32,1.429,82.8,15.478,108.6,20.308C308.437,22.376,311.489,32.154,311.489,40.237Z"/>
+      </g>
+    </g>
+    <g id="Body" transform="translate(35.766 217.709)">
+      <g id="Body_Pointing_Forward" data-name="Body/Pointing Forward">
+        <path id="SKIN-2" data-name="SKIN" class="cls-13" d="M262.784,51.253c4.773-.985,16.422-9.671,18.429-7.908,2.97,2.609.322,10.621-2.8,14.606-5.831,7.449-10.658,10-22.591,13.331Q246.466,73.9,235.589,81.77l-.956-16.9,16.795-9.25q3.535-13.485,8.451-13.57C262.4,40.878,258.011,52.238,262.784,51.253ZM233.878,12.746c-3.084,5.488-6.081,11.4-4.51,13.089s5.489-.671,7.363,2.138q1.874,2.809-20.079,8.875l-27.782,25.5-14.12-15.194,38.235-21q9.537-11.355,18.794-17.637C233.664,7.737,236.961,7.259,233.878,12.746Z"/>
+        <g id="Group-3" transform="translate(147.998 25.828)">
+          <path id="Mask" class="cls-14" d="M9.369,12.55A93.743,93.743,0,0,0,61.416,5.522L66.2,23.22C51.174,34.075,31.242,41.788,15.351,38.8,2.828,36.453-1.191,20.18,9.369,12.55Z" transform="matrix(0.988, -0.157, 0.156, 0.988, -3.081, 5.727)"/>
+        </g>
+        <g id="Group-27" transform="translate(84.82)">
+          <path id="Mask-2" data-name="Mask" class="cls-15" d="M72.2,0c1.686,21.722,10.174,45.662,17.141,69.313q21.326,5.334,71.526-12.576,12.452,25.827,11.512,36.825c-28.713,15.037-53.322,21.74-73.6,22.181.653,12.056-.811,23.533-5.731,34.02-10.111,21.556-69.32,1.593-89.228,5.522C-8.641,114.693,15.464,98.2,15.483,72.224,15.5,43.781,38.284,0,41.636,0H72.2Z"/>
+        </g>
+      </g>
+    </g>
+    <g id="Bars" transform="translate(260 33)">
+      <rect id="Rectangle" class="cls-16" width="110" height="16" rx="4"/>
+      <rect id="Rectangle-2" data-name="Rectangle" class="cls-4" width="70" height="16" rx="4" transform="translate(0 24)"/>
+      <rect id="Rectangle-3" data-name="Rectangle" class="cls-4" width="86" height="16" rx="4" transform="translate(0 48)"/>
+    </g>
+    <g id="Graph" transform="translate(24 426)">
+      <rect id="Value-4" data-name="Value" class="cls-17" width="6" height="25" rx="3" transform="translate(0 32)"/>
+      <rect id="Value-5" data-name="Value" class="cls-17" width="6" height="41" rx="3" transform="translate(14 16)"/>
+      <rect id="Value-6" data-name="Value" class="cls-17" width="6" height="49" rx="3" transform="translate(28 8)"/>
+      <rect id="Value-7" data-name="Value" class="cls-17" width="6" height="41" rx="3" transform="translate(42 16)"/>
+      <rect id="Value-8" data-name="Value" class="cls-16" width="6" height="57" rx="3" transform="translate(56)"/>
+    </g>
+    <g id="Pie-Chart" transform="translate(382 436) rotate(180)">
+      <path id="Value-9" data-name="Value" class="cls-1" d="M58-29.516C58-13.285,44.947,0,29,0V-29.516L48.819-51A29.316,29.316,0,0,1,58-29.516Z"/>
+      <path id="Value-10" data-name="Value" class="cls-18" d="M30.108-29H1A29.114,29.114,0,0,1,8.922-48.819,29.254,29.254,0,0,1,30.108-58,29.653,29.653,0,0,1,50-50.108Z"/>
+      <path id="Value-11" data-name="Value" class="cls-19" d="M0-29A29.089,29.089,0,0,0,29,0V-29ZM43.5,0,31.9-26.1,58-14.5C55.419-7.734,49.623-2.581,43.5,0Z"/>
+    </g>
+    <g id="Circles-2" data-name="Circles" transform="translate(122 246)">
+      <circle id="Circle" class="cls-5" cx="14.5" cy="14.5" r="14.5" transform="translate(0 90)"/>
+      <circle id="Circle-2" data-name="Circle" class="cls-4" cx="7" cy="7" r="7" transform="translate(50 14)"/>
+      <circle id="Circle-3" data-name="Circle" class="cls-5" cx="15" cy="15" r="15" transform="translate(130)"/>
+    </g>
+  </g>
+</svg>

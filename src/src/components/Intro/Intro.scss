@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+    margin: 0;
+}
+
+a {
+    font-family: 'Nanum Gothic', sans-serif;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.row-1 {
+    position: relative;
+}
+
+.character1 {
+    position: absolute;
+    top: -30%;
+    left: 20%;
+}
+
+.character1 img {
+    display: block;
+    width: 80%;
+    height: auto;
+    animation-name: move-character-1;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+}
+
+.outer-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20rem;
+    width: 100%;
+    height: auto;
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.intro h1 {
+    margin-bottom: 100px;
+    line-height: 4rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.intro strong {
+    font-weight: 700;
+}
+
+.btn-make-survey {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: 0;
+    border-radius: 50px;
+    color: #fff;
+    background-color: #2B44FF;
+    
+}
+
+@keyframes move-character-1 {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translate(50px, 0);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width:1799px) {
+    .character1 {
+        position: absolute;
+        top: -20%;
+        left: 10%;
+    }
+
+    .character1 img {
+        display: block;
+        width: 70%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:1199px) {
+    .character1 {
+        position: absolute;
+        top: -10%;
+        left: 5%;
+    }
+
+    .character1 img {
+        display: block;
+        width: 60%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:899px) {
+    .character1 {
+        position: absolute;
+        top: -50%;
+        left: 5%;
+    }
+
+    .character1 img {
+        display: block;
+        width: 60%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:599px) {
+    .character1 {
+        position: absolute;
+        top: -80%;
+        left: 0%;
+    }
+
+    .character1 img {
+        display: block;
+        width: 40%;
+        height: auto;
+    }
+
+    .intro h1 {
+        margin-bottom: 30px;
+        line-height: 3.5rem;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .outer-box {
+        margin-top: 20rem;
+    }
+}

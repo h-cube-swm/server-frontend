@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Nanum Gothic', sans-serif;
+    margin: 0;
+}
+
+a {
+    font-family: 'Nanum Gothic', sans-serif;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.header {
+    display: block;
+    height: 50px;
+}
+
+.header .logo {
+    position: fixed;
+    top: 5rem;
+    left: 5rem;
+}
+
+.header .logo img {
+    width: 8rem;
+    height: auto;
+}
+
+.header .account {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5rem;
+}
+
+.header a {
+    font-size: 20px;
+    margin-right: 30px;
+}
+
+.header a:visited {
+    color: #000;
+}
+
+@media screen and (max-width:599px) {
+    .header .logo {
+        position: fixed;
+        top: 3rem;
+        left: 3rem;
+    }
+
+    .header .logo img {
+        width: 5rem;
+        height: auto;
+    }
+
+    .header .account {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 4rem 2rem;
+    }
+}
