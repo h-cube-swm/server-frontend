@@ -75,12 +75,14 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 50px;
+    width: 20rem;
+    height: 5rem;
     border: 0;
     border-radius: 50px;
     color: #fff;
     background-color: #2B44FF;
+    font-size: 1.5rem;
+    font-weight: 700;
     
 }
 
@@ -134,6 +136,11 @@ a {
 
 
 @media screen and (max-width:1023px) {
+    .btn-make-survey {
+        font-size: 1.33rem;
+        width: 16rem;
+        height: 4rem;
+    }
     .row-1 {
         margin-top: 10rem;
     }
@@ -161,6 +168,11 @@ a {
 }
 
 @media screen and (max-width:767px) {
+    .btn-make-survey {
+        font-size: 1rem;
+        width: 14rem;
+        height: 3rem;
+    }
     .row-1 {
         display: flex;
         flex-direction: column;

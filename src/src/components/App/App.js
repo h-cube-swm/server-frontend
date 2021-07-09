@@ -9,7 +9,7 @@ function App() {
     <div>
       <Header />
       <Intro />
-      {/* <Service /> */}
+      <Service />
     </div>
   );
 }
