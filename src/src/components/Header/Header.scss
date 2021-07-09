@@ -16,9 +16,9 @@ a {
 }
 
 .header .logo {
-    position: fixed;
-    top: 5rem;
-    left: 5rem;
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
 }
 
 .header .logo img {
@@ -30,23 +30,40 @@ a {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 5rem;
+    padding: 3rem;
 }
 
 .header a {
-    font-size: 20px;
-    margin-right: 30px;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.header a:last-child {
+    margin-right: 0;
 }
 
 .header a:visited {
     color: #000;
 }
 
-@media screen and (max-width:599px) {
+@media screen and (max-width:1023px) {
     .header .logo {
-        position: fixed;
-        top: 3rem;
-        left: 3rem;
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+    }
+
+    .header .logo img {
+        width: 6rem;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .header .logo {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
     }
 
     .header .logo img {
@@ -58,6 +75,7 @@ a {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 4rem 2rem;
+        padding: 2rem 2rem;
+        font-size: 2vh;
     }
 }

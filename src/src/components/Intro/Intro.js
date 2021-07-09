@@ -1,6 +1,7 @@
 import React from 'react';
 import './Intro.scss';
 import character1 from './main-character-1.svg';
+import character2 from './main-character-2.svg';
 
 function Intro() {
     return (
@@ -21,6 +22,9 @@ function Intro() {
                             </div>
                         </a>
                     </div>
+                </div>
+                <div className="character2">
+                    <img src={character2} alt="counting man" />
                 </div>
             </div>
         </>
