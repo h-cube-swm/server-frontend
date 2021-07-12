@@ -1,7 +1,7 @@
 import React from 'react';
 import './Intro.scss';
-import character1 from './main-character-1.svg';
-import character2 from './main-character-2.svg';
+import character1 from '../../assets/images/main-character-1.svg';
+import character2 from '../../assets/images/main-character-2.svg';
 
 function Intro() {
     return (

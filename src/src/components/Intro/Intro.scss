@@ -18,12 +18,12 @@ a {
 .character1 {
     position: absolute;
     left: 10%;
-    animation-name: move-character-1;
-    animation-duration: 1000ms;
-    animation-fill-mode: forwards;
     img {
         width: 20rem;
         height: auto;
+        animation-name: move-character-1;
+        animation-duration: 1000ms;
+        animation-fill-mode: forwards;
     }
 }
 
@@ -31,14 +31,14 @@ a {
     position: absolute;
     top: 70%;
     right: 10%;
-    opacity: 0;
-    animation-name: move-character-2;
-    animation-duration: 1000ms;
-    animation-delay: 800ms;
-    animation-fill-mode: forwards;
     img {
         width: 20rem;
         height: auto;
+        opacity: 0;
+        animation-name: move-character-2;
+        animation-duration: 1000ms;
+        animation-delay: 800ms;
+        animation-fill-mode: forwards;
     }
 }
 
@@ -46,7 +46,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15rem;
+    margin-top: 10rem;
     width: 100%;
     height: auto;
 }
@@ -68,28 +68,33 @@ a {
 }
 
 .intro strong {
+    display: block;
     font-weight: 700;
+    margin-top: 1.6rem;
 }
 
 .btn-make-survey {
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20rem;
-    height: 5rem;
+    width: 12.8rem;
+    height: 4rem;
+    bottom: 10rem;
     border: 0;
     border-radius: 50px;
     color: #fff;
     background-color: #2B44FF;
-    font-size: 1.5rem;
+    font-size: 1.33rem;
     font-weight: 700;
-    
+    box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+    z-index: 1;
 }
 
 @keyframes move-character-1 {
     0% {
         transform: translate(0, 0);
-        opacity: 0.3;
+        opacity: 0;
     }
     100% {
         transform: translate(50px, 0);
@@ -100,7 +105,7 @@ a {
 @keyframes move-character-2 {
     0% {
         transform: translate(0, 0);
-        opacity: 0.3;
+        opacity: 0;
     }
     100% {
         transform: translate(-50px, 0);
@@ -109,12 +114,12 @@ a {
 }
 
 @media screen and (max-width:1679px){
-    .outer-box {
-        margin-top: 10rem;
+    .btn-make-survey {
+        font-size: 1.33rem;
+        bottom: 5rem;
     }
-
     .intro h1 {
-        margin-top: 8rem;
+        margin-top: 3rem;
         margin-bottom: 6rem;
         line-height: 4rem;
         font-size: 2.5rem;
@@ -138,15 +143,14 @@ a {
 @media screen and (max-width:1023px) {
     .btn-make-survey {
         font-size: 1.33rem;
-        width: 16rem;
-        height: 4rem;
+        bottom: 20rem;
     }
     .row-1 {
         margin-top: 10rem;
     }
 
     .intro h1 {
-        margin-top: 10rem;
+        margin-top: 8rem;
         margin-bottom: 3rem;
     }
 
@@ -170,8 +174,9 @@ a {
 @media screen and (max-width:767px) {
     .btn-make-survey {
         font-size: 1rem;
-        width: 14rem;
+        width: 9.6rem;
         height: 3rem;
+        bottom: 8rem;
     }
     .row-1 {
         display: flex;
@@ -205,6 +210,49 @@ a {
         text-align: right;
         img {
             width: 8rem;
+        }
+    }
+}
+
+@media screen and (max-width:767px) 
+    and (max-height:600px) {
+    .btn-make-survey {
+        font-size: 1rem;
+        width: 9.6rem;
+        height: 3rem;
+        bottom: 5rem;
+    }
+    .row-1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .outer-box {
+        margin-top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .intro h1 {
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+        line-height: 3rem;
+        font-size: 2rem;
+    }
+
+    .character1 {
+        width: 1;
+        height: 1;
+        opacity: 0;
+        z-index: -1000;
+    }
+
+    .character2 {
+        position: static;
+        text-align: right;
+        img {
+            width: 6rem;
         }
     }
 }
