@@ -12,9 +12,12 @@ import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 
 const Edit = ({ match }) => {
+
   const [survey, setSurvey] = useState({ questions: [] });
   const [selectedIndex, setSelectedIndex] = useState(0);
+
   const surveyId = match.params.link;
+  const windowHeight = window.innerHeight;
 
   useEffect(async () => {
     const { result: survey } = await getApi(`/surveys/${surveyId}`);
@@ -38,6 +41,25 @@ const Edit = ({ match }) => {
     });
   };
 
+  console.log(survey);
+
+  /**
+   * Insert new survey at given index.
+   * @param {Integer} index 
+   */
+  const addQuestion = (index) => {
+    setSurvey(survey => {
+      const counter = survey.counter + 1;
+      const newQuestion = {
+        id: counter,
+        type: CardTypes.SINGLE_CHOICE,
+      };
+      const questions = [...survey.questions];
+      questions.splice(index, 0, newQuestion);
+      return { ...survey, counter, questions };
+    });
+    setSelectedIndex(index);
+  };
 
 
   const selectedSurveyType = survey.questions[selectedIndex]?.type;
@@ -54,14 +76,25 @@ const Edit = ({ match }) => {
           const index = idList.indexOf(question.id);
           return (
             <Card
+              key={question.id}
               question={question}
               index={index}
               selectedIndex={selectedIndex}
-              mode={CardStates.BLURREED}
+              state={CardStates.EDITTING}
             >
             </Card>
           );
         }))}
+        <div className="question-add-box" style={{ transform: `translate(-50%, ${- 240 - 32}px)` }}>
+          <button onClick={() => addQuestion(selectedIndex)}>
+            설문 추가
+          </button>
+        </div>
+        <div className="question-add-box" style={{ transform: `translate(-50%, ${+ 240 + 32}px)` }}>
+          <button onClick={() => addQuestion(selectedIndex + 1)}>
+            설문 추가
+          </button>
+        </div>
       </div>
       <Link to={"/forms/survey/end/" + match.params.link}>완료</Link>
     </div>
