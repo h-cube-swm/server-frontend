@@ -4,22 +4,23 @@ import { Link, Redirect } from "react-router-dom";
 import { getApi, putApi } from "../../../utils/parser";
 
 const Survey = () => {
-  const [data, setData] = useState("");
+  const [redirect, setRedirect] = useState(null);
 
   useEffect(async () => {
     try {
       const response = await getApi("/link");
-      setData("/forms/survey/edit/" + response.link);
+      const url = "/forms/survey/edit/" + response.link;
+      setRedirect(<Redirect to={url} />);
     } catch (e) {
       console.log(e);
     }
-  });
+  }, []);
 
   return (
     <div>
       <Link to="/">Home</Link>
       <h1>Survey Page</h1>
-      {data && <Redirect to={data} />}
+      {redirect}
     </div>
   );
 };
