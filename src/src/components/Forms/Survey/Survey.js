@@ -1,14 +1,14 @@
 /* React elements */
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { getApi } from "../../../utils/parser";
+import { getApi, putApi } from "../../../utils/parser";
 
 const Survey = () => {
   const [data, setData] = useState("");
 
   useEffect(async () => {
     try {
-      const response = await getApi("/link/");
+      const response = await getApi("/link");
       setData("/forms/survey/edit/" + response.link);
     } catch (e) {
       console.log(e);

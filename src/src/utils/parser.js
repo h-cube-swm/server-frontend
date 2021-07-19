@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ROOT = "https://api.h-cu.be";
+const ROOT = "https://api.the-form.io";
 
 export async function getApi(path) {
   try {
@@ -10,7 +10,7 @@ export async function getApi(path) {
     });
     return data;
   } catch (e) {
-    // console.log(e);
+    console.log(e);
     return null;
   }
 }
