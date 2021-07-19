@@ -22,7 +22,7 @@
 .element-detail {
   font-size: 0.7rem;
   font-weight: 700;
-  margin-top: 0.6rem;
+  margin-top: 0.3rem;
   opacity: 0;
   z-index: -2;
 }
@@ -36,24 +36,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   background-color: #fff;
   border: 0;
+}
+
+.element-binding {
+  width: 4rem;
+  height: 6rem;
   border-radius: 15px;
 }
 
-.selected.element-btn {
+.element-binding:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  z-index: 2;
+
+  .element-detail {
+    opacity: 1;
+  }
+}
+
+.selected.element-binding {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   z-index: 2;
   animation-name: clicked;
   animation-duration: 400ms;
   animation-timing-function: ease-in;
-}
-
-.element-btn:hover {
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  z-index: 2;
 }
 
 @keyframes clicked {

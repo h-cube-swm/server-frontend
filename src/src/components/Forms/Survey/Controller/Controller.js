@@ -22,10 +22,10 @@ export default function Controller({ element, setElement }) {
         {buttons.map(([image, type, detail]) => {
           const className = type === element ? "selected" : "";
           return (
-            <div className="element-binding">
+            <div className={"element-binding " + className}>
               <button
                 key={type}
-                className={"element-btn " + className}
+                className="element-btn"
                 onClick={() => setElement(type)}
               >
                 <img src={image} alt={type} />
