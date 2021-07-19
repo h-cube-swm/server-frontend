@@ -11,14 +11,14 @@ export default function Card({
     index,
     selectedIndex,
     onGrab,
-    ref
+    dom
 }) {
 
     const [isInit, setIsInit] = useState(true);
     const { type } = question;
     const deltaIndex = index - selectedIndex;
-    const isSelected = deltaIndex === 0;
     const yPos = deltaIndex * (240 + 64);
+    let showHandle = false;
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,7 +26,7 @@ export default function Card({
         }, 400);
     }, []);
 
-    const style = {
+    let style = {
         transform: 'translate(-50%, -50%)',
         opacity: isInit ? 0 : 1
     };
@@ -38,33 +38,41 @@ export default function Card({
     switch (state) {
         case CardStates.EDITTING:
             style.transform += ` translateY(${yPos}px)`;
-            if (isSelected) {
-
-            } else {
-
-            }
+            showHandle = true;
             break;
         case CardStates.ORDERING:
+            style.opacity = 0;
+            style.transitionDuration = 0 + 's';
             break;
         case CardStates.RESPONSE:
+            style.transform += ` translateY(${yPos}px)`;
+            break;
+        case CardStates.GHOST:
+            showHandle = true;
+            style.transform = "translate(-660px,-50%)";
+            style.transitionDuration = 0 + 's';
+            if (index == 0) {
+                style.opacity = 0;
+                style.zIndex = -1;
+            }
             break;
     }
 
     const _onGrab = (event) => {
-        if (!isSelected) return;
+        if (!showHandle) return;
         event.preventDefault();
         onGrab();
     };
 
     return (
-        <div className="survey-card" style={style} ref={ref}>
+        <div className="survey-card" style={style} ref={dom} >
             {CardTypes.CARD_MODE_RESPONSE}
             <div>Question : {JSON.stringify(question)}</div>
             <div>Type : {type}</div>
             <div>State: {state}</div>
             <div>Index : {index}</div>
             <div>SelectedIndex : {selectedIndex}</div>
-            <div className="handle" onMouseDown={_onGrab} style={{ opacity: isSelected ? 1 : 0, cursor: 'inherit' }}>
+            <div className="handle" onMouseDown={_onGrab} style={{ opacity: showHandle ? 1 : 0, cursor: showHandle ? 'grab' : 'inherit' }}>
                 <img src={hanleImage}></img>
             </div>
         </div>

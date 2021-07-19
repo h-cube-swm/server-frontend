@@ -9,5 +9,6 @@ export const CardTypes = {
 export const CardStates = {
     RESPONSE: 'response',
     EDITTING: 'editting',
-    ORDERING: 'ordering'
+    ORDERING: 'ordering',
+    GHOST: 'ghost'
 };
