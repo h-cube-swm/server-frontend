@@ -1,5 +1,5 @@
 /* React elements*/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 /* Test */
@@ -10,14 +10,26 @@ import './Edit.scss';
 /* Components */
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
+import useScrollPaging from "../../../../hooks/useScrollPaging";
 
 const Edit = ({ match }) => {
 
   const [survey, setSurvey] = useState({ questions: [] });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const [onWheel, isMoving] = useScrollPaging((delta) => {
+    setSelectedIndex(index => {
+      let newIndex = index + delta;
+      if (newIndex < 0) newIndex = 0;
+      if (newIndex >= questions.length) newIndex = questions.length - 1;
+      return newIndex;
+    });
+  });
+
   const surveyId = match.params.link;
   const windowHeight = window.innerHeight;
+  const { questions } = survey;
+  const questionNumber = questions.length;
 
   useEffect(async () => {
     const { result: survey } = await getApi(`/surveys/${surveyId}`);
@@ -71,7 +83,7 @@ const Edit = ({ match }) => {
       <div style={{ opacity: survey ? 0 : 1 }}>Loading</div>
       <h1>Edit Page</h1>
       <Controller element={selectedSurveyType} setElement={setSelectedSurveyType} />
-      <div className="question-container">
+      <div className="question-container" onWheel={onWheel}>
         {sortedQuestions.map((question => {
           const index = idList.indexOf(question.id);
           return (
@@ -85,19 +97,19 @@ const Edit = ({ match }) => {
             </Card>
           );
         }))}
-        <div className="question-add-box" style={{ transform: `translate(-50%, ${- 240 - 32}px)` }}>
+        <div className="question-add-box" style={{ transform: `translate(-50%, ${-240 - 32}px)` }}>
           <button onClick={() => addQuestion(selectedIndex)}>
             설문 추가
           </button>
         </div>
-        <div className="question-add-box" style={{ transform: `translate(-50%, ${+ 240 + 32}px)` }}>
+        <div className="question-add-box" style={{ transform: `translate(-50%, ${+240 + 32}px)` }}>
           <button onClick={() => addQuestion(selectedIndex + 1)}>
             설문 추가
           </button>
         </div>
       </div>
       <Link to={"/forms/survey/end/" + match.params.link}>완료</Link>
-    </div>
+    </div >
   );
 };
 
