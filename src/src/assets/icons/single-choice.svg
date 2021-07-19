@@ -6,26 +6,9 @@
   </defs>
   <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
     <rect width="55" height="55" fill="#fff"/>
-    <g id="그룹_82" data-name="그룹 82" transform="translate(0 16.213)">
-      <g id="타원_1" data-name="타원 1" transform="translate(0 3.787)" fill="#fff" stroke="#707070" stroke-width="3">
-        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
-        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
-      </g>
-      <g id="타원_8" data-name="타원 8" transform="translate(20 3.787)" fill="#fff" stroke="#707070" stroke-width="3">
-        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
-        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
-      </g>
-      <g id="타원_9" data-name="타원 9" transform="translate(40 3.787)" fill="#fff" stroke="#707070" stroke-width="3">
-        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
-        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
-      </g>
-    </g>
-    <g id="CFTV4v4-black-check-mark-vector" transform="translate(23.144 17.213)">
-      <g id="layer1" transform="translate(0)">
-        <g id="layer1-2">
-          <path id="path4068" d="M321.013-455.067l4.738,5.515a43.636,43.636,0,0,1,10.119-13.787c-3.555,2.012-7.473,5.833-10.821,10.56Z" transform="translate(-321.013 463.339)" fill="#2b44ff" stroke="#2b44ff" stroke-width="4"/>
-        </g>
-      </g>
+    <rect id="사각형_122" data-name="사각형 122" width="41" height="40" rx="15" transform="translate(7 8)" fill="#38618c"/>
+    <g id="구성_요소_4_1" data-name="구성 요소 4 – 1" transform="translate(23.244 18.504)">
+      <path id="패스_52" data-name="패스 52" d="M-2.244-13.656a.992.992,0,0,1-1.056.132.852.852,0,0,1-.456-.8,1.377,1.377,0,0,1,.1-.492.9.9,0,0,1,.336-.42l3-1.944a2.124,2.124,0,0,1,.492-.24,1.4,1.4,0,0,1,.42-.072.978.978,0,0,1,.756.252.981.981,0,0,1,.228.684Q1.6-12.312,1.62-7.9T1.668.744a.957.957,0,0,1-.36.744,1.144,1.144,0,0,1-.72.264,1.081,1.081,0,0,1-.672-.24.983.983,0,0,1-.36-.72V-.864q0-.984-.012-2.136T-.48-5.4Q-.492-6.648-.492-7.872q0-1.008-.012-2.016t-.012-1.92V-14.76Z" transform="translate(3.756 17.496)" fill="#fff"/>
     </g>
   </g>
 </svg>

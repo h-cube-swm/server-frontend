@@ -6,20 +6,21 @@
   </defs>
   <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
     <rect width="55" height="55" fill="#fff"/>
-    <g id="그룹_11" data-name="그룹 11" transform="translate(-161 16.213)">
-      <g id="타원_10" data-name="타원 10" transform="translate(161 3.787)" fill="#707070" stroke="#707070" stroke-width="3">
-        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
-        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
+    <path id="패스_52" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#ff5964"/>
+    <g id="그룹_83" data-name="그룹 83" transform="translate(0 1)">
+      <g id="타원_10" data-name="타원 10" transform="translate(13 24)" fill="#707070" stroke="#fff" stroke-width="3">
+        <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+        <circle cx="3.5" cy="3.5" r="2" fill="none"/>
       </g>
-      <g id="타원_11" data-name="타원 11" transform="translate(181 3.787)" fill="#707070" stroke="#707070" stroke-width="3">
-        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
-        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
+      <g id="타원_11" data-name="타원 11" transform="translate(24 24)" fill="#707070" stroke="#fff" stroke-width="3">
+        <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+        <circle cx="3.5" cy="3.5" r="2" fill="none"/>
       </g>
-      <g id="타원_12" data-name="타원 12" transform="translate(201 3.787)" fill="#707070" stroke="#707070" stroke-width="3">
-        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
-        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
+      <g id="타원_12" data-name="타원 12" transform="translate(35 24)" fill="#fff" stroke="#fff" stroke-width="3">
+        <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+        <circle cx="3.5" cy="3.5" r="2" fill="none"/>
       </g>
+      <path id="패스_46" data-name="패스 46" d="M0,0H22.822" transform="translate(14.773 27.5)" fill="none" stroke="#fff" stroke-width="1"/>
     </g>
-    <line id="선_21" data-name="선 21" x2="50" transform="translate(2.5 28.357)" fill="none" stroke="#707070" stroke-width="3"/>
   </g>
 </svg>

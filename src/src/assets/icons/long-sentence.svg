@@ -6,9 +6,10 @@
   </defs>
   <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
     <rect width="55" height="55" fill="#fff"/>
-    <line id="선_17" data-name="선 17" x2="55" transform="translate(0 11.357)" fill="none" stroke="#707070" stroke-width="3"/>
-    <line id="선_18" data-name="선 18" x2="55" transform="translate(0 22.782)" fill="none" stroke="#707070" stroke-width="3"/>
-    <path id="패스_43" data-name="패스 43" d="M0,0H55" transform="translate(0 34.207)" fill="none" stroke="#707070" stroke-width="3"/>
-    <line id="선_20" data-name="선 20" x2="27.5" transform="translate(0 45.632)" fill="none" stroke="#707070" stroke-width="3"/>
+    <path id="패스_52" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#b1b1b1"/>
+    <path id="패스_48" data-name="패스 48" d="M0,0H26.02" transform="translate(14.49 20)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <path id="패스_55" data-name="패스 55" d="M0,0H13" transform="translate(14.5 28)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <path id="패스_56" data-name="패스 56" d="M0,0H26.02" transform="translate(14.49 36)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <path id="패스_57" data-name="패스 57" d="M0,0H6" transform="translate(34.51 28)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
   </g>
 </svg>
