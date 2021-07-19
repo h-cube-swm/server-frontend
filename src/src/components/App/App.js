@@ -11,12 +11,9 @@ import Survey from "../Forms/Survey/Survey";
 import Edit from "../Forms/Survey/Edit";
 import Ending from "../Forms/Survey/Ending";
 
-import Test from "../test";
-
 function App() {
   return (
     <div>
-      <Test />
       <Switch>
         <Route path="/" component={Main} exact />
         <Route path="/forms/survey" component={Survey} exact />
