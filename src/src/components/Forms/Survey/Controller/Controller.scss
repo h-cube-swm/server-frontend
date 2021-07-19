@@ -1,0 +1,70 @@
+.element-box {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  position: fixed;
+  padding: 1rem;
+  border-radius: 15px;
+  right: 30rem;
+  width: 15rem;
+  height: 15rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.element-binding {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.element-detail {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 0.6rem;
+  opacity: 0;
+  z-index: -2;
+}
+
+.selected.element-detail {
+  opacity: 1;
+  z-index: 0;
+}
+
+.element-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  background-color: #fff;
+  border: 0;
+  border-radius: 15px;
+}
+
+.selected.element-btn {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  z-index: 2;
+  animation-name: clicked;
+  animation-duration: 400ms;
+  animation-timing-function: ease-in;
+}
+
+.element-btn:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  z-index: 2;
+}
+
+@keyframes clicked {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
