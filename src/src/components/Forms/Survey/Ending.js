@@ -20,7 +20,7 @@ const Ending = ({ match }) => {
     } catch (e) {
       console.log(e);
     }
-  });
+  }, []);
 
   return (
     <>
@@ -29,7 +29,7 @@ const Ending = ({ match }) => {
       <p>설명: {description}</p>
       <p>배포링크: {surveyLink}</p>
       <p>결과링크: {resultLink}</p>
-      <Link to="/">배포하기</Link>
+      <Link to="/">홈으로</Link>
     </>
   );
 };
