@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="55" viewBox="0 0 55 55">
+  <defs>
+    <clipPath id="clip-아트보드_1">
+      <rect width="55" height="55"/>
+    </clipPath>
+  </defs>
+  <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
+    <rect width="55" height="55" fill="#fff"/>
+    <g id="그룹_11" data-name="그룹 11" transform="translate(-161 16.213)">
+      <g id="타원_10" data-name="타원 10" transform="translate(161 3.787)" fill="#707070" stroke="#707070" stroke-width="3">
+        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
+        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
+      </g>
+      <g id="타원_11" data-name="타원 11" transform="translate(181 3.787)" fill="#707070" stroke="#707070" stroke-width="3">
+        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
+        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
+      </g>
+      <g id="타원_12" data-name="타원 12" transform="translate(201 3.787)" fill="#707070" stroke="#707070" stroke-width="3">
+        <ellipse cx="7.5" cy="8" rx="7.5" ry="8" stroke="none"/>
+        <ellipse cx="7.5" cy="8" rx="6" ry="6.5" fill="none"/>
+      </g>
+    </g>
+    <line id="선_21" data-name="선 21" x2="50" transform="translate(2.5 28.357)" fill="none" stroke="#707070" stroke-width="3"/>
+  </g>
+</svg>
