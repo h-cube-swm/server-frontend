@@ -5,8 +5,12 @@ import '../Card/Card.scss';
 export default function Card({ question, state, setQuestion, setResponse, index, selectedIndex }) {
 
     const { type } = question;
+    const deltaIndex = index - selectedIndex;
+    const isSelected = deltaIndex === 0;
+    const yPos = deltaIndex * 540;
+
     const style = {
-        transform: 'translate(-50%,-50%)'
+        transform: 'translate(-50%, -50%)'
     };
 
     switch (type) {
@@ -14,7 +18,18 @@ export default function Card({ question, state, setQuestion, setResponse, index,
     }
 
     switch (state) {
+        case CardStates.EDITTING:
+            style.transform += ` translateY(${yPos}px)`;
+            if (isSelected) {
 
+            } else {
+
+            }
+            break;
+        case CardStates.ORDERING:
+            break;
+        case CardStates.RESPONSE:
+            break;
     }
 
     return (

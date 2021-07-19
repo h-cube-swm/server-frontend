@@ -8,7 +8,6 @@ export const CardTypes = {
 
 export const CardStates = {
     RESPONSE: 'response',
-    BLURREED: 'blurred',
-    SELECTED: 'selected',
+    EDITTING: 'editting',
     ORDERING: 'ordering'
 };
