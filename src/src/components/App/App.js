@@ -8,7 +8,7 @@ import "./App.css";
 /* Components */
 import Main from "../Main/Main";
 import Survey from "../Forms/Survey/Survey";
-import Edit from "../Forms/Survey/Edit";
+import Edit from "../Forms/Survey/Edit/Edit";
 import Ending from "../Forms/Survey/Ending";
 
 function App() {
