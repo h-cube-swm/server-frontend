@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 /* Test */
 import { getApi } from "../../../../utils/parser";
 import { CardTypes, CardStates } from "../constants";
-import './Edit.scss';
+import "./Edit.scss";
 
 /* Components */
 import Card from "../Card/Card";
@@ -13,12 +13,11 @@ import Controller from "../Controller/Controller";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 
 const Edit = ({ match }) => {
-
   const [survey, setSurvey] = useState({ questions: [] });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [onWheel, isMoving] = useScrollPaging((delta) => {
-    setSelectedIndex(index => {
+    setSelectedIndex((index) => {
       let newIndex = index + delta;
       if (newIndex < 0) newIndex = 0;
       if (newIndex >= questions.length) newIndex = questions.length - 1;
@@ -35,20 +34,21 @@ const Edit = ({ match }) => {
     const { result: survey } = await getApi(`/surveys/${surveyId}`);
     if (!survey.counter) survey.counter = 0;
     if (!survey.questions) survey.questions = [];
-    if (survey.questions.length == 0) survey.questions.push({
-      id: survey.counter++,
-      type: CardTypes.SINGLE_CHOICE
-    });
+    if (survey.questions.length == 0)
+      survey.questions.push({
+        id: survey.counter++,
+        type: CardTypes.SINGLE_CHOICE,
+      });
     setSurvey(survey);
   }, []);
 
   const setSelectedSurveyType = (type) => {
-    setSurvey(survey => {
+    setSurvey((survey) => {
       const questions = [...survey.questions];
       questions[selectedIndex].type = type;
       return {
         questions,
-        ...survey
+        ...survey,
       };
     });
   };
@@ -57,10 +57,10 @@ const Edit = ({ match }) => {
 
   /**
    * Insert new survey at given index.
-   * @param {Integer} index 
+   * @param {Integer} index
    */
   const addQuestion = (index) => {
-    setSurvey(survey => {
+    setSurvey((survey) => {
       const counter = survey.counter + 1;
       const newQuestion = {
         id: counter,
@@ -73,7 +73,6 @@ const Edit = ({ match }) => {
     setSelectedIndex(index);
   };
 
-
   const selectedSurveyType = survey.questions[selectedIndex]?.type;
   const sortedQuestions = [...survey?.questions].sort((a, b) => a.id - b.id);
   const idList = survey.questions.map(({ id }) => id);
@@ -81,10 +80,17 @@ const Edit = ({ match }) => {
   return (
     <div className="edit">
       <div style={{ opacity: survey ? 0 : 1 }}>Loading</div>
-      <h1>Edit Page</h1>
-      <Controller element={selectedSurveyType} setElement={setSelectedSurveyType} />
+      <div className="controller-positioning-box">
+        <div className="controller-box">
+          <Controller
+            element={selectedSurveyType}
+            setElement={setSelectedSurveyType}
+          />
+          <Link to={"/forms/survey/end/" + match.params.link}>완료</Link>
+        </div>
+      </div>
       <div className="question-container" onWheel={onWheel}>
-        {sortedQuestions.map((question => {
+        {sortedQuestions.map((question) => {
           const index = idList.indexOf(question.id);
           return (
             <Card
@@ -93,27 +99,25 @@ const Edit = ({ match }) => {
               index={index}
               selectedIndex={selectedIndex}
               state={CardStates.EDITTING}
-            >
-            </Card>
+            ></Card>
           );
         })}
         <div
           className="question-add-box"
-          style={{ transform: `translate(-50%,-50%) translateY(${-240 - 32}px)` }}
+          style={{ transform: `translate(-50%,-50%) translateY(${-120 - 32}px)` }}
         >
           <button onClick={() => addQuestion(selectedIndex)}>설문 추가</button>
         </div>
         <div
           className="question-add-box"
-          style={{ transform: `translate(-50%,-50%) translateY(${+240 + 32}px)` }}
+          style={{ transform: `translate(-50%,-50%) translateY(${+120 + 32}px)` }}
         >
           <button onClick={() => addQuestion(selectedIndex + 1)}>
             설문 추가
           </button>
         </div>
       </div>
-      <Link to={"/forms/survey/end/" + match.params.link}>완료</Link>
-    </div >
+    </div>
   );
 };
 
