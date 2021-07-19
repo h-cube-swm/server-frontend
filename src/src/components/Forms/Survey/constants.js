@@ -1,4 +1,4 @@
-export const CardModes = {
+export const CardTypes = {
     SINGLE_CHOICE: 'single-choice',
     MULTIPLE_CHOICE: 'multiple-choice',
     PREFERENCE: 'preference',
@@ -7,6 +7,8 @@ export const CardModes = {
 };
 
 export const CardStates = {
-    CARD_MODE_EDITTING: 0x01,
-    CARD_MODE_RESPONSE: 0x02,
+    RESPONSE: 'response',
+    BLURREED: 'blurred',
+    SELECTED: 'selected',
+    ORDERING: 'ordering'
 };
