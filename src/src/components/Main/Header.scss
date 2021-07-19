@@ -1,0 +1,59 @@
+a {
+  font-family: "Nanum Gothic", sans-serif;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.header {
+  display: block;
+  height: 50px;
+}
+
+.header .logo {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+}
+
+.header .logo img {
+  width: 8rem;
+  height: auto;
+}
+
+.header a:visited {
+  color: #000;
+}
+
+@media screen and (max-width: 1023px) {
+  .header .logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .header .logo img {
+    width: 6rem;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header .logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .header .logo img {
+    width: 5rem;
+    height: auto;
+  }
+
+  .header .account {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2rem 2rem;
+    font-size: 2vh;
+  }
+}
