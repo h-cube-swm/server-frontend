@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { CardTypes, CardStates } from '../constants';
 import '../Card/Card.scss';
+import hanleImage from '../../../../assets/icons/handle.svg';
 
-export default function Card({ question, state, setQuestion, setResponse, index, selectedIndex }) {
+export default function Card({
+    question,
+    state,
+    setQuestion,
+    setResponse,
+    index,
+    selectedIndex,
+    onGrab,
+    ref
+}) {
 
     const [isInit, setIsInit] = useState(true);
     const { type } = question;
     const deltaIndex = index - selectedIndex;
     const isSelected = deltaIndex === 0;
-    const yPos = deltaIndex * 540;
+    const yPos = deltaIndex * (240 + 64);
 
     useEffect(() => {
         setTimeout(() => {
@@ -40,14 +50,23 @@ export default function Card({ question, state, setQuestion, setResponse, index,
             break;
     }
 
+    const _onGrab = (event) => {
+        if (!isSelected) return;
+        event.preventDefault();
+        onGrab();
+    };
+
     return (
-        <div className="survey-card" style={style}>
+        <div className="survey-card" style={style} ref={ref}>
             {CardTypes.CARD_MODE_RESPONSE}
             <div>Question : {JSON.stringify(question)}</div>
             <div>Type : {type}</div>
             <div>State: {state}</div>
             <div>Index : {index}</div>
             <div>SelectedIndex : {selectedIndex}</div>
+            <div className="handle" onMouseDown={_onGrab} style={{ opacity: isSelected ? 1 : 0, cursor: 'inherit' }}>
+                <img src={hanleImage}></img>
+            </div>
         </div>
     );
 };
