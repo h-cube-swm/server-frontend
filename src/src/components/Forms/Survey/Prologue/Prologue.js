@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
+import "./Prologue.scss";
+
 export default function Prologue() {
+  const [isFolding, setIsFolding] = useState(false);
+
   return (
+    <div
+      className="prologue-box"
+      onClick={() => {
+        setIsFolding(false);
+      }}
+    >
+      {!isFolding && (
         <form>
           <input
             name="title"
@@ -14,5 +25,7 @@ export default function Prologue() {
             placeholder="설문 설명을 입력해주세요"
           />
         </form>
+      )}
+    </div>
   );
 }
