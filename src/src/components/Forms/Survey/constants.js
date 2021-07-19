@@ -1,5 +1,5 @@
 export const CardModes = {
-    SINGLE_CHOICE: 'single-choicd',
+    SINGLE_CHOICE: 'single-choice',
     MULTIPLE_CHOICE: 'multiple-choice',
     PREFERENCE: 'preference',
     SHORT_SENTENCE: 'short-sentence',
