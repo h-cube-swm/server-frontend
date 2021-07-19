@@ -4,13 +4,12 @@
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  position: fixed;
   padding: 1rem;
   border-radius: 15px;
-  right: 30rem;
   width: 15rem;
   height: 15rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-bottom: 3rem;
 }
 
 .element-binding {
