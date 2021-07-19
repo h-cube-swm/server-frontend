@@ -1,18 +1,19 @@
 /* React elements*/
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getApi } from "../../../utils/parser";
-import { CardTypes, CardStates } from "./constants";
-import Card from "./Card/Card";
+
+/* Test */
+import { getApi } from "../../../../utils/parser";
+import { CardTypes, CardStates } from "../constants";
 import './Edit.scss';
 
 /* Components */
-import Controller from "./Controller/Controller";
+import Card from "../Card/Card";
+import Controller from "../Controller/Controller";
 
 const Edit = ({ match }) => {
   const [survey, setSurvey] = useState({ questions: [] });
   const [selectedIndex, setSelectedIndex] = useState(0);
-
   const surveyId = match.params.link;
 
   useEffect(async () => {
@@ -36,6 +37,8 @@ const Edit = ({ match }) => {
       };
     });
   };
+
+
 
   const selectedSurveyType = survey.questions[selectedIndex]?.type;
   const sortedQuestions = [...survey?.questions].sort((a, b) => a.id - b.id);
