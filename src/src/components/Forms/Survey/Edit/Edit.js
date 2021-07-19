@@ -96,13 +96,17 @@ const Edit = ({ match }) => {
             >
             </Card>
           );
-        }))}
-        <div className="question-add-box" style={{ transform: `translate(-50%, ${-240 - 32}px)` }}>
-          <button onClick={() => addQuestion(selectedIndex)}>
-            설문 추가
-          </button>
+        })}
+        <div
+          className="question-add-box"
+          style={{ transform: `translate(-50%,-50%) translateY(${-240 - 32}px)` }}
+        >
+          <button onClick={() => addQuestion(selectedIndex)}>설문 추가</button>
         </div>
-        <div className="question-add-box" style={{ transform: `translate(-50%, ${+240 + 32}px)` }}>
+        <div
+          className="question-add-box"
+          style={{ transform: `translate(-50%,-50%) translateY(${+240 + 32}px)` }}
+        >
           <button onClick={() => addQuestion(selectedIndex + 1)}>
             설문 추가
           </button>
