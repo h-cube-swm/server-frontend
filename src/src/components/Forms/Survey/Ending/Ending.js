@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { putApi } from "../../../utils/parser";
+import { putApi } from "../../../../utils/parser";
+
+import "./Ending.scss";
 
 const Ending = ({ match }) => {
   const [title, setTitle] = useState("제목을 입력해주세요.");
@@ -23,14 +25,17 @@ const Ending = ({ match }) => {
   }, []);
 
   return (
-    <>
-      <h1>Ending</h1>
-      <h2>제목: {title}</h2>
-      <p>설명: {description}</p>
-      <p>배포링크: {surveyLink}</p>
-      <p>결과링크: {resultLink}</p>
-      <Link to="/">홈으로</Link>
-    </>
+    <div className="ending-page">
+      <div className="survey-sum">
+        <h1>제목: {title}</h1>
+        <h2>설명: {description}</h2>
+        <p>배포링크: {surveyLink}</p>
+        <p>결과링크: {resultLink}</p>
+      </div>
+      <Link className="home-btn" to="/">
+        홈으로
+      </Link>
+    </div>
   );
 };
 
