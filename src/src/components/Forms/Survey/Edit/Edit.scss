@@ -42,7 +42,7 @@
 		opacity: 1;
 	}
 
-	.controller-positioning-box {
+	.positioning-box {
 		max-width: 1500px;
 		margin: 0 auto;
 		position: relative;
@@ -67,6 +67,12 @@
 				left: 50%;
 				transform: translateX(-50%);
 			}
+		}
+
+		.sidebar-box {
+			position: absolute;
+			left: 5rem;
+			top: 50vh;
 		}
 	}
 }

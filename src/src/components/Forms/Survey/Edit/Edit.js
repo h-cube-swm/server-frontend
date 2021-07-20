@@ -104,13 +104,23 @@ const Edit = ({ match }) => {
 
 	return (
 		<div className="edit" {...backgroundCallbacks}>
-			<div className="controller-positioning-box">
+      <div className="positioning-box">
 				<div className="controller-box">
 					<Controller
 						element={selectedSurveyType}
 						setElement={setSelectedSurveyType}
 					/>
-					<Link to={"/forms/survey/end/" + match.params.link}>완료</Link>
+          <Link
+            className="link-btn"
+            to={"/forms/survey/end/" + match.params.link}>
+            완료
+          </Link>
+        </div>
+        <div className="sidebar-box">
+          <Sidebar
+            questionsNumber={questionsNumber}
+            currentIndex={selectedIndex}
+            onSelect={setSelectedIndex}></Sidebar>
 				</div>
 			</div>
 			<div className="question-container" onWheel={onWheel}>
@@ -165,11 +175,6 @@ const Edit = ({ match }) => {
 						<img src={addBtn} alt="add button" />
 					</button>
 				</div>
-				<Sidebar
-					questionsNumber={questionsNumber}
-					currentIndex={selectedIndex}
-					onSelect={setSelectedIndex}
-				></Sidebar>
 			</div>
 		</div>
 	);
