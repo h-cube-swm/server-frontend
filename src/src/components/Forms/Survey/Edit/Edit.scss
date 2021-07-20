@@ -47,16 +47,16 @@ $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	max-width: 1500px;
 	margin: 0 auto;
 	position: relative;
+
 	.controller-box {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		position: absolute;
 		right: 5rem;
 		top: 50vh;
 		transform: translateY(-50%);
+
 		a {
+			position: absolute;
+			bottom: -4rem;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -68,6 +68,8 @@ $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 			font-size: 1rem;
 			border-radius: 15px;
 			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+			left: 50%;
+			transform: translateX(-50%);
 		}
 	}
 }
