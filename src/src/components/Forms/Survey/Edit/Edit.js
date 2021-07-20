@@ -13,10 +13,14 @@ import Controller from "../Controller/Controller";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
 import addBtn from "../../../../assets/icons/add-btn.svg";
+import Sidebar from "../Sidebar/Sidebar";
 
 const Edit = ({ match }) => {
 	const [survey, setSurvey] = useState({ questions: [{ type: 0 }] });
 	const [selectedIndex, setSelectedIndex] = useState(0);
+
+	const surveyId = match.params.link;
+	const questionsNumber = survey.questions.length;
 
 	const [onWheel, isMoving] = useScrollPaging((delta) => {
 		setSelectedIndex((index) => {
@@ -46,8 +50,6 @@ const Edit = ({ match }) => {
 			});
 		}
 	);
-
-	const surveyId = match.params.link;
 
 	const { questions } = survey;
 
@@ -143,9 +145,8 @@ const Edit = ({ match }) => {
 				<div
 					className="question-add-box"
 					style={{
-						transform: `translate(-50%,-50%) translateY(${
-							-(CardStyle.HEIGHT + CardStyle.DISTANCE) / 2
-						}px)`,
+						transform: `translate(-50%,-50%) translateY(${-(CardStyle.HEIGHT + CardStyle.DISTANCE) / 2
+							}px)`,
 						opacity: showAddButton ? null : 0,
 					}}>
 					<button onClick={() => addQuestion(selectedIndex)}>
@@ -155,9 +156,8 @@ const Edit = ({ match }) => {
 				<div
 					className="question-add-box"
 					style={{
-						transform: `translate(-50%,-50%) translateY(${
-							+(CardStyle.HEIGHT + CardStyle.DISTANCE) / 2
-						}px)`,
+						transform: `translate(-50%,-50%) translateY(${+(CardStyle.HEIGHT + CardStyle.DISTANCE) / 2
+							}px)`,
 						opacity: showAddButton ? null : 0,
 					}}
 					hidden={!showAddButton}>
@@ -165,6 +165,11 @@ const Edit = ({ match }) => {
 						<img src={addBtn} alt="add button" />
 					</button>
 				</div>
+				<Sidebar
+					questionsNumber={questionsNumber}
+					currentIndex={selectedIndex}
+					onSelect={setSelectedIndex}
+				></Sidebar>
 			</div>
 		</div>
 	);

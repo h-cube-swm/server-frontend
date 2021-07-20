@@ -1,0 +1,33 @@
+.sidebar {
+	position: fixed;
+	z-index: 100;
+	left: 18rem;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+	.dot {
+		position: absolute;
+		display: block;
+		height: 2rem;
+		width: 3rem;
+		font-size: 1rem;
+
+		background-color: none;
+		background: none;
+		border: none;
+
+		transition-duration: 0.2s;
+
+		cursor: pointer;
+	}
+
+	.bar {
+		position: absolute;
+		width: 2px;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.04);
+		position: absolute;
+		transform: translateX(-50%);
+		z-index: -1;
+	}
+}
