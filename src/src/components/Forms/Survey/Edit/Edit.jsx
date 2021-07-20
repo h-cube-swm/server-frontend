@@ -14,6 +14,7 @@ import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
 import addBtn from "../../../../assets/icons/add-btn.svg";
 import Sidebar from "../Sidebar/Sidebar";
+import orderedMap from "../../../../utils/orderedMap";
 
 const Edit = ({ match }) => {
 	const [survey, setSurvey] = useState({ questions: [] });
@@ -117,7 +118,7 @@ const Edit = ({ match }) => {
 				</div>
 			</div>
 			<div className="question-container" onWheel={onWheel}>
-				{questions?.map((question, index) => {
+				{orderedMap(questions, (question, index) => {
 					const isSelected = index === selectedIndex;
 
 					let state = CardStates.RESPONSE;

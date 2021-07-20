@@ -2,6 +2,7 @@ import React from "react";
 import "./Sidebar.scss";
 import selectedDot from "../../../../assets/icons/selected-dot.svg";
 import unselectedDot from "../../../../assets/icons/unselected-dot.svg";
+import orderedMap from "../../../../utils/orderedMap";
 
 const DIST_LARGE = 72;
 const DIST_NARROW = 48;
@@ -13,7 +14,7 @@ export default function Sidebar({ questions, currentIndex, onSelect }) {
   let start = 0;
   let end = 0;
 
-  let dots = questions.map((question, i) => {
+  let dots = orderedMap(questions, (question, i) => {
     const delta = i - currentIndex;
     const selected = delta === 0;
 
