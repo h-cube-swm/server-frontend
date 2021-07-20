@@ -5,7 +5,7 @@
     </clipPath>
   </defs>
   <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
-    <rect width="55" height="55" fill="#fff"/>
+    <rect width="55" height="55" fill="#fff0"/>
     <path id="패스_52" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#64e4c2"/>
     <path id="패스_48" data-name="패스 48" d="M0,0H26.02" transform="translate(14.49 24)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
     <path id="패스_53" data-name="패스 53" d="M0,0H12.93" transform="translate(14.49 32)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
