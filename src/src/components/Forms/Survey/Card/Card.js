@@ -61,6 +61,8 @@ export default function Card({
 			break;
 	}
 
+	let inner = <div className="loading">Loading</div>;
+
 	const type = question.type;
 	switch (type) {
 	}
@@ -75,12 +77,7 @@ export default function Card({
 
 	return (
 		<div className={className} style={style} ref={dom}>
-			{CardTypes.CARD_MODE_RESPONSE}
-			<div>Question : {JSON.stringify(question)}</div>
-			<div>Type : {type}</div>
-			<div>State: {state}</div>
-			<div>Index : {index}</div>
-			<div>SelectedIndex : {selectedIndex}</div>
+			<div className="inner-container">{inner}</div>
 			<div className="handle" onMouseDown={_onGrab}>
 				<img src={hanleImage}></img>
 			</div>

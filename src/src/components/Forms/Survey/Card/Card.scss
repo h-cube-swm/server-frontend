@@ -10,6 +10,17 @@ $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	transition-duration: 0.5s;
 	border: solid 0.1px rgba(0, 0, 0, 0.05);
 
+	.inner-container {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		font-size: 3rem;
+		color: rgba(0, 0, 0, 0.1);
+	}
+
 	.handle {
 		opacity: 0;
 		z-index: -1;
