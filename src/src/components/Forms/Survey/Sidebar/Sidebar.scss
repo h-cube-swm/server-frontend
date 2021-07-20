@@ -1,5 +1,5 @@
 .sidebar {
-	z-index: 100;
+	z-index: 5;
 	transform: translate(-50%, -50%);
 
 	.dot {
@@ -13,14 +13,13 @@
 		background: none;
 		border: none;
 
-		transition-duration: 0.2s;
-
+		transition-duration: 0.5s;
 		cursor: pointer;
 	}
 
 	.bar {
 		position: absolute;
-		transition-duration: 0.2s;
+		transition-duration: 0.5s;
 		width: 3px;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.04);

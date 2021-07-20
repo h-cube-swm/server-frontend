@@ -3,16 +3,17 @@ import "./Sidebar.scss";
 import selectedDot from "../../../../assets/icons/selected-dot.svg";
 import unselectedDot from "../../../../assets/icons/unselected-dot.svg";
 
-const DIST_LARGE = 64;
+const DIST_LARGE = 72;
 const DIST_NARROW = 48;
 
-export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
-  let dots = [];
+export default function Sidebar({ questions, currentIndex, onSelect }) {
 
   let y = 0;
-  let start = 0;
 
-  for (let i = 0; i < questionsNumber; i++) {
+  let start = 0;
+  let end = 0;
+
+  let dots = questions.map((question, i) => {
     const delta = i - currentIndex;
     const selected = delta === 0;
 
@@ -24,25 +25,25 @@ export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
       y = 0;
     }
 
-    if (i === 0) start = y;
+    if (start > y) start = y;
+    if (end < y) end = y;
 
     // Place component
-    dots.push(
+    return (
       <button
         className="dot"
+        key={question.id}
         onClick={() => {
           onSelect(i);
         }}
-        key={i}
         style={{
           transform: `translate(-50%,-50%) translateY(${y}px)`,
+          zIndex: selected ? 10 : null
         }}>
         <img src={selected ? selectedDot : unselectedDot} alt="dot" />
       </button>
     );
-  }
-
-  let end = y;
+  });
 
   /**
    * bar starat point = (0-c +1)*N-L
