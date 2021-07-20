@@ -9,6 +9,7 @@ export default function Card({
 	state,
 	setQuestion,
 	setResponse,
+
 	onDelete,
 
 	// UI-associated parameters
@@ -16,6 +17,7 @@ export default function Card({
 	selectedIndex,
 	onGrab,
 	dom,
+  slowAppear,
 }) {
 	const [isInit, setIsInit] = useState(true);
 	const yPos =
@@ -23,10 +25,14 @@ export default function Card({
 
 	// Implement delayed fade-in effect
 	useEffect(() => {
+    if (slowAppear) {
 		const handle = setTimeout(() => {
 			setIsInit(false);
 		}, 400);
 		return () => clearTimeout(handle);
+    } else {
+      setIsInit(false);
+    }
 	}, []);
 
 	let classes = ["survey-card"];

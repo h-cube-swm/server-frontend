@@ -90,7 +90,8 @@ const Edit = ({ match }) => {
 			questions.splice(index, 0, newQuestion);
 			return { ...survey, counter, questions };
 		});
-		setSelectedIndex(index);
+		if (survey.questions.length === 0) setSelectedIndex(0);
+		else setSelectedIndex(index);
 	};
 
 	const removeQuestion = (index) => {
@@ -99,6 +100,9 @@ const Edit = ({ match }) => {
 			questions.splice(index, 1);
 			return { ...survey, questions };
 		});
+		if (index === survey.questions.length - 1) {
+			setSelectedIndex(index - 1);
+		}
 	};
 
 	const selectedSurveyType = survey.questions[selectedIndex]?.type;
@@ -148,7 +152,8 @@ const Edit = ({ match }) => {
 							onDelete={() => {
 								removeQuestion(index);
 							}}
-							onGrab={onGrab}></Card>
+							onGrab={onGrab}
+							slowAppear={questions.length > 1}></Card>
 					);
 				})}
 				<Card
