@@ -1,19 +1,51 @@
-.survey-card {
-  position: absolute;
-  width: 640px;
-  height: 240px;
-  border-radius: 15px;
-  border: solid 1px rgba(0, 0, 0, 0.2);
-  left: 50%;
-  top: 50%;
-  transition-duration: 0.5s;
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
-  .handle {
-    transition-duration: 0.5s;
-    top: 50%;
-    position: absolute;
-    right: -3.5rem;
-    transform: translate(-50%, -50%) scale(0.8);
-    cursor: grab;
-  }
+.survey-card {
+	position: absolute;
+	width: 640px;
+	padding: 1rem;
+	border-radius: 15px;
+	left: 50%;
+	top: 50%;
+	transition-duration: 0.5s;
+	transform: scale(0.95);
+	border: solid 0.1px rgba(0, 0, 0, 0.05);
+	opacity: 0.8;
+
+	.handle {
+		opacity: 0;
+		z-index: -1;
+		position: absolute;
+		top: 50%;
+		right: -60px;
+		transform: translate(-50%, -50%) scale(0.8);
+	}
+
+	&.highlight {
+		transform: scale(1);
+		box-shadow: $box-shadow;
+		border: solid 0 rgba(0, 0, 0, 0);
+		z-index: 1;
+		background-color: #fff;
+		opacity: 1;
+	}
+
+	&.ghost {
+		transition-duration: 0s;
+		transform: translate(-670px, -50%);
+	}
+
+	&.hidden {
+		transition-duration: 0s;
+		opacity: 0;
+		z-index: -1000;
+	}
+
+	&.show-handle {
+		.handle {
+			opacity: 1;
+			transition-duration: 0.5s;
+			cursor: grab;
+		}
+	}
 }
