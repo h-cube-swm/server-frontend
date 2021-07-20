@@ -22,7 +22,7 @@
 		opacity: 0;
 		animation: disappear 2s linear;
 		text-align: center;
-		transition-duration: 100ms;
+		transition-duration: 200ms;
 
 		button {
 			@include round;
@@ -82,7 +82,7 @@
 			opacity: 1;
 		}
 
-		75% {
+		90% {
 			opacity: 1;
 		}
 
