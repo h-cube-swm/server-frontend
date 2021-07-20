@@ -1,30 +1,29 @@
 .sidebar {
-  z-index: 100;
-  transform: translate(-50%, -50%);
+	z-index: 100;
+	transform: translate(-50%, -50%);
 
-  .dot {
-    position: absolute;
-    display: block;
-    height: 4rem;
-    width: 5rem;
-    font-size: 1rem;
+	.dot {
+		position: absolute;
+		display: block;
+		height: 4rem;
+		width: 5rem;
+		font-size: 1rem;
 
-    background-color: none;
-    background: none;
-    border: none;
+		background-color: none;
+		background: none;
+		border: none;
 
-    transition-duration: 0.2s;
+		transition-duration: 0.2s;
 
-    cursor: pointer;
-  }
+		cursor: pointer;
+	}
 
-  .bar {
-    position: absolute;
-    width: 3px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.04);
-    position: absolute;
-    transform: translateX(-50%);
-    z-index: -1;
-  }
+	.bar {
+		position: absolute;
+		transition-duration: 0.2s;
+		width: 3px;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.04);
+		z-index: -1;
+	}
 }

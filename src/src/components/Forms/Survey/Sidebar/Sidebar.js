@@ -3,57 +3,28 @@ import "./Sidebar.scss";
 import selectedDot from "../../../../assets/icons/selected-dot.svg";
 import unselectedDot from "../../../../assets/icons/unselected-dot.svg";
 
-/**
- * Let
- *    default margin = dm
- *    additional margin = am
- *    total length   = L
- *
- * Then L = dm * (n-1) + am * 2
- * Suppose that am = dm * r.
- * Then L = dm * (n-1) + dm * r * 2
- *        = dm * (n-1+r*2)
- *
- * Therefore dm = L / (n-1+r*2)
- */
-
-const SIDEBAR_HEIGHT = 200;
-const ADDITIONAL_MARGIN_RATE = 1;
+const DIST_LARGE = 64;
+const DIST_NARROW = 48;
 
 export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
-  // Calculate default margin(dm) and additional marign(am)
-  const dm =
-    SIDEBAR_HEIGHT / (questionsNumber - 1 + ADDITIONAL_MARGIN_RATE * 2);
-  const am = dm * ADDITIONAL_MARGIN_RATE;
-
   let dots = [];
+
   let y = 0;
+  let start = 0;
 
   for (let i = 0; i < questionsNumber; i++) {
-    const selected = i === currentIndex;
-    let mt = dm;
-    let mb = dm;
+    const delta = i - currentIndex;
+    const selected = delta === 0;
 
-    // Calculate upper margin and lower margin
-    if (i === 0) {
-      mt = 0;
-      if (selected) {
-        mb += am * 2;
-      }
-    } else if (i === questionsNumber - 1) {
-      mb = 0;
-      if (selected) {
-        mt += am * 2;
-      }
+    if (delta < 0) {
+      y = (delta + 1) * DIST_NARROW - DIST_LARGE;
+    } else if (delta > 0) {
+      y = (delta - 1) * DIST_NARROW + DIST_LARGE;
     } else {
-      if (selected) {
-        mb += am;
-        mt += am;
-      }
+      y = 0;
     }
 
-    // Add upper margin
-    y += mt;
+    if (i === 0) start = y;
 
     // Place component
     dots.push(
@@ -64,20 +35,27 @@ export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
         }}
         key={i}
         style={{
-          transform: `translate(-50%,-50%) translateY( ${y}px)`,
+          transform: `translate(-50%,-50%) translateY(${y}px)`,
         }}>
         <img src={selected ? selectedDot : unselectedDot} alt="dot" />
       </button>
     );
-
-    // Add lower margin
-    y += mb;
   }
 
+  let end = y;
+
+  /**
+   * bar starat point = (0-c +1)*N-L
+   * bar end point    = (n-1-c-1)*N+L
+   * bar length = (n-1-c-c)*N-2*L
+   */
+
+  const barLength = end - start;
+
   return (
-    <div className="sidebar" style={{ height: y }}>
+    <div className="sidebar" >
       {dots}
-      <div className="bar"></div>
+      <div className="bar" style={{ height: barLength, transform: `translateX(-50%) translateY(${start}px)` }}></div>
     </div>
   );
 }
