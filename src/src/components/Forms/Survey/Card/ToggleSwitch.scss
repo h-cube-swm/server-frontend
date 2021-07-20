@@ -1,0 +1,9 @@
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  .toggle-box {
+    width: 2rem;
+    height: 3px;
+    background-color: #b0b1b1;
+  }
+}
