@@ -61,7 +61,7 @@ export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
         key={i}
         style={{
           transform: `translate(-50%,-50%) translateY( ${y}px)`,
-          color: selected ? "rgb(0,102,255)" : "rgb(204,224,255)"
+          color: selected ? "#2b44ff" : "rgb(200,200,200)"
         }}
       >
         ●
