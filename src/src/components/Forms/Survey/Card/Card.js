@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CardTypes, CardStates } from '../constants';
+import { CardTypes, CardStates, CardStyle } from '../constants';
 import '../Card/Card.scss';
 import hanleImage from '../../../../assets/icons/handle.svg';
 
@@ -15,9 +15,10 @@ export default function Card({
 }) {
 
     const [isInit, setIsInit] = useState(true);
+    //ToDo : 여기서 에러 발생함. question 이 null인 경우 있음!
     const { type } = question;
     const deltaIndex = index - selectedIndex;
-    const yPos = deltaIndex * (240 + 64);
+    const yPos = deltaIndex * (CardStyle.HEIGHT + CardStyle.DISTANCE);
     let showHandle = false;
 
     useEffect(() => {
@@ -28,7 +29,8 @@ export default function Card({
 
     let style = {
         transform: 'translate(-50%, -50%)',
-        opacity: isInit ? 0 : 1
+        opacity: isInit ? 0 : 1,
+        height: CardStyle.HEIGHT
     };
 
     switch (type) {
