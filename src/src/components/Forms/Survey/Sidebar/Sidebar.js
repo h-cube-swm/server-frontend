@@ -1,17 +1,19 @@
 import React from "react";
 import "./Sidebar.scss";
+import selectedDot from "../../../../assets/icons/selected-dot.svg";
+import unselectedDot from "../../../../assets/icons/unselected-dot.svg";
 
 /**
  * Let
  *    default margin = dm
  *    additional margin = am
  *    total length   = L
- * 
+ *
  * Then L = dm * (n-1) + am * 2
  * Suppose that am = dm * r.
  * Then L = dm * (n-1) + dm * r * 2
  *        = dm * (n-1+r*2)
- * 
+ *
  * Therefore dm = L / (n-1+r*2)
  */
 
@@ -19,9 +21,9 @@ const SIDEBAR_HEIGHT = 200;
 const ADDITIONAL_MARGIN_RATE = 1;
 
 export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
-
   // Calculate default margin(dm) and additional marign(am)
-  const dm = SIDEBAR_HEIGHT / (questionsNumber - 1 + ADDITIONAL_MARGIN_RATE * 2);
+  const dm =
+    SIDEBAR_HEIGHT / (questionsNumber - 1 + ADDITIONAL_MARGIN_RATE * 2);
   const am = dm * ADDITIONAL_MARGIN_RATE;
 
   let dots = [];
@@ -57,14 +59,14 @@ export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
     dots.push(
       <button
         className="dot"
-        onClick={() => { onSelect(i); }}
+        onClick={() => {
+          onSelect(i);
+        }}
         key={i}
         style={{
           transform: `translate(-50%,-50%) translateY( ${y}px)`,
-          color: selected ? "#2b44ff" : "rgb(200,200,200)"
-        }}
-      >
-        ●
+        }}>
+        <img src={selected ? selectedDot : unselectedDot} alt="dot" />
       </button>
     );
 
@@ -75,7 +77,7 @@ export default function Sidebar({ questionsNumber, currentIndex, onSelect }) {
   return (
     <div className="sidebar" style={{ height: y }}>
       {dots}
-      < div className="bar" ></div >
-    </div >
+      <div className="bar"></div>
+    </div>
   );
 }
