@@ -59,7 +59,7 @@ const Edit = ({ match }) => {
 			if (!survey.counter) survey.counter = 0;
 			if (!survey.questions) survey.questions = [];
 			setSurvey(survey);
-			if (survey.questions.length == 0) addQuestion(0);
+			if (survey.questions.length == 0) insertQuestion(0);
 		};
 		init();
 	}, [surveyId]);
@@ -79,7 +79,7 @@ const Edit = ({ match }) => {
 	 * Insert new survey at given index.
 	 * @param {Integer} index
 	 */
-	const addQuestion = (index) => {
+	const insertQuestion = (index) => {
 		setSurvey((survey) => {
 			const counter = survey.counter + 1;
 			const newQuestion = {
@@ -91,6 +91,14 @@ const Edit = ({ match }) => {
 			return { ...survey, counter, questions };
 		});
 		setSelectedIndex(index);
+	};
+
+	const removeQuestion = (index) => {
+		setSurvey((survey) => {
+			const questions = [...survey.questions];
+			questions.splice(index, 1);
+			return { ...survey, questions };
+		});
 	};
 
 	const selectedSurveyType = survey.questions[selectedIndex]?.type;
@@ -137,6 +145,9 @@ const Edit = ({ match }) => {
 							index={index}
 							selectedIndex={selectedIndex}
 							state={state}
+							onDelete={() => {
+								removeQuestion(index);
+							}}
 							onGrab={onGrab}></Card>
 					);
 				})}
@@ -153,7 +164,7 @@ const Edit = ({ match }) => {
 						}px)`,
 						opacity: showAddButton ? null : 0,
 					}}>
-					<button onClick={() => addQuestion(selectedIndex)}>
+					<button onClick={() => insertQuestion(selectedIndex)}>
 						<img src={addBtn} alt="add button" />
 					</button>
 				</div>
@@ -166,7 +177,7 @@ const Edit = ({ match }) => {
 						opacity: showAddButton ? null : 0,
 					}}
 					hidden={!showAddButton}>
-					<button onClick={() => addQuestion(selectedIndex + 1)}>
+					<button onClick={() => insertQuestion(selectedIndex + 1)}>
 						<img src={addBtn} alt="add button" />
 					</button>
 				</div>
