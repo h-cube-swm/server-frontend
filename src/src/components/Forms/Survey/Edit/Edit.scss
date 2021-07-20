@@ -54,12 +54,9 @@
 			transform: translateY(-50%);
 
 			a {
+				@include text-center;
 				position: absolute;
 				bottom: -4rem;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
 				color: #fff;
 				background-color: #2b44ff;
 				width: 5rem;

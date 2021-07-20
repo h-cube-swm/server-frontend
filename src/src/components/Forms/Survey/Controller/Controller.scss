@@ -25,10 +25,7 @@
 }
 
 .element-btn {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	@include text-center;
 	width: 4rem;
 	height: 6rem;
 	border-radius: 15px;
