@@ -12,3 +12,8 @@ export const CardStates = {
     ORDERING: 'ordering',
     GHOST: 'ghost'
 };
+
+export const CardStyle = {
+    HEIGHT: 250,
+    DISTANCE: 100
+};
