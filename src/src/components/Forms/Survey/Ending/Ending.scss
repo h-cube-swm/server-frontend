@@ -1,48 +1,48 @@
-$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+@import "/src/scss/style.scss";
 
 .ending-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .survey-sum {
-  width: 60rem;
-  height: 15rem;
-  margin-bottom: 5rem;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: $box-shadow;
-  h1 {
-    display: block;
-    margin-bottom: 1rem;
-  }
-  h2 {
-    display: block;
-    margin-bottom: 2rem;
-  }
-  p {
-    display: block;
-    margin-bottom: 1rem;
-  }
-  p:last-child {
-    display: block;
-    margin-bottom: 0;
-  }
+	width: 60rem;
+	height: 15rem;
+	margin-bottom: 5rem;
+	padding: 2rem;
+	border-radius: 15px;
+	box-shadow: $shadow-default;
+	h1 {
+		display: block;
+		margin-bottom: 1rem;
+	}
+	h2 {
+		display: block;
+		margin-bottom: 2rem;
+	}
+	p {
+		display: block;
+		margin-bottom: 1rem;
+	}
+	p:last-child {
+		display: block;
+		margin-bottom: 0;
+	}
 }
 
 .home-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 7rem;
-  height: 3rem;
-  font-size: 1.3rem;
-  color: #fff;
-  background-color: #2b44ff;
-  border-radius: 15px;
-  box-shadow: $box-shadow;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 7rem;
+	height: 3rem;
+	font-size: 1.3rem;
+	color: #fff;
+	background-color: #2b44ff;
+	border-radius: 15px;
+	box-shadow: $shadow-default;
 }

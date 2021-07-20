@@ -1,4 +1,4 @@
-$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+@import "/src/scss/style.scss";
 
 .edit {
 	height: 100%;
@@ -41,35 +41,35 @@ $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	:hover {
 		opacity: 1;
 	}
-}
 
-.controller-positioning-box {
-	max-width: 1500px;
-	margin: 0 auto;
-	position: relative;
+	.controller-positioning-box {
+		max-width: 1500px;
+		margin: 0 auto;
+		position: relative;
 
-	.controller-box {
-		position: absolute;
-		right: 5rem;
-		top: 50vh;
-		transform: translateY(-50%);
-
-		a {
+		.controller-box {
 			position: absolute;
-			bottom: -4rem;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			color: #fff;
-			background-color: #2b44ff;
-			width: 5rem;
-			height: 2.5rem;
-			font-size: 1rem;
-			border-radius: 15px;
-			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-			left: 50%;
-			transform: translateX(-50%);
+			right: 5rem;
+			top: 50vh;
+			transform: translateY(-50%);
+
+			a {
+				position: absolute;
+				bottom: -4rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				color: #fff;
+				background-color: #2b44ff;
+				width: 5rem;
+				height: 2.5rem;
+				font-size: 1rem;
+				border-radius: 15px;
+				box-shadow: $shadow-default;
+				left: 50%;
+				transform: translateX(-50%);
+			}
 		}
 	}
 }

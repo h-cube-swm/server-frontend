@@ -1,7 +1,4 @@
-$box-shadow-deep: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
-$box-shadow-reverse-deep: inset rgba(100, 100, 111, 0.2) 5px 5px 7px 3px;
-$box-shadow-reverse-shallow: inset rgba(100, 100, 111, 0.1) 3px 3px 5px 2px;
+@import "/src/scss/style.scss";
 
 .element-box {
 	display: grid;
@@ -13,7 +10,7 @@ $box-shadow-reverse-shallow: inset rgba(100, 100, 111, 0.1) 3px 3px 5px 2px;
 	border-radius: 15px;
 	width: 15rem;
 	height: 15rem;
-	box-shadow: $box-shadow-deep;
+	box-shadow: $shadow-default;
 }
 
 .element-detail {
@@ -42,7 +39,7 @@ $box-shadow-reverse-shallow: inset rgba(100, 100, 111, 0.1) 3px 3px 5px 2px;
 	box-shadow: inset rgba(100, 100, 111, 0.1) 0px 0px 0px 0px;
 
 	&:hover {
-		box-shadow: $box-shadow-reverse-shallow;
+		box-shadow: $shadow-reverse-shallow;
 		z-index: 2;
 		.element-detail {
 			opacity: 1;
@@ -50,7 +47,7 @@ $box-shadow-reverse-shallow: inset rgba(100, 100, 111, 0.1) 3px 3px 5px 2px;
 	}
 
 	&.selected {
-		box-shadow: $box-shadow-reverse-shallow;
+		box-shadow: $shadow-reverse-shallow;
 		z-index: 2;
 		animation-name: clicked;
 		animation-duration: 200ms;
@@ -63,12 +60,12 @@ $box-shadow-reverse-shallow: inset rgba(100, 100, 111, 0.1) 3px 3px 5px 2px;
 
 @keyframes clicked {
 	0% {
-		box-shadow: $box-shadow-reverse-shallow;
+		box-shadow: $shadow-reverse-shallow;
 	}
 	50% {
-		box-shadow: $box-shadow-reverse-deep;
+		box-shadow: $shadow-reverse-deep;
 	}
 	100% {
-		box-shadow: $box-shadow-reverse-shallow;
+		box-shadow: $shadow-reverse-shallow;
 	}
 }
