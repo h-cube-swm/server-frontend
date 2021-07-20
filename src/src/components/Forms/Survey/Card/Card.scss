@@ -8,9 +8,7 @@ $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	left: 50%;
 	top: 50%;
 	transition-duration: 0.5s;
-	transform: scale(0.95);
 	border: solid 0.1px rgba(0, 0, 0, 0.05);
-	opacity: 0.8;
 
 	.handle {
 		opacity: 0;
@@ -22,7 +20,6 @@ $box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	}
 
 	&.highlight {
-		transform: scale(1);
 		box-shadow: $box-shadow;
 		border: solid 0 rgba(0, 0, 0, 0);
 		z-index: 1;
