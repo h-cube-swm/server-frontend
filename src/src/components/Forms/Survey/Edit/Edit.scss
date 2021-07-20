@@ -20,6 +20,7 @@
 		left: 50%;
 		top: 50%;
 		opacity: 0;
+		animation: disappear 2s linear;
 		text-align: center;
 		transition-duration: 100ms;
 
@@ -38,7 +39,7 @@
 		}
 	}
 
-	:hover {
+	.question-add-box:hover {
 		opacity: 1;
 	}
 
@@ -54,18 +55,10 @@
 			transform: translateY(-50%);
 
 			a {
-				@include text-center;
-				@include round;
 				position: absolute;
-				bottom: -4rem;
-				color: #fff;
-				background-color: #2b44ff;
-				width: 5rem;
-				height: 2.5rem;
-				font-size: 1rem;
-				box-shadow: $shadow-default;
 				left: 50%;
 				transform: translateX(-50%);
+				bottom: -4rem;
 			}
 		}
 
@@ -73,6 +66,28 @@
 			position: absolute;
 			left: 5rem;
 			top: 50vh;
+		}
+	}
+
+	@keyframes disappear {
+		0% {
+			opacity: 0;
+		}
+
+		25% {
+			opacity: 0;
+		}
+
+		50% {
+			opacity: 1;
+		}
+
+		75% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0;
 		}
 	}
 }
