@@ -1,59 +1,42 @@
-a {
-  font-family: "Nanum Gothic", sans-serif;
-  text-decoration: none;
-  font-weight: 700;
-}
+@import "/src/scss/style.scss";
 
 .header {
-  display: block;
-  height: 50px;
-}
+	position: relative;
+	display: block;
+	height: 50px;
 
-.header .logo {
-  position: absolute;
-  top: 3rem;
-  left: 3rem;
-}
+	.logo {
+		position: absolute;
+		top: 3rem;
+		left: 3rem;
 
-.header .logo img {
-  width: 8rem;
-  height: auto;
-}
+		img {
+			width: 8rem;
+			height: auto;
+		}
+	}
 
-.header a:visited {
-  color: #000;
-}
+	@include tablet {
+		.logo {
+			position: absolute;
+			top: 2rem;
+			left: 2rem;
 
-@media screen and (max-width: 1023px) {
-  .header .logo {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-  }
+			img {
+				width: 6rem;
+			}
+		}
+	}
 
-  .header .logo img {
-    width: 6rem;
-    height: auto;
-  }
-}
+	@include mobile {
+		.logo {
+			position: absolute;
+			top: 2rem;
+			left: 2rem;
 
-@media screen and (max-width: 767px) {
-  .header .logo {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-  }
-
-  .header .logo img {
-    width: 5rem;
-    height: auto;
-  }
-
-  .header .account {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 2rem 2rem;
-    font-size: 2vh;
-  }
+			img {
+				width: 5rem;
+			}
+		}
+	}
 }
