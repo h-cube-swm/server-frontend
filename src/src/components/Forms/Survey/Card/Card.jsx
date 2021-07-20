@@ -9,6 +9,7 @@ export default function Card({
 	state,
 	setQuestion,
 	setResponse,
+	onDelete,
 
 	// UI-associated parameters
 	index,
@@ -48,7 +49,7 @@ export default function Card({
 			break;
 
 		case CardStates.RESPONSE:
-			style.transform = `translate(-50%, -50%) translateY(${yPos}px)`;
+			style.transform = `translate(-50%, -50%) translateY(${yPos}px) scale(0.975)`;
 			break;
 
 		case CardStates.GHOST:
@@ -62,10 +63,22 @@ export default function Card({
 			break;
 	}
 
-	let inner = <div className="loading">Loading</div>;
+	let inner = <div className="loading">SAMPLE : {question?.id}</div>;
 
 	const type = question?.type;
 	switch (type) {
+		case CardTypes.SINGLE_CHOICE:
+			break;
+		case CardTypes.MULTIPLE_CHOICE:
+			break;
+		case CardTypes.PREFERENCE:
+			break;
+		case CardTypes.SHORT_SENTENCE:
+			break;
+		case CardTypes.LONG_SENTENCE:
+			break;
+		default:
+			break;
 	}
 
 	const _onGrab = (event) => {
@@ -82,6 +95,12 @@ export default function Card({
 			<div className="handle" onMouseDown={_onGrab}>
 				<img src={hanleImage}></img>
 			</div>
+			<button
+				className="delete"
+				onClick={onDelete}
+				hidden={state !== CardStates.EDITTING}>
+				DELETE
+			</button>
 		</div>
 	);
 }
