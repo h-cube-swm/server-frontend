@@ -1,10 +1,10 @@
 @import "/src/scss/style.scss";
 
 .survey-card {
+	@include round;
 	position: absolute;
 	width: 640px;
 	padding: 1rem;
-	border-radius: 15px;
 	left: 50%;
 	top: 50%;
 	transition-duration: 0.5s;

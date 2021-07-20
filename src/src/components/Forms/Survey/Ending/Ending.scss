@@ -10,11 +10,11 @@
 }
 
 .survey-sum {
+	@include round;
 	width: 60rem;
 	height: 15rem;
 	margin-bottom: 5rem;
 	padding: 2rem;
-	border-radius: 15px;
 	box-shadow: $shadow-default;
 	h1 {
 		display: block;
@@ -35,6 +35,7 @@
 }
 
 .home-btn {
+	@include round;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -43,6 +44,5 @@
 	font-size: 1.3rem;
 	color: #fff;
 	background-color: #2b44ff;
-	border-radius: 15px;
 	box-shadow: $shadow-default;
 }

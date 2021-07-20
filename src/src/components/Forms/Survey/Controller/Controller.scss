@@ -1,13 +1,13 @@
 @import "/src/scss/style.scss";
 
 .element-box {
+	@include round;
 	display: grid;
 	justify-content: center;
 	align-items: center;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
 	padding: 1rem;
-	border-radius: 15px;
 	width: 15rem;
 	height: 15rem;
 	box-shadow: $shadow-default;
@@ -26,9 +26,9 @@
 
 .element-btn {
 	@include text-center;
+	@include round;
 	width: 4rem;
 	height: 6rem;
-	border-radius: 15px;
 	padding: 0;
 	background-color: #fff;
 	border: 0;
