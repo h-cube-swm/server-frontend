@@ -12,9 +12,10 @@ import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
+import addBtn from "../../../../assets/icons/add-btn.svg";
 
 const Edit = ({ match }) => {
-  const [survey, setSurvey] = useState({ questions: [{ 'type': 0 }] });
+  const [survey, setSurvey] = useState({ questions: [{ type: 0 }] });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const [onWheel, isMoving] = useScrollPaging((delta) => {
@@ -26,8 +27,8 @@ const Edit = ({ match }) => {
     });
   });
 
-  const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging((delta) => {
-    console.log('DELTA:', delta);
+  const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging(
+    (delta) => {
     let newIndex = selectedIndex + delta;
     if (newIndex < 0) return;
     if (newIndex >= survey.questions.length) return;
@@ -40,9 +41,11 @@ const Edit = ({ match }) => {
 
     setSelectedIndex(newIndex);
     setSurvey({
-      ...survey, questions
+        ...survey,
+        questions,
     });
-  });
+    }
+  );
 
   const surveyId = match.params.link;
 
@@ -129,17 +132,14 @@ const Edit = ({ match }) => {
               index={index}
               selectedIndex={selectedIndex}
               state={state}
-              onGrab={onGrab}
-            ></Card>
+              onGrab={onGrab}></Card>
           );
         })}
         <Card
-          key={'GHOST'}
           question={questions[selectedIndex]}
           state={CardStates.GHOST}
           index={isDragging ? 1 : 0}
-          dom={item}
-        ></Card>
+          dom={item}></Card>
         <div
           className="question-add-box"
           style={{
