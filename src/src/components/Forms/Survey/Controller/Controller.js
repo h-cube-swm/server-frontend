@@ -22,16 +22,13 @@ export default function Controller({ element, setElement }) {
         {buttons.map(([image, type, detail]) => {
           const className = type === element ? "selected" : "";
           return (
-            <div className={"element-binding " + className}>
-              <button
-                key={type}
-                className="element-btn"
-                onClick={() => setElement(type)}
-              >
-                <img src={image} alt={type} />
-              </button>
-              <p className={"element-detail " + className}>{detail}</p>
-            </div>
+            <button
+              key={type}
+              className={"element-btn " + className}
+              onClick={() => setElement(type)}>
+              <img src={image} alt={type} />
+              <p className="element-detail">{detail}</p>
+            </button>
           );
         })}
       </div>

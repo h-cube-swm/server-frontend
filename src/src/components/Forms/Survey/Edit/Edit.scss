@@ -1,55 +1,73 @@
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 .edit {
-  height: 100%;
+	height: 100%;
 
-  .question-container {
-    width: 100%;
-    height: 100%;
-    left: 0px;
-    top: 0px;
-    content: "";
-    overflow: hidden;
-  }
+	.question-container {
+		width: 100%;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+		content: "";
+		overflow: hidden;
+	}
 
-  .question-add-box {
-    position: absolute;
-    display: block;
-    width: 640px;
-    left: 50%;
-    top: 50%;
-    opacity: 0.5;
-    text-align: center;
-  }
+	.question-add-box {
+		position: absolute;
+		display: block;
+		width: 640px;
+		height: 3rem;
+		left: 50%;
+		top: 50%;
+		opacity: 0;
+		text-align: center;
+		transition-duration: 100ms;
 
-  :hover {
-    opacity: 1;
-  }
+		button {
+			background-color: #fff;
+			border: none;
+			width: 100%;
+			height: 100%;
+			border-radius: 15px;
+			opacity: 1;
+			cursor: pointer;
+
+			img {
+				height: 90%;
+			}
+		}
+	}
+
+	:hover {
+		opacity: 1;
+	}
 }
 
 .controller-positioning-box {
-  max-width: 1500px;
-  margin: 0 auto;
-  position: relative;
-  .controller-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 5rem;
-    top: 50vh;
-    transform: translateY(-50%);
-    a {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      background-color: #2b44ff;
-      width: 5rem;
-      height: 2.5rem;
-      font-size: 1rem;
-      border-radius: 15px;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    }
-  }
+	max-width: 1500px;
+	margin: 0 auto;
+	position: relative;
+	.controller-box {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		right: 5rem;
+		top: 50vh;
+		transform: translateY(-50%);
+		a {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			color: #fff;
+			background-color: #2b44ff;
+			width: 5rem;
+			height: 2.5rem;
+			font-size: 1rem;
+			border-radius: 15px;
+			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		}
+	}
 }

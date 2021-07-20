@@ -1,3 +1,5 @@
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 .ending-page {
   width: 100vw;
   height: 100vh;
@@ -13,7 +15,7 @@
   margin-bottom: 5rem;
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: $box-shadow;
   h1 {
     display: block;
     margin-bottom: 1rem;
@@ -42,5 +44,5 @@
   color: #fff;
   background-color: #2b44ff;
   border-radius: 15px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: $box-shadow;
 }
