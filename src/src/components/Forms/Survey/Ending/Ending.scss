@@ -1,48 +1,59 @@
 @import "/src/scss/style.scss";
 
 .ending-page {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.celebrate-sentence {
+  margin-bottom: 5rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 3rem;
 }
 
 .survey-sum {
-	@include round;
-	width: 60rem;
-	height: 15rem;
-	margin-bottom: 5rem;
-	padding: 2rem;
-	box-shadow: $shadow-default;
-	h1 {
-		display: block;
-		margin-bottom: 1rem;
-	}
-	h2 {
-		display: block;
-		margin-bottom: 2rem;
-	}
-	p {
-		display: block;
-		margin-bottom: 1rem;
-	}
-	p:last-child {
-		display: block;
-		margin-bottom: 0;
-	}
-}
-
-.home-btn {
-	@include round;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 7rem;
-	height: 3rem;
-	font-size: 1.3rem;
-	color: #fff;
-	background-color: #2b44ff;
-	box-shadow: $shadow-default;
+  @include round;
+  width: 60rem;
+  height: 25rem;
+  margin-bottom: 5rem;
+  padding: 3rem 5rem;
+  box-shadow: $shadow-default;
+  h1 {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    display: block;
+    margin-bottom: 3rem;
+  }
+  ul {
+    @include text-center;
+    padding: 0;
+    li {
+      @include text-center;
+      width: 100%;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      h3 {
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        @include text-center;
+        @include round;
+        margin-bottom: 1rem;
+        width: 100%;
+        height: 2.5rem;
+        background-color: #2b44ff;
+        color: #fff;
+        font-weight: 700;
+        opacity: 0.7;
+      }
+    }
+  }
 }

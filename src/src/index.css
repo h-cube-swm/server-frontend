@@ -1,36 +1,27 @@
 * {
-	font-family: "Nanum Gothic", sans-serif;
-	box-sizing: border-box;
-	margin: 0;
-	font-weight: 400;
+  font-family: "Nanum Gothic", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: 400;
 }
 
 html,
 body,
 #root {
-	margin: 0px;
-	width: 100%;
-	height: 100%;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
 }
 
 html {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-button {
-	color: #000;
-}
-
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
