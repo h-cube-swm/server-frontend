@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 /* Test */
 import { getApi } from "../../../../utils/parser";
-import { CardTypes, CardStates } from "../constants";
+import { CardTypes, CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
 
 /* Components */
@@ -142,13 +142,21 @@ const Edit = ({ match }) => {
         ></Card>
         <div
           className="question-add-box"
-          style={{ transform: `translate(-50%,-50%) translateY(${-120 - 32}px)` }}
+          style={{
+            transform: `translate(-50%,-50%) translateY(${
+              -(CardStyle.HEIGHT + CardStyle.DISTANCE) / 2
+            }px)`,
+          }}
         >
           <button onClick={() => addQuestion(selectedIndex)}>설문 추가</button>
         </div>
         <div
           className="question-add-box"
-          style={{ transform: `translate(-50%,-50%) translateY(${+120 + 32}px)` }}
+          style={{
+            transform: `translate(-50%,-50%) translateY(${
+              +(CardStyle.HEIGHT + CardStyle.DISTANCE) / 2
+            }px)`,
+          }}
         >
           <button onClick={() => addQuestion(selectedIndex + 1)}>
             설문 추가
