@@ -22,9 +22,10 @@ export default function Card({
 
 	// Implement delayed fade-in effect
 	useEffect(() => {
-		setTimeout(() => {
+		const handle = setTimeout(() => {
 			setIsInit(false);
 		}, 400);
+		return () => clearTimeout(handle);
 	}, []);
 
 	let classes = ["survey-card"];
@@ -63,7 +64,7 @@ export default function Card({
 
 	let inner = <div className="loading">Loading</div>;
 
-	const type = question.type;
+	const type = question?.type;
 	switch (type) {
 	}
 
