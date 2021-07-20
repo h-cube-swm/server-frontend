@@ -61,7 +61,7 @@ export default function Card({
 			break;
 	}
 
-	const { type } = question;
+	const type = question.type;
 	switch (type) {
 	}
 
