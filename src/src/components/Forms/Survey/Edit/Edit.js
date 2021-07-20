@@ -102,7 +102,6 @@ const Edit = ({ match }) => {
 
 	return (
 		<div className="edit" {...backgroundCallbacks}>
-			<div style={{ opacity: survey ? 0 : 1 }}>Loading</div>
 			<div className="controller-positioning-box">
 				<div className="controller-box">
 					<Controller
