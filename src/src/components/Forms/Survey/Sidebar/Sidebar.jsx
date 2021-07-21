@@ -29,9 +29,8 @@ export default function Sidebar({ questions, currentIndex, onSelect }) {
 
 		// Place component
 		return (
-			<Positioner y={y} zIndex={selected ? 10 : null}>
+			<Positioner y={y} zIndex={selected ? 10 : null} key={question.id}>
 				<button
-					key={question.id}
 					onClick={() => {
 						onSelect(i);
 					}}
