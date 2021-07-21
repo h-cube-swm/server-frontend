@@ -21,8 +21,14 @@ export function Positioner({ x, y, zIndex = 0, children, topLeft }) {
 		style.top = "50%";
 	}
 
-	if (x) style.transform += ` translateX(${x}px)`;
-	if (y) style.transform += ` translateY(${y}px)`;
+	if (x) {
+		if (typeof x === "number") style.transform += ` translateX(${x}px)`;
+		else style.transform += ` translateX(${x})`;
+	}
+	if (y) {
+		if (typeof y === "number") style.transform += ` translateY(${y}px)`;
+		else style.transform += ` translateY(${y})`;
+	}
 
 	return <div style={style}>{children}</div>;
 }
