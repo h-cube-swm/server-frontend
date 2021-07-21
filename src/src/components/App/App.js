@@ -1,15 +1,15 @@
 /* React elements */
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 /* Styles */
-import "./App.css";
+import "./App.scss";
 
 /* Components */
 import Main from "../Main/Main";
 import Survey from "../Forms/Survey/Survey";
-import Edit from "../Forms/Survey/Edit";
-import Ending from "../Forms/Survey/Ending";
+import Edit from "../Forms/Survey/Edit/Edit";
+import Ending from "../Forms/Survey/Ending/Ending";
 
 function App() {
   return (

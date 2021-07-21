@@ -17,14 +17,14 @@ function Service() {
     return (
         <div className="container">
             <img src={partition} alt="partition" />
-            <div className="row-1" {...animatedItem}>
+            <div className="row row-1" {...animatedItem}>
                 <h2>
                     방금 답한 이름, 나이, 직업같은 것들<br />
                     다시 입력할 필요 없이 저희가 다 해드릴게요.
                 </h2>
                 <img src={character3} alt="sitting man" />
             </div>
-            <div className="row-2" {...animatedItem2}>
+            <div className="row row-2" {...animatedItem2}>
                 <img src={character4} alt="man and bubble" />
                 <h2>
                     단조로운 디자인, 귀찮은 경품 추첨,<br />
@@ -33,7 +33,7 @@ function Service() {
                     그것도 저희가 다 해드릴게요.
                 </h2>
             </div>
-            <div className="row-3" {...animatedItem3}>
+            <div className="row row-3" {...animatedItem3}>
                 <h2>
                     이렇게나 묻고 답하기 좋은 폼이<br />
                     여기, 있습니다.

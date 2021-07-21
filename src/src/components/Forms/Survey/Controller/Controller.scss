@@ -1,0 +1,68 @@
+@import "/src/scss/style.scss";
+
+.element-box {
+	@include round;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	padding: 1rem;
+	width: 15rem;
+	height: 15rem;
+	box-shadow: $shadow-default;
+}
+
+.element-detail {
+	font-size: 0.7rem;
+	font-weight: 700;
+	margin-top: 0.3rem;
+	opacity: 0;
+
+	&.selected {
+		opacity: 0;
+	}
+}
+
+.element-btn {
+	@include text-center;
+	@include round;
+	width: 4rem;
+	height: 6rem;
+	padding: 0;
+	background-color: #fff;
+	border: 0;
+	transition-duration: 200ms;
+	box-shadow: inset rgba(100, 100, 111, 0.1) 0px 0px 0px 0px;
+
+	&:hover {
+		box-shadow: $shadow-reverse-shallow;
+		z-index: 2;
+		.element-detail {
+			opacity: 1;
+		}
+	}
+
+	&.selected {
+		box-shadow: $shadow-reverse-shallow;
+		z-index: 2;
+		animation-name: clicked;
+		animation-duration: 200ms;
+		animation-timing-function: ease-in;
+		.element-detail {
+			opacity: 1;
+		}
+	}
+}
+
+@keyframes clicked {
+	0% {
+		box-shadow: $shadow-reverse-shallow;
+	}
+	50% {
+		box-shadow: $shadow-reverse-deep;
+	}
+	100% {
+		box-shadow: $shadow-reverse-shallow;
+	}
+}

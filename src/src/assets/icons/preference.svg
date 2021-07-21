@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="55" viewBox="0 0 55 55">
+  <defs>
+    <clipPath id="clip-아트보드_1">
+      <rect width="55" height="55"/>
+    </clipPath>
+  </defs>
+  <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
+    <rect width="55" height="55" fill="#fff0"/>
+    <path id="패스_52" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#ff4133"/>
+    <g id="그룹_83" data-name="그룹 83" transform="translate(0 1)">
+      <g id="타원_10" data-name="타원 10" transform="translate(13 24)" fill="#707070" stroke="#fff" stroke-width="3">
+        <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+        <circle cx="3.5" cy="3.5" r="2" fill="none"/>
+      </g>
+      <g id="타원_11" data-name="타원 11" transform="translate(24 24)" fill="#707070" stroke="#fff" stroke-width="3">
+        <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+        <circle cx="3.5" cy="3.5" r="2" fill="none"/>
+      </g>
+      <g id="타원_12" data-name="타원 12" transform="translate(35 24)" fill="#fff" stroke="#fff" stroke-width="3">
+        <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+        <circle cx="3.5" cy="3.5" r="2" fill="none"/>
+      </g>
+      <path id="패스_46" data-name="패스 46" d="M0,0H22.822" transform="translate(14.773 27.5)" fill="none" stroke="#fff" stroke-width="1"/>
+    </g>
+  </g>
+</svg>
