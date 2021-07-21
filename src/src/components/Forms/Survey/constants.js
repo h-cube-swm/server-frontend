@@ -8,12 +8,17 @@ export const CardTypes = {
 
 export const CardStates = {
   RESPONSE: 'response',
+  PREVIEW: 'preview',
   EDITTING: 'editting',
   ORDERING: 'ordering',
   GHOST: 'ghost'
 };
 
+const SURVEY_HEIGHT = 250;
+const SURVEY_DISTANCE = 100;
+
 export const CardStyle = {
-  HEIGHT: 250,
-  DISTANCE: 100
+  HEIGHT: SURVEY_HEIGHT,
+  DISTANCE: SURVEY_DISTANCE,
+  FRAME_HEIHGT: SURVEY_HEIGHT + SURVEY_DISTANCE
 };
