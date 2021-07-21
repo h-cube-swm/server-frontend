@@ -56,7 +56,7 @@ export default function Card({
 			break;
 	}
 
-	let inner;
+	let inner = <div className="inner-default">Type : {question.type}</div>;
 
 	const type = question?.type;
 	switch (type) {
@@ -71,7 +71,7 @@ export default function Card({
 		case CardTypes.LONG_SENTENCE:
 			break;
 		default:
-			inner = <div className="loading">SAMPLE : {question?.id}</div>;
+			inner = <div className="inner-default">Unsupported Card Type</div>;
 			break;
 	}
 
@@ -91,21 +91,22 @@ export default function Card({
 			ref={dom}>
 			<div className="card-header">
 				<input type="text" placeholder="제목을 입력하세요." />
-				{state === CardStates.EDITTING && (
-					<div className="basic-element">
-						<ToggleSwitch
-							isRequired={question.isRequired}
-							setIsRequired={(isRequired) => {
-								const newQuestion = { ...question, isRequired };
-								setQuestion(newQuestion);
-							}}
-							label="필수요소"
-						/>
-						<button className="delete" onClick={onDelete}>
-							<img src={delBtn} alt="Delete button"></img>
-						</button>
-					</div>
-				)}
+				<div
+					className={`basic-element ${
+						state === CardStates.EDITTING ? "" : "hidden"
+					}`}>
+					<ToggleSwitch
+						isRequired={question.isRequired}
+						setIsRequired={(isRequired) => {
+							const newQuestion = { ...question, isRequired };
+							setQuestion(newQuestion);
+						}}
+						label="필수요소"
+					/>
+					<button className="delete" onClick={onDelete}>
+						<img src={delBtn} alt="Delete button"></img>
+					</button>
+				</div>
 			</div>
 			<div className="inner-box">{inner}</div>
 			<div className="handle" onMouseDown={_onGrab}>
