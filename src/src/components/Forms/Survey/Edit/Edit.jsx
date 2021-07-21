@@ -17,8 +17,9 @@ import useDragPaging from "../../../../hooks/useDragPaging";
 
 /* Others */
 import orderedMap from "../../../../utils/orderedMap";
-import { CardTypes, CardStates, CardStyle } from "../constants";
+import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
+import getQuestion from "../getQuestion";
 
 const Edit = ({ surveyId, survey, setSurvey }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -42,21 +43,17 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 
 	const insertQuestion = (index) => {
 		setSurvey((survey) => {
-			const counter = survey.counter + 1;
-			const newQuestion = {
-				id: counter + "",
-				type: CardTypes.SINGLE_CHOICE,
-				isRequired: true,
-			};
+			const [counter, question] = getQuestion(survey.counter);
 			const questions = [...survey.questions];
-			questions.splice(index, 0, newQuestion);
+			questions.splice(index, 0, question);
 			return { ...survey, counter, questions };
 		});
-		if (survey && survey.questions.length === 0) setSelectedIndex(0);
-		else setSelectedIndex(index);
+		setSelectedIndex(index);
 	};
 
 	const removeQuestion = (index) => {
+		/* ToDo : 질문이 최소한 하나는 있어야 한다는 경고를 띄우거나, 아니면 질문을 지울 수 없도록 하기 */
+		if (survey.questions.length <= 1) return;
 		setSurvey((survey) => {
 			const questions = [...survey.questions];
 			questions.splice(index, 1);
