@@ -11,19 +11,15 @@ export default function Card({
 	state,
 	setQuestion,
 	setResponse,
-
 	onDelete,
 
 	// UI-associated parameters
-	index,
-	selectedIndex,
 	onGrab,
 	dom,
 	slowAppear,
+	hidden,
 }) {
 	const [isInit, setIsInit] = useState(true);
-	const yPos =
-		(index - selectedIndex) * (CardStyle.HEIGHT + CardStyle.DISTANCE);
 
 	// Implement delayed fade-in effect
 	useEffect(() => {
@@ -41,29 +37,24 @@ export default function Card({
 
 	let classes = ["survey-card"];
 
-	let style = {
-		height: CardStyle.HEIGHT,
-	};
-	if (isInit) style.opacity = 0;
+	if (isInit) classes.push("hidden");
 
 	switch (state) {
 		case CardStates.EDITTING:
-			style.transform = `translate(-50%, -50%) translateY(${yPos}px)`;
 			classes.push("highlight");
 			classes.push("show-handle");
 			break;
 
 		case CardStates.ORDERING:
-			style.transform = `translate(-50%, -50%) translateY(${yPos}px)`;
 			classes.push("hidden");
 			break;
 
 		case CardStates.PREVIEW:
-			style.transform = `translate(-50%, -50%) translateY(${yPos}px) scale(0.975)`;
+			classes.push("preview");
 			break;
 
 		case CardStates.GHOST:
-			if (index === 0) {
+			if (hidden) {
 				classes.push("hidden");
 			} else {
 				classes.push("ghost");
@@ -103,7 +94,12 @@ export default function Card({
 
 	const className = classes.join(" ");
 	return (
-		<div className={className} style={style} ref={dom}>
+		<div
+			className={className}
+			style={{
+				height: CardStyle.HEIGHT,
+			}}
+			ref={dom}>
 			<div className="card-header">
 				<input type="text" placeholder="제목을 입력하세요." />
 				{state === CardStates.EDITTING && (

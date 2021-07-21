@@ -2,11 +2,8 @@
 
 .survey-card {
 	@include round;
-	position: absolute;
 	width: 640px;
 	padding: 1rem;
-	left: 50%;
-	top: 50%;
 	transition-duration: 0.5s;
 	border: solid 1px rgba(0, 0, 0, 0.1);
 	background-color: #fff;

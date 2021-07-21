@@ -41,6 +41,7 @@ const useDragPaging = (onPaging, threshold = 64) => {
         if (!isDragging) return;
         if (!item.current) return;
 
+        item.current.style.position = 'absolute';
         item.current.style.left = mX.current + 'px';
         item.current.style.top = mY.current + 'px';
 

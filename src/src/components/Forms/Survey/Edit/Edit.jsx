@@ -5,30 +5,20 @@ import { Link } from "react-router-dom";
 /* Components */
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
+import Sidebar from "../Sidebar/Sidebar";
+import { Positioner } from "../../../Positioner/Positioner";
+import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
+
+/* HOC, Context, Hooks */
+import { SurveyProvider } from "../../../../hooks/_useSurvey";
+import withSurvey from "../../../../hocs/withSurvey";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
-import addBtn from "../../../../assets/icons/add-btn.svg";
-import Sidebar from "../Sidebar/Sidebar";
-import orderedMap from "../../../../utils/orderedMap";
-import { SurveyProvider } from "../../../../hooks/_useSurvey";
-import { Positioner } from "../../../Positioner/Positioner";
-import withSurvey from "../../../../hocs/withSurvey";
 
 /* Others */
+import orderedMap from "../../../../utils/orderedMap";
 import { CardTypes, CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
-
-function QuestionAddButton({ show, y, onClick }) {
-	return (
-		<Positioner y={y}>
-			<div className="question-add-box" style={{ opacity: show ? null : 0 }}>
-				<button onClick={onClick}>
-					<img src={addBtn} alt="add button" />
-				</button>
-			</div>
-		</Positioner>
-	);
-}
 
 const Edit = ({ surveyId, survey, setSurvey }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -144,32 +134,39 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 							state = CardStates.PREVIEW;
 						}
 
+						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
+
 						return (
-							<Card
+							<Positioner
 								key={question.id}
-								question={question}
-								setQuestion={getSetQuestion(index)}
-								index={index}
-								selectedIndex={selectedIndex}
-								state={state}
-								onDelete={() => {
-									removeQuestion(index);
-								}}
-								onGrab={onGrab}
-								slowAppear={questions.length > 1}
-							/>
+								y={yPos}
+								zIndex={isSelected ? 1 : 0}>
+								<Card
+									question={question}
+									setQuestion={getSetQuestion(index)}
+									state={state}
+									onDelete={() => {
+										removeQuestion(index);
+									}}
+									onGrab={onGrab}
+									slowAppear={questions.length > 1}
+								/>
+							</Positioner>
 						);
 					})}
+
 					<Card
 						question={questions[selectedIndex]}
 						state={CardStates.GHOST}
-						index={isDragging ? 1 : 0}
+						hidden={!isDragging}
 						dom={item}></Card>
+
 					<QuestionAddButton
 						onClick={() => insertQuestion(selectedIndex)}
 						y={-CardStyle.FRAME_HEIHGT / 2}
 						show={showAddButton}
 					/>
+
 					<QuestionAddButton
 						onClick={() => insertQuestion(selectedIndex + 1)}
 						y={+CardStyle.FRAME_HEIHGT / 2}
