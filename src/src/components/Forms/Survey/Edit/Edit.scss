@@ -13,12 +13,9 @@
 	}
 
 	.question-add-box {
-		position: absolute;
 		display: block;
 		width: 640px;
 		height: 3rem;
-		left: 50%;
-		top: 50%;
 		opacity: 0;
 		animation: disappear 2s linear;
 		text-align: center;
