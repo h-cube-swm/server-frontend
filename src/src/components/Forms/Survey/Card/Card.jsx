@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CardTypes, CardStates, CardStyle } from "../constants";
 import "../Card/Card.scss";
 import hanleImage from "../../../../assets/icons/handle.svg";
 import delBtn from "../../../../assets/icons/del-btn.svg";
 import ToggleSwitch from "./ToggleSwitch";
+import useTimeout from "../../../../hooks/useTimeout";
 
 export default function Card({
 	// Logic-associated parameters
@@ -19,19 +20,7 @@ export default function Card({
 	slowAppear,
 	hidden,
 }) {
-	const [isInit, setIsInit] = useState(true);
-
-	// Implement delayed fade-in effect
-	useEffect(() => {
-		if (slowAppear) {
-			const handle = setTimeout(() => {
-				setIsInit(false);
-			}, 400);
-			return () => clearTimeout(handle);
-		} else {
-			setIsInit(false);
-		}
-	}, [slowAppear]);
+	const isInit = useTimeout(slowAppear ? 400 : 0);
 
 	if (!question) return null;
 
