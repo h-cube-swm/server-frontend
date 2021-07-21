@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CardTypes, CardStates, CardStyle } from "../constants";
 import "../Card/Card.scss";
 import hanleImage from "../../../../assets/icons/handle.svg";
+import delBtn from "../../../../assets/icons/del-btn.svg";
 import ToggleSwitch from "./ToggleSwitch";
 
 export default function Card({
@@ -98,29 +99,30 @@ export default function Card({
   };
 
   const className = classes.join(" ");
-  console.log(question);
   return (
     <div className={className} style={style} ref={dom}>
       <div className="card-header">
         <input type="text" placeholder="제목을 입력하세요." />
-        <ToggleSwitch
-          isRequired={question.isRequired}
-          setIsRequired={(isRequired) => {
-            const newQuestion = { ...question, isRequired };
-            setQuestion(newQuestion);
-          }}
-        />
+        {state === CardStates.EDITTING && (
+          <div className="basic-element">
+            <ToggleSwitch
+              isRequired={question.isRequired}
+              setIsRequired={(isRequired) => {
+                const newQuestion = { ...question, isRequired };
+                setQuestion(newQuestion);
+              }}
+              label="필수요소"
+            />
+            <button className="delete" onClick={onDelete}>
+              <img src={delBtn}></img>
+            </button>
+          </div>
+        )}
       </div>
       <div className="inner-container">{inner}</div>
       <div className="handle" onMouseDown={_onGrab}>
         <img src={hanleImage}></img>
       </div>
-      <button
-        className="delete"
-        onClick={onDelete}
-        hidden={state !== CardStates.EDITTING}>
-        삭제
-      </button>
     </div>
   );
 }
