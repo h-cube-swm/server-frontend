@@ -35,7 +35,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 		});
 	};
 
-	const setSelectedSurveyType = (type) => {
+	const setQuesionType = (type) => {
 		const setQuestion = getSetQuestion(selectedIndex);
 		setQuestion((question) => ({ ...question, type }));
 	};
@@ -103,10 +103,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 			<>
 				<div className="positioning-box">
 					<div className="controller-box">
-						<Controller
-							type={selectedSurveyType}
-							setType={setSelectedSurveyType}
-						/>
+						<Controller type={selectedSurveyType} setType={setQuesionType} />
 						<Link className="link-btn" to={"/forms/survey/end/" + surveyId}>
 							완료
 						</Link>
@@ -119,7 +116,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 						/>
 					</div>
 				</div>
-				<div className="question-container" onWheel={onWheel}>
+				<div className="question-box" onWheel={onWheel}>
 					{orderedMap(questions, (question, index) => {
 						const isSelected = index === selectedIndex;
 
@@ -137,10 +134,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
 
 						return (
-							<Positioner
-								key={question.id}
-								y={yPos}
-								zIndex={isSelected ? 1 : 0}>
+							<Positioner key={question.id} y={yPos}>
 								<Card
 									question={question}
 									setQuestion={getSetQuestion(index)}

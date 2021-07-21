@@ -118,7 +118,7 @@ export default function Card({
 					</div>
 				)}
 			</div>
-			<div className="inner-container">{inner}</div>
+			<div className="inner-box">{inner}</div>
 			<div className="handle" onMouseDown={_onGrab}>
 				<img src={hanleImage} alt="Handle"></img>
 			</div>
