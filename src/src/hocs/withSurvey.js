@@ -7,13 +7,13 @@ const withSurvey = Component => props => {
   const [survey, setSurvey] = useState(null);
 
   useEffect(() => {
-    const init = async () => {
+    const getSurvey = async () => {
       const { result: survey } = await getApi(`/surveys/${surveyId}`);
       if (!survey.counter) survey.counter = 0;
       if (!survey.questions) survey.questions = [];
       setSurvey(survey);
     };
-    init();
+    getSurvey();
   }, [surveyId]);
 
   return (

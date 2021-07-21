@@ -35,7 +35,7 @@ export default function Card({
 		} else {
 			setIsInit(false);
 		}
-	}, []);
+	}, [slowAppear]);
 
 	if (!question) return null;
 
@@ -63,13 +63,16 @@ export default function Card({
 			break;
 
 		case CardStates.GHOST:
-			if (index == 0) {
+			if (index === 0) {
 				classes.push("hidden");
 			} else {
 				classes.push("ghost");
 				classes.push("show-handle");
 				classes.push("highlight");
 			}
+			break;
+
+		default:
 			break;
 	}
 
@@ -114,14 +117,14 @@ export default function Card({
 							label="필수요소"
 						/>
 						<button className="delete" onClick={onDelete}>
-							<img src={delBtn}></img>
+							<img src={delBtn} alt="Delete button"></img>
 						</button>
 					</div>
 				)}
 			</div>
 			<div className="inner-container">{inner}</div>
 			<div className="handle" onMouseDown={_onGrab}>
-				<img src={hanleImage}></img>
+				<img src={hanleImage} alt="Handle"></img>
 			</div>
 		</div>
 	);

@@ -1,11 +1,6 @@
 /* React elements*/
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-/* Test */
-import { getApi } from "../../../../utils/parser";
-import { CardTypes, CardStates, CardStyle } from "../constants";
-import "./Edit.scss";
 
 /* Components */
 import Card from "../Card/Card";
@@ -18,6 +13,10 @@ import orderedMap from "../../../../utils/orderedMap";
 import { SurveyProvider } from "../../../../hooks/_useSurvey";
 import { Positioner } from "../../../Positioner/Positioner";
 import withSurvey from "../../../../hocs/withSurvey";
+
+/* Others */
+import { CardTypes, CardStates, CardStyle } from "../constants";
+import "./Edit.scss";
 
 function QuestionAddButton({ show, y, onClick }) {
 	return (
@@ -81,8 +80,8 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 	const [onWheel, isMoving] = useScrollPaging((delta) => {
 		setSelectedIndex((index) => {
 			let newIndex = index + delta;
-			if (newIndex < 0) return;
-			if (newIndex >= survey.questions.length) return;
+			if (newIndex < 0) return index;
+			if (newIndex >= survey.questions.length) return index;
 			return newIndex;
 		});
 	});
@@ -115,8 +114,8 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 				<div className="positioning-box">
 					<div className="controller-box">
 						<Controller
-							element={selectedSurveyType}
-							setElement={setSelectedSurveyType}
+							type={selectedSurveyType}
+							setType={setSelectedSurveyType}
 						/>
 						<Link className="link-btn" to={"/forms/survey/end/" + surveyId}>
 							완료
@@ -183,7 +182,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 		<div className="loading-screen">Now Loading...</div>;
 	}
 	return (
-		<SurveyProvider data={[survey, setSurvey]}>
+		<SurveyProvider value={[survey, setSurvey]}>
 			<div className="edit" {...backgroundCallbacks}>
 				{contents}
 			</div>

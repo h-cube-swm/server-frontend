@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { putApi } from "../../../../utils/parser";
+import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 
 import "./Ending.scss";
 
-const Ending = ({ match }) => {
-  const [title, setTitle] = useState("Loading...");
-  const [description, setDescription] = useState("Loading...");
-  const [surveyLink, setSurveyLink] = useState("Loading...");
-  const [resultLink, setResultLink] = useState("Loading...");
-  const survey_id = match.params.link;
-
-  useEffect(async () => {
-    try {
-      const json = await putApi(`/surveys/${survey_id}/end`);
-      const obj = JSON.parse(JSON.stringify(json));
-      setTitle(obj.result.title);
-      setDescription(obj.result.description);
-      setSurveyLink(obj.result.survey_link);
-      setResultLink(obj.result.result_link);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
+const Ending = ({ title, description, surveyLink, resultLink }) => {
   return (
     <div className="ending-page">
       <h1 className="celebrate-sentence">
@@ -52,4 +33,4 @@ const Ending = ({ match }) => {
   );
 };
 
-export default Ending;
+export default withSurveyEnding(Ending);

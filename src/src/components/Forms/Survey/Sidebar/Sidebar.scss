@@ -3,7 +3,6 @@
 	transform: translate(-50%, -50%);
 
 	.dot {
-		position: absolute;
 		display: block;
 		height: 4rem;
 		width: 5rem;
@@ -15,10 +14,25 @@
 
 		transition-duration: 0.5s;
 		cursor: pointer;
+
+		img {
+			transition-duration: 0.25s;
+		}
+
+		&.unselected {
+			img {
+				filter: grayscale(100%) brightness(2);
+			}
+		}
+	}
+
+	.dot:hover {
+		img {
+			transform: scale(1.2);
+		}
 	}
 
 	.bar {
-		position: absolute;
 		transition-duration: 0.5s;
 		width: 3px;
 		height: 100%;

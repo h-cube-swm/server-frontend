@@ -8,11 +8,11 @@ import React from "react";
  * If topLeft flag is set true, origin will be set to top-left.
  */
 
-export function Positioner({ x, y, depth = 0, children, topLeft }) {
+export function Positioner({ x, y, zIndex = 0, children, topLeft }) {
 	let style = {
 		position: "absolute",
 		transitionDuration: "0.5s",
-		zIndex: -depth,
+		zIndex,
 	};
 
 	if (!topLeft) {
