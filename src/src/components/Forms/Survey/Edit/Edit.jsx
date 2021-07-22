@@ -20,6 +20,7 @@ import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
 import getQuestion from "../getQuestion";
 import setNestedState from "../../../../utils/setNestedState";
+import Hider from "../../../Hider/Hider";
 
 const Edit = ({ surveyId, survey, setSurvey }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -41,7 +42,6 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 	};
 
 	const removeQuestion = (index) => {
-		/* ToDo : 질문이 최소한 하나는 있어야 한다는 경고를 띄우거나, 아니면 질문을 지울 수 없도록 하기 */
 		if (survey.questions.length <= 1) return;
 		setSurvey((survey) => {
 			const questions = [...survey.questions];
@@ -136,11 +136,12 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 						);
 					})}
 
-					<Card
-						question={questions[selectedIndex]}
-						state={CardStates.GHOST}
-						hidden={!isDragging}
-						dom={item}></Card>
+					<Hider hide={!isDragging} ref={item}>
+						<Card
+							question={questions[selectedIndex]}
+							state={CardStates.GHOST}
+						/>
+					</Hider>
 
 					<QuestionAddButton
 						onClick={() => insertQuestion(selectedIndex)}

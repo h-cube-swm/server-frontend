@@ -82,9 +82,6 @@ export default function Card({
 			break;
 
 		case CardStates.GHOST:
-			if (hidden) {
-				return null;
-			} else {
 				classes.push("ghost");
 				classes.push("show-handle");
 				classes.push("highlight");
@@ -97,7 +94,7 @@ export default function Card({
 					style={{ height: CardStyle.HEIGHT }}
 					ref={dom}>
 					<div className="card-header">
-						<TextField placeholder="질문을 입력하세요" value={question.title} />
+						<TextField placeholder="질문을 입력하세요" text={question.title} />
 					</div>
 					<div className="inner-box">
 						<InnerComponent
@@ -130,9 +127,7 @@ export default function Card({
 					<div className={`basic-element`}>
 						<ToggleSwitch
 							isRequired={question.isRequired}
-							setIsRequired={(isRequired) =>
-								setQuestion((question) => ({ ...question, isRequired }))
-							}
+							setIsRequired={setNestedState(setQuestion, ["isRequired"])}
 							label="필수응답"
 						/>
 						<button
