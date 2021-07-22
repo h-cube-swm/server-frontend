@@ -1,16 +1,18 @@
 import React, { forwardRef } from "react";
+import "./TextField.scss";
 
-function TextField({ text, setText, disabled, ...props }, ref) {
-	return (
-		<input
-			{...props}
-			type="text"
-			value={text}
-			onChange={setText ? (e) => setText(e.target.value) : () => {}}
-			disabled={disabled || !setText}
-			ref={ref}
-		/>
-	);
+function TextField({ text, setText, disabled, size, ...props }, ref) {
+  return (
+    <input
+      {...props}
+      className={"txt-field " + size}
+      type="text"
+      value={text}
+      onChange={setText ? (e) => setText(e.target.value) : () => {}}
+      disabled={disabled || !setText}
+      ref={ref}
+    />
+  );
 }
 
 export default forwardRef(TextField);

@@ -22,7 +22,8 @@ function Choice({ text, setText, checked, setChecked, onDelete, editable }) {
         text={text}
         setText={setText}
         disabled={!editable}
-        className={editable ? "text-box" : "text-box disabled"}
+        placeholder="선택지를 입력하세요."
+        size="regular"
       />
       <Hider hide={!(editable && onDelete)}>
         <button className="del-btn" onClick={onDelete}>
@@ -41,7 +42,7 @@ export default function MultipleChoice({
   state,
 }) {
   const initialized = useDefault(question, setQuestion, {
-    choices: ["아이유 이쁘다"],
+    choices: [""],
   });
   if (!initialized) return null;
 
@@ -51,7 +52,7 @@ export default function MultipleChoice({
   const editable = state === CardStates.EDITTING;
 
   const addChoice = () => {
-    setNestedState(setQuestion, ["choices"])((choices) => [...choices, "인정"]);
+    setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
   };
 
   const removeChoice = (i) => {
