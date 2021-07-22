@@ -14,7 +14,7 @@ export const CardStates = {
   GHOST: 'ghost'
 };
 
-const SURVEY_HEIGHT = 250;
+const SURVEY_HEIGHT = 400;
 const SURVEY_DISTANCE = 100;
 
 export const CardStyle = {
