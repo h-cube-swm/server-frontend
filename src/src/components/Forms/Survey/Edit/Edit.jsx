@@ -140,6 +140,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 						<Card
 							question={questions[selectedIndex]}
 							state={CardStates.GHOST}
+							slowAppear={false}
 						/>
 					</Hider>
 
