@@ -1,0 +1,8 @@
+.hider {
+	display: inline;
+	transition-duration: 500ms;
+	opacity: 1;
+	&.hide {
+		opacity: 0;
+	}
+}
