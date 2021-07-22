@@ -1,16 +1,44 @@
 import React from "react";
 import { CardTypes, CardStates, CardStyle } from "../constants";
+import useTimeout from "../../../../hooks/useTimeout";
+
+/* Assets */
 import "../Card/Card.scss";
 import hanleImage from "../../../../assets/icons/handle.svg";
 import delBtn from "../../../../assets/icons/del-btn.svg";
+
+/* Components */
+import Default from "./Types/Default/Default";
 import ToggleSwitch from "./ToggleSwitch";
-import useTimeout from "../../../../hooks/useTimeout";
+import SingleChoice from "./Types/SingleChoice/SingleChoice";
+import MultipleChoice from "./Types/MultipleChoice/MultipleChoice";
+import Preference from "./Types/Preference/Preference";
+import ShortSentence from "./Types/ShortSentence/ShortSentence";
+import LongSentence from "./Types/LongSentence/LongSentence";
+
+function getInnerComponent(type) {
+	switch (type) {
+		case CardTypes.SINGLE_CHOICE:
+			return SingleChoice;
+		case CardTypes.MULTIPLE_CHOICE:
+			return MultipleChoice;
+		case CardTypes.PREFERENCE:
+			return Preference;
+		case CardTypes.SHORT_SENTENCE:
+			return ShortSentence;
+		case CardTypes.LONG_SENTENCE:
+			return LongSentence;
+		default:
+			return Default;
+	}
+}
 
 export default function Card({
 	// Logic-associated parameters
-	question,
 	state,
+	question,
 	setQuestion,
+	response,
 	setResponse,
 	onDelete,
 
@@ -56,24 +84,7 @@ export default function Card({
 			break;
 	}
 
-	let inner = <div className="inner-default">Type : {question.type}</div>;
-
-	const type = question?.type;
-	switch (type) {
-		case CardTypes.SINGLE_CHOICE:
-			break;
-		case CardTypes.MULTIPLE_CHOICE:
-			break;
-		case CardTypes.PREFERENCE:
-			break;
-		case CardTypes.SHORT_SENTENCE:
-			break;
-		case CardTypes.LONG_SENTENCE:
-			break;
-		default:
-			inner = <div className="inner-default">Unsupported Card Type</div>;
-			break;
-	}
+	const InnerComponent = getInnerComponent(question.type);
 
 	const _onGrab = (event) => {
 		event.preventDefault();
@@ -83,25 +94,23 @@ export default function Card({
 
 	const className = classes.join(" ");
 	return (
-		<div
-			className={className}
-			style={{
-				height: CardStyle.HEIGHT,
-			}}
-			ref={dom}>
+		<div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
 			<div className="card-header">
-				<input type="text" placeholder="제목을 입력하세요." />
+				<input
+					type="text"
+					placeholder="제목을 입력하세요."
+					value={question.title}
+				/>
 				<div
 					className={`basic-element ${
 						state === CardStates.EDITTING ? "" : "hidden"
 					}`}>
 					<ToggleSwitch
 						isRequired={question.isRequired}
-						setIsRequired={(isRequired) => {
-							const newQuestion = { ...question, isRequired };
-							setQuestion(newQuestion);
-						}}
-						label="필수요소"
+						setIsRequired={(isRequired) =>
+							setQuestion((question) => ({ ...question, isRequired }))
+						}
+						label="필수응답"
 					/>
 					<button
 						className={`delete ${onDelete ? "" : "hidden"}`}
@@ -110,7 +119,16 @@ export default function Card({
 					</button>
 				</div>
 			</div>
-			<div className="inner-box">{inner}</div>
+			<div className="inner-box">
+				<InnerComponent
+					state={state}
+					isRequired={question.isRequired}
+					question={question}
+					setQuestion={setQuestion}
+					response={response}
+					setResponse={setResponse}
+				/>
+			</div>
 			<div className="handle" onMouseDown={_onGrab}>
 				<img src={hanleImage} alt="Handle"></img>
 			</div>
