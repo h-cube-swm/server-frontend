@@ -17,126 +17,146 @@ import ShortSentence from "./Types/ShortSentence/ShortSentence";
 import LongSentence from "./Types/LongSentence/LongSentence";
 import setNestedState from "../../../../utils/setNestedState";
 import TextField from "../../../TextField/TextField";
+import Hider from "../../../Hider/Hider";
 
 function getInnerComponent(type) {
-	switch (type) {
-		case CardTypes.SINGLE_CHOICE:
-			return SingleChoice;
-		case CardTypes.MULTIPLE_CHOICE:
-			return MultipleChoice;
-		case CardTypes.PREFERENCE:
-			return Preference;
-		case CardTypes.SHORT_SENTENCE:
-			return ShortSentence;
-		case CardTypes.LONG_SENTENCE:
-			return LongSentence;
-		default:
-			return Default;
-	}
+  switch (type) {
+    case CardTypes.SINGLE_CHOICE:
+      return SingleChoice;
+    case CardTypes.MULTIPLE_CHOICE:
+      return MultipleChoice;
+    case CardTypes.PREFERENCE:
+      return Preference;
+    case CardTypes.SHORT_SENTENCE:
+      return ShortSentence;
+    case CardTypes.LONG_SENTENCE:
+      return LongSentence;
+    default:
+      return Default;
+  }
 }
 
 export default function Card({
-	// Logic-associated parameters
-	state,
-	question,
-	setQuestion,
-	response,
-	setResponse,
-	onDelete,
+  // Logic-associated parameters
+  state,
+  question,
+  setQuestion,
+  response,
+  setResponse,
+  onDelete,
 
-	// UI-associated parameters
-	onGrab,
-	dom,
-	slowAppear,
-	hidden,
+  // UI-associated parameters
+  onGrab,
+  dom,
+  slowAppear,
+  hidden,
 }) {
-	const isInit = useTimeout(slowAppear ? 400 : 0);
+  const isInit = useTimeout(slowAppear ? 400 : 0);
 
-	if (!question) return null;
+  if (!question) return null;
 
-	let classes = ["survey-card"];
+  let classes = ["survey-card"];
 
-	if (isInit) classes.push("hidden");
+  if (isInit) classes.push("hidden");
 
-	switch (state) {
-		case CardStates.EDITTING:
-			classes.push("highlight");
-			classes.push("show-handle");
-			break;
+  const InnerComponent = getInnerComponent(question.type);
 
-		case CardStates.ORDERING:
-			classes.push("hidden");
-			break;
+  const _onGrab = (event) => {
+    event.preventDefault();
+    if (state !== CardStates.EDITTING) return;
+    onGrab();
+  };
 
-		case CardStates.PREVIEW:
-			classes.push("preview");
-			break;
+  switch (state) {
+    case CardStates.EDITTING:
+      classes.push("highlight");
+      classes.push("show-handle");
+      break;
 
-		case CardStates.GHOST:
-			if (hidden) {
-				classes.push("hidden");
-			} else {
-				classes.push("ghost");
-				classes.push("show-handle");
-				classes.push("highlight");
-			}
-			break;
+    case CardStates.ORDERING:
+      classes.push("hidden");
+      break;
 
-		default:
-			break;
-	}
+    case CardStates.PREVIEW:
+      classes.push("preview");
+      break;
 
-	const InnerComponent = getInnerComponent(question.type);
+    case CardStates.GHOST:
+      if (hidden) {
+        return null;
+      } else {
+        classes.push("ghost");
+        classes.push("show-handle");
+        classes.push("highlight");
+      }
 
-	const _onGrab = (event) => {
-		event.preventDefault();
-		if (state !== CardStates.EDITTING) return;
-		onGrab();
-	};
+      const className = classes.join(" ");
+      return (
+        <div
+          className={className}
+          style={{ height: CardStyle.HEIGHT }}
+          ref={dom}
+        >
+          <div className="card-header">
+            <TextField placeholder="질문을 입력하세요" value={question.title} />
+          </div>
+          <div className="inner-box">
+            <InnerComponent
+              state={CardStates.GHOST}
+              isRequired={question.isRequired}
+              question={question}
+            />
+          </div>
+          <div className="handle">
+            <img src={hanleImage} alt="Handle"></img>
+          </div>
+        </div>
+      );
 
-	const className = classes.join(" ");
-	return (
-		<div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
-			<div className="card-header">
-				<TextField
-					placeholder="질문을 입력하세요."
-					value={question.title}
-					onChange={setNestedState(setQuestion, ["title"])}
-				/>
-				<div
-					className={`basic-element ${
-						state === CardStates.EDITTING ? "" : "hidden"
-					}`}>
-					<ToggleSwitch
-						isRequired={question.isRequired}
-						setIsRequired={(isRequired) =>
-							setQuestion((question) => ({ ...question, isRequired }))
-						}
-						label="필수응답"
-					/>
-					<button
-						className={`delete ${onDelete ? "" : "hidden"}`}
-						onClick={onDelete}>
-						<img src={delBtn} alt="Delete button"></img>
-					</button>
-				</div>
-			</div>
-			<div
-				className="inner-box"
-				onScroll={(e) => e.stopPropagation()}
-				onWheel={(e) => e.stopPropagation()}>
-				<InnerComponent
-					state={state}
-					isRequired={question.isRequired}
-					question={question}
-					setQuestion={setQuestion}
-					response={response}
-					setResponse={setResponse}
-				/>
-			</div>
-			<div className="handle" onMouseDown={_onGrab}>
-				<img src={hanleImage} alt="Handle"></img>
-			</div>
-		</div>
-	);
+    default:
+      break;
+  }
+
+  const className = classes.join(" ");
+  return (
+    <div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
+      <div className="card-header">
+        <TextField
+          placeholder="질문을 입력하세요"
+          value={question.title}
+          onChange={setNestedState(setQuestion, ["title"])}
+        />
+        <Hider hide={state !== CardStates.EDITTING}>
+          <div className={`basic-element`}>
+            <ToggleSwitch
+              isRequired={question.isRequired}
+              setIsRequired={(isRequired) =>
+                setQuestion((question) => ({ ...question, isRequired }))
+              }
+              label="필수응답"
+            />
+            <button
+              className={"delete" + (onDelete ? "" : " disabled")}
+              onClick={onDelete}
+            >
+              <img src={delBtn} alt="Delete button"></img>
+            </button>
+          </div>
+        </Hider>
+      </div>
+      <div className="inner-box">
+        <InnerComponent
+          state={state}
+          isRequired={question.isRequired}
+          question={question}
+          setQuestion={setQuestion}
+          response={response}
+          setResponse={setResponse}
+        />
+      </div>
+      <div className="handle" onMouseDown={_onGrab}>
+        <img src={hanleImage} alt="Handle"></img>
+      </div>
+    </div>
+  );
 }
