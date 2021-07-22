@@ -17,54 +17,9 @@
       width: 15rem;
       border: 0;
       border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-      font-size: 1rem;
+      font-size: $fs-rg;
       background-color: rgba($color: #fff, $alpha: 0);
       height: 2rem;
-    }
-
-    .max-len-controller {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      width: 7rem;
-
-      .text-set {
-        @include text-center;
-        p {
-          font-size: 0.5rem;
-          font-weight: 700;
-          margin-bottom: 0.3rem;
-        }
-
-        input {
-          display: block;
-          width: 3rem;
-          font-weight: 700;
-          font-size: 1rem;
-          text-align: center;
-          border-bottom: 0;
-          margin: 0;
-          border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-          outline: none;
-        }
-      }
-
-      .btn-set {
-        display: flex;
-        flex-direction: column;
-        margin-left: 0.5rem;
-        transform: translateY(0.3rem);
-        button {
-          background-color: rgba($color: #fff, $alpha: 0);
-          border: 0;
-          cursor: pointer;
-          width: 1.3rem;
-          padding: 0;
-        }
-        img {
-          width: 60%;
-        }
-      }
     }
 
     .response {
@@ -76,10 +31,10 @@
         justify-content: center;
         padding-left: 2rem;
         p {
-          font-weight: 700;
+          font-weight: $fw-bold;
         }
         .indicator {
-          font-size: 0.3rem;
+          font-size: $fs-xs;
         }
       }
     }

@@ -53,13 +53,12 @@
       margin-top: 8rem;
       margin-bottom: 6rem;
       line-height: 8rem;
-      font-size: 4rem;
-      font-weight: 500;
+      font-size: $fs-xl;
     }
 
     strong {
       display: block;
-      font-weight: 700;
+      font-weight: $fw-bold;
       margin-top: 1.6rem;
     }
   }
@@ -76,15 +75,14 @@
     border: 0;
     color: #fff;
     background-color: #2b44ff;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: $fs-rg;
+    font-weight: $fw-bold;
     box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
     z-index: 1;
   }
 
   @include desktop {
     .btn-make-survey {
-      font-size: 1.33rem;
       bottom: 5rem;
     }
 
@@ -93,8 +91,6 @@
         margin-top: 3rem;
         margin-bottom: 6rem;
         line-height: 4rem;
-        font-size: 2.5rem;
-        font-weight: 500;
       }
     }
 
@@ -115,7 +111,6 @@
     margin-top: 10rem;
 
     .btn-make-survey {
-      font-size: 1.2rem;
       bottom: 20rem;
     }
 
@@ -150,7 +145,6 @@
     margin-top: 5rem;
 
     .btn-make-survey {
-      font-size: 1rem;
       width: 9rem;
       height: 3rem;
       bottom: 8rem;
@@ -166,7 +160,6 @@
         margin-top: 0;
         margin-bottom: 2rem;
         line-height: 3rem;
-        font-size: 2rem;
       }
     }
 
@@ -194,7 +187,6 @@
     margin-top: 0;
 
     .btn-make-survey {
-      font-size: 1rem;
       width: 9.6rem;
       height: 3rem;
       bottom: 5rem;
@@ -210,7 +202,6 @@
         margin-top: -1rem;
         margin-bottom: 2rem;
         line-height: 3rem;
-        font-size: 2rem;
       }
     }
 
