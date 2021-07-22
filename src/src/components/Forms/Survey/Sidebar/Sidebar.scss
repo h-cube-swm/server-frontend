@@ -21,13 +21,14 @@
 		&.unselected {
 			img {
 				filter: grayscale(100%) brightness(2);
+				transform: scale(0.8);
 			}
 		}
 	}
 
 	.dot:hover {
 		img {
-			transform: scale(1.2);
+			transform: scale(1);
 		}
 	}
 
