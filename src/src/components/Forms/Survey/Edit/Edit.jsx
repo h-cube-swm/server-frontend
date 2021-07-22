@@ -22,7 +22,7 @@ import getQuestion from "../getQuestion";
 import setNestedState from "../../../../utils/setNestedState";
 import Hider from "../../../Hider/Hider";
 
-const Edit = ({ surveyId, survey, setSurvey }) => {
+const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const setQuesionType = setNestedState(setSurvey, [
@@ -93,6 +93,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 						<Link className="link-btn" to={"/forms/survey/end/" + surveyId}>
 							완료
 						</Link>
+						<button onClick={putSurvey}>저장</button>
 					</div>
 					<div className="sidebar-box">
 						<Sidebar
