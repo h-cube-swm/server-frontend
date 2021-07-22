@@ -99,7 +99,7 @@ export default function Card({
 		<div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
 			<div className="card-header">
 				<TextField
-					placeholder="제목을 입력하세요."
+					placeholder="질문을 입력하세요."
 					value={question.title}
 					onChange={setNestedState(setQuestion, ["title"])}
 				/>
@@ -121,7 +121,10 @@ export default function Card({
 					</button>
 				</div>
 			</div>
-			<div className="inner-box">
+			<div
+				className="inner-box"
+				onScroll={(e) => e.stopPropagation()}
+				onWheel={(e) => e.stopPropagation()}>
 				<InnerComponent
 					state={state}
 					isRequired={question.isRequired}
