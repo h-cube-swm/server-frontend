@@ -1,10 +1,13 @@
 import React from "react";
 
-export default function TextField({ onChange, ...props }) {
+export default function TextField({ text, setText, disabled, ...props }) {
 	return (
 		<input
 			{...props}
 			type="text"
-			onChange={onChange && ((e) => onChange(e.target.value))}></input>
+			value={text}
+			onChange={setText && ((e) => setText(e.target.value))}
+			disabled={disabled || !setText}
+		/>
 	);
 }
