@@ -1,5 +1,5 @@
 import React from "react";
-import addDefault from "../../../../../../utils/addDefault";
+import useDefault from "../../../../../../utils/addDefault";
 import setNestedState from "../../../../../../utils/setNestedState";
 import Hider from "../../../../../Hider/Hider";
 import TextField from "../../../../../TextField/TextField";
@@ -30,12 +30,10 @@ export default function MultipleChoice({
 	setResponse,
 	state,
 }) {
-	if (
-		addDefault(question, setQuestion, {
-			choices: ["아이유 이쁘다"],
-		})
-	)
-		return null;
+	const initialized = useDefault(question, setQuestion, {
+		choices: ["아이유 이쁘다"],
+	});
+	if (!initialized) return null;
 
 	if (!question.choices) return null;
 

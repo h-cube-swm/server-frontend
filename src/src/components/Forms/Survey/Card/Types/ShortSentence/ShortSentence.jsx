@@ -12,13 +12,12 @@ export default function ShortSentence({
   setQuestion,
   setResponse,
 }) {
-  if (
-    addDefault(question, setQuestion, {
+  const [curLen, setCurLen] = useState(0);
+  const initialized = useDefault(question, setQuestion, {
       answer: "",
       maxLen: 32,
-    })
-  )
-    return null;
+  });
+  if (!initialized) return null;
 
   const update = (e) => {
     const answer = e.target.value;
