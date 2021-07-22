@@ -55,8 +55,14 @@
 		bottom: 0.5rem;
 		border: 0;
 		background-color: #fff;
+		transition-duration: 0.5s;
+
 		img {
 			width: 70%;
+		}
+
+		&.hidden {
+			filter: grayscale(100%) brightness(1.8);
 		}
 	}
 

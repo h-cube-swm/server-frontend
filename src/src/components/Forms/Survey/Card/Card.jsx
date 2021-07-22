@@ -103,7 +103,9 @@ export default function Card({
 						}}
 						label="필수요소"
 					/>
-					<button className="delete" onClick={onDelete}>
+					<button
+						className={`delete ${onDelete ? "" : "hidden"}`}
+						onClick={onDelete}>
 						<img src={delBtn} alt="Delete button"></img>
 					</button>
 				</div>

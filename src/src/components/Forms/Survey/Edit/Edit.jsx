@@ -117,6 +117,11 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 					{orderedMap(questions, (question, index) => {
 						const isSelected = index === selectedIndex;
 
+						const setQuestion = getSetQuestion(index);
+						const onDelete =
+							questions.length > 1 ? () => removeQuestion(index) : null;
+						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
+						const slowAppear = questions.length > 1;
 						let state = null;
 						if (isSelected) {
 							if (isDragging) {
@@ -128,19 +133,15 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 							state = CardStates.PREVIEW;
 						}
 
-						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
-
 						return (
 							<Positioner key={question.id} y={yPos}>
 								<Card
 									question={question}
-									setQuestion={getSetQuestion(index)}
+									setQuestion={setQuestion}
 									state={state}
-									onDelete={() => {
-										removeQuestion(index);
-									}}
+									onDelete={onDelete}
 									onGrab={onGrab}
-									slowAppear={questions.length > 1}
+									slowAppear={slowAppear}
 								/>
 							</Positioner>
 						);
