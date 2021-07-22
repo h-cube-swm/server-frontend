@@ -10,7 +10,6 @@ import { Positioner } from "../../../Positioner/Positioner";
 import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
 
 /* HOC, Context, Hooks */
-import { SurveyProvider } from "../../../../hooks/_useSurvey";
 import withSurvey from "../../../../hocs/withSurvey";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
@@ -20,26 +19,16 @@ import orderedMap from "../../../../utils/orderedMap";
 import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
 import getQuestion from "../getQuestion";
+import setNestedState from "../../../../utils/setNestedState";
 
 const Edit = ({ surveyId, survey, setSurvey }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
-	const getSetQuestion = (index) => (question) => {
-		setSurvey((survey) => {
-			const questions = [...survey.questions];
-			if (typeof question === "function") {
-				questions[index] = question(questions[index]);
-			} else {
-				questions[index] = question;
-			}
-			return { ...survey, questions };
-		});
-	};
-
-	const setQuesionType = (type) => {
-		const setQuestion = getSetQuestion(selectedIndex);
-		setQuestion((question) => ({ ...question, type }));
-	};
+	const setQuesionType = setNestedState(setSurvey, [
+		"questions",
+		selectedIndex,
+		"type",
+	]);
 
 	const insertQuestion = (index) => {
 		setSurvey((survey) => {
@@ -117,7 +106,7 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 					{orderedMap(questions, (question, index) => {
 						const isSelected = index === selectedIndex;
 
-						const setQuestion = getSetQuestion(index);
+						const setQuestion = setNestedState(setSurvey, ["questions", index]);
 						const onDelete =
 							questions.length > 1 ? () => removeQuestion(index) : null;
 						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
@@ -171,11 +160,9 @@ const Edit = ({ surveyId, survey, setSurvey }) => {
 		<div className="loading-screen">Now Loading...</div>;
 	}
 	return (
-		<SurveyProvider value={[survey, setSurvey]}>
-			<div className="edit" {...backgroundCallbacks}>
-				{contents}
-			</div>
-		</SurveyProvider>
+		<div className="edit" {...backgroundCallbacks}>
+			{contents}
+		</div>
 	);
 };
 
