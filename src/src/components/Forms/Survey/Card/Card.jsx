@@ -70,7 +70,6 @@ export default function Card({
 	switch (state) {
 		case CardStates.EDITTING:
 			classes.push("highlight");
-			classes.push("show-handle");
 			break;
 
 		case CardStates.ORDERING:
@@ -79,11 +78,11 @@ export default function Card({
 
 		case CardStates.PREVIEW:
 			classes.push("preview");
+			classes.push("hide-handle");
 			break;
 
 		case CardStates.GHOST:
 			classes.push("ghost");
-			classes.push("show-handle");
 			classes.push("highlight");
 
 			const className = classes.join(" ");
