@@ -15,17 +15,20 @@
 		justify-content: space-between;
 		padding: 0.5rem;
 
+		input {
+			width: 15rem;
+			border: 0;
+			border-bottom: solid 1px #000;
+			font-size: 1.5rem;
+			background-color: rgba($color: #fff, $alpha: 0);
+		}
+
 		.basic-element {
 			transition-duration: 0.5s;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-
-			&.hidden {
-				opacity: 0;
-				z-index: -1;
-			}
 		}
 	}
 
@@ -33,11 +36,7 @@
 		@include text-center;
 		width: 100%;
 		flex-grow: 1;
-
-		.inner-default {
-			font-size: 3rem;
-			color: rgba(0, 0, 0, 0.3);
-		}
+		overflow: scroll;
 	}
 
 	.handle {
@@ -56,13 +55,14 @@
 		border: 0;
 		background-color: #fff;
 		transition-duration: 0.5s;
-
+		cursor: pointer;
 		img {
 			width: 70%;
 		}
 
-		&.hidden {
+		&.disabled {
 			filter: grayscale(100%) brightness(1.8);
+			cursor: inherit;
 		}
 	}
 
