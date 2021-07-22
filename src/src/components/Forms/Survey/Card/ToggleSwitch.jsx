@@ -3,25 +3,24 @@ import "./ToggleSwitch.scss";
 import selectedDot from "../../../../assets/icons/selected-dot.svg";
 import unselectedDot from "../../../../assets/icons/unselected-dot.svg";
 
-export default function ToggleSwitch(params) {
-	const isRequired = params.isRequired;
-	const label = params.label;
+export default function ToggleSwitch({ isRequired, setIsRequired, label }) {
 	const onClick = () => {
-		params.setIsRequired(!params.isRequired);
+		setIsRequired(!isRequired);
 	};
 
 	return (
-		<div className="toggle-box">
+		<div
+			className="toggle-box"
+			onMouseDown={(event) => event.preventDefault()}
+			onClick={onClick}>
 			<div className="toggle-switch">
 				<div className="toggle-background" />
-				<button
-					className={isRequired ? "toggle-btn" : "unselected-toggle-btn"}
-					onClick={onClick}>
+				<div className={isRequired ? "toggle-btn" : "unselected-toggle-btn"}>
 					<img
 						src={isRequired ? selectedDot : unselectedDot}
 						alt="require element switch"
 					/>
-				</button>
+				</div>
 			</div>
 			<p className={isRequired ? "selected-label" : "unselected-label"}>
 				{label}
