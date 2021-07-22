@@ -1,18 +1,16 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-export default function CheckField({
-  checked,
-  setChecked,
-  disabled,
-  ...props
-}) {
-  return (
-    <input
-      {...props}
-      type="checkbox"
-      value={checked}
-      onChange={setChecked && ((e) => setChecked(e.target.value))}
-      disabled={disabled || !setChecked}
-    />
-  );
+function CheckField({ checked, setChecked, disabled, ...props }, ref) {
+	return (
+		<input
+			{...props}
+			type="checkbox"
+			value={checked}
+			onChange={setChecked && ((e) => setChecked(e.target.value))}
+			disabled={disabled || !setChecked}
+			ref={ref}
+		/>
+	);
 }
+
+export default forwardRef(CheckField);

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-export default function TextField({ text, setText, disabled, ...props }) {
+function TextField({ text, setText, disabled, ...props }, ref) {
 	return (
 		<input
 			{...props}
 			type="text"
 			value={text}
-			onChange={setText && ((e) => setText(e.target.value))}
+			onChange={setText ? (e) => setText(e.target.value) : () => {}}
 			disabled={disabled || !setText}
+			ref={ref}
 		/>
 	);
 }
+
+export default forwardRef(TextField);
