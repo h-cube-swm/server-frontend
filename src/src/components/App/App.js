@@ -13,7 +13,7 @@ import Ending from "../Forms/Survey/Ending/Ending";
 
 function App() {
   return (
-    <div>
+    <>
       <Switch>
         <Route path="/" component={Main} exact />
         <Route path="/forms/survey" component={Survey} exact />
@@ -27,7 +27,7 @@ function App() {
           )}
         />
       </Switch>
-    </div>
+    </>
   );
 }
 
