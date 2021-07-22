@@ -101,7 +101,7 @@ export default function Card({
 				<TextField
 					placeholder="제목을 입력하세요."
 					value={question.title}
-					onChange={setNestedState(setQuestion, "title")}
+					onChange={setNestedState(setQuestion, ["title"])}
 				/>
 				<div
 					className={`basic-element ${
