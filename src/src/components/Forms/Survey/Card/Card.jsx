@@ -15,6 +15,8 @@ import MultipleChoice from "./Types/MultipleChoice/MultipleChoice";
 import Preference from "./Types/Preference/Preference";
 import ShortSentence from "./Types/ShortSentence/ShortSentence";
 import LongSentence from "./Types/LongSentence/LongSentence";
+import setNestedState from "../../../../utils/setNestedState";
+import TextField from "../../../TextField/TextField";
 
 function getInnerComponent(type) {
 	switch (type) {
@@ -96,10 +98,10 @@ export default function Card({
 	return (
 		<div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
 			<div className="card-header">
-				<input
-					type="text"
+				<TextField
 					placeholder="제목을 입력하세요."
 					value={question.title}
+					onChange={setNestedState(setQuestion, "title")}
 				/>
 				<div
 					className={`basic-element ${
