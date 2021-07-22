@@ -1,14 +1,16 @@
+@import "/src/scss/style.scss";
+
 .short-sentence {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  transform: translateX(3rem);
+  padding-left: 1rem;
   input {
     display: block;
     width: 15rem;
     border: 0;
-    border-bottom: solid 1px rgba($color: #000000, $alpha: 0.6);
+    border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
     font-size: 1rem;
     background-color: rgba($color: #fff, $alpha: 0);
   }
@@ -18,14 +20,39 @@
     justify-content: center;
     align-items: center;
     width: 7rem;
-    p {
-      font-size: 0.5rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
+    .text-set {
+      @include text-center;
+      p {
+        font-size: 0.5rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      input {
+        width: 2rem;
+        font-weight: 700;
+        font-size: 1rem;
+        text-align: center;
+        border-bottom: 0;
+        margin: 0;
+      }
+      input:active {
+        width: 2rem;
+        font-weight: 700;
+        font-size: 0.6rem;
+        border-bottom: solid 1px rgba($color: #000000, $alpha: 0.6);
+        margin: 0;
+      }
+      input:focus {
+        outline: none;
+        border-bottom: solid 1px rgba($color: #000000, $alpha: 0.6);
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
-    strong {
-      font-weight: 700;
-    }
+
     .btn-set {
       display: flex;
       flex-direction: column;
@@ -40,6 +67,23 @@
       }
       img {
         width: 80%;
+      }
+    }
+  }
+
+  .response {
+    display: flex;
+    align-items: center;
+    .max-len-indicator {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 2rem;
+      p {
+        font-weight: 700;
+      }
+      .indicator {
+        font-size: 0.3rem;
       }
     }
   }
