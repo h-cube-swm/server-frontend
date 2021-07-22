@@ -82,10 +82,9 @@ export default function Card({
 			break;
 
 		case CardStates.GHOST:
-				classes.push("ghost");
-				classes.push("show-handle");
-				classes.push("highlight");
-			}
+			classes.push("ghost");
+			classes.push("show-handle");
+			classes.push("highlight");
 
 			const className = classes.join(" ");
 			return (
