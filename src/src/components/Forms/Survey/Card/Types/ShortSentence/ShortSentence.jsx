@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import addDefault from "../../../../../../utils/addDefault";
+import useDefault from "../../../../../../utils/useDefault";
 import { CardStates } from "../../../constants";
 import "./ShortSentence.scss";
 import plusBtn from "../../../../../../assets/icons/add-btn.svg";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CardStates } from "../../../constants";
-import useDefault from "../../../../../../utils/addDefault";
+import useDefault from "../../../../../../utils/useDefault";
 import "./LongSentence.scss";
 import TextField from "../../../../../TextField/TextField";
 import setNestedState from "../../../../../../utils/setNestedState";
