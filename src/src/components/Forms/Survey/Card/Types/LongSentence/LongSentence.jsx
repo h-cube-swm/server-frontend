@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardStates } from "../../../constants";
-import addDefault from "../../../../../../utils/addDefault";
+import useDefault from "../../../../../../utils/addDefault";
 import "./LongSentence.scss";
+import TextField from "../../../../../TextField/TextField";
+import setNestedState from "../../../../../../utils/setNestedState";
 
 export default function LongSentence({
   question,
@@ -10,28 +12,35 @@ export default function LongSentence({
   response,
   setResponse,
 }) {
-  if (addDefault(question, setQuestion, { answer: "" })) return null;
+  const [curLen, setCurLen] = useState(0);
+
+  const initialized = useDefault(question, setQuestion, {
+    answer: "",
+    maxLen: 300,
+  });
+  if (!initialized) return null;
 
   const handleChange = (e) => {
     const answer = e.target.value;
     setQuestion((question) => ({ ...question, answer }));
   };
 
-  if (state === CardStates.EDITTING) {
+  if (state === CardStates.RESPONSE) {
     return (
       <div className="long-sentence">
-        <input type="text" placeholder="장문형 텍스트" disabled={true} />
+        <TextField placeholder="장문형 텍스트" disabled />
       </div>
     );
   }
+
+  const setText = setNestedState(setQuestion, ["answer"]);
+  
   return (
     <div className="long-sentence">
-      <input
-        type="text"
+      <TextField
         placeholder="답변을 입력하세요"
-        onChange={handleChange}
-        value={question.answer}
-        name="response"
+        text={question.answer}
+        setText={setText}
       />
       <p>{question.answer}</p>
     </div>
