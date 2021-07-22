@@ -49,7 +49,6 @@ export default function Card({
 	onGrab,
 	dom,
 	slowAppear,
-	hidden,
 }) {
 	const isInit = useTimeout(slowAppear ? 400 : 0);
 
