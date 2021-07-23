@@ -1,0 +1,49 @@
+@import "/src/scss/style.scss";
+
+.preference {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  .preference-elements {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .preference-box {
+    @include text-center;
+    flex: 0 0 auto;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    color: black;
+    &.cursor {
+      cursor: pointer;
+    }
+    &.selected {
+      background-color: aqua;
+    }
+  }
+
+  .preference-box-end {
+    @include text-center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    color: black;
+  }
+  .description {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    input {
+      font-size: $fs-sm;
+      width: auto;
+      padding-top: 1rem;
+    }
+  }
+}
