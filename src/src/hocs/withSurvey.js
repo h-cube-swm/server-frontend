@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import getQuestion from "../components/Forms/Survey/getQuestion";
-import { getApi } from "../utils/parser";
+import { getApi, putApi } from "../utils/parser";
 
 const withSurvey = Component => props => {
 
@@ -9,7 +9,11 @@ const withSurvey = Component => props => {
 
   useEffect(() => {
     const getSurvey = async () => {
-      const { result: survey } = await getApi(`/surveys/${surveyId}`);
+
+      const { result } = await getApi(`/surveys/${surveyId}`);  //A
+      const { title, description, contents } = result;          //B
+      const survey = { title, description, ...contents };       //C
+
       if (!survey.counter) survey.counter = 0;
       if (!survey.questions) survey.questions = [];
       if (survey.questions.length === 0) {
@@ -23,7 +27,17 @@ const withSurvey = Component => props => {
     getSurvey();
   }, [surveyId]);
 
-  const newProps = { ...props, surveyId, survey, setSurvey };
+  /**
+   * Send survey data to server
+   */
+  async function putSurvey() {
+
+    const { title, description, ...contents } = survey;             //C
+    const body = { title, description, contents, 'view': 'slide' }; //B
+    return await putApi(`/surveys/${surveyId}`, body);              //A
+  }
+
+  const newProps = { ...props, surveyId, survey, setSurvey, putSurvey };
 
   return (
     <Component {...newProps} />
