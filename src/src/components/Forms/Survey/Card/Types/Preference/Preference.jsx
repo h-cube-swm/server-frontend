@@ -24,12 +24,13 @@ export default function Preference({
   });
   const ib = useDefault(setResponse, "");
 
+  let trueMaxPref = question.maxPref;
+
   const preferences = [];
   const handleOnChange = (e) => {
-    const pref = parseInt(e.target.value);
-    if (!(pref >= 5 && pref <= 10)) return false;
-
-    setMaxPref(parseInt(pref));
+    const maxPref = e.target.value + "";
+    if (!/^[0-9]*$/.test(maxPref)) return false;
+    setMaxPref(maxPref);
   };
 
   const handleOnClick = (e) => {
@@ -37,6 +38,11 @@ export default function Preference({
     setResponse(answer);
     console.log("response는", response, typeof response);
   };
+
+  const handleOnBlur = () => {
+    setMaxPref(trueMaxPref);
+  };
+
   if (!ia || !ib) return null;
 
   switch (state) {
@@ -76,19 +82,30 @@ export default function Preference({
 
     case CardStates.EDITTING:
     default:
-      for (let i = 1; i <= question.maxPref; i++) {
-        if (i === question.maxPref) {
-          preferences.push(
-            <input
-              type="text"
-              className="preference-box-end"
-              placeholder={i}
-              onChange={handleOnChange}
-              maxLength="2"
-            />
-          );
-        } else preferences.push(<div className="preference-box">{i}</div>);
+      if (trueMaxPref < 5) trueMaxPref = 5;
+      else if (trueMaxPref > 10) trueMaxPref = 10;
+
+      for (let i = 1; i < trueMaxPref; i++) {
+        preferences.push(
+          <div key={i} className="preference-box">
+            {i}
+          </div>
+        );
       }
+      preferences.push(
+        <input
+          key="last"
+          type="text"
+          className="preference-box-end"
+          value={question.maxPref}
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+          maxLength="2"
+          style={{
+            color: trueMaxPref !== question.maxPref ? "red" : "black",
+          }}
+        />
+      );
 
       return (
         <div className="preference">

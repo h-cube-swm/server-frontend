@@ -3,38 +3,49 @@
 .preference {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   width: 100%;
+  overflow: visible;
+  z-index: 4;
 
   .preference-elements {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    // padding: 0 2rem;
   }
 
   .preference-box {
     @include text-center;
-    flex: 0 0 auto;
+    font-size: $fs-rg;
+    font-weight: $fw-bold;
+    flex: 0 1 auto;
     width: 3.5rem;
     height: 3.5rem;
-    border-radius: 50%;
-    border: 1px solid black;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: $shadow-default;
     color: black;
     &.cursor {
       cursor: pointer;
     }
     &.selected {
-      background-color: aqua;
+      background-color: darkblue;
+      color: #fff;
     }
   }
 
   .preference-box-end {
     @include text-center;
+    font-size: $fs-rg;
+    font-weight: $fw-bold;
     width: 3.5rem;
     height: 3.5rem;
-    border-radius: 50%;
-    border: 1px solid black;
+    border-radius: 15px;
+    border: 1.5px dashed rgba(0, 0, 0, 0.4);
     color: black;
+    box-shadow: $shadow-default;
   }
   .description {
     display: flex;
