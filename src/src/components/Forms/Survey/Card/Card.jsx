@@ -99,7 +99,7 @@ export default function Card({
             <TextField
               placeholder="질문을 입력하세요"
               text={question.title}
-              size="large"
+              size="title"
             />
           </div>
           <div className="inner-box">
@@ -128,7 +128,7 @@ export default function Card({
           text={question.title}
           setText={setNestedState(setQuestion, ["title"])}
           disabled={state !== CardStates.EDITTING}
-          size="large"
+          size="title"
         />
         <Hider hide={state !== CardStates.EDITTING}>
           <div className={`basic-element`}>

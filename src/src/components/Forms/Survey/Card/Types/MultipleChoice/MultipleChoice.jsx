@@ -23,7 +23,7 @@ function Choice({ text, setText, checked, setChecked, onDelete, editable }) {
         setText={setText}
         disabled={!editable}
         placeholder="선택지를 입력하세요."
-        size="regular"
+        size="rg"
       />
       <Hider hide={!(editable && onDelete)}>
         <button className="del-btn" onClick={onDelete}>
