@@ -19,6 +19,7 @@ export default function Prologue({ survey, setSurvey }) {
             setText={setNestedState(setSurvey, ["title"])}
             placeholder="더 폼 나는 제목"
             size="title"
+            multiline
           />
           <br />
           <TextField
@@ -26,6 +27,7 @@ export default function Prologue({ survey, setSurvey }) {
             setText={setNestedState(setSurvey, ["description"])}
             placeholder="더 폼 나는 설명"
             size="xl"
+            multiline
           />
         </div>
       )}

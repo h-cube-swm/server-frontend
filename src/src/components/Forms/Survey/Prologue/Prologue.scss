@@ -1,9 +1,17 @@
+@import "/src/scss/style.scss";
+
 .prologue-box {
   display: flex;
   background-color: #dbdfff;
-  width: 90%;
+  width: 50%;
   height: 10rem;
-  align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  align-items: center;
+  margin: 1rem auto;
+  min-width: 640px;
+  @include round;
+  input {
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
 }

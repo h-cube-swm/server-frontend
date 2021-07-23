@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import Sidebar from "../Sidebar/Sidebar";
+import Prologue from "../Prologue/Prologue";
 import { Positioner } from "../../../Positioner/Positioner";
 import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
 
@@ -103,6 +104,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 						/>
 					</div>
 				</div>
+				<Prologue survey={survey} setSurvey={setSurvey} />
 				<div className="question-box" onWheel={onWheel}>
 					{orderedMap(questions, (question, index) => {
 						const isSelected = index === selectedIndex;
