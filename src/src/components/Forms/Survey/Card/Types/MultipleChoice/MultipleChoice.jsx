@@ -60,6 +60,8 @@ export default function MultipleChoice({
 	const { choices } = question;
 	const editable = state === CardStates.EDITTING;
 
+	if (state === CardStates.GHOST && !choices) return null;
+
 	const addChoice = () => {
 		setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
 	};
