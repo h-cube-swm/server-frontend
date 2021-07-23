@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 /**
  * Positioner is required for absolute positioning.
@@ -8,7 +8,7 @@ import React from "react";
  * If topLeft flag is set true, origin will be set to top-left.
  */
 
-export function Positioner({ x, y, zIndex = 0, children, topLeft }) {
+function Positioner({ x, y, zIndex = 0, children, topLeft }, ref) {
 	let style = {
 		position: "absolute",
 		transitionDuration: "0.5s",
@@ -30,5 +30,11 @@ export function Positioner({ x, y, zIndex = 0, children, topLeft }) {
 		else style.transform += ` translateY(${y})`;
 	}
 
-	return <div style={style}>{children}</div>;
+	return (
+		<div style={style} ref={ref}>
+			{children}
+		</div>
+	);
 }
+
+export default forwardRef(Positioner);

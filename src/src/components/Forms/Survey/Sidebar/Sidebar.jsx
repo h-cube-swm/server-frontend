@@ -2,7 +2,7 @@ import React from "react";
 import "./Sidebar.scss";
 import selectedDot from "../../../../assets/icons/selected-dot.svg";
 import orderedMap from "../../../../utils/orderedMap";
-import { Positioner } from "../../../Positioner/Positioner";
+import Positioner from "../../../Positioner/Positioner";
 
 const DIST_LARGE = 72;
 const DIST_NARROW = 48;

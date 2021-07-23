@@ -7,7 +7,7 @@ import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import Sidebar from "../Sidebar/Sidebar";
 import Prologue from "../Prologue/Prologue";
-import { Positioner } from "../../../Positioner/Positioner";
+import Positioner from "../../../Positioner/Positioner";
 import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
 
 /* HOC, Context, Hooks */

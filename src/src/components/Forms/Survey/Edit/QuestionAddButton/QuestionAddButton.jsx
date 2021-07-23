@@ -1,6 +1,6 @@
 import React from "react";
 import addBtn from "../../../../../assets/icons/add-btn.svg";
-import { Positioner } from "../../../../Positioner/Positioner";
+import Positioner from "../../../../Positioner/Positioner";
 import "./QuestionAddButton.scss";
 
 export function QuestionAddButton({ show, y, onClick }) {
