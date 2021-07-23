@@ -10,13 +10,22 @@ import delBtn from "../../../../../../assets/icons/del-btn.svg";
 import addBtn from "../../../../../../assets/icons/add-btn.svg";
 import "./MultipleChoice.scss";
 
-function Choice({ text, setText, checked, setChecked, onDelete, editable }) {
+function Choice({
+	text,
+	setText,
+	checked,
+	setChecked,
+	onDelete,
+	editable,
+	multipleSelect,
+}) {
 	return (
 		<div className="choice-box">
 			<CheckField
 				className="check-box"
 				checked={checked}
 				setChecked={setChecked}
+				radio={!multipleSelect}
 			/>
 			<TextField
 				text={text}
@@ -40,6 +49,7 @@ export default function MultipleChoice({
 	response,
 	setResponse,
 	state,
+	multipleSelect,
 }) {
 	const questionInitialized = useDefault(setQuestion, {
 		choices: [""],
@@ -62,6 +72,16 @@ export default function MultipleChoice({
 		});
 	};
 
+	const onSelect = (i) => (checked) => {
+		if (editable) return;
+		if (multipleSelect) {
+			setNestedState(setResponse, [i])(checked);
+		} else {
+			console.log("HERE", i, checked);
+			setResponse({ [i]: checked });
+		}
+	};
+
 	return (
 		<div className="multiple-choice">
 			{choices.map((choice, i) => {
@@ -73,8 +93,9 @@ export default function MultipleChoice({
 						setText={setText}
 						editable={editable}
 						onDelete={() => removeChoice(i)}
-						checked={response && response[i]}
-						setChecked={setNestedState(setResponse, [i])}
+						checked={typeof response === "object" && response[i]}
+						setChecked={onSelect(i)}
+						multipleSelect={multipleSelect}
 					/>
 				);
 			})}

@@ -10,7 +10,6 @@ import delBtn from "../../../../assets/icons/del-btn.svg";
 /* Components */
 import Default from "./Types/Default/Default";
 import ToggleSwitch from "./ToggleSwitch";
-import SingleChoice from "./Types/SingleChoice/SingleChoice";
 import MultipleChoice from "./Types/MultipleChoice/MultipleChoice";
 import Preference from "./Types/Preference/Preference";
 import ShortSentence from "./Types/ShortSentence/ShortSentence";
@@ -22,7 +21,7 @@ import Hider from "../../../Hider/Hider";
 function getInnerComponent(type) {
   switch (type) {
     case CardTypes.SINGLE_CHOICE:
-      return SingleChoice;
+			return MultipleChoice;
     case CardTypes.MULTIPLE_CHOICE:
       return MultipleChoice;
     case CardTypes.PREFERENCE:
@@ -153,6 +152,7 @@ export default function Card({
           setQuestion={setQuestion}
           response={response}
           setResponse={setResponse}
+					multipleSelect={question.type === CardTypes.MULTIPLE_CHOICE}
         />
       </div>
       <div className="handle" onMouseDown={_onGrab}>

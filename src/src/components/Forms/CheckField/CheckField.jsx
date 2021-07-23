@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 
-function CheckField({ checked, setChecked, disabled, ...props }, ref) {
+function CheckField({ checked, setChecked, disabled, radio, ...props }, ref) {
 	return (
 		<input
 			{...props}
-			type="checkbox"
-			value={checked}
-			onChange={setChecked && ((e) => setChecked(e.target.value))}
+			type={radio ? "radio" : "checkbox"}
+			checked={checked}
+			onChange={setChecked && ((e) => setChecked(e.target.checked))}
 			disabled={disabled || !setChecked}
 			ref={ref}
 		/>
