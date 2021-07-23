@@ -4,7 +4,7 @@
   @include round;
   opacity: inherit;
   width: 640px;
-  padding: 1rem;
+  padding: $card-margin;
   border: solid 1px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   display: flex;
@@ -14,7 +14,6 @@
   .card-header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
 
     .basic-element {
       display: flex;
@@ -42,14 +41,17 @@
 
   .delete {
     position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    padding: 0;
+    right: $card-margin;
+    bottom: $card-margin;
     border: 0;
     background-color: #fff;
     transition-duration: 0.5s;
     cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
     img {
-      width: 70%;
+      width: 100%;
     }
 
     &.disabled {
