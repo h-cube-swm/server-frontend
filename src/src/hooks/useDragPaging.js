@@ -9,7 +9,7 @@ const useDragPaging = (onPaging, threshold = 64) => {
     const mX = useRef(0);
     const mY = useRef(0);
     const isTriggable = useRef(true);
-    const item = useRef(null);
+    const ref = useRef(null);
     const onDragRef = useRef(() => { });
 
     const center = window.innerHeight / 2;
@@ -39,12 +39,12 @@ const useDragPaging = (onPaging, threshold = 64) => {
 
     const onDrag = () => {
         if (!isDragging) return;
-        if (!item.current) return;
+        if (!ref.current) return;
 
-        item.current.style.transitionDuration = '0s';
-        item.current.style.position = 'absolute';
-        item.current.style.left = mX.current + 'px';
-        item.current.style.top = mY.current + 'px';
+        ref.current.style.transitionDuration = '0s';
+        ref.current.style.position = 'absolute';
+        ref.current.style.left = mX.current + 'px';
+        ref.current.style.top = mY.current + 'px';
 
         if (!isTriggable.current) return;
         if (mY.current < center - threshold) {
@@ -65,7 +65,7 @@ const useDragPaging = (onPaging, threshold = 64) => {
 
     const backgroundCallbacks = { onMouseMove, onMouseUp, onMouseLeave };
 
-    return [onGrab, backgroundCallbacks, item, isDragging];
+    return [onGrab, backgroundCallbacks, isDragging ? ref : null, isDragging];
 };
 
 export default useDragPaging;
