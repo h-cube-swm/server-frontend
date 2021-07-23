@@ -97,7 +97,7 @@ export default function Card({
           ref={dom}>
           <div className="card-header">
             <TextField
-              placeholder="질문을 입력하세요"
+              placeholder="더 폼 나는 질문"
               text={question.title}
               size="title"
             />
@@ -124,7 +124,7 @@ export default function Card({
     <div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
       <div className="card-header">
         <TextField
-          placeholder="질문을 입력하세요"
+          placeholder="더 폼 나는 질문"
           text={question.title}
           setText={setNestedState(setQuestion, ["title"])}
           disabled={state !== CardStates.EDITTING}
