@@ -1,93 +1,52 @@
 @import "/src/scss/style.scss";
 
 .txt-field {
+  font-weight: $fw-bold;
+  border: 0;
+  border-bottom: solid 2px rgba(0, 0, 0, 0);
+  outline: none;
+  background-color: rgba($color: #fff, $alpha: 0);
+  font-size: $fs-rg;
+
   &.title {
-    width: 20rem;
+    width: 25rem;
     font-size: $fs-lg;
-    font-weight: $fw-bold;
-    border: 0;
-    border-bottom: solid 1px rgba(0, 0, 0, 0);
-    outline: none;
-    background-color: rgba($color: #fff, $alpha: 0);
-
-    &:active {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
-
-    &:focus {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
   }
 
   &.xl {
     width: 25rem;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
-    border: 0;
-    border-bottom: solid 2px rgba(0, 0, 0, 0);
-    outline: none;
-    background-color: rgba($color: #fff, $alpha: 0);
-
-    &:active {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
-
-    &:focus {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
   }
 
   &.lg {
     width: 20rem;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
-    border: 0;
-    border-bottom: solid 2px rgba(0, 0, 0, 0);
-    outline: none;
-    background-color: rgba($color: #fff, $alpha: 0);
-
-    &:active {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
-
-    &:focus {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
   }
 
   &.rg {
     width: 10rem;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
-    border: 0;
-    border-bottom: solid 2px rgba(0, 0, 0, 0);
-    outline: none;
-    background-color: rgba($color: #fff, $alpha: 0);
-
-    &:active {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
-
-    &:focus {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
   }
 
   &.sm {
     width: 3rem;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
     text-align: center;
-    border: 0;
-    border-bottom: solid 2px rgba(0, 0, 0, 0);
-    outline: none;
-    background-color: rgba($color: #fff, $alpha: 0);
+  }
 
-    &:active {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
-    &:focus {
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    }
+  &:active {
+    border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
+  }
+
+  &:focus {
+    border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
+  }
+
+  &.textarea {
+    display: flex;
+    resize: none;
+    height: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
   }
 }
