@@ -6,20 +6,31 @@
   align-items: flex-end;
   width: 7rem;
 
-  input {
-    width: 3rem;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
-    text-align: center;
-    border: 0;
-    border-bottom: 0;
-    outline: none;
-    background-color: rgba($color: #fff, $alpha: 0);
-    &:active {
-      border-bottom: solid 1px rgba($color: #000000, $alpha: 0.4);
+  .text-set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .label {
+      font-size: $fs-sm;
+      font-weight: 700;
     }
-    &:focus {
-      border-bottom: solid 1px rgba($color: #000000, $alpha: 0.4);
+    input {
+      width: 3rem;
+      font-size: $fs-rg;
+      font-weight: $fw-bold;
+      text-align: center;
+      border: 0;
+      border-bottom: solid 2px rgba(0, 0, 0, 0);
+      outline: none;
+      background-color: rgba($color: #fff, $alpha: 0);
+
+      &:active {
+        border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
+      }
+      &:focus {
+        border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
+      }
     }
   }
 
