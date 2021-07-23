@@ -2,40 +2,26 @@
 
 .short-sentence {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 100%;
   height: 100%;
   padding-left: 1rem;
-  padding-bottom: 4rem;
-  .short-sentence-box {
+  padding-bottom: 10rem;
+
+  .response {
     display: flex;
-    align-items: flex-end;
-
-    input {
-      display: block;
-      width: 15rem;
-      border: 0;
-      border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-      font-size: $fs-rg;
-      background-color: rgba($color: #fff, $alpha: 0);
-      height: 2rem;
-    }
-
-    .response {
+    align-items: center;
+    .max-len-indicator {
       display: flex;
-      align-items: center;
-      .max-len-indicator {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 2rem;
-        p {
-          font-weight: $fw-bold;
-        }
-        .indicator {
-          font-size: $fs-xs;
-        }
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 2rem;
+      p {
+        font-weight: $fw-bold;
+      }
+      .indicator {
+        font-size: $fs-xs;
       }
     }
   }

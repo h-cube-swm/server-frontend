@@ -3,15 +3,10 @@
 .long-sentence {
   display: flex;
   justify-content: flex-start;
+  align-items: flex-end;
   width: 100%;
+  height: 100%;
   padding-left: 1rem;
+  padding-bottom: 10rem;
   overflow: scroll;
-  input {
-    display: block;
-    width: 30rem;
-    border: 0;
-    border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-    font-size: $fs-rg;
-    background-color: rgba($color: #fff, $alpha: 0);
-  }
 }
