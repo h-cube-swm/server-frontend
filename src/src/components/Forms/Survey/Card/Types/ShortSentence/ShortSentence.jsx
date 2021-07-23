@@ -32,7 +32,7 @@ export default function ShortSentence({
   };
 
   switch (state) {
-    case CardStates.EDITTING:
+    case CardStates.RESPONSE: // Should be RESPONSE
       return (
         <div className="short-sentence">
           <div className="response">
@@ -40,8 +40,8 @@ export default function ShortSentence({
               placeholder="답변을 입력하세요"
               size="lg"
               setText={onChange}
-              value={question.answer}
-              maxLength={question.maxLen}
+              text={question.answer}
+              maxlength={question.maxLen}
             />
             <Hider hide={state !== CardStates.EDITTING}>
               <div className="max-len-indicator">
