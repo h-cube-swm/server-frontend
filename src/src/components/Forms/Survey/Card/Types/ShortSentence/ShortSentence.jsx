@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useDefault from "../../../../../../utils/useDefault";
+import useDefault from "../../../../../../hooks/useDefault";
 import { CardStates } from "../../../constants";
 import "./ShortSentence.scss";
 import TextField from "../../../../../TextField/TextField";

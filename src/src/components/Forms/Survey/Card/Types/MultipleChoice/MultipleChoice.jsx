@@ -1,5 +1,5 @@
 import React from "react";
-import useDefault from "../../../../../../utils/useDefault";
+import useDefault from "../../../../../../hooks/useDefault";
 import setNestedState from "../../../../../../utils/setNestedState";
 import Hider from "../../../../../Hider/Hider";
 import TextField from "../../../../../TextField/TextField";
@@ -11,78 +11,78 @@ import addBtn from "../../../../../../assets/icons/add-btn.svg";
 import "./MultipleChoice.scss";
 
 function Choice({ text, setText, checked, setChecked, onDelete, editable }) {
-  return (
-    <div className="choice-box">
-      <CheckField
-        className="check-box"
-        checked={checked}
-        setChecked={setChecked}
-      />
-      <TextField
-        text={text}
-        setText={setText}
-        disabled={!editable}
-        placeholder="선택지를 입력하세요."
-        size="rg"
-      />
-      <Hider hide={!(editable && onDelete)}>
-        <button className="del-btn" onClick={onDelete}>
-          <img src={delBtn} alt="delete button" />
-        </button>
-      </Hider>
-    </div>
-  );
+	return (
+		<div className="choice-box">
+			<CheckField
+				className="check-box"
+				checked={checked}
+				setChecked={setChecked}
+			/>
+			<TextField
+				text={text}
+				setText={setText}
+				disabled={!editable}
+				placeholder="더 폼 나는 선택지"
+				size="rg"
+			/>
+			<Hider hide={!(editable && onDelete)}>
+				<button className="del-btn" onClick={onDelete}>
+					<img src={delBtn} alt="delete button" />
+				</button>
+			</Hider>
+		</div>
+	);
 }
 
 export default function MultipleChoice({
-  question,
-  setQuestion,
-  response,
-  setResponse,
-  state,
+	question,
+	setQuestion,
+	response,
+	setResponse,
+	state,
 }) {
-  const initialized = useDefault(question, setQuestion, {
-    choices: [""],
-  });
-  if (!initialized) return null;
+	const initialized = useDefault(question, setQuestion, {
+		choices: [""],
+	});
+	if (!initialized) return null;
 
-  if (!question.choices) return null;
+	if (!question.choices) return null;
 
-  const { choices } = question;
-  const editable = state === CardStates.EDITTING;
+	const { choices } = question;
+	const editable = state === CardStates.EDITTING;
 
-  const addChoice = () => {
-    setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
-  };
+	const addChoice = () => {
+		setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
+	};
 
-  const removeChoice = (i) => {
-    setNestedState(setQuestion, ["choices"])((choices) => {
-      const newChoices = [...choices];
-      newChoices.splice(i, 1);
-      return newChoices;
-    });
-  };
+	const removeChoice = (i) => {
+		setNestedState(setQuestion, ["choices"])((choices) => {
+			const newChoices = [...choices];
+			newChoices.splice(i, 1);
+			return newChoices;
+		});
+	};
 
-  return (
-    <div className="multiple-choice">
-      {choices.map((choice, i) => {
-        const setText = setNestedState(setQuestion, ["choices", i]);
-        return (
-          <Choice
-            key={i}
-            text={choice}
-            setText={setText}
-            editable={editable}
-            onDelete={() => removeChoice(i)}
-          />
-        );
-      })}
-      <Hider hide={!editable}>
-        <button className="add-btn" onClick={addChoice}>
-          <img src={addBtn} alt="delete button" />
-          <p>선택지 추가하기</p>
-        </button>
-      </Hider>
-    </div>
-  );
+	return (
+		<div className="multiple-choice">
+			{choices.map((choice, i) => {
+				const setText = setNestedState(setQuestion, ["choices", i]);
+				return (
+					<Choice
+						key={i}
+						text={choice}
+						setText={setText}
+						editable={editable}
+						onDelete={() => removeChoice(i)}
+					/>
+				);
+			})}
+			<Hider hide={!editable}>
+				<button className="add-btn" onClick={addChoice}>
+					<img src={addBtn} alt="delete button" />
+					<p>더 폼 나는 선택지 추가하기</p>
+				</button>
+			</Hider>
+		</div>
+	);
 }
