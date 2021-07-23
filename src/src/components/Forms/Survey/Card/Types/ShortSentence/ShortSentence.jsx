@@ -23,34 +23,37 @@ export default function ShortSentence({
   });
   if (!initialized) return null;
 
-  const update = (e) => {
-    const answer = e.target.value;
-    if (e.target.value.length <= question.maxLen) {
-      setCurLen(e.target.value.length);
+  const onChange = (text) => {
+    const answer = text;
+    if (answer.length <= question.maxLen) {
+      setCurLen(answer.length);
     }
-    setQuestion((question) => ({ ...question, answer }));
+    setAnswer(answer);
   };
 
   switch (state) {
-    case CardStates.RESPONSE:
+    case CardStates.EDITTING:
       return (
         <div className="short-sentence">
-          <div className="short-sentence-box">
-            <div className="response">
-              <TextField
-                placeholder="답변을 입력해주세요."
-                size="lg"
-                onChange={update}
-                value={question.answer}
-                maxLength={question.maxLen}
-              />
-              <Hider hide={state !== CardStates.EDITTING}>
-                <div className="max-len-indicator">
-                  <p className="indicator">현재 / 최대</p>
+          <div className="response">
+            <TextField
+              placeholder="답변을 입력하세요"
+              size="lg"
+              setText={onChange}
+              value={question.answer}
+              maxLength={question.maxLen}
+            />
+            <Hider hide={state !== CardStates.EDITTING}>
+              <div className="max-len-indicator">
+                {/* <p className="indicator">현재 / 최대</p> 
+                  이 부분은 추후 추가가 될 수 있기에 임시로 주석처리 진행*/}
+                {curLen === question.maxLen ? (
+                  <p className="red">{curLen + " / " + question.maxLen}</p>
+                ) : (
                   <p>{curLen + " / " + question.maxLen}</p>
-                </div>
-              </Hider>
-            </div>
+                )}
+              </div>
+            </Hider>
           </div>
         </div>
       );

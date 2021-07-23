@@ -10,19 +10,8 @@
   padding-bottom: 10rem;
 
   .response {
+    @include max-len-indicator;
     display: flex;
-    align-items: center;
-    .max-len-indicator {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-left: 2rem;
-      p {
-        font-weight: $fw-bold;
-      }
-      .indicator {
-        font-size: $fs-xs;
-      }
-    }
+    align-items: flex-end;
   }
 }

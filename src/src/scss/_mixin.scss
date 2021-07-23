@@ -27,3 +27,18 @@
     @content;
   }
 }
+
+@mixin max-len-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    font-weight: $fw-bold;
+  }
+  .red {
+    color: red;
+  }
+  .indicator {
+    font-size: $fs-xs;
+  }
+}
