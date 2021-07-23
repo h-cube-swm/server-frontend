@@ -21,6 +21,6 @@ export default function useDefault(setState, defaults) {
     });
 
     setInitialized(true);
-  }, [setState, initialized]);
+  }, [setState, defaults, initialized]);
   return initialized;
 }
