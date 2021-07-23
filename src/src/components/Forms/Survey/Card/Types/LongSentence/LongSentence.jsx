@@ -14,14 +14,15 @@ export default function LongSentence({
 	response,
 	setResponse,
 }) {
-	const setAnswer = setNestedState(setQuestion, ["answer"]);
 	const setMaxNum = setNestedState(setQuestion, ["maxNum"]);
 
-	const initialized = useDefault(question, setQuestion, {
+	const ia = useDefault(setQuestion, {
 		answer: "",
 		maxNum: 300,
 	});
-	if (!initialized) return null;
+	const ib = useDefault(setResponse, "");
+
+	if (!ia || !ib) return null;
 
 	switch (state) {
 		case CardStates.RESPONSE: // Should be RESPONSE
@@ -31,21 +32,21 @@ export default function LongSentence({
 						<TextField
 							placeholder="답변을 입력하세요"
 							size="xl"
-							setText={setAnswer}
-							text={question.answer}
-							maxlength={question.maxNum}
+							setText={setResponse}
+							text={response}
+							maxLength={question.maxNum}
 							multiline
 						/>
 						<Hider hide={state !== CardStates.RESPONSE}>
 							<div className="max-len-indicator">
 								{/* <p className="indicator">현재 / 최대</p> 
                   이 부분은 추후 추가가 될 수 있기에 임시로 주석처리 진행*/}
-								{question.answer.length === question.maxNum ? (
+								{response.length === question.maxNum ? (
 									<p className="red">
-										{question.answer.length + " / " + question.maxNum}
+										{response.length + " / " + question.maxNum}
 									</p>
 								) : (
-									<p>{question.answer.length + " / " + question.maxNum}</p>
+									<p>{response.length + " / " + question.maxNum}</p>
 								)}
 							</div>
 						</Hider>

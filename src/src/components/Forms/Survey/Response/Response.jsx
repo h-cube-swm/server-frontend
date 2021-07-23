@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import withSurvey from "../../../../hocs/withSurvey";
+import setNestedState from "../../../../utils/setNestedState";
 import Card from "../Card/Card";
 import { CardStates } from "../constants";
 import "./Response.scss";
 
-function Response({ surveyId, survey }) {
+function Response({ survey, submit }) {
+	const [response, setResponse] = useState({});
+	console.log(response);
+
 	let contents = null;
 	if (survey) {
 		const { questions } = survey;
 		contents = (
 			<div className="question-box">
-				{questions.map((question, index) => {
-					let state = CardStates.RESPONSE;
-					return <Card question={question} state={state} slowAppear={false} />;
+				{questions.map((question) => {
+					const { id } = question;
+					return (
+						<Card
+							key={id}
+							question={question}
+							state={CardStates.RESPONSE}
+							slowAppear={false}
+							response={response[id]}
+							setResponse={setNestedState(setResponse, [id])}
+						/>
+					);
 				})}
 			</div>
 		);

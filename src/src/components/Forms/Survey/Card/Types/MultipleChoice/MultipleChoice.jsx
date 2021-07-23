@@ -41,12 +41,11 @@ export default function MultipleChoice({
 	setResponse,
 	state,
 }) {
-	const initialized = useDefault(question, setQuestion, {
+	const questionInitialized = useDefault(setQuestion, {
 		choices: [""],
 	});
-	if (!initialized) return null;
-
-	if (!question.choices) return null;
+	const responseInitialized = useDefault(setResponse, {});
+	if (!questionInitialized || !responseInitialized) return null;
 
 	const { choices } = question;
 	const editable = state === CardStates.EDITTING;
@@ -74,6 +73,8 @@ export default function MultipleChoice({
 						setText={setText}
 						editable={editable}
 						onDelete={() => removeChoice(i)}
+						checked={response && response[i]}
+						setChecked={setNestedState(setResponse, [i])}
 					/>
 				);
 			})}
