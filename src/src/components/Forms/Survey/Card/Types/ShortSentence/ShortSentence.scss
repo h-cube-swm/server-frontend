@@ -6,8 +6,7 @@
   align-items: flex-end;
   width: 100%;
   height: 100%;
-  padding-left: 1rem;
-  padding-bottom: 10rem;
+  padding-bottom: 8rem;
 
   .response {
     @include max-len-indicator;

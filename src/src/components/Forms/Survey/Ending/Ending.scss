@@ -26,10 +26,13 @@
   h1 {
     display: block;
     margin-bottom: 1rem;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
   }
   h2 {
     display: block;
     margin-bottom: 3rem;
+    font-size: $fs-rg;
   }
   ul {
     @include text-center;
