@@ -23,16 +23,33 @@ function Card({ children, onGrab, handle }) {
 	);
 }
 
-function CardSystem({ items, setItems }) {
+/**
+ *
+ * CardSystem => Parent
+ * - paging event
+ * - dragging - 이게...전달이 까다롭다...
+ *
+ * Parent => CardSystem
+ * - items
+ * - selected index
+ */
+
+function CardSystem({ items, selected, onPaging }) {
 	const [selected, setSelected] = useState(0);
 	const [onGrab, backgroundCallbacks, ref, isDragging] = useDragPaging(
 		(delta) => {
-			setSelected((index) => {
-				let newIndex = index + delta;
-				if (newIndex < 0) return index;
-				if (newIndex >= items.length) return index;
-				return newIndex;
-			});
+			let newIndex = selected + delta;
+			if (newIndex < 0) return;
+			if (newIndex >= items.length) return;
+			if (newIndex === selected) return;
+
+			const newItems = [...items];
+			const tmp = newItems[selected];
+			newItems[selected] = newItems[newIndex];
+			newItems[newIndex] = tmp;
+
+			setSelected(newIndex);
+			setItems(newItems);
 		}
 	);
 

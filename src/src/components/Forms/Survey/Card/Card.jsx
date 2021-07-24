@@ -17,6 +17,7 @@ import LongSentence from "./Types/LongSentence/LongSentence";
 import setNestedState from "../../../../utils/setNestedState";
 import TextField from "../../../TextField/TextField";
 import Hider from "../../../Hider/Hider";
+import { useQuestion } from "../../../../contexts/QuestionContext";
 
 function getInnerComponent(type) {
 	switch (type) {
@@ -37,19 +38,14 @@ function getInnerComponent(type) {
 
 export default function Card({
 	// Logic-associated parameters
-	state,
-	question,
-	setQuestion,
-	response,
-	setResponse,
 	onDelete,
 
 	// UI-associated parameters
 	onGrab,
-	dom,
 	slowAppear,
 }) {
 	const isInit = useTimeout(slowAppear ? 400 : 0);
+	const { state, question, setQuestion, response, setResponse } = useQuestion();
 
 	if (!question) return null;
 
@@ -90,10 +86,7 @@ export default function Card({
 
 			const className = classes.join(" ");
 			return (
-				<div
-					className={className}
-					style={{ height: CardStyle.HEIGHT }}
-					ref={dom}>
+				<div className={className} style={{ height: CardStyle.HEIGHT }}>
 					<div className="card-header">
 						<TextField
 							placeholder="더 폼 나는 질문"
@@ -121,7 +114,7 @@ export default function Card({
 
 	const className = classes.join(" ");
 	return (
-		<div className={className} style={{ height: CardStyle.HEIGHT }} ref={dom}>
+		<div className={className} style={{ height: CardStyle.HEIGHT }}>
 			<div className="card-header">
 				<TextField
 					placeholder="더 폼 나는 질문"

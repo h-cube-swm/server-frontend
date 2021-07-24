@@ -11,7 +11,7 @@ import React, { forwardRef } from "react";
 function Positioner({ x, y, zIndex = 0, children, topLeft }, ref) {
 	let style = {
 		position: "absolute",
-		transitionDuration: "0.5s",
+		transitionDuration: "500ms",
 		zIndex,
 	};
 
@@ -19,6 +19,7 @@ function Positioner({ x, y, zIndex = 0, children, topLeft }, ref) {
 		style.transform = "translate(-50%, -50%)";
 		style.left = "50%";
 		style.top = "50%";
+		console.log("TOPS");
 	}
 
 	if (x) {
@@ -30,11 +31,15 @@ function Positioner({ x, y, zIndex = 0, children, topLeft }, ref) {
 		else style.transform += ` translateY(${y})`;
 	}
 
-	return (
-		<div style={style} ref={ref}>
-			{children}
-		</div>
-	);
+	if (ref) {
+		return (
+			<div style={style} ref={ref}>
+				{children}
+			</div>
+		);
+	} else {
+		return <div style={style}>{children}</div>;
+	}
 }
 
 export default forwardRef(Positioner);

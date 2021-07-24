@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import withSurvey from "../../../../hocs/withSurvey";
 import setNestedState from "../../../../utils/setNestedState";
 import Card from "../Card/Card";
@@ -17,14 +18,16 @@ function Response({ survey, submit }) {
 				{questions.map((question) => {
 					const { id } = question;
 					return (
-						<Card
-							key={id}
-							question={question}
-							state={CardStates.RESPONSE}
-							slowAppear={false}
-							response={response[id]}
-							setResponse={setNestedState(setResponse, [id])}
-						/>
+						<QuestionProvider>
+							<Card
+								key={id}
+								question={question}
+								state={CardStates.RESPONSE}
+								slowAppear={false}
+								response={response[id]}
+								setResponse={setNestedState(setResponse, [id])}
+							/>
+						</QuestionProvider>
 					);
 				})}
 			</div>
