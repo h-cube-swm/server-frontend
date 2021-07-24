@@ -1,17 +1,68 @@
 @import "/src/scss/style.scss";
 
+// .prologue-box {
+//   display: flex;
+//   position: absolute;
+//   background-color: #dbdfff;
+//   width: 640px;
+//   height: 15rem;
+//   justify-content: center;
+//   align-items: center;
+//   margin: 3rem auto;
+//   min-width: 640px;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   @include round;
+//   transition-duration: 1000ms;
+//   input {
+//     margin-bottom: 1rem;
+//     text-align: center;
+//   }
+// }
+// 실제 개발
+
 .prologue-box {
-  display: flex;
-  background-color: #dbdfff;
-  width: 50%;
-  height: 10rem;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem auto;
-  min-width: 640px;
-  @include round;
-  input {
-    margin-bottom: 0.5rem;
-    text-align: center;
+  @include text-center;
+  width: 100%;
+  height: 5rem;
+  position: absolute;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0;
+  background-color: #fff;
+  box-shadow: $shadow-default;
+  z-index: 5;
+  .survey-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-left: 5rem;
+    width: 100%;
   }
+
+  transition-duration: 1000ms;
+}
+
+.prologue-box-top {
+  @include text-center;
+  width: 100%;
+  height: 5rem;
+  position: absolute;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0;
+  background-color: #fff;
+  box-shadow: $shadow-default;
+  z-index: 5;
+  .survey-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-left: 5rem;
+    width: 100%;
+  }
+
+  transition-duration: 1000ms;
 }
