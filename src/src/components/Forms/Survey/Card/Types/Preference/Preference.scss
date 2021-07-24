@@ -2,31 +2,30 @@
 
 .preference {
   display: flex;
+  float: left;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  overflow: visible;
   z-index: 4;
 
   .preference-elements {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    // padding: 0 2rem;
+    flex-wrap: wrap;
   }
 
   .preference-box {
     @include text-center;
+    margin-bottom: 1rem;
     font-size: $fs-rg;
     font-weight: $fw-bold;
-    flex: 0 1 auto;
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 15px;
-    border: 0;
-    box-shadow: $shadow-default;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     color: black;
+    box-shadow: $shadow-default-shallow;
     &.cursor {
       cursor: pointer;
     }
@@ -38,6 +37,7 @@
 
   .preference-box-end {
     @include text-center;
+    margin-bottom: 1rem;
     font-size: $fs-rg;
     font-weight: $fw-bold;
     width: 3.5rem;
@@ -45,16 +45,15 @@
     border-radius: 15px;
     border: 1.5px dashed rgba(0, 0, 0, 0.4);
     color: black;
-    box-shadow: $shadow-default;
+    opacity: 0.4;
+    box-shadow: $shadow-default-shallow;
   }
-  .description {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    input {
-      font-size: $fs-sm;
-      width: auto;
-      padding-top: 1rem;
-    }
+
+  input {
+    display: block;
+    width: auto;
+    font-size: $fs-sm;
+    font-weight: $fw-bold;
+    margin: 0 auto;
   }
 }

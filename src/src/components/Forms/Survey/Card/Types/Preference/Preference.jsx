@@ -53,8 +53,7 @@ export default function Preference({
             <div
               className="preference-box cursor selected"
               onClick={handleOnClick}
-              value={i}
-            >
+              value={i}>
               {i}
             </div>
           );
@@ -63,8 +62,7 @@ export default function Preference({
             <div
               className="preference-box cursor"
               onClick={handleOnClick}
-              value={i}
-            >
+              value={i}>
               {i}
             </div>
           );
@@ -84,44 +82,46 @@ export default function Preference({
     default:
       if (trueMaxPref < 5) trueMaxPref = 5;
       else if (trueMaxPref > 10) trueMaxPref = 10;
+      preferences.push(
+        <div className="prefence-btn">
+          <div key="first" className="preference-box">
+            1
+          </div>
+          <TextField placeholder="설명 추가" size="sm" setText={setMinDes} />
+        </div>
+      );
 
-      for (let i = 1; i < trueMaxPref; i++) {
+      for (let i = 2; i < trueMaxPref; i++) {
         preferences.push(
-          <div key={i} className="preference-box">
-            {i}
+          <div className="prefence-btn">
+            <div key={i} className="preference-box">
+              {i}
+            </div>
+            <TextField placeholder="" size="sm" />
           </div>
         );
       }
       preferences.push(
-        <input
-          key="last"
-          type="text"
-          className="preference-box-end"
-          value={question.maxPref}
-          onChange={handleOnChange}
-          onBlur={handleOnBlur}
-          maxLength="2"
-          style={{
-            color: trueMaxPref !== question.maxPref ? "red" : "black",
-          }}
-        />
+        <div className="prefence-btn">
+          <input
+            key="last"
+            type="text"
+            className="preference-box-end"
+            value={question.maxPref}
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            maxLength="2"
+            style={{
+              color: trueMaxPref !== question.maxPref ? "red" : "black",
+            }}
+          />
+          <TextField placeholder="설명 추가" size="sm" setText={setMaxDes} />
+        </div>
       );
 
       return (
         <div className="preference">
           <div className="preference-elements">{preferences}</div>
-          <div className="description">
-            <TextField
-              placeholder="설명 추가하기"
-              size="sm"
-              setText={setMinDes}
-            />
-            <TextField
-              placeholder="설명 추가하기"
-              size="sm"
-              setText={setMaxDes}
-            />
-          </div>
         </div>
       );
   }
