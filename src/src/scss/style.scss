@@ -28,6 +28,7 @@ a {
     font-size: $fs-rg;
     box-shadow: $shadow-default;
   }
+
   &.link-btn-lg {
     @include text-center;
     @include round;
@@ -35,6 +36,17 @@ a {
     background-color: #2b44ff;
     width: 6rem;
     height: 3rem;
+    font-size: $fs-rg;
+    box-shadow: $shadow-default;
+  }
+
+  &.link-btn-xl {
+    @include text-center;
+    @include round;
+    color: #fff;
+    background-color: #2b44ff;
+    width: 10rem;
+    height: 4rem;
     font-size: $fs-rg;
     box-shadow: $shadow-default;
   }

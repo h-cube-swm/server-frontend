@@ -1,12 +1,13 @@
 @import "/src/scss/style.scss";
 
-.row-1 {
+.intro {
   position: relative;
   margin-top: 5rem;
 
   a {
-    text-decoration: none;
-    font-weight: 700;
+    position: fixed;
+    bottom: 15rem;
+    z-index: 1;
   }
 
   .character1 {
@@ -46,14 +47,13 @@
     height: auto;
   }
 
-  .intro {
+  .message {
     @include text-center;
+    font-size: 1.5rem;
 
     h1 {
       margin-top: 8rem;
-      margin-bottom: 6rem;
-      line-height: 8rem;
-      font-size: $fs-xl;
+      line-height: 5rem;
     }
 
     strong {
@@ -63,34 +63,13 @@
     }
   }
 
-  .btn-make-survey {
-    @include round;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 12rem;
-    height: 4rem;
-    bottom: 10rem;
-    border: 0;
-    color: #fff;
-    background-color: #2b44ff;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
-    box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
-    z-index: 1;
-  }
-
   @include desktop {
-    .btn-make-survey {
-      bottom: 5rem;
-    }
-
-    .intro {
+    .message {
       h1 {
+        font-size: 2.5rem;
         margin-top: 3rem;
         margin-bottom: 6rem;
-        line-height: 4rem;
+        line-height: 3.5rem;
       }
     }
 
@@ -108,16 +87,18 @@
   }
 
   @include tablet {
-    margin-top: 10rem;
-
-    .btn-make-survey {
-      bottom: 20rem;
+    a {
+      width: 9rem;
+      height: 3rem;
+      bottom: 25rem;
     }
 
-    .intro {
+    .message {
       h1 {
+        font-size: $fs-lg;
         margin-top: 8rem;
         margin-bottom: 3rem;
+        line-height: 3.5rem;
       }
     }
 
@@ -144,10 +125,10 @@
     justify-content: center;
     margin-top: 5rem;
 
-    .btn-make-survey {
+    a {
       width: 9rem;
       height: 3rem;
-      bottom: 8rem;
+      bottom: 3rem;
     }
 
     .outer-box {
@@ -155,11 +136,12 @@
       margin-bottom: 2rem;
     }
 
-    .intro {
+    .message {
       h1 {
+        font-size: $fs-lg;
         margin-top: 0;
         margin-bottom: 2rem;
-        line-height: 3rem;
+        line-height: 3.5rem;
       }
     }
 
@@ -186,10 +168,10 @@
     justify-content: center;
     margin-top: 0;
 
-    .btn-make-survey {
+    a {
       width: 9.6rem;
       height: 3rem;
-      bottom: 5rem;
+      bottom: 3rem;
     }
 
     .outer-box {
@@ -197,8 +179,9 @@
       margin-bottom: 2rem;
     }
 
-    .intro {
+    .message {
       h1 {
+        font-size: $fs-lg;
         margin-top: -1rem;
         margin-bottom: 2rem;
         line-height: 3rem;

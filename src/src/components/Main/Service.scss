@@ -2,7 +2,7 @@
 
 .container {
   display: flex;
-  margin-top: 25rem;
+  margin-top: 30rem;
   flex-wrap: wrap;
   justify-content: center;
 
@@ -11,7 +11,7 @@
     width: 90%;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
 
     h2 {
       font-size: $fs-lg;
@@ -43,10 +43,16 @@
       width: 20rem;
       margin-top: 2rem;
     }
+    .row {
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 8rem;
+      }
+    }
   }
 
   @include tablet {
-    margin-top: 10rem;
+    margin-top: 20rem;
 
     img {
       width: 20rem;
@@ -54,7 +60,10 @@
     }
 
     .row {
-      margin-bottom: 8rem;
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 8rem;
+      }
     }
 
     .row-1 {
@@ -92,6 +101,12 @@
     .row {
       display: flex;
 
+      h2 {
+        font-size: $fs-rg;
+        font-weight: $fw-bold;
+        line-height: 3rem;
+      }
+
       img {
         margin-top: 2rem;
         width: 50%;
@@ -101,7 +116,10 @@
     .row-1 {
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: 5rem;
+      margin-bottom: 0;
+      h2 {
+        margin-bottom: 2rem;
+      }
       img {
         margin-left: 10rem;
       }
@@ -110,16 +128,23 @@
     .row-2 {
       flex-direction: column-reverse;
       align-items: flex-end;
-      margin-bottom: 5rem;
+      margin-bottom: 0;
+      h2 {
+        margin-bottom: 2rem;
+      }
       img {
-        margin-right: 10rem;
+        width: 14rem;
+        margin-right: 5rem;
       }
     }
 
     .row-3 {
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: 10rem;
+      margin-bottom: 0;
+      h2 {
+        margin-bottom: 2rem;
+      }
       img {
         margin-top: 1rem;
       }
