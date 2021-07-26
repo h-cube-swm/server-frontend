@@ -5,9 +5,25 @@ import setNestedState from "../../../../utils/setNestedState";
 import Card from "../Card/Card";
 import { CardStates } from "../constants";
 import "./Response.scss";
+import { postApi } from "../../../../utils/parser";
 
-function Response({ survey, submit }) {
+function Response({ survey, submit, surveyId }) {
 	const [response, setResponse] = useState({});
+  const [data, setData] = useState({});
+  const [error, setError] = useState(false);
+
+  const onClick = () => {
+    const body = { answer: response };
+    const result = postApi(`/surveys/${surveyId}/responses`, body);
+    result ? setData(result) : setError(true);
+    if (!error) {
+      setError(false);
+      console.log(data);
+      return;
+    }
+    setError(false);
+    console.log("error 발생");
+  };
 
 	let contents = null;
 	if (survey) {
