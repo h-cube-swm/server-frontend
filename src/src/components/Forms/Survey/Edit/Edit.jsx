@@ -22,6 +22,7 @@ import "./Edit.scss";
 import getQuestion from "../getQuestion";
 import setNestedState from "../../../../utils/setNestedState";
 import Hider from "../../../Hider/Hider";
+import { QuestionProvider } from "../../../../contexts/QuestionContext";
 
 const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -105,6 +106,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 					</div>
 				</div>
 				<Prologue survey={survey} setSurvey={setSurvey} />
+
 				<div className="question-box" onWheel={onWheel}>
 					{orderedMap(questions, (question, index) => {
 						const isSelected = index === selectedIndex;
@@ -113,11 +115,14 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 						const onDelete =
 							questions.length > 1 ? () => removeQuestion(index) : null;
 						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
-						const slowAppear = questions.length > 1;
+						let slowAppear = questions.length > 1;
 						let state = null;
+						let ref = null;
 						if (isSelected) {
 							if (isDragging) {
-								state = CardStates.ORDERING;
+								state = CardStates.GHOST;
+								slowAppear = false;
+								ref = item;
 							} else {
 								state = CardStates.EDITTING;
 							}
@@ -126,26 +131,30 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 						}
 
 						return (
-							<Positioner key={question.id} y={yPos}>
-								<Card
-									question={question}
-									setQuestion={setQuestion}
+							<Positioner key={question.id} y={yPos} ref={ref}>
+								<QuestionProvider
 									state={state}
-									onDelete={onDelete}
-									onGrab={onGrab}
-									slowAppear={slowAppear}
-								/>
+									question={question}
+									setQuestion={setQuestion}>
+									<Card
+										onDelete={onDelete}
+										onGrab={onGrab}
+										slowAppear={slowAppear}
+									/>
+								</QuestionProvider>
 							</Positioner>
 						);
 					})}
 
-					<Hider hide={!isDragging} ref={item}>
-						<Card
-							question={questions[selectedIndex]}
-							state={CardStates.GHOST}
-							slowAppear={false}
-						/>
-					</Hider>
+					{/* <Hider hide={!isDragging}>
+						<QuestionProvider value={[questions[selectedIndex]]}>
+							<Card
+								question={questions[selectedIndex]}
+								state={CardStates.GHOST}
+								slowAppear={false}
+							/>
+						</QuestionProvider>
+					</Hider> */}
 
 					<QuestionAddButton
 						onClick={() => insertQuestion(selectedIndex)}
