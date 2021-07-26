@@ -4,21 +4,28 @@ import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 
 import "./Ending.scss";
 import logo from "../../../../assets/images/logo.png";
+import Error from "../../../Error/Error";
 
-const Ending = ({ title, description, surveyLink, resultLink }) => {
+const Ending = ({ ending }) => {
+  if (!ending) {
+    return <Error type="loading"></Error>;
+  }
+
+  const { title, description, surveyLink, resultLink } = ending;
+
   return (
     <div className="ending-page">
+      <div className="logo">
+        <Link to="/">
+          <img src={logo} alt="logo" />
+        </Link>
+      </div>
       <h1 className="celebrate-sentence">
         축하합니다. 설문을 완성했습니다.
         <br />
         이제 배포만 남았습니다.
       </h1>
       <div className="survey-sum">
-        <div className="logo">
-          <Link to="/">
-            <img src={logo} alt="logo" />
-          </Link>
-        </div>
         <h1>{title}</h1>
         <h2>{description}</h2>
         <ul>

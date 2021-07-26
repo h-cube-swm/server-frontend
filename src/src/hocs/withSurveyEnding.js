@@ -3,10 +3,8 @@ import { putApi } from "../utils/parser";
 
 const withSurveyEnding = Component => props => {
 
-  const [title, setTitle] = useState("Loading...");
-  const [description, setDescription] = useState("Loading...");
-  const [surveyLink, setSurveyLink] = useState("Loading...");
-  const [resultLink, setResultLink] = useState("Loading...");
+  const [ending, setEnding] = useState(null);
+
   const survey_id = props.match.params.link;
 
   useEffect(() => {
@@ -14,10 +12,7 @@ const withSurveyEnding = Component => props => {
       try {
         const json = await putApi(`/surveys/${survey_id}/end`);
         const { result } = JSON.parse(JSON.stringify(json));
-        setTitle(result.title);
-        setDescription(result.description);
-        setSurveyLink(result.survey_link);
-        setResultLink(result.result_link);
+        setEnding(result);
       } catch (e) {
         console.log(e);
       }
@@ -25,9 +20,7 @@ const withSurveyEnding = Component => props => {
     getEndData();
   }, [survey_id]);
 
-  const newProps = { ...props, title, description, surveyLink, resultLink };
-
-  return <Component {...newProps} />;
+  return <Component {...props} ending={ending} />;
 };
 
 export default withSurveyEnding;
