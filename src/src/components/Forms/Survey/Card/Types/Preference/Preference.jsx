@@ -1,7 +1,6 @@
 import React from "react";
 import { CardStates } from "../../../constants";
 import useDefault from "../../../../../../hooks/useDefault";
-import Hider from "../../../../../Hider/Hider";
 import setNestedState from "../../../../../../utils/setNestedState";
 import "./Preference.scss";
 import TextField from "../../../../../TextField/TextField";
@@ -10,8 +9,8 @@ import { useQuestion } from "../../../../../../contexts/QuestionContext";
 function PreferenceButton({
   index,
   placeholder,
-  setText,
-  text,
+  description,
+  setDescription,
   selected,
   onClick,
 }) {
@@ -33,8 +32,40 @@ function PreferenceButton({
       <TextField
         placeholder={placeholder}
         size="sm"
-        setText={setText}
-        text={text}
+        setText={setDescription}
+        text={description}
+      />
+    </div>
+  );
+}
+
+function LastButton({
+  count,
+  onCountChange,
+  onBlur,
+  isError,
+  description,
+  setDescription,
+}) {
+  return (
+    <div className="prefence-btn" key="last">
+      <input
+        type="text"
+        className="preference-box-end"
+        value={count}
+        onChange={(e) => onCountChange(e.target.value)}
+        onBlur={onBlur}
+        onClick={(e) => e.target.select()}
+        maxLength="2"
+        style={{
+          color: isError ? "red" : "black",
+        }}
+      />
+      <TextField
+        placeholder="설명 추가"
+        size="sm"
+        text={description}
+        setText={setDescription}
       />
     </div>
   );
@@ -43,56 +74,58 @@ function PreferenceButton({
 export default function Preference() {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-  const setMaxPref = setNestedState(setQuestion, ["maxPref"]); // 개수
+  const setMaxPref = setNestedState(setQuestion, ["count"]); // 개수
   const setMinDes = setNestedState(setQuestion, ["minDes"]); // 왼쪽 설명
   const setMaxDes = setNestedState(setQuestion, ["maxDes"]); // 오른쪽 설명
+
   const ia = useDefault(setQuestion, {
     answer: "",
-    maxPref: 5,
+    count: 5,
     minDes: "",
     maxDes: "",
   });
   const ib = useDefault(setResponse, "");
 
-  let trueMaxPref = question.maxPref;
-
-  const preferences = [];
-  const handleOnChange = (e) => {
-    const maxPref = e.target.value + "";
-    if (!/^[0-9]*$/.test(maxPref)) return false;
-    setMaxPref(maxPref);
-  };
-
-  const getOnClick = (index) =>
-    !isEditting &&
-    (() => {
-      setResponse(index);
-    });
-
-  const handleOnBlur = () => {
-    setMaxPref(trueMaxPref);
-  };
-
   if (!ia || !ib) return null;
 
   const isEditting = state === CardStates.EDITTING;
 
-  if (trueMaxPref < 5) trueMaxPref = 5;
-  else if (trueMaxPref > 10) trueMaxPref = 10;
+  let trueCount = question.count;
+  if (trueCount < 5) trueCount = 5;
+  else if (trueCount > 10) trueCount = 10;
 
+  const handleOnCountChange = (value) => {
+    const count = value + "";
+    if (!/^[0-9]*$/.test(count)) return false;
+    setMaxPref(count);
+  };
+
+  const handleOnBlur = () => {
+    setMaxPref(trueCount);
+  };
+
+  const getOnClick = (index) => {
+    if (isEditting) return null;
+    else return () => setResponse(index);
+  };
+
+  const preferences = [];
+
+  // First component
   preferences.push(
     <PreferenceButton
       key={"first"}
       index={1}
-      placeholder="설명 추가"
-      setText={setMinDes}
-      text={question.minDes}
+      placeholder={isEditting && "설명 추가"}
+      setDescription={setMinDes}
+      description={question.minDes}
       onClick={getOnClick(1)}
       selected={response}
     />
   );
 
-  for (let i = 2; i < trueMaxPref; i++) {
+  // Middle components
+  for (let i = 2; i < trueCount; i++) {
     preferences.push(
       <PreferenceButton
         key={i}
@@ -103,17 +136,26 @@ export default function Preference() {
     );
   }
 
+  // Last component
   if (isEditting) {
     preferences.push(
-      LastButton(question, handleOnChange, handleOnBlur, trueMaxPref, setMaxDes)
+      <LastButton
+        key="last"
+        count={question.count}
+        onCountChange={handleOnCountChange}
+        onBlur={handleOnBlur}
+        isError={question.count !== trueCount}
+        description={question.maxDes}
+        setDescription={setMaxDes}
+      />
     );
   } else {
     preferences.push(
       <PreferenceButton
-        key={"last"}
-        index={question.maxPref}
-        text={question.maxDes}
-        onClick={getOnClick(question.maxPref)}
+        key="last"
+        index={question.count}
+        description={question.maxDes}
+        onClick={getOnClick(question.count)}
         selected={response}
       />
     );
@@ -122,37 +164,6 @@ export default function Preference() {
   return (
     <div className="preference">
       <div className="preference-elements">{preferences}</div>
-    </div>
-  );
-}
-
-function LastButton(
-  question,
-  handleOnChange,
-  handleOnBlur,
-  trueMaxPref,
-  setMaxDes
-) {
-  return (
-    <div className="prefence-btn" key="last">
-      <input
-        type="text"
-        className="preference-box-end"
-        value={question.maxPref}
-        onChange={handleOnChange}
-        onBlur={handleOnBlur}
-        onClick={(e) => e.target.select()}
-        maxLength="2"
-        style={{
-          color: trueMaxPref !== question.maxPref ? "red" : "black",
-        }}
-      />
-      <TextField
-        placeholder="설명 추가"
-        size="sm"
-        setText={setMaxDes}
-        text={question.maxDes}
-      />
     </div>
   );
 }
