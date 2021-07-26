@@ -3,12 +3,13 @@ import useDefault from "../../../../../../hooks/useDefault";
 import setNestedState from "../../../../../../utils/setNestedState";
 import Hider from "../../../../../Hider/Hider";
 import TextField from "../../../../../TextField/TextField";
-import CheckField from "../../../../CheckField/CheckField";
+import CheckField from "../../../../../CheckField/CheckField";
 import { CardStates } from "../../../constants";
 
 import delBtn from "../../../../../../assets/icons/del-btn.svg";
 import addBtn from "../../../../../../assets/icons/add-btn.svg";
 import "./MultipleChoice.scss";
+import { useQuestion } from "../../../../../../contexts/QuestionContext";
 
 function Choice({
   text,
@@ -43,14 +44,9 @@ function Choice({
   );
 }
 
-export default function MultipleChoice({
-  question,
-  setQuestion,
-  response,
-  setResponse,
-  state,
-  multipleSelect,
-}) {
+function Choices({ multipleSelect }) {
+  const { state, question, setQuestion, response, setResponse } = useQuestion();
+
   const questionInitialized = useDefault(setQuestion, {
     choices: [""],
   });
@@ -109,4 +105,12 @@ export default function MultipleChoice({
       </Hider>
     </div>
   );
+}
+
+export function SingleChoices(props) {
+  return <Choices {...props} multipleSelect={false} />;
+}
+
+export function MultipleChoices(props) {
+  return <Choices {...props} multipleSelect={true} />;
 }

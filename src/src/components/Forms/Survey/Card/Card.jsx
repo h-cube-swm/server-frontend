@@ -10,7 +10,10 @@ import delBtn from "../../../../assets/icons/del-btn.svg";
 /* Components */
 import Default from "./Types/Default/Default";
 import ToggleSwitch from "./ToggleSwitch";
-import MultipleChoice from "./Types/MultipleChoice/MultipleChoice";
+import {
+	MultipleChoices,
+	SingleChoices,
+} from "./Types/MultipleChoice/MultipleChoice";
 import Preference from "./Types/Preference/Preference";
 import ShortSentence from "./Types/ShortSentence/ShortSentence";
 import LongSentence from "./Types/LongSentence/LongSentence";
@@ -22,9 +25,9 @@ import { useQuestion } from "../../../../contexts/QuestionContext";
 function getInnerComponent(type) {
 	switch (type) {
 		case CardTypes.SINGLE_CHOICE:
-			return MultipleChoice;
+			return SingleChoices;
 		case CardTypes.MULTIPLE_CHOICE:
-			return MultipleChoice;
+			return MultipleChoices;
 		case CardTypes.PREFERENCE:
 			return Preference;
 		case CardTypes.SHORT_SENTENCE:
