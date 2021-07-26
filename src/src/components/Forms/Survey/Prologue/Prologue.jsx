@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
 import setNestedState from "../../../../utils/setNestedState";
 import TextField from "../../../TextField/TextField";
 import "./Prologue.scss";
+import logo from "../../../../assets/images/logo.png";
 
 export default function Prologue({ survey, setSurvey }) {
   const [y, setY] = useState(0);
@@ -33,6 +35,11 @@ export default function Prologue({ survey, setSurvey }) {
   return (
     <div className={!wheelDirection ? "prologue-box" : "prologue-box-top"}>
       <div className="survey-header">
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+        </div>
         <TextField
           text={survey.title}
           setText={setNestedState(setSurvey, ["title"])}

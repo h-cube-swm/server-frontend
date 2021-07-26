@@ -1,42 +1,42 @@
 @import "/src/scss/style.scss";
 
 .header {
-	position: relative;
-	display: block;
-	height: 50px;
+  position: relative;
+  display: block;
+  z-index: 2;
 
-	.logo {
-		position: absolute;
-		top: 3rem;
-		left: 3rem;
+  .logo {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
 
-		img {
-			width: 8rem;
-			height: auto;
-		}
-	}
+    img {
+      width: 8rem;
+      height: auto;
+    }
+  }
 
-	@include tablet {
-		.logo {
-			position: absolute;
-			top: 2rem;
-			left: 2rem;
+  @include tablet {
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
 
-			img {
-				width: 6rem;
-			}
-		}
-	}
+      img {
+        width: 6rem;
+      }
+    }
+  }
 
-	@include mobile {
-		.logo {
-			position: absolute;
-			top: 2rem;
-			left: 2rem;
+  @include mobile {
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
 
-			img {
-				width: 5rem;
-			}
-		}
-	}
+      img {
+        width: 5rem;
+      }
+    }
+  }
 }

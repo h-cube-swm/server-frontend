@@ -37,8 +37,15 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    margin-left: 5rem;
+    margin-left: 3rem;
     width: 100%;
+    .logo {
+      width: 3rem;
+      margin-right: 3rem;
+      img {
+        width: 100%;
+      }
+    }
   }
 
   transition-duration: 1000ms;
@@ -60,8 +67,15 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    margin-left: 5rem;
+    margin-left: 3rem;
     width: 100%;
+    .logo {
+      width: 3rem;
+      margin-right: 3rem;
+      img {
+        width: 100%;
+      }
+    }
   }
 
   transition-duration: 1000ms;
