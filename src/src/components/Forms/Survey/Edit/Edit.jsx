@@ -89,6 +89,14 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 
 		contents = (
 			<>
+				<div ref={item}>
+					<QuestionProvider
+						state={CardStates.GHOST}
+						question={questions[selectedIndex]}>
+						<Card slowAppear={false} />
+					</QuestionProvider>
+				</div>
+
 				<div className="positioning-box">
 					<div className="controller-box">
 						<Controller type={selectedSurveyType} setType={setQuesionType} />
@@ -117,44 +125,29 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 						const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
 						let slowAppear = questions.length > 1;
 						let state = null;
-						let ref = null;
 						if (isSelected) {
-							if (isDragging) {
-								state = CardStates.GHOST;
-								slowAppear = false;
-								ref = item;
-							} else {
-								state = CardStates.EDITTING;
-							}
+							state = CardStates.EDITTING;
 						} else {
 							state = CardStates.PREVIEW;
 						}
 
 						return (
-							<Positioner key={question.id} y={yPos} ref={ref}>
-								<QuestionProvider
-									state={state}
-									question={question}
-									setQuestion={setQuestion}>
-									<Card
-										onDelete={onDelete}
-										onGrab={onGrab}
-										slowAppear={slowAppear}
-									/>
-								</QuestionProvider>
+							<Positioner key={question.id} y={yPos}>
+								<Hider hide={isDragging && isSelected} animation={false}>
+									<QuestionProvider
+										state={state}
+										question={question}
+										setQuestion={setQuestion}>
+										<Card
+											onDelete={onDelete}
+											onGrab={onGrab}
+											slowAppear={slowAppear}
+										/>
+									</QuestionProvider>
+								</Hider>
 							</Positioner>
 						);
 					})}
-
-					{/* <Hider hide={!isDragging}>
-						<QuestionProvider value={[questions[selectedIndex]]}>
-							<Card
-								question={questions[selectedIndex]}
-								state={CardStates.GHOST}
-								slowAppear={false}
-							/>
-						</QuestionProvider>
-					</Hider> */}
 
 					<QuestionAddButton
 						onClick={() => insertQuestion(selectedIndex)}

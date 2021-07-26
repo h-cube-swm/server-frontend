@@ -6,14 +6,10 @@ import TextField from "../../../../../TextField/TextField";
 import Hider from "../../../../../Hider/Hider";
 import setNestedState from "../../../../../../utils/setNestedState";
 import IntegerField from "../../../../../IntegerField/IntegerField";
+import { useQuestion } from "../../../../../../contexts/QuestionContext";
 
-export default function LongSentence({
-	question,
-	state,
-	setQuestion,
-	response,
-	setResponse,
-}) {
+export default function LongSentence() {
+	const { state, question, setQuestion, response, setResponse } = useQuestion();
 	const setMaxNum = setNestedState(setQuestion, ["maxNum"]);
 
 	const ia = useDefault(setQuestion, {

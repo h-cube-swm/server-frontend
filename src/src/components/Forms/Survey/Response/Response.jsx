@@ -8,7 +8,6 @@ import "./Response.scss";
 
 function Response({ survey, submit }) {
 	const [response, setResponse] = useState({});
-	console.log(response);
 
 	let contents = null;
 	if (survey) {
@@ -18,15 +17,13 @@ function Response({ survey, submit }) {
 				{questions.map((question) => {
 					const { id } = question;
 					return (
-						<QuestionProvider>
-							<Card
-								key={id}
-								question={question}
-								state={CardStates.RESPONSE}
-								slowAppear={false}
-								response={response[id]}
-								setResponse={setNestedState(setResponse, [id])}
-							/>
+						<QuestionProvider
+							state={CardStates.RESPONSE}
+							question={question}
+							key={id}
+							response={response[id]}
+							setResponse={setNestedState(setResponse, [id])}>
+							<Card slowAppear={false} />
 						</QuestionProvider>
 					);
 				})}

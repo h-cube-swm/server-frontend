@@ -45,7 +45,7 @@ export default function Card({
 	slowAppear,
 }) {
 	const isInit = useTimeout(slowAppear ? 400 : 0);
-	const { state, question, setQuestion, response, setResponse } = useQuestion();
+	const { state, question, setQuestion } = useQuestion();
 
 	if (!question) return null;
 
@@ -96,11 +96,7 @@ export default function Card({
 						/>
 					</div>
 					<div className="inner-box">
-						<InnerComponent
-							state={CardStates.GHOST}
-							isRequired={question.isRequired}
-							question={question}
-						/>
+						<InnerComponent state={CardStates.GHOST} />
 					</div>
 					<div className="handle">
 						<img src={hanleImage} alt="Handle"></img>
@@ -141,12 +137,6 @@ export default function Card({
 			</div>
 			<div className="inner-box">
 				<InnerComponent
-					state={state}
-					isRequired={question.isRequired}
-					question={question}
-					setQuestion={setQuestion}
-					response={response}
-					setResponse={setResponse}
 					multipleSelect={question.type === CardTypes.MULTIPLE_CHOICE}
 				/>
 			</div>
