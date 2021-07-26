@@ -48,22 +48,58 @@ export default function Preference({
   switch (state) {
     case CardStates.RESPONSE:
       for (let i = 1; i <= question.maxPref; i++) {
-        if (i + "" === response) {
+        if (i === 1) {
           preferences.push(
-            <div
-              className="preference-box cursor selected"
-              onClick={handleOnClick}
-              value={i}>
-              {i}
+            <div className="prefence-btn">
+              <div
+                className={
+                  i + "" === response
+                    ? "preference-box cursor selected"
+                    : "preference-box cursor"
+                }
+                onClick={handleOnClick}
+                value={i}
+                key={i}
+              >
+                {i}
+              </div>
+              <TextField text={question.setMinDes} size="sm" />
+            </div>
+          );
+        } else if (i === question.maxPref) {
+          preferences.push(
+            <div className="prefence-btn">
+              <div
+                className={
+                  i + "" === response
+                    ? "preference-box cursor selected"
+                    : "preference-box cursor"
+                }
+                onClick={handleOnClick}
+                value={i}
+                key={i}
+              >
+                {i}
+              </div>
+              <TextField text={question.setMaxDes} size="sm" />
             </div>
           );
         } else {
           preferences.push(
-            <div
-              className="preference-box cursor"
-              onClick={handleOnClick}
-              value={i}>
-              {i}
+            <div className="prefence-btn">
+              <div
+                className={
+                  i + "" === response
+                    ? "preference-box cursor selected"
+                    : "preference-box cursor"
+                }
+                onClick={handleOnClick}
+                value={i}
+                key={i}
+              >
+                {i}
+              </div>
+              <TextField placeholder="" size="sm" />
             </div>
           );
         }
@@ -71,10 +107,6 @@ export default function Preference({
       return (
         <div className="preference">
           <div className="preference-elements">{preferences}</div>
-          <div className="description">
-            <TextField text={question.setMinDes} size="sm" />
-            <TextField text={question.setMaxDes} size="sm" />
-          </div>
         </div>
       );
 
