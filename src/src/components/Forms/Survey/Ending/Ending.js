@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 
 import "./Ending.scss";
+import logo from "../../../../assets/images/logo.png";
 
 const Ending = ({ title, description, surveyLink, resultLink }) => {
   return (
@@ -13,6 +14,11 @@ const Ending = ({ title, description, surveyLink, resultLink }) => {
         이제 배포만 남았습니다.
       </h1>
       <div className="survey-sum">
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+        </div>
         <h1>{title}</h1>
         <h2>{description}</h2>
         <ul>
