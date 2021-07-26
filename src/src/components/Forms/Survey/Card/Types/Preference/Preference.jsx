@@ -7,148 +7,151 @@ import "./Preference.scss";
 import TextField from "../../../../../TextField/TextField";
 import { useQuestion } from "../../../../../../contexts/QuestionContext";
 
+function PreferenceButton({
+  index,
+  placeholder,
+  setText,
+  text,
+  selected,
+  onClick,
+}) {
+  const classes = ["preference-box"];
+
+  if (onClick) {
+    classes.push("cursor");
+  }
+
+  if (index === selected) {
+    classes.push("selected");
+  }
+
+  return (
+    <div className="prefence-btn">
+      <div className={classes.join(" ")} onClick={onClick}>
+        {index}
+      </div>
+      <TextField
+        placeholder={placeholder}
+        size="sm"
+        setText={setText}
+        text={text}
+      />
+    </div>
+  );
+}
+
 export default function Preference() {
-	const { state, question, setQuestion, response, setResponse } = useQuestion();
+  const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-	const setMaxPref = setNestedState(setQuestion, ["maxPref"]);
-	const setMinDes = setNestedState(setQuestion, ["setMinDes"]);
-	const setMaxDes = setNestedState(setQuestion, ["setMaxDes"]);
-	const ia = useDefault(setQuestion, {
-		answer: "",
-		maxPref: 5,
-		setMinDes: "",
-		setMaxDes: "",
-	});
-	const ib = useDefault(setResponse, "");
+  const setMaxPref = setNestedState(setQuestion, ["maxPref"]); // 개수
+  const setMinDes = setNestedState(setQuestion, ["minDes"]); // 왼쪽 설명
+  const setMaxDes = setNestedState(setQuestion, ["maxDes"]); // 오른쪽 설명
+  const ia = useDefault(setQuestion, {
+    answer: "",
+    maxPref: 5,
+    minDes: "",
+    maxDes: "",
+  });
+  const ib = useDefault(setResponse, "");
 
-	let trueMaxPref = question.maxPref;
+  let trueMaxPref = question.maxPref;
 
-	const preferences = [];
-	const handleOnChange = (e) => {
-		const maxPref = e.target.value + "";
-		if (!/^[0-9]*$/.test(maxPref)) return false;
-		setMaxPref(maxPref);
-	};
+  const preferences = [];
+  const handleOnChange = (e) => {
+    const maxPref = e.target.value + "";
+    if (!/^[0-9]*$/.test(maxPref)) return false;
+    setMaxPref(maxPref);
+  };
 
-	const handleOnClick = (e) => {
-		const answer = e.target.getAttribute("value");
-		setResponse(answer);
-		console.log("response는", response, typeof response);
-	};
+  const getOnClick = (index) =>
+    !isEditting &&
+    (() => {
+      setResponse(index);
+    });
 
-	const handleOnBlur = () => {
-		setMaxPref(trueMaxPref);
-	};
+  const handleOnBlur = () => {
+    setMaxPref(trueMaxPref);
+  };
 
-	if (!ia || !ib) return null;
+  if (!ia || !ib) return null;
 
-	switch (state) {
-		case CardStates.RESPONSE:
-			for (let i = 1; i <= question.maxPref; i++) {
-				if (i === 1) {
-					preferences.push(
-						<div className="prefence-btn">
-							<div
-								className={
-									i + "" === response
-										? "preference-box cursor selected"
-										: "preference-box cursor"
-								}
-								onClick={handleOnClick}
-								value={i}
-								key={i}>
-								{i}
-							</div>
-							<TextField text={question.setMinDes} size="sm" />
-						</div>
-					);
-				} else if (i === question.maxPref) {
-					preferences.push(
-						<div className="prefence-btn">
-							<div
-								className={
-									i + "" === response
-										? "preference-box cursor selected"
-										: "preference-box cursor"
-								}
-								onClick={handleOnClick}
-								value={i}
-								key={i}>
-								{i}
-							</div>
-							<TextField text={question.setMaxDes} size="sm" />
-						</div>
-					);
-				} else {
-					preferences.push(
-						<div className="prefence-btn">
-							<div
-								className={
-									i + "" === response
-										? "preference-box cursor selected"
-										: "preference-box cursor"
-								}
-								onClick={handleOnClick}
-								value={i}
-								key={i}>
-								{i}
-							</div>
-							<TextField placeholder="" size="sm" />
-						</div>
-					);
-				}
-			}
-			return (
-				<div className="preference">
-					<div className="preference-elements">{preferences}</div>
-				</div>
-			);
+  const isEditting = state === CardStates.EDITTING;
 
-		case CardStates.EDITTING:
-		default:
-			if (trueMaxPref < 5) trueMaxPref = 5;
-			else if (trueMaxPref > 10) trueMaxPref = 10;
-			preferences.push(
-				<div className="prefence-btn">
-					<div key="first" className="preference-box">
-						1
-					</div>
-					<TextField placeholder="설명 추가" size="sm" setText={setMinDes} />
-				</div>
-			);
+  if (trueMaxPref < 5) trueMaxPref = 5;
+  else if (trueMaxPref > 10) trueMaxPref = 10;
 
-			for (let i = 2; i < trueMaxPref; i++) {
-				preferences.push(
-					<div className="prefence-btn">
-						<div key={i} className="preference-box">
-							{i}
-						</div>
-						<TextField placeholder="" size="sm" />
-					</div>
-				);
-			}
-			preferences.push(
-				<div className="prefence-btn">
-					<input
-						key="last"
-						type="text"
-						className="preference-box-end"
-						value={question.maxPref}
-						onChange={handleOnChange}
-						onBlur={handleOnBlur}
-						maxLength="2"
-						style={{
-							color: trueMaxPref !== question.maxPref ? "red" : "black",
-						}}
-					/>
-					<TextField placeholder="설명 추가" size="sm" setText={setMaxDes} />
-				</div>
-			);
+  preferences.push(
+    <PreferenceButton
+      key={"first"}
+      index={1}
+      placeholder="설명 추가"
+      setText={setMinDes}
+      text={question.minDes}
+      onClick={getOnClick(1)}
+      selected={response}
+    />
+  );
 
-			return (
-				<div className="preference">
-					<div className="preference-elements">{preferences}</div>
-				</div>
-			);
-	}
+  for (let i = 2; i < trueMaxPref; i++) {
+    preferences.push(
+      <PreferenceButton
+        key={i}
+        index={i}
+        onClick={getOnClick(i)}
+        selected={response}
+      />
+    );
+  }
+
+  if (isEditting) {
+    preferences.push(
+      LastButton(question, handleOnChange, handleOnBlur, trueMaxPref, setMaxDes)
+    );
+  } else {
+    preferences.push(
+      <PreferenceButton
+        key={"last"}
+        index={question.maxPref}
+        text={question.maxDes}
+        onClick={getOnClick(question.maxPref)}
+        selected={response}
+      />
+    );
+  }
+
+  return (
+    <div className="preference">
+      <div className="preference-elements">{preferences}</div>
+    </div>
+  );
+}
+
+function LastButton(
+  question,
+  handleOnChange,
+  handleOnBlur,
+  trueMaxPref,
+  setMaxDes
+) {
+  return (
+    <div className="prefence-btn" key="last">
+      <input
+        type="text"
+        className="preference-box-end"
+        value={question.maxPref}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
+        maxLength="2"
+        style={{
+          color: trueMaxPref !== question.maxPref ? "red" : "black",
+        }}
+      />
+      <TextField
+        placeholder="설명 추가"
+        size="sm"
+        setText={setMaxDes}
+        text={question.maxDes}
+      />
+    </div>
+  );
 }
