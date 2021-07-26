@@ -12,7 +12,14 @@ const withSurveyEnding = Component => props => {
       try {
         const json = await putApi(`/surveys/${survey_id}/end`);
         const { result } = JSON.parse(JSON.stringify(json));
-        setEnding(result);
+        const ending = {
+          description: result['description'],
+          resultLink: result['result_link'],
+          status: result['status'],
+          surveyLink: result['survey_link'],
+          title: result['title'],
+        };
+        setEnding(ending);
       } catch (e) {
         console.log(e);
       }
