@@ -8,57 +8,73 @@ import setNestedState from "../../../../../../utils/setNestedState";
 import IntegerField from "../../../../../IntegerField/IntegerField";
 import { useQuestion } from "../../../../../../contexts/QuestionContext";
 
-export default function ShortSentence() {
-	const { state, question, setQuestion, response, setResponse } = useQuestion();
-	const setMaxLen = setNestedState(setQuestion, ["maxLen"]);
+function Sentence({ isLong }) {
+  const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-	const ia = useDefault(setQuestion, {
-		answer: "",
-		maxLen: 32,
-	});
-	const ib = useDefault(setResponse, "");
+  const ia = useDefault(setQuestion, {
+    answer: "",
+    maxLenLong: 300,
+    maxLenShort: 32,
+  });
+  const ib = useDefault(setResponse, "");
 
-	if (!ia || !ib) return null;
+  if (!ia || !ib) return null;
 
-	switch (state) {
-		case CardStates.RESPONSE:
-			return (
-				<div className="short-sentence">
-					<div className="response">
-						<TextField
-							placeholder="답변을 입력하세요"
-							size="lg"
-							setText={setResponse}
-							text={response}
-							maxLength={question.maxLen}
-						/>
-						<Hider hide={state !== CardStates.RESPONSE}>
-							<div className="max-len-indicator">
-								{response.length === question.maxLen ? (
-									<p className="red">
-										{response.length + " / " + question.maxLen}
-									</p>
-								) : (
-									<p>{response.length + " / " + question.maxLen}</p>
-								)}
-							</div>
-						</Hider>
-					</div>
-				</div>
-			);
-		case CardStates.EDITTING:
-		default:
-			return (
-				<div className="short-sentence">
-					<TextField placeholder="단답형 텍스트" size="lg" disabled />
-					<Hider hide={state !== CardStates.EDITTING}>
-						<IntegerField
-							number={question.maxLen}
-							setNumber={setMaxLen}
-							label="최대 글자수"
-						/>
-					</Hider>
-				</div>
-			);
-	}
+  const maxLen = isLong ? question.maxLenLong : question.maxLenShort;
+  const setMaxLen = setNestedState(setQuestion, [
+    isLong ? "maxLenLong" : "maxLenShort",
+  ]);
+
+  switch (state) {
+    case CardStates.RESPONSE:
+      return (
+        <div className="sentence-question">
+          <div className="respoclnse">
+            <TextField
+              placeholder="답변을 입력하세요"
+              size={isLong ? "xl" : "lg"}
+              setText={setResponse}
+              text={response}
+              maxLength={maxLen}
+              multiline={isLong}
+            />
+            <Hider hide={state !== CardStates.RESPONSE}>
+              <div className="max-len-indicator">
+                {response.length === maxLen ? (
+                  <p className="red">{response.length + " / " + maxLen}</p>
+                ) : (
+                  <p>{response.length + " / " + maxLen}</p>
+                )}
+              </div>
+            </Hider>
+          </div>
+        </div>
+      );
+    case CardStates.EDITTING:
+    default:
+      return (
+        <div className="short-sentence">
+          <TextField
+            placeholder={isLong ? "장문형 텍스트" : "단답형 텍스트"}
+            size={isLong ? "xl" : "lg"}
+            disabled
+          />
+          <Hider hide={state !== CardStates.EDITTING}>
+            <IntegerField
+              number={maxLen}
+              setNumber={setMaxLen}
+              label="최대 글자수"
+            />
+          </Hider>
+        </div>
+      );
+  }
+}
+
+export function ShortSentence() {
+  return <Sentence isLong={false} />;
+}
+
+export function LongSentence() {
+  return <Sentence isLong={true} />;
 }

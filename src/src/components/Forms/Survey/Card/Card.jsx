@@ -15,12 +15,14 @@ import {
   SingleChoices,
 } from "./Types/MultipleChoice/MultipleChoice";
 import Preference from "./Types/Preference/Preference";
-import ShortSentence from "./Types/ShortSentence/ShortSentence";
-import LongSentence from "./Types/LongSentence/LongSentence";
 import setNestedState from "../../../../utils/setNestedState";
 import TextField from "../../../TextField/TextField";
 import Hider from "../../../Hider/Hider";
 import { useQuestion } from "../../../../contexts/QuestionContext";
+import {
+  LongSentence,
+  ShortSentence,
+} from "./Types/ShortSentence/ShortSentence";
 
 function getInnerComponent(type) {
   switch (type) {
