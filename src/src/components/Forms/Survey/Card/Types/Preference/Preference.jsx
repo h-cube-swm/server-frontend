@@ -141,6 +141,7 @@ function LastButton(
         value={question.maxPref}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
+        onClick={(e) => e.target.select()}
         maxLength="2"
         style={{
           color: trueMaxPref !== question.maxPref ? "red" : "black",
