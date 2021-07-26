@@ -8,6 +8,10 @@ const withSurvey = Component => props => {
   const [survey, setSurvey] = useState(null);
 
   useEffect(() => {
+
+    /**
+     * Fetch survey data from server
+     */
     const getSurvey = async () => {
 
       const { result } = await getApi(`/surveys/${surveyId}`);  //A
