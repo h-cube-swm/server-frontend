@@ -141,7 +141,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 
           return (
             <Positioner key={question.id} y={y}>
-              <Hider hide={isHide} animation={false}>
+              <Hider hide={isHide} animation={false} appearDelay={400}>
                 <QuestionProvider
                   state={state}
                   question={question}
