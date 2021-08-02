@@ -25,7 +25,6 @@ import Hider from "../../../Hider/Hider";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
-import { API } from "../../../../utils/parser";
 
 const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   const initSurvey = useMemo(() => {

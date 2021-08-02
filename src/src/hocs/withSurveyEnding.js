@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API } from "../utils/parser";
+import { API } from "../utils/apis";
 
 const withSurveyEnding = Component => props => {
 

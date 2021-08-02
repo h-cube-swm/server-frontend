@@ -8,7 +8,7 @@ import TextField from "../../../TextField/TextField";
 import { CardStates } from "../constants";
 import "./Response.scss";
 import logo from "../../../../assets/images/logo.png";
-import { API } from "../../../../utils/parser";
+import { API } from "../../../../utils/apis";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 
 function Response({ survey, submit, surveyId }) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import Loading from "../components/Loading/Loading";
-import { API } from "../utils/parser";
+import { API } from "../utils/apis";
 
 const withSurvey = Component => props => {
 
