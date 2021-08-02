@@ -8,32 +8,14 @@ import "../Card/Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
 import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
 
-export default function Card({
-  // Logic-associated parameters
-  onDelete,
-
-  // UI-associated parameters
-  onGrab,
-  slowAppear,
-
-  // Children
-  children,
-}) {
-  const isInit = useTimeout(slowAppear ? 400 : 0);
-  const { state, question } = useQuestion();
-
-  if (!question) return null;
+export default function Card({ onDelete, onGrab, children }) {
+  const { state } = useQuestion();
 
   let classes = ["survey-card"];
-  if (isInit) classes.push("hidden");
 
   switch (state) {
     case CardStates.EDITTING:
       classes.push("highlight");
-      break;
-
-    case CardStates.ORDERING:
-      classes.push("hidden");
       break;
 
     case CardStates.PREVIEW:
@@ -49,6 +31,7 @@ export default function Card({
     case CardStates.GHOST:
       classes.push("ghost");
       classes.push("highlight");
+      break;
 
     default:
       break;
