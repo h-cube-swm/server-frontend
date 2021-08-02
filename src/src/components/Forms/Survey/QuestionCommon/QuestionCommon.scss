@@ -3,7 +3,8 @@
 .question-common {
   width: 100%;
   height: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 
   .question-common-box {
     display: flex;
@@ -19,10 +20,9 @@
 
   .question-detail-box {
     top: 0px;
-    position: absolute;
     @include text-center;
     width: 100%;
-    height: 100%;
+    flex-grow: 1;
     overflow: scroll;
   }
 }
