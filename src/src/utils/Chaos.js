@@ -181,7 +181,7 @@ export default function Chaos() {
     var particles = [
       [0, 0.1, 0],
       [0, 0.1, 0.01],
-      [0, 0.1, 0.02]
+      [0, 0.1, 0.02],
     ];
 
     var renderer = getRenderer(particles, (p) => {
