@@ -7,6 +7,17 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  .logo {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+
+    img {
+      width: 8rem;
+      height: auto;
+    }
+  }
 }
 
 .celebrate-sentence {
