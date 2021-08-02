@@ -1,0 +1,32 @@
+@import "/src/scss/style.scss";
+
+.sentence-view {
+  @include round;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto;
+  width: 640px;
+  height: 400px;
+  box-shadow: $shadow-default;
+  background-color: #fff;
+  transition-duration: 500ms;
+
+  .chart {
+    width: 50%;
+  }
+
+  p {
+    @include round;
+    @include text-center;
+    width: 80%;
+    height: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #fff;
+    font-weight: $fw-bold;
+    background-color: royalblue;
+    opacity: 0.6;
+  }
+}
