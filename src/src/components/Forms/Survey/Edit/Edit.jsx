@@ -27,13 +27,7 @@ import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Error from "../../../Error/Error";
 
 const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const setQuesionType = setNestedState(setSurvey, [
-    "questions",
-    selectedIndex,
-    "type",
-  ]);
+  const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
 
   const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
@@ -69,6 +63,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
   const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging(
     (delta) => {
       // Calculate new index
+      const { selectedIndex } = survey;
       let newIndex = selectedIndex + delta;
 
       // Check range
@@ -82,13 +77,18 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
       questions[selectedIndex] = questions[newIndex];
       questions[newIndex] = tmp;
 
-      // Update index and question
-      setSelectedIndex(newIndex);
-      setSurvey({ ...survey, questions });
+      setSurvey({ ...survey, selectedIndex: newIndex, questions });
     }
   );
 
   if (!survey) return <Error type="loading"></Error>;
+
+  const { selectedIndex } = survey;
+  const setQuesionType = setNestedState(setSurvey, [
+    "questions",
+    selectedIndex,
+    "type",
+  ]);
 
   const selectedSurveyType = survey.questions[selectedIndex].type;
   const showAddButton = !isDragging && !isMoving;
@@ -133,19 +133,14 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
           const isSelected = index === selectedIndex;
           const y = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
           const slowAppear = questions.length > 1;
-          const setQuestion = setNestedState(setSurvey, ["questions", index]);
+          const isHide = isDragging && isSelected;
+          const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
           const onDelete = questions.length > 1 && getRemoveQuestion(index);
-
-          let state = null;
-          if (isSelected) {
-            state = CardStates.EDITTING;
-          } else {
-            state = CardStates.PREVIEW;
-          }
+          const setQuestion = setNestedState(setSurvey, ["questions", index]);
 
           return (
             <Positioner key={question.id} y={y}>
-              <Hider hide={isDragging && isSelected} animation={false}>
+              <Hider hide={isHide} animation={false}>
                 <QuestionProvider
                   state={state}
                   question={question}
