@@ -1,15 +1,15 @@
 import React from "react";
-import useDefault from "../../../../../../hooks/useDefault";
-import setNestedState from "../../../../../../utils/setNestedState";
-import Hider from "../../../../../Hider/Hider";
-import TextField from "../../../../../TextField/TextField";
-import CheckField from "../../../../../CheckField/CheckField";
-import { CardStates } from "../../../constants";
+import useDefault from "../../../../../hooks/useDefault";
+import setNestedState from "../../../../../utils/setNestedState";
+import Hider from "../../../../Hider/Hider";
+import TextField from "../../../../TextField/TextField";
+import CheckField from "../../../../CheckField/CheckField";
+import { CardStates } from "../../constants";
 
-import delBtn from "../../../../../../assets/icons/del-btn.svg";
-import addBtn from "../../../../../../assets/icons/add-btn.svg";
+import delBtn from "../../../../../assets/icons/del-btn.svg";
+import addBtn from "../../../../../assets/icons/add-btn.svg";
 import "./MultipleChoice.scss";
-import { useQuestion } from "../../../../../../contexts/QuestionContext";
+import { useQuestion } from "../../../../../contexts/QuestionContext";
 
 function Choice({
   text,

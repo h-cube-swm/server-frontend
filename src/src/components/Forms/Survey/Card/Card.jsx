@@ -8,7 +8,7 @@ import "../Card/Card.scss";
 import hanleImage from "../../../../assets/icons/handle.svg";
 import delBtn from "../../../../assets/icons/del-btn.svg";
 
-import QuestionCommon from "./QuestionCommon";
+import QuestionCommon from "../QuestionCommon/QuestionCommon";
 
 export default function Card({
   // Logic-associated parameters

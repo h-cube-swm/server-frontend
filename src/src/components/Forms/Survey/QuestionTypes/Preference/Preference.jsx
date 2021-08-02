@@ -1,10 +1,10 @@
 import React from "react";
-import { CardStates } from "../../../constants";
-import useDefault from "../../../../../../hooks/useDefault";
-import setNestedState from "../../../../../../utils/setNestedState";
+import { CardStates } from "../../constants";
+import useDefault from "../../../../../hooks/useDefault";
+import setNestedState from "../../../../../utils/setNestedState";
 import "./Preference.scss";
-import TextField from "../../../../../TextField/TextField";
-import { useQuestion } from "../../../../../../contexts/QuestionContext";
+import TextField from "../../../../TextField/TextField";
+import { useQuestion } from "../../../../../contexts/QuestionContext";
 
 function PreferenceButton({
   index,

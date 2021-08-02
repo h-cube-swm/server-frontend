@@ -1,10 +1,10 @@
 import React from "react";
-import { CardStates, CardTypes } from "../../constants";
-import ToggleSwitch from "../ToggleSwitch";
-import setNestedState from "../../../../../utils/setNestedState";
-import TextField from "../../../../TextField/TextField";
-import Hider from "../../../../Hider/Hider";
-import { useQuestion } from "../../../../../contexts/QuestionContext";
+import { CardStates, CardTypes } from "../constants";
+import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
+import setNestedState from "../../../../utils/setNestedState";
+import TextField from "../../../TextField/TextField";
+import Hider from "../../../Hider/Hider";
+import { useQuestion } from "../../../../contexts/QuestionContext";
 /* Components */
 import Default from "../QuestionTypes/Default/Default";
 import {
