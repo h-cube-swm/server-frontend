@@ -11,6 +11,7 @@ import Survey from "../Forms/Survey/Survey";
 import Edit from "../Forms/Survey/Edit/Edit";
 import Ending from "../Forms/Survey/Ending/Ending";
 import Response from "../Forms/Survey/Response/Response";
+import Error from "../Error/Error";
 import Result from "../Forms/Survey/Result/Result";
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
         <Route path="/forms/survey/end/:link" component={Ending} />
         <Route path="/forms/survey/response/:link" component={Response} />
         <Route path="/forms/survey/result/:link" component={Result} />
+        <Route path="/error/:type" component={Error} />
+        <Route component={Error} />
       </Switch>
     </>
   );
