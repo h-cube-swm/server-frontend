@@ -3,7 +3,12 @@ import "./ToggleSwitch.scss";
 import selectedDot from "../../assets/icons/selected-dot.svg";
 import unselectedDot from "../../assets/icons/unselected-dot.svg";
 
-export default function ToggleSwitch({ isRequired, setIsRequired, label }) {
+export default function ToggleSwitch({
+  isRequired,
+  setIsRequired,
+  selectedLabel,
+  unselectedLabel,
+}) {
   const onClick = () => {
     setIsRequired(!isRequired);
   };
@@ -22,9 +27,7 @@ export default function ToggleSwitch({ isRequired, setIsRequired, label }) {
           />
         </div>
       </div>
-      <p className={isRequired ? "selected-label" : "unselected-label"}>
-        {label}
-      </p>
+      <p className="label">{isRequired ? selectedLabel : unselectedLabel}</p>
     </div>
   );
 }

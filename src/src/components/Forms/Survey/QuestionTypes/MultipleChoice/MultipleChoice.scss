@@ -11,6 +11,7 @@
   .choice-box {
     display: flex;
     align-items: center;
+    padding-left: 0.4rem;
     .check-box {
       width: 1rem;
       margin: 0 0.6rem;
@@ -44,17 +45,15 @@
   padding: 0;
   border: 0;
   border-bottom: solid 1px rgba(0, 0, 0, 0);
-  color: rgba($color: #000000, $alpha: 0.4);
+  color: #485eff;
   background-color: rgba($color: #fff, $alpha: 0);
   cursor: pointer;
   img {
-    width: 1rem;
-    opacity: 0.4;
+    width: 2rem;
   }
   p {
-    margin: 0 1rem;
+    margin: 0 0.7rem;
     font-size: $fs-rg;
     font-weight: $fw-bold;
-    opacity: 0.4;
   }
 }
