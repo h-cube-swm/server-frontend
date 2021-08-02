@@ -1,79 +1,14 @@
 import React from "react";
-import { CardTypes, CardStates, CardStyle } from "../constants";
+import { CardStates, CardStyle } from "../constants";
 import useTimeout from "../../../../hooks/useTimeout";
+import { useQuestion } from "../../../../contexts/QuestionContext";
 
 /* Assets */
 import "../Card/Card.scss";
 import hanleImage from "../../../../assets/icons/handle.svg";
 import delBtn from "../../../../assets/icons/del-btn.svg";
 
-/* Components */
-import Default from "./Types/Default/Default";
-import ToggleSwitch from "./ToggleSwitch";
-import {
-  MultipleChoices,
-  SingleChoices,
-} from "./Types/MultipleChoice/MultipleChoice";
-import Preference from "./Types/Preference/Preference";
-import setNestedState from "../../../../utils/setNestedState";
-import TextField from "../../../TextField/TextField";
-import Hider from "../../../Hider/Hider";
-import { useQuestion } from "../../../../contexts/QuestionContext";
-import {
-  LongSentence,
-  ShortSentence,
-} from "./Types/ShortSentence/ShortSentence";
-
-function getInnerComponent(type) {
-  switch (type) {
-    case CardTypes.SINGLE_CHOICE:
-      return SingleChoices;
-    case CardTypes.MULTIPLE_CHOICE:
-      return MultipleChoices;
-    case CardTypes.PREFERENCE:
-      return Preference;
-    case CardTypes.SHORT_SENTENCE:
-      return ShortSentence;
-    case CardTypes.LONG_SENTENCE:
-      return LongSentence;
-    default:
-      return Default;
-  }
-}
-
-function CommonComponent() {
-  const { state, question, setQuestion } = useQuestion();
-
-  const InnerComponent = getInnerComponent(question.type);
-  const isEditting = state !== CardStates.EDITTING;
-
-  return (
-    <>
-      <div className="card-header">
-        <TextField
-          placeholder="더 폼 나는 질문"
-          text={question.title}
-          setText={setNestedState(setQuestion, ["title"])}
-          disabled={isEditting}
-          size="title"
-          multiline
-        />
-        <Hider hide={isEditting}>
-          <div className={`basic-element`}>
-            <ToggleSwitch
-              isRequired={question.isRequired}
-              setIsRequired={setNestedState(setQuestion, ["isRequired"])}
-              label="필수응답"
-            />
-          </div>
-        </Hider>
-      </div>
-      <div className="inner-box">
-        <InnerComponent />
-      </div>
-    </>
-  );
-}
+import QuestionCommon from "./QuestionCommon";
 
 export default function Card({
   // Logic-associated parameters
@@ -130,7 +65,7 @@ export default function Card({
       style={{
         height: state === CardStates.RESPONSE ? null : CardStyle.HEIGHT,
       }}>
-      <CommonComponent></CommonComponent>
+      <QuestionCommon></QuestionCommon>
       <button
         className={"delete" + (onDelete ? "" : " disabled")}
         onClick={onDelete}>
