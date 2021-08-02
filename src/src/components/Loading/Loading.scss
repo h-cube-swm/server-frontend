@@ -1,0 +1,42 @@
+@import "/src/scss/style.scss";
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .logo {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    width: 8rem;
+  }
+
+  h1 {
+    position: absolute;
+    left: 10rem;
+    font-size: $fs-xl;
+  }
+
+  .chaos {
+    z-index: -1;
+  }
+
+  @include mobile {
+    h1 {
+      position: absolute;
+      left: 3rem;
+      bottom: 5rem;
+      font-size: $fs-lg;
+      z-index: 2;
+    }
+    img {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      width: 5rem;
+    }
+  }
+}

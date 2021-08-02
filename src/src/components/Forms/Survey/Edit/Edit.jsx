@@ -24,7 +24,7 @@ import setNestedState from "../../../../utils/setNestedState";
 import Hider from "../../../Hider/Hider";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import Error from "../../../Error/Error";
+import Loading from "../../../Loading/Loading";
 
 const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
@@ -81,7 +81,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
     }
   );
 
-  if (!survey) return <Error type="loading"></Error>;
+  if (!survey) return <Loading></Loading>;
 
   const { selectedIndex } = survey;
   const setQuesionType = setNestedState(setSurvey, [

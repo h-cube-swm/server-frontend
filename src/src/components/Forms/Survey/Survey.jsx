@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { getApi } from "../../../utils/parser";
-import Error from "../../Error/Error";
+import Loading from "../../Loading/Loading";
 
 const Survey = () => {
   const [redirect, setRedirect] = useState(null);
@@ -14,6 +14,8 @@ const Survey = () => {
         const url = "/forms/survey/edit/" + response.link;
         setRedirect(<Redirect to={url} />);
       } catch (e) {
+        if (e.response.status === 400)
+          setRedirect(<Redirect to="/error/published" />);
         console.log(e);
       }
     };
@@ -22,7 +24,7 @@ const Survey = () => {
 
   return (
     <div>
-      <Error type="loading" />
+      <Loading />
       {redirect}
     </div>
   );

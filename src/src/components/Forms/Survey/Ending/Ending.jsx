@@ -4,11 +4,10 @@ import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 
 import "./Ending.scss";
 import logo from "../../../../assets/images/logo.png";
-import Error from "../../../Error/Error";
 
 const Ending = ({ ending }) => {
   if (!ending) {
-    return <Error type="loading"></Error>;
+    return <div>Loaidng</div>;
   }
 
   const { title, description, surveyLink, resultLink } = ending;
