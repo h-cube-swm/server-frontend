@@ -45,7 +45,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
     setSelectedIndex(index);
   };
 
-  const removeQuestion = (index) => {
+  const getRemoveQuestion = (index) => () => {
     if (survey.questions.length <= 1) return;
     setSurvey((survey) => {
       const questions = [...survey.questions];
@@ -68,117 +68,112 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 
   const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging(
     (delta) => {
+      // Calculate new index
       let newIndex = selectedIndex + delta;
+
+      // Check range
       if (newIndex < 0) return;
       if (newIndex >= survey.questions.length) return;
       if (newIndex === selectedIndex) return;
 
+      // Swap two question
       const questions = [...survey.questions];
       const tmp = questions[selectedIndex];
       questions[selectedIndex] = questions[newIndex];
       questions[newIndex] = tmp;
 
+      // Update index and question
       setSelectedIndex(newIndex);
       setSurvey({ ...survey, questions });
     }
   );
 
-  let contents = null;
-  if (survey) {
-    const selectedSurveyType = survey.questions[selectedIndex]?.type;
-    const showAddButton = !isDragging && !isMoving;
-    const { questions } = survey;
+  if (!survey) return <Error type="loading"></Error>;
 
-    contents = (
-      <>
-        <div className="positioning-box">
-          <div className="controller-box">
-            <Controller type={selectedSurveyType} setType={setQuesionType} />
-            <Link
-              onClick={putSurvey}
-              className="link-btn"
-              to={"/forms/survey/end/" + surveyId}>
-              완료
-            </Link>
-            <button onClick={putSurvey}>저장</button>
-          </div>
-          <div className="sidebar-box">
-            <Sidebar
-              questions={questions}
-              currentIndex={selectedIndex}
-              onSelect={setSelectedIndex}
-            />
-          </div>
-        </div>
-        <Prologue survey={survey} setSurvey={setSurvey} />
-
-        {/* Ghost that appears when card moves */}
-        <div ref={item}>
-          <QuestionProvider
-            state={CardStates.GHOST}
-            question={questions[selectedIndex]}>
-            <Card slowAppear={false}>
-              <QuestionCommon />
-            </Card>
-          </QuestionProvider>
-        </div>
-
-        <div className="question-box" onWheel={onWheel}>
-          {orderedMap(questions, (question, index) => {
-            const isSelected = index === selectedIndex;
-
-            const setQuestion = setNestedState(setSurvey, ["questions", index]);
-            const onDelete =
-              questions.length > 1 ? () => removeQuestion(index) : null;
-            const yPos = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
-            let slowAppear = questions.length > 1;
-            let state = null;
-            if (isSelected) {
-              state = CardStates.EDITTING;
-            } else {
-              state = CardStates.PREVIEW;
-            }
-
-            return (
-              <Positioner key={question.id} y={yPos}>
-                <Hider hide={isDragging && isSelected} animation={false}>
-                  <QuestionProvider
-                    state={state}
-                    question={question}
-                    setQuestion={setQuestion}>
-                    <Card
-                      onDelete={onDelete}
-                      onGrab={onGrab}
-                      slowAppear={slowAppear}>
-                      <QuestionCommon />
-                    </Card>
-                  </QuestionProvider>
-                </Hider>
-              </Positioner>
-            );
-          })}
-
-          <QuestionAddButton
-            onClick={getInsertQuestion(selectedIndex)}
-            y={-CardStyle.FRAME_HEIHGT / 2}
-            show={showAddButton}
-          />
-
-          <QuestionAddButton
-            onClick={getInsertQuestion(selectedIndex + 1)}
-            y={+CardStyle.FRAME_HEIHGT / 2}
-            show={showAddButton}
-          />
-        </div>
-      </>
-    );
-  } else {
-    <Error type="loading"></Error>;
-  }
+  const selectedSurveyType = survey.questions[selectedIndex].type;
+  const showAddButton = !isDragging && !isMoving;
+  const { questions } = survey;
 
   return (
     <div className="edit" {...backgroundCallbacks}>
-      {contents}
+      <div className="positioning-box">
+        <div className="controller-box">
+          <Controller type={selectedSurveyType} setType={setQuesionType} />
+          <Link
+            onClick={putSurvey}
+            className="link-btn"
+            to={"/forms/survey/end/" + surveyId}>
+            완료
+          </Link>
+          <button onClick={putSurvey}>저장</button>
+        </div>
+        <div className="sidebar-box">
+          <Sidebar
+            questions={questions}
+            currentIndex={selectedIndex}
+            onSelect={setSelectedIndex}
+          />
+        </div>
+      </div>
+      <Prologue survey={survey} setSurvey={setSurvey} />
+
+      {/* Ghost that appears when card moves */}
+      <div ref={item}>
+        <QuestionProvider
+          state={CardStates.GHOST}
+          question={questions[selectedIndex]}>
+          <Card slowAppear={false}>
+            <QuestionCommon />
+          </Card>
+        </QuestionProvider>
+      </div>
+
+      <div className="question-box" onWheel={onWheel}>
+        {orderedMap(questions, (question, index) => {
+          const isSelected = index === selectedIndex;
+          const y = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
+          const slowAppear = questions.length > 1;
+          const setQuestion = setNestedState(setSurvey, ["questions", index]);
+          const onDelete = questions.length > 1 && getRemoveQuestion(index);
+
+          let state = null;
+          if (isSelected) {
+            state = CardStates.EDITTING;
+          } else {
+            state = CardStates.PREVIEW;
+          }
+
+          return (
+            <Positioner key={question.id} y={y}>
+              <Hider hide={isDragging && isSelected} animation={false}>
+                <QuestionProvider
+                  state={state}
+                  question={question}
+                  setQuestion={setQuestion}>
+                  <Card
+                    onDelete={onDelete}
+                    onGrab={onGrab}
+                    slowAppear={slowAppear}>
+                    <QuestionCommon />
+                  </Card>
+                </QuestionProvider>
+              </Hider>
+            </Positioner>
+          );
+        })}
+
+        <QuestionAddButton
+          onClick={getInsertQuestion(selectedIndex)}
+          y={-CardStyle.FRAME_HEIHGT / 2}
+          show={showAddButton}
+        />
+
+        <QuestionAddButton
+          onClick={getInsertQuestion(selectedIndex + 1)}
+          y={+CardStyle.FRAME_HEIHGT / 2}
+          show={showAddButton}
+        />
+      </div>
     </div>
   );
 };

@@ -47,8 +47,8 @@ export default function QuestionCommon() {
   const isEditting = state !== CardStates.EDITTING;
 
   return (
-    <>
-      <div className="question-common">
+    <div className="question-common">
+      <div className="question-common-box">
         <TextField
           placeholder="더 폼 나는 질문"
           text={question.title}
@@ -70,6 +70,6 @@ export default function QuestionCommon() {
       <div className="question-detail-box">
         <QuestionDetail />
       </div>
-    </>
+    </div>
   );
 }
