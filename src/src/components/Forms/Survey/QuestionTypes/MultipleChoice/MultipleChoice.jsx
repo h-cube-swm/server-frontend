@@ -52,7 +52,6 @@ function Choices({ multipleSelect }) {
   });
   const responseInitialized = useDefault(setResponse, {});
   if (!questionInitialized || !responseInitialized) return null;
-
   const { choices } = question;
   const editable = state === CardStates.EDITTING;
 
@@ -75,7 +74,6 @@ function Choices({ multipleSelect }) {
     if (multipleSelect) {
       setNestedState(setResponse, [i])(checked);
     } else {
-      console.log("HERE", i, checked);
       setResponse({ [i]: checked });
     }
   };

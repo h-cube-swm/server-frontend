@@ -1,7 +1,7 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import "./CheckField.scss";
 
-function CheckField({ checked, setChecked, disabled, radio, ...props }, ref) {
+function CheckField({ checked, setChecked, disabled, radio }) {
   const classes = ["checkmark"];
 
   if (radio) classes.push("radio");
@@ -11,7 +11,6 @@ function CheckField({ checked, setChecked, disabled, radio, ...props }, ref) {
   return (
     <div className="check-field">
       <span
-        ref={ref}
         className={classes.join(" ")}
         onClick={() => {
           if (setChecked && !disabled) setChecked(!checked);
@@ -20,4 +19,4 @@ function CheckField({ checked, setChecked, disabled, radio, ...props }, ref) {
   );
 }
 
-export default forwardRef(CheckField);
+export default CheckField;

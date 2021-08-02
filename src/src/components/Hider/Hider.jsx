@@ -1,15 +1,14 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import "./Hider.scss";
 
-function Hider({ hide, children, animation = true }, ref) {
-	return (
-		<div
-			className={`hider ${hide ? "hide" : ""}`}
-			style={{ transitionDuration: animation ? null : "0s" }}
-			ref={ref}>
-			{children}
-		</div>
-	);
+function Hider({ hide, children, animation = true }) {
+  return (
+    <div
+      className={`hider ${hide ? "hide" : ""}`}
+      style={{ transitionDuration: animation ? "500ms" : "0s" }}>
+      {children}
+    </div>
+  );
 }
 
-export default forwardRef(Hider);
+export default Hider;

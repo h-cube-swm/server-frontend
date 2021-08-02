@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useDefault from "../../../../../hooks/useDefault";
 import { CardStates } from "../../constants";
 import "./ShortSentence.scss";

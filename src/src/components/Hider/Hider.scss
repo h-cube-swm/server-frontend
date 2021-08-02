@@ -1,10 +1,9 @@
 .hider {
-	display: inline;
-	opacity: 1;
-	transition-duration: 500ms;
+  display: inline;
+  opacity: 1;
 
-	&.hide {
-		opacity: 0;
-		z-index: -1;
-	}
+  &.hide {
+    opacity: 0;
+    z-index: -1;
+  }
 }
