@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 
 export default function useTimeout(timeout) {
 
-  const [isInit, setIsInit] = useState(true);
+  const [isFinished, setIsInit] = useState(timeout === 0);
 
   useEffect(() => {
     const handle = setTimeout(() => {
-      setIsInit(false);
+      setIsInit(true);
     }, timeout);
     return () => clearTimeout(handle);
   }, [timeout]);
 
-  return isInit;
+  return isFinished;
 }

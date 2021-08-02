@@ -8,24 +8,16 @@ import TextField from "../../../TextField/TextField";
 import { CardStates } from "../constants";
 import "./Response.scss";
 import logo from "../../../../assets/images/logo.png";
-import { postApi } from "../../../../utils/parser";
+import { API } from "../../../../utils/parser";
+import QuestionCommon from "../QuestionCommon/QuestionCommon";
 
 function Response({ survey, submit, surveyId }) {
   const [response, setResponse] = useState({});
-  const [data, setData] = useState({});
-  const [error, setError] = useState(false);
 
-  const onClick = () => {
+  const onClick = async () => {
     const body = { answer: response };
-    const result = postApi(`/surveys/${surveyId}/responses`, body);
-    result ? setData(result) : setError(true);
-    if (!error) {
-      setError(false);
-      console.log(data);
-      return;
-    }
-    setError(false);
-    console.log("error 발생");
+    const [result, err] = await API.postResponse(surveyId, body);
+    console.log(result, err);
   };
 
   let contents = null;
@@ -42,7 +34,9 @@ function Response({ survey, submit, surveyId }) {
               key={id}
               response={response[id]}
               setResponse={setNestedState(setResponse, [id])}>
-              <Card slowAppear={false} />
+              <Card slowAppear={false}>
+                <QuestionCommon></QuestionCommon>
+              </Card>
             </QuestionProvider>
           );
         })}

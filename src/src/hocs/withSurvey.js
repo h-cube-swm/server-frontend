@@ -1,51 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import getQuestion from "../components/Forms/Survey/getQuestion";
-import { getApi, putApi } from "../utils/parser";
+import { Redirect } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
+import { API } from "../utils/parser";
 
 const withSurvey = Component => props => {
 
   const surveyId = props.match.params.link;
-  const [survey, setSurvey] = useState(null);
 
-  useEffect(() => {
+  const [result, err] = API.useSurvey(surveyId);
+  if (err) return <Redirect to="/error/unexpected"></Redirect>;
+  if (!result) return <Loading></Loading>;
 
-    /**
-     * Fetch survey data from server
-     */
-    const getSurvey = async () => {
+  const { title, description, contents } = result;          //A
+  const survey = { title, description, ...contents };       //B
+  const newProps = { ...props, surveyId, survey };
 
-      const { result } = await getApi(`/surveys/${surveyId}`);  //A
-      const { title, description, contents } = result;          //B
-      const survey = { title, description, ...contents };       //C
-
-      if (!survey.counter) survey.counter = 0;
-      if (!survey.questions) survey.questions = [];
-      if (!survey.selectedIndex) survey.selectedIndex = 0;
-      if (survey.questions.length === 0) {
-        const [counter, question] = getQuestion(survey.counter);
-        survey.counter = counter;
-        survey.questions.push(question);
-      }
-
-      setSurvey(survey);
-    };
-    getSurvey();
-  }, [surveyId]);
-
-  /**
-   * Send survey data to server
-   */
-  async function putSurvey() {
-
-    const { title, description, ...contents } = survey;             //C
-    const body = { title, description, contents, 'view': 'slide' }; //B
-    return await putApi(`/surveys/${surveyId}`, body);              //A
+  async function updateSurvey(survey) {
+    const { title, description, ...contents } = survey;           //B
+    const body = { title, description, contents, view: "slide" }; //A
+    const [result, error] = await API.putSurvey(surveyId, body);
   }
 
-  const newProps = { ...props, surveyId, survey, setSurvey, putSurvey };
-
   return (
-    <Component {...newProps} />
+    <Component {...newProps} updateSurvey={updateSurvey} />
   );
 };
 

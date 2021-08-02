@@ -1,5 +1,5 @@
 /* React elements*/
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 /* Components */
@@ -25,8 +25,25 @@ import Hider from "../../../Hider/Hider";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
+import { API } from "../../../../utils/parser";
 
-const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
+const Edit = ({ surveyId, survey: init, updateSurvey }) => {
+  const initSurvey = useMemo(() => {
+    if (!init.counter) init.counter = 0;
+    if (!init.questions) init.questions = [];
+    if (!init.selectedIndex) init.selectedIndex = 0;
+    if (init.questions.length === 0) {
+      const [counter, question] = getQuestion(init.counter);
+      init.counter = counter;
+      init.questions.push(question);
+    }
+    return init;
+  }, [init]);
+
+  console.log("S:", initSurvey);
+
+  const [survey, setSurvey] = useState(initSurvey);
+
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
 
   const getInsertQuestion = (index) => () => {
@@ -81,6 +98,10 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
       setSurvey({ ...survey, selectedIndex: newIndex, questions });
     }
   );
+
+  const putSurvey = async () => {
+    updateSurvey(survey);
+  };
 
   if (!survey) return <Loading></Loading>;
 
