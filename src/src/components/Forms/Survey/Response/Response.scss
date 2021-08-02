@@ -1,7 +1,43 @@
-.response-page {
-  display: flex;
-  justify-content: center;
+@import "/src/scss/style.scss";
+
+.response {
   width: 100%;
   height: 100%;
   overflow: scroll;
+
+  .contents-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+  }
+
+  .button-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+  }
+
+  .survey-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    box-shadow: $shadow-default;
+    z-index: 1;
+
+    .logo {
+      margin-left: 3rem;
+      margin-right: 3rem;
+      width: 3rem;
+      img {
+        width: 100%;
+      }
+    }
+  }
 }
