@@ -1,11 +1,14 @@
 import React from "react";
 import { CardStates, CardTypes } from "../constants";
-import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
 import setNestedState from "../../../../utils/setNestedState";
+import { useQuestion } from "../../../../contexts/QuestionContext";
+
+// Components
+import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
 import TextField from "../../../TextField/TextField";
 import Hider from "../../../Hider/Hider";
-import { useQuestion } from "../../../../contexts/QuestionContext";
-/* Components */
+
+// Question types
 import Default from "../QuestionTypes/Default/Default";
 import {
   MultipleChoices,
@@ -17,7 +20,10 @@ import {
   ShortSentence,
 } from "../QuestionTypes/ShortSentence/ShortSentence";
 
-function getInnerComponent(type) {
+// Scss
+import "./QuestionCommon.scss";
+
+function getQuestionDetail(type) {
   switch (type) {
     case CardTypes.SINGLE_CHOICE:
       return SingleChoices;
@@ -37,12 +43,12 @@ function getInnerComponent(type) {
 export default function QuestionCommon() {
   const { state, question, setQuestion } = useQuestion();
 
-  const InnerComponent = getInnerComponent(question.type);
+  const QuestionDetail = getQuestionDetail(question.type);
   const isEditting = state !== CardStates.EDITTING;
 
   return (
     <>
-      <div className="card-header">
+      <div className="question-common">
         <TextField
           placeholder="더 폼 나는 질문"
           text={question.title}
@@ -52,7 +58,7 @@ export default function QuestionCommon() {
           multiline
         />
         <Hider hide={isEditting}>
-          <div className="basic-element">
+          <div className="required-toggle-box">
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
@@ -61,8 +67,8 @@ export default function QuestionCommon() {
           </div>
         </Hider>
       </div>
-      <div className="inner-box">
-        <InnerComponent />
+      <div className="question-detail-box">
+        <QuestionDetail />
       </div>
     </>
   );

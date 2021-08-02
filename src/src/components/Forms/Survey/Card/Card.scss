@@ -11,29 +11,6 @@
   flex-direction: column;
   transition-duration: 500ms;
 
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-
-    .basic-element {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-
-  .inner-box {
-    @include text-center;
-    width: 100%;
-    flex-grow: 1;
-    overflow: scroll;
-  }
-
-  .preference {
-    padding: 0rem;
-  }
-
   .handle {
     z-index: 1;
     position: absolute;

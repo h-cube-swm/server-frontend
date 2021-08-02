@@ -23,6 +23,8 @@ import getQuestion from "../getQuestion";
 import setNestedState from "../../../../utils/setNestedState";
 import Hider from "../../../Hider/Hider";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
+import QuestionCommon from "../QuestionCommon/QuestionCommon";
+import Error from "../../../Error/Error";
 
 const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -33,7 +35,7 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
     "type",
   ]);
 
-  const insertQuestion = (index) => {
+  const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
       const [counter, question] = getQuestion(survey.counter);
       const questions = [...survey.questions];
@@ -89,14 +91,6 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
 
     contents = (
       <>
-        <div ref={item}>
-          <QuestionProvider
-            state={CardStates.GHOST}
-            question={questions[selectedIndex]}>
-            <Card slowAppear={false} />
-          </QuestionProvider>
-        </div>
-
         <div className="positioning-box">
           <div className="controller-box">
             <Controller type={selectedSurveyType} setType={setQuesionType} />
@@ -117,6 +111,17 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
           </div>
         </div>
         <Prologue survey={survey} setSurvey={setSurvey} />
+
+        {/* Ghost that appears when card moves */}
+        <div ref={item}>
+          <QuestionProvider
+            state={CardStates.GHOST}
+            question={questions[selectedIndex]}>
+            <Card slowAppear={false}>
+              <QuestionCommon />
+            </Card>
+          </QuestionProvider>
+        </div>
 
         <div className="question-box" onWheel={onWheel}>
           {orderedMap(questions, (question, index) => {
@@ -144,8 +149,9 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
                     <Card
                       onDelete={onDelete}
                       onGrab={onGrab}
-                      slowAppear={slowAppear}
-                    />
+                      slowAppear={slowAppear}>
+                      <QuestionCommon />
+                    </Card>
                   </QuestionProvider>
                 </Hider>
               </Positioner>
@@ -153,13 +159,13 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
           })}
 
           <QuestionAddButton
-            onClick={() => insertQuestion(selectedIndex)}
+            onClick={getInsertQuestion(selectedIndex)}
             y={-CardStyle.FRAME_HEIHGT / 2}
             show={showAddButton}
           />
 
           <QuestionAddButton
-            onClick={() => insertQuestion(selectedIndex + 1)}
+            onClick={getInsertQuestion(selectedIndex + 1)}
             y={+CardStyle.FRAME_HEIHGT / 2}
             show={showAddButton}
           />
@@ -167,8 +173,9 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
       </>
     );
   } else {
-    <div className="loading-screen">Now Loading...</div>;
+    <Error type="loading"></Error>;
   }
+
   return (
     <div className="edit" {...backgroundCallbacks}>
       {contents}

@@ -5,10 +5,8 @@ import { useQuestion } from "../../../../contexts/QuestionContext";
 
 /* Assets */
 import "../Card/Card.scss";
-import hanleImage from "../../../../assets/icons/handle.svg";
-import delBtn from "../../../../assets/icons/del-btn.svg";
-
-import QuestionCommon from "../QuestionCommon/QuestionCommon";
+import imgHandle from "../../../../assets/icons/handle.svg";
+import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
 
 export default function Card({
   // Logic-associated parameters
@@ -17,11 +15,15 @@ export default function Card({
   // UI-associated parameters
   onGrab,
   slowAppear,
+
+  // Children
+  children,
 }) {
   const isInit = useTimeout(slowAppear ? 400 : 0);
   const { state, question } = useQuestion();
 
   if (!question) return null;
+
   let classes = ["survey-card"];
   if (isInit) classes.push("hidden");
 
@@ -52,10 +54,15 @@ export default function Card({
       break;
   }
 
-  const _onGrab = (event) => {
+  const handleOnGrab = (event) => {
     event.preventDefault();
     if (state !== CardStates.EDITTING) return;
-    onGrab();
+    if (onGrab) onGrab();
+  };
+
+  const handleOnDelete = (event) => {
+    event.preventDefault();
+    if (onDelete) onDelete();
   };
 
   const className = classes.join(" ");
@@ -65,14 +72,14 @@ export default function Card({
       style={{
         height: state === CardStates.RESPONSE ? null : CardStyle.HEIGHT,
       }}>
-      <QuestionCommon></QuestionCommon>
+      {children}
       <button
-        className={"delete" + (onDelete ? "" : " disabled")}
-        onClick={onDelete}>
-        <img src={delBtn} alt="Delete button"></img>
+        className={"delete " + (onDelete ? "" : "hidden")}
+        onClick={handleOnDelete}>
+        <img src={imgDeleteButton} alt="Delete button"></img>
       </button>
-      <div className="handle" onMouseDown={_onGrab}>
-        <img src={hanleImage} alt="Handle"></img>
+      <div className="handle" onMouseDown={handleOnGrab}>
+        <img src={imgHandle} alt="Handle"></img>
       </div>
     </div>
   );

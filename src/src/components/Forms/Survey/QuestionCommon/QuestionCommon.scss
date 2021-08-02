@@ -1,0 +1,20 @@
+@import "/src/scss/style.scss";
+
+.question-common {
+  display: flex;
+  justify-content: space-between;
+
+  .required-toggle-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .question-detail-box {
+    @include text-center;
+    width: 100%;
+    flex-grow: 1;
+    overflow: scroll;
+  }
+}
