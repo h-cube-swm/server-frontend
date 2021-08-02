@@ -1,0 +1,39 @@
+@import "/src/scss/style.scss";
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  .logo {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    width: 8rem;
+  }
+
+  .loading {
+    h1 {
+      position: absolute;
+      left: 10rem;
+      font-size: $fs-xl;
+    }
+  }
+  @include mobile {
+    .loading {
+      h1 {
+        position: absolute;
+        left: 3rem;
+        bottom: 5rem;
+        font-size: $fs-lg;
+      }
+    }
+    img {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      width: 5rem;
+    }
+  }
+}
