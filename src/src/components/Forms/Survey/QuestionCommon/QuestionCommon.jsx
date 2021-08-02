@@ -57,15 +57,16 @@ export default function QuestionCommon() {
           size="title"
           multiline
         />
-        <Hider hide={isEditting}>
-          <div className="required-toggle-box">
+        <div className="required-toggle-box">
+          <Hider hide={isEditting}>
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
-              label="필수응답"
+              selectedLabel="필수응답"
+              unselectedLabel="선택응답"
             />
-          </div>
-        </Hider>
+          </Hider>
+        </div>
       </div>
       <div className="question-detail-box">
         <QuestionDetail />
