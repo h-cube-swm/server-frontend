@@ -1,5 +1,5 @@
 /* React elements*/
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 /* Components */
@@ -43,12 +43,13 @@ const Edit = ({ surveyId, survey, setSurvey, putSurvey }) => {
     if (survey.questions.length <= 1) return;
     setSurvey((survey) => {
       const questions = [...survey.questions];
+      let selectedIndex = survey.selectedIndex;
       questions.splice(index, 1);
-      return { ...survey, questions };
+      if (index === survey.questions.length - 1) {
+        selectedIndex = index - 1;
+      }
+      return { ...survey, selectedIndex, questions };
     });
-    if (index === survey.questions.length - 1) {
-      setSelectedIndex(index - 1);
-    }
   };
 
   const [onWheel, isMoving] = useScrollPaging((delta) => {
