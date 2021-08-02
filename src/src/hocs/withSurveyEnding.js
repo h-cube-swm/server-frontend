@@ -11,7 +11,6 @@ const withSurveyEnding = Component => props => {
     const getEndData = async () => {
       try {
         const [json, err] = await API.endSurvey(surveyId);
-        console.log(err);
         const { result } = json;
         const ending = {
           description: result['description'],
@@ -22,7 +21,6 @@ const withSurveyEnding = Component => props => {
         };
         setEnding(ending);
       } catch (e) {
-        console.log(e);
       }
     };
     getEndData();

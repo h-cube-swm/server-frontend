@@ -39,8 +39,6 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
     return init;
   }, [init]);
 
-  console.log("S:", initSurvey);
-
   const [survey, setSurvey] = useState(initSurvey);
 
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);

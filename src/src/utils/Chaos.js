@@ -113,19 +113,15 @@ export default function Chaos() {
       a[2] * b[0] - a[0] * b[2],
       a[0] * b[1] - a[1] * b[0],
     ];
-    // Elemental wise product
-    const ewp = (a, b) => a.map((x, i) => x * b[i]);
     // Square of length
     const len2 = (x) => dot(x, x);
     // Legth of vector
     const len = (x) => Math.sqrt(len2(x));
     // Unit vector of given direction
     const unt = (x) => div(x, len(x));
-    // Apply function to each element of given vector
-    const fnc = (x, f) => x.map((x, i) => f(x, i));
 
     function basis3(z) {
-      var z = unt(z);
+      z = unt(z);
       var x = unt(crs(z, [0, 0, 1]));
       var y = unt(crs(x, z));
       return {
@@ -141,7 +137,7 @@ export default function Chaos() {
         // Convert to pos-center space
         point = sub(point, pos);
         // When point is behind pos
-        if (dot(point, dir) < 0) return;
+        if (dot(point, dir) < 0) return null;
 
         let point_ = mul(point, len2(dir) / dot(dir, point));
         var x = dot(point_, base.x);

@@ -16,8 +16,7 @@ function Response({ survey, submit, surveyId }) {
 
   const onClick = async () => {
     const body = { answer: response };
-    const [result, err] = await API.postResponse(surveyId, body);
-    console.log(result, err);
+    await API.postResponse(surveyId, body);
   };
 
   let contents = null;

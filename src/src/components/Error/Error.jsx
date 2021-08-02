@@ -30,6 +30,7 @@ export default function Error({ match }) {
           <p>연락 부탁!!</p>
         </>
       );
+      break;
 
     default:
       contents = <h1>존재하지 않는 경로입니다.</h1>;

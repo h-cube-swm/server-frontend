@@ -78,7 +78,7 @@ const useDragPaging = (onPaging, threshold = 64) => {
     useEffect(() => {
         if (ref.current)
             ref.current.style.position = 'absolute';
-    }, [ref.current]);
+    }, []);
 
     return [onGrab, backgroundCallbacks, ref, isDragging];
 };

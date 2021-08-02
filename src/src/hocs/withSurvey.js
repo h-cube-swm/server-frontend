@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router-dom";
 import Loading from "../components/Loading/Loading";
 import { API } from "../utils/apis";
@@ -18,7 +17,7 @@ const withSurvey = Component => props => {
   async function updateSurvey(survey) {
     const { title, description, ...contents } = survey;           //B
     const body = { title, description, contents, view: "slide" }; //A
-    const [result, error] = await API.putSurvey(surveyId, body);
+    return await API.putSurvey(surveyId, body);
   }
 
   return (
