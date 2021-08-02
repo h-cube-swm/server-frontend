@@ -4,13 +4,13 @@ import Positioner from "../../../../Positioner/Positioner";
 import "./QuestionAddButton.scss";
 
 export function QuestionAddButton({ show, y, onClick }) {
-	return (
-		<Positioner y={y}>
-			<div className="question-add-box" style={{ opacity: show ? null : 0 }}>
-				<button onClick={onClick}>
-					<img src={addBtn} alt="add button" />
-				</button>
-			</div>
-		</Positioner>
-	);
+  return (
+    <Positioner y={y}>
+      <div className="question-add-box" style={{ opacity: show ? null : 0 }}>
+        <button onClick={onClick}>
+          <img src={addBtn} alt="add button" />
+        </button>
+      </div>
+    </Positioner>
+  );
 }

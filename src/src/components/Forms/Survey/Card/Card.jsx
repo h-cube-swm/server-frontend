@@ -1,6 +1,5 @@
 import React from "react";
 import { CardStates, CardStyle } from "../constants";
-import useTimeout from "../../../../hooks/useTimeout";
 import { useQuestion } from "../../../../contexts/QuestionContext";
 
 /* Assets */

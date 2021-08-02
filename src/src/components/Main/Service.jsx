@@ -3,7 +3,6 @@ import "./Service.scss";
 import character3 from "../../assets/images/main-service-1.svg";
 import character4 from "../../assets/images/main-service-2.svg";
 import character5 from "../../assets/images/main-service-3.svg";
-import partition from "../../assets/images/partition.png";
 
 import useScrollFadeIn from "../../hooks/useScrollFadeIn";
 

@@ -1,11 +1,15 @@
 import React from "react";
-import useDefault from "../../../../../hooks/useDefault";
-import { CardStates } from "../../constants";
 import "./ShortSentence.scss";
-import TextField from "../../../../TextField/TextField";
+import { CardStates } from "../../constants";
 import setNestedState from "../../../../../utils/setNestedState";
-import IntegerField from "../../../../IntegerField/IntegerField";
+
+// Hooks
+import useDefault from "../../../../../hooks/useDefault";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
+
+// Components
+import TextField from "../../../../TextField/TextField";
+import IntegerField from "../../../../IntegerField/IntegerField";
 
 function Sentence({ isLong }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
