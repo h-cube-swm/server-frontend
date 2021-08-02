@@ -1,36 +1,44 @@
 @import "/src/scss/style.scss";
 
 .error {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+
   .logo {
     position: absolute;
     top: 3rem;
     left: 3rem;
     width: 8rem;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 
-  .loading {
-    h1 {
-      position: absolute;
-      left: 10rem;
-      font-size: $fs-xl;
-    }
+  h1 {
+    position: absolute;
+    left: 10rem;
+    font-size: $fs-xl;
   }
+
+  .chaos {
+    z-index: -1;
+  }
+
   @include mobile {
-    .loading {
-      h1 {
-        position: absolute;
-        left: 3rem;
-        bottom: 5rem;
-        font-size: $fs-lg;
-      }
+    h1 {
+      left: 3rem;
+      bottom: 5rem;
+      font-size: $fs-lg;
+      z-index: 2;
     }
-    img {
-      position: absolute;
+
+    .logo {
       top: 2rem;
       left: 2rem;
       width: 5rem;
