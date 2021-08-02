@@ -1,22 +1,21 @@
 import React from "react";
-import { CardStates } from "../constants";
-import { CardTypes } from "../constants";
-import ToggleSwitch from "./ToggleSwitch";
-import setNestedState from "../../../../utils/setNestedState";
-import TextField from "../../../TextField/TextField";
-import Hider from "../../../Hider/Hider";
-import { useQuestion } from "../../../../contexts/QuestionContext";
+import { CardStates, CardTypes } from "../../constants";
+import ToggleSwitch from "../ToggleSwitch";
+import setNestedState from "../../../../../utils/setNestedState";
+import TextField from "../../../../TextField/TextField";
+import Hider from "../../../../Hider/Hider";
+import { useQuestion } from "../../../../../contexts/QuestionContext";
 /* Components */
-import Default from "./QuestionTypes/Default/Default";
+import Default from "../QuestionTypes/Default/Default";
 import {
   MultipleChoices,
   SingleChoices,
-} from "./QuestionTypes/MultipleChoice/MultipleChoice";
-import Preference from "./QuestionTypes/Preference/Preference";
+} from "../QuestionTypes/MultipleChoice/MultipleChoice";
+import Preference from "../QuestionTypes/Preference/Preference";
 import {
   LongSentence,
   ShortSentence,
-} from "./QuestionTypes/ShortSentence/ShortSentence";
+} from "../QuestionTypes/ShortSentence/ShortSentence";
 
 function getInnerComponent(type) {
   switch (type) {
@@ -53,7 +52,7 @@ export default function QuestionCommon() {
           multiline
         />
         <Hider hide={isEditting}>
-          <div className={`basic-element`}>
+          <div className="basic-element">
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
