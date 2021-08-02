@@ -20,6 +20,7 @@ const withSurvey = Component => props => {
 
       if (!survey.counter) survey.counter = 0;
       if (!survey.questions) survey.questions = [];
+      if (!survey.selectedIndex) survey.selectedIndex = 0;
       if (survey.questions.length === 0) {
         const [counter, question] = getQuestion(survey.counter);
         survey.counter = counter;
