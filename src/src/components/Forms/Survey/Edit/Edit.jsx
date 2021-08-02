@@ -25,6 +25,7 @@ import Hider from "../../../Hider/Hider";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
+import useThrottle from "../../../../hooks/useThrottle";
 
 const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   const initSurvey = useMemo(() => {
@@ -75,6 +76,10 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
     });
   });
 
+  const putSurvey = async () => {
+    updateSurvey(survey);
+  };
+
   const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging(
     (delta) => {
       // Calculate new index
@@ -96,9 +101,8 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
     }
   );
 
-  const putSurvey = async () => {
-    updateSurvey(survey);
-  };
+  const onEvent = useThrottle(putSurvey);
+  onEvent();
 
   if (!survey) return <Loading></Loading>;
 
@@ -124,7 +128,6 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
             to={"/forms/survey/end/" + surveyId}>
             완료
           </Link>
-          <button onClick={putSurvey}>저장</button>
         </div>
         <div className="sidebar-box">
           <Sidebar

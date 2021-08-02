@@ -10,7 +10,7 @@ const withSurveyEnding = Component => props => {
   useEffect(() => {
     const getEndData = async () => {
       try {
-        const [json, err] = await API.endSurvey(surveyId);
+        const [json] = await API.endSurvey(surveyId);
         const { result } = json;
         const ending = {
           description: result['description'],
