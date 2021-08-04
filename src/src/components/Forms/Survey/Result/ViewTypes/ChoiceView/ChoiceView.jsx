@@ -3,43 +3,26 @@ import { Pie } from "react-chartjs-2";
 import "./ChoiceView.scss";
 
 export default function ChoiceView({ question, answers }) {
-  let answerObj = {};
-  let labels = [];
-  let values = [];
+  let labels = question.choices;
+  let values = new Array(labels.length).fill(0);
 
   answers.forEach((answer) => {
-    const keys = Object.keys(answer);
-    keys.forEach((key) => {
-      if (answer[key]) {
-        if (answerObj[key]) {
-          answerObj[key] += 1;
-        } else {
-          answerObj[key] = 1;
-        }
-      }
+    Object.entries(answer).forEach(([key, value]) => {
+      values[key] += value;
     });
   });
 
-  console.log(answerObj);
-
-  Object.entries(answerObj).forEach(([key, value]) => {
-    labels.push(question.choices[key]);
-    values.push(value);
-  });
+  let colors = [];
+  for (let i = 1; i <= labels.length; i++) {
+    colors.push(`rgba(43,68,255,${i / labels.length})`);
+  }
 
   const data = {
-    labels: labels,
+    labels,
     datasets: [
       {
         data: values,
-        backgroundColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: colors,
         borderColor: "rgba(255,255,255,1)",
         borderWidth: 3,
       },
