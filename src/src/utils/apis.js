@@ -21,7 +21,7 @@ function useFetch(path) {
           setData([data.result, data]);
         }
       } catch (error) {
-        setData([error.response.data, error]);
+        setData([error.response && error.response.data, error]);
       }
     }, 1000);
   }, [path]);
@@ -42,7 +42,7 @@ async function sendData(method, path, body) {
     const { data } = await axios(config);
     return [data, null];
   } catch (error) {
-    return [error.response.data, error];
+    return [error.response && error.response.data, error];
   }
 }
 
