@@ -8,8 +8,47 @@
   height: 100%;
 
   .charts {
+    margin-top: 5rem;
     overflow: scroll;
     flex-grow: 1;
+  }
+
+  .survey-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    box-shadow: $shadow-default;
+    z-index: 1;
+
+    .logo {
+      margin-left: 3rem;
+      margin-right: 3rem;
+      width: 4rem;
+      img {
+        width: 100%;
+      }
+    }
+
+    .info {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    h3 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15rem;
+      margin-right: 2rem;
+      strong {
+        font-weight: $fw-bold;
+      }
+    }
   }
 
   overflow: scroll;

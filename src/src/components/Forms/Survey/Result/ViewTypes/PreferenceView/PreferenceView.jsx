@@ -51,7 +51,7 @@ export default function PreferenceView({ question, answers }) {
     <div className="preference-view">
       <h1>{question.title}</h1>
       <div className="chart">
-        <Bar data={data} width={640} height={280} options={option} />
+        <Bar data={data} width={560} height={360} options={option} />
       </div>
     </div>
   );

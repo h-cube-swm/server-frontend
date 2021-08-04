@@ -78,12 +78,41 @@ export default function Result({ match }) {
     return <View key={key} question={question} answers={answers}></View>;
   });
 
+  const onClick = () => {
+    setIsChart(!isChart);
+  };
+
   return (
     <div className="result">
-      <div>총 질문 문항수는 {questions.length}</div>
-      <div>총 응답수는 {answers.length}</div>
-      <div className="charts">{contents}</div>
-      <button>다운로드</button>
+      <div className="survey-header">
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+        </div>
+        <div className="info">
+          <TextField text={survey ? survey.title : ""} size="title" multiline />
+          <TextField
+            text={survey ? survey.description : ""}
+            size="xl"
+            multiline
+          />
+        </div>
+
+        <h3>
+          총 응답 수 <strong>{answers.length}</strong>
+        </h3>
+      </div>
+
+      {isChart ? (
+        <div className="charts">{charts}</div>
+      ) : (
+        <Tables questions={questions} answers={answers} />
+      )}
+
+      <button onClick={onClick}>전환</button>
+      <button>.xlsx 다운로드</button>
+      <button>csv 다운로드</button>
     </div>
   );
 }
