@@ -1,0 +1,10 @@
+@import "/src/scss/style.scss";
+
+.view-frame {
+  @include round;
+  margin: 3rem auto;
+  padding: $card-margin;
+  width: 640px;
+  height: 400px;
+  box-shadow: $shadow-default;
+}

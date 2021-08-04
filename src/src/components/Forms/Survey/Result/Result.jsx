@@ -12,6 +12,7 @@ import { CardTypes } from "../constants";
 /* Assets */
 import "./Result.scss";
 import logo from "../../../../assets/images/logo.png";
+import ViewFrame from "./ViewFrame/ViewFrame";
 
 /**
  * Refactor survey+answers to
@@ -76,7 +77,11 @@ export default function Result({ match, location }) {
     const View = VIEW_DICT[type];
     if (!View) return null;
 
-    return <View key={key} question={question} answers={answers}></View>;
+    return (
+      <ViewFrame>
+        <View key={key} question={question} answers={answers}></View>
+      </ViewFrame>
+    );
   });
 
   let viewModeNext = isTable ? "chart" : "table";

@@ -1,12 +1,8 @@
 @import "/src/scss/style.scss";
 
 .choice-view {
-  @include round;
-  margin: 3rem auto;
-  padding: $card-margin;
-  width: 640px;
-  height: 400px;
-  box-shadow: $shadow-default;
+  width: 100%;
+  height: 100%;
   background-color: #fff;
   transition-duration: 500ms;
 
@@ -16,6 +12,6 @@
   }
 
   .chart {
-    margin: 3rem auto;
+    margin: 1rem auto;
   }
 }

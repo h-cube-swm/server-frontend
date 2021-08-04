@@ -1,14 +1,10 @@
 @import "/src/scss/style.scss";
 
 .sentence-view {
-  @include round;
   display: flex;
   flex-direction: column;
-  margin: 3rem auto;
-  padding: $card-margin;
-  width: 640px;
-  height: 400px;
-  box-shadow: $shadow-default;
+  width: 100%;
+  height: 100%;
   background-color: #fff;
   transition-duration: 500ms;
 

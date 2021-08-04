@@ -48,7 +48,7 @@ export default function ChoiceView({ question, answers }) {
 
   return (
     <div className="choice-view">
-      <h1>{question.title}</h1>
+      <h1>{question.title}&nbsp;</h1>
       <div className="chart">
         <Pie data={data} width={640} height={250} options={option} />
       </div>
