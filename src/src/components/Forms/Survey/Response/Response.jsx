@@ -15,6 +15,7 @@ import TextField from "../../../TextField/TextField";
 import { Link, Redirect } from "react-router-dom";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
+import Card from "../Card/Card";
 
 function Response({ survey, surveyId, match }) {
   const [response, setResponse] = useState({});
@@ -58,7 +59,9 @@ function Response({ survey, surveyId, match }) {
                 key={id}
                 response={response[id]}
                 setResponse={setNestedState(setResponse, [id])}>
-                <QuestionCommon />
+                <Card>
+                  <QuestionCommon />
+                </Card>
               </QuestionProvider>
             );
           })}

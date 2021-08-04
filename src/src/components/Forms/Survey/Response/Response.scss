@@ -17,11 +17,13 @@
     display: flex;
     justify-content: center;
     margin-bottom: 5rem;
+    a {
+      color: #fff;
+    }
   }
 
   .survey-header {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     width: 100%;
     height: 5rem;
@@ -34,10 +36,16 @@
     .logo {
       margin-left: 3rem;
       margin-right: 3rem;
-      width: 3rem;
+      width: 4rem;
       img {
         width: 100%;
       }
+    }
+
+    .info {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
     }
   }
 }
