@@ -1,20 +1,21 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import Card from "../../../Card/Card";
 import "./ChoiceView.scss";
 
-export default function ChoiceView({ answers }) {
+export default function ChoiceView({ question, answers }) {
   let answerObj = {};
   let labels = [];
-  let data = [];
+  let values = [];
 
   answers.forEach((answer) => {
     const keys = Object.keys(answer);
     keys.forEach((key) => {
-      if (answerObj[key]) {
-        answerObj[key] += 1;
-      } else {
-        answerObj[key] = 1;
+      if (answer[key]) {
+        if (answerObj[key]) {
+          answerObj[key] += 1;
+        } else {
+          answerObj[key] = 1;
+        }
       }
     });
   });
@@ -22,51 +23,51 @@ export default function ChoiceView({ answers }) {
   console.log(answerObj);
 
   Object.entries(answerObj).forEach(([key, value]) => {
-    labels.push(key);
-    data.push(value);
+    labels.push(question.choices[key]);
+    values.push(value);
   });
 
-  const state = {
+  const data = {
     labels: labels,
     datasets: [
       {
-        label: "option",
-        backgroundColor: "rgba(55,90,180,1)",
+        data: values,
+        backgroundColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
         borderColor: "rgba(255,255,255,1)",
         borderWidth: 3,
-        data: data,
       },
     ],
   };
 
+  const option = {
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: "left",
+        labels: {
+          font: {
+            size: 14,
+            family: "'Roboto', 'Noto Sans KR', sans-serif",
+            weight: 700,
+          },
+        },
+      },
+    },
+  };
+
   return (
     <div className="choice-view">
+      <h1>{question.title}</h1>
       <div className="chart">
-        <Pie
-          data={state}
-          options={{
-            title: {
-              display: true,
-              text: "Average",
-              fontSize: 20,
-            },
-            legend: {
-              display: true,
-              position: "right",
-            },
-            plugins: {
-              legend: {
-                labels: {
-                  font: {
-                    size: 14,
-                    family: "'Roboto', 'Noto Sans KR', sans-serif",
-                    weight: 700,
-                  },
-                },
-              },
-            },
-          }}
-        />
+        <Pie data={data} width={640} height={250} options={option} />
       </div>
     </div>
   );

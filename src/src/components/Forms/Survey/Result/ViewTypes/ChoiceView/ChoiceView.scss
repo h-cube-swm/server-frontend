@@ -2,18 +2,20 @@
 
 .choice-view {
   @include round;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: 3rem auto;
+  padding: $card-margin;
   width: 640px;
   height: 400px;
   box-shadow: $shadow-default;
   background-color: #fff;
   transition-duration: 500ms;
 
+  h1 {
+    display: block;
+    font-weight: 700;
+  }
+
   .chart {
-    width: 50%;
-    margin-left: 1rem;
+    margin: 0 auto;
   }
 }
