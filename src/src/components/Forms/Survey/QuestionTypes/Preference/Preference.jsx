@@ -97,7 +97,7 @@ export default function Preference() {
   const handleOnCountChange = (value) => {
     const count = value + "";
     if (!/^[0-9]*$/.test(count)) return false;
-    setMaxPref(count);
+    setMaxPref(+count);
   };
 
   const handleOnBlur = () => {
