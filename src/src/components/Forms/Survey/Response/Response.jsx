@@ -1,67 +1,71 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import withSurvey from "../../../../hocs/withSurvey";
-import setNestedState from "../../../../utils/setNestedState";
-import Card from "../Card/Card";
-import TextField from "../../../TextField/TextField";
+
 import { CardStates } from "../constants";
+import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
 import logo from "../../../../assets/images/logo.png";
 import { API } from "../../../../utils/apis";
+
+// HOCs
+import withSurvey from "../../../../hocs/withSurvey";
+
+// Components
+import { QuestionProvider } from "../../../../contexts/QuestionContext";
+import TextField from "../../../TextField/TextField";
+import { Link, Redirect } from "react-router-dom";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
+import Loading from "../../../Loading/Loading";
 
-function Response({ survey, submit, surveyId }) {
+function Response({ survey, surveyId, match }) {
   const [response, setResponse] = useState({});
+  const [contents, setContents] = useState(<></>);
 
-  const onClick = async () => {
+  const onSubmit = async () => {
     const body = { answer: response };
     await API.postResponse(surveyId, body);
+    setContents(<Redirect to="/forms/survey/response/ending" />);
   };
 
-  let contents = null;
-  if (survey) {
-    const { questions } = survey;
-    contents = (
-      <div className="question-box">
-        {questions.map((question) => {
-          const { id } = question;
-          return (
-            <QuestionProvider
-              state={CardStates.RESPONSE}
-              question={question}
-              key={id}
-              response={response[id]}
-              setResponse={setNestedState(setResponse, [id])}>
-              <Card slowAppear={false}>
-                <QuestionCommon></QuestionCommon>
-              </Card>
-            </QuestionProvider>
-          );
-        })}
-      </div>
-    );
-  } else {
-    <div className="loading-screen">Now Loading...</div>;
-  }
+  if (!survey) return <Loading />;
+  const { questions } = survey;
+
   return (
     <div className="response">
+      {contents}
       <div className="survey-header">
         <div className="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
         </div>
-        <TextField text={survey ? survey.title : ""} size="title" multiline />
-        <TextField
-          text={survey ? survey.description : ""}
-          size="xl"
-          multiline
-        />
+        <div className="info">
+          <TextField text={survey ? survey.title : ""} size="title" multiline />
+          <TextField
+            text={survey ? survey.description : ""}
+            size="xl"
+            multiline
+          />
+        </div>
       </div>
-      <div className="contents-box">{contents}</div>
+      <div className="contents-box">
+        <div className="question-box">
+          {questions.map((question) => {
+            const { id } = question;
+            return (
+              <QuestionProvider
+                state={CardStates.RESPONSE}
+                question={question}
+                key={id}
+                response={response[id]}
+                setResponse={setNestedState(setResponse, [id])}>
+                <QuestionCommon />
+              </QuestionProvider>
+            );
+          })}
+        </div>
+      </div>
       <div className="button-box">
-        <button href="#" className="link-btn-lg" onClick={onClick}>
+        <button className="link-btn-lg" onClick={onSubmit}>
           완료
         </button>
       </div>
