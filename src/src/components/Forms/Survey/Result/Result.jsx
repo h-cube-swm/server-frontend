@@ -54,9 +54,10 @@ function reshapeAnswer(survey, answers) {
   return answerList;
 }
 
-export default function Result({ match }) {
-  const [isChart, setIsChart] = useState(true);
+export default function Result({ match, location }) {
   const resultId = match.params.link;
+  const viewMode = location.hash.replace("#", "");
+  const isTable = viewMode === "table";
 
   const [result, err] = API.useResponses(resultId);
   if (err && result.status === 400)
@@ -78,9 +79,7 @@ export default function Result({ match }) {
     return <View key={key} question={question} answers={answers}></View>;
   });
 
-  const onClick = () => {
-    setIsChart(!isChart);
-  };
+  let viewModeNext = isTable ? "chart" : "table";
 
   return (
     <div className="result">
@@ -104,13 +103,13 @@ export default function Result({ match }) {
         </h3>
       </div>
 
-      {isChart ? (
-        <div className="charts">{charts}</div>
-      ) : (
+      {isTable ? (
         <Tables questions={questions} answers={answers} />
+      ) : (
+        <div className="charts">{charts}</div>
       )}
 
-      <button onClick={onClick}>전환</button>
+      <Link to={`#${viewModeNext}`}>전환</Link>
       <button>.xlsx 다운로드</button>
       <button>csv 다운로드</button>
     </div>
