@@ -5,13 +5,14 @@ import Loading from "../../../Loading/Loading";
 import ChoiceView from "./ViewTypes/ChoiceView/ChoiceView";
 import SentenceView from "./ViewTypes/SentenceView/SentenceView";
 import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
+import "./Result.scss";
 
 export default function Result({ match }) {
   const resultId = match.params.link;
 
   const [result, err] = API.useResponses(resultId);
-
-  if (err && err.status === 400) return <Redirect to="/error/wrongResultId" />;
+  if (err && result.status === 400)
+    return <Redirect to="/error/wrongResultId" />;
   if (err) return <Redirect to="/error/unexpected" />;
   if (!result) return <Loading />;
 
@@ -21,6 +22,7 @@ export default function Result({ match }) {
   let answerObj = {};
   questions.forEach((question) => (answerObj[question.id] = []));
   answers.forEach(({ answer }) => {
+    console.log(answer);
     Object.entries(answer).map(([key, value]) => {
       answerObj[key].push(value);
     });
@@ -31,18 +33,18 @@ export default function Result({ match }) {
   questions.map((question) => {
     const type = question.type;
     switch (type) {
-      //   case "single-choice":
-      //   case "multiple-choice":
-      //     contents.push(
-      //       <ChoiceView key={question.id} answers={answerObj[question.id]} />
-      //     );
-      //     break;
-      //   case "short-sentence":
-      //   case "long-sentence":
-      //     contents.push(
-      //       <SentenceView key={question.id} answers={answerObj[question.id]} />
-      //     );
-      // break;
+      case "single-choice":
+      case "multiple-choice":
+        contents.push(
+          <ChoiceView key={question.id} answers={answerObj[question.id]} />
+        );
+        break;
+      case "short-sentence":
+      case "long-sentence":
+        contents.push(
+          <SentenceView key={question.id} answers={answerObj[question.id]} />
+        );
+        break;
       case "preference":
         contents.push(
           <PreferenceView key={question.id} answers={answerObj[question.id]} />

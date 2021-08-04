@@ -54,6 +54,17 @@ export default function ChoiceView({ answers }) {
               display: true,
               position: "right",
             },
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 14,
+                    family: "'Roboto', 'Noto Sans KR', sans-serif",
+                    weight: 700,
+                  },
+                },
+              },
+            },
           }}
         />
       </div>

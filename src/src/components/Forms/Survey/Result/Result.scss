@@ -6,7 +6,11 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+
   .charts {
     overflow: scroll;
+    flex-grow: 1;
   }
+
+  overflow: scroll;
 }
