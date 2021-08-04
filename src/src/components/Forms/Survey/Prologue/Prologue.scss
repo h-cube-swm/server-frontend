@@ -1,80 +1,30 @@
 @import "/src/scss/style.scss";
 
-// .prologue-box {
-//   display: flex;
-//   position: absolute;
-//   background-color: #dbdfff;
-//   width: 640px;
-//   height: 15rem;
-//   justify-content: center;
-//   align-items: center;
-//   margin: 3rem auto;
-//   min-width: 640px;
-//   left: 50%;
-//   transform: translateX(-50%);
-//   @include round;
-//   transition-duration: 1000ms;
-//   input {
-//     margin-bottom: 1rem;
-//     text-align: center;
-//   }
-// }
-// 실제 개발
-
 .prologue-box {
-  @include text-center;
-  width: 100%;
-  height: 5rem;
-  position: absolute;
-  margin: 0 auto;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0;
-  background-color: #fff;
-  box-shadow: $shadow-default;
-  z-index: 5;
   .survey-header {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    margin-left: 3rem;
+    align-items: center;
     width: 100%;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    box-shadow: $shadow-default;
+    z-index: 1;
+
     .logo {
-      width: 3rem;
+      margin-left: 3rem;
       margin-right: 3rem;
+      width: 4rem;
       img {
-        width: 100%;
+        width: 90%;
       }
     }
-  }
 
-  transition-duration: 1000ms;
-}
-
-.prologue-box-top {
-  @include text-center;
-  width: 100%;
-  height: 5rem;
-  position: absolute;
-  margin: 0 auto;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0;
-  background-color: #fff;
-  box-shadow: $shadow-default;
-  z-index: 5;
-  .survey-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    margin-left: 3rem;
-    width: 100%;
-    .logo {
-      width: 3rem;
-      margin-right: 3rem;
-      img {
-        width: 100%;
-      }
+    .info {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
     }
   }
 
