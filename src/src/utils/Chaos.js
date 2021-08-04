@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 export default function Chaos() {
   const ref = useRef(null);
 
-  const width = document.getElementById("root").offsetWidth + "";
+  const width = document.getElementById("root").offsetWidth * 1.3 + "";
   const height = document.getElementById("root").offsetHeight + "";
 
   useEffect(() => {
