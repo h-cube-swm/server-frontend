@@ -20,10 +20,15 @@
     }
   }
 
-  h1 {
+  .contents {
     position: absolute;
     left: 10rem;
-    font-size: $fs-xl;
+    h1 {
+      font-size: $fs-xl;
+    }
+    p {
+      font-size: $fs-lg;
+    }
   }
 
   .chaos {
@@ -31,11 +36,18 @@
   }
 
   @include mobile {
-    h1 {
+    contents {
       left: 3rem;
       bottom: 5rem;
       font-size: $fs-lg;
       z-index: 2;
+    }
+
+    p {
+      position: absolute;
+      left: 3rem;
+      bottom: 4;
+      font-size: $fs-rg;
     }
 
     .logo {
