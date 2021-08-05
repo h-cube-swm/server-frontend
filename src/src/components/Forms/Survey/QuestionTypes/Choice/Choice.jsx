@@ -31,7 +31,6 @@ function Choice({
       <TextField
         text={text}
         setText={setText}
-        disabled={!editable}
         placeholder="더 폼 나는 선택지"
         size="rg"
       />

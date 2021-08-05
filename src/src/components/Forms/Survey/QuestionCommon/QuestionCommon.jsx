@@ -50,7 +50,6 @@ export default function QuestionCommon() {
           placeholder="더 폼 나는 질문"
           text={question.title}
           setText={setNestedState(setQuestion, ["title"])}
-          disabled={isEditting}
           size="title"
           multiline
         />
