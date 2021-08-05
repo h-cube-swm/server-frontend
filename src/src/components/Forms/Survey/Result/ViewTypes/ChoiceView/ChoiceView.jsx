@@ -1,6 +1,23 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Pie } from "test-react-chartjs-2";
 import "./ChoiceView.scss";
+
+const option = {
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: "left",
+      labels: {
+        font: {
+          size: 14,
+          family: "'Roboto', 'Noto Sans KR', sans-serif",
+          weight: 700,
+        },
+      },
+    },
+  },
+};
 
 export default function ChoiceView({ question, answers }) {
   let labels = question.choices;
@@ -27,23 +44,6 @@ export default function ChoiceView({ question, answers }) {
         borderWidth: 3,
       },
     ],
-  };
-
-  const option = {
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: "left",
-        labels: {
-          font: {
-            size: 14,
-            family: "'Roboto', 'Noto Sans KR', sans-serif",
-            weight: 700,
-          },
-        },
-      },
-    },
   };
 
   return (
