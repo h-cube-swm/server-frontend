@@ -3,32 +3,14 @@
 .response {
   width: 100%;
   height: 100%;
-  overflow: scroll;
-
-  .contents-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5rem;
-  }
-
-  .button-box {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 5rem;
-    a {
-      color: #fff;
-    }
-  }
+  display: flex;
+  flex-direction: column;
 
   .survey-header {
     display: flex;
     align-items: center;
     width: 100%;
     height: 5rem;
-    position: fixed;
-    top: 0;
     background-color: #fff;
     box-shadow: $shadow-default;
     z-index: 1;
@@ -46,6 +28,44 @@
       display: flex;
       align-items: flex-end;
       width: 100%;
+    }
+  }
+
+  .contents-box {
+    flex-grow: 1;
+    position: relative;
+
+    .question-box {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition-duration: 500ms;
+
+      &.left {
+        transform: translateX(-100%);
+      }
+
+      &.right {
+        transform: translateX(100%);
+      }
+
+      .question-box-inner {
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        height: 100%;
+      }
+    }
+  }
+
+  .button-box {
+    width: 100%;
+
+    .button-box-inner {
+      max-width: 800px;
+      display: flex;
+      justify-content: space-around;
+      margin: 2rem auto;
     }
   }
 }
