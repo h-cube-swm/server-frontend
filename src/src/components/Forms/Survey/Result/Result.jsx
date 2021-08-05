@@ -155,6 +155,9 @@ export default function Result({ match, location }) {
         <h3>
           총 응답 수 <strong>{answers.length}</strong>
         </h3>
+        <Link to={`#${viewModeNext}`} className="btn">
+          전환
+        </Link>
       </div>
 
       {isTable ? (
