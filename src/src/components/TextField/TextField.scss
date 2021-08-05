@@ -9,6 +9,7 @@
   border-bottom: solid 2px rgba(0, 0, 0, 0);
   background-color: rgba($color: #fff, $alpha: 0);
   outline: none;
+  white-space: pre-wrap;
 
   // Font size settings
   &.title {
@@ -35,14 +36,8 @@
   }
 
   // If an element is activated or focused, show border-bottom.
-  &:active,
   &:focus {
     border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-  }
-
-  // If an element is disabled, never shows border-bottom.
-  &:disabled {
-    border-bottom: none;
   }
 
   // Setting for textarea, which is multi-line mdoe.
