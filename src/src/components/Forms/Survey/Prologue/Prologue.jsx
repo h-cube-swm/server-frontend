@@ -5,7 +5,7 @@ import TextField from "../../../TextField/TextField";
 import "./Prologue.scss";
 import logo from "../../../../assets/images/logo.png";
 
-export default function Prologue({ survey, setSurvey }) {
+export default function Prologue({ survey, setSurvey, putSurvey }) {
   return (
     <div className="prologue-box">
       <div className="survey-header">
@@ -29,6 +29,16 @@ export default function Prologue({ survey, setSurvey }) {
             size="xl"
             multiline
           />
+        </div>
+        <div className="put-survey">
+          {putSurvey ? (
+            <Link
+              onClick={putSurvey}
+              className="btn submit-button"
+              to={"/forms/survey/end/" + survey.id}>
+              완료
+            </Link>
+          ) : null}
         </div>
       </div>
     </div>

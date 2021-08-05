@@ -1,23 +1,28 @@
 @import "/src/scss/style.scss";
 
 .prologue-box {
+  width: 100%;
+  height: 5rem;
+  background-color: #fff;
+  box-shadow: $shadow-default;
+  z-index: 4;
+
   .survey-header {
     display: flex;
     align-items: center;
+    padding: 0.5rem;
     width: 100%;
-    height: 5rem;
-    position: fixed;
+    height: 100%;
     top: 0;
-    background-color: #fff;
-    box-shadow: $shadow-default;
     z-index: 1;
 
     .logo {
-      margin-left: 3rem;
+      margin-left: 2rem;
       margin-right: 3rem;
-      width: 4rem;
+      width: auto;
+      height: 100%;
       img {
-        width: 90%;
+        height: 90%;
       }
     }
 
@@ -26,7 +31,16 @@
       align-items: flex-end;
       width: 100%;
     }
+
+    .put-survey {
+      margin-right: 3rem;
+    }
   }
 
-  transition-duration: 1000ms;
+  @include tablet {
+    .survey-header {
+      .logo {
+      }
+    }
+  }
 }

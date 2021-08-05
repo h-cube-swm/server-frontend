@@ -1,6 +1,5 @@
 /* React elements*/
 import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 
 /* Components */
 import Card from "../Card/Card";
@@ -32,6 +31,7 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
     if (!init.counter) init.counter = 0;
     if (!init.questions) init.questions = [];
     if (!init.selectedIndex) init.selectedIndex = 0;
+    if (!init.id) init.id = surveyId;
     if (init.questions.length === 0) {
       const [counter, question] = getQuestion(init.counter);
       init.counter = counter;
@@ -119,16 +119,8 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
 
   return (
     <div className="edit" {...backgroundCallbacks}>
+      <Prologue survey={survey} setSurvey={setSurvey} putSurvey={putSurvey} />
       <div className="positioning-box">
-        <div className="controller-box">
-          <Controller type={selectedSurveyType} setType={setQuesionType} />
-          <Link
-            onClick={putSurvey}
-            className="link-btn"
-            to={"/forms/survey/end/" + surveyId}>
-            완료
-          </Link>
-        </div>
         <div className="sidebar-box">
           <Sidebar
             questions={questions}
@@ -137,7 +129,6 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
           />
         </div>
       </div>
-      <Prologue survey={survey} setSurvey={setSurvey} />
 
       {/* Ghost that appears when card moves */}
       <div ref={item}>
@@ -153,7 +144,7 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
       <div className="question-box" onWheel={onWheel}>
         {orderedMap(questions, (question, index) => {
           const isSelected = index === selectedIndex;
-          const y = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
+          const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
           const slowAppear = questions.length > 1;
           const isHide = isDragging && isSelected;
           const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
@@ -178,19 +169,22 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
             </Positioner>
           );
         })}
-
-        <QuestionAddButton
-          onClick={getInsertQuestion(selectedIndex)}
-          y={-CardStyle.FRAME_HEIHGT / 2}
-          show={showAddButton}
-        />
-
-        <QuestionAddButton
-          onClick={getInsertQuestion(selectedIndex + 1)}
-          y={+CardStyle.FRAME_HEIHGT / 2}
-          show={showAddButton}
-        />
       </div>
+
+      <div className="fade-out top" />
+      <div className="fade-out bottom" />
+
+      <QuestionAddButton
+        onClick={getInsertQuestion(selectedIndex)}
+        y={-CardStyle.FRAME_HEIGHT / 2}
+      />
+
+      <QuestionAddButton
+        onClick={getInsertQuestion(selectedIndex + 1)}
+        y={+CardStyle.FRAME_HEIGHT / 2}
+      />
+
+      <Controller type={selectedSurveyType} setType={setQuesionType} />
     </div>
   );
 };
