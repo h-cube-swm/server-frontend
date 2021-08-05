@@ -9,7 +9,7 @@ import Chaos from "../../utils/Chaos";
 function Intro() {
   return (
     <div className="intro">
-      <div className="fade-out"></div>
+      <div className="fade-out" />
       <Chaos />
       <div className="outer-box">
         <div className="message">

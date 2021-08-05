@@ -4,9 +4,11 @@ import Card from "../Forms/Survey/Card/Card";
 import { CardStates } from "../Forms/Survey/constants";
 import getQuestion from "../Forms/Survey/getQuestion";
 import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
-import "./Service.scss";
 import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
 import useDefault from "../../hooks/useDefault";
+
+/* Assets */
+import "./Service.scss";
 
 const [_, _question] = getQuestion(0);
 const defaultAnswers = [
@@ -28,28 +30,50 @@ function Service() {
   if (!isInit) return null;
   return (
     <div className="service">
-      <div className="section one">
-        <QuestionProvider
-          question={question}
-          setQuestion={setQuestion}
-          state={CardStates.EDITTING}>
-          <QuestionCommon />
-        </QuestionProvider>
+      <div className="section">
+        <div className="text two">
+          <h1>간단하게,</h1>
+          <h1>직관적으로,</h1>
+          <h1>멋지게,</h1>
+          <h1>만들고</h1>
+        </div>
+        <div className="box one">
+          <QuestionProvider
+            question={question}
+            setQuestion={setQuestion}
+            state={CardStates.EDITTING}>
+            <QuestionCommon />
+          </QuestionProvider>
+        </div>
+        <div className="text three">
+          <h1>편하게,</h1>
+          <h1>쉽게,</h1>
+          <h1>빠르게,</h1>
+          <h1>응답하고</h1>
+        </div>
+        <div className="box four">
+          <QuestionProvider
+            question={question}
+            state={CardStates.RESPONSE}
+            response={response}
+            setResponse={setResponse}>
+            <QuestionCommon />
+          </QuestionProvider>
+        </div>
+        <div className="text six">
+          <h1>더 폼 나게</h1>
+          <h1>결과를 확인합니다.</h1>
+        </div>
+        <div className="box five">
+          <ChoiceView
+            question={question}
+            answers={[response].concat(defaultAnswers)}
+          />
+        </div>
       </div>
-      <div className="section two">
-        <QuestionProvider
-          question={question}
-          state={CardStates.RESPONSE}
-          response={response}
-          setResponse={setResponse}>
-          <QuestionCommon />
-        </QuestionProvider>
-      </div>
-      <div className="section three">
-        <ChoiceView
-          question={question}
-          answers={[response].concat(defaultAnswers)}
-        />
+      <div className="phrase">
+        <h1>이렇게나 묻고 답하기 좋은 폼이</h1>
+        <h1>여기, 있습니다.</h1>
       </div>
     </div>
   );
