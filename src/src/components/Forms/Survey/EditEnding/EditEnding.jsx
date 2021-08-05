@@ -39,7 +39,7 @@ const Ending = ({ ending }) => {
           </li>
         </ul>
       </div>
-      <Link className="link-btn-lg" to="/">
+      <Link className="btn lg" to="/">
         홈으로
       </Link>
     </div>

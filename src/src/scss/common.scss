@@ -3,44 +3,12 @@ button {
   font-weight: 700;
   border: 0;
   cursor: pointer;
-
-  &.link-btn {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 5rem;
-    height: 2.5rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
-
-  &.link-btn-lg {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 6rem;
-    height: 3rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
-
-  &.link-btn-xl {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 10rem;
-    height: 4rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
 }
 
 a {
   text-decoration: none;
   font-weight: 700;
+
   :visited {
     text-decoration: none;
   }
@@ -50,37 +18,43 @@ a {
   :active {
     text-decoration: none;
   }
-  &.link-btn {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 5rem;
-    height: 2.5rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
+}
 
-  &.link-btn-lg {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
+.btn {
+  // Reset default settings of button
+  border: none;
+  text-decoration: none;
+
+  // Set shape
+  @include text-center;
+  @include round;
+  width: 5rem;
+  height: 2.5rem;
+
+  // Set font
+  color: #fff;
+  font-weight: 700;
+  font-size: $fs-rg;
+
+  // Set others
+  cursor: pointer;
+  background-color: #2b44ff;
+  box-shadow: $shadow-default;
+  transition-duration: 500ms;
+
+  // Options
+  &.lg {
     width: 6rem;
     height: 3rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
   }
 
-  &.link-btn-xl {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
+  &.xl {
     width: 10rem;
     height: 4rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
+  }
+
+  &.disabled {
+    background-color: #888;
   }
 }
 
