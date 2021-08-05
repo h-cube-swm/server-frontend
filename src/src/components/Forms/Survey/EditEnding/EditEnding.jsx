@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 
-import "./Ending.scss";
+import "./EditEnding.scss";
 import logo from "../../../../assets/images/logo.png";
 import Loading from "../../../Loading/Loading";
 

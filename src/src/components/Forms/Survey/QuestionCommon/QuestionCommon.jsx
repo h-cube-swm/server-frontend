@@ -10,15 +10,12 @@ import Hider from "../../../Hider/Hider";
 
 // Question types
 import Default from "../QuestionTypes/Default/Default";
-import {
-  MultipleChoices,
-  SingleChoices,
-} from "../QuestionTypes/MultipleChoice/MultipleChoice";
+import { MultipleChoices, SingleChoices } from "../QuestionTypes/Choice/Choice";
 import Preference from "../QuestionTypes/Preference/Preference";
 import {
   LongSentence,
   ShortSentence,
-} from "../QuestionTypes/ShortSentence/ShortSentence";
+} from "../QuestionTypes/Sentence/Sentence";
 
 // Scss
 import "./QuestionCommon.scss";

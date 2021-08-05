@@ -9,7 +9,7 @@ import "./App.scss";
 import Main from "../Main/Main";
 import Survey from "../Forms/Survey/Survey";
 import Edit from "../Forms/Survey/Edit/Edit";
-import Ending from "../Forms/Survey/Ending/Ending";
+import Ending from "../Forms/Survey/EditEnding/EditEnding";
 import Response from "../Forms/Survey/Response/Response";
 import Error from "../Error/Error";
 import Result from "../Forms/Survey/Result/Result";

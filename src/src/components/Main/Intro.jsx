@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 /* Styles */
 import "./Intro.scss";
-import Chaos from "../../utils/Chaos";
+import Chaos from "../Chaos/Chaos";
 
 function Intro() {
   return (

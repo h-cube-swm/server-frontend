@@ -1,5 +1,5 @@
 import React from "react";
-import "./ShortSentence.scss";
+import "./Sentence.scss";
 import { CardStates } from "../../constants";
 import setNestedState from "../../../../../utils/setNestedState";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import Chaos from "../../utils/Chaos";
+import Chaos from "../Chaos/Chaos";
 import "./Loading.scss";
 
 export default function Loading() {

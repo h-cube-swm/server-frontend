@@ -8,7 +8,7 @@ import { CardStates } from "../../constants";
 
 import delBtn from "../../../../../assets/icons/del-btn.svg";
 import addBtn from "../../../../../assets/icons/add-btn.svg";
-import "./MultipleChoice.scss";
+import "./Choice.scss";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
 
 function Choice({
