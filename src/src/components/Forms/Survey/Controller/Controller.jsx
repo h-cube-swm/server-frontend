@@ -17,7 +17,7 @@ const BUTTONS = [
 
 export default function Controller({ type: selectedType, setType }) {
   return (
-    <div>
+    <div className="contoller">
       <div className="element-box">
         {BUTTONS.map(([image, type, description]) => {
           const className = type === selectedType ? "selected" : "";

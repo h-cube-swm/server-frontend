@@ -3,7 +3,7 @@
 .multiple-choice {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
   height: 100%;
@@ -37,11 +37,10 @@
 }
 .add-btn {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   width: 20rem;
   height: 2rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   padding: 0;
   border: 0;
   border-bottom: solid 1px rgba(0, 0, 0, 0);
@@ -56,4 +55,8 @@
     font-size: $fs-rg;
     font-weight: $fw-bold;
   }
+}
+
+.multiple-choice:first-child {
+  margin-top: 5rem;
 }
