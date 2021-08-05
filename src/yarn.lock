@@ -11048,6 +11048,13 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
+test-react-chartjs-2@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/test-react-chartjs-2/-/test-react-chartjs-2-3.0.4.tgz#7699f23146b0525f0a77ff6d449ae5b9025b472e"
+  integrity sha512-/M0L87paeoepNh/kXk0eAJMZ8ysZjQDl9dd141Gy1qe2gnVtgIy1GCaco1sFSXVE7tJ36p+b5sEVjGNE7NabnA==
+  dependencies:
+    lodash "^4.17.19"
+
 text-table@0.2.0, text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
