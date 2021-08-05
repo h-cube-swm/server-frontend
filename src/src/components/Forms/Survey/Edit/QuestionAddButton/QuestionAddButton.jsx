@@ -3,10 +3,10 @@ import addBtn from "../../../../../assets/icons/add-btn.svg";
 import Positioner from "../../../../Positioner/Positioner";
 import "./QuestionAddButton.scss";
 
-export function QuestionAddButton({ show, y, onClick }) {
+export function QuestionAddButton({ y, onClick }) {
   return (
     <Positioner y={y}>
-      <div className="question-add-box" style={{ opacity: show ? null : 0 }}>
+      <div className="question-add-box">
         <button onClick={onClick}>
           <img src={addBtn} alt="add button" />
         </button>
