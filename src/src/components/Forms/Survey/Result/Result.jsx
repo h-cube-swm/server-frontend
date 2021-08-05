@@ -8,6 +8,7 @@ import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
 import TextField from "../../../TextField/TextField";
 import Tables from "./Tables";
 import { CardTypes } from "../constants";
+import DataGrid from "react-data-grid";
 
 /* Assets */
 import "./Result.scss";
@@ -86,6 +87,39 @@ export default function Result({ match, location }) {
 
   let viewModeNext = isTable ? "chart" : "table";
 
+  let questionDict = {};
+  questions.forEach((question) => {
+    questionDict[question.id] = question;
+  });
+
+  const valueToRow = (key, value) => {
+    const question = questionDict[key];
+    const { type } = question;
+
+    if (
+      type === CardTypes.SINGLE_CHOICE ||
+      type === CardTypes.MULTIPLE_CHOICE
+    ) {
+      return Object.entries(value)
+        .filter(([_, value]) => value)
+        .map(([key]) => question.choices[key])
+        .join(", ");
+    }
+    return value;
+  };
+
+  const columns = [{ key: "timestamp", name: "응답 시각" }];
+  questions.forEach((question) => {
+    columns.push({ key: question.id, name: question.title });
+  });
+
+  const rows = answers.map(({ answer, submit_time: timestamp }) => {
+    let row = { ...answer };
+    Object.keys(row).forEach((key) => (row[key] = valueToRow(key, row[key])));
+    row.timestamp = timestamp;
+    return row;
+  });
+
   return (
     <div className="result">
       <div className="survey-header">
@@ -109,7 +143,13 @@ export default function Result({ match, location }) {
       </div>
 
       {isTable ? (
-        <Tables questions={questions} answers={answers} />
+        <DataGrid
+          columns={columns}
+          rows={rows}
+          defaultColumnOptions={{
+            resizable: true,
+          }}
+        />
       ) : (
         <div className="charts">{charts}</div>
       )}
