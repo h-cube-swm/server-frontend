@@ -8,7 +8,7 @@ function useFetch(path) {
   const [data, setData] = useState([null, null]);
 
   useEffect(() => {
-    setTimeout(async () => {
+    (async () => {
       try {
         const config = {
           url: ROOT + path,
@@ -23,7 +23,7 @@ function useFetch(path) {
       } catch (error) {
         setData([error.response && error.response.data, error]);
       }
-    }, 1000);
+    })();
   }, [path]);
 
   return data;
