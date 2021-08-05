@@ -31,6 +31,7 @@ function IntegerField({ number, setNumber, disabled, label, ...props }, ref) {
           text={number}
           disabled={disabled || !setNumber}
           setText={onChange}
+          size="md"
         />
       </div>
       <span className="btn-set">

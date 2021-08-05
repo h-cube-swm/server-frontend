@@ -6,11 +6,16 @@
   align-items: flex-end;
   width: 100%;
   height: 100%;
-  padding-bottom: 8rem;
+  padding-left: 1rem;
+  padding-bottom: 6rem;
 
   .response {
     @include max-len-indicator;
     display: flex;
     align-items: flex-end;
+  }
+
+  @include desktop {
+    padding-bottom: 2rem;
   }
 }

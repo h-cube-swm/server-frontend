@@ -79,4 +79,10 @@
     height: 100vh;
     border: none;
   }
+
+  @include tablet {
+    .handle {
+      opacity: 0;
+    }
+  }
 }
