@@ -17,7 +17,6 @@ export default function ResponseEnding() {
       <div className="celebrate-sentence">
         <h1>축하합니다. 설문이 제출되었습니다.</h1>
       </div>
-      <Service />
       <Link className="link-btn-xl" to="/forms/survey">
         설문조사 하러가기
       </Link>

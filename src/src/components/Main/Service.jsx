@@ -6,6 +6,7 @@ import getQuestion from "../Forms/Survey/getQuestion";
 import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
 import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
 import useDefault from "../../hooks/useDefault";
+import { CardTypes } from "../Forms/Survey/constants";
 
 /* Assets */
 import "./Service.scss";
@@ -18,6 +19,7 @@ const defaultAnswers = [
   { 1: true },
   { 2: true },
 ];
+_question.type = CardTypes.MULTIPLE_CHOICE;
 
 function Service() {
   const [question, setQuestion] = useState(_question);
@@ -26,7 +28,6 @@ function Service() {
     choices: ["마음껏", "테스트", "해보세요"],
   });
 
-  console.log(isInit, question);
   if (!isInit) return null;
   return (
     <div className="service">

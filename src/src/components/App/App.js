@@ -13,6 +13,7 @@ import Ending from "../Forms/Survey/EditEnding/EditEnding";
 import Response from "../Forms/Survey/Response/Response";
 import Error from "../Error/Error";
 import Result from "../Forms/Survey/Result/Result";
+import ResponseEnding from "../Forms/Survey/ResponseEnding/ResponseEnding";
 
 function App() {
   return (
@@ -22,6 +23,11 @@ function App() {
         <Route path="/forms/survey" component={Survey} exact />
         <Route path="/forms/survey/edit/:link" component={Edit} />
         <Route path="/forms/survey/end/:link" component={Ending} />
+        <Route
+          path="/forms/survey/response/ending"
+          component={ResponseEnding}
+          exact
+        />
         <Route path="/forms/survey/response/:link" component={Response} />
         <Route path="/forms/survey/result/:link" component={Result} />
         <Route path="/error/:type" component={Error} />
