@@ -53,6 +53,7 @@ export default function Card({ onDelete, onGrab, children }) {
       className={className}
       style={{
         height: state === CardStates.RESPONSE ? null : CardStyle.HEIGHT,
+        width: CardStyle.WIDTH,
       }}>
       {children}
       <button
