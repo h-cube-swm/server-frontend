@@ -14,14 +14,24 @@ export const CardStates = {
   GHOST: "ghost",
 };
 
-const SURVEY_HEIGHT = 350;
-const SURVEY_WIDTH = 560;
-const SURVEY_DISTANCE = 100;
+let SURVEY_HEIGHT;
+let SURVEY_WIDTH;
+let SURVEY_DISTANCE;
+
+if (document.getElementById("root").offsetWidth <= 767) {
+  SURVEY_HEIGHT = document.getElementById("root").offsetHeight * 0.6;
+  SURVEY_WIDTH = 340;
+  SURVEY_DISTANCE = 80;
+} else {
+  SURVEY_HEIGHT = 350;
+  SURVEY_WIDTH = 560;
+  SURVEY_DISTANCE = 60;
+}
 
 export const CardStyle = {
   WIDTH: SURVEY_WIDTH,
   HEIGHT: SURVEY_HEIGHT,
   DISTANCE: SURVEY_DISTANCE,
-  FRAME_HEIHGT: SURVEY_HEIGHT + SURVEY_DISTANCE,
+  FRAME_HEIGHT: SURVEY_HEIGHT + SURVEY_DISTANCE,
   FRAME_WIDTH: SURVEY_WIDTH + SURVEY_DISTANCE,
 };
