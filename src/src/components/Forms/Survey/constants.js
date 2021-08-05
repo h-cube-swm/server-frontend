@@ -25,7 +25,7 @@ if (document.getElementById("root").offsetWidth <= 767) {
 } else {
   SURVEY_HEIGHT = 350;
   SURVEY_WIDTH = 560;
-  SURVEY_DISTANCE = 60;
+  SURVEY_DISTANCE = 100;
 }
 
 export const CardStyle = {
