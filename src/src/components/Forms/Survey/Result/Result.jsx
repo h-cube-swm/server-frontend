@@ -6,9 +6,9 @@ import ChoiceView from "./ViewTypes/ChoiceView/ChoiceView";
 import SentenceView from "./ViewTypes/SentenceView/SentenceView";
 import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
 import TextField from "../../../TextField/TextField";
-import Tables from "./Tables";
 import { CardTypes } from "../constants";
 import DataGrid from "react-data-grid";
+import { utils, writeFile } from "xlsx";
 
 /* Assets */
 import "./Result.scss";
@@ -113,12 +113,27 @@ export default function Result({ match, location }) {
     columns.push({ key: question.id, name: question.title });
   });
 
-  const rows = answers.map(({ answer, submit_time: timestamp }) => {
+  const rows = answers.map(({ submit_time: timestamp, answer }) => {
     let row = { ...answer };
     Object.keys(row).forEach((key) => (row[key] = valueToRow(key, row[key])));
     row.timestamp = timestamp;
     return row;
   });
+
+  const exportToXlsx = () => {
+    const xlsxColumn = columns.map(({ name }) => name);
+    const xlsxRows = rows.map((obj) => {
+      let xlsxRow = Object.values(obj);
+      xlsxRow.unshift(xlsxRow.pop());
+      return xlsxRow;
+    });
+    xlsxRows.unshift(xlsxColumn);
+    const workSheetData = xlsxRows;
+    const wb = utils.book_new();
+    const ws = utils.aoa_to_sheet(workSheetData);
+    utils.book_append_sheet(wb, ws, "Sheet 1");
+    writeFile(wb, "filename.xlsx");
+  };
 
   return (
     <div className="result">
@@ -144,6 +159,7 @@ export default function Result({ match, location }) {
 
       {isTable ? (
         <DataGrid
+          key="grid"
           columns={columns}
           rows={rows}
           defaultColumnOptions={{
@@ -155,7 +171,7 @@ export default function Result({ match, location }) {
       )}
 
       <Link to={`#${viewModeNext}`}>전환</Link>
-      <button>.xlsx 다운로드</button>
+      <button onClick={exportToXlsx}>xlsx 다운로드</button>
       <button>csv 다운로드</button>
     </div>
   );
