@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
   <defs>
     <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#3be1ff"/>
-      <stop offset="1" stop-color="#1e2680"/>
+      <stop offset="0" stop-color="#00FFEB"/>
+      <stop offset="1" stop-color="#4B60FF"/>
     </linearGradient>
     <clipPath id="clip-아트보드_2">
       <rect width="100" height="100"/>
