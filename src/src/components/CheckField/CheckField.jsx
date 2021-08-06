@@ -10,11 +10,11 @@ function CheckField({ checked, setChecked, disabled, radio }) {
 
   return (
     <div className="check-field">
-      <span
+      <div
         className={classes.join(" ")}
         onClick={() => {
           if (setChecked && !disabled) setChecked(!checked);
-        }}></span>
+        }}></div>
     </div>
   );
 }
