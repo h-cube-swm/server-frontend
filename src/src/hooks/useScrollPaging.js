@@ -4,19 +4,19 @@ const MOVE_TIME = 500;
 
 const useScrollPaging = (onPaging) => {
     const scrollRef = useRef(0);
-    const [isMoving, setIsMoving] = useState(false);
+    const isMovingRef = useRef(false);
 
     const _onPaging = (delta) => {
-        setIsMoving(true);
+        isMovingRef.current = true;
         setTimeout(() => {
-            setIsMoving(false);
+            isMovingRef.current = false;
         }, MOVE_TIME);
         if (onPaging) onPaging(delta);
     };
 
     const onWheel = (event) => {
         const currentScroll = event.deltaY;
-        if (!isMoving) {
+        if (!isMovingRef.current) {
             if (currentScroll > 0 && currentScroll > scrollRef.current) {
                 _onPaging(1);
             } else if (currentScroll < 0 && currentScroll < scrollRef.current) {
@@ -26,7 +26,7 @@ const useScrollPaging = (onPaging) => {
         scrollRef.current = currentScroll;
     };
 
-    return [onWheel, isMoving];
+    return [onWheel];
 };
 
 export default useScrollPaging;
