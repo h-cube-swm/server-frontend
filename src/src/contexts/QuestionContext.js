@@ -6,12 +6,12 @@ export function QuestionProvider({ children, state, question, setQuestion, respo
   const callbackRef = useRef({});
   const callbacks = callbackRef.current;
 
-  if (callbacks.question !== question) {
+  if (callbacks.question !== question || callbacks.question === undefined) {
     callbacks.question = question;
     callbacks['setQuestion'] = setQuestion;
   }
 
-  if (callbacks.response !== response) {
+  if (callbacks.response !== response || callbacks.response === undefined) {
     callbacks.response = response;
     callbacks['setResponse'] = setResponse;
   }
