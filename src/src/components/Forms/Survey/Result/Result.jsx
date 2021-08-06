@@ -49,10 +49,9 @@ function reshapeAnswer(survey, answers) {
 
   answers.forEach(({ answer }) => {
     Object.entries(answer).forEach(([key, value]) => {
-      answerList[answerDict[key]].answers.push(value);
+      if (key !== "index") answerList[answerDict[key]].answers.push(value);
     });
   });
-
   return answerList;
 }
 
@@ -115,7 +114,9 @@ export default function Result({ match, location }) {
 
   const rows = answers.map(({ submit_time: timestamp, answer }) => {
     let row = { ...answer };
-    Object.keys(row).forEach((key) => (row[key] = valueToRow(key, row[key])));
+    Object.keys(row).forEach((key) => {
+      if (key !== "index") row[key] = valueToRow(key, row[key]);
+    });
     row.timestamp = timestamp;
     return row;
   });
@@ -172,10 +173,10 @@ export default function Result({ match, location }) {
       ) : (
         <div className="charts">{charts}</div>
       )}
-
-      <Link to={`#${viewModeNext}`}>전환</Link>
-      <button onClick={exportToXlsx}>xlsx 다운로드</button>
-      <button>csv 다운로드</button>
+      <div className="export-button">
+        <button onClick={exportToXlsx}>xlsx 다운로드</button>
+        <button>pdf 다운로드</button>
+      </div>
     </div>
   );
 }
