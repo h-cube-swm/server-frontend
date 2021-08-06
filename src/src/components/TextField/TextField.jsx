@@ -22,7 +22,6 @@ function TextField({
   ...props
 }) {
   const ref = useRef(null);
-  const { current } = ref;
 
   // Build classname
   const classes = ["txt-field"];
@@ -34,22 +33,25 @@ function TextField({
 
   // Adjust maximum height. It works similar to max-height option of css.
   const resize = () => {
-    if (!current) return;
-    current.style.height = "";
-    const height = Math.min(current.scrollHeight + 2, 100) + "px";
-    current.style.height = height;
+    const cur = ref.current;
+
+    if (!cur) return;
+    cur.style.height = "";
+    const height = Math.min(cur.scrollHeight + 2, 100) + "px";
+    cur.style.height = height;
   };
 
   const handleOnInput = () => {
+    const cur = ref.current;
+
     if (disabled) return;
-    if (!current) return;
-    let { value } = current;
+    if (!cur) return;
+    let { value } = cur;
     if (!multiline) value = value.replace(/\n/g, "");
     setText(value);
   };
 
   resize();
-  console.log("asdF");
 
   if (!setText) {
     if (text) {
