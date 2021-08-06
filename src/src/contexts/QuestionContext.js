@@ -1,9 +1,22 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useRef } from "react";
 
 const QuestionContext = createContext();
 
 export function QuestionProvider({ children, state, question, setQuestion, response, setResponse }) {
-  return <QuestionContext.Provider value={{ state, question, setQuestion, response, setResponse }} >
+  const callbackRef = useRef({});
+  const callbacks = callbackRef.current;
+
+  if (callbacks.question !== question) {
+    callbacks.question = question;
+    callbacks['setQuestion'] = setQuestion;
+  }
+
+  if (callbacks.response !== response) {
+    callbacks.response = response;
+    callbacks['setResponse'] = setResponse;
+  }
+
+  return <QuestionContext.Provider value={{ state, question, response, ...callbacks }} >
     {children}
   </QuestionContext.Provider >;
 }
