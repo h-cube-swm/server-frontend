@@ -148,7 +148,8 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
           const slowAppear = questions.length > 1;
           const isHide = isDragging && isSelected;
           const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
-          const onDelete = questions.length > 1 && getRemoveQuestion(index);
+          const onDelete =
+            questions.length > 1 && isSelected && getRemoveQuestion(index);
           const setQuestion = setNestedState(setSurvey, ["questions", index]);
 
           return (

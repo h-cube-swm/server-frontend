@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { CardStates } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
-import logo from "../../../../assets/images/logo.png";
 import { API } from "../../../../utils/apis";
 
 // HOCs
@@ -11,7 +10,6 @@ import withSurvey from "../../../../hocs/withSurvey";
 
 // Components
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import TextField from "../../../TextField/TextField";
 import { Link, Redirect } from "react-router-dom";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
@@ -50,7 +48,7 @@ function Response({ survey, surveyId }) {
   const isAnswered = !question.isRequired || checkEntered(response);
   if (index > 0) {
     buttons.push(
-      <button key="previous" className="btn" onClick={getMove(index - 1)}>
+      <button key="previous" className="btn lg" onClick={getMove(index - 1)}>
         이전으로
       </button>
     );
@@ -59,7 +57,7 @@ function Response({ survey, surveyId }) {
     buttons.push(
       <button
         key="next"
-        className={"btn " + (isAnswered ? "" : "disabled")}
+        className={"btn lg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? getMove(index + 1) : () => {}}>
         다음으로
       </button>
@@ -69,7 +67,7 @@ function Response({ survey, surveyId }) {
     buttons.push(
       <button
         key="finished"
-        className={"btn " + (isAnswered ? "" : "disabled")}
+        className={"btn lg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? onSubmit : () => {}}>
         완료
       </button>
@@ -79,19 +77,12 @@ function Response({ survey, surveyId }) {
   return (
     <div className="response">
       <div className="survey-header">
-        <div className="logo">
+        <span className="title"> {survey.title}</span>
+        <span className="logo">
           <Link to="/">
-            <img src={logo} alt="logo" />
+            Powered by <em> the Form</em>
           </Link>
-        </div>
-        <div className="info">
-          <TextField text={survey ? survey.title : ""} size="title" multiline />
-          <TextField
-            text={survey ? survey.description : ""}
-            size="xl"
-            multiline
-          />
-        </div>
+        </span>
       </div>
       <div className="contents-box">
         {questions.map((question, i) => {

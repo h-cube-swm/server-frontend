@@ -1,7 +1,10 @@
 import React from "react";
 import { CardStates, CardTypes } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
+
+// Hooks
 import { useQuestion } from "../../../../contexts/QuestionContext";
+import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
@@ -21,24 +24,21 @@ import {
 import "./QuestionCommon.scss";
 
 function getQuestionDetail(type) {
-  switch (type) {
-    case CardTypes.SINGLE_CHOICE:
-      return SingleChoices;
-    case CardTypes.MULTIPLE_CHOICE:
-      return MultipleChoices;
-    case CardTypes.PREFERENCE:
-      return Preference;
-    case CardTypes.SHORT_SENTENCE:
-      return ShortSentence;
-    case CardTypes.LONG_SENTENCE:
-      return LongSentence;
-    default:
-      return Default;
-  }
+  const typeDict = {
+    [CardTypes.SINGLE_CHOICE]: SingleChoices,
+    [CardTypes.MULTIPLE_CHOICE]: MultipleChoices,
+    [CardTypes.PREFERENCE]: Preference,
+    [CardTypes.SHORT_SENTENCE]: ShortSentence,
+    [CardTypes.LONG_SENTENCE]: LongSentence,
+  };
+  if (typeDict[type]) return typeDict[type];
+  return Default;
 }
 
 export default function QuestionCommon() {
   const { state, question, setQuestion } = useQuestion();
+  const blockTitle = useScrollBlock();
+  const blockDetail = useScrollBlock();
 
   const QuestionDetail = getQuestionDetail(question.type);
   const isEditting = state !== CardStates.EDITTING;
@@ -46,13 +46,15 @@ export default function QuestionCommon() {
   return (
     <div className="question-common">
       <div className="question-common-box">
-        <TextField
-          placeholder="더 폼 나는 질문"
-          text={question.title}
-          setText={setNestedState(setQuestion, ["title"])}
-          size="title"
-          multiline
-        />
+        <div className="question-title-box" {...blockTitle}>
+          <TextField
+            placeholder="더 폼 나는 질문"
+            text={question.title}
+            setText={setNestedState(setQuestion, ["title"])}
+            size="title"
+            multiline
+          />
+        </div>
         <div className="required-toggle-box">
           <Hider hide={isEditting}>
             <ToggleSwitch
@@ -64,8 +66,10 @@ export default function QuestionCommon() {
           </Hider>
         </div>
       </div>
-      <div className="question-detail-box">
-        <QuestionDetail />
+      <div className="question-detail-box" {...blockDetail}>
+        <div className="question-detail-box-inner">
+          <QuestionDetail />
+        </div>
       </div>
     </div>
   );

@@ -29,12 +29,14 @@ function PreferenceButton({
       <div className={classes.join(" ")} onClick={onClick}>
         {index}
       </div>
-      <TextField
-        placeholder={placeholder}
-        size="sm"
-        setText={setDescription}
-        text={description}
-      />
+      <div className="text-box">
+        <TextField
+          placeholder={placeholder}
+          size="sm"
+          setText={setDescription}
+          text={description}
+        />
+      </div>
     </div>
   );
 }
@@ -61,12 +63,14 @@ function LastButton({
           color: isError ? "red" : "black",
         }}
       />
-      <TextField
-        placeholder="설명 추가"
-        size="sm"
-        text={description}
-        setText={setDescription}
-      />
+      <div className="text-box">
+        <TextField
+          placeholder="설명 추가"
+          size="sm"
+          text={description}
+          setText={setDescription}
+        />
+      </div>
     </div>
   );
 }

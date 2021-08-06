@@ -28,14 +28,20 @@
     color: black;
     box-shadow: $shadow-default-shallow;
     transition-duration: 200ms;
+
     &.cursor {
       cursor: pointer;
     }
+
     &.selected {
       background-color: #2b44ff;
       color: #fff;
       transition-duration: 200ms;
     }
+  }
+
+  .text-box {
+    width: 3.5rem;
   }
 
   .preference-box-end {

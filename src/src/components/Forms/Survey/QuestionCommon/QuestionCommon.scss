@@ -6,10 +6,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 
   .question-common-box {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    margin-bottom: $card-padding;
+
+    .question-title-box {
+      flex-grow: 1;
+      max-height: 6rem;
+    }
 
     .required-toggle-box {
       display: flex;
@@ -20,10 +27,17 @@
   }
 
   .question-detail-box {
-    top: 0px;
-    @include text-center;
     width: 100%;
-    flex-grow: 1;
+    height: 100%;
+    display: flex;
     overflow: scroll;
+
+    .question-detail-box-inner {
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  @include mobile {
   }
 }
