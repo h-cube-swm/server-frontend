@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./TextField.scss";
 
 /*
@@ -21,12 +21,35 @@ function TextField({
   placeholder,
   ...props
 }) {
+  const ref = useRef(null);
+  const { current } = ref;
+
+  // Build classname
   const classes = ["txt-field"];
   if (size) classes.push(size);
   if (disabled) classes.push("disabled");
   if (!text) classes.push("placeholder");
-
+  if (multiline) classes.push("multiline");
   const className = classes.join(" ");
+
+  // Adjust maximum height. It works similar to max-height option of css.
+  const resize = () => {
+    if (!current) return;
+    current.style.height = "";
+    const height = Math.min(current.scrollHeight + 2, 100) + "px";
+    current.style.height = height;
+  };
+
+  const handleOnInput = () => {
+    if (disabled) return;
+    if (!current) return;
+    let { value } = current;
+    if (!multiline) value = value.replace(/\n/g, "");
+    setText(value);
+  };
+
+  resize();
+  console.log("asdF");
 
   if (!setText) {
     if (text) {
@@ -36,32 +59,16 @@ function TextField({
     }
   }
 
-  const handleOnInput = ({ target }) => {
-    let { value } = target;
-    if (!multiline) value = value.replace(/\n/g, "");
-    target.value = value;
-    setText(value);
-
-    target.style.height = "";
-    target.style.height = target.scrollHeight + "px";
-    if (size === "title" && target.scrollHeight >= 79) {
-      target.style.height = "79px";
-      target.style.overflow = "scroll";
-    } else if (size === "xl" && target.scrollHeight >= 45) {
-      target.style.height = "45px";
-      target.style.overflow = "scroll";
-    }
-  };
-
   return (
     <textarea
+      ref={ref}
       rows={1}
       {...props}
       className={className}
+      onInput={handleOnInput}
       value={text}
       disabled={disabled}
       placeholder={placeholder}
-      onInput={handleOnInput}
     />
   );
 }

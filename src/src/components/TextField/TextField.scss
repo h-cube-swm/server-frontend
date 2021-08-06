@@ -1,18 +1,28 @@
 @import "/src/scss/style.scss";
 
 .txt-field {
+  // Size setting
+  width: 100%;
+  overflow: hidden;
+
+  // Display settings
   display: flex;
   align-items: flex-end;
+  padding: 0;
+
+  // Text setting
   font-size: $fs-rg;
   font-weight: $fw-bold;
-  border: 0;
-  border-bottom: solid 2px rgba(0, 0, 0, 0);
-  background-color: rgba($color: #fff, $alpha: 0);
-  outline: none;
   white-space: pre-wrap;
   resize: none;
-  overflow: hidden;
-  padding-bottom: 5px;
+
+  // Shape setting
+  outline: none;
+  border: none;
+  border-bottom: solid 2px rgba(0, 0, 0, 0);
+
+  // Others
+  background-color: rgba($color: #fff, $alpha: 0);
 
   &.disabled,
   &.placeholder {
@@ -21,34 +31,27 @@
 
   // Font size settings
   &.title {
-    width: 25rem;
-    height: 3rem;
     font-size: $fs-lg;
   }
 
   &.xl {
-    width: 25rem;
     font-size: $fs-rg;
   }
 
   &.lg {
-    width: 20rem;
     font-size: $fs-rg;
   }
 
   &.rg {
-    width: 10rem;
     font-size: $fs-rg;
   }
 
   &.md {
-    width: 3rem;
     text-align: center;
     font-size: $fs-rg;
   }
 
   &.sm {
-    width: 3rem;
     text-align: center;
     font-size: $fs-sm;
     margin: 0 auto;
@@ -57,5 +60,9 @@
   // If an element is activated or focused, show border-bottom.
   &:focus {
     border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
+  }
+
+  &.multiline {
+    overflow: scroll;
   }
 }
