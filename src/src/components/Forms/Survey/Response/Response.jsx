@@ -79,8 +79,9 @@ function Response({ survey, surveyId }) {
       <div className="survey-header">
         <span className="title"> {survey.title}</span>
         <span className="logo">
-          <Link to="/">
-            Powered by <em> the Form</em>
+          <Link to="/" target="_blank">
+            Powered by <br />
+            <em> the Form</em>
           </Link>
         </span>
       </div>
