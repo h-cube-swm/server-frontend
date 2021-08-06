@@ -14,10 +14,11 @@ import { useQuestion } from "../../../../../contexts/QuestionContext";
 function Choice({
   text,
   setText,
+
   checked,
   setChecked,
+
   onDelete,
-  editable,
   multipleSelect,
 }) {
   return (
@@ -39,7 +40,7 @@ function Choice({
         />
       </div>
       <div className="delete-button-box">
-        <Hider hide={!(editable && onDelete)}>
+        <Hider hide={!(setText && onDelete)}>
           <button className="del-btn" onClick={onDelete}>
             <img src={delBtn} alt="delete button" />
           </button>
@@ -52,10 +53,10 @@ function Choice({
 function Choices({ multipleSelect }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-  const questionInitialized = useDefault(setQuestion, {
+  const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });
-  const responseInitialized = useDefault(setResponse, {});
+  const responseInitialized = useDefault(response, setResponse, {});
   if (!questionInitialized || !responseInitialized) return null;
   const { choices } = question;
   const editable = state === CardStates.EDITTING;
@@ -92,7 +93,6 @@ function Choices({ multipleSelect }) {
             key={i}
             text={choice}
             setText={setText}
-            editable={editable}
             onDelete={() => removeChoice(i)}
             checked={typeof response === "object" && response[i]}
             setChecked={onSelect(i)}

@@ -14,12 +14,12 @@ import IntegerField from "../../../../IntegerField/IntegerField";
 function Sentence({ isLong }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-  const ia = useDefault(setQuestion, {
+  const ia = useDefault(question, setQuestion, {
     answer: "",
     maxLenLong: 300,
     maxLenShort: 32,
   });
-  const ib = useDefault(setResponse, "");
+  const ib = useDefault(response, setResponse, "");
 
   if (!ia || !ib) return null;
 

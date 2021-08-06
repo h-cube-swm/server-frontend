@@ -82,13 +82,13 @@ export default function Preference() {
   const setMinDes = setNestedState(setQuestion, ["minDes"]); // 왼쪽 설명
   const setMaxDes = setNestedState(setQuestion, ["maxDes"]); // 오른쪽 설명
 
-  const ia = useDefault(setQuestion, {
+  const ia = useDefault(question, setQuestion, {
     answer: "",
     count: 5,
     minDes: "",
     maxDes: "",
   });
-  const ib = useDefault(setResponse, "");
+  const ib = useDefault(response, setResponse, "");
 
   if (!ia || !ib) return null;
 
