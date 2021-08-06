@@ -11,6 +11,7 @@
     margin-top: 5rem;
     overflow: scroll;
     flex-grow: 1;
+    margin-bottom: 5rem;
   }
 
   .survey-header {
@@ -44,11 +45,63 @@
       flex-direction: column;
       align-items: center;
       width: 15rem;
-      margin-right: 2rem;
+      margin-right: 0rem;
+      font-size: $fs-rg;
       strong {
+        font-size: $fs-md;
         font-weight: $fw-bold;
       }
     }
+  }
+
+  .btn-box {
+    @include round;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    padding: 1rem 1.5rem;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: $shadow-default;
+    .change {
+      background-color: #707070;
+      font-size: $fs-rg;
+      opacity: 0.6;
+    }
+    .partition {
+      width: 2px;
+      height: 3rem;
+      margin-right: 1rem;
+      background-color: #707070;
+      opacity: 0.6;
+    }
+    .export-button {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+      .xlsx {
+        font-size: $fs-rg;
+        background-color: #2d5b3a;
+        margin-right: 1rem;
+      }
+      .pdf {
+        font-size: $fs-rg;
+        background-color: #ce301e;
+      }
+
+      strong {
+        font-size: $fs-sm;
+        font-weight: $fw-bold;
+        margin-top: 3px;
+      }
+    }
+  }
+
+  .data-grid {
+    height: 100%;
+    margin-top: 5rem;
   }
 
   overflow: scroll;
