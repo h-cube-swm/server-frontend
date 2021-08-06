@@ -27,7 +27,8 @@ a {
 
   // Set shape
   @include text-center;
-  @include round;
+  // @include round;
+  border-radius: 999px;
   width: 5rem;
   height: 2.5rem;
 
@@ -51,6 +52,11 @@ a {
   &.xl {
     width: 10rem;
     height: 4rem;
+  }
+
+  &.rg {
+    width: 5rem;
+    height: 2rem;
   }
 
   &.disabled {
