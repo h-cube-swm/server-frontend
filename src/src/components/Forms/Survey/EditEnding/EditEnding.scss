@@ -1,12 +1,124 @@
 @import "/src/scss/style.scss";
 
-.ending-page {
-  width: 100vw;
-  height: 100vh;
+.edit-ending {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .contents-box {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    .celebrate-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-right: 15rem;
+      .celebrate-sentence {
+        text-align: start;
+        margin-top: 5rem;
+
+        img {
+          width: 6rem;
+          &.right {
+            opacity: 0;
+          }
+        }
+
+        h1 {
+          font-weight: 700;
+          text-align: start;
+          line-height: 1.6;
+          margin-bottom: 5rem;
+        }
+      }
+      .firework {
+        position: absolute;
+      }
+    }
+
+    .section {
+      height: 100%;
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      grid-gap: 2rem;
+      padding: 2rem;
+
+      .box {
+        @include round;
+        padding: 2rem 2rem;
+        width: 24rem;
+        height: 12rem;
+        box-shadow: $shadow-default;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        h1 {
+          font-size: $fs-lg;
+          font-weight: $fw-bold;
+          color: white;
+          strong {
+            color: #1dff0a;
+            font-weight: $fw-bold;
+          }
+        }
+        h2 {
+          font-size: $fs-md;
+          font-weight: $fw-bold;
+          margin: 0.5rem 0;
+          color: white;
+        }
+        h3 {
+          font-size: $fs-rg;
+          font-weight: $fw-bold;
+          margin: 0.5rem 0;
+          color: white;
+        }
+        &.one {
+          height: 24rem;
+          grid-row: 1 / 3;
+          grid-column: 1;
+          background: linear-gradient(to right, #2b44ff, #1dff0a);
+          img {
+            width: 40%;
+          }
+        }
+
+        &.four {
+          height: 24rem;
+          grid-row: 2 / 4;
+          grid-column: 2;
+          background: linear-gradient(to right, #2b44ff, #0afff6);
+          img {
+            width: 40%;
+          }
+        }
+
+        &.five {
+          grid-row: 4;
+          grid-column: 1;
+          background: linear-gradient(to right, #2b44ff, #707070);
+          img {
+            width: 40%;
+          }
+        }
+
+        &.six {
+          grid-row: 4;
+          grid-column: 2;
+          background: linear-gradient(to right, #2b44ff, #707070);
+          img {
+            width: 40%;
+          }
+        }
+      }
+    }
+  }
 
   .logo {
     position: absolute;
@@ -14,59 +126,53 @@
     left: 3rem;
 
     img {
-      width: 8rem;
+      width: 6rem;
       height: auto;
     }
   }
-}
 
-.celebrate-sentence {
-  margin-bottom: 5rem;
-  font-weight: 700;
-  text-align: center;
-  line-height: 3rem;
-}
+  .link-btn-xl {
+    position: fixed;
+    bottom: 5rem;
+  }
 
-.survey-sum {
-  @include round;
-  width: 60rem;
-  height: 25rem;
-  margin-bottom: 5rem;
-  padding: 3rem 5rem;
-  box-shadow: $shadow-default;
-  h1 {
-    display: block;
-    margin-bottom: 1rem;
-    font-size: $fs-lg;
-    font-weight: $fw-bold;
-  }
-  h2 {
-    display: block;
-    margin-bottom: 3rem;
-    font-size: $fs-rg;
-  }
-  ul {
-    @include text-center;
-    padding: 0;
-    li {
-      @include text-center;
-      width: 100%;
-      text-decoration: none;
-      margin-bottom: 1rem;
-      h3 {
-        font-weight: 700;
-        margin-bottom: 0.5rem;
+  overflow: scroll;
+
+  @include desktop {
+    .contents-box {
+      justify-content: space-around;
+      max-width: 1200px;
+      .celebrate-sentence {
+        h1 {
+          font-size: $fs-lg;
+        }
       }
-      p {
-        @include text-center;
-        @include round;
-        margin-bottom: 1rem;
-        width: 100%;
-        height: 2.5rem;
-        background-color: #2b44ff;
-        color: #fff;
-        font-weight: 700;
-        opacity: 0.7;
+      .celebrate-box {
+        margin-right: 3rem;
+      }
+      .section {
+        grid-gap: 1rem;
+        grid-row-gap: 0.5rem;
+        .box {
+          width: 18rem;
+          height: 9.5rem;
+          padding: 1.5rem;
+          h1 {
+            font-size: $fs-md;
+          }
+          h2 {
+            font-size: $fs-rg;
+          }
+          h3 {
+            font-size: $fs-sm;
+          }
+          &.one {
+            height: 16rem;
+          }
+          &.four {
+            height: 16rem;
+          }
+        }
       }
     }
   }
