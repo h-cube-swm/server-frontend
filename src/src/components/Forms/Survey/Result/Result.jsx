@@ -9,6 +9,9 @@ import TextField from "../../../TextField/TextField";
 import { CardTypes } from "../constants";
 import DataGrid from "react-data-grid";
 import { utils, writeFile } from "xlsx";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
+import { font } from "./malgun-normal";
 
 /* Assets */
 import "./Result.scss";
@@ -136,6 +139,38 @@ export default function Result({ match, location }) {
     writeFile(wb, "filename.xlsx");
   };
 
+  const exportToPdf = () => {
+    const pdfColumn = [columns.map(({ name }) => name)];
+    const pdfRows = rows.map((obj) => {
+      let pdfRow = Object.values(obj);
+      pdfRow.unshift(pdfRow.pop());
+      return pdfRow;
+    });
+
+    const doc = new jsPDF({
+      orientation: "landscape",
+      unit: "px",
+    });
+
+    doc.addFileToVFS("MyFont.ttf", font);
+    doc.addFont("MyFont.ttf", "MyFont", "normal");
+    doc.setFont("MyFont");
+
+    autoTable(doc, {
+      head: pdfColumn,
+      body: pdfRows,
+      horizontalPageBreak: true,
+      styles: {
+        cellPadding: 1.5,
+        font: "MyFont",
+        fontStyle: "normal",
+        fontSize: 8,
+        cellWidth: "wrap",
+      },
+      tableWidth: "wrap",
+    });
+    doc.save("filename.pdf");
+  };
   return (
     <div className="result">
       <div className="survey-header">
@@ -156,13 +191,11 @@ export default function Result({ match, location }) {
         <h3>
           총 응답 수 <strong>{answers.length}</strong>
         </h3>
-        <Link to={`#${viewModeNext}`} className="btn">
-          전환
-        </Link>
       </div>
 
       {isTable ? (
         <DataGrid
+          className="data-grid"
           key="grid"
           columns={columns}
           rows={rows}
@@ -173,9 +206,23 @@ export default function Result({ match, location }) {
       ) : (
         <div className="charts">{charts}</div>
       )}
-      <div className="export-button">
-        <button onClick={exportToXlsx}>xlsx 다운로드</button>
-        <button>pdf 다운로드</button>
+      <div className="btn-box">
+        <div className="export-button">
+          <button className="btn lg xlsx" onClick={exportToXlsx}>
+            .xlsx
+            <br />
+            <strong>다운로드</strong>
+          </button>
+          <button className="btn lg pdf" onClick={exportToPdf}>
+            pdf
+            <br />
+            <strong>다운로드</strong>
+          </button>
+        </div>
+        <div className="partition"></div>
+        <Link to={`#${viewModeNext}`} className="btn lg change">
+          {isTable ? "차트 보기" : "표 보기"}
+        </Link>
       </div>
     </div>
   );
