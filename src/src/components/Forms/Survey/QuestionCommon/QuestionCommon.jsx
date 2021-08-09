@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CardStates, CardTypes } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
@@ -36,12 +36,25 @@ function getQuestionDetail(type) {
 }
 
 export default function QuestionCommon() {
+  const scrollRef = useRef(0);
+
   const { state, question, setQuestion } = useQuestion();
   const blockTitle = useScrollBlock();
-  const blockDetail = useScrollBlock();
+  const { ref, ...blockDetail } = useScrollBlock();
 
   const QuestionDetail = getQuestionDetail(question.type);
   const isEditting = state !== CardStates.EDITTING;
+
+  useEffect(() => {
+    if (scrollRef.current < ref.current.scrollHeight) {
+      ref.current.scroll({
+        top: 999999,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+    scrollRef.current = ref.current.scrollHeight;
+  });
 
   return (
     <div className="question-common">
@@ -52,7 +65,6 @@ export default function QuestionCommon() {
             text={question.title}
             setText={setNestedState(setQuestion, ["title"])}
             size="title"
-            multiline
           />
         </div>
         <div className="required-toggle-box">
@@ -66,7 +78,7 @@ export default function QuestionCommon() {
           </Hider>
         </div>
       </div>
-      <div className="question-detail-box" {...blockDetail}>
+      <div className="question-detail-box" ref={ref} {...blockDetail}>
         <div className="question-detail-box-inner">
           <QuestionDetail />
         </div>
