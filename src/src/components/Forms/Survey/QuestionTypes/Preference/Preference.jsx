@@ -53,7 +53,7 @@ function LastButton({
     <div className="prefence-btn" key="last">
       <input
         type="text"
-        className="preference-box-end"
+        className="preference-box end"
         value={count}
         onChange={(e) => onCountChange(e.target.value)}
         onBlur={onBlur}
