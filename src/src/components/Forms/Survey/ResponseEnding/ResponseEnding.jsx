@@ -31,7 +31,7 @@ export default function ResponseEnding() {
           <Firework />
           <Link className="btn lg" to="/forms/survey">
             설문조사 <br />
-            시작하기
+            만들기
           </Link>
         </div>
         <div className="service-box">

@@ -27,10 +27,10 @@ a {
 
   // Set shape
   @include text-center;
-  // @include round;
-  border-radius: 999px;
-  width: 5rem;
-  height: 2.5rem;
+  @include round;
+  width: 8rem;
+  height: 4rem;
+  padding: 1rem;
 
   // Set font
   color: #fff;
@@ -44,23 +44,41 @@ a {
   transition-duration: 500ms;
 
   // Options
-  &.lg {
-    width: 6rem;
-    height: 3rem;
-  }
 
-  &.xl {
+  &.long {
     width: 10rem;
     height: 4rem;
   }
 
+  &.xl {
+    width: 10rem;
+    height: 5rem;
+  }
+
+  &.lg {
+    width: 8rem;
+    height: 4rem;
+  }
+
   &.rg {
-    width: 5rem;
-    height: 2rem;
+    width: 6rem;
+    height: 3rem;
   }
 
   &.disabled {
     background-color: #888;
+  }
+
+  @include mobile {
+    &.lg {
+      width: 6rem;
+      height: 3rem;
+    }
+
+    &.rg {
+      width: 4rem;
+      height: 2rem;
+    }
   }
 }
 

@@ -48,7 +48,7 @@ function Response({ survey, surveyId }) {
   const isAnswered = !question.isRequired || checkEntered(response);
   if (index > 0) {
     buttons.push(
-      <button key="previous" className="btn lg" onClick={getMove(index - 1)}>
+      <button key="previous" className="btn rg" onClick={getMove(index - 1)}>
         이전으로
       </button>
     );
@@ -57,7 +57,7 @@ function Response({ survey, surveyId }) {
     buttons.push(
       <button
         key="next"
-        className={"btn lg " + (isAnswered ? "" : "disabled")}
+        className={"btn rg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? getMove(index + 1) : () => {}}>
         다음으로
       </button>
@@ -67,7 +67,7 @@ function Response({ survey, surveyId }) {
     buttons.push(
       <button
         key="finished"
-        className={"btn lg " + (isAnswered ? "" : "disabled")}
+        className={"btn rg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? onSubmit : () => {}}>
         완료
       </button>
@@ -89,16 +89,18 @@ function Response({ survey, surveyId }) {
         {questions.map((question, i) => {
           const { id } = question;
 
+          // Build class names
           const classes = ["question-box"];
-
           if (i < index) classes.push("left");
           if (i > index) classes.push("right");
-
           const className = classes.join(" ");
+
+          // Get state
+          const state = i === index ? CardStates.RESPONSE : CardStates.PREVIEW;
 
           return (
             <QuestionProvider
-              state={CardStates.RESPONSE}
+              state={state}
               question={question}
               key={id}
               response={responses[id]}
