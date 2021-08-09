@@ -10,12 +10,12 @@ const withSurvey = Component => props => {
   if (err) return <Redirect to="/error/unexpected"></Redirect>;
   if (!result) return <Loading></Loading>;
 
-  const { title, description, contents } = result;          //A
-  const survey = { title, description, ...contents };       //B
+  const { title, description, contents, ...meta } = result;       //A
+  const survey = { title, description, meta, ...contents };       //B
   const newProps = { ...props, surveyId, survey };
 
   async function updateSurvey(survey) {
-    const { title, description, ...contents } = survey;           //B
+    const { title, description, meta, ...contents } = survey;     //B
     const body = { title, description, contents, view: "slide" }; //A
     return await API.putSurvey(surveyId, body);
   }
