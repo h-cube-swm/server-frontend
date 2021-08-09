@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 
@@ -7,8 +7,11 @@ import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
 import Loading from "../../../Loading/Loading";
 import Firework from "../ResponseEnding/Firework/Firework";
+import TextField from "../../../TextField/TextField";
 
 const Ending = ({ ending }) => {
+  const [email, setEmail] = useState("");
+
   if (!ending) {
     return <Loading />;
   }
@@ -29,13 +32,29 @@ const Ending = ({ ending }) => {
             <h1>
               축하합니다. <br />
               설문을 완성했습니다. <br />
-              이제 배포만 남았습니다!
+              <br />
+              이메일을 적어주시면
+              <br />
+              <strong>배포</strong>와 <strong>결과확인</strong> 링크를
+              보내드립니다.
             </h1>
+            <div className="email">
+              <TextField
+                placeholder="abcde@the-form.io"
+                size="title"
+                setText={setEmail}
+                text={email}
+              />
+              <Link className="btn rg" to="/forms/survey">
+                보내기
+              </Link>
+            </div>
+            <p>
+              * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 <br />
+              해당 설문에 접근할 수 없습니다.
+            </p>
           </div>
           <Firework />
-          <Link className="btn lg" to="/forms/survey">
-            홈으로
-          </Link>
         </div>
         <div className="service-box">
           <div className="section">

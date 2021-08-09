@@ -10,7 +10,7 @@ import Positioner from "../../../Positioner/Positioner";
 import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
 import Hider from "../../../Hider/Hider";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import Loading from "../../../Loading/Loading";
+import Ending from "../EditEnding/EditEnding";
 
 /* HOC, Context, Hooks */
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
@@ -25,6 +25,7 @@ import orderedMap from "../../../../utils/orderedMap";
 import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
+import { Redirect } from "react-router-dom";
 
 const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   const initSurvey = useMemo(() => {
@@ -41,7 +42,7 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   }, [init]);
 
   const [survey, setSurvey] = useState(initSurvey);
-
+  const [isEnded, setIsEnded] = useState(false);
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
 
   const getInsertQuestion = (index) => () => {
@@ -104,7 +105,9 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   const onEvent = useThrottle(putSurvey);
   onEvent();
 
-  if (!survey) return <Loading></Loading>;
+  if (survey.meta.status === "published")
+    return <Redirect to="/error/published" />;
+  if (isEnded) return <Ending surveyId={survey.id} />;
 
   const { selectedIndex } = survey;
   const setQuesionType = setNestedState(setSurvey, [
@@ -118,7 +121,12 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
 
   return (
     <div className="edit" {...backgroundCallbacks}>
-      <Prologue survey={survey} setSurvey={setSurvey} putSurvey={putSurvey} />
+      <Prologue
+        survey={survey}
+        setSurvey={setSurvey}
+        putSurvey={putSurvey}
+        setIsEnded={setIsEnded}
+      />
       <div className="positioning-box">
         <div className="sidebar-box">
           <Sidebar
@@ -157,7 +165,7 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
                 <QuestionProvider
                   state={state}
                   question={question}
-                  setQuestion={setQuestion}>
+                  setQuestion={isSelected && setQuestion}>
                   <Card
                     onDelete={onDelete}
                     onGrab={onGrab}

@@ -15,11 +15,19 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      margin-right: 15rem;
+      margin-right: 10rem;
+      margin-top: 5rem;
       .celebrate-sentence {
         text-align: start;
-        margin-top: 5rem;
-
+        margin-bottom: 5rem;
+        p {
+          color: red;
+          margin-top: 1rem;
+        }
+        .email {
+          display: flex;
+          align-items: center;
+        }
         img {
           width: 6rem;
           &.right {
@@ -27,11 +35,21 @@
           }
         }
 
+        textarea {
+          width: 70%;
+          margin-right: 1rem;
+        }
+
         h1 {
+          font-size: $fs-lg;
           font-weight: 700;
           text-align: start;
           line-height: 1.6;
           margin-bottom: 5rem;
+          strong {
+            color: #2b44ff;
+            font-weight: $fw-bold;
+          }
         }
       }
       .firework {
@@ -51,7 +69,7 @@
 
       .box {
         @include round;
-        padding: 2rem 2rem;
+        padding: 1.5rem;
         width: 24rem;
         height: 12rem;
         box-shadow: $shadow-default;
@@ -87,6 +105,12 @@
           img {
             width: 40%;
           }
+        }
+
+        &.three {
+          height: 24rem;
+          grid-row: 3;
+          grid-column: 1;
         }
 
         &.four {
@@ -142,13 +166,13 @@
     .contents-box {
       justify-content: space-around;
       max-width: 1200px;
-      .celebrate-sentence {
-        h1 {
-          font-size: $fs-lg;
-        }
-      }
       .celebrate-box {
         margin-right: 3rem;
+        .celebrate-sentence {
+          h1 {
+            font-size: $fs-md;
+          }
+        }
       }
       .section {
         grid-gap: 1rem;
