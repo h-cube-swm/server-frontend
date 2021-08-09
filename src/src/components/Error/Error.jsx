@@ -35,7 +35,9 @@ export default function Error({ match }) {
       contents = (
         <div className="contents">
           <h1>예상치 못한 에러가 발생하였습니다. </h1>
-          <p>메인 페이지의 채널톡을 통해 문의주시면 감사드리겠습니다.</p>
+          <p>
+            하단 <strong>채널톡</strong>을 통해 문의주시면 감사드리겠습니다.
+          </p>
         </div>
       );
       break;

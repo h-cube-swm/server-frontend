@@ -25,9 +25,15 @@
     left: 10rem;
     h1 {
       font-size: $fs-xl;
+      margin-bottom: 1rem;
     }
     p {
-      font-size: $fs-lg;
+      font-size: $fs-md;
+      font-weight: 700;
+      strong {
+        font-weight: 700;
+        color: #2b44ff;
+      }
     }
   }
 
