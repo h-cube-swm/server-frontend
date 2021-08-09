@@ -2,45 +2,104 @@
 
 .prologue-box {
   width: 100%;
-  height: 5rem;
+  height: 100%;
+  z-index: 4;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
   background-color: #fff;
   box-shadow: $shadow-default;
-  z-index: 4;
+  transition-duration: 500ms;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   .survey-header {
     display: flex;
     align-items: center;
-    padding: 0.5rem;
     width: 100%;
-    height: 100%;
-    top: 0;
-    z-index: 1;
+
+    .submit-button {
+      position: absolute;
+      right: 2rem;
+    }
 
     .logo {
-      margin-left: 2rem;
-      margin-right: 3rem;
-      width: auto;
-      height: 100%;
+      padding-left: 2rem;
+      padding-right: 3rem;
+      height: 5rem;
+      transition-duration: 500ms;
       img {
+        margin-top: 10%;
         height: 90%;
       }
     }
 
-    .info {
-      display: flex;
-      align-items: flex-end;
+    .title-box {
+      flex-grow: 1;
       width: 100%;
-    }
-
-    .put-survey {
-      margin-right: 3rem;
+      margin-right: 1rem;
     }
   }
 
-  @include tablet {
-    .survey-header {
-      .logo {
+  .fold-button-box {
+    width: 100;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    padding: 1rem;
+    transform: translateX(-50%);
+    button {
+      background-color: transparent;
+      img {
+        width: 70%;
       }
+    }
+  }
+
+  &.folded {
+    height: 5rem;
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .survey-header {
+      height: 100%;
+    }
+
+    .fold-button-box {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      z-index: -10;
+    }
+
+    .description-box {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      z-index: -10;
+    }
+  }
+
+  &.extended {
+    justify-content: center;
+    align-items: center;
+
+    .submit-button {
+      opacity: 0;
+    }
+
+    .logo {
+      opacity: 0;
+      z-index: -10;
     }
   }
 }
