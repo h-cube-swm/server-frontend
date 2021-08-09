@@ -1,32 +1,36 @@
 @import "/src/scss/style.scss";
 
-.txt-field {
+.text-field {
   // Size setting
   width: 100%;
-  overflow: hidden;
-
-  // Display settings
-  display: flex;
-  align-items: flex-end;
-  padding: 0;
 
   // Text setting
   font-size: $fs-rg;
-  font-weight: $fw-bold;
-  white-space: pre-wrap;
-  resize: none;
+  font-weight: $fw-light;
+  white-space: pre;
 
   // Shape setting
   outline: none;
   border: none;
-  border-bottom: solid 2px rgba(0, 0, 0, 0);
 
   // Others
-  background-color: rgba($color: #fff, $alpha: 0);
+  background-color: #fff;
+  resize: none;
 
-  &.disabled,
-  &.placeholder {
-    color: #888;
+  &.multiline {
+    white-space: pre-wrap;
+  }
+
+  &.gray {
+    color: rgba(#000, 0.2);
+  }
+
+  &.viewmode {
+    white-space: pre-wrap;
+  }
+
+  &::placeholder {
+    color: rgba(#000, 0.2);
   }
 
   // Font size settings
@@ -55,14 +59,5 @@
     text-align: center;
     font-size: $fs-sm;
     margin: 0 auto;
-  }
-
-  // If an element is activated or focused, show border-bottom.
-  &:focus {
-    border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-  }
-
-  &.multiline {
-    overflow: initial;
   }
 }
