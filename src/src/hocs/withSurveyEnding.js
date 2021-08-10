@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
 import { API } from "../utils/apis";
 
 const withSurveyEnding = (Component) => (props) => {
@@ -18,6 +20,7 @@ const withSurveyEnding = (Component) => (props) => {
           status: result["status"],
           surveyLink: result["survey_link"],
           title: result["title"],
+          surveyId,
         };
         setEnding(ending);
       } catch (e) {
@@ -28,6 +31,8 @@ const withSurveyEnding = (Component) => (props) => {
   }, [surveyId]);
 
   if (error) return <Redirect to="/error/unexpected/cannot-end-survey" />;
+  if (!ending) return <Loading />;
+
   return <Component {...props} ending={ending} />;
 };
 
