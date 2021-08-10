@@ -1,5 +1,5 @@
 /* React elements*/
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useState } from "react";
 
 /* Components */
 import Card from "../Card/Card";
@@ -26,6 +26,7 @@ import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
 import { Redirect } from "react-router-dom";
+import Title from "../../../Title/Title";
 
 const Edit = ({ survey: init, updateSurvey }) => {
   const [survey, setSurvey] = useState(init);
@@ -108,6 +109,7 @@ const Edit = ({ survey: init, updateSurvey }) => {
 
   return (
     <div className="edit" {...backgroundCallbacks}>
+      <Title>{survey.title}</Title>
       <Prologue
         survey={survey}
         setSurvey={setSurvey}
