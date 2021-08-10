@@ -66,7 +66,7 @@ export default function Result({ match, location }) {
   const [result, err] = API.useResponses(resultId);
   if (err && result.status === 400)
     return <Redirect to="/error/wrongResultId" />;
-  if (err) return <Redirect to="/error/unexpected" />;
+  if (err) return <Redirect to="/error/unexpected/cannot-get-result" />;
   if (!result) return <Loading />;
 
   const { survey, answers } = result;

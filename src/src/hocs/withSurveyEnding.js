@@ -3,6 +3,7 @@ import { API } from "../utils/apis";
 
 const withSurveyEnding = (Component) => (props) => {
   const [ending, setEnding] = useState(null);
+  const [error, setError] = useState(null);
 
   const surveyId = props.surveyId;
 
@@ -19,11 +20,14 @@ const withSurveyEnding = (Component) => (props) => {
           title: result["title"],
         };
         setEnding(ending);
-      } catch (e) {}
+      } catch (e) {
+        setError(e);
+      }
     };
     getEndData();
   }, [surveyId]);
 
+  if (error) return <Redirect to="/error/unexpected/cannot-end-survey" />;
   return <Component {...props} ending={ending} />;
 };
 
