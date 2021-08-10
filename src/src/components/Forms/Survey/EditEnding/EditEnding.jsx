@@ -78,7 +78,8 @@ const Ending = ({ ending }) => {
                   사람들에게 <strong>배포</strong>하세요.
                 </h1>
                 <h3>
-                  {"https://the-form.io/forms/survey/response/" + surveyLink}
+                  {"https://the-form.io/forms/survey/response/" +
+                    hash(surveyLink)}
                 </h3>
               </div>
             </div>
