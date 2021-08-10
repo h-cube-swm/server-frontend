@@ -93,9 +93,8 @@ const Edit = ({ survey: init, updateSurvey }) => {
   const onEvent = useThrottle(putSurvey);
   onEvent();
 
-  if (survey.meta.status === "published")
-    return <Redirect to="/error/published" />;
-  if (isEnded) return <Ending surveyId={survey.id} />;
+  if (survey.meta.status === "published" || isEnded)
+    return <Redirect to={`/forms/survey/end/${survey.id}`} />;
 
   const { selectedIndex } = survey;
   const setQuesionType = setNestedState(setSurvey, [

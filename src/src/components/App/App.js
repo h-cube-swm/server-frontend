@@ -22,7 +22,7 @@ function App() {
         <Route path="/" component={Main} exact />
         <Route path="/forms/survey" component={Survey} exact />
         <Route path="/forms/survey/edit/:link" component={Edit} />
-        <Route path="/forms/survey/end" component={Ending} />
+        <Route path="/forms/survey/end/:link" component={Ending} />
         <Route
           path="/forms/survey/response/ending"
           component={ResponseEnding}
