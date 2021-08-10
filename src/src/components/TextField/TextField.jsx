@@ -9,7 +9,6 @@ function TextField({
   size,
   multiline,
   placeholder,
-  focused,
   ...props
 }) {
   const ref = useRef(null);
