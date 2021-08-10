@@ -6,6 +6,30 @@
   display: flex;
   flex-direction: column;
 
+  .cover-box {
+    flex-grow: 1;
+    max-width: 800px;
+    height: 100%;
+    padding: 2rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      text-align: center;
+    }
+
+    hr {
+      margin: 1rem 0;
+    }
+
+    .description {
+      flex-grow: 1;
+      overflow: scroll;
+      white-space: pre-wrap;
+    }
+  }
+
   .survey-header {
     display: flex;
     justify-content: space-between;

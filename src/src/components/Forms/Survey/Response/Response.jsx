@@ -29,8 +29,9 @@ function Response({ survey, surveyId }) {
   const [redirect, setRedirect] = useState(null);
   const { questions } = survey;
   const { index } = responses;
-  const question = questions[index];
-  const response = responses[question.id];
+
+  const question = index > 0 && questions[index - 1];
+  const response = index > 0 && responses[index - 1];
   const setIndex = setNestedState(setResponses, ["index"]);
 
   if (!survey) return <Loading />;
@@ -43,9 +44,19 @@ function Response({ survey, surveyId }) {
     setRedirect("/forms/survey/response/ending");
   };
 
+  const cover = (
+    <div className="cover-box">
+      <h1 className="title">{survey.title}</h1>
+      <hr></hr>
+      <div className="description">{survey.description}</div>
+    </div>
+  );
+  const pages = [cover, ...questions];
+
   let buttons = [];
 
-  const isAnswered = !question.isRequired || checkEntered(response);
+  const isAnswered =
+    index === 0 || !question.isRequired || checkEntered(response);
   if (index > 0) {
     buttons.push(
       <button key="previous" className="btn rg" onClick={getMove(index - 1)}>
@@ -53,7 +64,7 @@ function Response({ survey, surveyId }) {
       </button>
     );
   }
-  if (index < questions.length - 1) {
+  if (index < pages.length - 1) {
     buttons.push(
       <button
         key="next"
@@ -63,7 +74,7 @@ function Response({ survey, surveyId }) {
       </button>
     );
   }
-  if (index === questions.length - 1) {
+  if (index === pages.length - 1) {
     buttons.push(
       <button
         key="finished"
@@ -86,22 +97,23 @@ function Response({ survey, surveyId }) {
         </span>
       </div>
       <div className="contents-box">
-        {questions.map((question, i) => {
-          const { id } = question;
-
+        {pages.map((page, i) => {
           // Build class names
           const classes = ["question-box"];
           if (i < index) classes.push("left");
           if (i > index) classes.push("right");
           const className = classes.join(" ");
 
+          if (i == 0) return <div className={className}>{page}</div>;
+
           // Get state
           const state = i === index ? CardStates.RESPONSE : CardStates.PREVIEW;
 
+          const { id } = page;
           return (
             <QuestionProvider
               state={state}
-              question={question}
+              question={page}
               key={id}
               response={responses[id]}
               setResponse={setNestedState(setResponses, [id])}>
