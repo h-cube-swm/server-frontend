@@ -21,6 +21,9 @@ function Choice({
   onDelete,
   multipleSelect,
 }) {
+  const { state } = useQuestion();
+  const isEditing = state === CardStates.EDITTING;
+
   return (
     <div className="choice-box">
       <div className="check-box">
@@ -40,7 +43,7 @@ function Choice({
         />
       </div>
       <div className="delete-button-box">
-        <Hider hide={!(setText && onDelete)}>
+        <Hider hide={!isEditing}>
           <button className="del-btn" onClick={onDelete}>
             <img src={delBtn} alt="delete button" />
           </button>
@@ -59,15 +62,18 @@ function Choices({ multipleSelect }) {
   const responseInitialized = useDefault(response, setResponse, {});
   if (!questionInitialized || !responseInitialized) return null;
   const { choices } = question;
-  const editable = state === CardStates.EDITTING;
+  const isEditting = state === CardStates.EDITTING;
+  const isResponse = state === CardStates.RESPONSE;
 
   if (state === CardStates.GHOST && !choices) return null;
 
   const addChoice = () => {
+    if (!isEditting) return;
     setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
   };
 
   const removeChoice = (i) => {
+    if (!isEditting) return;
     setNestedState(setQuestion, ["choices"])((choices) => {
       const newChoices = [...choices];
       newChoices.splice(i, 1);
@@ -76,7 +82,7 @@ function Choices({ multipleSelect }) {
   };
 
   const onSelect = (i) => (checked) => {
-    if (editable) return;
+    if (!isResponse) return;
     if (multipleSelect) {
       setNestedState(setResponse, [i])(checked);
     } else {
@@ -92,7 +98,7 @@ function Choices({ multipleSelect }) {
           <Choice
             key={i}
             text={choice}
-            setText={setText}
+            setText={isEditting && setText}
             onDelete={() => removeChoice(i)}
             checked={typeof response === "object" && response[i]}
             setChecked={onSelect(i)}
@@ -101,7 +107,7 @@ function Choices({ multipleSelect }) {
         );
       })}
       <div>
-        <Hider hide={!editable}>
+        <Hider hide={!isEditting}>
           <button className="add-btn" onClick={addChoice}>
             <div className="button-box">
               <img src={addBtn} alt="delete button" />
