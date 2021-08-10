@@ -162,7 +162,7 @@
 
   overflow: scroll;
 
-  @include desktop {
+  @include laptop {
     .contents-box {
       justify-content: space-around;
       max-width: 1200px;

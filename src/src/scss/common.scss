@@ -1,3 +1,24 @@
+@include mobile {
+  html {
+    font-size: 13px;
+  }
+}
+@include tablet {
+  html {
+    font-size: 14px;
+  }
+}
+@include laptop {
+  html {
+    font-size: 15px;
+  }
+}
+@include desktop {
+  html {
+    font-size: 16px;
+  }
+}
+
 button {
   text-decoration: none;
   font-weight: 700;
@@ -27,7 +48,7 @@ a {
 
   // Set shape
   @include text-center;
-  @include round;
+  border-radius: 10px;
   width: 8rem;
   height: 4rem;
   padding: 1rem;
@@ -67,18 +88,6 @@ a {
 
   &.disabled {
     background-color: #888;
-  }
-
-  @include mobile {
-    &.lg {
-      width: 6rem;
-      height: 3rem;
-    }
-
-    &.rg {
-      width: 4rem;
-      height: 2rem;
-    }
   }
 }
 

@@ -25,20 +25,24 @@
       right: 2rem;
     }
 
+    .info {
+      width: 80%;
+    }
+
     .logo {
-      padding-left: 2rem;
+      padding-left: (5rem-3.5rem)/2;
       padding-right: 3rem;
-      height: 5rem;
+      height: 3.5rem;
       transition-duration: 500ms;
       img {
-        margin-top: 10%;
-        height: 90%;
+        height: 100%;
       }
     }
 
     .title-box {
       flex-grow: 1;
       width: 100%;
+      height: max-content;
       margin-right: 1rem;
     }
   }
@@ -57,6 +61,16 @@
       img {
         width: 70%;
       }
+    }
+  }
+
+  .description-box {
+    width: 100%;
+    height: auto;
+    textarea {
+      width: 50%;
+      height: 10rem;
+      margin-top: 5rem;
     }
   }
 

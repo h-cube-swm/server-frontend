@@ -48,7 +48,7 @@ $background-color: #fff;
     }
   }
 
-  @include desktop {
+  @include laptop {
     .positioning-box {
       .sidebar-box {
         left: 15rem;
