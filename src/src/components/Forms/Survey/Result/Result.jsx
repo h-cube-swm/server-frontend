@@ -101,7 +101,6 @@ export default function Result({ match, location }) {
   const isTable = viewMode === "table";
   const isWinner = viewMode === "winner";
   const isChart = !isTable && !isWinner;
-  const nextMode = isChart ? "table" : "chart";
 
   // Parse response data
   const { survey, answers } = result;
@@ -167,10 +166,12 @@ export default function Result({ match, location }) {
           </button>
         </div>
         <div className="partition"></div>
-        <Link to={`#${nextMode}`} className="btn rg change">
+        <Link to={`#${isTable ? "chart" : "table"}`} className="btn rg change">
           {isTable ? "차트 보기" : "표 보기"}
         </Link>
-        <Link className="btn rg get-winner" to="#winner">
+        <Link
+          className="btn rg get-winner"
+          to={`#${isWinner ? "chart" : "winner"}`}>
           {isWinner ? "돌아가기" : "응답자\n추첨"}
         </Link>
       </div>

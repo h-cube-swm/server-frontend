@@ -5,19 +5,18 @@ import Loading from "../components/Loading/Loading";
 import { API } from "../utils/apis";
 import { isUnhashable, unhash } from "../utils/hasher";
 
-const withSurvey = Component => props => {
-
+const withSurvey = (Component) => (props) => {
   let surveyId = props.match.params.link;
   if (isUnhashable(surveyId)) surveyId = unhash(surveyId);
 
   // Load survey data from server
   const [result, err] = API.useSurvey(surveyId);
-  if (err) return <Redirect to="/error/unexpected/cannot-load-survey"></Redirect>;
+  if (err) return <Redirect to="/error/unexpected/cannot-load-survey" />;
   if (!result) return <Loading></Loading>;
 
   // Reshape survey structure into one object
-  const { title, description, contents, ...meta } = result;       //A
-  let survey = { title, description, meta, ...contents };         //B
+  const { title, description, contents, ...meta } = result; //A
+  let survey = { title, description, meta, ...contents }; //B
   survey.id = surveyId;
   if (!survey.counter) survey.counter = 0;
   if (!survey.questions) survey.questions = [];
@@ -36,23 +35,25 @@ const withSurvey = Component => props => {
     // Filter empty choices of single choice or multiple choice
     survey.questions = survey.questions.map((question) => {
       const { type } = question;
-      if (type == CardTypes.SINGLE_CHOICE || type == CardTypes.MULTIPLE_CHOICE) {
-        question.choices = question.choices.filter(x => x);
+      if (
+        type == CardTypes.SINGLE_CHOICE ||
+        type == CardTypes.MULTIPLE_CHOICE
+      ) {
+        if (question.choices)
+          question.choices = question.choices.filter((x) => x);
       }
       return question;
     });
 
     // Reshape survey object
-    const { title, description, meta, ...contents } = survey;     //B
+    const { title, description, meta, ...contents } = survey; //B
     const body = { title, description, contents, view: "slide" }; //A
 
     // Send data to server
     return await API.putSurvey(surveyId, body);
   }
 
-  return (
-    <Component {...newProps} updateSurvey={updateSurvey} />
-  );
+  return <Component {...newProps} updateSurvey={updateSurvey} />;
 };
 
 export default withSurvey;
