@@ -12,9 +12,12 @@ export default function Prologue({ survey, setSurvey, putSurvey, setIsEnded }) {
   if (isFolded) classes.push("folded");
   else classes.push("extended");
 
-  const onClick = () => {
-    setIsEnded(true);
-    return putSurvey;
+  const onClick = async () => {
+    try {
+      await putSurvey();
+      setIsEnded(true);
+      return putSurvey;
+    } catch {}
   };
 
   const className = classes.join(" ");
@@ -37,15 +40,15 @@ export default function Prologue({ survey, setSurvey, putSurvey, setIsEnded }) {
               onFocus={() => setIsFolded(false)}
             />
           </div>
-          <TextField
-            className="description-box"
-            text={survey.description}
-            setText={setNestedState(setSurvey, ["description"])}
-            placeholder="더 폼 나는 설명"
-            size="xl"
-            multiline
-            onFocus={() => setIsFolded(false)}
-          />
+          <div className="description-box">
+            <TextField
+              text={survey.description}
+              setText={setNestedState(setSurvey, ["description"])}
+              placeholder="더 폼 나는 설명"
+              multiline
+              onFocus={() => setIsFolded(false)}
+            />
+          </div>
         </div>
         <button onClick={onClick} className="btn rg submit-button">
           완료
