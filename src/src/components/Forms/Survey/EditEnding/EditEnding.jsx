@@ -1,22 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
+import { API } from "../../../../utils/apis";
 
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
-import Loading from "../../../Loading/Loading";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
+import { hash } from "../../../../utils/hasher";
 
 const Ending = ({ ending }) => {
   const [email, setEmail] = useState("");
+  const defaultBtnClasses = ["btn", "rg", "submit-btn"];
+  const [btnClasses, setBtnClasses] = useState(defaultBtnClasses);
+  const [isLoading, setIsLoading] = useState(false);
+  const { surveyId, title, description, surveyLink, resultLink } = ending;
+  const onClick = async () => {
+    setIsLoading(true);
+    try {
+      const [json] = await API.putEmail(surveyId, email);
+      const { status } = json;
+      if (status === 200) {
+        const newBtnClasses = [...btnClasses, "success"];
+        setBtnClasses(newBtnClasses);
+        setIsLoading(false);
+      }
+    } catch (e) {}
+  };
 
-  if (!ending) {
-    return <Loading />;
-  }
-
-  const { title, description, surveyLink, resultLink } = ending;
+  useEffect(() => {
+    setBtnClasses(defaultBtnClasses);
+  }, [email]);
 
   return (
     <div className="edit-ending">
@@ -33,28 +48,12 @@ const Ending = ({ ending }) => {
               축하합니다. <br />
               설문을 완성했습니다. <br />
               <br />
-              이메일을 적어주시면
-              <br />
-              <strong>배포</strong>와 <strong>결과확인</strong> 링크를
-              보내드립니다.
             </h1>
-            <div className="email">
-              <TextField
-                placeholder="abcde@the-form.io"
-                size="title"
-                setText={setEmail}
-                text={email}
-              />
-              <Link className="btn rg" to="/forms/survey">
-                보내기
-              </Link>
-            </div>
-            <p>
-              * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 <br />
-              해당 설문에 접근할 수 없습니다.
-            </p>
           </div>
           <Firework />
+          <Link className="btn rg home-btn" to="/">
+            홈으로
+          </Link>
         </div>
         <div className="service-box">
           <div className="section">
@@ -63,6 +62,37 @@ const Ending = ({ ending }) => {
                 <h1>설문 제목</h1>
                 <h2>{title}</h2>
               </div>
+            </div>
+            <div className="email box three">
+              <h1>
+                이메일을 적어주시면
+                <br />
+                <strong>배포</strong>와 <strong>결과확인</strong> 링크를
+                보내드립니다.
+              </h1>
+              <div className="email-input">
+                <TextField
+                  placeholder="abcde@the-form.io"
+                  size="lg"
+                  setText={setEmail}
+                  text={email}
+                />
+                <button
+                  onClick={onClick}
+                  className={btnClasses.join(" ")}
+                  to="/forms/survey"
+                  disabled={btnClasses.includes("success") || isLoading}>
+                  {isLoading
+                    ? "보내는 중"
+                    : btnClasses.includes("success")
+                    ? "성공"
+                    : "보내기"}
+                </button>
+              </div>
+              <p>
+                * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당
+                설문에 접근할 수 없습니다.
+              </p>
             </div>
             <div className="box four">
               <div className="description">
