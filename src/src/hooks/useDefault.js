@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 
+/*
+
+어떻게 하면 useDefault를 효율적으로 만들 수 있을까?
+이 작업의 궁극적인 목표는 uninitialized된 state를 initialize하는 것이다.
+
+*/
+
 function checkUpdateAndGetNew(state, defaults, initialized) {
   if (initialized) return [false, null];
 
@@ -39,11 +46,13 @@ export default function useDefault(state, setState, defaults) {
     if (!shouldUpdate) return;
     // If setState is not a function, it means that the state is not used.
     // Therefore, assume that it is initialized.
-    if (setState) setState(newState);
-    setInitialized(true);
+    if (setState) {
+      setState(newState);
+      setInitialized(true);
+    }
   }, [shouldUpdate, setState, initialized]);
 
-  if (!setState) return true;
+  if (!setState) return false;
   if (!shouldUpdate) return true;
 
   return initialized;

@@ -5,5 +5,6 @@ export default function getQuestion(counter) {
     id: counter + "",
     type: CardTypes.SINGLE_CHOICE,
     isRequired: true,
+    choices: [""]
   }];
 }
