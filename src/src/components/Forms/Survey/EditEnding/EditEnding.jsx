@@ -11,27 +11,53 @@ import TextField from "../../../TextField/TextField";
 import { hash } from "../../../../utils/hasher";
 
 const Ending = ({ ending }) => {
-  const [email, setEmail] = useState("");
-  const defaultBtnClasses = ["btn", "rg", "submit-btn"];
-  const [btnClasses, setBtnClasses] = useState(defaultBtnClasses);
-  const [isLoading, setIsLoading] = useState(false);
   const { surveyId, title, description, surveyLink, resultLink } = ending;
-  const onClick = async () => {
-    setIsLoading(true);
+
+  const [email, setEmail] = useState("");
+  const [emailState, setEmailState] = useState("default");
+
+  const handleEmailSend = async () => {
+    if (emailState === "loading") return;
+    setEmailState("loading");
     try {
       const [json] = await API.putEmail(surveyId, email);
       const { status } = json;
       if (status === 200) {
-        const newBtnClasses = [...btnClasses, "success"];
-        setBtnClasses(newBtnClasses);
-        setIsLoading(false);
+        setEmailState("success");
       }
-    } catch (e) {}
+    } catch (e) {
+      setEmailState("error");
+    }
   };
 
-  useEffect(() => {
-    setBtnClasses(defaultBtnClasses);
-  }, [email]);
+  const handleEmailInput = (text) => {
+    setEmail(text);
+    if (emailState !== "default") {
+      setEmailState("default");
+    }
+  };
+
+  let buttonClasses = ["btn", "rg", "submit-btn"];
+  let buttonText = "";
+
+  switch (emailState) {
+    case "default":
+      buttonText = "보내기";
+      break;
+    case "loading":
+      buttonText = "보내는 중";
+      break;
+    case "success":
+      buttonText = "성공";
+      buttonClasses.push("success");
+      break;
+    case "error":
+      buttonText = "오류";
+      buttonClasses.push("error");
+      break;
+    default:
+      throw new Error("Unexpected button state");
+  }
 
   return (
     <div className="edit-ending">
@@ -74,19 +100,15 @@ const Ending = ({ ending }) => {
                 <TextField
                   placeholder="abcde@the-form.io"
                   size="lg"
-                  setText={setEmail}
+                  setText={handleEmailInput}
                   text={email}
                 />
                 <button
-                  onClick={onClick}
-                  className={btnClasses.join(" ")}
+                  onClick={handleEmailSend}
+                  className={buttonClasses.join(" ")}
                   to="/forms/survey"
-                  disabled={btnClasses.includes("success") || isLoading}>
-                  {isLoading
-                    ? "보내는 중"
-                    : btnClasses.includes("success")
-                    ? "성공"
-                    : "보내기"}
+                  disabled={emailState !== "default"}>
+                  {buttonText}
                 </button>
               </div>
               <p>
