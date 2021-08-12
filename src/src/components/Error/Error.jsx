@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import Chaos from "../Chaos/Chaos";
 import "./Error.scss";
 
 export default function Error({ match }) {
