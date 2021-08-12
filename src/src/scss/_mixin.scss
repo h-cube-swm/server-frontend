@@ -28,22 +28,22 @@
 }
 
 @mixin tablet {
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  @media screen and (max-width: 1023px) {
     @content;
   }
 }
 
 @mixin laptop {
-  @media screen and (min-width: 1024px) and (max-width: 1679px) {
+  @media screen and (max-width: 1679px) {
     @content;
   }
 }
 
-@mixin desktop {
-  @media screen and (min-width: 1680px) {
-    @content;
-  }
-}
+// @mixin desktop {
+//   @media screen and (min-width: 1680px) {
+//     @content;
+//   }
+// }
 
 @mixin max-len-indicator {
   display: flex;
