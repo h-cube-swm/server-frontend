@@ -8,6 +8,7 @@
   font-size: $fs-rg;
   font-weight: $fw-light;
   white-space: pre;
+  word-break: keep-all;
 
   // Shape setting
   outline: none;
@@ -31,6 +32,7 @@
 
   &::placeholder {
     color: rgba(#000, 0.2);
+    height: 100%;
   }
 
   // Font size settings
