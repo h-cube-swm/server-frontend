@@ -29,7 +29,7 @@ export default function ResponseEnding() {
             </h1>
           </div>
           <Firework />
-          <Link className="btn lg" to="/forms/survey">
+          <Link className="btn lg make-survey-btn" to="/forms/survey">
             설문조사 <br />
             만들기
           </Link>

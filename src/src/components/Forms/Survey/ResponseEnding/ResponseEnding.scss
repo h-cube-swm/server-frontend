@@ -6,6 +6,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
+
   .contents-box {
     display: flex;
     justify-content: center;
@@ -20,14 +21,10 @@
         font-size: $fs-rg;
       }
       .celebrate-sentence {
-        text-align: start;
         margin-top: 5rem;
 
         img {
           width: 6rem;
-          &.right {
-            opacity: 0;
-          }
         }
 
         h1 {
@@ -37,6 +34,7 @@
           margin-bottom: 5rem;
         }
       }
+
       .firework {
         position: absolute;
       }
@@ -110,7 +108,7 @@
 
   overflow: scroll;
 
-  @include desktop {
+  @include laptop {
     .contents-box {
       justify-content: space-around;
       max-width: 1200px;
@@ -133,6 +131,58 @@
           }
         }
       }
+    }
+  }
+
+  @include mobile {
+    .contents-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 5rem;
+      .celebrate-box {
+        align-items: center;
+        margin: 0 auto;
+        margin-top: 20rem;
+        .celebrate-sentence {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          h1 {
+            font-size: $fs-md;
+            text-align: center;
+          }
+          img {
+            width: 4rem;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+
+      .section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 8rem;
+        .box {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+
+      img {
+        width: 3rem;
+        height: auto;
+      }
+    }
+
+    .make-survey-btn {
+      position: fixed;
+      bottom: 3rem;
     }
   }
 }
