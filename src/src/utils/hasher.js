@@ -1,11 +1,15 @@
+// Characters to be used to construct hash string
 const hashChars = ['슈', '슉', '.', '!'];
+// Characters of origianl string
 const textChars = "abcdefghijklmnopqrstuvwxyz1234567890-";
 
+// Calculate required character number for each caracter
 let count = 1;
 while (Math.pow(hashChars.length, count) < textChars.length) {
   count += 1;
 }
 
+// Generate array of hash unit with hashChar^count length
 function getAllText(count) {
   if (count === 0) return [""];
   let list = [];
@@ -17,13 +21,15 @@ function getAllText(count) {
   return list;
 }
 
-const combination = getAllText(count);
+const hashUnits = getAllText(count);
 
+// Get hash function(dictionary) that converts original char to a set of hash units
 const hashFunction = new Array(textChars.length).fill(0).map(() => []);
-combination.forEach((x, i) => {
+hashUnits.forEach((x, i) => {
   hashFunction[i % textChars.length].push(x);
 });
 
+// Hash original string
 function hash(str) {
   let hashString = "";
   for (let i = 0; i < str.length; i++) {
@@ -35,28 +41,33 @@ function hash(str) {
   return hashString;
 }
 
+// Reverse hash original string
 function unhash(hashStr) {
   let str = "";
   for (let i = 0; i < hashStr.length; i += count) {
-    const hashIndex = combination.indexOf(hashStr.substr(i, count));
+    const hashIndex = hashUnits.indexOf(hashStr.substr(i, count));
     const charIndex = hashIndex % textChars.length;
     str += textChars.charAt(charIndex);
   }
   return str;
 }
 
+// Check if given string is unhashable.
 function isUnhashable(str) {
 
+  // Length check
   if (str.length % count != 0) return false;
 
-  let hashed = true;
+  // Character check
+  let unhashable = true;
   for (let i = 0; i < str.length; i++) {
     if (hashChars.indexOf(str.charAt(i)) < 0) {
-      hashed = false;
+      unhashable = false;
       break;
     }
   }
-  return hashed;
+
+  return unhashable;
 }
 
 export { hash, unhash, isUnhashable };
