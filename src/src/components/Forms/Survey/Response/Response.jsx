@@ -31,7 +31,7 @@ function Response({ survey, surveyId }) {
   const { index } = responses;
 
   const question = index > 0 && questions[index - 1];
-  const response = index > 0 && responses[index - 1];
+  const response = index > 0 && responses[question.id];
   const setIndex = setNestedState(setResponses, ["index"]);
 
   if (!survey) return <Loading />;
@@ -40,8 +40,9 @@ function Response({ survey, surveyId }) {
   const getMove = (index) => () => setIndex(index);
   const onSubmit = async () => {
     const body = { answer: responses };
-    await API.postResponse(surveyId, body);
-    setRedirect("/forms/survey/response/ending");
+    const [data, err] = await API.postResponse(surveyId, body);
+    if (err) setRedirect("/error/unexpected/cannot-submit-data");
+    else setRedirect("/forms/survey/response/ending");
   };
 
   const cover = (
@@ -88,10 +89,9 @@ function Response({ survey, surveyId }) {
   return (
     <div className="response">
       <div className="survey-header">
-        <span className="title"> {survey.title}</span>
         <span className="logo">
           <Link to="/" target="_blank">
-            Powered by <br />
+            <span> Powered by</span>
             <em> the Form</em>
           </Link>
         </span>
