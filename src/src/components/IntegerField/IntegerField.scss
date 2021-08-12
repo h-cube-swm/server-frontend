@@ -15,23 +15,6 @@
       font-size: $fs-sm;
       font-weight: 700;
     }
-    input {
-      width: 3rem;
-      font-size: $fs-rg;
-      font-weight: $fw-bold;
-      text-align: center;
-      border: 0;
-      border-bottom: solid 2px rgba(0, 0, 0, 0);
-      outline: none;
-      background-color: rgba($color: #fff, $alpha: 0);
-
-      &:active {
-        border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-      }
-      &:focus {
-        border-bottom: solid 2px rgba($color: #000000, $alpha: 0.4);
-      }
-    }
   }
 
   .btn-set {

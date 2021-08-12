@@ -27,14 +27,13 @@
   }
 
   .section {
-    width: 80rem;
+    width: 60%;
     display: grid;
     justify-content: center;
-    align-items: center;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-gap: 3rem;
     margin: 10rem auto;
-    padding: 4rem;
 
     .box {
       @include round;
@@ -42,6 +41,7 @@
       width: 30rem;
       height: 23rem;
       box-shadow: $shadow-default;
+      margin: 0 auto;
       &p {
         font-size: 1.2rem;
         font-weight: $fw-bold;
@@ -71,6 +71,7 @@
       width: 30rem;
       height: 23rem;
       padding: 3rem;
+      margin: 0 auto;
       h1 {
         font-weight: $fw-bold;
         margin: 1rem 0;
@@ -129,17 +130,18 @@
     .phrase {
       flex-direction: column;
       margin-bottom: 0;
-      padding: 5rem;
+      padding: 3rem;
 
       h1 {
         font-size: $fs-rg;
-        font-weight: $fw-bold;
+        font-weight: 500;
       }
     }
 
     .section {
       width: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       margin: 2rem auto;
@@ -150,8 +152,8 @@
       }
 
       .text {
-        margin-left: 0rem;
         text-align: center;
+        margin: 0 auto;
       }
     }
   }

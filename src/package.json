@@ -9,6 +9,8 @@
     "array-move": "^3.0.1",
     "axios": "^0.21.1",
     "chart.js": "^3.5.0",
+    "jspdf": "^2.3.1",
+    "jspdf-autotable": "^3.5.15",
     "node-sass": "^4.14.0",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.4",
@@ -20,7 +22,8 @@
     "react-virtualized": "^9.22.3",
     "sass-loader": "^12.1.0",
     "test-react-chartjs-2": "^3.0.4",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "react-scripts start",

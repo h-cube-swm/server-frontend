@@ -1,32 +1,119 @@
 @import "/src/scss/style.scss";
 
 .prologue-box {
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #fff;
+  box-shadow: $shadow-default;
+  transition-duration: 500ms;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
   .survey-header {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 5rem;
-    position: fixed;
-    top: 0;
-    background-color: #fff;
-    box-shadow: $shadow-default;
-    z-index: 1;
 
-    .logo {
-      margin-left: 3rem;
-      margin-right: 3rem;
-      width: 4rem;
-      img {
-        width: 90%;
-      }
+    .submit-button {
+      position: absolute;
+      right: 2rem;
     }
 
     .info {
-      display: flex;
-      align-items: flex-end;
+      width: 80%;
+    }
+
+    .logo {
+      padding-left: (5rem-3.5rem)/2;
+      padding-right: 3rem;
+      height: 3.5rem;
+      transition-duration: 500ms;
+      img {
+        height: 100%;
+      }
+    }
+
+    .title-box {
+      flex-grow: 1;
       width: 100%;
+      height: max-content;
+      margin-right: 1rem;
     }
   }
 
-  transition-duration: 1000ms;
+  .fold-button-box {
+    width: 100;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    padding: 1rem;
+    transform: translateX(-50%);
+    button {
+      background-color: transparent;
+      img {
+        width: 70%;
+      }
+    }
+  }
+
+  .description-box {
+    width: 100%;
+    height: auto;
+    textarea {
+      width: 50%;
+      height: 10rem;
+      margin-top: 5rem;
+    }
+  }
+
+  &.folded {
+    height: 5rem;
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .survey-header {
+      height: 100%;
+    }
+
+    .fold-button-box {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      z-index: -10;
+    }
+
+    .description-box {
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      z-index: -10;
+    }
+  }
+
+  &.extended {
+    justify-content: center;
+    align-items: center;
+
+    .submit-button {
+      opacity: 0;
+    }
+
+    .logo {
+      opacity: 0;
+      z-index: -10;
+    }
+  }
 }

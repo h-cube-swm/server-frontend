@@ -4,7 +4,7 @@ import "./PreferenceView.scss";
 
 export default function PreferenceView({ question, answers }) {
   let answerObj = {};
-  let labels = [];
+  let labels = [question.minDes];
   let values = [];
 
   answers.forEach((answer) => {
@@ -16,23 +16,29 @@ export default function PreferenceView({ question, answers }) {
   });
 
   Object.entries(answerObj).forEach(([key, value]) => {
-    labels.push(key);
+    if (key === "1" || key === `${answers.length}`) {
+      values.push(value);
+      return;
+    }
+    labels.push("");
     values.push(value);
   });
+
+  labels.push(question.maxDes);
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: "선호도",
+        label: question.title,
         data: values,
         backgroundColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
+          "rgba(240, 192, 71, 1)",
+          "rgba(235, 82, 64, 1)",
+          "rgba(87, 182, 75, 1)",
+          "rgba(48, 67, 246, 1)",
+          "rgba(177, 177, 177, 1)",
+          "rgba(133, 112, 215, 1)",
         ],
         borderColor: "rgba(255,255,255,1)",
         borderRadius: 15,
@@ -44,6 +50,15 @@ export default function PreferenceView({ question, answers }) {
     legend: {
       display: true,
       position: "left",
+      base: 1,
+    },
+    scales: {
+      yAxes: {
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+        },
+      },
     },
   };
 

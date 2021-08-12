@@ -12,7 +12,7 @@ export default function Error({ match }) {
     case "published": // published 된 설문을 edit으로 들어갈 때
       contents = (
         <div className="contents">
-          <h1>이미 배포된 설문입니다.</h1>;
+          <h1>이미 배포된 설문입니다.</h1>
         </div>
       );
       break;
@@ -35,7 +35,9 @@ export default function Error({ match }) {
       contents = (
         <div className="contents">
           <h1>예상치 못한 에러가 발생하였습니다. </h1>
-          <p>메인 페이지의 채널톡을 통해 문의주시면 감사드리겠습니다.</p>
+          <p>
+            하단 <strong>채널톡</strong>을 통해 문의주시면 감사드리겠습니다.
+          </p>
         </div>
       );
       break;
@@ -43,7 +45,9 @@ export default function Error({ match }) {
     default:
       contents = (
         <div className="contents">
-          <h1>존재하지 않는 경로입니다.</h1>
+          <h1>
+            <span className="hidden">존재하지 않는</span> 경로입니다.
+          </h1>
         </div>
       );
       break;
@@ -57,7 +61,6 @@ export default function Error({ match }) {
         </Link>
       </div>
       {contents}
-      <Chaos />
     </div>
   );
 }

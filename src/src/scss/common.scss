@@ -1,46 +1,35 @@
+@include mobile {
+  html {
+    font-size: 13px;
+  }
+}
+@include tablet {
+  html {
+    font-size: 14px;
+  }
+}
+@include laptop {
+  html {
+    font-size: 15px;
+  }
+}
+// @include desktop {
+//   html {
+//     font-size: 16px;
+//   }
+// }
+
 button {
   text-decoration: none;
   font-weight: 700;
   border: 0;
   cursor: pointer;
-
-  &.link-btn {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 5rem;
-    height: 2.5rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
-
-  &.link-btn-lg {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 6rem;
-    height: 3rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
-
-  &.link-btn-xl {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 10rem;
-    height: 4rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
 }
 
 a {
   text-decoration: none;
   font-weight: 700;
+
   :visited {
     text-decoration: none;
   }
@@ -50,37 +39,55 @@ a {
   :active {
     text-decoration: none;
   }
-  &.link-btn {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 5rem;
-    height: 2.5rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
+}
 
-  &.link-btn-lg {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
-    width: 6rem;
-    height: 3rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
-  }
+.btn {
+  // Reset default settings of button
+  border: none;
+  text-decoration: none;
 
-  &.link-btn-xl {
-    @include text-center;
-    @include round;
-    color: #fff;
-    background-color: #2b44ff;
+  // Set shape
+  @include text-center;
+  border-radius: 10px;
+  width: 8rem;
+  height: 4rem;
+  padding: 1rem;
+
+  // Set font
+  color: #fff;
+  font-weight: 700;
+  font-size: $fs-rg;
+
+  // Set others
+  cursor: pointer;
+  background-color: #2b44ff;
+  box-shadow: $shadow-default;
+  transition-duration: 500ms;
+
+  // Options
+
+  &.long {
     width: 10rem;
     height: 4rem;
-    font-size: $fs-rg;
-    box-shadow: $shadow-default;
+  }
+
+  &.xl {
+    width: 10rem;
+    height: 5rem;
+  }
+
+  &.lg {
+    width: 8rem;
+    height: 4rem;
+  }
+
+  &.rg {
+    width: 6rem;
+    height: 3rem;
+  }
+
+  &.disabled {
+    background-color: #888;
   }
 }
 

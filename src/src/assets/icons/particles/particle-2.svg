@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff3b86"/>
+      <stop offset="1" stop-color="#ff0062"/>
+    </linearGradient>
+    <clipPath id="clip-아트보드_2">
+      <rect width="100" height="100"/>
+    </clipPath>
+  </defs>
+  <g id="아트보드_2" data-name="아트보드 – 2" clip-path="url(#clip-아트보드_2)">
+    <path id="패스_62" data-name="패스 62" d="M7712.881,4727.822c-8.358,25.127,15.688,45.963,15.688,45.963s-45.441,2.407-51.809,1.325-5.338-56.158-5.338-56.158Z" transform="translate(-7647 -4700)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

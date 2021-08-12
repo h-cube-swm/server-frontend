@@ -19,8 +19,8 @@ function Intro() {
             <br />
             <strong>더 폼</strong>
           </h1>
-          <Link className="link-btn-xl" to="/forms/survey">
-            설문조사 하러가기
+          <Link className="btn long" to="/forms/survey">
+            설문조사 만들기
           </Link>
         </div>
       </div>

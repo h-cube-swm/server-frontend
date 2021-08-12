@@ -20,15 +20,12 @@ const defaultAnswers = [
   { 2: true },
 ];
 _question.type = CardTypes.MULTIPLE_CHOICE;
+_question.choices = ["마음껏", "테스트", "해보세요"];
 
 function Service() {
   const [question, setQuestion] = useState(_question);
   const [response, setResponse] = useState({});
-  const isInit = useDefault(setQuestion, {
-    choices: ["마음껏", "테스트", "해보세요"],
-  });
 
-  if (!isInit) return null;
   return (
     <div className="service">
       <div className="section">

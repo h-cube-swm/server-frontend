@@ -5,14 +5,18 @@
   float: left;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
   z-index: 4;
 
   .preference-elements {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     flex-wrap: wrap;
+    flex-shrink: 1;
+    width: 25rem;
+    height: auto;
   }
 
   .preference-box {
@@ -20,42 +24,32 @@
     margin-bottom: 1rem;
     font-size: $fs-rg;
     font-weight: $fw-bold;
-    width: 3.5rem;
+    min-width: 2rem;
     height: 3.5rem;
     border-radius: 15px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: black;
     box-shadow: $shadow-default-shallow;
     transition-duration: 200ms;
+
     &.cursor {
       cursor: pointer;
     }
+
     &.selected {
       background-color: #2b44ff;
       color: #fff;
       transition-duration: 200ms;
     }
+
+    &.end {
+      border: 1.5px dashed rgba(0, 0, 0, 0.4);
+      width: 3.5rem;
+      opacity: 0.4;
+    }
   }
 
-  .preference-box-end {
-    @include text-center;
-    margin-bottom: 1rem;
-    font-size: $fs-rg;
-    font-weight: $fw-bold;
+  .text-box {
     width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 15px;
-    border: 1.5px dashed rgba(0, 0, 0, 0.4);
-    color: black;
-    opacity: 0.4;
-    box-shadow: $shadow-default-shallow;
-  }
-
-  input {
-    display: block;
-    width: auto;
-    font-size: $fs-sm;
-    font-weight: $fw-bold;
-    margin: 0 auto;
   }
 }

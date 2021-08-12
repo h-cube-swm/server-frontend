@@ -1,37 +1,53 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import useScrollBlock from "../../hooks/useScrollBlock";
 import "./TextField.scss";
 
-function TextField({ text, setText, disabled, size, multiline, ...props }) {
-  if (!setText) {
-    return <div className={"txt-field " + size}>{text}</div>;
-  }
+function TextField({
+  text,
+  setText,
+  disabled,
+  size,
+  multiline,
+  placeholder,
+  ...props
+}) {
+  const ref = useRef(null);
 
-  const handleOnInput = ({ target }) => {
-    let { value } = target;
-    if (!multiline) value = value.replace(/\n/g, "");
-    target.value = value;
-    setText(value);
+  // Build classname
+  const classes = ["text-field"];
+  if (size) classes.push(size);
+  if (disabled) classes.push("gray viewmode");
+  if (!text) classes.push("gray");
+  if (!setText) classes.push("viewmode");
+  if (multiline) classes.push("multiline");
+  const className = classes.join(" ");
 
-    target.style.height = "";
-    target.style.height = target.scrollHeight + "px";
-    if (size === "title" && target.scrollHeight >= 79) {
-      target.style.height = "79px";
-      target.style.overflow = "scroll";
-    } else if (size === "xl" && target.scrollHeight >= 45) {
-      target.style.height = "45px";
-      target.style.overflow = "scroll";
-    }
+  const handleOnInput = () => {
+    const cur = ref.current;
+    if (disabled) return;
+    if (!cur) return;
+    if (!multiline) cur.value = cur.value.replace(/\n/g, "");
+    setText(cur.value);
   };
+
+  if (!setText) {
+    if (text) {
+      return <div className={className}>{text}</div>;
+    } else {
+      return <div className={className}>{placeholder}</div>;
+    }
+  }
 
   return (
     <textarea
+      className={className}
+      ref={ref}
       rows={1}
       {...props}
-      className={"txt-field textarea " + size}
-      value={text}
-      // onChange={handleOnChange}
-      disabled={disabled}
       onInput={handleOnInput}
+      value={text}
+      disabled={disabled || !setText}
+      placeholder={placeholder}
     />
   );
 }

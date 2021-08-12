@@ -1,6 +1,5 @@
 /* React elements*/
-import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 /* Components */
 import Card from "../Card/Card";
@@ -9,39 +8,29 @@ import Sidebar from "../Sidebar/Sidebar";
 import Prologue from "../Prologue/Prologue";
 import Positioner from "../../../Positioner/Positioner";
 import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
+import Hider from "../../../Hider/Hider";
+import QuestionCommon from "../QuestionCommon/QuestionCommon";
+import Ending from "../EditEnding/EditEnding";
 
 /* HOC, Context, Hooks */
+import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import withSurvey from "../../../../hocs/withSurvey";
+import getQuestion from "../getQuestion";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
+import useThrottle from "../../../../hooks/useThrottle";
 
 /* Others */
 import orderedMap from "../../../../utils/orderedMap";
 import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
-import getQuestion from "../getQuestion";
 import setNestedState from "../../../../utils/setNestedState";
-import Hider from "../../../Hider/Hider";
-import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import Loading from "../../../Loading/Loading";
-import useThrottle from "../../../../hooks/useThrottle";
+import { Redirect } from "react-router-dom";
+import Title from "../../../Title/Title";
 
-const Edit = ({ surveyId, survey: init, updateSurvey }) => {
-  const initSurvey = useMemo(() => {
-    if (!init.counter) init.counter = 0;
-    if (!init.questions) init.questions = [];
-    if (!init.selectedIndex) init.selectedIndex = 0;
-    if (init.questions.length === 0) {
-      const [counter, question] = getQuestion(init.counter);
-      init.counter = counter;
-      init.questions.push(question);
-    }
-    return init;
-  }, [init]);
-
-  const [survey, setSurvey] = useState(initSurvey);
-
+const Edit = ({ survey: init, updateSurvey }) => {
+  const [survey, setSurvey] = useState(init);
+  const [isEnded, setIsEnded] = useState(false);
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
 
   const getInsertQuestion = (index) => () => {
@@ -67,18 +56,18 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
     });
   };
 
-  const [onWheel, isMoving] = useScrollPaging((delta) => {
-    setSelectedIndex((index) => {
-      let newIndex = index + delta;
-      if (newIndex < 0) return index;
-      if (newIndex >= survey.questions.length) return index;
-      return newIndex;
-    });
+  const [onWheel] = useScrollPaging((delta) => {
+    const index = survey.selectedIndex;
+    const length = survey.questions.length;
+
+    let newIndex = index + delta;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= length) newIndex = length - 1;
+    if (newIndex === index) return;
+    setSelectedIndex(newIndex);
   });
 
-  const putSurvey = async () => {
-    updateSurvey(survey);
-  };
+  const putSurvey = () => updateSurvey(survey);
 
   const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging(
     (delta) => {
@@ -104,7 +93,8 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   const onEvent = useThrottle(putSurvey);
   onEvent();
 
-  if (!survey) return <Loading></Loading>;
+  if (survey.meta.status === "published" || isEnded)
+    return <Redirect to={`/forms/survey/end/${survey.id}`} />;
 
   const { selectedIndex } = survey;
   const setQuesionType = setNestedState(setSurvey, [
@@ -114,21 +104,18 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
   ]);
 
   const selectedSurveyType = survey.questions[selectedIndex].type;
-  const showAddButton = !isDragging && !isMoving;
   const { questions } = survey;
 
   return (
     <div className="edit" {...backgroundCallbacks}>
+      <Title>{survey.title}</Title>
+      <Prologue
+        survey={survey}
+        setSurvey={setSurvey}
+        putSurvey={putSurvey}
+        setIsEnded={setIsEnded}
+      />
       <div className="positioning-box">
-        <div className="controller-box">
-          <Controller type={selectedSurveyType} setType={setQuesionType} />
-          <Link
-            onClick={putSurvey}
-            className="link-btn"
-            to={"/forms/survey/end/" + surveyId}>
-            완료
-          </Link>
-        </div>
         <div className="sidebar-box">
           <Sidebar
             questions={questions}
@@ -137,7 +124,6 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
           />
         </div>
       </div>
-      <Prologue survey={survey} setSurvey={setSurvey} />
 
       {/* Ghost that appears when card moves */}
       <div ref={item}>
@@ -153,11 +139,12 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
       <div className="question-box" onWheel={onWheel}>
         {orderedMap(questions, (question, index) => {
           const isSelected = index === selectedIndex;
-          const y = (index - selectedIndex) * CardStyle.FRAME_HEIHGT;
+          const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
           const slowAppear = questions.length > 1;
           const isHide = isDragging && isSelected;
           const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
-          const onDelete = questions.length > 1 && getRemoveQuestion(index);
+          const onDelete =
+            questions.length > 1 && isSelected && getRemoveQuestion(index);
           const setQuestion = setNestedState(setSurvey, ["questions", index]);
 
           return (
@@ -166,7 +153,7 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
                 <QuestionProvider
                   state={state}
                   question={question}
-                  setQuestion={setQuestion}>
+                  setQuestion={isSelected && setQuestion}>
                   <Card
                     onDelete={onDelete}
                     onGrab={onGrab}
@@ -178,19 +165,22 @@ const Edit = ({ surveyId, survey: init, updateSurvey }) => {
             </Positioner>
           );
         })}
-
-        <QuestionAddButton
-          onClick={getInsertQuestion(selectedIndex)}
-          y={-CardStyle.FRAME_HEIHGT / 2}
-          show={showAddButton}
-        />
-
-        <QuestionAddButton
-          onClick={getInsertQuestion(selectedIndex + 1)}
-          y={+CardStyle.FRAME_HEIHGT / 2}
-          show={showAddButton}
-        />
       </div>
+
+      <div className="fade-out top" />
+      <div className="fade-out bottom" />
+
+      <QuestionAddButton
+        onClick={getInsertQuestion(selectedIndex)}
+        y={-CardStyle.FRAME_HEIGHT / 2}
+      />
+
+      <QuestionAddButton
+        onClick={getInsertQuestion(selectedIndex + 1)}
+        y={+CardStyle.FRAME_HEIGHT / 2}
+      />
+
+      <Controller type={selectedSurveyType} setType={setQuesionType} />
     </div>
   );
 };

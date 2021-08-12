@@ -30,7 +30,7 @@ export default function ChoiceView({ question, answers }) {
   });
 
   let colors = [];
-  for (let i = 1; i <= labels.length; i++) {
+  for (let i = labels.length; i > 0; i--) {
     colors.push(`rgba(43,68,255,${i / labels.length})`);
   }
 

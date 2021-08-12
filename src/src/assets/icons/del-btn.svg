@@ -6,7 +6,7 @@
   </defs>
   <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
     <path id="패스_52" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#eb5240"/>
-    <line id="선_40" data-name="선 40" y1="16.961" x2="16.637" transform="translate(19.182 19.02)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
-    <line id="선_41" data-name="선 41" x2="16.582" y2="16.792" transform="translate(19.182 19.188)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_40" data-name="선 40" y1="16.961" x2="16.637" transform="translate(19.182 19.02)" fill="none" stroke="#FFF" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_41" data-name="선 41" x2="16.582" y2="16.792" transform="translate(19.182 19.188)" fill="none" stroke="#FFF" stroke-linecap="round" stroke-width="3"/>
   </g>
 </svg>

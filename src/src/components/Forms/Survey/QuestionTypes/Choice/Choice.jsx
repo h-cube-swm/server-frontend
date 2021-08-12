@@ -14,32 +14,41 @@ import { useQuestion } from "../../../../../contexts/QuestionContext";
 function Choice({
   text,
   setText,
+
   checked,
   setChecked,
+
   onDelete,
-  editable,
   multipleSelect,
 }) {
+  const { state } = useQuestion();
+  const isEditing = state === CardStates.EDITTING;
+
   return (
     <div className="choice-box">
-      <CheckField
-        className="check-box"
-        checked={checked}
-        setChecked={setChecked}
-        radio={!multipleSelect}
-      />
-      <TextField
-        text={text}
-        setText={setText}
-        disabled={!editable}
-        placeholder="더 폼 나는 선택지"
-        size="rg"
-      />
-      <Hider hide={!(editable && onDelete)}>
-        <button className="del-btn" onClick={onDelete}>
-          <img src={delBtn} alt="delete button" />
-        </button>
-      </Hider>
+      <div className="check-box">
+        <CheckField
+          className="check-box"
+          checked={checked}
+          setChecked={setChecked}
+          radio={!multipleSelect}
+        />
+      </div>
+      <div className="text-box">
+        <TextField
+          text={text}
+          setText={setText}
+          placeholder="더 폼 나는 선택지"
+          size="rg"
+        />
+      </div>
+      <div className="delete-button-box">
+        <Hider hide={!isEditing}>
+          <button className="del-btn" onClick={onDelete}>
+            <img src={delBtn} alt="delete button" />
+          </button>
+        </Hider>
+      </div>
     </div>
   );
 }
@@ -47,21 +56,24 @@ function Choice({
 function Choices({ multipleSelect }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-  const questionInitialized = useDefault(setQuestion, {
+  const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });
-  const responseInitialized = useDefault(setResponse, {});
+  const responseInitialized = useDefault(response, setResponse, {});
   if (!questionInitialized || !responseInitialized) return null;
   const { choices } = question;
-  const editable = state === CardStates.EDITTING;
+  const isEditting = state === CardStates.EDITTING;
+  const isResponse = state === CardStates.RESPONSE;
 
   if (state === CardStates.GHOST && !choices) return null;
 
   const addChoice = () => {
+    if (!isEditting) return;
     setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
   };
 
   const removeChoice = (i) => {
+    if (!isEditting) return;
     setNestedState(setQuestion, ["choices"])((choices) => {
       const newChoices = [...choices];
       newChoices.splice(i, 1);
@@ -70,7 +82,7 @@ function Choices({ multipleSelect }) {
   };
 
   const onSelect = (i) => (checked) => {
-    if (editable) return;
+    if (!isResponse) return;
     if (multipleSelect) {
       setNestedState(setResponse, [i])(checked);
     } else {
@@ -86,8 +98,7 @@ function Choices({ multipleSelect }) {
           <Choice
             key={i}
             text={choice}
-            setText={setText}
-            editable={editable}
+            setText={isEditting && setText}
             onDelete={() => removeChoice(i)}
             checked={typeof response === "object" && response[i]}
             setChecked={onSelect(i)}
@@ -95,12 +106,16 @@ function Choices({ multipleSelect }) {
           />
         );
       })}
-      <Hider hide={!editable}>
-        <button className="add-btn" onClick={addChoice}>
-          <img src={addBtn} alt="delete button" />
-          <p>더 폼 나는 선택지 추가하기</p>
-        </button>
-      </Hider>
+      <div>
+        <Hider hide={!isEditting}>
+          <button className="add-btn" onClick={addChoice}>
+            <div className="button-box">
+              <img src={addBtn} alt="delete button" />
+              <span>더 폼 나는 선택지 추가하기</span>
+            </div>
+          </button>
+        </Hider>
+      </div>
     </div>
   );
 }

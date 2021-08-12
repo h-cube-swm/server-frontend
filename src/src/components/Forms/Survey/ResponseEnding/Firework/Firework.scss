@@ -1,0 +1,144 @@
+.firework {
+  .part1 {
+    position: relative;
+    height: auto;
+    animation: xAxis1 2s forwards ease-out;
+    img {
+      width: 2rem;
+      opacity: 0;
+      &.particle1 {
+        animation: yAxis1 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle2 {
+        animation: yAxis2 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle5 {
+        animation: yAxis3 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+    }
+  }
+
+  .part2 {
+    position: relative;
+    height: auto;
+    animation: xAxis2 2s forwards ease-out;
+    img {
+      width: 2rem;
+      opacity: 0;
+      &.particle2 {
+        animation: yAxis2 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle3 {
+        animation: yAxis1 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle4 {
+        animation: yAxis4 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle5 {
+        animation: yAxis3 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+    }
+  }
+
+  .part3 {
+    position: relative;
+    height: auto;
+    animation: xAxis3 2s forwards ease-out;
+    img {
+      width: 2rem;
+      opacity: 0;
+      &.particle3 {
+        animation: yAxis2 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle4 {
+        animation: yAxis1 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+      &.particle5 {
+        animation: yAxis4 2s forwards cubic-bezier(0.3, 0.27, 0.07, 3);
+      }
+    }
+  }
+}
+
+@keyframes yAxis1 {
+  50% {
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 3);
+    transform: translateY(-13rem);
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 0;
+  }
+}
+
+@keyframes yAxis2 {
+  50% {
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 3);
+    transform: translateY(-10rem);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+}
+
+@keyframes yAxis3 {
+  50% {
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 3);
+    transform: translateY(-8rem);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+}
+@keyframes yAxis4 {
+  50% {
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 3);
+    transform: translateY(-6rem);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+}
+
+@keyframes xAxis1 {
+  50% {
+    animation-timing-function: ease-in-out;
+    transform: translateX(-9rem);
+    opacity: 1;
+  }
+  100% {
+    animation-timing-function: ease-out;
+    transform: translateX(-15rem);
+    opacity: 0;
+  }
+}
+
+@keyframes xAxis2 {
+  50% {
+    animation-timing-function: ease-in-out;
+    transform: translateX(9rem);
+    opacity: 1;
+  }
+  100% {
+    animation-timing-function: ease-out;
+    transform: translateX(15rem);
+    opacity: 0;
+  }
+}
+
+@keyframes xAxis3 {
+  50% {
+    animation-timing-function: ease-in-out;
+    transform: translateX(2rem);
+    opacity: 1;
+  }
+  100% {
+    animation-timing-function: ease-out;
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+}

@@ -1,11 +1,12 @@
 import React from "react";
+import { CardTypes } from "../constants";
+
 import "./Controller.scss";
 import singleChoice from "../../../../assets/icons/single-choice.svg";
 import multipleChoice from "../../../../assets/icons/multiple-choice.svg";
 import preference from "../../../../assets/icons/preference.svg";
 import shortSentence from "../../../../assets/icons/short-sentence.svg";
 import longSentence from "../../../../assets/icons/long-sentence.svg";
-import { CardTypes } from "../constants";
 
 const BUTTONS = [
   [singleChoice, CardTypes.SINGLE_CHOICE, "객관식"],
@@ -17,20 +18,22 @@ const BUTTONS = [
 
 export default function Controller({ type: selectedType, setType }) {
   return (
-    <div className="contoller">
-      <div className="element-box">
-        {BUTTONS.map(([image, type, description]) => {
-          const className = type === selectedType ? "selected" : "";
-          return (
-            <button
-              key={type}
-              className={"element-btn " + className}
-              onClick={() => setType(type)}>
-              <img src={image} alt={type} />
-              <p className="element-detail">{description}</p>
-            </button>
-          );
-        })}
+    <div className="controller">
+      <div className="controller-inner">
+        <div className="element-box">
+          {BUTTONS.map(([image, type, description]) => {
+            const className = type === selectedType ? "selected" : "";
+            return (
+              <button
+                key={type}
+                className={"element-btn " + className}
+                onClick={() => setType(type)}>
+                <img src={image} alt={type} />
+                <p className="element-detail">{description}</p>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -29,12 +29,14 @@ function PreferenceButton({
       <div className={classes.join(" ")} onClick={onClick}>
         {index}
       </div>
-      <TextField
-        placeholder={placeholder}
-        size="sm"
-        setText={setDescription}
-        text={description}
-      />
+      <div className="text-box">
+        <TextField
+          placeholder={placeholder}
+          size="sm"
+          setText={setDescription}
+          text={description}
+        />
+      </div>
     </div>
   );
 }
@@ -51,7 +53,7 @@ function LastButton({
     <div className="prefence-btn" key="last">
       <input
         type="text"
-        className="preference-box-end"
+        className="preference-box end"
         value={count}
         onChange={(e) => onCountChange(e.target.value)}
         onBlur={onBlur}
@@ -61,12 +63,14 @@ function LastButton({
           color: isError ? "red" : "black",
         }}
       />
-      <TextField
-        placeholder="설명 추가"
-        size="sm"
-        text={description}
-        setText={setDescription}
-      />
+      <div className="text-box">
+        <TextField
+          placeholder="설명 추가"
+          size="sm"
+          text={description}
+          setText={setDescription}
+        />
+      </div>
     </div>
   );
 }
@@ -78,13 +82,13 @@ export default function Preference() {
   const setMinDes = setNestedState(setQuestion, ["minDes"]); // 왼쪽 설명
   const setMaxDes = setNestedState(setQuestion, ["maxDes"]); // 오른쪽 설명
 
-  const ia = useDefault(setQuestion, {
+  const ia = useDefault(question, setQuestion, {
     answer: "",
     count: 5,
     minDes: "",
     maxDes: "",
   });
-  const ib = useDefault(setResponse, "");
+  const ib = useDefault(response, setResponse, "");
 
   if (!ia || !ib) return null;
 

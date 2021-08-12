@@ -1,12 +1,24 @@
+//shadow
 $shadow-default: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 $shadow-default-shallow: rgba(100, 100, 111, 0.2) 0px 7px 5px 0px;
 $shadow-reverse-deep: inset rgba(100, 100, 111, 0.2) 5px 5px 7px 3px;
 $shadow-reverse-shallow: inset rgba(100, 100, 111, 0.1) 3px 3px 5px 2px;
+
+//font-size
 $fs-xl: 4rem;
 $fs-lg: 2rem;
 $fs-md: 1.5rem;
 $fs-rg: 1rem;
 $fs-sm: 0.7rem;
 $fs-xs: 0.3rem;
+
+//font-weight
+$fw-light: 700;
 $fw-bold: 700;
-$card-margin: 2.5rem;
+
+//maring / padding
+$card-padding: 2rem;
+
+//Brand Identity
+$bi-color: #2b44ff;
+$bi-font: "Pacifico", cursive;

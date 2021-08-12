@@ -14,47 +14,53 @@ import IntegerField from "../../../../IntegerField/IntegerField";
 function Sentence({ isLong }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
 
-  const ia = useDefault(setQuestion, {
+  const ia = useDefault(question, setQuestion, {
     answer: "",
     maxLenLong: 300,
     maxLenShort: 32,
   });
-  const ib = useDefault(setResponse, "");
+  const ib = useDefault(response, setResponse, "");
 
   if (!ia || !ib) return null;
 
+  const isEditting = state === CardStates.EDITTING;
   const maxLen = isLong ? question.maxLenLong : question.maxLenShort;
   const setMaxLen = setNestedState(setQuestion, [
     isLong ? "maxLenLong" : "maxLenShort",
   ]);
+  const setText = (text) => {
+    text = text.substr(0, maxLen);
+    setResponse(text);
+  };
 
   let extra = null;
 
-  if (state === CardStates.EDITTING) {
+  if (isEditting) {
     extra = (
       <IntegerField number={maxLen} setNumber={setMaxLen} label="최대 글자수" />
     );
-  } else if (response) {
+  } else {
+    const len = response ? response.length : 0;
     extra = (
       <div className="max-len-indicator">
-        <p className={response.length === maxLen ? "red" : ""}>
-          {response.length + " / " + maxLen}
-        </p>
+        <p className={len === maxLen ? "red" : ""}>{len + " / " + maxLen}</p>
       </div>
     );
   }
 
   return (
     <div className="sentence-question">
-      <TextField
-        placeholder={isLong ? "장문형 텍스트" : "단답형 텍스트"}
-        size={isLong ? "xl" : "lg"}
-        setText={setResponse}
-        text={response}
-        maxLength={maxLen}
-        multiline={isLong}
-      />
-      {extra}
+      <div className="text-box">
+        <TextField
+          placeholder={isLong ? "장문형 텍스트" : "단답형 텍스트"}
+          size={isLong ? "xl" : "lg"}
+          setText={setText}
+          text={response}
+          disabled={isEditting}
+          multiline={isLong}
+        />
+      </div>
+      <div className="extra">{extra}</div>
     </div>
   );
 }

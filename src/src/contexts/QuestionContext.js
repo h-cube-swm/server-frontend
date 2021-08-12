@@ -1,9 +1,9 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useRef } from "react";
 
 const QuestionContext = createContext();
 
 export function QuestionProvider({ children, state, question, setQuestion, response, setResponse }) {
-  return <QuestionContext.Provider value={{ state, question, setQuestion, response, setResponse }} >
+  return <QuestionContext.Provider value={{ state, question, response, setQuestion, setResponse }} >
     {children}
   </QuestionContext.Provider >;
 }

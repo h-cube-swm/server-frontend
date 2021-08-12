@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const ROOT = "https://api.the-form.io";
 
 function useFetch(path) {
-
   const [data, setData] = useState([null, null]);
 
   useEffect(() => {
@@ -12,7 +11,7 @@ function useFetch(path) {
       try {
         const config = {
           url: ROOT + path,
-          method: 'GET'
+          method: "GET",
         };
         const { data } = await axios(config);
         if (data.success) {
@@ -30,13 +29,12 @@ function useFetch(path) {
 }
 
 async function sendData(method, path, body) {
-
   method = method.toLowerCase();
 
   try {
     const config = {
       url: ROOT + path,
-      method
+      method,
     };
     if (body) config.data = body;
     const { data } = await axios(config);
@@ -48,11 +46,15 @@ async function sendData(method, path, body) {
 
 export const API = {
   // Get
-  useResponses: resultId => useFetch(`/surveys/${resultId}/responses`),
-  useLink: () => useFetch('/link'),
-  useSurvey: surveyId => useFetch(`/surveys/${surveyId}`),
+  useResponses: (resultId) => useFetch(`/surveys/${resultId}/responses`),
+  useLink: () => useFetch("/link"),
+  useSurvey: (surveyId) => useFetch(`/surveys/${surveyId}`),
 
-  putSurvey: (surveyId, survey) => sendData('PUT', `/surveys/${surveyId}`, survey),
-  endSurvey: (surveyId) => sendData('PUT', `/surveys/${surveyId}/end`),
-  postResponse: (surveyId, response) => sendData("POST", `/surveys/${surveyId}/responses`, response)
+  putSurvey: (surveyId, survey) =>
+    sendData("PUT", `/surveys/${surveyId}`, survey),
+  putEmail: (surveyId, email) =>
+    sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
+  endSurvey: (surveyId) => sendData("PUT", `/surveys/${surveyId}/end`),
+  postResponse: (surveyId, response) =>
+    sendData("POST", `/surveys/${surveyId}/responses`, response),
 };
