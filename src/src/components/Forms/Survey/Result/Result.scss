@@ -12,6 +12,20 @@
     overflow: scroll;
     flex-grow: 1;
     margin-bottom: 5rem;
+
+    @media print {
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 18px;
+      z-index: 9999;
+    }
   }
 
   .survey-header {
@@ -73,6 +87,7 @@
     background-color: #fff;
     box-shadow: $shadow-default;
     .change {
+      margin-right: 1rem;
       background-color: #707070;
       font-size: $fs-rg;
       opacity: 0.6;
@@ -93,9 +108,14 @@
         background-color: #2d5b3a;
         margin-right: 1rem;
       }
-      .pdf {
+      .image {
         font-size: $fs-rg;
         background-color: #ce301e;
+      }
+
+      .get-winner {
+        margin-left: 3rem;
+        background-color: #707070;
       }
 
       strong {
@@ -103,6 +123,10 @@
         font-weight: $fw-bold;
         margin-top: 3px;
       }
+    }
+
+    @media print {
+      display: none;
     }
   }
 
@@ -130,5 +154,12 @@
         width: 100%;
       }
     }
+  }
+}
+
+@media print {
+  * {
+    height: unset !important;
+    overflow: unset !important;
   }
 }

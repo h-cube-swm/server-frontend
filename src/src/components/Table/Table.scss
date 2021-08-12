@@ -1,0 +1,13 @@
+.table {
+  top: 5rem;
+  th,
+  tr {
+    border: solid 1px #000;
+  }
+
+  th {
+    cursor: pointer;
+    background-color: #444;
+    color: white;
+  }
+}

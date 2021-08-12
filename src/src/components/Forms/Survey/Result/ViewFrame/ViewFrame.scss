@@ -11,4 +11,8 @@
   @include mobile {
     width: 300px;
   }
+
+  @media print {
+    break-inside: avoid;
+  }
 }
