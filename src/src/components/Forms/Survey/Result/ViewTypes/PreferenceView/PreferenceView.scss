@@ -14,6 +14,14 @@
 
   .chart {
     width: 70%;
-    margin: 0 auto;
+    margin: 2rem auto;
+  }
+
+  @include mobile {
+    .chart {
+      width: 80%;
+      height: 100%;
+      margin: 8rem auto;
+    }
   }
 }

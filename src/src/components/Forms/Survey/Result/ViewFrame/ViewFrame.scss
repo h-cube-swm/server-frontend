@@ -7,4 +7,8 @@
   width: 640px;
   height: 400px;
   box-shadow: $shadow-default;
+
+  @include mobile {
+    width: 300px;
+  }
 }

@@ -6,6 +6,7 @@ import ChoiceView from "./ViewTypes/ChoiceView/ChoiceView";
 import SentenceView from "./ViewTypes/SentenceView/SentenceView";
 import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
 import TextField from "../../../TextField/TextField";
+import GetWinner from "./GetWinner/GetWinner";
 import { CardTypes } from "../constants";
 import DataGrid from "react-data-grid";
 import { utils, writeFile } from "xlsx";
@@ -62,6 +63,11 @@ export default function Result({ match, location }) {
   const resultId = match.params.link;
   const viewMode = location.hash.replace("#", "");
   const isTable = viewMode === "table";
+  const [isOpen, setIsOpen] = useState(false);
+
+  const changeOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
   const [result, err] = API.useResponses(resultId);
   if (err && result.status === 400)
@@ -124,7 +130,7 @@ export default function Result({ match, location }) {
     return row;
   });
 
-  const exportToXlsx = () => {
+  const exportToXlsx = async () => {
     const xlsxColumn = columns.map(({ name }) => name);
     const xlsxRows = rows.map((obj) => {
       let xlsxRow = Object.values(obj);
@@ -136,22 +142,20 @@ export default function Result({ match, location }) {
     const wb = utils.book_new();
     const ws = utils.aoa_to_sheet(workSheetData);
     utils.book_append_sheet(wb, ws, "Sheet 1");
-    writeFile(wb, "filename.xlsx");
+    await writeFile(wb, "filename.xlsx");
   };
 
-  const exportToPdf = () => {
+  const exportToPdf = async () => {
     const pdfColumn = [columns.map(({ name }) => name)];
     const pdfRows = rows.map((obj) => {
       let pdfRow = Object.values(obj);
       pdfRow.unshift(pdfRow.pop());
       return pdfRow;
     });
-
     const doc = new jsPDF({
       orientation: "landscape",
       unit: "px",
     });
-
     doc.addFileToVFS("MyFont.ttf", font);
     doc.addFont("MyFont.ttf", "MyFont", "normal");
     doc.setFont("MyFont");
@@ -169,8 +173,11 @@ export default function Result({ match, location }) {
       },
       tableWidth: "wrap",
     });
-    doc.save("filename.pdf");
+    await doc.save("filename.pdf");
   };
+
+  if (isOpen) return <GetWinner changeOpen={changeOpen} answers={answers} />;
+
   return (
     <div className="result">
       <div className="survey-header">
@@ -181,18 +188,16 @@ export default function Result({ match, location }) {
         </div>
         <div className="info">
           <TextField text={survey ? survey.title : ""} size="title" multiline />
-          <TextField
-            text={survey ? survey.description : ""}
-            size="xl"
-            multiline
-          />
         </div>
-
+        <button className="btn rg" onClick={changeOpen}>
+          응답자
+          <br />
+          추첨
+        </button>
         <h3>
           총 응답 수 <strong>{answers.length}</strong>
         </h3>
       </div>
-
       {isTable ? (
         <DataGrid
           className="data-grid"
@@ -208,19 +213,19 @@ export default function Result({ match, location }) {
       )}
       <div className="btn-box">
         <div className="export-button">
-          <button className="btn lg xlsx" onClick={exportToXlsx}>
+          <button className="btn rg xlsx" onClick={exportToXlsx}>
             .xlsx
             <br />
             <strong>다운로드</strong>
           </button>
-          <button className="btn lg pdf" onClick={exportToPdf}>
+          <button className="btn rg pdf" onClick={exportToPdf}>
             pdf
             <br />
             <strong>다운로드</strong>
           </button>
         </div>
         <div className="partition"></div>
-        <Link to={`#${viewModeNext}`} className="btn lg change">
+        <Link to={`#${viewModeNext}`} className="btn rg change">
           {isTable ? "차트 보기" : "표 보기"}
         </Link>
       </div>

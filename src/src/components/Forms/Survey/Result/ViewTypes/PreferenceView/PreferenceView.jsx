@@ -4,7 +4,7 @@ import "./PreferenceView.scss";
 
 export default function PreferenceView({ question, answers }) {
   let answerObj = {};
-  let labels = [];
+  let labels = [question.minDes];
   let values = [];
 
   answers.forEach((answer) => {
@@ -16,15 +16,21 @@ export default function PreferenceView({ question, answers }) {
   });
 
   Object.entries(answerObj).forEach(([key, value]) => {
-    labels.push(key);
+    if (key === "1" || key === `${answers.length}`) {
+      values.push(value);
+      return;
+    }
+    labels.push("");
     values.push(value);
   });
+
+  labels.push(question.maxDes);
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: "선호도",
+        label: question.title,
         data: values,
         backgroundColor: [
           "rgba(240, 192, 71, 1)",
@@ -44,6 +50,15 @@ export default function PreferenceView({ question, answers }) {
     legend: {
       display: true,
       position: "left",
+      base: 1,
+    },
+    scales: {
+      yAxes: {
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+        },
+      },
     },
   };
 

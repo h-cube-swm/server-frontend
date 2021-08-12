@@ -54,6 +54,13 @@
     }
   }
 
+  .get-winner-modal {
+    z-index: 2;
+    width: 200px;
+    height: 100px;
+    background: red;
+  }
+
   .btn-box {
     @include round;
     display: flex;
@@ -105,4 +112,23 @@
   }
 
   overflow: scroll;
+
+  @include mobile {
+    .btn-box {
+      bottom: 0;
+    }
+    .info {
+      textarea {
+        font-size: $fs-rg;
+      }
+    }
+    .logo {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      width: 4rem;
+      img {
+        width: 100%;
+      }
+    }
+  }
 }
