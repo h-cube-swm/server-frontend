@@ -6,6 +6,7 @@
   .choice-box {
     display: flex;
     align-items: center;
+    height: 2rem;
 
     .check-box {
       width: 2rem;
@@ -13,7 +14,7 @@
     }
 
     .text-box {
-      height: max-content;
+      // height: max-content;
     }
   }
 

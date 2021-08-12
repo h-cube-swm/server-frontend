@@ -13,7 +13,7 @@
     position: absolute;
     top: 3rem;
     left: 3rem;
-    width: 8rem;
+    width: 6rem;
 
     img {
       max-width: 100%;
@@ -43,6 +43,18 @@
     text-shadow: 0 0 10px #808080;
   }
 
+  @include tablet {
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+
+      img {
+        width: 6rem;
+      }
+    }
+  }
+
   @include mobile {
     contents {
       left: 3rem;
@@ -59,9 +71,13 @@
     }
 
     .logo {
+      position: absolute;
       top: 2rem;
       left: 2rem;
-      width: 5rem;
+
+      img {
+        width: 4rem;
+      }
     }
   }
 }
