@@ -5,7 +5,7 @@
   top: 0px;
   left: 0px;
   width: 100%;
-  z-index: 2;
+  z-index: 4;
 
   .message-box {
     width: 100vw;
@@ -25,7 +25,7 @@
     color: #000;
 
     &.danger {
-      background-color: red;
+      background-color: #e22f1b;
       color: white;
     }
 
@@ -39,10 +39,15 @@
       width: 1px;
       height: 2rem;
       background-color: #000;
+      &.danger {
+        background-color: #fff;
+      }
     }
 
     button {
       background-color: inherit;
+      margin-left: 1rem;
+      margin-right: 0.5rem;
     }
 
     .close {
