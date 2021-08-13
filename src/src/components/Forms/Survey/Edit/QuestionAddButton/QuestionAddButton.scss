@@ -4,10 +4,13 @@
   display: block;
   width: 600px;
   height: 4.5rem;
-  opacity: 0;
-  animation: intro 2s linear;
   text-align: center;
   transition-duration: 200ms;
+  opacity: 0.25;
+
+  &:hover {
+    opacity: 1;
+  }
 
   button {
     background-color: rgba(0, 0, 0, 0);
@@ -18,36 +21,6 @@
 
     img {
       height: 100%;
-    }
-  }
-
-  &:focus {
-    opacity: 1;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-
-  @keyframes intro {
-    0% {
-      opacity: 0;
-    }
-
-    25% {
-      opacity: 0;
-    }
-
-    50% {
-      opacity: 1;
-    }
-
-    90% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
     }
   }
 }
