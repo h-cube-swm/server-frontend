@@ -32,6 +32,7 @@
     .message-inner-box {
       flex-grow: 1;
       text-align: center;
+      word-break: keep-all;
     }
 
     .splitter {

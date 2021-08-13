@@ -2,26 +2,24 @@
 
 .loading {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
 
   h1 {
     font-size: $fs-xl;
+    text-align: center;
   }
 
-  .chaos {
-    z-index: -1;
+  .spinner {
+    text-align: center;
+    font-weight: 700;
   }
 
   @include mobile {
     h1 {
-      position: absolute;
-      left: 3rem;
-      bottom: 5rem;
       font-size: $fs-lg;
-      z-index: 2;
     }
   }
 }
