@@ -1,32 +1,10 @@
 @import "/src/scss/style.scss";
 
 .result {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100%;
   height: 100%;
-
-  .charts {
-    margin-top: 5rem;
-    overflow: scroll;
-    flex-grow: 1;
-    margin-bottom: 5rem;
-
-    @media print {
-      background-color: white;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      margin: 0;
-      padding: 15px;
-      font-size: 14px;
-      line-height: 18px;
-      z-index: 9999;
-    }
-  }
+  display: flex;
+  flex-direction: column;
 
   .survey-header {
     display: flex;
@@ -68,11 +46,29 @@
     }
   }
 
-  .get-winner-modal {
-    z-index: 2;
-    width: 200px;
-    height: 100px;
-    background: red;
+  .content {
+    margin-top: 5rem;
+    flex-grow: 1;
+    padding-bottom: 7rem;
+    // max-width: 1000px;
+  }
+
+  .charts {
+    margin-bottom: 5rem;
+
+    @media print {
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 18px;
+      z-index: 9999;
+    }
   }
 
   .btn-box {
@@ -99,6 +95,12 @@
       background-color: #707070;
       opacity: 0.6;
     }
+    .get-winner-btn {
+      background-color: #707070;
+      opacity: 0.6;
+      word-break: keep-all;
+    }
+
     .export-button {
       display: flex;
       align-items: center;
@@ -112,12 +114,6 @@
         font-size: $fs-rg;
         background-color: #ce301e;
       }
-
-      .get-winner {
-        margin-left: 3rem;
-        background-color: #707070;
-      }
-
       strong {
         font-size: $fs-sm;
         font-weight: $fw-bold;
@@ -128,11 +124,6 @@
     @media print {
       display: none;
     }
-  }
-
-  .data-grid {
-    height: 100%;
-    margin-top: 5rem;
   }
 
   overflow: scroll;

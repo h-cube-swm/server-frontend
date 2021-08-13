@@ -38,28 +38,29 @@ function answerToString(answer) {
 function reshapeAnswerTo2DArray(survey, answers) {
   const { questions } = survey;
   let questionDict = {};
-  let questionList = [];
   let answerList = [];
 
   // Construct questionDict.
   // QuestionDict map question id to question index.
   questions.forEach((question, i) => {
-    questionDict[question.id] = questionList.length;
-    questionList.push(question);
+    questionDict[question.id] = i;
   });
 
   // Answers is just 2D array of answers.
   answers.forEach(({ answer }) => {
-    const newAnswer = Array(questionList.length).fill(null);
+    const newAnswer = Array(questions.length).fill(null);
     Object.entries(answer).forEach(([key, value]) => {
       if (key === "index") return;
       const questionIndex = questionDict[key];
       newAnswer[questionIndex] = value;
     });
-    answerList.push(newAnswer);
+    answerList.push(["asd"].concat(newAnswer));
   });
 
-  return [questions, answerList];
+  return [
+    [{ title: "응답 시각", type: "timestamp" }].concat(questions),
+    answerList,
+  ];
 }
 
 function ChartView({ columns, rows }) {
@@ -151,7 +152,7 @@ export default function Result({ match, location }) {
           총 응답 수 <strong>{answers.length}</strong>
         </h3>
       </div>
-      {content}
+      <div className="content">{content}</div>
       <div className="btn-box">
         <div className="export-button">
           <button className="btn rg xlsx" onClick={exportToXlsx}>
@@ -170,9 +171,9 @@ export default function Result({ match, location }) {
           {isTable ? "차트 보기" : "표 보기"}
         </Link>
         <Link
-          className="btn rg get-winner"
+          className="btn rg get-winner-btn"
           to={`#${isWinner ? "chart" : "winner"}`}>
-          {isWinner ? "돌아가기" : "응답자\n추첨"}
+          {isWinner ? "돌아가기" : "응답자 추첨"}
         </Link>
       </div>
     </div>
