@@ -2,82 +2,47 @@
 
 .error {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   background-color: #f8f8f8;
 
-  .logo {
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
-    width: 6rem;
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-    }
+  .container {
+    padding: 2rem;
   }
 
-  .contents {
-    position: absolute;
-    left: 10rem;
-    h1 {
-      font-size: $fs-xl;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: $fs-md;
+  h1 {
+    font-size: $fs-xl;
+    margin-bottom: 1rem;
+    word-break: keep-all;
+    text-align: center;
+  }
+
+  p {
+    font-size: $fs-md;
+    font-weight: 700;
+    word-break: keep-all;
+    text-align: center;
+
+    strong {
       font-weight: 700;
-      strong {
-        font-weight: 700;
-        color: #2b44ff;
-      }
+      color: #2b44ff;
     }
-  }
-
-  .hidden {
-    color: transparent;
-    text-shadow: 0 0 10px #808080;
   }
 
   @include tablet {
-    .logo {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-
-      img {
-        width: 6rem;
-      }
+    h1 {
+      font-size: 2rem;
     }
   }
 
   @include mobile {
-    contents {
-      left: 3rem;
-      bottom: 5rem;
-      font-size: $fs-lg;
-      z-index: 2;
-    }
-
-    p {
-      position: absolute;
-      left: 3rem;
-      bottom: 4;
-      font-size: $fs-rg;
-    }
-
-    .logo {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-
-      img {
-        width: 4rem;
-      }
+    h1 {
+      font-size: 2rem;
     }
   }
 }
