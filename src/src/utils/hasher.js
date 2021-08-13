@@ -56,7 +56,7 @@ function unhash(hashStr) {
 function isUnhashable(str) {
 
   // Length check
-  if (str.length % count != 0) return false;
+  if (str.length % count !== 0) return false;
 
   // Character check
   let unhashable = true;
