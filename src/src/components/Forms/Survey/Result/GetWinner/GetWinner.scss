@@ -1,0 +1,59 @@
+@import "/src/scss/style.scss";
+.get-winner {
+  .contents {
+    margin-top: 8rem;
+  }
+  .questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 2rem;
+    button {
+      @include round;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      font-size: $fs-rg;
+      color: #fff;
+      background-color: #b0b0b0;
+    }
+  }
+  .answers {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    p {
+      @include round;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      font-size: $fs-rg;
+      font-weight: $fw-bold;
+      color: #000;
+      background-color: #fff;
+      box-shadow: $shadow-default;
+    }
+  }
+
+  .type-button {
+    position: absolute;
+    padding: 1rem 1.5rem;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    .random {
+      font-size: $fs-rg;
+      background-color: #707070;
+      opacity: 0.6;
+      margin-right: 2rem;
+    }
+    .timestamp {
+      font-size: $fs-rg;
+      background-color: #707070;
+      opacity: 0.6;
+    }
+  }
+}
