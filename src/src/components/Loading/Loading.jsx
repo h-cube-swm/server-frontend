@@ -1,15 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import React, { useEffect } from "react";
 import Chaos from "../Chaos/Chaos";
+import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Loading.scss";
 
 export default function Loading() {
   return (
     <div className="loading">
-      <Link to="/">
-        <img className="logo" src={logo} alt="logo" />
-      </Link>
+      <FloatingLogo />
       <h1>로딩 중입니다.</h1>
       <Chaos />
     </div>

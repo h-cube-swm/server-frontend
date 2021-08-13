@@ -4,21 +4,17 @@ import { Link } from "react-router-dom";
 
 /* Styles */
 import "./ResponseEnding.scss";
-import logo from "../../../../assets/images/logo.png";
 import firework from "../../../../assets/icons/firework.png";
 import Firework from "./Firework/Firework";
 import pencil from "../../../../assets/images/pencil.png";
 import books from "../../../../assets/images/books.png";
 import wand from "../../../../assets/images/wand.png";
+import FloatingLogo from "../../../FloatingLogo/FloatingLogo";
 
 export default function ResponseEnding() {
   return (
     <div className="response-ending">
-      <div className="logo">
-        <Link to="/">
-          <img src={logo} alt="logo" />
-        </Link>
-      </div>
+      <FloatingLogo />
       <div className="contents-box">
         <div className="celebrate-box">
           <div className="celebrate-sentence">
