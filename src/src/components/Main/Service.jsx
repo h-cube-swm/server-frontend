@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { QuestionProvider } from "../../contexts/QuestionContext";
-import Card from "../Forms/Survey/Card/Card";
 import { CardStates } from "../Forms/Survey/constants";
 import getQuestion from "../Forms/Survey/getQuestion";
 import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
 import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
-import useDefault from "../../hooks/useDefault";
 import { CardTypes } from "../Forms/Survey/constants";
 
 /* Assets */
