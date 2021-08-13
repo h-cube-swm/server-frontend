@@ -36,8 +36,8 @@ const withSurvey = (Component) => (props) => {
     survey.questions = survey.questions.map((question) => {
       const { type } = question;
       if (
-        type == CardTypes.SINGLE_CHOICE ||
-        type == CardTypes.MULTIPLE_CHOICE
+        type === CardTypes.SINGLE_CHOICE ||
+        type === CardTypes.MULTIPLE_CHOICE
       ) {
         if (question.choices)
           question.choices = question.choices.filter((x) => x);

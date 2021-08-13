@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Table.scss';
+import React, { useState } from "react";
+import "./Table.scss";
 
 const ASC = 1;
 
@@ -19,7 +19,7 @@ export default function Table({ columns, rows }) {
   });
 
   const getSetCriterion = (nextIndex) => () => {
-    if (nextIndex == index) {
+    if (nextIndex === index) {
       setCriterion([nextIndex, -order]);
     } else {
       setCriterion([nextIndex, ASC]);
@@ -30,11 +30,21 @@ export default function Table({ columns, rows }) {
     <table className="table">
       <thead>
         <tr>
-          {columns.map((column, i) => <th key={i} onClick={getSetCriterion(i)}>{column}</th>)}
+          {columns.map((column, i) => (
+            <th key={i} onClick={getSetCriterion(i)}>
+              {column}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {sortedRows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}
+        {sortedRows.map((row, i) => (
+          <tr key={i}>
+            {row.map((cell, j) => (
+              <td key={j}>{cell}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );

@@ -11,7 +11,7 @@ export function MessageProvider({ children }) {
 
   function publish(message, type = 'default') {
     setMessageQueue(queue => [...queue, [messageIdRef.current++, message, type]]);
-  }
+  };
 
   function close(messageId) {
     setMessageQueue(queue => queue.filter(([id]) => id !== messageId));

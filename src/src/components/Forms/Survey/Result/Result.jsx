@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { API } from "../../../../utils/apis";
 import Loading from "../../../Loading/Loading";
@@ -49,7 +49,7 @@ function reshapeAnswerTo2DArray(survey, answers) {
   });
 
   // Answers is just 2D array of answers.
-  answers = answers.map(({ answer }) => {
+  answers.forEach(({ answer }) => {
     const newAnswer = Array(questionList.length).fill(null);
     Object.entries(answer).forEach(([key, value]) => {
       if (key === "index") return;
@@ -108,7 +108,7 @@ export default function Result({ match, location }) {
 
   // Get content from viewMode
   let content = null;
-  if (isWinner) content = <GetWinner result={result} />;
+  if (isWinner) content = <GetWinner columns={columns} rows={rows} />;
   if (isChart) content = <ChartView columns={columns} rows={rows} />;
   if (isTable)
     content = <TableView columns={columns.map((x) => x.title)} rows={rows} />;

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 import { API } from "../../../../utils/apis";
+import { useMessage } from "../../../../contexts/MessageContext";
 
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
@@ -9,12 +10,15 @@ import logo from "../../../../assets/images/logo.png";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import { hash } from "../../../../utils/hasher";
+import useOnce from "../../../../hooks/useOnce";
 
 const Ending = ({ ending }) => {
   const { surveyId, title, description, surveyLink, resultLink } = ending;
 
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState("default");
+
+  const { publish } = useMessage();
 
   const handleEmailSend = async () => {
     if (emailState === "loading") return;
@@ -36,6 +40,13 @@ const Ending = ({ ending }) => {
       setEmailState("default");
     }
   };
+
+  useOnce(() => {
+    publish(
+      "메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
+      "danger"
+    );
+  });
 
   let buttonClasses = ["btn", "rg", "submit-btn"];
   let buttonText = "";

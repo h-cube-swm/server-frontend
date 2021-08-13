@@ -1,5 +1,4 @@
 import React from "react";
-import Service from "../../../Main/Service";
 import { Link } from "react-router-dom";
 
 /* Styles */

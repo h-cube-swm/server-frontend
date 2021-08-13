@@ -9,7 +9,7 @@ import { CardTypes } from "../Forms/Survey/constants";
 /* Assets */
 import "./Service.scss";
 
-const [_, _question] = getQuestion(0);
+const _question = getQuestion(0)[1];
 const defaultAnswers = [
   { 0: true },
   { 0: true },

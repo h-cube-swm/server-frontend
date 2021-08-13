@@ -40,7 +40,7 @@ function Response({ survey, surveyId }) {
   const getMove = (index) => () => setIndex(index);
   const onSubmit = async () => {
     const body = { answer: responses };
-    const [data, err] = await API.postResponse(surveyId, body);
+    const err = await API.postResponse(surveyId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
     else setRedirect("/forms/survey/response/ending");
   };
@@ -48,8 +48,9 @@ function Response({ survey, surveyId }) {
   const cover = (
     <div className="cover-box">
       <h1 className="title">{survey.title}</h1>
-      <hr></hr>
-      <div className="description">{survey.description}</div>
+      {survey.description && (
+        <div className="description">{survey.description}</div>
+      )}
     </div>
   );
   const pages = [cover, ...questions];
@@ -104,7 +105,12 @@ function Response({ survey, surveyId }) {
           if (i > index) classes.push("right");
           const className = classes.join(" ");
 
-          if (i == 0) return <div className={className}>{page}</div>;
+          if (i === 0)
+            return (
+              <div key="cover" className={className}>
+                {page}
+              </div>
+            );
 
           // Get state
           const state = i === index ? CardStates.RESPONSE : CardStates.PREVIEW;
