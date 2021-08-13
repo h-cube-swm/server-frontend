@@ -9,6 +9,8 @@ import "./App.scss";
 // import Response from "../Forms/Survey/Response/Response";
 import Loading from "../Loading/Loading";
 import Response from "../Forms/Survey/Response/Response";
+import { MessageProvider } from "../../contexts/MessageContext";
+import MessageSystem from "../Message/MessageSystem";
 
 // /* Lazy loaded components */
 const Main = lazy(() => import("../Main/Main"));
@@ -30,23 +32,27 @@ Thus, unlike example in official document, Suspense should be outside of Switch.
 
 function App() {
   return (
-    <Suspense fallback={<Loading />}>
-      <Switch>
-        <Route path="/" component={Main} exact />
-        <Route path="/forms/survey" component={Survey} exact />
-        <Route path="/forms/survey/edit/:link" component={Edit} />
-        <Route path="/forms/survey/end/:link" component={EditEnding} />
-        <Route
-          path="/forms/survey/response/ending"
-          component={ResponseEnding}
-          exact
-        />
-        <Route path="/forms/survey/response/:link" component={Response} />
-        <Route path="/forms/survey/result/:link" component={Result} />
-        <Route path="/error/:type" component={Error} />
-        <Route component={Error} />
-      </Switch>
-    </Suspense>
+    <MessageProvider>
+      <MessageSystem />
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <Route path="/" component={Main} exact />
+          <Route path="/forms/survey" component={Survey} exact />
+          <Route path="/forms/survey/edit/:link" component={Edit} />
+          <Route path="/forms/survey/end/:link" component={EditEnding} />
+          <Route
+            path="/forms/survey/response/ending"
+            component={ResponseEnding}
+            exact
+          />
+          <Route path="/forms/survey/response/:link" component={Response} />
+          <Route path="/forms/survey/result/:link" component={Result} />
+          <Route path="/error/:type" component={Error} />
+          <Route path="/loading" component={Loading}></Route>
+          <Route component={Error} />
+        </Switch>
+      </Suspense>
+    </MessageProvider>
   );
 }
 
