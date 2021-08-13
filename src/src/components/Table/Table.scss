@@ -1,13 +1,34 @@
+@import "/src/scss/style.scss";
+
 .table {
-  top: 5rem;
-  th,
+  border-spacing: 0 1em;
+  padding: 1rem;
+
   tr {
-    border: solid 1px #000;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      content: "";
+      background-color: white;
+      border-radius: 7px;
+      z-index: 0;
+      box-shadow: $shadow-default;
+    }
   }
 
   th {
+    font-weight: 700;
     cursor: pointer;
-    background-color: #444;
-    color: white;
+  }
+
+  th,
+  td {
+    position: relative;
+    // z-index: 1;
+    color: black;
+    padding: 0.5rem;
   }
 }
