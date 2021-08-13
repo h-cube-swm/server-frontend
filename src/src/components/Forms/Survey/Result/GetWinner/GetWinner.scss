@@ -1,30 +1,63 @@
 @import "/src/scss/style.scss";
+
 .get-winner {
-  .contents {
-    margin-top: 8rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 80%;
+  height: 50%;
+  margin: 5rem auto;
+  max-width: 1200px;
+  .controller {
+    margin-left: 2rem;
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      h3 {
+        width: 10rem;
+        font-size: $fs-lg;
+        font-weight: $fw-bold;
+      }
+      button {
+        font-size: $fs-rg;
+        word-break: keep-all;
+        margin-right: 1rem;
+      }
+    }
+  }
+  h1 {
+    font-size: $fs-rg;
+    font-weight: $fw-bold;
+    margin-top: 3rem;
   }
   .questions {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-left: 2rem;
+    margin-top: 2rem;
+    height: 100%;
+    overflow: scroll;
     button {
       @include round;
+      width: 25rem;
+      height: auto;
       margin-bottom: 2rem;
-      padding: 1.5rem;
+      padding: 1rem;
       font-size: $fs-rg;
       color: #fff;
-      background-color: #b0b0b0;
+      background: linear-gradient(to right, #2b44ff, #707070);
     }
   }
   .answers {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    width: 100%;
-    height: auto;
+    width: 20rem;
+    height: 100%;
+    overflow: scroll;
     p {
       @include round;
+      margin-left: 1.5rem;
       margin-bottom: 1rem;
       padding: 1rem;
       font-size: $fs-rg;
@@ -36,11 +69,7 @@
   }
 
   .type-button {
-    position: absolute;
-    padding: 1rem 1.5rem;
-    top: 8rem;
-    left: 50%;
-    transform: translateX(-50%);
+    padding: 1rem 0;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -55,5 +84,9 @@
       background-color: #707070;
       opacity: 0.6;
     }
+  }
+
+  @include laptop {
+    height: 40%;
   }
 }
