@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useMessage } from "../../contexts/MessageContext";
+import useOnly from "../../hooks/useOnly";
 import useTimeout from "../../hooks/useTimeout";
 import "./Loading.scss";
 
@@ -21,7 +22,7 @@ export default function Loading() {
   });
 
   // useEffect for error message
-  useEffect(
+  useOnly(
     () =>
       isError &&
       publish(
