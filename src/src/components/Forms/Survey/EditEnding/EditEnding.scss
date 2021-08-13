@@ -72,6 +72,7 @@
           font-size: $fs-lg;
           font-weight: $fw-bold;
           color: white;
+          word-break: keep-all;
           strong {
             color: #1dff0a;
             font-weight: $fw-bold;
@@ -153,8 +154,19 @@
           grid-row: 4;
           grid-column: 1;
           background: linear-gradient(to right, #2b44ff, #707070);
-          img {
-            width: 40%;
+          .explain {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            button {
+              position: static;
+              width: 15%;
+              background-color: rgba($color: #000000, $alpha: 0);
+              transform: translate(30%, -80%);
+              img {
+                width: 50%;
+              }
+            }
           }
         }
 
@@ -162,8 +174,19 @@
           grid-row: 4;
           grid-column: 2;
           background: linear-gradient(to right, #2b44ff, #707070);
-          img {
-            width: 40%;
+          .explain {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            button {
+              position: static;
+              width: 15%;
+              background-color: rgba($color: #000000, $alpha: 0);
+              transform: translate(30%, -80%);
+              img {
+                width: 50%;
+              }
+            }
           }
         }
       }

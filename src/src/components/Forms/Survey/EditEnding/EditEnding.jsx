@@ -7,10 +7,13 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
+import duplicate from "../../../../assets/icons/duplicate.svg";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import { hash } from "../../../../utils/hasher";
-import useOnce from "../../../../hooks/useOnce";
+import useOnly from "../../../../hooks/useOnly";
+
+const HOST = window.location.protocol + "//" + window.location.host;
 
 const Ending = ({ ending }) => {
   const { surveyId, title, description, surveyLink, resultLink } = ending;
@@ -41,9 +44,20 @@ const Ending = ({ ending }) => {
     }
   };
 
-  useOnce(() => {
+  const duplicateLink = (link) => {
+    const linkarea = document.createElement("textarea");
+    document.body.appendChild(linkarea);
+    linkarea.value = link;
+    linkarea.focus();
+    linkarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(linkarea);
+    publish("링크가 복사되었습니다 ✅");
+  };
+
+  useOnly(() => {
     publish(
-      "메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
+      "주의⚠️ 메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
       "danger"
     );
   });
@@ -135,27 +149,44 @@ const Ending = ({ ending }) => {
             </div>
             <div className="box five">
               <div className="description">
-                <h1>
-                  아래 링크를 통해
-                  <br />
-                  사람들에게 <strong>배포</strong>하세요.
-                </h1>
-                <h3>
-                  {"https://the-form.io/forms/survey/response/" +
-                    hash(surveyLink)}
-                </h3>
+                <div className="explain">
+                  <h1>
+                    아래 링크를 통해
+                    <br />
+                    <strong>배포</strong>하세요.
+                  </h1>
+                  <button
+                    onClick={() =>
+                      duplicateLink(
+                        `${HOST + "/forms/survey/response/" + hash(surveyLink)}`
+                      )
+                    }>
+                    <img src={duplicate} alt="duplicate button" />
+                  </button>
+                </div>
+
+                <h3>{HOST + "/forms/survey/response/" + hash(surveyLink)}</h3>
               </div>
             </div>
             <div className="box six">
               <div className="description">
-                <h1>
-                  아래 링크를 통해
-                  <br />
-                  <strong>결과</strong>를 확인하세요.
-                </h1>
-                <h3>
-                  {"https://the-form.io/forms/survey/result/" + resultLink}
-                </h3>
+                <div className="explain">
+                  <h1>
+                    아래 링크를 통해
+                    <br />
+                    <strong>결과</strong>를 확인하세요.
+                  </h1>
+                  <button
+                    onClick={() =>
+                      duplicateLink(
+                        `${HOST + "/forms/survey/result/" + resultLink}`
+                      )
+                    }>
+                    <img src={duplicate} alt="duplicate button" />
+                  </button>
+                </div>
+
+                <h3>{HOST + "/forms/survey/result/" + resultLink}</h3>
               </div>
             </div>
           </div>
