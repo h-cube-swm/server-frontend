@@ -4,39 +4,4 @@
   position: relative;
   display: block;
   z-index: 2;
-
-  .logo {
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
-
-    img {
-      width: 6rem;
-      height: auto;
-    }
-  }
-
-  @include tablet {
-    .logo {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-
-      img {
-        width: 6rem;
-      }
-    }
-  }
-
-  @include mobile {
-    .logo {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
-
-      img {
-        width: 5rem;
-      }
-    }
-  }
 }

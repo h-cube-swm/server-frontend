@@ -1,19 +1,12 @@
 /* React elements */
 import React from "react";
-import { Link } from "react-router-dom";
-
-/* Styles */
-import logo from "../../assets/images/logo.png";
+import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Header.scss";
 
 function Header() {
   return (
     <div className="header">
-      <div className="logo">
-        <Link to="/">
-          <img src={logo} alt="logo" />
-        </Link>
-      </div>
+      <FloatingLogo />
     </div>
   );
 }
