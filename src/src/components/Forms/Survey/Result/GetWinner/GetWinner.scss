@@ -2,14 +2,14 @@
 
 .get-winner {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-start;
-  width: 80%;
-  height: 50%;
-  margin: 5rem auto;
-  max-width: 1200px;
+  height: 100%;
+  width: 55%;
   .controller {
-    margin-left: 2rem;
+    height: auto;
+    max-height: 80%;
+    margin-right: 2rem;
     .header {
       display: flex;
       flex-direction: column;
@@ -31,34 +31,35 @@
     font-weight: $fw-bold;
     margin-top: 3rem;
   }
-  .questions {
+  .criteria {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
-    height: 100%;
+    width: 25rem;
+    height: 30rem;
     overflow: scroll;
+    margin-top: 2rem;
     button {
       @include round;
-      width: 25rem;
+      width: 20rem;
       height: auto;
       margin-bottom: 2rem;
       padding: 1rem;
       font-size: $fs-rg;
       color: #fff;
-      background: linear-gradient(to right, #2b44ff, #707070);
     }
   }
   .answers {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    width: 20rem;
-    height: 100%;
+    width: 30em;
+    height: 31rem;
+    margin-top: 3rem;
     overflow: scroll;
+    padding: 2rem 0;
     p {
       @include round;
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
+      margin: 0.5rem 1.5rem;
       padding: 1rem;
       font-size: $fs-rg;
       font-weight: $fw-bold;
@@ -72,20 +73,47 @@
     padding: 1rem 0;
     display: flex;
     align-items: center;
+
     .random {
       font-size: $fs-rg;
-      background-color: #707070;
-      opacity: 0.6;
       margin-right: 2rem;
     }
+
     .timestamp {
       font-size: $fs-rg;
-      background-color: #707070;
-      opacity: 0.6;
     }
   }
 
   @include laptop {
-    height: 40%;
+    .criteria {
+      height: 20rem;
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .controller {
+      margin-right: 0;
+      text-align: center;
+      .header {
+        align-items: center;
+      }
+    }
+    .criteria {
+      align-items: center;
+      height: 8rem;
+    }
+    .answers {
+      width: 100%;
+      align-items: center;
+      margin-top: 0;
+      p {
+        margin: 0;
+        margin-bottom: 1rem;
+      }
+    }
   }
 }

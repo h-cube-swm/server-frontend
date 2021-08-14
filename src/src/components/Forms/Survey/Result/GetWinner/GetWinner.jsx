@@ -2,48 +2,26 @@ import React, { useState } from "react";
 import "./GetWinner.scss";
 import IntegerField from "../../../../IntegerField/IntegerField";
 
-function AnswerContentView({ contents, number, type, random }) {
-  const filterNumber = number !== 0 ? number : contents.length;
-
-  let contentView = type === "random" ? random : contents;
-
-  contentView = contentView.map((content, i) => <p key={i}>{content}</p>);
-  return contentView.slice(0, filterNumber);
+/**
+ * This function generates random number in (0,1) from the given seed.
+ * @param {*} seed
+ * @returns Number
+ */
+function getPseudoRandom(seed) {
+  let randomNumber = Math.E;
+  for (let i = 0; i < seed.length; i++) {
+    randomNumber *= seed.charCodeAt(i);
+    randomNumber = randomNumber - Math.floor(randomNumber);
+  }
+  return randomNumber;
 }
 
-export default function GetWinner({ columns: questions, rows: answerList }) {
+export default function GetWinner({ columns, rows }) {
   const [winnerType, setWinnerType] = useState("timestamp");
   const [winnerNumber, setWinnerNumber] = useState(0);
-  const [answerContents, setAnswerContents] = useState([]);
-  const [randomContents, setRandomContents] = useState([]);
+  const [criterion, setCriterion] = useState(null);
 
-  let questionSheet = [];
-  let answerSheet = [];
-
-  let questionDict = {};
-
-  const changeWinnerType = (type) => {
-    if (type === "random") {
-      const contents = [...answerContents];
-      setRandomContents(
-        contents.sort(() => {
-          return Math.random() - Math.random();
-        })
-      );
-      // contents = contents.sort(() => {
-      //   return Math.random() - Math.random();
-      // });
-    }
-    setWinnerType(type);
-  };
-
-  const onClick = (e) => {
-    setAnswerContents([]);
-    const contents = answerSheet[e.target.value];
-    setAnswerContents(contents);
-  };
-
-  questions
+  let criterionButtons = columns
     .map((question, index) => [question, index])
     .filter(
       ([question]) =>
@@ -58,64 +36,78 @@ export default function GetWinner({ columns: questions, rows: answerList }) {
           question.title.indexOf("별명") >= 0 ||
           question.title.indexOf("닉네임") >= 0)
     )
-    .forEach((question, i) => {
-      let tempAnswerList = [];
-      answerList.forEach((answer) => {
-        tempAnswerList.push(answer[question[1]]);
-      });
-      questionDict[question[0].title] = tempAnswerList;
+    .map(([{ title }, index]) => {
+      return (
+        <button
+          className={"btn " + (index === criterion ? "" : "disabled")}
+          onClick={() => {
+            criterion === index ? setCriterion(null) : setCriterion(index);
+          }}
+          key={index}>
+          {title}
+        </button>
+      );
     });
 
-  Object.entries(questionDict).forEach(([question, value], i) => {
-    questionSheet.push(
-      <button onClick={onClick} key={i} value={i}>
-        {question}
-      </button>
-    );
-    answerSheet.push(value);
-  });
+  let filteredAnswers = [];
+  if (criterion) {
+    filteredAnswers = rows.map((x) => <p>{x[criterion]}</p>);
+    if (winnerType === "random") {
+      let seed = JSON.stringify(rows);
+      filteredAnswers.sort(() => {
+        const random = getPseudoRandom(seed);
+        seed = random + "";
+        return random - 0.5;
+      });
+    }
+    filteredAnswers = filteredAnswers.filter((_, i) => i < winnerNumber);
+  }
 
   return (
     <div className="get-winner">
       <div className="controller">
+        <h1>추첨 기준과 추첨 인원을 추천해주세요.</h1>
         <div className="header">
-          <div className="type">
-            {winnerType === "random" && <h3>랜덤 추첨</h3>}
-            {winnerType === "timestamp" && <h3>시간순 추첨</h3>}
-          </div>
           <div className="type-button">
             <button
-              onClick={() => changeWinnerType("timestamp")}
-              className="btn rg timestamp">
+              onClick={() => setWinnerType("timestamp")}
+              className={
+                "btn rg " + (winnerType === "timestamp" ? "" : "disabled")
+              }>
               시간순 추첨
             </button>
             <button
-              onClick={() => changeWinnerType("random")}
-              className="btn rg random">
+              onClick={() => setWinnerType("random")}
+              className={
+                "btn rg " + (winnerType === "random" ? "" : "disabled")
+              }>
               랜덤 추첨
             </button>
             <IntegerField
               number={winnerNumber}
               setNumber={setWinnerNumber}
-              max={answerList.length}
+              max={rows.length}
+              onClick={(e) => e.target.select()}
               label="추첨수"
             />
           </div>
         </div>
-        <h1>어떤 질문을 기준으로 추첨할지 선택해 주세요.</h1>
-        <div className="questions">{questionSheet}</div>
+        {criterionButtons.length ? (
+          <h1>어떤 질문을 기준으로 추첨할지 선택해 주세요.</h1>
+        ) : (
+          <h1>
+            필터링할 질문이 없습니다. <br></br>인구통계학적 질문이 필요해요.
+            <br></br>예) 이메일, 전화번호 등
+          </h1>
+        )}
+        <div className="criteria">{criterionButtons}</div>
       </div>
 
       <div className="answers">
-        {answerContents.length == 0 ? (
-          <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>
+        {filteredAnswers ? (
+          filteredAnswers
         ) : (
-          <AnswerContentView
-            contents={answerContents}
-            random={randomContents}
-            number={winnerNumber}
-            type={winnerType}
-          />
+          <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>
         )}
       </div>
     </div>
