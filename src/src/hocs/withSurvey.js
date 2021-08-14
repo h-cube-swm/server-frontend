@@ -26,7 +26,7 @@ const withSurvey = (Component) => (props) => {
     survey.counter = counter;
     survey.questions.push(question);
   }
-  const newProps = { ...props, surveyId, survey };
+  const newProps = { ...props, survey };
 
   async function updateSurvey(survey) {
     // Copy survey
