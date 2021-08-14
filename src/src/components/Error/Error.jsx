@@ -1,5 +1,6 @@
 import React from "react";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
+import Title from "../Title/Title";
 import "./Error.scss";
 
 export default function Error({ match }) {
@@ -38,9 +39,12 @@ export default function Error({ match }) {
   }
 
   return (
-    <div className="error">
-      <FloatingLogo />
-      <div className="container">{contents}</div>
-    </div>
+    <>
+      <Title>Error</Title>
+      <div className="error">
+        <FloatingLogo />
+        <div className="container">{contents}</div>
+      </div>
+    </>
   );
 }
