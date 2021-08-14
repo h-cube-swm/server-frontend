@@ -36,7 +36,6 @@ export default function Prologue({ survey, setSurvey, putSurvey, setIsEnded }) {
               setText={setNestedState(setSurvey, ["title"])}
               placeholder="더 폼 나는 제목"
               size="title"
-              multiline
               onFocus={() => setIsFolded(false)}
             />
           </div>
