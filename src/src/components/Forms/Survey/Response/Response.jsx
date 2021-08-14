@@ -24,26 +24,45 @@ function checkEntered(response) {
   return true;
 }
 
-function Response({ survey, surveyId }) {
+/**
+ * ResponseContainer only does control including API call, and does not perform rendering.
+ * @param {*} surveyInfo
+ * @returns
+ */
+function ResponseContainer({ survey }) {
   const [responses, setResponses] = useState({ index: 0 });
   const [redirect, setRedirect] = useState(null);
-  const { questions } = survey;
-  const { index } = responses;
-
-  const question = index > 0 && questions[index - 1];
-  const response = index > 0 && responses[question.id];
-  const setIndex = setNestedState(setResponses, ["index"]);
-
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
 
-  const getMove = (index) => () => setIndex(index);
   const onSubmit = async () => {
     const body = { answer: responses };
-    const err = await API.postResponse(surveyId, body)[1];
+    const err = await API.postResponse(survey.id, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
     else setRedirect("/forms/survey/response/ending");
   };
+
+  return (
+    <Response
+      survey={survey}
+      responses={responses}
+      setResponses={setResponses}
+      onSubmit={onSubmit}></Response>
+  );
+}
+
+/**
+ * Response only performs rendering.
+ * @param {*} responseInfo
+ * @returns
+ */
+export function Response({ survey, responses, setResponses, onSubmit }) {
+  const { questions } = survey;
+  const { index } = responses;
+  const question = index > 0 && questions[index - 1];
+  const response = index > 0 && responses[question.id];
+  const setIndex = setNestedState(setResponses, ["index"]);
+  const getMove = (index) => () => setIndex(index);
 
   const cover = (
     <div className="cover-box">
@@ -139,4 +158,4 @@ function Response({ survey, surveyId }) {
   );
 }
 
-export default withSurvey(Response);
+export default withSurvey(ResponseContainer);
