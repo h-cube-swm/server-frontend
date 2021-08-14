@@ -47,14 +47,14 @@ function reshapeAnswerTo2DArray(survey, answers) {
   });
 
   // Answers is just 2D array of answers.
-  answers.forEach(({ answer }) => {
+  answers.forEach(({ answer, submit_time: timestamp }) => {
     const newAnswer = Array(questions.length).fill(null);
     Object.entries(answer).forEach(([key, value]) => {
       if (key === "index") return;
       const questionIndex = questionDict[key];
       newAnswer[questionIndex] = value;
     });
-    answerList.push(["asd"].concat(newAnswer));
+    answerList.push([timestamp].concat(newAnswer));
   });
 
   return [
