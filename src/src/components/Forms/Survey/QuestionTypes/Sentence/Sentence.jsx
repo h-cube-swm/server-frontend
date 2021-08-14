@@ -34,6 +34,7 @@ function Sentence({ isLong }) {
   };
 
   let extra = null;
+  let classes = ["sentence-question"];
 
   if (isEditting) {
     extra = (
@@ -49,17 +50,15 @@ function Sentence({ isLong }) {
   }
 
   return (
-    <div className="sentence-question">
-      <div className="text-box">
-        <TextField
-          placeholder={isLong ? "장문형 텍스트" : "단답형 텍스트"}
-          size={isLong ? "xl" : "lg"}
-          setText={setText}
-          text={response}
-          disabled={isEditting}
-          multiline={isLong}
-        />
-      </div>
+    <div className={classes.join(" ")}>
+      <TextField
+        placeholder={isLong ? "장문형 텍스트" : "단답형 텍스트"}
+        size={isLong ? "free" : "lg"}
+        setText={setText}
+        text={response}
+        disabled={isEditting}
+        multiline={isLong}
+      />
       <div className="extra">{extra}</div>
     </div>
   );

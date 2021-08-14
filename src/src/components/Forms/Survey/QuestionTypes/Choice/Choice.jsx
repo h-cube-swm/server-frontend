@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import useDefault from "../../../../../hooks/useDefault";
 import setNestedState from "../../../../../utils/setNestedState";
 import Hider from "../../../../Hider/Hider";
@@ -10,6 +10,7 @@ import delBtn from "../../../../../assets/icons/del-btn.svg";
 import addBtn from "../../../../../assets/icons/add-btn.svg";
 import "./Choice.scss";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
+import useScrollBlock from "../../../../../hooks/useScrollBlock";
 
 function Choice({
   text,
@@ -55,11 +56,24 @@ function Choice({
 
 function Choices({ multipleSelect }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
-
   const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });
   const responseInitialized = useDefault(response, setResponse, {});
+  const scrollRef = useRef(0);
+  const { ref, ...scrollBlock } = useScrollBlock();
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    if (scrollRef.current < ref.current.scrollHeight) {
+      ref.current.scroll({
+        top: 999999,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+    scrollRef.current = ref.current.scrollHeight;
+  });
+
   if (!questionInitialized || !responseInitialized) return null;
   const { choices } = question;
   const isEditting = state === CardStates.EDITTING;
@@ -91,30 +105,32 @@ function Choices({ multipleSelect }) {
   };
 
   return (
-    <div className="multiple-choice">
-      {choices.map((choice, i) => {
-        const setText = setNestedState(setQuestion, ["choices", i]);
-        return (
-          <Choice
-            key={i}
-            text={choice}
-            setText={isEditting && setText}
-            onDelete={() => removeChoice(i)}
-            checked={typeof response === "object" && response[i]}
-            setChecked={onSelect(i)}
-            multipleSelect={multipleSelect}
-          />
-        );
-      })}
-      <div>
-        <Hider hide={!isEditting}>
-          <button className="add-btn" onClick={addChoice}>
-            <div className="button-box">
-              <img src={addBtn} alt="delete button" />
-              <span>더 폼 나는 선택지 추가하기</span>
-            </div>
-          </button>
-        </Hider>
+    <div className="multiple-choice" ref={ref} {...scrollBlock}>
+      <div className="multiple-choice-inner">
+        {choices.map((choice, i) => {
+          const setText = setNestedState(setQuestion, ["choices", i]);
+          return (
+            <Choice
+              key={i}
+              text={choice}
+              setText={isEditting && setText}
+              onDelete={() => removeChoice(i)}
+              checked={typeof response === "object" && response[i]}
+              setChecked={onSelect(i)}
+              multipleSelect={multipleSelect}
+            />
+          );
+        })}
+        <div>
+          <Hider hide={!isEditting}>
+            <button className="add-btn" onClick={addChoice}>
+              <div className="button-box">
+                <img src={addBtn} alt="delete button" />
+                <span>더 폼 나는 선택지 추가하기</span>
+              </div>
+            </button>
+          </Hider>
+        </div>
       </div>
     </div>
   );

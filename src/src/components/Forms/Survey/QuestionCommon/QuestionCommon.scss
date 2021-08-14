@@ -5,7 +5,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
 
   .question-common-box {
@@ -28,17 +27,9 @@
 
   .question-detail-box {
     width: 100%;
-    height: 100%;
-    overflow: scroll;
-
-    .question-detail-box-inner {
-      display: flex;
-      width: 100%;
-      min-height: 100%;
-      align-items: center;
-    }
-  }
-
-  @include mobile {
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
   }
 }

@@ -55,12 +55,14 @@ export default function Card({ onDelete, onGrab, children }) {
         height: state === CardStates.RESPONSE ? null : CardStyle.HEIGHT,
         width: CardStyle.WIDTH,
       }}>
-      {children}
-      <button
-        className={"delete " + (onDelete ? "" : "hidden")}
-        onClick={handleOnDelete}>
-        <img src={imgDeleteButton} alt="Delete button"></img>
-      </button>
+      <div className="content-box">{children}</div>
+      <div className="button-box">
+        <button
+          className={"delete " + (onDelete ? "" : "hidden")}
+          onClick={handleOnDelete}>
+          <img src={imgDeleteButton} alt="Delete button"></img>
+        </button>
+      </div>
       <div className="handle" onMouseDown={handleOnGrab}>
         <img src={imgHandle} alt="Handle"></img>
       </div>

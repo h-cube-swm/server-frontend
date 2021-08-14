@@ -10,6 +10,17 @@
   flex-direction: column;
   transition-duration: 500ms;
 
+  .content-box {
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  .button-box {
+    width: 100%;
+    text-align: right;
+  }
+
   .handle {
     z-index: 1;
     position: absolute;
@@ -20,12 +31,11 @@
   }
 
   .delete {
-    position: absolute;
     padding: 0;
     right: $card-padding;
     bottom: $card-padding;
     border: 0;
-    background-color: #fff;
+    background-color: transparent;
     transition-duration: 500ms;
     cursor: pointer;
     width: 2.5rem;

@@ -36,30 +36,15 @@ function getQuestionDetail(type) {
 }
 
 export default function QuestionCommon() {
-  const scrollRef = useRef(0);
-
   const { state, question, setQuestion } = useQuestion();
-  const blockTitle = useScrollBlock();
-  const { ref, ...blockDetail } = useScrollBlock();
 
   const QuestionDetail = getQuestionDetail(question.type);
   const isEditting = state !== CardStates.EDITTING;
 
-  useEffect(() => {
-    if (scrollRef.current < ref.current.scrollHeight) {
-      ref.current.scroll({
-        top: 999999,
-        left: 0,
-        behavior: "smooth",
-      });
-    }
-    scrollRef.current = ref.current.scrollHeight;
-  });
-
   return (
     <div className="question-common">
       <div className="question-common-box">
-        <div className="question-title-box" {...blockTitle}>
+        <div className="question-title-box">
           <TextField
             placeholder="더 폼 나는 질문"
             text={question.title}
@@ -78,10 +63,8 @@ export default function QuestionCommon() {
           </Hider>
         </div>
       </div>
-      <div className="question-detail-box" ref={ref} {...blockDetail}>
-        <div className="question-detail-box-inner">
-          <QuestionDetail />
-        </div>
+      <div className="question-detail-box">
+        <QuestionDetail />
       </div>
     </div>
   );
