@@ -17,6 +17,7 @@
   // Others
   background-color: #fff;
   resize: none;
+  @include hide-scrollbar;
 
   &.multiline {
     white-space: pre-wrap;
@@ -61,5 +62,14 @@
     text-align: center;
     font-size: $fs-sm;
     margin: 0 auto;
+  }
+
+  &.free {
+    @include round;
+    font-size: $fs-rg;
+    // width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border: 1.5px solid #0001;
   }
 }
