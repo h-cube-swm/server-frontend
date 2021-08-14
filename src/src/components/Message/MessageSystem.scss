@@ -15,7 +15,7 @@
   .message {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #fff;
+    background: #fff;
     border-radius: 7px;
     padding: 0.5rem;
     display: flex;
@@ -25,7 +25,7 @@
     color: #000;
 
     &.danger {
-      background-color: #e22f1b;
+      background: #e22f1b;
       color: white;
     }
 

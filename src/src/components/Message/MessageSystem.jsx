@@ -9,12 +9,14 @@ import useTimeout from "../../hooks/useTimeout";
 const MESSAGE_LIFE = 5000;
 
 function Message({ index, children, onClose, type }) {
-  const shouldClose = useTimeout(MESSAGE_LIFE);
+  const isLifeEnd = useTimeout(MESSAGE_LIFE);
+  const [shouldClose, setShouldClose] = useState(false);
   const [position, setPosition] = useState(-72);
 
   useEffect(() => {
-    if (shouldClose) onClose();
-  }, [shouldClose, onClose]);
+    if (isLifeEnd) setShouldClose(true);
+    if (shouldClose) setTimeout(onClose, 1000);
+  }, [isLifeEnd, shouldClose, setShouldClose]);
 
   useEffect(() => {
     setTimeout(() => setPosition(index * 72), 0);
@@ -24,12 +26,12 @@ function Message({ index, children, onClose, type }) {
   const splitterClasses = "splitter " + type;
 
   return (
-    <Positioner y={position}>
+    <Positioner y={shouldClose ? -72 : position}>
       <div className="message-box">
         <div className={classes}>
           <div className="message-inner-box">{children}</div>
           <div className={splitterClasses}></div>
-          <button onClick={onClose}>
+          <button onClick={() => setShouldClose(true)}>
             <img
               className="close"
               src={type === "default" ? delIcon : delIconWhite}
