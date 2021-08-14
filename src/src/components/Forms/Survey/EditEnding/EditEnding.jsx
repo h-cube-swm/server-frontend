@@ -10,7 +10,6 @@ import logo from "../../../../assets/images/logo.png";
 import duplicate from "../../../../assets/icons/duplicate.svg";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
-import { hash } from "../../../../utils/hasher";
 import useOnly from "../../../../hooks/useOnly";
 
 const HOST = window.location.protocol + "//" + window.location.host;
@@ -109,10 +108,8 @@ const Ending = ({ ending }) => {
         <div className="service-box">
           <div className="section">
             <div className="box one">
-              <div className="description">
-                <h1>설문 제목</h1>
-                <h2>{title}</h2>
-              </div>
+              <h1>설문 제목</h1>
+              <h2>{title}</h2>
             </div>
             <div className="email box three">
               <h1>
@@ -122,12 +119,14 @@ const Ending = ({ ending }) => {
                 보내드립니다.
               </h1>
               <div className="email-input">
-                <TextField
-                  placeholder="abcde@the-form.io"
-                  size="lg"
-                  setText={handleEmailInput}
-                  text={email}
-                />
+                <div className="email-input-box">
+                  <TextField
+                    placeholder="abcde@the-form.io"
+                    size="lg"
+                    setText={handleEmailInput}
+                    text={email}
+                  />
+                </div>
                 <button
                   onClick={handleEmailSend}
                   className={buttonClasses.join(" ")}
@@ -142,10 +141,8 @@ const Ending = ({ ending }) => {
               </p>
             </div>
             <div className="box four">
-              <div className="description">
-                <h1>설문 설명</h1>
-                <h3>{description}</h3>
-              </div>
+              <h1>설문 설명</h1>
+              <h3>{description}</h3>
             </div>
             <div className="box five">
               <div className="description">
@@ -158,14 +155,14 @@ const Ending = ({ ending }) => {
                   <button
                     onClick={() =>
                       duplicateLink(
-                        `${HOST + "/forms/survey/response/" + hash(surveyLink)}`
+                        `${HOST + "/forms/survey/response/" + surveyLink}`
                       )
                     }>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>
 
-                <h3>{HOST + "/forms/survey/response/" + hash(surveyLink)}</h3>
+                <h3>{HOST + "/forms/survey/response/" + surveyLink}</h3>
               </div>
             </div>
             <div className="box six">

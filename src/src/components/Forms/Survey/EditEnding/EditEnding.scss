@@ -62,12 +62,14 @@
       .box {
         @include round;
         padding: 1.5rem;
+        padding-bottom: 0.5rem;
         width: 24rem;
         height: 12rem;
         box-shadow: $shadow-default;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: flex-start;
+
         h1 {
           font-size: $fs-lg;
           font-weight: $fw-bold;
@@ -79,17 +81,21 @@
           }
         }
         h2 {
+          display: block;
           font-size: $fs-md;
           font-weight: $fw-bold;
           margin: 0.5rem 0;
           color: white;
+          width: 100%;
+          height: 100%;
+          word-break: break-all;
+          overflow: scroll;
         }
         h3 {
           font-size: $fs-rg;
           font-weight: $fw-bold;
           margin: 0.5rem 0;
           color: white;
-
           @include break-all;
         }
         &.one {
@@ -107,12 +113,15 @@
           flex-direction: column;
           height: 24rem;
           &.email {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             .email-input {
               display: flex;
               flex-direction: row;
               align-items: center;
-              textarea {
-                font-size: $fs-md;
+              .email-input-box {
+                margin-right: 1rem;
               }
             }
             h1 {
@@ -121,6 +130,9 @@
               strong {
                 color: #2b44ff;
               }
+            }
+            p {
+              margin-bottom: 1rem;
             }
           }
 
@@ -162,7 +174,7 @@
               position: static;
               width: 15%;
               background-color: rgba($color: #000000, $alpha: 0);
-              transform: translate(30%, -80%);
+              transform: translate(30%, -65%);
               img {
                 width: 50%;
               }
@@ -182,7 +194,7 @@
               position: static;
               width: 15%;
               background-color: rgba($color: #000000, $alpha: 0);
-              transform: translate(30%, -80%);
+              transform: translate(30%, -65%);
               img {
                 width: 50%;
               }
@@ -220,13 +232,6 @@
         .celebrate-sentence {
           h1 {
             font-size: $fs-md;
-            margin-bottom: 1rem;
-          }
-          .email {
-            padding: 1.2rem;
-            p {
-              font-size: $fs-sm;
-            }
           }
           img {
             width: 5rem;
@@ -240,6 +245,7 @@
           width: 16rem;
           height: 9.5rem;
           padding: 1.2rem;
+          padding-bottom: 0.5rem;
           h1 {
             font-size: $fs-md;
           }
@@ -253,9 +259,34 @@
           }
           &.three {
             height: 16rem;
+            &.email {
+              .email-input {
+                textarea {
+                  font-size: $fs-rg;
+                }
+              }
+            }
           }
           &.four {
             height: 16rem;
+          }
+          &.five {
+            .explain {
+              button {
+                img {
+                  width: 70%;
+                }
+              }
+            }
+          }
+          &.six {
+            .explain {
+              button {
+                img {
+                  width: 70%;
+                }
+              }
+            }
           }
         }
       }
@@ -297,6 +328,7 @@
         margin-bottom: 10rem;
         .box {
           padding: 1rem;
+          padding-bottom: 0.5rem;
         }
       }
     }
