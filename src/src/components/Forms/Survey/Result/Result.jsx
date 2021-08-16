@@ -6,7 +6,7 @@ import ChoiceView from "./ViewTypes/ChoiceView/ChoiceView";
 import SentenceView from "./ViewTypes/SentenceView/SentenceView";
 import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
 import TextField from "../../../TextField/TextField";
-import GetWinner from "./GetWinner/GetWinner";
+import Selection from "./Selection/Selection";
 import { CardTypes } from "../constants";
 import { utils, writeFile } from "xlsx";
 
@@ -112,7 +112,7 @@ export default function Result({ match, location }) {
 
   // Get content from viewMode
   let content = null;
-  if (isWinner) content = <GetWinner columns={columns} rows={rows} />;
+  if (isWinner) content = <Selection columns={columns} rows={rows} />;
   if (isChart) content = <ChartView columns={columns} rows={rows} />;
   if (isTable)
     content = <TableView columns={columns.map((x) => x.title)} rows={rows} />;

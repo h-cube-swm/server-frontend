@@ -6,6 +6,7 @@
   align-items: flex-start;
   height: 100%;
   width: 55%;
+  margin: 0 auto;
   .controller {
     height: auto;
     max-height: 80%;
@@ -108,8 +109,8 @@
     }
     .answers {
       width: 100%;
+      height: auto;
       align-items: center;
-      margin-top: 0;
       p {
         margin: 0;
         margin-bottom: 1rem;

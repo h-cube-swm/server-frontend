@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./GetWinner.scss";
+import "./Selection.scss";
 import IntegerField from "../../../../IntegerField/IntegerField";
 
 /**
@@ -16,7 +16,7 @@ function getPseudoRandom(seed) {
   return randomNumber;
 }
 
-export default function GetWinner({ columns, rows }) {
+export default function Selection({ columns, rows }) {
   const [winnerType, setWinnerType] = useState("timestamp");
   const [winnerNumber, setWinnerNumber] = useState(0);
   const [criterion, setCriterion] = useState(null);
