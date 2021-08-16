@@ -16,10 +16,17 @@
     display: flex;
     align-items: center;
     height: 2rem;
+    width: 60%;
 
     .check-box {
       width: 2rem;
       margin-right: 1rem;
+    }
+
+    .text-box {
+      width: 0px;
+      flex-grow: 1;
+      word-break: break-all;
     }
   }
 

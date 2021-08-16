@@ -64,14 +64,16 @@ function Choices({ multipleSelect }) {
   const { ref, ...scrollBlock } = useScrollBlock();
   useEffect(() => {
     if (!ref.current) return;
-    if (scrollRef.current < ref.current.scrollHeight) {
-      ref.current.scroll({
-        top: 999999,
-        left: 0,
-        behavior: "smooth",
-      });
+    if (state === CardStates.EDITTING) {
+      if (scrollRef.current < ref.current.scrollHeight) {
+        ref.current.scroll({
+          top: 999999,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+      scrollRef.current = ref.current.scrollHeight;
     }
-    scrollRef.current = ref.current.scrollHeight;
   });
 
   if (!questionInitialized || !responseInitialized) return null;
