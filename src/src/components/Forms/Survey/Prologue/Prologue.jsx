@@ -6,19 +6,11 @@ import "./Prologue.scss";
 import logo from "../../../../assets/images/logo.png";
 import arrow from "../../../../assets/icons/upward-arrow.svg";
 
-export default function Prologue({ survey, setSurvey, putSurvey, setIsEnded }) {
+export default function Prologue({ survey, setSurvey, children }) {
   const [isFolded, setIsFolded] = useState(true);
   const classes = ["prologue-box"];
   if (isFolded) classes.push("folded");
   else classes.push("extended");
-
-  const onClick = async () => {
-    try {
-      await putSurvey();
-      setIsEnded(true);
-      return putSurvey;
-    } catch {}
-  };
 
   const className = classes.join(" ");
   return (
@@ -49,9 +41,7 @@ export default function Prologue({ survey, setSurvey, putSurvey, setIsEnded }) {
             />
           </div>
         </div>
-        <button onClick={onClick} className="btn rg submit-button">
-          완료
-        </button>
+        <div className="children-box">{children}</div>
       </div>
       <div className="fold-button-box">
         <button onClick={() => setIsFolded(true)}>

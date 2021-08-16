@@ -5,6 +5,7 @@
   height: 100%;
   z-index: 4;
   overflow: hidden;
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -20,9 +21,11 @@
     align-items: center;
     width: 100%;
 
-    .submit-button {
-      position: absolute;
-      right: 2rem;
+    .children-box {
+      transition-duration: 500ms;
+      width: 15rem;
+      display: flex;
+      justify-content: space-between;
     }
 
     .info {
@@ -107,7 +110,7 @@
     justify-content: center;
     align-items: center;
 
-    .submit-button {
+    .children-box {
       opacity: 0;
     }
 
