@@ -16,7 +16,7 @@ export default function PreferenceView({ question, answers }) {
   });
 
   Object.entries(answerObj).forEach(([key, value]) => {
-    if (key === "1" || key === `${answers.length}`) {
+    if (key === "1" || key === `${question.count}`) {
       values.push(value);
       return;
     }
