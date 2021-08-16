@@ -85,7 +85,16 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
       </button>
     );
   }
-  if (index < pages.length - 1) {
+  if (index === 0) {
+    buttons.push(
+      <button
+        key="start"
+        className="btn rg"
+        onClick={isAnswered ? getMove(index + 1) : () => {}}>
+        시작하기
+      </button>
+    );
+  } else if (index < pages.length - 1) {
     buttons.push(
       <button
         key="next"
