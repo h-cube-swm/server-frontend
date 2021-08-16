@@ -17,6 +17,10 @@
     box-shadow: $shadow-default;
     z-index: 1;
 
+    textarea {
+      height: 100%;
+    }
+
     .logo {
       margin-left: 3rem;
       margin-right: 3rem;
@@ -28,8 +32,11 @@
 
     .info {
       display: flex;
-      align-items: flex-end;
+      align-items: flex-start;
       width: 100%;
+      height: 100%;
+      overflow: scroll;
+      padding-top: 1.2rem;
     }
 
     h3 {
@@ -50,7 +57,11 @@
     margin-top: 5rem;
     flex-grow: 1;
     padding-bottom: 7rem;
-    // max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .charts {
@@ -105,15 +116,17 @@
       display: flex;
       align-items: center;
       margin-right: 1rem;
+
       .xlsx {
         font-size: $fs-rg;
-        background-color: #2d5b3a;
+        background: linear-gradient(45deg, #2d5b3a, #2e8b48);
+      }
+      .png {
+        font-size: $fs-rg;
+        background: linear-gradient(45deg, #e22f1b, #2b44ff);
         margin-right: 1rem;
       }
-      .image {
-        font-size: $fs-rg;
-        background-color: #ce301e;
-      }
+
       strong {
         font-size: $fs-sm;
         font-weight: $fw-bold;
@@ -130,19 +143,26 @@
 
   @include mobile {
     .btn-box {
+      width: 100%;
       bottom: 0;
-    }
-    .info {
-      textarea {
-        font-size: $fs-rg;
+      word-break: keep-all;
+      .btn {
+        width: 5rem;
+        font-size: $fs-sm;
       }
     }
-    .logo {
-      margin-left: 2rem;
-      margin-right: 2rem;
-      width: 4rem;
-      img {
-        width: 100%;
+    .survey-header {
+      .info {
+        overflow-x: scroll;
+        margin-top: 0;
+      }
+      .logo {
+        margin-left: 1.5rem;
+        margin-right: 1.5em;
+        width: 5rem;
+        img {
+          width: 100%;
+        }
       }
     }
   }

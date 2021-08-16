@@ -16,6 +16,7 @@ import Table from "../../../Table/Table";
 import "./Result.scss";
 import logo from "../../../../assets/images/logo.png";
 import ViewFrame from "./ViewFrame/ViewFrame";
+import { useMessage } from "../../../../contexts/MessageContext";
 
 const VIEW_DICT = {
   [CardTypes.SINGLE_CHOICE]: ChoiceView,
@@ -91,6 +92,8 @@ export default function Result({ match, location }) {
   const resultId = match.params.link;
   const viewMode = location.hash.replace("#", "");
 
+  const { publish } = useMessage();
+
   // Load response data
   const [result, err] = API.useResponses(resultId);
   if (err && result.status === 400)
@@ -126,14 +129,17 @@ export default function Result({ match, location }) {
 
   // Export to image
   const exportToImg = () => {
-    const tags = document.getElementsByTagName("canvas");
-
-    for (let i = 0; i < tags.length; i++) {
-      const cnv = tags[i];
-      const link = document.createElement("a");
-      link.download = columns[i].title + ".png";
-      link.href = cnv.toDataURL();
-      link.click();
+    const canvases = document.getElementsByTagName("canvas");
+    if (canvases.length === 0) {
+      publish("png 파일로 추출할 데이터가 없습니다 📊");
+    } else {
+      for (let i = 0; i < canvases.length; i++) {
+        const cnv = canvases[i];
+        const link = document.createElement("a");
+        link.download = "Chart " + (i + 1) + ".png";
+        link.href = cnv.toDataURL();
+        link.click();
+      }
     }
   };
 
@@ -155,13 +161,13 @@ export default function Result({ match, location }) {
       <div className="content">{content}</div>
       <div className="btn-box">
         <div className="export-button">
-          <button className="btn rg xlsx" onClick={exportToXlsx}>
-            .xlsx
+          <button className="btn rg png" onClick={exportToImg}>
+            .png
             <br />
             <strong>다운로드</strong>
           </button>
-          <button className="btn rg image" onClick={exportToImg}>
-            차트
+          <button className="btn rg xlsx" onClick={exportToXlsx}>
+            .xlsx
             <br />
             <strong>다운로드</strong>
           </button>
