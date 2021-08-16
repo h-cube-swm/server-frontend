@@ -15,7 +15,7 @@ function Message({ index, children, onClose, type }) {
 
   useEffect(() => {
     if (isLifeEnd) setShouldClose(true);
-    if (shouldClose) setTimeout(onClose, 1000);
+    if (shouldClose) setTimeout(onClose, 500);
   }, [isLifeEnd, shouldClose, setShouldClose]);
 
   useEffect(() => {
