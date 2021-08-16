@@ -78,7 +78,7 @@
   }
 
   &.folded {
-    height: 5rem;
+    height: $header-height;
 
     .info {
       display: flex;
