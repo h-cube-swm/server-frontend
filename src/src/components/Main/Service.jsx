@@ -5,6 +5,7 @@ import getQuestion from "../Forms/Survey/getQuestion";
 import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
 import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
 import { CardTypes } from "../Forms/Survey/constants";
+import { Link } from "react-router-dom";
 
 /* Assets */
 import "./Service.scss";
@@ -71,6 +72,9 @@ function Service() {
         <h1>이렇게나 묻고 답하기 좋은 폼이</h1>
         <h1>여기, 있습니다.</h1>
       </div>
+      <Link className="btn long make-survey-btn" to="/forms/survey">
+        설문조사 만들기
+      </Link>
     </div>
   );
 }
