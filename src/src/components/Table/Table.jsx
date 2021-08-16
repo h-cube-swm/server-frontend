@@ -26,26 +26,37 @@ export default function Table({ columns, rows }) {
     }
   };
 
+  const weight = new Array(columns.length).fill(1);
+  // Weight assign comes here, if Required.
+  const weightSum = weight.reduce((pre, cur) => pre + cur, 0);
+  const weightStyles = weight.map((x) => ({ flexGrow: 1 }));
+
   return (
-    <table className="table">
-      <thead>
-        <tr>
+    <div className="table">
+      <div className="thead">
+        <div className="tr">
           {columns.map((column, i) => (
-            <th key={i} onClick={getSetCriterion(i)}>
+            <div
+              className="th"
+              style={weightStyles[i]}
+              key={i}
+              onClick={getSetCriterion(i)}>
               {column}
-            </th>
+            </div>
           ))}
-        </tr>
-      </thead>
-      <tbody>
+        </div>
+      </div>
+      <div className="tbody">
         {sortedRows.map((row, i) => (
-          <tr key={i}>
+          <div className="tr" key={i}>
             {row.map((cell, j) => (
-              <td key={j}>{cell}</td>
+              <div className="td" style={weightStyles[j]} key={j}>
+                {cell}
+              </div>
             ))}
-          </tr>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 }
