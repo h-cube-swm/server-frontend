@@ -1,9 +1,12 @@
 @import "/src/scss/style.scss";
 
 .table {
-  padding: 1rem;
   width: 100%;
   min-width: max-content;
+
+  .tbody > .tr {
+    margin-top: $default-space/2;
+  }
 
   .tr {
     display: flex;
@@ -11,7 +14,6 @@
     border-radius: 7px;
     z-index: 0;
     box-shadow: $shadow-default;
-    margin: 1rem;
   }
 
   .th {

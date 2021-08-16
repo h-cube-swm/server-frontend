@@ -2,15 +2,10 @@
 
 .view-frame {
   @include round;
-  margin: 3rem auto;
+  margin: 0 auto;
   padding: $card-padding;
-  width: 640px;
-  height: 400px;
+  max-width: 640px;
   box-shadow: $shadow-default;
-
-  @include mobile {
-    width: 300px;
-  }
 
   @media print {
     break-inside: avoid;

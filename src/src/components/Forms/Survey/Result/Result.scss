@@ -54,18 +54,23 @@
   }
 
   .content {
-    margin-top: 5rem;
     flex-grow: 1;
+
+    // Spacing
+    margin-top: 5rem+1rem;
+    padding: $default-space;
     padding-bottom: 7rem;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+
+    // Size
+    overflow: scroll;
   }
 
   .charts {
     margin-bottom: 5rem;
+
+    > :not(:first-child) {
+      margin-top: $default-space;
+    }
 
     @media print {
       background-color: white;
@@ -139,19 +144,22 @@
     }
   }
 
-  overflow: scroll;
-
   @include mobile {
     .btn-box {
       width: 100%;
-      bottom: 0;
+      height: 5rem;
+      top: 5rem;
       word-break: keep-all;
+      justify-content: center;
+      border-radius: 0;
       .btn {
         width: 5rem;
         font-size: $fs-sm;
       }
     }
     .survey-header {
+      box-shadow: none;
+
       .info {
         overflow-x: scroll;
         margin-top: 0;
@@ -164,6 +172,10 @@
           width: 100%;
         }
       }
+    }
+    .content {
+      margin-top: 10rem;
+      padding-bottom: 0px;
     }
   }
 }

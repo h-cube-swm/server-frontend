@@ -17,8 +17,9 @@ $fw-light: 300;
 $fw-regular: 500;
 $fw-bold: 700;
 
-//maring / padding
-$card-padding: 2rem;
+//Spacing
+$default-space: 2rem;
+$card-padding: $default-space;
 
 //Brand Identity
 $bi-color: #2b44ff;
