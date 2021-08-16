@@ -11,26 +11,52 @@ import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
 import Hider from "../../../Hider/Hider";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import EditCover from "./EditCover";
+import { Redirect } from "react-router-dom";
+import Title from "../../../Title/Title";
+import { Response } from "../Response/Response";
 
 /* HOC, Context, Hooks */
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import withSurvey from "../../../../hocs/withSurvey";
-import getQuestion from "../getQuestion";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
 import useThrottle from "../../../../hooks/useThrottle";
+import useOnly from "../../../../hooks/useOnly";
 
 /* Others */
 import orderedMap from "../../../../utils/orderedMap";
 import { CardStates, CardStyle } from "../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
-import { Redirect } from "react-router-dom";
-import Title from "../../../Title/Title";
+import getQuestion from "../getQuestion";
+import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
+import { useMessage } from "../../../../contexts/MessageContext";
 
-const Edit = ({ survey: init, updateSurvey }) => {
+function Preview({ survey }) {
+  const [responses, setResponses] = useState(null);
+
+  useOnly(() => {
+    setResponses({ index: 0 });
+  }, [survey]);
+
+  if (!responses) return null;
+
+  return (
+    <Response
+      survey={survey}
+      responses={responses}
+      setResponses={setResponses}
+      onSubmit={() => setResponses({ index: 0 })}></Response>
+  );
+}
+
+function Edit({ survey: init, updateSurvey }) {
   const [survey, setSurvey] = useState(init);
   const [isEnded, setIsEnded] = useState(false);
+  const [isPreview, setIsPreview] = useState(false);
+
+  const { publish } = useMessage();
+
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
   let isMobile = false;
   if (document.getElementById("root").offsetWidth < 767) {
@@ -94,6 +120,53 @@ const Edit = ({ survey: init, updateSurvey }) => {
     }
   );
 
+  function detectQuestion() {
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].title) {
+        publish("주의❗️ 제목이 비어있는 질문이 있습니다.", "warning");
+        return false;
+      }
+      if (
+        questions[i].type === "single-choice" ||
+        questions[i].type === "multiple-choice"
+      ) {
+        if (questions[i].choices.length === 0) {
+          publish("주의❗️ 선택지가 없는 질문이 있습니다.", "warning");
+          return false;
+        }
+        for (let j = 0; j < questions[i].choices.length; j++) {
+          if (questions[i].choices[j].length === 0) {
+            publish(
+              "주의❗️ 선택지가 입력되지 않은 질문이 있습니다.",
+              "warning"
+            );
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  const onSubmit = async () => {
+    if (survey.title.length === 0) {
+      publish(
+        "주의❗️ 설문 제목을 입력해야 설문 제작을 완료할 수 있습니다.",
+        "warning"
+      );
+      return;
+    }
+
+    if (!detectQuestion()) {
+      return;
+    }
+    try {
+      await putSurvey();
+      setIsEnded(true);
+      return putSurvey;
+    } catch {}
+  };
+
   const onEvent = useThrottle(putSurvey);
   onEvent();
 
@@ -117,80 +190,93 @@ const Edit = ({ survey: init, updateSurvey }) => {
   return (
     <div className="edit" {...backgroundCallbacks}>
       <Title>{survey.title}</Title>
-      <Prologue
-        survey={survey}
-        setSurvey={setSurvey}
-        putSurvey={putSurvey}
-        setIsEnded={setIsEnded}
-      />
-      <div className="positioning-box">
-        <div className="sidebar-box">
-          <Sidebar
-            questions={questions}
-            currentIndex={selectedIndex}
-            onSelect={setSelectedIndex}
-          />
+      <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
+        <ToggleSwitch
+          isRequired={isPreview}
+          selectedLabel={"미리보기"}
+          unselectedLabel={"미리보기"}
+          setIsRequired={setIsPreview}
+        />
+        <button onClick={onSubmit} className="btn rg submit-button">
+          완료
+        </button>
+      </Prologue>
+
+      <div
+        className={"view-edit " + (isPreview ? "left" : "")}
+        onWheel={onWheel}>
+        <div className="positioning-box">
+          <div className="sidebar-box">
+            <Sidebar
+              questions={questions}
+              currentIndex={selectedIndex}
+              onSelect={setSelectedIndex}
+            />
+          </div>
         </div>
+
+        {/* Ghost that appears when card moves */}
+        <div ref={item}>
+          <QuestionProvider
+            state={CardStates.GHOST}
+            question={questions[selectedIndex]}>
+            <Card slowAppear={false}>
+              <QuestionCommon />
+            </Card>
+          </QuestionProvider>
+        </div>
+
+        <div className="question-box">
+          {orderedMap(questions, (question, index) => {
+            const isSelected = index === selectedIndex;
+            const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
+            const slowAppear = questions.length > 1;
+            const isHide = isDragging && isSelected;
+            const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
+            const onDelete =
+              questions.length > 1 && isSelected && getRemoveQuestion(index);
+            const setQuestion = setNestedState(setSurvey, ["questions", index]);
+
+            return (
+              <Positioner key={question.id} y={y}>
+                <Hider hide={isHide} animation={false} appearDelay={400}>
+                  <QuestionProvider
+                    state={state}
+                    question={question}
+                    setQuestion={isSelected && setQuestion}>
+                    <Card
+                      onDelete={onDelete}
+                      onGrab={onGrab}
+                      slowAppear={slowAppear}>
+                      <QuestionCommon />
+                    </Card>
+                  </QuestionProvider>
+                </Hider>
+              </Positioner>
+            );
+          })}
+        </div>
+
+        <div className="fade-out top" />
+        <div className="fade-out bottom" />
+
+        <QuestionAddButton
+          onClick={getInsertQuestion(selectedIndex)}
+          y={-CardStyle.FRAME_HEIGHT / 2}
+        />
+
+        <QuestionAddButton
+          onClick={getInsertQuestion(selectedIndex + 1)}
+          y={+CardStyle.FRAME_HEIGHT / 2}
+        />
+
+        <Controller type={selectedSurveyType} setType={setQuesionType} />
       </div>
-
-      {/* Ghost that appears when card moves */}
-      <div ref={item}>
-        <QuestionProvider
-          state={CardStates.GHOST}
-          question={questions[selectedIndex]}>
-          <Card slowAppear={false}>
-            <QuestionCommon />
-          </Card>
-        </QuestionProvider>
+      <div className={"view-preview " + (isPreview ? "" : "right")}>
+        <Preview survey={survey}></Preview>
       </div>
-
-      <div className="question-box" onWheel={onWheel}>
-        {orderedMap(questions, (question, index) => {
-          const isSelected = index === selectedIndex;
-          const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
-          const slowAppear = questions.length > 1;
-          const isHide = isDragging && isSelected;
-          const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
-          const onDelete =
-            questions.length > 1 && isSelected && getRemoveQuestion(index);
-          const setQuestion = setNestedState(setSurvey, ["questions", index]);
-
-          return (
-            <Positioner key={question.id} y={y}>
-              <Hider hide={isHide} animation={false} appearDelay={400}>
-                <QuestionProvider
-                  state={state}
-                  question={question}
-                  setQuestion={isSelected && setQuestion}>
-                  <Card
-                    onDelete={onDelete}
-                    onGrab={onGrab}
-                    slowAppear={slowAppear}>
-                    <QuestionCommon />
-                  </Card>
-                </QuestionProvider>
-              </Hider>
-            </Positioner>
-          );
-        })}
-      </div>
-
-      <div className="fade-out top" />
-      <div className="fade-out bottom" />
-
-      <QuestionAddButton
-        onClick={getInsertQuestion(selectedIndex)}
-        y={-CardStyle.FRAME_HEIGHT / 2}
-      />
-
-      <QuestionAddButton
-        onClick={getInsertQuestion(selectedIndex + 1)}
-        y={+CardStyle.FRAME_HEIGHT / 2}
-      />
-
-      <Controller type={selectedSurveyType} setType={setQuesionType} />
     </div>
   );
-};
+}
 
 export default withSurvey(Edit);

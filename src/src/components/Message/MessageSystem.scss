@@ -5,15 +5,15 @@
   top: 0px;
   left: 0px;
   width: 100%;
-  z-index: 4;
+  z-index: 5;
 
   .message-box {
-    width: 100vw;
+    width: 800px;
     padding: 2rem;
   }
 
   .message {
-    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     background: #fff;
     border-radius: 7px;
@@ -27,6 +27,11 @@
     &.danger {
       background: #e22f1b;
       color: white;
+    }
+
+    &.warning {
+      background: #f6c344;
+      color: black;
     }
 
     .message-inner-box {
