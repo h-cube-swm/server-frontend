@@ -35,10 +35,17 @@ function Sentence({ isLong }) {
 
   let extra = null;
   let classes = ["sentence-question"];
+  if (isLong) classes.push("long");
+  else classes.push("short");
 
   if (isEditting) {
     extra = (
-      <IntegerField number={maxLen} setNumber={setMaxLen} label="최대 글자수" />
+      <IntegerField
+        number={maxLen}
+        setNumber={setMaxLen}
+        onClick={(e) => e.target.select()}
+        label="최대 글자수"
+      />
     );
   } else {
     const len = response ? response.length : 0;
