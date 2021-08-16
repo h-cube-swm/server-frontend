@@ -63,7 +63,7 @@ function Choices({ multipleSelect }) {
   const scrollRef = useRef(0);
   const { ref, ...scrollBlock } = useScrollBlock();
   useEffect(() => {
-    if (!scrollRef.current) return;
+    if (!ref.current) return;
     if (scrollRef.current < ref.current.scrollHeight) {
       ref.current.scroll({
         top: 999999,
