@@ -9,7 +9,7 @@ import shortSentence from "../../../../assets/icons/short-sentence.svg";
 import longSentence from "../../../../assets/icons/long-sentence.svg";
 
 const BUTTONS = [
-  [singleChoice, CardTypes.SINGLE_CHOICE, "객관식"],
+  [singleChoice, CardTypes.SINGLE_CHOICE, "단일선택"],
   [multipleChoice, CardTypes.MULTIPLE_CHOICE, "다중선택"],
   [preference, CardTypes.PREFERENCE, "선호도"],
   [shortSentence, CardTypes.SHORT_SENTENCE, "단답형"],
