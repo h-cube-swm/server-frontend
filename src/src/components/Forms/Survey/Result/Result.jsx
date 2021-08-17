@@ -147,7 +147,7 @@ export default function Result({ match, location }) {
     <div className="result">
       <div className="survey-header">
         <div className="logo">
-          <Link to="/">
+          <Link to="/" target="_blank">
             <img src={logo} alt="logo" />
           </Link>
         </div>

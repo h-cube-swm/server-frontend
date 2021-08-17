@@ -17,7 +17,7 @@ export default function Prologue({ survey, setSurvey, children }) {
     <div className={className}>
       <div className="survey-header">
         <div className="logo">
-          <Link to="/">
+          <Link to="/" target="_blank">
             <img src={logo} alt="logo" />
           </Link>
         </div>
