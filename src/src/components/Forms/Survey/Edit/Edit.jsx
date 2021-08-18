@@ -10,7 +10,6 @@ import Positioner from "../../../Positioner/Positioner";
 import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
 import Hider from "../../../Hider/Hider";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import EditCover from "./EditCover";
 import { Redirect } from "react-router-dom";
 import Title from "../../../Title/Title";
 import { Response } from "../Response/Response";
@@ -60,10 +59,6 @@ function Edit({ survey: init, updateSurvey }) {
   const { publish } = useMessage();
 
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
-  let isMobile = false;
-  if (document.getElementById("root").offsetWidth < 767) {
-    isMobile = true;
-  }
 
   const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
@@ -184,10 +179,6 @@ function Edit({ survey: init, updateSurvey }) {
 
   const selectedSurveyType = survey.questions[selectedIndex].type;
   const { questions } = survey;
-
-  if (isMobile) {
-    return <EditCover />;
-  }
 
   return (
     <div className="edit" {...backgroundCallbacks}>

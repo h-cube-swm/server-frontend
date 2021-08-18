@@ -11,6 +11,7 @@ import Loading from "../Loading/Loading";
 import Response from "../Forms/Survey/Response/Response";
 import { MessageProvider } from "../../contexts/MessageContext";
 import MessageSystem from "../Message/MessageSystem";
+import EditCover from "../Forms/Survey/Edit/EditCover";
 import useGaTracker from "../../utils/useGaTracker";
 
 // /* Lazy loaded components */
@@ -20,7 +21,9 @@ const Edit = lazy(() => import("../Forms/Survey/Edit/Edit"));
 const EditEnding = lazy(() => import("../Forms/Survey/EditEnding/EditEnding"));
 const Error = lazy(() => import("../Error/Error"));
 const Result = lazy(() => import("../Forms/Survey/Result/Result"));
-const ResponseEnding = lazy(() => import("../Forms/Survey/ResponseEnding/ResponseEnding"));
+const ResponseEnding = lazy(() =>
+  import("../Forms/Survey/ResponseEnding/ResponseEnding")
+);
 
 /*
 Only directly loaded components, which is Response and Loading, are loaded directly.
@@ -37,6 +40,7 @@ function App() {
   });
 
   useGaTracker();
+
   return (
     <MessageProvider>
       <MessageSystem />
@@ -44,6 +48,7 @@ function App() {
         <Switch>
           <Route path="/" component={Main} exact />
           <Route path="/forms/survey" component={Survey} exact />
+          <Route path="/forms/survey/mobile" component={EditCover} />
           <Route path="/forms/survey/edit/:link" component={Edit} />
           <Route path="/forms/survey/end/:link" component={EditEnding} />
           <Route
