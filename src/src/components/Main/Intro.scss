@@ -25,10 +25,23 @@
     }
 
     strong {
-      display: block;
+      display: flex;
+      align-items: flex-start;
       font-weight: $fw-bold;
       margin-top: 1.6rem;
       margin-bottom: 10rem;
+      p {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+        font-size: $fs-sm;
+        font-weight: $fw-bold;
+        color: #fff;
+        background-color: #707070;
+        border-radius: 25px;
+        padding: 0.4rem 0.5rem;
+        height: 1.5rem;
+      }
     }
   }
 
