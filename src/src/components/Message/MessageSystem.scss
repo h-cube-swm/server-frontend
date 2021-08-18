@@ -6,6 +6,7 @@
   left: 0px;
   width: 100%;
   z-index: 5;
+  padding: 0 2rem;
 
   .message-box {
     width: 800px;
@@ -58,6 +59,18 @@
     .close {
       height: 2rem;
       width: 2rem;
+    }
+  }
+
+  @include mobile {
+    .message-box {
+      width: 400px;
+    }
+    .message {
+      button {
+        margin-left: 0.3rem;
+        margin-right: 0;
+      }
     }
   }
 }
