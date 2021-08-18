@@ -92,19 +92,20 @@
           overflow: scroll;
         }
         h3 {
+          display: block;
           font-size: $fs-rg;
           font-weight: $fw-bold;
           margin: 0.5rem 0;
           color: white;
-          @include break-all;
+          width: 100%;
+          height: 100%;
+          word-break: break-all;
+          overflow: scroll;
         }
         &.one {
           grid-row: 1;
           grid-column: 1;
           background: linear-gradient(to right, #2b44ff, #1dff0a);
-          img {
-            width: 40%;
-          }
         }
 
         &.three {
@@ -157,9 +158,6 @@
           grid-row: 2 / 4;
           grid-column: 1;
           background: linear-gradient(to right, #2b44ff, #0afff6);
-          img {
-            width: 40%;
-          }
         }
 
         &.five {
@@ -242,8 +240,8 @@
         grid-gap: 1rem;
         grid-row-gap: 0.5rem;
         .box {
-          width: 16rem;
-          height: 9.5rem;
+          width: 20rem;
+          height: 10rem;
           padding: 1.2rem;
           padding-bottom: 0.5rem;
           h1 {
@@ -258,7 +256,7 @@
             width: 90%;
           }
           &.three {
-            height: 16rem;
+            height: 20rem;
             &.email {
               .email-input {
                 textarea {
@@ -268,7 +266,7 @@
             }
           }
           &.four {
-            height: 16rem;
+            height: 20rem;
           }
           &.five {
             .explain {
