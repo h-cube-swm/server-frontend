@@ -99,6 +99,7 @@
   }
 
   @include tablet {
+    margin-top: 1rem;
     .phrase {
       flex-direction: column;
       margin-bottom: 5rem;
@@ -118,6 +119,8 @@
       margin: 0 auto;
 
       .box {
+        display: flex;
+        align-items: center;
         width: 20rem;
       }
       .text {

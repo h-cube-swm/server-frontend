@@ -30,7 +30,7 @@ function answerToString(answer) {
   if (answer instanceof Object) {
     return Object.entries(answer)
       .filter(([_, value]) => value)
-      .map((x) => x[0])
+      .map((x) => +x[0] + 1 + "")
       .join(", ");
   }
   return answer + "";
@@ -119,8 +119,10 @@ export default function Result({ match, location }) {
 
   // Export to xlsx file
   const exportToXlsx = async () => {
+    let cells = rows.map((row) => row.map((cell) => answerToString(cell)));
     const xlsxColumn = columns.map(({ title }) => title);
-    const workSheetData = [xlsxColumn, ...rows];
+    const workSheetData = [xlsxColumn, ...cells];
+    console.log(workSheetData);
     const wb = utils.book_new();
     const ws = utils.aoa_to_sheet(workSheetData);
     utils.book_append_sheet(wb, ws, "Sheet 1");
