@@ -35,9 +35,11 @@ import { useMessage } from "../../../../contexts/MessageContext";
 function Preview({ survey }) {
   const [responses, setResponses] = useState(null);
 
-  useOnly(() => {
-    setResponses({ index: 0 });
-  }, [survey]);
+  function resetResponse() {
+    setResponses((responses) => ({ ...responses, index: 0 }));
+  }
+
+  useOnly(resetResponse, [survey]);
 
   if (!responses) return null;
 
@@ -46,7 +48,7 @@ function Preview({ survey }) {
       survey={survey}
       responses={responses}
       setResponses={setResponses}
-      onSubmit={() => setResponses({ index: 0 })}></Response>
+      onSubmit={resetResponse}></Response>
   );
 }
 
