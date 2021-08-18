@@ -13,6 +13,7 @@ import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import { Link, Redirect } from "react-router-dom";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
+import FadeBox from "../../../FadeBox/FadeBox";
 
 function checkEntered(response) {
   if (response === null) return false;
@@ -67,6 +68,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   const cover = (
     <div className="cover-box">
       <h1 className="title">{survey.title}</h1>
+
       {survey.description && (
         <div className="description">{survey.description}</div>
       )}
