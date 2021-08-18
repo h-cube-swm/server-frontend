@@ -32,6 +32,10 @@ Thus, unlike example in official document, Suspense should be outside of Switch.
 */
 
 function App() {
+  document.body.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") event.preventDefault();
+  });
+
   useGaTracker();
   return (
     <MessageProvider>
