@@ -143,6 +143,10 @@ export default function Result({ match, location }) {
     }
   };
 
+  const noAnswers = (
+    <h1 className="no-answers">아직 표시할 응답이 없습니다.</h1>
+  );
+
   return (
     <div className="result">
       <div className="survey-header">
@@ -158,7 +162,9 @@ export default function Result({ match, location }) {
           총 응답 수 <strong>{answers.length}</strong>
         </h3>
       </div>
-      <div className="content">{content}</div>
+      <div className="content">
+        {answers.length === 0 ? noAnswers : content}
+      </div>
       <div className="btn-box">
         <div className="export-button">
           <button className="btn rg png" onClick={exportToImg}>

@@ -53,6 +53,21 @@
     }
   }
 
+  .no-answers {
+    @include round;
+    display: flex;
+    justify-content: center;
+    box-shadow: $shadow-default;
+    width: 80%;
+    max-width: 30rem;
+    padding: 2rem;
+    margin: 15rem auto;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: #fff;
+    background: linear-gradient(to right, #e22f1b, #eb5240);
+  }
+
   .content {
     flex-grow: 1;
 
@@ -103,6 +118,7 @@
       background-color: #707070;
       font-size: $fs-rg;
       opacity: 0.6;
+      word-break: keep-all;
     }
     .partition {
       width: 2px;
@@ -177,6 +193,9 @@
       margin-top: $header-height * 2;
       padding-bottom: 0px;
     }
+  }
+  .no-answers {
+    font-size: $fs-rg;
   }
 }
 
