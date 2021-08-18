@@ -4,7 +4,7 @@ import "./PreferenceView.scss";
 
 export default function PreferenceView({ question, answers }) {
   let answerObj = {};
-  let labels = [question.minDes];
+  let labels = [];
   let values = [];
 
   answers.forEach((answer) => {
@@ -15,22 +15,21 @@ export default function PreferenceView({ question, answers }) {
     }
   });
 
-  Object.entries(answerObj).forEach(([key, value]) => {
-    if (key === "1" || key === `${question.count}`) {
-      values.push(value);
-      return;
+  for (let i = 1; i <= question.count; i++) {
+    if (answerObj[i]) {
+      labels.push(i);
+      values.push(answerObj[i]);
+    } else {
+      labels.push(i);
+      values.push(0);
     }
-    labels.push("");
-    values.push(value);
-  });
-
-  labels.push(question.maxDes);
+  }
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: question.title,
+        label: `1: ${question.minDes},  ${question.count}: ${question.maxDes}`,
         data: values,
         backgroundColor: [
           "rgba(240, 192, 71, 1)",
@@ -48,7 +47,7 @@ export default function PreferenceView({ question, answers }) {
   };
   const option = {
     legend: {
-      display: true,
+      display: false,
       position: "left",
       base: 1,
     },
