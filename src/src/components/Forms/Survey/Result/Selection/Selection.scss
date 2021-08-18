@@ -26,6 +26,11 @@
         margin-right: 1rem;
       }
     }
+    .no-filter {
+      @include round;
+      box-shadow: $shadow-default;
+      padding: 1.5rem;
+    }
   }
   h1 {
     font-size: $fs-rg;
