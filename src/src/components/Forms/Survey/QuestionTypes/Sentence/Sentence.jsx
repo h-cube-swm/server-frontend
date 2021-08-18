@@ -48,7 +48,7 @@ function Sentence({ isLong }) {
       />
     );
   } else {
-    const len = response ? response.length : 0;
+    const len = typeof response !== "string" ? 0 : response.length;
     extra = (
       <div className="max-len-indicator">
         <p className={len === maxLen ? "red" : ""}>{len + " / " + maxLen}</p>
@@ -62,7 +62,7 @@ function Sentence({ isLong }) {
         placeholder={isLong ? "장문형 텍스트" : "단답형 텍스트"}
         size={isLong ? "free" : "lg"}
         setText={setText}
-        text={response}
+        text={typeof response !== "string" ? "" : response}
         disabled={isEditting}
         multiline={isLong}
       />
