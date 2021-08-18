@@ -11,6 +11,7 @@ import Loading from "../Loading/Loading";
 import Response from "../Forms/Survey/Response/Response";
 import { MessageProvider } from "../../contexts/MessageContext";
 import MessageSystem from "../Message/MessageSystem";
+import useGaTracker from "../../utils/useGaTracker";
 
 // /* Lazy loaded components */
 const Main = lazy(() => import("../Main/Main"));
@@ -31,6 +32,7 @@ Thus, unlike example in official document, Suspense should be outside of Switch.
 */
 
 function App() {
+  useGaTracker();
   return (
     <MessageProvider>
       <MessageSystem />
