@@ -1,3 +1,8 @@
+* {
+  @include hide-scrollbar;
+  outline: none;
+}
+
 @include mobile {
   html {
     font-size: 13px;
