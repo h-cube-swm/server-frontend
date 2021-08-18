@@ -1,33 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { putApi } from "../utils/parser";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
+import { API } from "../utils/apis";
 
-const withSurveyEnding = Component => props => {
+const withSurveyEnding = (Component) => (props) => {
+  const [ending, setEnding] = useState(null);
+  const [error, setError] = useState(null);
 
-  const [title, setTitle] = useState("Loading...");
-  const [description, setDescription] = useState("Loading...");
-  const [surveyLink, setSurveyLink] = useState("Loading...");
-  const [resultLink, setResultLink] = useState("Loading...");
-  const survey_id = props.match.params.link;
+  const surveyId = props.match.params.link;
 
   useEffect(() => {
     const getEndData = async () => {
       try {
-        const json = await putApi(`/surveys/${survey_id}/end`);
-        const { result } = JSON.parse(JSON.stringify(json));
-        setTitle(result.title);
-        setDescription(result.description);
-        setSurveyLink(result.survey_link);
-        setResultLink(result.result_link);
+        const [json] = await API.endSurvey(surveyId);
+        const { result } = json;
+        const ending = {
+          description: result["description"],
+          resultLink: result["survey_link"],
+          status: result["status"],
+          surveyLink: result["response_link"],
+          title: result["title"],
+          surveyId,
+        };
+        setEnding(ending);
       } catch (e) {
-        console.log(e);
+        setError(e);
       }
     };
     getEndData();
-  }, [survey_id]);
+  }, [surveyId]);
 
-  const newProps = { ...props, title, description, surveyLink, resultLink };
+  if (error) return <Redirect to="/error/unexpected/cannot-end-survey" />;
+  if (!ending) return <Loading />;
 
-  return <Component {...newProps} />;
+  return <Component {...props} ending={ending} />;
 };
 
 export default withSurveyEnding;

@@ -1,0 +1,106 @@
+* {
+  @include hide-scrollbar;
+  outline: none;
+}
+
+@include mobile {
+  html {
+    font-size: 13px;
+  }
+}
+@include tablet {
+  html {
+    font-size: 14px;
+  }
+}
+@include laptop {
+  html {
+    font-size: 15px;
+  }
+}
+// @include desktop {
+//   html {
+//     font-size: 16px;
+//   }
+// }
+
+button {
+  text-decoration: none;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+
+  :visited {
+    text-decoration: none;
+  }
+  :link {
+    text-decoration: none;
+  }
+  :active {
+    text-decoration: none;
+  }
+}
+
+.btn {
+  // Reset default settings of button
+  border: none;
+  text-decoration: none;
+
+  // Set shape
+  @include text-center;
+  border-radius: 10px;
+  width: 8rem;
+  height: 4rem;
+  padding: 1rem;
+
+  // Set font
+  color: #fff;
+  font-weight: 700;
+  font-size: $fs-rg;
+
+  // Set others
+  cursor: pointer;
+  background-color: #2b44ff;
+  box-shadow: $shadow-default;
+  transition-duration: 500ms;
+
+  // Options
+
+  &.long {
+    width: 10rem;
+    height: 4rem;
+  }
+
+  &.xl {
+    width: 10rem;
+    height: 5rem;
+  }
+
+  &.lg {
+    width: 8rem;
+    height: 4rem;
+  }
+
+  &.rg {
+    width: 6rem;
+    height: 3rem;
+  }
+
+  &.disabled {
+    background-color: #b1b1b1;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+strong {
+  font-weight: $fw-bold;
+}

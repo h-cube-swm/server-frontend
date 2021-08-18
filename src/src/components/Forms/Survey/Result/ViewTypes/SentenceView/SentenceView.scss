@@ -1,0 +1,35 @@
+@import "/src/scss/style.scss";
+
+.sentence-view {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 400px;
+  background-color: #fff;
+  transition-duration: 500ms;
+
+  h1 {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  p {
+    @include round;
+    @include text-center;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0.5rem;
+    color: #fff;
+    font-weight: $fw-bold;
+    background-color: rgba($color: #707070, $alpha: 0.6);
+  }
+}

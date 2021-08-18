@@ -1,0 +1,13 @@
+@import "/src/scss/style.scss";
+
+.view-frame {
+  @include round;
+  margin: 0 auto;
+  padding: $card-padding;
+  max-width: 640px;
+  box-shadow: $shadow-default;
+
+  @media print {
+    break-inside: avoid;
+  }
+}

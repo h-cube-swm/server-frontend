@@ -8,27 +8,34 @@ import React from "react";
  * If topLeft flag is set true, origin will be set to top-left.
  */
 
-export function Positioner({ x, y, zIndex = 0, children, topLeft }) {
-	let style = {
-		position: "absolute",
-		transitionDuration: "0.5s",
-		zIndex,
-	};
+function Positioner({ x, y, zIndex = 0, children, topLeft }) {
+  // Default style.
+  let style = {
+    position: "absolute",
+    transitionDuration: "500ms",
+    zIndex,
+  };
 
-	if (!topLeft) {
-		style.transform = "translate(-50%, -50%)";
-		style.left = "50%";
-		style.top = "50%";
-	}
+  // If topLeft is not set, consider top center of element instead of top-left corner.
+  if (!topLeft) {
+    style.transform = "translate(-50%, -50%)";
+    style.left = "50%";
+    style.top = "50%";
+  }
 
-	if (x) {
-		if (typeof x === "number") style.transform += ` translateX(${x}px)`;
-		else style.transform += ` translateX(${x})`;
-	}
-	if (y) {
-		if (typeof y === "number") style.transform += ` translateY(${y}px)`;
-		else style.transform += ` translateY(${y})`;
-	}
+  // If x is set, move to right with given amount.
+  if (x) {
+    if (typeof x === "number") style.transform += ` translateX(${x}px)`;
+    else style.transform += ` translateX(${x})`;
+  }
 
-	return <div style={style}>{children}</div>;
+  // If x is set, move to bottom with given amount.
+  if (y) {
+    if (typeof y === "number") style.transform += ` translateY(${y}px)`;
+    else style.transform += ` translateY(${y})`;
+  }
+
+  return <div style={style}>{children}</div>;
 }
+
+export default Positioner;

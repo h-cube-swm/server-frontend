@@ -1,0 +1,125 @@
+@import "/src/scss/style.scss";
+
+.get-winner {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
+  width: 55%;
+  margin: 0 auto;
+  .controller {
+    height: auto;
+    max-height: 80%;
+    margin-right: 2rem;
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      h3 {
+        width: 10rem;
+        font-size: $fs-lg;
+        font-weight: $fw-bold;
+      }
+      button {
+        font-size: $fs-rg;
+        word-break: keep-all;
+        margin-right: 1rem;
+      }
+    }
+    .no-filter {
+      @include round;
+      box-shadow: $shadow-default;
+      padding: 1.5rem;
+    }
+  }
+  h1 {
+    font-size: $fs-rg;
+    font-weight: $fw-bold;
+    margin-top: 3rem;
+  }
+  .criteria {
+    display: flex;
+    flex-direction: column;
+    width: 25rem;
+    height: 30rem;
+    overflow: scroll;
+    margin-top: 2rem;
+    button {
+      @include round;
+      width: 20rem;
+      height: auto;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      font-size: $fs-rg;
+      color: #fff;
+    }
+  }
+  .answers {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 30em;
+    height: 31rem;
+    margin-top: 3rem;
+    overflow: scroll;
+    padding: 2rem 0;
+    p {
+      @include round;
+      margin: 0.5rem 1.5rem;
+      padding: 1rem;
+      font-size: $fs-rg;
+      font-weight: $fw-bold;
+      color: #000;
+      background-color: #fff;
+      box-shadow: $shadow-default;
+    }
+  }
+
+  .type-button {
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+
+    .random {
+      font-size: $fs-rg;
+      margin-right: 2rem;
+    }
+
+    .timestamp {
+      font-size: $fs-rg;
+    }
+  }
+
+  @include laptop {
+    .criteria {
+      height: 20rem;
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .controller {
+      margin-right: 0;
+      text-align: center;
+      .header {
+        align-items: center;
+      }
+    }
+    .criteria {
+      align-items: center;
+      height: 8rem;
+    }
+    .answers {
+      width: 100%;
+      height: auto;
+      align-items: center;
+      p {
+        margin: 0;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

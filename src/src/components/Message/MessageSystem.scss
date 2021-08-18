@@ -1,0 +1,76 @@
+@import "/src/scss/style.scss";
+
+.message-system {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 5;
+  padding: 0 2rem;
+
+  .message-box {
+    width: 800px;
+    padding: 2rem;
+  }
+
+  .message {
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 7px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: $shadow-default;
+    font-size: $fw-bold;
+    color: #000;
+
+    &.danger {
+      background: #e22f1b;
+      color: white;
+    }
+
+    &.warning {
+      background: #f6c344;
+      color: black;
+    }
+
+    .message-inner-box {
+      flex-grow: 1;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    .splitter {
+      width: 1px;
+      height: 2rem;
+      background-color: #000;
+      &.danger {
+        background-color: #fff;
+      }
+    }
+
+    button {
+      background-color: inherit;
+      margin-left: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .close {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+
+  @include mobile {
+    .message-box {
+      width: 400px;
+    }
+    .message {
+      button {
+        margin-left: 0.3rem;
+        margin-right: 0;
+      }
+    }
+  }
+}

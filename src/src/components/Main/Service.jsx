@@ -1,47 +1,82 @@
-import React from 'react';
-import './Service.scss';
-import character3 from '../../assets/images/main-service-1.svg';
-import character4 from '../../assets/images/main-service-2.svg';
-import character5 from '../../assets/images/main-service-3.svg';
-import partition from '../../assets/images/partition.png';
+import React, { useState } from "react";
+import { QuestionProvider } from "../../contexts/QuestionContext";
+import { CardStates } from "../Forms/Survey/constants";
+import getQuestion from "../Forms/Survey/getQuestion";
+import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
+import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
+import { CardTypes } from "../Forms/Survey/constants";
+import { Link } from "react-router-dom";
 
-import useScrollFadeIn from '../../hooks/useScrollFadeIn';
+/* Assets */
+import "./Service.scss";
+
+const _question = getQuestion(0)[1];
+const defaultAnswers = [
+  { 0: true },
+  { 0: true },
+  { 1: true },
+  { 1: true },
+  { 2: true },
+];
+_question.type = CardTypes.MULTIPLE_CHOICE;
+_question.choices = ["마음껏", "테스트", "해보세요"];
 
 function Service() {
+  const [question, setQuestion] = useState(_question);
+  const [response, setResponse] = useState({});
 
-    const animatedItem = useScrollFadeIn();
-    const animatedItem2 = useScrollFadeIn();
-    const animatedItem3 = useScrollFadeIn();
-
-
-    return (
-        <div className="container">
-            <img src={partition} alt="partition" />
-            <div className="row row-1" {...animatedItem}>
-                <h2>
-                    방금 답한 이름, 나이, 직업같은 것들<br />
-                    다시 입력할 필요 없이 저희가 다 해드릴게요.
-                </h2>
-                <img src={character3} alt="sitting man" />
-            </div>
-            <div className="row row-2" {...animatedItem2}>
-                <img src={character4} alt="man and bubble" />
-                <h2>
-                    단조로운 디자인, 귀찮은 경품 추첨,<br />
-                    어려운 조사방법론까지.<br />
-                    당신은 그저 정보만 가져가세요.<br />
-                    그것도 저희가 다 해드릴게요.
-                </h2>
-            </div>
-            <div className="row row-3" {...animatedItem3}>
-                <h2>
-                    이렇게나 묻고 답하기 좋은 폼이<br />
-                    여기, 있습니다.
-                </h2>
-                <img src={character5} alt="" />
-            </div>
+  return (
+    <div className="service">
+      <div className="section">
+        <div className="text two">
+          <h1>간단하게,</h1>
+          <h1>직관적으로,</h1>
+          <h1>멋지게,</h1>
+          <h1>만들고</h1>
         </div>
-    );
+        <div className="box one">
+          <QuestionProvider
+            question={question}
+            setQuestion={setQuestion}
+            state={CardStates.EDITTING}>
+            <QuestionCommon />
+          </QuestionProvider>
+        </div>
+        <div className="text three">
+          <h1>편하게,</h1>
+          <h1>쉽게,</h1>
+          <h1>빠르게,</h1>
+          <h1>응답하고</h1>
+        </div>
+        <div className="box four">
+          <QuestionProvider
+            question={question}
+            state={CardStates.RESPONSE}
+            response={response}
+            setResponse={setResponse}>
+            <QuestionCommon />
+          </QuestionProvider>
+        </div>
+        <div className="text six">
+          <h1>더 폼 나게</h1>
+          <h1>결과를 확인합니다.</h1>
+        </div>
+        <div className="box five">
+          <ChoiceView
+            question={question}
+            answers={[response].concat(defaultAnswers)}
+          />
+        </div>
+      </div>
+      <div className="phrase">
+        <h1>이렇게나 묻고 답하기 좋은 폼이</h1>
+        <h1>여기, 있습니다.</h1>
+      </div>
+      <Link className="btn long make-survey-btn" to="/forms/survey">
+        설문조사 만들기
+      </Link>
+    </div>
+  );
 }
 
 export default Service;

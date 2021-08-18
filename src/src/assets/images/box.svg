@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="404" height="105" viewBox="0 0 404 105">
+  <defs>
+    <clipPath id="clip-아트보드_1">
+      <rect width="404" height="105"/>
+    </clipPath>
+  </defs>
+  <g id="아트보드_1" data-name="아트보드 – 1" clip-path="url(#clip-아트보드_1)">
+    <g id="사각형_131" data-name="사각형 131" transform="translate(18)" fill="none" stroke="#000" stroke-width="1">
+      <rect width="386" height="87" rx="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="385" height="86" rx="14.5" fill="none"/>
+    </g>
+    <g id="사각형_132" data-name="사각형 132" transform="translate(0 18)" fill="none" stroke="#000" stroke-width="1">
+      <rect width="386" height="87" rx="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="385" height="86" rx="14.5" fill="none"/>
+    </g>
+    <g id="사각형_133" data-name="사각형 133" transform="translate(9 9)" fill="none" stroke="#000" stroke-width="1">
+      <rect width="386" height="87" rx="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="385" height="86" rx="14.5" fill="none"/>
+    </g>
+  </g>
+</svg>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const TIMEOUT = 500;
 
@@ -9,7 +9,7 @@ const useDragPaging = (onPaging, threshold = 64) => {
     const mX = useRef(0);
     const mY = useRef(0);
     const isTriggable = useRef(true);
-    const item = useRef(null);
+    const ref = useRef(null);
     const onDragRef = useRef(() => { });
 
     const center = window.innerHeight / 2;
@@ -39,11 +39,10 @@ const useDragPaging = (onPaging, threshold = 64) => {
 
     const onDrag = () => {
         if (!isDragging) return;
-        if (!item.current) return;
+        if (!ref.current) return;
 
-        item.current.style.position = 'absolute';
-        item.current.style.left = mX.current + 'px';
-        item.current.style.top = mY.current + 'px';
+        ref.current.style.left = mX.current + 'px';
+        ref.current.style.top = mY.current + 'px';
 
         if (!isTriggable.current) return;
         if (mY.current < center - threshold) {
@@ -64,7 +63,24 @@ const useDragPaging = (onPaging, threshold = 64) => {
 
     const backgroundCallbacks = { onMouseMove, onMouseUp, onMouseLeave };
 
-    return [onGrab, backgroundCallbacks, item, isDragging];
+    if (ref.current) {
+        if (isDragging) {
+            ref.current.style.transitionDuration = '0s';
+            ref.current.style.opacity = 1;
+            ref.current.style.zIndex = 1;
+        }
+        else {
+            ref.current.style.opacity = 0;
+            ref.current.style.zIndex = -1;
+        }
+    }
+
+    useEffect(() => {
+        if (ref.current)
+            ref.current.style.position = 'absolute';
+    }, []);
+
+    return [onGrab, backgroundCallbacks, ref, isDragging];
 };
 
 export default useDragPaging;

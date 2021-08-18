@@ -1,0 +1,36 @@
+@import "/src/scss/style.scss";
+
+.integer-field {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 7rem;
+
+  .text-set {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .label {
+      font-size: $fs-sm;
+      font-weight: 700;
+    }
+  }
+
+  .btn-set {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    transform: translateY(0.3rem);
+    button {
+      background-color: rgba($color: #fff, $alpha: 0);
+      border: 0;
+      cursor: pointer;
+      width: 1.3rem;
+      padding: 0;
+    }
+    img {
+      width: 90%;
+    }
+  }
+}

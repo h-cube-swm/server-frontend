@@ -1,0 +1,23 @@
+@import "/src/scss/style.scss";
+
+.floating-logo {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  height: 6rem;
+
+  img {
+    height: 100%;
+  }
+
+  @include tablet {
+    top: 2rem;
+    left: 2rem;
+  }
+
+  @include mobile {
+    top: 2rem;
+    left: 2rem;
+    height: 4rem;
+  }
+}

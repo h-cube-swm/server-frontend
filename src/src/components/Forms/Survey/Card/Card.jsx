@@ -1,117 +1,71 @@
 import React from "react";
-import { CardTypes, CardStates, CardStyle } from "../constants";
+import { CardStates, CardStyle } from "../constants";
+import { useQuestion } from "../../../../contexts/QuestionContext";
+
+/* Assets */
 import "../Card/Card.scss";
-import hanleImage from "../../../../assets/icons/handle.svg";
-import delBtn from "../../../../assets/icons/del-btn.svg";
-import ToggleSwitch from "./ToggleSwitch";
-import useTimeout from "../../../../hooks/useTimeout";
+import imgHandle from "../../../../assets/icons/handle.svg";
+import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
 
-export default function Card({
-	// Logic-associated parameters
-	question,
-	state,
-	setQuestion,
-	setResponse,
-	onDelete,
+export default function Card({ onDelete, onGrab, children }) {
+  const { state } = useQuestion();
 
-	// UI-associated parameters
-	onGrab,
-	dom,
-	slowAppear,
-	hidden,
-}) {
-	const isInit = useTimeout(slowAppear ? 400 : 0);
+  let classes = ["survey-card"];
 
-	if (!question) return null;
+  switch (state) {
+    case CardStates.EDITTING:
+      classes.push("highlight");
+      break;
 
-	let classes = ["survey-card"];
+    case CardStates.PREVIEW:
+      classes.push("preview");
+      classes.push("hide-handle");
+      break;
 
-	if (isInit) classes.push("hidden");
+    case CardStates.RESPONSE:
+      classes.push("response");
+      classes.push("hide-handle");
+      break;
 
-	switch (state) {
-		case CardStates.EDITTING:
-			classes.push("highlight");
-			classes.push("show-handle");
-			break;
+    case CardStates.GHOST:
+      classes.push("ghost");
+      classes.push("highlight");
+      break;
 
-		case CardStates.ORDERING:
-			classes.push("hidden");
-			break;
+    default:
+      break;
+  }
 
-		case CardStates.PREVIEW:
-			classes.push("preview");
-			break;
+  const handleOnGrab = (event) => {
+    event.preventDefault();
+    if (state !== CardStates.EDITTING) return;
+    if (onGrab) onGrab();
+  };
 
-		case CardStates.GHOST:
-			if (hidden) {
-				classes.push("hidden");
-			} else {
-				classes.push("ghost");
-				classes.push("show-handle");
-				classes.push("highlight");
-			}
-			break;
+  const handleOnDelete = (event) => {
+    event.preventDefault();
+    if (onDelete) onDelete();
+  };
 
-		default:
-			break;
-	}
-
-	let inner = <div className="inner-default">Type : {question.type}</div>;
-
-	const type = question?.type;
-	switch (type) {
-		case CardTypes.SINGLE_CHOICE:
-			break;
-		case CardTypes.MULTIPLE_CHOICE:
-			break;
-		case CardTypes.PREFERENCE:
-			break;
-		case CardTypes.SHORT_SENTENCE:
-			break;
-		case CardTypes.LONG_SENTENCE:
-			break;
-		default:
-			inner = <div className="inner-default">Unsupported Card Type</div>;
-			break;
-	}
-
-	const _onGrab = (event) => {
-		event.preventDefault();
-		if (state !== CardStates.EDITTING) return;
-		onGrab();
-	};
-
-	const className = classes.join(" ");
-	return (
-		<div
-			className={className}
-			style={{
-				height: CardStyle.HEIGHT,
-			}}
-			ref={dom}>
-			<div className="card-header">
-				<input type="text" placeholder="제목을 입력하세요." />
-				<div
-					className={`basic-element ${
-						state === CardStates.EDITTING ? "" : "hidden"
-					}`}>
-					<ToggleSwitch
-						isRequired={question.isRequired}
-						setIsRequired={(isRequired) => {
-							const newQuestion = { ...question, isRequired };
-							setQuestion(newQuestion);
-						}}
-						label="필수요소"
-					/>
-					<button className="delete" onClick={onDelete}>
-						<img src={delBtn} alt="Delete button"></img>
-					</button>
-				</div>
-			</div>
-			<div className="inner-box">{inner}</div>
-			<div className="handle" onMouseDown={_onGrab}>
-				<img src={hanleImage} alt="Handle"></img>
-			</div>
-		</div>
-	);
+  const className = classes.join(" ");
+  return (
+    <div
+      className={className}
+      style={{
+        height: state === CardStates.RESPONSE ? null : CardStyle.HEIGHT,
+        width: CardStyle.WIDTH,
+      }}>
+      <div className="content-box">{children}</div>
+      <div className="button-box">
+        <button
+          className={"delete " + (onDelete ? "" : "hidden")}
+          onClick={handleOnDelete}>
+          <img src={imgDeleteButton} alt="Delete button"></img>
+        </button>
+      </div>
+      <div className="handle" onMouseDown={handleOnGrab}>
+        <img src={imgHandle} alt="Handle"></img>
+      </div>
+    </div>
+  );
 }

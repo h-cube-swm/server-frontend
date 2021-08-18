@@ -1,68 +1,158 @@
 @import "/src/scss/style.scss";
 
-.element-box {
-	@include round;
-	display: grid;
-	justify-content: center;
-	align-items: center;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	padding: 1rem;
-	width: 15rem;
-	height: 15rem;
-	box-shadow: $shadow-default;
-}
+.controller {
+  position: absolute;
+  right: 33rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 
-.element-detail {
-	font-size: 0.7rem;
-	font-weight: 700;
-	margin-top: 0.3rem;
-	opacity: 0;
+  .controller-inner {
+    @include round;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    background-color: #fff;
+    box-shadow: $shadow-default;
 
-	&.selected {
-		opacity: 0;
-	}
-}
+    .element-box {
+      display: grid;
+      align-items: center;
+      grid-template-rows: repeat(5, 1fr);
+    }
 
-.element-btn {
-	@include text-center;
-	@include round;
-	width: 4rem;
-	height: 6rem;
-	padding: 0;
-	background-color: #fff;
-	border: 0;
-	transition-duration: 200ms;
-	box-shadow: inset rgba(100, 100, 111, 0.1) 0px 0px 0px 0px;
+    .element-detail {
+      display: block;
+      width: 3rem;
+      position: absolute;
+      text-align: start;
+      font-size: $fs-sm;
+      font-weight: $fw-bold;
+      left: 1.5rem;
+      color: #000;
+      transition-duration: 500ms;
+      z-index: -1;
+    }
 
-	&:hover {
-		box-shadow: $shadow-reverse-shallow;
-		z-index: 2;
-		.element-detail {
-			opacity: 1;
-		}
-	}
+    .element-btn {
+      @include text-center;
+      @include round;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+      margin: 0.2rem auto;
+      padding: 0;
+      background-color: #fff;
+      transition-duration: 200ms;
+      box-shadow: none;
 
-	&.selected {
-		box-shadow: $shadow-reverse-shallow;
-		z-index: 2;
-		animation-name: clicked;
-		animation-duration: 200ms;
-		animation-timing-function: ease-in;
-		.element-detail {
-			opacity: 1;
-		}
-	}
+      &:hover {
+        box-shadow: $shadow-reverse-shallow;
+        .element-detail {
+          left: 6rem;
+        }
+      }
+
+      &.selected {
+        box-shadow: $shadow-reverse-shallow;
+        animation-name: clicked;
+        animation-duration: 200ms;
+        animation-timing-function: ease-in;
+        animation-fill-mode: forwards;
+        .element-detail {
+          left: 6rem;
+        }
+      }
+    }
+  }
+  @include laptop {
+    right: 13rem;
+  }
+
+  @include tablet {
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: 3rem;
+    transform: translate(-50%, 0);
+    position: absolute;
+
+    .controller-inner {
+      width: 30rem;
+      .element-box {
+        grid-template-columns: repeat(5, 1fr);
+        height: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .element-detail {
+        top: 0;
+        left: 1rem;
+      }
+
+      .element-btn {
+        margin: 0rem 0.5rem;
+        &:hover {
+          .element-detail {
+            top: -3rem;
+            left: 1rem;
+          }
+        }
+        &.selected {
+          .element-detail {
+            top: -3rem;
+            left: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    bottom: 1rem;
+    .controller-inner {
+      width: 20rem;
+      .element-box {
+        grid-template-columns: repeat(5, 1fr);
+        height: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .element-detail {
+        top: 0;
+        left: 0.8rem;
+      }
+
+      .element-btn {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 0rem 0.2rem;
+        &:hover {
+          .element-detail {
+            top: -2rem;
+            left: 0.8rem;
+          }
+        }
+        &.selected {
+          .element-detail {
+            top: -2rem;
+            left: 0.8rem;
+          }
+        }
+      }
+    }
+  }
 }
 
 @keyframes clicked {
-	0% {
-		box-shadow: $shadow-reverse-shallow;
-	}
-	50% {
-		box-shadow: $shadow-reverse-deep;
-	}
-	100% {
-		box-shadow: $shadow-reverse-shallow;
-	}
+  0% {
+    box-shadow: $shadow-reverse-shallow;
+  }
+  50% {
+    box-shadow: $shadow-reverse-deep;
+  }
+  100% {
+    box-shadow: $shadow-reverse-shallow;
+  }
 }

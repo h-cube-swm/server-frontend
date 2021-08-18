@@ -1,0 +1,75 @@
+@import "/src/scss/style.scss";
+
+.text-field {
+  // Size setting
+  width: 100%;
+
+  // Text setting
+  font-size: $fs-rg;
+  font-weight: $fw-bold;
+  white-space: pre;
+  word-break: keep-all;
+
+  // Shape setting
+  outline: none;
+  border: none;
+
+  // Others
+  background-color: #fff;
+  resize: none;
+  @include hide-scrollbar;
+
+  &.multiline {
+    white-space: pre-wrap;
+  }
+
+  &.gray {
+    color: rgba(#000, 0.2);
+  }
+
+  &.viewmode {
+    white-space: pre-wrap;
+  }
+
+  &::placeholder {
+    color: rgba(#000, 0.2);
+    height: 100%;
+  }
+
+  // Font size settings
+  &.title {
+    font-size: $fs-lg;
+  }
+
+  &.xl {
+    font-size: $fs-rg;
+  }
+
+  &.lg {
+    font-size: $fs-rg;
+  }
+
+  &.rg {
+    font-size: $fs-rg;
+  }
+
+  &.md {
+    text-align: center;
+    font-size: $fs-rg;
+  }
+
+  &.sm {
+    text-align: center;
+    font-size: $fs-sm;
+    margin: 0 auto;
+  }
+
+  &.free {
+    @include round;
+    font-size: $fs-rg;
+    // width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border: 1.5px solid #0001;
+  }
+}

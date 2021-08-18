@@ -10,6 +10,17 @@
   border-radius: 15px;
 }
 
+@mixin break-all {
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: break-all;
+  white-space: normal;
+}
+
 @mixin mobile {
   @media screen and (max-width: 767px) {
     @content;
@@ -22,8 +33,40 @@
   }
 }
 
-@mixin desktop {
+@mixin laptop {
   @media screen and (max-width: 1679px) {
     @content;
   }
+}
+
+// @mixin desktop {
+//   @media screen and (min-width: 1680px) {
+//     @content;
+//   }
+// }
+
+@mixin max-len-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    font-weight: $fw-bold;
+  }
+  .red {
+    color: red;
+  }
+  .indicator {
+    font-size: $fs-xs;
+  }
+}
+
+@mixin hide-scrollbar {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
