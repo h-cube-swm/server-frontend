@@ -1,16 +1,16 @@
-/* React elements*/
+/* React elements */
 import React, { useState } from "react";
 
 /* Components */
+import { Redirect } from "react-router-dom";
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import Sidebar from "../Sidebar/Sidebar";
 import Prologue from "../Prologue/Prologue";
 import Positioner from "../../../Positioner/Positioner";
-import { QuestionAddButton } from "./QuestionAddButton/QuestionAddButton";
+import QuestionAddButton from "./QuestionAddButton/QuestionAddButton";
 import Hider from "../../../Hider/Hider";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import { Redirect } from "react-router-dom";
 import Title from "../../../Title/Title";
 import { Response } from "../Response/Response";
 
@@ -74,7 +74,7 @@ function Edit({ survey: init, updateSurvey }) {
     if (survey.questions.length <= 1) return;
     setSurvey((survey) => {
       const questions = [...survey.questions];
-      let selectedIndex = survey.selectedIndex;
+      let { selectedIndex } = survey;
       questions.splice(index, 1);
       if (index === survey.questions.length - 1) {
         selectedIndex = index - 1;
@@ -85,7 +85,7 @@ function Edit({ survey: init, updateSurvey }) {
 
   const [onWheel] = useScrollPaging((delta) => {
     const index = survey.selectedIndex;
-    const length = survey.questions.length;
+    const { length } = survey.questions;
 
     let newIndex = index + delta;
     if (newIndex < 0) newIndex = 0;
@@ -99,7 +99,7 @@ function Edit({ survey: init, updateSurvey }) {
   const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging((delta) => {
     // Calculate new index
     const { selectedIndex } = survey;
-    let newIndex = selectedIndex + delta;
+    const newIndex = selectedIndex + delta;
 
     // Check range
     if (newIndex < 0) return;
@@ -114,6 +114,18 @@ function Edit({ survey: init, updateSurvey }) {
 
     setSurvey({ ...survey, selectedIndex: newIndex, questions });
   });
+
+  const onEvent = useThrottle(putSurvey);
+  onEvent();
+
+  if (survey.meta.status === "published" || isEnded)
+    return <Redirect to={`/forms/survey/end/${survey.id}`} />;
+
+  const { selectedIndex } = survey;
+  const setQuesionType = setNestedState(setSurvey, ["questions", selectedIndex, "type"]);
+
+  const selectedSurveyType = survey.questions[selectedIndex].type;
+  const { questions } = survey;
 
   function detectQuestion() {
     for (let i = 0; i < questions.length; i++) {
@@ -146,24 +158,14 @@ function Edit({ survey: init, updateSurvey }) {
     if (!detectQuestion()) {
       return;
     }
+
     try {
       await putSurvey();
       setIsEnded(true);
-      return putSurvey;
-    } catch {}
+    } catch {
+      /* */
+    }
   };
-
-  const onEvent = useThrottle(putSurvey);
-  onEvent();
-
-  if (survey.meta.status === "published" || isEnded)
-    return <Redirect to={`/forms/survey/end/${survey.id}`} />;
-
-  const { selectedIndex } = survey;
-  const setQuesionType = setNestedState(setSurvey, ["questions", selectedIndex, "type"]);
-
-  const selectedSurveyType = survey.questions[selectedIndex].type;
-  const { questions } = survey;
 
   return (
     <div className="edit" {...backgroundCallbacks}>

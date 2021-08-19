@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { API } from "../../../../utils/apis";
+import { utils, writeFile } from "xlsx";
+import API from "../../../../utils/apis";
 import Loading from "../../../Loading/Loading";
 import ChoiceView from "./ViewTypes/ChoiceView/ChoiceView";
 import SentenceView from "./ViewTypes/SentenceView/SentenceView";
@@ -8,7 +9,6 @@ import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
 import TextField from "../../../TextField/TextField";
 import Selection from "./Selection/Selection";
 import { CardTypes } from "../constants";
-import { utils, writeFile } from "xlsx";
 
 import Table from "../../../Table/Table";
 
@@ -29,7 +29,7 @@ const VIEW_DICT = {
 function answerToString(answer) {
   if (answer instanceof Object) {
     return Object.entries(answer)
-      .filter(([_, value]) => value)
+      .filter((value) => value[1])
       .map((x) => +x[0] + 1 + "")
       .join(", ");
   }
@@ -38,8 +38,8 @@ function answerToString(answer) {
 
 function reshapeAnswerTo2DArray(survey, answers) {
   const { questions } = survey;
-  let questionDict = {};
-  let answerList = [];
+  const questionDict = {};
+  const answerList = [];
 
   // Construct questionDict.
   // QuestionDict map question id to question index.
@@ -63,7 +63,7 @@ function reshapeAnswerTo2DArray(survey, answers) {
 
 function ChartView({ columns, rows }) {
   const charts = columns.map((question, i) => {
-    const type = question.type;
+    const { type } = question;
     const key = question.id;
     const answers = rows.map((x) => x[i]);
 
@@ -80,8 +80,8 @@ function ChartView({ columns, rows }) {
 }
 
 function TableView({ columns, rows }) {
-  rows = rows.map((row) => row.map((cell) => answerToString(cell)));
-  return <Table columns={columns} rows={rows} />;
+  const stringRows = rows.map((row) => row.map((cell) => answerToString(cell)));
+  return <Table columns={columns} rows={stringRows} />;
 }
 
 export default function Result({ match, location }) {
@@ -114,10 +114,9 @@ export default function Result({ match, location }) {
 
   // Export to xlsx file
   const exportToXlsx = async () => {
-    let cells = rows.map((row) => row.map((cell) => answerToString(cell)));
+    const cells = rows.map((row) => row.map((cell) => answerToString(cell)));
     const xlsxColumn = columns.map(({ title }) => title);
     const workSheetData = [xlsxColumn, ...cells];
-    console.log(workSheetData);
     const wb = utils.book_new();
     const ws = utils.aoa_to_sheet(workSheetData);
     utils.book_append_sheet(wb, ws, "Sheet 1");

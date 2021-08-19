@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 
+// Components
+import { Link, Redirect } from "react-router-dom";
+import { QuestionProvider } from "../../../../contexts/QuestionContext";
+import QuestionCommon from "../QuestionCommon/QuestionCommon";
+import Loading from "../../../Loading/Loading";
+
 import { CardStates } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
-import { API } from "../../../../utils/apis";
+import API from "../../../../utils/apis";
 
 // HOCs
 import withSurvey from "../../../../hocs/withSurvey";
-
-// Components
-import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import { Link, Redirect } from "react-router-dom";
-import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import Loading from "../../../Loading/Loading";
-import FadeBox from "../../../FadeBox/FadeBox";
 
 function checkEntered(response) {
   if (response === null) return false;
@@ -73,7 +72,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   );
   const pages = [cover, ...questions];
 
-  let buttons = [];
+  const buttons = [];
 
   const isAnswered = index === 0 || !question.isRequired || checkEntered(response);
   if (index > 0) {

@@ -10,7 +10,7 @@ import React from "react";
 
 function Positioner({ x, y, zIndex = 0, children, topLeft }) {
   // Default style.
-  let style = {
+  const style = {
     position: "absolute",
     transitionDuration: "500ms",
     zIndex,

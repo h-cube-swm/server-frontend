@@ -12,7 +12,7 @@ export default function Sidebar({ questions, currentIndex, onSelect }) {
   let end = 0;
 
   let y = 0;
-  let dots = orderedMap(questions, (question, i) => {
+  const dots = orderedMap(questions, (question, i) => {
     const delta = i - currentIndex;
     const selected = delta === 0;
 

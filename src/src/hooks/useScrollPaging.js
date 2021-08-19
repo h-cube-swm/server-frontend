@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const MOVE_TIME = 500;
 
@@ -6,7 +6,7 @@ const useScrollPaging = (onPaging) => {
   const scrollRef = useRef(0);
   const isMovingRef = useRef(false);
 
-  const _onPaging = (delta) => {
+  const handleOnPaging = (delta) => {
     isMovingRef.current = true;
     setTimeout(() => {
       isMovingRef.current = false;
@@ -18,9 +18,9 @@ const useScrollPaging = (onPaging) => {
     const currentScroll = event.deltaY;
     if (!isMovingRef.current) {
       if (currentScroll > 0 && currentScroll > scrollRef.current) {
-        _onPaging(1);
+        handleOnPaging(1);
       } else if (currentScroll < 0 && currentScroll < scrollRef.current) {
-        _onPaging(-1);
+        handleOnPaging(-1);
       }
     }
     scrollRef.current = currentScroll;

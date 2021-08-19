@@ -3,9 +3,9 @@ import { Bar } from "test-react-chartjs-2";
 import "./PreferenceView.scss";
 
 export default function PreferenceView({ question, answers }) {
-  let answerObj = {};
-  let labels = [];
-  let values = [];
+  const answerObj = {};
+  const labels = [];
+  const values = [];
 
   answers.forEach((answer) => {
     if (answerObj[answer]) {
@@ -26,7 +26,7 @@ export default function PreferenceView({ question, answers }) {
   }
 
   const data = {
-    labels: labels,
+    labels,
     datasets: [
       {
         label: `1: ${question.minDes},  ${question.count}: ${question.maxDes}`,

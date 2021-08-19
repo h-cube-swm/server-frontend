@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 
 const MessageContext = createContext();
 
@@ -17,7 +17,11 @@ export function MessageProvider({ children }) {
     setMessageQueue((queue) => queue.filter(([id]) => id !== messageId));
   }
 
-  return <MessageContext.Provider value={{ messageQueue, publish, close }}>{children}</MessageContext.Provider>;
+  return (
+    <MessageContext.Provider value={{ messageQueue, publish, close }}>
+      {children}
+    </MessageContext.Provider>
+  );
 }
 
 export function useMessage() {

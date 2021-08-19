@@ -5,14 +5,14 @@ const textChars = "abcdefghijklmnopqrstuvwxyz1234567890-";
 
 // Calculate required character number for each caracter
 let count = 1;
-while (Math.pow(hashChars.length, count) < textChars.length) {
+while (hashChars.length ** count < textChars.length) {
   count += 1;
 }
 
 // Generate array of hash unit with hashChar^count length
 function getAllText(count) {
   if (count === 0) return [""];
-  let list = [];
+  const list = [];
   for (let i = 0; i < hashChars.length; i++) {
     getAllText(count - 1).forEach((str) => {
       list.push(hashChars[i] + str);

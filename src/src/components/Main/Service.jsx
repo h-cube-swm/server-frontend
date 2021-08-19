@@ -1,22 +1,21 @@
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { QuestionProvider } from "../../contexts/QuestionContext";
-import { CardStates } from "../Forms/Survey/constants";
 import getQuestion from "../Forms/Survey/getQuestion";
 import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
 import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
-import { CardTypes } from "../Forms/Survey/constants";
-import { Link } from "react-router-dom";
+import { CardStates, CardTypes } from "../Forms/Survey/constants";
 
 /* Assets */
 import "./Service.scss";
 
-const _question = getQuestion(0)[1];
+const initQuestion = getQuestion(0)[1];
 const defaultAnswers = [{ 0: true }, { 0: true }, { 1: true }, { 1: true }, { 2: true }];
-_question.type = CardTypes.MULTIPLE_CHOICE;
-_question.choices = ["마음껏", "테스트", "해보세요"];
+initQuestion.type = CardTypes.MULTIPLE_CHOICE;
+initQuestion.choices = ["마음껏", "테스트", "해보세요"];
 
 function Service() {
-  const [question, setQuestion] = useState(_question);
+  const [question, setQuestion] = useState(initQuestion);
   const [response, setResponse] = useState({});
 
   return (

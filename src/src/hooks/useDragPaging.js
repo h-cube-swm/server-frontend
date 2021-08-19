@@ -25,7 +25,7 @@ const useDragPaging = (onPaging, threshold = 64) => {
     setIsDragging(false);
   };
 
-  const _onPaging = (delta) => {
+  const handleOnPaging = (delta) => {
     if (!isTriggable.current) return;
     isTriggable.current = false;
 
@@ -40,14 +40,14 @@ const useDragPaging = (onPaging, threshold = 64) => {
     if (!isDragging) return;
     if (!ref.current) return;
 
-    ref.current.style.left = mX.current + "px";
-    ref.current.style.top = mY.current + "px";
+    ref.current.style.left = `${mX.current}px`;
+    ref.current.style.top = `${mY.current}px`;
 
     if (!isTriggable.current) return;
     if (mY.current < center - threshold) {
-      _onPaging(-1);
+      handleOnPaging(-1);
     } else if (mY.current > center + threshold) {
-      _onPaging(+1);
+      handleOnPaging(+1);
     }
   };
   onDragRef.current = onDrag;

@@ -8,7 +8,7 @@ import "./App.scss";
 // /* Directly-loaded components */
 // import Response from "../Forms/Survey/Response/Response";
 import Loading from "../Loading/Loading";
-import Response from "../Forms/Survey/Response/Response";
+import ResponseContainer from "../Forms/Survey/Response/Response";
 import { MessageProvider } from "../../contexts/MessageContext";
 import MessageSystem from "../Message/MessageSystem";
 import EditCover from "../Forms/Survey/Edit/EditCover";
@@ -50,7 +50,7 @@ function App() {
           <Route path="/forms/survey/edit/:link" component={Edit} />
           <Route path="/forms/survey/end/:link" component={EditEnding} />
           <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
-          <Route path="/forms/survey/response/:link" component={Response} />
+          <Route path="/forms/survey/response/:link" component={ResponseContainer} />
           <Route path="/forms/survey/result/:link" component={Result} />
           <Route path="/error/:type" component={Error} />
           <Route path="/loading" component={Loading}></Route>

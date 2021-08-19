@@ -1,7 +1,6 @@
 /* React elements */
 import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
-import EditCover from "../Forms/Survey/Edit/EditCover";
 
 /* Styles */
 import "./Intro.scss";

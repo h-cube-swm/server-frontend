@@ -83,6 +83,7 @@ export default function Preference() {
     const count = value + "";
     if (!/^[0-9]*$/.test(count)) return false;
     setMaxPref(+count);
+    return true;
   };
 
   const handleOnBlur = () => {
@@ -91,7 +92,7 @@ export default function Preference() {
 
   const getOnClick = (index) => {
     if (isEditting) return null;
-    else return () => setResponse(index);
+    return () => setResponse(index);
   };
 
   const preferences = [];

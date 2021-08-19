@@ -7,7 +7,7 @@
         w[l] = w[l] || [];
         w[l].push({
           "gtm.start": new Date().getTime(),
-          event: "gtm.js",
+          "event": "gtm.js",
         });
         var f = d.getElementsByTagName(s)[0],
           j = d.createElement(s),
@@ -41,7 +41,10 @@
     <meta property="og:image:height" content="400" />
     <meta property="og:url" content="https://the-form.io/" />
     <meta property="og:title" content="더 폼 - 모든 폼을 대신하는 폼나는 설문조사" />
-    <meta property="og:description" content="폼, 설문조사, 신청서, 자기소개서, 지원서, 만족도조사, 선호도조사, " />
+    <meta
+      property="og:description"
+      content="폼, 설문조사, 신청서, 자기소개서, 지원서, 만족도조사, 선호도조사, "
+    />
 
     <!--Facebook Pixel meta code-->
     <meta name="facebook-domain-verification" content="n1ko475gmjbaymjd24w6y0m3mcjp7i" />
@@ -67,9 +70,15 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
+      rel="stylesheet"
+    />
 
     <title>더 폼 - 모든 폼을 대신하는 폼나는 설문조사</title>
 
@@ -123,7 +132,9 @@
       (function () {
         var w = window;
         if (w.ChannelIO) {
-          return (window.console.error || window.console.log || function () {})("ChannelIO script included twice.");
+          return (window.console.error || window.console.log || function () {})(
+            "ChannelIO script included twice.",
+          );
         }
         var ch = function () {
           ch.c(arguments);

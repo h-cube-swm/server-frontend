@@ -27,12 +27,12 @@ function Sentence({ isLong }) {
   const maxLen = isLong ? question.maxLenLong : question.maxLenShort;
   const setMaxLen = setNestedState(setQuestion, [isLong ? "maxLenLong" : "maxLenShort"]);
   const setText = (text) => {
-    text = text.substr(0, maxLen);
-    setResponse(text);
+    const limitedText = text.substr(0, maxLen);
+    setResponse(limitedText);
   };
 
   let extra = null;
-  let classes = ["sentence-question"];
+  const classes = ["sentence-question"];
   if (isLong) classes.push("long");
   else classes.push("short");
 

@@ -4,16 +4,17 @@ import minusBtn from "../../assets/icons/minus-btn.svg";
 import TextField from "../TextField/TextField";
 import "./IntegerField.scss";
 
-function IntegerField({ number, setNumber, disabled, label, max, min, ...props }, ref) {
-  const maxNum = max ? max : 999;
-  const minNum = min ? min : 0;
+function IntegerField({ number, setNumber, disabled, label, max, min, ...props }) {
+  const maxNum = max || 999;
+  const minNum = min || 0;
 
-  const onChange = (text) => {
-    text = text + "";
+  const onChange = (value) => {
+    const text = value + "";
     if (!/^[0-9]{0,3}$/.test(text)) return false;
     let number = +text;
     if (number >= maxNum) number = maxNum;
     setNumber(number);
+    return true;
   };
 
   const plus = () => {

@@ -24,9 +24,8 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
   if (!setText) {
     if (text) {
       return <div className={className}>{text}</div>;
-    } else {
-      return <div className={className}>{placeholder}</div>;
     }
+    return <div className={className}>{placeholder}</div>;
   }
 
   /**
@@ -45,7 +44,7 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
       rows={1}
       {...props}
       onInput={handleOnInput}
-      value={text ? text : ""}
+      value={text || ""}
       disabled={disabled || !setText}
       placeholder={placeholder}
     />

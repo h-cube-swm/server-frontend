@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { CardStates, CardTypes } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
 // Hooks
 import { useQuestion } from "../../../../contexts/QuestionContext";
-import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";

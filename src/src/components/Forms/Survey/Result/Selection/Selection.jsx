@@ -11,7 +11,7 @@ function getPseudoRandom(seed) {
   let randomNumber = Math.E;
   for (let i = 0; i < seed.length; i++) {
     randomNumber *= seed.charCodeAt(i);
-    randomNumber = randomNumber - Math.floor(randomNumber);
+    randomNumber -= Math.floor(randomNumber);
   }
   return randomNumber;
 }
@@ -21,7 +21,7 @@ export default function Selection({ columns, rows }) {
   const [winnerNumber, setWinnerNumber] = useState(0);
   const [criterion, setCriterion] = useState(null);
 
-  let criterionButtons = columns
+  const criterionButtons = columns
     .map((question, index) => [question, index])
     .filter(
       ([question]) =>
@@ -42,9 +42,7 @@ export default function Selection({ columns, rows }) {
       return (
         <button
           className={"btn " + (index === criterion ? "" : "disabled")}
-          onClick={() => {
-            criterion === index ? setCriterion(null) : setCriterion(index);
-          }}
+          onClick={() => setCriterion(criterion === index ? null : index)}
           key={index}>
           {title}
         </button>
@@ -53,7 +51,7 @@ export default function Selection({ columns, rows }) {
 
   let filteredAnswers = [];
   if (criterion) {
-    filteredAnswers = rows.map((x) => <p>{x[criterion]}</p>);
+    filteredAnswers = rows.map((x, i) => <p key={i}>{x[criterion]}</p>);
     if (winnerType === "random") {
       let seed = JSON.stringify(rows);
       filteredAnswers.sort(() => {
@@ -106,7 +104,7 @@ export default function Selection({ columns, rows }) {
       </div>
 
       <div className="answers">
-        {filteredAnswers ? filteredAnswers : <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>}
+        {filteredAnswers || <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
-import { API } from "../../../../utils/apis";
+import API from "../../../../utils/apis";
 import { useMessage } from "../../../../contexts/MessageContext";
 
 import "./EditEnding.scss";
@@ -12,7 +12,7 @@ import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import useOnly from "../../../../hooks/useOnly";
 
-const HOST = window.location.protocol + "//" + window.location.host;
+const HOST = `${window.location.protocol}//${window.location.host}`;
 
 const Ending = ({ ending }) => {
   const { surveyId, title, description, surveyLink, resultLink } = ending;
@@ -61,7 +61,7 @@ const Ending = ({ ending }) => {
     );
   });
 
-  let buttonClasses = ["btn", "rg", "submit-btn"];
+  const buttonClasses = ["btn", "rg", "submit-btn"];
   let buttonText = "";
 
   switch (emailState) {
@@ -111,7 +111,7 @@ const Ending = ({ ending }) => {
               <h1>설문 제목</h1>
               <h2>{title}</h2>
             </div>
-            <div className="email box three">
+            <div className="email box t`hree">
               <h1>
                 이메일을 적어주시면
                 <br />
@@ -152,14 +152,12 @@ const Ending = ({ ending }) => {
                     <strong>배포</strong>하세요.
                   </h1>
                   <button
-                    onClick={() =>
-                      duplicateLink(`${HOST + "/forms/survey/response/" + surveyLink}`)
-                    }>
+                    onClick={() => duplicateLink(`${HOST}/forms/survey/response/${surveyLink}`)}>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>
 
-                <h3>{HOST + "/forms/survey/response/" + surveyLink}</h3>
+                <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
               </div>
             </div>
             <div className="box six">
@@ -171,12 +169,12 @@ const Ending = ({ ending }) => {
                     <strong>결과</strong>를 확인하세요.
                   </h1>
                   <button
-                    onClick={() => duplicateLink(`${HOST + "/forms/survey/result/" + resultLink}`)}>
+                    onClick={() => duplicateLink(`${HOST}/forms/survey/result/${resultLink}`)}>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>
 
-                <h3>{HOST + "/forms/survey/result/" + resultLink}</h3>
+                <h3>{`${HOST}/forms/survey/result/${resultLink}`}</h3>
               </div>
             </div>
           </div>

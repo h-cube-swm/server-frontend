@@ -1,7 +1,7 @@
 /* React elements */
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { API } from "../../../utils/apis";
+import API from "../../../utils/apis";
 import Loading from "../../Loading/Loading";
 
 const Survey = () => {

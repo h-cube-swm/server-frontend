@@ -29,12 +29,10 @@ function useFetch(path) {
 }
 
 async function sendData(method, path, body) {
-  method = method.toLowerCase();
-
   try {
     const config = {
       url: ROOT + path,
-      method,
+      method: method.toLowerCase(),
     };
     if (body) config.data = body;
     const { data } = await axios(config);
@@ -44,7 +42,7 @@ async function sendData(method, path, body) {
   }
 }
 
-export const API = {
+export default {
   // Get
   useResponses: (resultId) => useFetch(`/surveys/${resultId}/responses`),
   useLink: () => useFetch("/link"),
@@ -53,5 +51,6 @@ export const API = {
   putSurvey: (surveyId, survey) => sendData("PUT", `/surveys/${surveyId}`, survey),
   putEmail: (surveyId, email) => sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
   endSurvey: (surveyId) => sendData("PUT", `/surveys/${surveyId}/end`),
-  postResponse: (surveyId, response) => sendData("POST", `/surveys/${surveyId}/responses`, response),
+  postResponse: (surveyId, response) =>
+    sendData("POST", `/surveys/${surveyId}/responses`, response),
 };

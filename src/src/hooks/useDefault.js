@@ -23,18 +23,18 @@ function checkUpdateAndGetNew(state, defaults, initialized) {
 
   if (typeof state === "object") {
     let shouldUpdate = false;
-    for (const key in defaults) {
-      if (!(key in state)) {
-        shouldUpdate = true;
-        break;
-      }
-    }
+    shouldUpdate = Object.keys(defaults).some((key) => !(key in state));
+    // for (const key in defaults) {
+    //   if (!(key in state)) {
+    //     shouldUpdate = true;
+    //     break;
+    //   }
+    // }
 
     if (shouldUpdate) {
       return [true, { ...defaults, ...state }];
-    } else {
-      return [false, null];
     }
+    return [false, null];
   }
 
   if (typeof state !== typeof defaults) {
