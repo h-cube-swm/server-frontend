@@ -5,6 +5,7 @@ module.exports = {
   useTabs: false,
   tabWidth: 2,
   trailingComma: "all",
+  quoteProps: "consistent",
   printWidth: 100,
   arrowParens: "always",
   endOfLine: "auto",
