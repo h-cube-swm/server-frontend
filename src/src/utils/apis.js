@@ -50,11 +50,8 @@ export const API = {
   useLink: () => useFetch("/link"),
   useSurvey: (surveyId) => useFetch(`/surveys/${surveyId}`),
 
-  putSurvey: (surveyId, survey) =>
-    sendData("PUT", `/surveys/${surveyId}`, survey),
-  putEmail: (surveyId, email) =>
-    sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
+  putSurvey: (surveyId, survey) => sendData("PUT", `/surveys/${surveyId}`, survey),
+  putEmail: (surveyId, email) => sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
   endSurvey: (surveyId) => sendData("PUT", `/surveys/${surveyId}/end`),
-  postResponse: (surveyId, response) =>
-    sendData("POST", `/surveys/${surveyId}/responses`, response),
+  postResponse: (surveyId, response) => sendData("POST", `/surveys/${surveyId}/responses`, response),
 };

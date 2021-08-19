@@ -9,17 +9,15 @@ export function MessageProvider({ children }) {
   const messageIdRef = useRef(0);
   const [messageQueue, setMessageQueue] = useState([]);
 
-  function publish(message, type = 'default') {
-    setMessageQueue(queue => [...queue, [messageIdRef.current++, message, type]]);
-  };
-
-  function close(messageId) {
-    setMessageQueue(queue => queue.filter(([id]) => id !== messageId));
+  function publish(message, type = "default") {
+    setMessageQueue((queue) => [...queue, [messageIdRef.current++, message, type]]);
   }
 
-  return <MessageContext.Provider value={{ messageQueue, publish, close }} >
-    {children}
-  </MessageContext.Provider >;
+  function close(messageId) {
+    setMessageQueue((queue) => queue.filter(([id]) => id !== messageId));
+  }
+
+  return <MessageContext.Provider value={{ messageQueue, publish, close }}>{children}</MessageContext.Provider>;
 }
 
 export function useMessage() {

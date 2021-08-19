@@ -14,17 +14,11 @@ export default function ToggleSwitch({
   };
 
   return (
-    <div
-      className="toggle-box"
-      onMouseDown={(event) => event.preventDefault()}
-      onClick={onClick}>
+    <div className="toggle-box" onMouseDown={(event) => event.preventDefault()} onClick={onClick}>
       <div className="toggle-switch">
         <div className="toggle-background" />
         <div className={isRequired ? "toggle-btn" : "unselected-toggle-btn"}>
-          <img
-            src={isRequired ? selectedDot : unselectedDot}
-            alt="require element switch"
-          />
+          <img src={isRequired ? selectedDot : unselectedDot} alt="require element switch" />
         </div>
       </div>
       <p className="label">{isRequired ? selectedLabel : unselectedLabel}</p>

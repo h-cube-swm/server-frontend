@@ -20,9 +20,11 @@ const deepUpdate = (state, keys, newValue) => {
   }
 };
 
-const setNestedState = (setState, keys) => setState && ((value) => {
-  if (!Array.isArray(keys)) throw new Error("Keys must be an array.");
-  setState((state) => deepUpdate(state, keys, value));
-});
+const setNestedState = (setState, keys) =>
+  setState &&
+  ((value) => {
+    if (!Array.isArray(keys)) throw new Error("Keys must be an array.");
+    setState((state) => deepUpdate(state, keys, value));
+  });
 
 export default setNestedState;

@@ -56,9 +56,7 @@ export default function Chaos() {
 
         //Render
         project: function (points) {
-          return project3(this.camera[0], this.camera[1], points).map((x) =>
-            this.cvt(x)
-          );
+          return project3(this.camera[0], this.camera[1], points).map((x) => this.cvt(x));
         },
         render: function () {
           this.ctx.beginPath();
@@ -82,8 +80,7 @@ export default function Chaos() {
           this.strs.forEach((str) => {
             var pos = this.project([str[0]])[0];
             if (!pos) return;
-            if (str[2])
-              this.ctx.font = Math.round(3000 / pos[2]) + 1 + "px Arial";
+            if (str[2]) this.ctx.font = Math.round(3000 / pos[2]) + 1 + "px Arial";
             this.ctx.fillText(str[1], pos[0], pos[1]);
           });
           this.ctx.stroke();
@@ -166,8 +163,7 @@ export default function Chaos() {
           this.time++;
           this.particles = this.particles.map((x, i) => {
             this.traceList[i].push(x);
-            if (this.traceList[i].length > this.traceCount)
-              this.traceList[i].shift();
+            if (this.traceList[i].length > this.traceCount) this.traceList[i].shift();
             return this.func(x, this.time);
           });
         },

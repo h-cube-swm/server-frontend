@@ -15,10 +15,7 @@ import Hider from "../../../Hider/Hider";
 import Default from "../QuestionTypes/Default/Default";
 import { MultipleChoices, SingleChoices } from "../QuestionTypes/Choice/Choice";
 import Preference from "../QuestionTypes/Preference/Preference";
-import {
-  LongSentence,
-  ShortSentence,
-} from "../QuestionTypes/Sentence/Sentence";
+import { LongSentence, ShortSentence } from "../QuestionTypes/Sentence/Sentence";
 
 // Scss
 import "./QuestionCommon.scss";

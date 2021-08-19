@@ -4,10 +4,7 @@ import minusBtn from "../../assets/icons/minus-btn.svg";
 import TextField from "../TextField/TextField";
 import "./IntegerField.scss";
 
-function IntegerField(
-  { number, setNumber, disabled, label, max, min, ...props },
-  ref
-) {
+function IntegerField({ number, setNumber, disabled, label, max, min, ...props }, ref) {
   const maxNum = max ? max : 999;
   const minNum = min ? min : 0;
 

@@ -57,7 +57,7 @@ const Ending = ({ ending }) => {
   useOnly(() => {
     publish(
       "주의❗️ 메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
-      "warning"
+      "warning",
     );
   });
 
@@ -115,8 +115,7 @@ const Ending = ({ ending }) => {
               <h1>
                 이메일을 적어주시면
                 <br />
-                <strong>배포</strong>와 <strong>결과확인</strong> 링크를
-                보내드립니다.
+                <strong>배포</strong>와 <strong>결과확인</strong> 링크를 보내드립니다.
               </h1>
               <div className="email-input">
                 <div className="email-input-box">
@@ -136,8 +135,8 @@ const Ending = ({ ending }) => {
                 </button>
               </div>
               <p>
-                * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당
-                설문에 접근할 수 없습니다.
+                * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당 설문에 접근할 수
+                없습니다.
               </p>
             </div>
             <div className="box four">
@@ -154,9 +153,7 @@ const Ending = ({ ending }) => {
                   </h1>
                   <button
                     onClick={() =>
-                      duplicateLink(
-                        `${HOST + "/forms/survey/response/" + surveyLink}`
-                      )
+                      duplicateLink(`${HOST + "/forms/survey/response/" + surveyLink}`)
                     }>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
@@ -174,11 +171,7 @@ const Ending = ({ ending }) => {
                     <strong>결과</strong>를 확인하세요.
                   </h1>
                   <button
-                    onClick={() =>
-                      duplicateLink(
-                        `${HOST + "/forms/survey/result/" + resultLink}`
-                      )
-                    }>
+                    onClick={() => duplicateLink(`${HOST + "/forms/survey/result/" + resultLink}`)}>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>

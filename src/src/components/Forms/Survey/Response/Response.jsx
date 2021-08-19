@@ -18,8 +18,7 @@ import FadeBox from "../../../FadeBox/FadeBox";
 function checkEntered(response) {
   if (response === null) return false;
   if (typeof response === "undefined") return false;
-  if (typeof response === "object")
-    return Object.values(response).filter((x) => x).length > 0;
+  if (typeof response === "object") return Object.values(response).filter((x) => x).length > 0;
   if (typeof response === "string") return response.length > 0;
 
   return true;
@@ -69,32 +68,26 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
     <div className="cover-box">
       <h1 className="title">{survey.title}</h1>
 
-      {survey.description && (
-        <div className="description">{survey.description}</div>
-      )}
+      {survey.description && <div className="description">{survey.description}</div>}
     </div>
   );
   const pages = [cover, ...questions];
 
   let buttons = [];
 
-  const isAnswered =
-    index === 0 || !question.isRequired || checkEntered(response);
+  const isAnswered = index === 0 || !question.isRequired || checkEntered(response);
   if (index > 0) {
     buttons.push(
       <button key="previous" className="btn rg" onClick={getMove(index - 1)}>
         이전으로
-      </button>
+      </button>,
     );
   }
   if (index === 0) {
     buttons.push(
-      <button
-        key="start"
-        className="btn rg"
-        onClick={isAnswered ? getMove(index + 1) : () => {}}>
+      <button key="start" className="btn rg" onClick={isAnswered ? getMove(index + 1) : () => {}}>
         시작하기
-      </button>
+      </button>,
     );
   } else if (index < pages.length - 1) {
     buttons.push(
@@ -103,7 +96,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
         className={"btn rg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? getMove(index + 1) : () => {}}>
         다음으로
-      </button>
+      </button>,
     );
   }
   if (index === pages.length - 1) {
@@ -113,7 +106,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
         className={"btn rg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? onSubmit : () => {}}>
         완료
-      </button>
+      </button>,
     );
   }
 

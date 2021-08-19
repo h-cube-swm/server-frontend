@@ -11,13 +11,7 @@ import { Link } from "react-router-dom";
 import "./Service.scss";
 
 const _question = getQuestion(0)[1];
-const defaultAnswers = [
-  { 0: true },
-  { 0: true },
-  { 1: true },
-  { 1: true },
-  { 2: true },
-];
+const defaultAnswers = [{ 0: true }, { 0: true }, { 1: true }, { 1: true }, { 2: true }];
 _question.type = CardTypes.MULTIPLE_CHOICE;
 _question.choices = ["마음껏", "테스트", "해보세요"];
 
@@ -62,10 +56,7 @@ function Service() {
           <h1>결과를 확인합니다.</h1>
         </div>
         <div className="box five">
-          <ChoiceView
-            question={question}
-            answers={[response].concat(defaultAnswers)}
-          />
+          <ChoiceView question={question} answers={[response].concat(defaultAnswers)} />
         </div>
       </div>
       <div className="phrase">

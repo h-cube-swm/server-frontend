@@ -21,9 +21,7 @@ const Edit = lazy(() => import("../Forms/Survey/Edit/Edit"));
 const EditEnding = lazy(() => import("../Forms/Survey/EditEnding/EditEnding"));
 const Error = lazy(() => import("../Error/Error"));
 const Result = lazy(() => import("../Forms/Survey/Result/Result"));
-const ResponseEnding = lazy(() =>
-  import("../Forms/Survey/ResponseEnding/ResponseEnding")
-);
+const ResponseEnding = lazy(() => import("../Forms/Survey/ResponseEnding/ResponseEnding"));
 
 /*
 Only directly loaded components, which is Response and Loading, are loaded directly.
@@ -51,11 +49,7 @@ function App() {
           <Route path="/forms/survey/mobile" component={EditCover} />
           <Route path="/forms/survey/edit/:link" component={Edit} />
           <Route path="/forms/survey/end/:link" component={EditEnding} />
-          <Route
-            path="/forms/survey/response/ending"
-            component={ResponseEnding}
-            exact
-          />
+          <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
           <Route path="/forms/survey/response/:link" component={Response} />
           <Route path="/forms/survey/result/:link" component={Result} />
           <Route path="/error/:type" component={Error} />

@@ -58,10 +58,7 @@ function reshapeAnswerTo2DArray(survey, answers) {
     answerList.push([timestamp].concat(newAnswer));
   });
 
-  return [
-    [{ title: "응답 시각", type: "timestamp" }].concat(questions),
-    answerList,
-  ];
+  return [[{ title: "응답 시각", type: "timestamp" }].concat(questions), answerList];
 }
 
 function ChartView({ columns, rows }) {
@@ -96,8 +93,7 @@ export default function Result({ match, location }) {
 
   // Load response data
   const [result, err] = API.useResponses(resultId);
-  if (err && result.status === 400)
-    return <Redirect to="/error/wrongResultId" />;
+  if (err && result.status === 400) return <Redirect to="/error/wrongResultId" />;
   if (err) return <Redirect to="/error/unexpected/cannot-get-result" />;
   if (!result) return <Loading />;
 
@@ -114,8 +110,7 @@ export default function Result({ match, location }) {
   let content = null;
   if (isWinner) content = <Selection columns={columns} rows={rows} />;
   if (isChart) content = <ChartView columns={columns} rows={rows} />;
-  if (isTable)
-    content = <TableView columns={columns.map((x) => x.title)} rows={rows} />;
+  if (isTable) content = <TableView columns={columns.map((x) => x.title)} rows={rows} />;
 
   // Export to xlsx file
   const exportToXlsx = async () => {
@@ -145,9 +140,7 @@ export default function Result({ match, location }) {
     }
   };
 
-  const noAnswers = (
-    <h1 className="no-answers">아직 표시할 응답이 없습니다.</h1>
-  );
+  const noAnswers = <h1 className="no-answers">아직 표시할 응답이 없습니다.</h1>;
 
   return (
     <div className="result">
@@ -164,9 +157,7 @@ export default function Result({ match, location }) {
           총 응답 수 <strong>{answers.length}</strong>
         </h3>
       </div>
-      <div className="content">
-        {answers.length === 0 ? noAnswers : content}
-      </div>
+      <div className="content">{answers.length === 0 ? noAnswers : content}</div>
       <div className="btn-box">
         <div className="export-button">
           <button className="btn rg png" onClick={exportToImg}>
@@ -184,9 +175,7 @@ export default function Result({ match, location }) {
         <Link to={`#${isTable ? "chart" : "table"}`} className="btn rg change">
           {isTable ? "차트 보기" : "표 보기"}
         </Link>
-        <Link
-          className="btn rg get-winner-btn"
-          to={`#${isWinner ? "chart" : "winner"}`}>
+        <Link className="btn rg get-winner-btn" to={`#${isWinner ? "chart" : "winner"}`}>
           {isWinner ? "돌아가기" : "응답자 추첨"}
         </Link>
       </div>

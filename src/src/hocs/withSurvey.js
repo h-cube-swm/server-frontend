@@ -35,12 +35,8 @@ const withSurvey = (Component) => (props) => {
     // Filter empty choices of single choice or multiple choice
     survey.questions = survey.questions.map((question) => {
       const { type } = question;
-      if (
-        type === CardTypes.SINGLE_CHOICE ||
-        type === CardTypes.MULTIPLE_CHOICE
-      ) {
-        if (question.choices)
-          question.choices = question.choices.filter((x) => x);
+      if (type === CardTypes.SINGLE_CHOICE || type === CardTypes.MULTIPLE_CHOICE) {
+        if (question.choices) question.choices = question.choices.filter((x) => x);
       }
       return question;
     });

@@ -36,7 +36,7 @@ export default function Selection({ columns, rows }) {
           question.title.indexOf("별명") >= 0 ||
           question.title.indexOf("학번") >= 0 ||
           question.title.indexOf("사번") >= 0 ||
-          question.title.indexOf("닉네임") >= 0)
+          question.title.indexOf("닉네임") >= 0),
     )
     .map(([{ title }, index]) => {
       return (
@@ -73,16 +73,12 @@ export default function Selection({ columns, rows }) {
           <div className="type-button">
             <button
               onClick={() => setWinnerType("timestamp")}
-              className={
-                "btn rg " + (winnerType === "timestamp" ? "" : "disabled")
-              }>
+              className={"btn rg " + (winnerType === "timestamp" ? "" : "disabled")}>
               시간순 추첨
             </button>
             <button
               onClick={() => setWinnerType("random")}
-              className={
-                "btn rg " + (winnerType === "random" ? "" : "disabled")
-              }>
+              className={"btn rg " + (winnerType === "random" ? "" : "disabled")}>
               랜덤 추첨
             </button>
             <IntegerField
@@ -110,11 +106,7 @@ export default function Selection({ columns, rows }) {
       </div>
 
       <div className="answers">
-        {filteredAnswers ? (
-          filteredAnswers
-        ) : (
-          <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>
-        )}
+        {filteredAnswers ? filteredAnswers : <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>}
       </div>
     </div>
   );

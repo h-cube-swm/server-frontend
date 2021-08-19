@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 function checkUpdateAndGetNew(state, defaults, initialized) {
   if (initialized) return [false, null];
 
-  if (typeof state === 'object') {
+  if (typeof state === "object") {
     let shouldUpdate = false;
     for (const key in defaults) {
       if (!(key in state)) {
@@ -45,7 +45,6 @@ function checkUpdateAndGetNew(state, defaults, initialized) {
 }
 
 export default function useDefault(state, setState, defaults) {
-
   const [initialized, setInitialized] = useState(false);
 
   // shouldUpdate is true when

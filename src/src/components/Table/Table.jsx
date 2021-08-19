@@ -36,11 +36,7 @@ export default function Table({ columns, rows }) {
       <div className="thead">
         <div className="tr">
           {columns.map((column, i) => (
-            <div
-              className="th"
-              style={weightStyles[i]}
-              key={i}
-              onClick={getSetCriterion(i)}>
+            <div className="th" style={weightStyles[i]} key={i} onClick={getSetCriterion(i)}>
               {column}
             </div>
           ))}

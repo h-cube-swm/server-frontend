@@ -57,9 +57,7 @@ export default function Card({ onDelete, onGrab, children }) {
       }}>
       <div className="content-box">{children}</div>
       <div className="button-box">
-        <button
-          className={"delete " + (onDelete ? "" : "hidden")}
-          onClick={handleOnDelete}>
+        <button className={"delete " + (onDelete ? "" : "hidden")} onClick={handleOnDelete}>
           <img src={imgDeleteButton} alt="Delete button"></img>
         </button>
       </div>

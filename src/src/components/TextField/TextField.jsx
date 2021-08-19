@@ -1,15 +1,7 @@
 import React, { useRef } from "react";
 import "./TextField.scss";
 
-function TextField({
-  text,
-  setText,
-  disabled,
-  size,
-  multiline,
-  placeholder,
-  ...props
-}) {
+function TextField({ text, setText, disabled, size, multiline, placeholder, ...props }) {
   const ref = useRef(null);
 
   // Build classname

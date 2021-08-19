@@ -25,11 +25,8 @@ export default function Loading() {
   useOnly(
     () =>
       isError &&
-      publish(
-        "로딩이 계속 끝나지 않는다면 우측 하단 채널톡을 통해 문의해주세요.",
-        "error"
-      ),
-    [isError]
+      publish("로딩이 계속 끝나지 않는다면 우측 하단 채널톡을 통해 문의해주세요.", "error"),
+    [isError],
   );
 
   const text = new Array(SPINNER_NUM)

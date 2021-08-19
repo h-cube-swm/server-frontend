@@ -1,5 +1,5 @@
 // Characters to be used to construct hash string
-const hashChars = ['슈', '슉', '.', '!'];
+const hashChars = ["슈", "슉", ".", "!"];
 // Characters of origianl string
 const textChars = "abcdefghijklmnopqrstuvwxyz1234567890-";
 
@@ -54,7 +54,6 @@ function unhash(hashStr) {
 
 // Check if given string is unhashable.
 function isUnhashable(str) {
-
   // Length check
   if (str.length % count !== 0) return false;
 

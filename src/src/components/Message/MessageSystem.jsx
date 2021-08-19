@@ -32,11 +32,7 @@ function Message({ index, children, onClose, type }) {
           <div className="message-inner-box">{children}</div>
           <div className={splitterClasses}></div>
           <button onClick={() => setShouldClose(true)}>
-            <img
-              className="close"
-              src={type === "default" ? delIcon : delIconWhite}
-              alt="del"
-            />
+            <img className="close" src={type === "default" ? delIcon : delIconWhite} alt="del" />
           </button>
         </div>
       </div>
@@ -49,11 +45,7 @@ export default function MessageSystem() {
   return (
     <div className="message-system">
       {messageQueue.map(([id, message, type], i) => (
-        <Message
-          key={id}
-          index={messageQueue.length - i}
-          type={type}
-          onClose={() => close(id)}>
+        <Message key={id} index={messageQueue.length - i} type={type} onClose={() => close(id)}>
           {message}
         </Message>
       ))}
