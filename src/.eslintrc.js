@@ -30,6 +30,7 @@ module.exports = {
     "react/prop-types": "off",
     "no-plusplus": "off",
     "react/display-name": "off",
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    // 프로덕션 시 console.log가 있으면 에러 발생, 개발 시에는 경고 발생
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
   },
 };
