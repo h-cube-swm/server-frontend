@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // Components
 import { Link, Redirect } from "react-router-dom";
+import Title from "../../../Title/Title";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
@@ -111,6 +112,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
 
   return (
     <div className="response">
+      <Title>더 폼 - {survey.title}</Title>
       <div className="survey-header">
         <span className="logo">
           <Link to="/" target="_blank">
