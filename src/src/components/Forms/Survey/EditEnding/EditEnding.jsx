@@ -111,7 +111,7 @@ const Ending = ({ ending }) => {
               <h1>설문 제목</h1>
               <h2>{title}</h2>
             </div>
-            <div className="email box t`hree">
+            <div className="email box three">
               <h1>
                 이메일을 적어주시면
                 <br />
