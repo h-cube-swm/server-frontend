@@ -51,7 +51,9 @@ export default function Selection({ columns, rows }) {
 
   let filteredAnswers = [];
   if (criterion) {
-    filteredAnswers = rows.map((x, i) => <p key={i}>{x[criterion]}</p>);
+    filteredAnswers = rows
+      .filter((x) => x[criterion].length !== 0)
+      .map((x, i) => <p key={i}>{x[criterion]}</p>);
     if (winnerType === "random") {
       let seed = JSON.stringify(rows);
       filteredAnswers.sort(() => {
