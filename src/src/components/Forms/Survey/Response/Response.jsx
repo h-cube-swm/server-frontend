@@ -116,16 +116,14 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   return (
     <div className="response">
       <Title>더 폼 - {survey.title}</Title>
-      {!isEmbed && (
-        <div className="survey-header">
-          <span className="logo">
-            <Link to="/" target="_blank">
-              <span> Powered by</span>
-              <em> the Form</em>
-            </Link>
-          </span>
-        </div>
-      )}
+      <div className={isEmbed ? "survey-header embed" : "survey-header"}>
+        <span className="logo">
+          <Link to="/" target="_blank">
+            <span> Powered by</span>
+            <em> the Form</em>
+          </Link>
+        </span>
+      </div>
       <div className="contents-box">
         {pages.map((page, i) => {
           // Build class names
