@@ -23,9 +23,7 @@ export default function Loading() {
 
   // useEffect for error message
   useOnly(
-    () =>
-      isError &&
-      publish("로딩이 계속 끝나지 않는다면 우측 하단 채널톡을 통해 문의해주세요.", "error"),
+    () => isError && publish("이 화면이 계속 되면 우측 하단 채널톡을 통해 문의해주세요.", "error"),
     [isError],
   );
 
