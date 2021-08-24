@@ -7,6 +7,7 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
+import embedBtn from "../../../../assets/icons/embed-btn.svg";
 import duplicate from "../../../../assets/icons/duplicate.svg";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
@@ -31,6 +32,9 @@ const Ending = ({ ending }) => {
       if (status === 200) {
         setEmailState("success");
       }
+      if (status === 400) {
+        setEmailState("error");
+      }
     } catch (e) {
       setEmailState("error");
     }
@@ -51,7 +55,18 @@ const Ending = ({ ending }) => {
     linkarea.select();
     document.execCommand("copy");
     document.body.removeChild(linkarea);
-    publish("링크가 복사되었습니다 ✅");
+    publish("📎 링크가 복사되었습니다 ✅");
+  };
+
+  const duplicateEmbedLink = (link) => {
+    const linkarea = document.createElement("textarea");
+    document.body.appendChild(linkarea);
+    linkarea.value = link;
+    linkarea.focus();
+    linkarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(linkarea);
+    publish("🖥 임베드 코드가 복사되었습니다 ✅");
   };
 
   useOnly(() => {
@@ -111,6 +126,20 @@ const Ending = ({ ending }) => {
               <h1>설문 제목</h1>
               <h2>{title}</h2>
             </div>
+            <div className="box two">
+              <div className="embed-title">
+                <h1>홈페이지에 직접 삽입해보세요.</h1>
+                <button
+                  onClick={() =>
+                    duplicateEmbedLink(
+                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
+                    )
+                  }>
+                  <img src={embedBtn} alt="" />
+                </button>
+              </div>
+              <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`}</h3>
+            </div>
             <div className="email box three">
               <h1>
                 이메일을 적어주시면
@@ -157,14 +186,6 @@ const Ending = ({ ending }) => {
                   </button>
                 </div>
                 <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
-                <button
-                  onClick={() =>
-                    duplicateLink(
-                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
-                    )
-                  }>
-                  Copy embedding code
-                </button>
               </div>
             </div>
             <div className="box six">
