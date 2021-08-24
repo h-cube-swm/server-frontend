@@ -14,6 +14,7 @@ import API from "../../../../utils/apis";
 
 // HOCs
 import withSurvey from "../../../../hocs/withSurvey";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 function checkEntered(response) {
   if (response === null) return false;
@@ -32,6 +33,7 @@ function checkEntered(response) {
 function ResponseContainer({ survey }) {
   const [responses, setResponses] = useState({ index: 0 });
   const [redirect, setRedirect] = useState(null);
+
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
 
@@ -63,6 +65,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   const response = index > 0 && responses[question.id];
   const setIndex = setNestedState(setResponses, ["index"]);
   const getMove = (index) => () => setIndex(index);
+  const { isEmbed } = useGlobalState();
 
   const cover = (
     <div className="cover-box">
@@ -113,14 +116,16 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   return (
     <div className="response">
       <Title>더 폼 - {survey.title}</Title>
-      <div className="survey-header">
-        <span className="logo">
-          <Link to="/" target="_blank">
-            <span> Powered by</span>
-            <em> the Form</em>
-          </Link>
-        </span>
-      </div>
+      {!isEmbed && (
+        <div className="survey-header">
+          <span className="logo">
+            <Link to="/" target="_blank">
+              <span> Powered by</span>
+              <em> the Form</em>
+            </Link>
+          </span>
+        </div>
+      )}
       <div className="contents-box">
         {pages.map((page, i) => {
           // Build class names

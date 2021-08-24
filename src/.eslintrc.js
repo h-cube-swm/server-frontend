@@ -1,3 +1,5 @@
+const errorAtProduction = process.env.NODE_ENV === "production" ? "error" : "warn";
+
 module.exports = {
   env: {
     browser: true,
@@ -31,6 +33,8 @@ module.exports = {
     "no-plusplus": "off",
     "react/display-name": "off",
     // 프로덕션 시 console.log가 있으면 에러 발생, 개발 시에는 경고 발생
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
+    "no-console": errorAtProduction,
+    "no-unused-vars": errorAtProduction,
+    "prefer-const": errorAtProduction,
   },
 };

@@ -156,8 +156,15 @@ const Ending = ({ ending }) => {
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>
-
                 <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
+                <button
+                  onClick={() =>
+                    duplicateLink(
+                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
+                    )
+                  }>
+                  Copy embedding code
+                </button>
               </div>
             </div>
             <div className="box six">
