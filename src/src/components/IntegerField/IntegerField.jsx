@@ -42,10 +42,10 @@ function IntegerField({ number, setNumber, disabled, label, max, min, ...props }
         />
       </div>
       <span className="btn-set">
-        <button onClick={plus}>
+        <button onClick={plus} disabled={disabled || !setNumber}>
           <img src={plusBtn} alt="add max length button" />
         </button>
-        <button onClick={minus}>
+        <button onClick={minus} disabled={disabled || !setNumber}>
           <img src={minusBtn} alt="minus max length button" />
         </button>
       </span>

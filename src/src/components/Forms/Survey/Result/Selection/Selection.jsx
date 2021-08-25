@@ -16,28 +16,31 @@ function getPseudoRandom(seed) {
   return randomNumber;
 }
 
+function isColumnCriteria(question) {
+  return (
+    question.type.indexOf("sentence") >= 0 &&
+    (question.title.indexOf("메일") >= 0 ||
+      question.title.indexOf("mail") >= 0 ||
+      question.title.indexOf("번호") >= 0 ||
+      question.title.indexOf("휴대폰") >= 0 ||
+      question.title.indexOf("이름") >= 0 ||
+      question.title.indexOf("나이") >= 0 ||
+      question.title.indexOf("취미") >= 0 ||
+      question.title.indexOf("별명") >= 0 ||
+      question.title.indexOf("학번") >= 0 ||
+      question.title.indexOf("사번") >= 0 ||
+      question.title.indexOf("닉네임") >= 0)
+  );
+}
+
 export default function Selection({ columns, rows }) {
   const [winnerType, setWinnerType] = useState("timestamp");
   const [winnerNumber, setWinnerNumber] = useState(0);
   const [criterion, setCriterion] = useState(null);
 
-  const criterionButtons = columns
+  const criteriaButtons = columns
     .map((question, index) => [question, index])
-    .filter(
-      ([question]) =>
-        question.type.indexOf("sentence") >= 0 &&
-        (question.title.indexOf("메일") >= 0 ||
-          question.title.indexOf("mail") >= 0 ||
-          question.title.indexOf("번호") >= 0 ||
-          question.title.indexOf("휴대폰") >= 0 ||
-          question.title.indexOf("이름") >= 0 ||
-          question.title.indexOf("나이") >= 0 ||
-          question.title.indexOf("취미") >= 0 ||
-          question.title.indexOf("별명") >= 0 ||
-          question.title.indexOf("학번") >= 0 ||
-          question.title.indexOf("사번") >= 0 ||
-          question.title.indexOf("닉네임") >= 0),
-    )
+    .filter(([question]) => isColumnCriteria(question))
     .map(([{ title }, index]) => {
       return (
         <button
@@ -50,6 +53,7 @@ export default function Selection({ columns, rows }) {
     });
 
   let filteredAnswers = [];
+  let maxWinnersNumber = 0;
   if (criterion) {
     filteredAnswers = rows
       .filter((x) => x[criterion].length !== 0)
@@ -62,6 +66,7 @@ export default function Selection({ columns, rows }) {
         return random - 0.5;
       });
     }
+    maxWinnersNumber = filteredAnswers.length;
     filteredAnswers = filteredAnswers.filter((_, i) => i < winnerNumber);
   }
 
@@ -84,14 +89,14 @@ export default function Selection({ columns, rows }) {
             <IntegerField
               placeholder="숫자 입력"
               number={winnerNumber}
-              setNumber={setWinnerNumber}
-              max={filteredAnswers.length}
+              setNumber={criterion && setWinnerNumber}
+              max={maxWinnersNumber}
               onClick={(e) => e.target.select()}
               label="추첨수"
             />
           </div>
         </div>
-        {criterionButtons.length ? (
+        {criteriaButtons.length ? (
           <h1>어떤 질문을 기준으로 추첨할지 선택해 주세요.</h1>
         ) : (
           <h1 className="no-filter">
@@ -102,7 +107,7 @@ export default function Selection({ columns, rows }) {
             예) 이름, 이메일, 전화번호, 학번 등
           </h1>
         )}
-        <div className="criteria">{criterionButtons}</div>
+        <div className="criteria">{criteriaButtons}</div>
       </div>
 
       <div className="answers">
