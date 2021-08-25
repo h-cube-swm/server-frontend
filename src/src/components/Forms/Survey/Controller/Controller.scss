@@ -66,8 +66,13 @@
       }
     }
   }
+
   @include laptop {
     right: 13rem;
+  }
+
+  @media screen and (max-width: 1210px) {
+    right: 7rem;
   }
 
   @include tablet {
