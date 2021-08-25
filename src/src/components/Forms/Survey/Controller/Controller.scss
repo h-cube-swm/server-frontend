@@ -67,6 +67,10 @@
     }
   }
 
+  @media screen and (max-width: 1890px) {
+    right: 25rem;
+  }
+
   @include laptop {
     right: 13rem;
   }
