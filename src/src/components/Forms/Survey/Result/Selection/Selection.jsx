@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Selection.scss";
 import IntegerField from "../../../../IntegerField/IntegerField";
+import { useMessage } from "../../../../../contexts/MessageContext";
 
 /**
  * This function generates random number in (0,1) from the given seed.
@@ -37,6 +38,11 @@ export default function Selection({ columns, rows }) {
   const [winnerType, setWinnerType] = useState("timestamp");
   const [winnerNumber, setWinnerNumber] = useState(0);
   const [criterion, setCriterion] = useState(null);
+  const { publish } = useMessage();
+
+  useEffect(() => {
+    publish("😊 추첨 기준을 먼저 선택해주세요 🎉");
+  }, []);
 
   const criteriaButtons = columns
     .map((question, index) => [question, index])
