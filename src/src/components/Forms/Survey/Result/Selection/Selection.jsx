@@ -85,7 +85,7 @@ export default function Selection({ columns, rows }) {
               placeholder="숫자 입력"
               number={winnerNumber}
               setNumber={setWinnerNumber}
-              max={rows.length}
+              max={filteredAnswers.length}
               onClick={(e) => e.target.select()}
               label="추첨수"
             />
