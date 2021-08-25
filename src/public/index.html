@@ -1,158 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          "event": "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TVSL838");
+    </script>
+    <!-- End Google Tag Manager -->
 
-<head>
-  <!-- Google Tag Manager -->
-  <script>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        "gtm.start": new Date().getTime(),
-        event: "gtm.js",
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != "dataLayer" ? "&l=" + l : "";
-      j.async = true;
-      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, "script", "dataLayer", "GTM-TVSL838");
-  </script>
-  <!-- End Google Tag Manager -->
+    <!-- Icons -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png?v=2" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-  <!-- Icons -->
-  <link rel="icon" href="%PUBLIC_URL%/favicon.png?v=2" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!-- Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="폼, 설문조사, 여론조사, 만족도조사, 신청서, 자기소개서" />
+    <meta
+      name="keywords"
+      content="폼, 설문조사, 조사, 더폼, 여론조사, 만족도조사, 만족도, 선호도, 신청서, 자기소개서"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://banner.png" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:url" content="https://the-form.io/" />
+    <meta property="og:title" content="더 폼 - 모든 폼을 대신하는 폼나는 설문조사" />
+    <meta
+      property="og:description"
+      content="폼, 설문조사, 신청서, 자기소개서, 지원서, 만족도조사, 선호도조사, "
+    />
 
-  <!-- Metadata -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="폼, 설문조사, 여론조사, 만족도조사, 신청서, 자기소개서" />
-  <meta name="keywords" content="폼, 설문조사, 조사, 더폼, 여론조사, 만족도조사, 만족도, 선호도, 신청서, 자기소개서" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image"
-    content="https://drive.google.com/uc?export=download&id=1gutV3MjK3k4ZzP2wGSWwlvZu1jaKcG8i" />
-  <meta property="og:image:width" content="800" />
-  <meta property="og:image:height" content="400" />
-  <meta property="og:url" content="https://the-form.io/" />
-  <meta property="og:title" content="더 폼 - 모든 폼을 대신하는 폼나는 설문조사" />
-  <meta property="og:description" content="폼, 설문조사, 신청서, 자기소개서, 지원서, 만족도조사, 선호도조사, " />
+    <!--Facebook Pixel meta code-->
+    <meta name="facebook-domain-verification" content="n1ko475gmjbaymjd24w6y0m3mcjp7i" />
 
-  <!--Facebook Pixel meta code-->
-  <meta name="facebook-domain-verification" content="n1ko475gmjbaymjd24w6y0m3mcjp7i" />
+    <!--Naver Search console-->
+    <meta name="naver-site-verification" content="1b52b0bcdfd6f6cfb3d22d9650d6760be67ca465" />
 
-  <!--Naver Search console-->
-  <meta name="naver-site-verification" content="1b52b0bcdfd6f6cfb3d22d9650d6760be67ca465" />
+    <!-- Manifest file for PWA -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <!-- Manifest file for PWA -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBV22WM0L8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-
-    gtag("config", "G-WBV22WM0L8");
-  </script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
-
-  <title>더 폼 - 모든 폼을 대신하는 폼나는 설문조사</title>
-
-  <!-- Facebook Pixel Code -->
-  <script>
-    !(function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-        n.callMethod
-          ? n.callMethod.apply(n, arguments)
-          : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = "2.0";
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    })(
-      window,
-      document,
-      "script",
-      "https://connect.facebook.net/en_US/fbevents.js"
-    );
-    fbq("init", "350704540037472");
-    fbq("track", "PageView");
-  </script>
-  <noscript><img height="1" width="1" style="display: none"
-      src="https://www.facebook.com/tr?id=350704540037472&ev=PageView&noscript=1" /></noscript>
-  <!-- End Facebook Pixel Code -->
-</head>
-
-<body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVSL838" height="0" width="0"
-      style="display: none; visibility: hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-
-  <!-- Channel Plugin Scripts -->
-  <script>
-    (function () {
-      var w = window;
-      if (w.ChannelIO) {
-        return (window.console.error || window.console.log || function () { })(
-          "ChannelIO script included twice."
-        );
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBV22WM0L8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
       }
-      var ch = function () {
-        ch.c(arguments);
-      };
-      ch.q = [];
-      ch.c = function (args) {
-        ch.q.push(args);
-      };
-      w.ChannelIO = ch;
-      function l() {
-        if (w.ChannelIOInitialized) {
-          return;
-        }
-        w.ChannelIOInitialized = true;
-        var s = document.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js";
-        s.charset = "UTF-8";
-        var x = document.getElementsByTagName("script")[0];
-        x.parentNode.insertBefore(s, x);
-      }
-      if (document.readyState === "complete") {
-        l();
-      } else if (window.attachEvent) {
-        window.attachEvent("onload", l);
-      } else {
-        window.addEventListener("DOMContentLoaded", l, false);
-        window.addEventListener("load", l, false);
-      }
-    })();
-    ChannelIO("boot", {
-      pluginKey: "91cb6c42-6533-4d7a-b925-f223dde1fe16",
-    });
-  </script>
-</body>
+      gtag("js", new Date());
 
+      gtag("config", "G-WBV22WM0L8");
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>더 폼 - 모든 폼을 대신하는 폼나는 설문조사</title>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+      fbq("init", "350704540037472");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=350704540037472&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TVSL838"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>

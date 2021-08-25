@@ -1,10 +1,11 @@
-import { Redirect } from "react-router-dom";
+import React, { Redirect } from "react-router-dom";
 import { CardTypes } from "../components/Forms/Survey/constants";
 import getQuestion from "../components/Forms/Survey/getQuestion";
 import Loading from "../components/Loading/Loading";
-import { API } from "../utils/apis";
+import API from "../utils/apis";
 import { isUnhashable, unhash } from "../utils/hasher";
 
+// eslint-disable-next-line
 const withSurvey = (Component) => (props) => {
   let surveyId = props.match.params.link;
   if (isUnhashable(surveyId)) surveyId = unhash(surveyId);
@@ -15,8 +16,8 @@ const withSurvey = (Component) => (props) => {
   if (!result) return <Loading></Loading>;
 
   // Reshape survey structure into one object
-  const { title, description, contents, ...meta } = result; //A
-  let survey = { title, description, meta, ...contents }; //B
+  const { title, description, contents, ...meta } = result; // A
+  const survey = { title, description, meta, ...contents }; // B
   survey.id = surveyId;
   if (!survey.counter) survey.counter = 0;
   if (!survey.questions) survey.questions = [];
@@ -28,29 +29,26 @@ const withSurvey = (Component) => (props) => {
   }
   const newProps = { ...props, survey };
 
-  async function updateSurvey(survey) {
+  async function updateSurvey(_survey) {
     // Copy survey
-    survey = JSON.parse(JSON.stringify(survey));
+    const survey = JSON.parse(JSON.stringify(_survey));
 
     // Filter empty choices of single choice or multiple choice
     survey.questions = survey.questions.map((question) => {
       const { type } = question;
-      if (
-        type === CardTypes.SINGLE_CHOICE ||
-        type === CardTypes.MULTIPLE_CHOICE
-      ) {
-        if (question.choices)
-          question.choices = question.choices.filter((x) => x);
+      const filtered = { ...question };
+      if (type === CardTypes.SINGLE_CHOICE || type === CardTypes.MULTIPLE_CHOICE) {
+        if (filtered.choices) filtered.choices = filtered.choices.filter((x) => x);
       }
-      return question;
+      return filtered;
     });
 
     // Reshape survey object
-    const { title, description, meta, ...contents } = survey; //B
-    const body = { title, description, contents, view: "slide" }; //A
+    const { title, description, meta, ...contents } = survey; // B
+    const body = { title, description, contents, view: "slide" }; // A
 
     // Send data to server
-    return await API.putSurvey(surveyId, body);
+    return API.putSurvey(surveyId, body);
   }
 
   return <Component {...newProps} updateSurvey={updateSurvey} />;

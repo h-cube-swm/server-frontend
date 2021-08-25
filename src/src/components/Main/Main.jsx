@@ -15,9 +15,7 @@ const Main = () => {
         <Header />
         <Intro />
         <Service />
-        <div className="footer">
-          Copyright 2021 H-cube Co. all rights reserved.
-        </div>
+        <div className="footer">Copyright 2021 H-cube Co. all rights reserved.</div>
       </div>
     </>
   );

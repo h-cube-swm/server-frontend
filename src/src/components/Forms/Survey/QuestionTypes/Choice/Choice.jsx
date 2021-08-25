@@ -35,13 +35,13 @@ function Choice({
           radio={!multipleSelect}
         />
       </div>
-      <div className="text-box">
-        <TextField
-          text={text}
-          setText={setText}
-          placeholder="더 폼 나는 선택지"
-          size="rg"
-        />
+      <div
+        className="text-box"
+        onClick={setChecked && (() => setChecked(!checked))}
+        style={{
+          cursor: setChecked ? "pointer" : null,
+        }}>
+        <TextField text={text} setText={setText} placeholder="더 폼 나는 선택지" size="rg" />
       </div>
       <div className="delete-button-box">
         <Hider hide={!isEditing}>

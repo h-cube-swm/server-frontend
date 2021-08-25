@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
-import { API } from "../../../../utils/apis";
+import API from "../../../../utils/apis";
 import { useMessage } from "../../../../contexts/MessageContext";
 
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
+import embedBtn from "../../../../assets/icons/embed-btn.svg";
 import duplicate from "../../../../assets/icons/duplicate.svg";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import useOnly from "../../../../hooks/useOnly";
 
-const HOST = window.location.protocol + "//" + window.location.host;
+const HOST = `${window.location.protocol}//${window.location.host}`;
 
 const Ending = ({ ending }) => {
   const { surveyId, title, description, surveyLink, resultLink } = ending;
@@ -30,6 +31,9 @@ const Ending = ({ ending }) => {
       const { status } = json;
       if (status === 200) {
         setEmailState("success");
+      }
+      if (status === 400) {
+        setEmailState("error");
       }
     } catch (e) {
       setEmailState("error");
@@ -51,17 +55,28 @@ const Ending = ({ ending }) => {
     linkarea.select();
     document.execCommand("copy");
     document.body.removeChild(linkarea);
-    publish("링크가 복사되었습니다 ✅");
+    publish("📎 링크가 복사되었습니다 ✅");
+  };
+
+  const duplicateEmbedLink = (link) => {
+    const linkarea = document.createElement("textarea");
+    document.body.appendChild(linkarea);
+    linkarea.value = link;
+    linkarea.focus();
+    linkarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(linkarea);
+    publish("🖥 임베드 코드가 복사되었습니다 ✅");
   };
 
   useOnly(() => {
     publish(
       "주의❗️ 메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
-      "warning"
+      "warning",
     );
   });
 
-  let buttonClasses = ["btn", "rg", "submit-btn"];
+  const buttonClasses = ["btn", "rg", "submit-btn"];
   let buttonText = "";
 
   switch (emailState) {
@@ -111,12 +126,25 @@ const Ending = ({ ending }) => {
               <h1>설문 제목</h1>
               <h2>{title}</h2>
             </div>
+            <div className="box two">
+              <div className="embed-title">
+                <h1>홈페이지에 직접 삽입해보세요.</h1>
+                <button
+                  onClick={() =>
+                    duplicateEmbedLink(
+                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
+                    )
+                  }>
+                  <img src={embedBtn} alt="" />
+                </button>
+              </div>
+              <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`}</h3>
+            </div>
             <div className="email box three">
               <h1>
                 이메일을 적어주시면
                 <br />
-                <strong>배포</strong>와 <strong>결과확인</strong> 링크를
-                보내드립니다.
+                <strong>배포</strong>와 <strong>결과확인</strong> 링크를 보내드립니다.
               </h1>
               <div className="email-input">
                 <div className="email-input-box">
@@ -136,8 +164,8 @@ const Ending = ({ ending }) => {
                 </button>
               </div>
               <p>
-                * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당
-                설문에 접근할 수 없습니다.
+                * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당 설문에 접근할 수
+                없습니다.
               </p>
             </div>
             <div className="box four">
@@ -153,16 +181,11 @@ const Ending = ({ ending }) => {
                     <strong>배포</strong>하세요.
                   </h1>
                   <button
-                    onClick={() =>
-                      duplicateLink(
-                        `${HOST + "/forms/survey/response/" + surveyLink}`
-                      )
-                    }>
+                    onClick={() => duplicateLink(`${HOST}/forms/survey/response/${surveyLink}`)}>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>
-
-                <h3>{HOST + "/forms/survey/response/" + surveyLink}</h3>
+                <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
               </div>
             </div>
             <div className="box six">
@@ -174,16 +197,12 @@ const Ending = ({ ending }) => {
                     <strong>결과</strong>를 확인하세요.
                   </h1>
                   <button
-                    onClick={() =>
-                      duplicateLink(
-                        `${HOST + "/forms/survey/result/" + resultLink}`
-                      )
-                    }>
+                    onClick={() => duplicateLink(`${HOST}/forms/survey/result/${resultLink}`)}>
                     <img src={duplicate} alt="duplicate button" />
                   </button>
                 </div>
 
-                <h3>{HOST + "/forms/survey/result/" + resultLink}</h3>
+                <h3>{`${HOST}/forms/survey/result/${resultLink}`}</h3>
               </div>
             </div>
           </div>

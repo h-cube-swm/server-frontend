@@ -4,7 +4,7 @@ import Title from "../Title/Title";
 import "./Error.scss";
 
 export default function Error({ match }) {
-  const type = match.params.type;
+  const { type } = match.params;
 
   let contents = null;
   switch (type) {

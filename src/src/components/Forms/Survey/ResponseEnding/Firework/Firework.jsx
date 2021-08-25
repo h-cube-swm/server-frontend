@@ -1,11 +1,11 @@
 import React from "react";
 import "./Firework.scss";
 
-import particle1 from "../.././../../../assets/icons/particles/particle-1.svg";
-import particle2 from "../.././../../../assets/icons/particles/particle-2.svg";
-import particle3 from "../.././../../../assets/icons/particles/particle-3.svg";
-import particle4 from "../.././../../../assets/icons/particles/particle-4.svg";
-import particle5 from "../.././../../../assets/icons/particles/particle-5.svg";
+import particle1 from "../../../../../assets/icons/particles/particle-1.svg";
+import particle2 from "../../../../../assets/icons/particles/particle-2.svg";
+import particle3 from "../../../../../assets/icons/particles/particle-3.svg";
+import particle4 from "../../../../../assets/icons/particles/particle-4.svg";
+import particle5 from "../../../../../assets/icons/particles/particle-5.svg";
 
 export default function Firework() {
   return (

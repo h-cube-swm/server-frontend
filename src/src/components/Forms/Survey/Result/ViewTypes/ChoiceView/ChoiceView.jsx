@@ -20,8 +20,8 @@ const option = {
 };
 
 export default function ChoiceView({ question, answers }) {
-  let labels = question.choices;
-  let values = new Array(labels.length).fill(0);
+  const labels = question.choices;
+  const values = new Array(labels.length).fill(0);
 
   answers.forEach((answer) => {
     Object.entries(answer).forEach(([key, value]) => {
@@ -29,7 +29,7 @@ export default function ChoiceView({ question, answers }) {
     });
   });
 
-  let colors = [];
+  const colors = [];
   for (let i = labels.length; i > 0; i--) {
     colors.push(`rgba(43,68,255,${i / labels.length})`);
   }

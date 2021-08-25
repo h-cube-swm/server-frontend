@@ -11,11 +11,11 @@ export default function Table({ columns, rows }) {
   sortedRows.sort((a, b) => {
     if (a[index] < b[index]) {
       return -order;
-    } else if (a[index] > b[index]) {
-      return order;
-    } else {
-      return 0;
     }
+    if (a[index] > b[index]) {
+      return order;
+    }
+    return 0;
   });
 
   const getSetCriterion = (nextIndex) => () => {
@@ -28,7 +28,10 @@ export default function Table({ columns, rows }) {
 
   const weight = new Array(columns.length).fill(1);
   // Weight assign comes here, if Required.
+
+  // eslint-disable-next-line
   const weightSum = weight.reduce((pre, cur) => pre + cur, 0);
+  // eslint-disable-next-line
   const weightStyles = weight.map((x) => ({ flexGrow: 1 }));
 
   return (
@@ -36,11 +39,7 @@ export default function Table({ columns, rows }) {
       <div className="thead">
         <div className="tr">
           {columns.map((column, i) => (
-            <div
-              className="th"
-              style={weightStyles[i]}
-              key={i}
-              onClick={getSetCriterion(i)}>
+            <div className="th" style={weightStyles[i]} key={i} onClick={getSetCriterion(i)}>
               {column}
             </div>
           ))}

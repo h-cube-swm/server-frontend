@@ -1,11 +1,11 @@
 import useTimeout from "../../hooks/useTimeout";
 import "./Hider.scss";
 
-function Hider({ hide, children, animation = true, appearDelay = 0 }) {
+function Hider({ hide, children, appearDelay = 0 }) {
   const isInit = useTimeout(appearDelay);
-  hide |= !isInit;
+  const shouldHide = hide || !isInit;
 
-  if (hide) return null;
+  if (shouldHide) return null;
 
   return children;
 }

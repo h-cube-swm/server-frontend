@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { CardStates, CardTypes } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
 // Hooks
 import { useQuestion } from "../../../../contexts/QuestionContext";
-import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
@@ -15,10 +14,7 @@ import Hider from "../../../Hider/Hider";
 import Default from "../QuestionTypes/Default/Default";
 import { MultipleChoices, SingleChoices } from "../QuestionTypes/Choice/Choice";
 import Preference from "../QuestionTypes/Preference/Preference";
-import {
-  LongSentence,
-  ShortSentence,
-} from "../QuestionTypes/Sentence/Sentence";
+import { LongSentence, ShortSentence } from "../QuestionTypes/Sentence/Sentence";
 
 // Scss
 import "./QuestionCommon.scss";

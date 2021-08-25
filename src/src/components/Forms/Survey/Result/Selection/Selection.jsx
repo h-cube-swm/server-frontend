@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Selection.scss";
 import IntegerField from "../../../../IntegerField/IntegerField";
+import { useMessage } from "../../../../../contexts/MessageContext";
 
 /**
  * This function generates random number in (0,1) from the given seed.
@@ -11,40 +12,46 @@ function getPseudoRandom(seed) {
   let randomNumber = Math.E;
   for (let i = 0; i < seed.length; i++) {
     randomNumber *= seed.charCodeAt(i);
-    randomNumber = randomNumber - Math.floor(randomNumber);
+    randomNumber -= Math.floor(randomNumber);
   }
   return randomNumber;
+}
+
+function isColumnCriteria(question) {
+  return (
+    question.type.indexOf("sentence") >= 0 &&
+    (question.title.indexOf("메일") >= 0 ||
+      question.title.indexOf("mail") >= 0 ||
+      question.title.indexOf("번호") >= 0 ||
+      question.title.indexOf("휴대폰") >= 0 ||
+      question.title.indexOf("이름") >= 0 ||
+      question.title.indexOf("나이") >= 0 ||
+      question.title.indexOf("취미") >= 0 ||
+      question.title.indexOf("별명") >= 0 ||
+      question.title.indexOf("학번") >= 0 ||
+      question.title.indexOf("사번") >= 0 ||
+      question.title.indexOf("닉네임") >= 0)
+  );
 }
 
 export default function Selection({ columns, rows }) {
   const [winnerType, setWinnerType] = useState("timestamp");
   const [winnerNumber, setWinnerNumber] = useState(0);
   const [criterion, setCriterion] = useState(null);
+  const { publish } = useMessage();
 
-  let criterionButtons = columns
+  useEffect(() => {
+    publish("😊 추첨 기준을 먼저 선택해주세요 🎉");
+  }, []);
+
+  const criteriaButtons = columns
     .map((question, index) => [question, index])
-    .filter(
-      ([question]) =>
-        question.type.indexOf("sentence") >= 0 &&
-        (question.title.indexOf("메일") >= 0 ||
-          question.title.indexOf("mail") >= 0 ||
-          question.title.indexOf("번호") >= 0 ||
-          question.title.indexOf("휴대폰") >= 0 ||
-          question.title.indexOf("이름") >= 0 ||
-          question.title.indexOf("나이") >= 0 ||
-          question.title.indexOf("취미") >= 0 ||
-          question.title.indexOf("별명") >= 0 ||
-          question.title.indexOf("학번") >= 0 ||
-          question.title.indexOf("사번") >= 0 ||
-          question.title.indexOf("닉네임") >= 0)
-    )
+    .filter(([question]) => isColumnCriteria(question))
     .map(([{ title }, index]) => {
       return (
         <button
           className={"btn " + (index === criterion ? "" : "disabled")}
-          onClick={() => {
-            criterion === index ? setCriterion(null) : setCriterion(index);
-          }}
+          onClick={() => setCriterion(criterion === index ? null : index)}
           key={index}>
           {title}
         </button>
@@ -52,8 +59,11 @@ export default function Selection({ columns, rows }) {
     });
 
   let filteredAnswers = [];
+  let maxWinnersNumber = 0;
   if (criterion) {
-    filteredAnswers = rows.map((x) => <p>{x[criterion]}</p>);
+    filteredAnswers = rows
+      .filter((x) => x[criterion].length !== 0)
+      .map((x, i) => <p key={i}>{x[criterion]}</p>);
     if (winnerType === "random") {
       let seed = JSON.stringify(rows);
       filteredAnswers.sort(() => {
@@ -62,6 +72,7 @@ export default function Selection({ columns, rows }) {
         return random - 0.5;
       });
     }
+    maxWinnersNumber = filteredAnswers.length;
     filteredAnswers = filteredAnswers.filter((_, i) => i < winnerNumber);
   }
 
@@ -73,29 +84,25 @@ export default function Selection({ columns, rows }) {
           <div className="type-button">
             <button
               onClick={() => setWinnerType("timestamp")}
-              className={
-                "btn rg " + (winnerType === "timestamp" ? "" : "disabled")
-              }>
+              className={"btn rg " + (winnerType === "timestamp" ? "" : "disabled")}>
               시간순 추첨
             </button>
             <button
               onClick={() => setWinnerType("random")}
-              className={
-                "btn rg " + (winnerType === "random" ? "" : "disabled")
-              }>
+              className={"btn rg " + (winnerType === "random" ? "" : "disabled")}>
               랜덤 추첨
             </button>
             <IntegerField
               placeholder="숫자 입력"
               number={winnerNumber}
-              setNumber={setWinnerNumber}
-              max={rows.length}
+              setNumber={criterion && setWinnerNumber}
+              max={maxWinnersNumber}
               onClick={(e) => e.target.select()}
               label="추첨수"
             />
           </div>
         </div>
-        {criterionButtons.length ? (
+        {criteriaButtons.length ? (
           <h1>어떤 질문을 기준으로 추첨할지 선택해 주세요.</h1>
         ) : (
           <h1 className="no-filter">
@@ -106,15 +113,11 @@ export default function Selection({ columns, rows }) {
             예) 이름, 이메일, 전화번호, 학번 등
           </h1>
         )}
-        <div className="criteria">{criterionButtons}</div>
+        <div className="criteria">{criteriaButtons}</div>
       </div>
 
       <div className="answers">
-        {filteredAnswers ? (
-          filteredAnswers
-        ) : (
-          <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>
-        )}
+        {filteredAnswers || <p>왼쪽 버튼을 누르면 여기에 결과가 추첨됩니다.</p>}
       </div>
     </div>
   );

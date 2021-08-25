@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const ROOT = "https://api.the-form.io";
+const ROOT =
+  process.env.NODE_ENV === "development"
+    ? "https://api.dev.the-form.io"
+    : "https://api.the-form.io";
 
 function useFetch(path) {
   const [data, setData] = useState([null, null]);
@@ -29,12 +32,10 @@ function useFetch(path) {
 }
 
 async function sendData(method, path, body) {
-  method = method.toLowerCase();
-
   try {
     const config = {
       url: ROOT + path,
-      method,
+      method: method.toLowerCase(),
     };
     if (body) config.data = body;
     const { data } = await axios(config);
@@ -44,16 +45,14 @@ async function sendData(method, path, body) {
   }
 }
 
-export const API = {
+export default {
   // Get
   useResponses: (resultId) => useFetch(`/surveys/${resultId}/responses`),
   useLink: () => useFetch("/link"),
   useSurvey: (surveyId) => useFetch(`/surveys/${surveyId}`),
 
-  putSurvey: (surveyId, survey) =>
-    sendData("PUT", `/surveys/${surveyId}`, survey),
-  putEmail: (surveyId, email) =>
-    sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
+  putSurvey: (surveyId, survey) => sendData("PUT", `/surveys/${surveyId}`, survey),
+  putEmail: (surveyId, email) => sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
   endSurvey: (surveyId) => sendData("PUT", `/surveys/${surveyId}/end`),
   postResponse: (surveyId, response) =>
     sendData("POST", `/surveys/${surveyId}/responses`, response),

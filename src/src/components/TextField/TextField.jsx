@@ -1,15 +1,7 @@
 import React, { useRef } from "react";
 import "./TextField.scss";
 
-function TextField({
-  text,
-  setText,
-  disabled,
-  size,
-  multiline,
-  placeholder,
-  ...props
-}) {
+function TextField({ text, setText, disabled, size, multiline, placeholder, ...props }) {
   const ref = useRef(null);
 
   // Build classname
@@ -21,7 +13,7 @@ function TextField({
   if (multiline) classes.push("multiline");
   const className = classes.join(" ");
 
-  const handleOnInput = () => {
+  const handleOnChange = () => {
     const cur = ref.current;
     if (disabled) return;
     if (!cur) return;
@@ -32,9 +24,8 @@ function TextField({
   if (!setText) {
     if (text) {
       return <div className={className}>{text}</div>;
-    } else {
-      return <div className={className}>{placeholder}</div>;
     }
+    return <div className={className}>{placeholder}</div>;
   }
 
   /**
@@ -52,8 +43,8 @@ function TextField({
       ref={ref}
       rows={1}
       {...props}
-      onInput={handleOnInput}
-      value={text ? text : ""}
+      onChange={handleOnChange}
+      value={text || ""}
       disabled={disabled || !setText}
       placeholder={placeholder}
     />

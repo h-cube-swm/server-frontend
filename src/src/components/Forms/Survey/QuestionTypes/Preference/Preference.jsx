@@ -6,14 +6,7 @@ import "./Preference.scss";
 import TextField from "../../../../TextField/TextField";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
 
-function PreferenceButton({
-  index,
-  placeholder,
-  description,
-  setDescription,
-  selected,
-  onClick,
-}) {
+function PreferenceButton({ index, placeholder, description, setDescription, selected, onClick }) {
   const classes = ["preference-box"];
 
   if (onClick) {
@@ -41,14 +34,7 @@ function PreferenceButton({
   );
 }
 
-function LastButton({
-  count,
-  onCountChange,
-  onBlur,
-  isError,
-  description,
-  setDescription,
-}) {
+function LastButton({ count, onCountChange, onBlur, isError, description, setDescription }) {
   return (
     <div className="prefence-btn" key="last">
       <input
@@ -64,12 +50,7 @@ function LastButton({
         }}
       />
       <div className="text-box">
-        <TextField
-          placeholder="설명 추가"
-          size="sm"
-          text={description}
-          setText={setDescription}
-        />
+        <TextField placeholder="설명 추가" size="sm" text={description} setText={setDescription} />
       </div>
     </div>
   );
@@ -102,6 +83,7 @@ export default function Preference() {
     const count = value + "";
     if (!/^[0-9]*$/.test(count)) return false;
     setMaxPref(+count);
+    return true;
   };
 
   const handleOnBlur = () => {
@@ -110,7 +92,7 @@ export default function Preference() {
 
   const getOnClick = (index) => {
     if (isEditting) return null;
-    else return () => setResponse(index);
+    return () => setResponse(index);
   };
 
   const preferences = [];
@@ -125,18 +107,13 @@ export default function Preference() {
       description={question.minDes}
       onClick={getOnClick(1)}
       selected={response}
-    />
+    />,
   );
 
   // Middle components
   for (let i = 2; i < trueCount; i++) {
     preferences.push(
-      <PreferenceButton
-        key={i}
-        index={i}
-        onClick={getOnClick(i)}
-        selected={response}
-      />
+      <PreferenceButton key={i} index={i} onClick={getOnClick(i)} selected={response} />,
     );
   }
 
@@ -151,7 +128,7 @@ export default function Preference() {
         isError={question.count !== trueCount}
         description={question.maxDes}
         setDescription={setMaxDes}
-      />
+      />,
     );
   } else {
     preferences.push(
@@ -161,7 +138,7 @@ export default function Preference() {
         description={question.maxDes}
         onClick={getOnClick(question.count)}
         selected={response}
-      />
+      />,
     );
   }
 

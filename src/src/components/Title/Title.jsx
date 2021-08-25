@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import React from "react";
+import { Helmet } from "react-helmet";
 
 export default function Title({ children }) {
-  useEffect(() => {
-    document.title = "더 폼 - " + children;
-    return () => {};
-  }, [children]);
-  return null;
+  return (
+    <Helmet>
+      <title>{children}</title>
+    </Helmet>
+  );
 }

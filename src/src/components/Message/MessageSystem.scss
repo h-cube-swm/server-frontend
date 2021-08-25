@@ -22,8 +22,11 @@
     display: flex;
     align-items: center;
     box-shadow: $shadow-default;
-    font-size: $fw-bold;
     color: #000;
+
+    .message-inner-box {
+      font-weight: $fw-bold;
+    }
 
     &.danger {
       background: #e22f1b;

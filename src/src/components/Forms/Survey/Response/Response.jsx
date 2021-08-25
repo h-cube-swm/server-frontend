@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 
+// Components
+import { Link, Redirect } from "react-router-dom";
+import Title from "../../../Title/Title";
+import { QuestionProvider } from "../../../../contexts/QuestionContext";
+import QuestionCommon from "../QuestionCommon/QuestionCommon";
+import Loading from "../../../Loading/Loading";
+
 import { CardStates } from "../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
-import { API } from "../../../../utils/apis";
+import API from "../../../../utils/apis";
 
 // HOCs
 import withSurvey from "../../../../hocs/withSurvey";
-
-// Components
-import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import { Link, Redirect } from "react-router-dom";
-import QuestionCommon from "../QuestionCommon/QuestionCommon";
-import Loading from "../../../Loading/Loading";
-import FadeBox from "../../../FadeBox/FadeBox";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 function checkEntered(response) {
   if (response === null) return false;
   if (typeof response === "undefined") return false;
-  if (typeof response === "object")
-    return Object.values(response).filter((x) => x).length > 0;
+  if (typeof response === "object") return Object.values(response).filter((x) => x).length > 0;
   if (typeof response === "string") return response.length > 0;
 
   return true;
@@ -33,6 +33,7 @@ function checkEntered(response) {
 function ResponseContainer({ survey }) {
   const [responses, setResponses] = useState({ index: 0 });
   const [redirect, setRedirect] = useState(null);
+
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
 
@@ -64,37 +65,32 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   const response = index > 0 && responses[question.id];
   const setIndex = setNestedState(setResponses, ["index"]);
   const getMove = (index) => () => setIndex(index);
+  const { isEmbed } = useGlobalState();
 
   const cover = (
     <div className="cover-box">
       <h1 className="title">{survey.title}</h1>
 
-      {survey.description && (
-        <div className="description">{survey.description}</div>
-      )}
+      {survey.description && <div className="description">{survey.description}</div>}
     </div>
   );
   const pages = [cover, ...questions];
 
-  let buttons = [];
+  const buttons = [];
 
-  const isAnswered =
-    index === 0 || !question.isRequired || checkEntered(response);
+  const isAnswered = index === 0 || !question.isRequired || checkEntered(response);
   if (index > 0) {
     buttons.push(
       <button key="previous" className="btn rg" onClick={getMove(index - 1)}>
         이전으로
-      </button>
+      </button>,
     );
   }
   if (index === 0) {
     buttons.push(
-      <button
-        key="start"
-        className="btn rg"
-        onClick={isAnswered ? getMove(index + 1) : () => {}}>
+      <button key="start" className="btn rg" onClick={isAnswered ? getMove(index + 1) : () => {}}>
         시작하기
-      </button>
+      </button>,
     );
   } else if (index < pages.length - 1) {
     buttons.push(
@@ -103,7 +99,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
         className={"btn rg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? getMove(index + 1) : () => {}}>
         다음으로
-      </button>
+      </button>,
     );
   }
   if (index === pages.length - 1) {
@@ -113,13 +109,14 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
         className={"btn rg " + (isAnswered ? "" : "disabled")}
         onClick={isAnswered ? onSubmit : () => {}}>
         완료
-      </button>
+      </button>,
     );
   }
 
   return (
     <div className="response">
-      <div className="survey-header">
+      <Title>더 폼 - {survey.title}</Title>
+      <div className={isEmbed ? "survey-header embed" : "survey-header"}>
         <span className="logo">
           <Link to="/" target="_blank">
             <span> Powered by</span>

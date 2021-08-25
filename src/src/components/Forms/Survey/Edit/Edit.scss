@@ -39,11 +39,7 @@ $background-color: #fff;
 
       &.bottom {
         bottom: 0;
-        background: linear-gradient(
-          to top,
-          rgba($background-color, 1) 70%,
-          rgba(255, 255, 255, 0)
-        );
+        background: linear-gradient(to top, rgba($background-color, 1) 70%, rgba(255, 255, 255, 0));
       }
     }
 

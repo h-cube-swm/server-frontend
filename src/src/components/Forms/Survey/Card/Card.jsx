@@ -3,14 +3,14 @@ import { CardStates, CardStyle } from "../constants";
 import { useQuestion } from "../../../../contexts/QuestionContext";
 
 /* Assets */
-import "../Card/Card.scss";
+import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
 import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
 
 export default function Card({ onDelete, onGrab, children }) {
   const { state } = useQuestion();
 
-  let classes = ["survey-card"];
+  const classes = ["survey-card"];
 
   switch (state) {
     case CardStates.EDITTING:
@@ -57,9 +57,7 @@ export default function Card({ onDelete, onGrab, children }) {
       }}>
       <div className="content-box">{children}</div>
       <div className="button-box">
-        <button
-          className={"delete " + (onDelete ? "" : "hidden")}
-          onClick={handleOnDelete}>
+        <button className={"delete " + (onDelete ? "" : "hidden")} onClick={handleOnDelete}>
           <img src={imgDeleteButton} alt="Delete button"></img>
         </button>
       </div>
