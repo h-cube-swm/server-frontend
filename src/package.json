@@ -22,7 +22,10 @@
     "sass-loader": "^12.1.0",
     "test-react-chartjs-2": "^3.0.4",
     "web-vitals": "^1.0.1",
-    "xlsx": "^0.17.0"
+    "xlsx": "^0.17.0",
+    "eslint-config-airbnb-base": "14.2.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-config-prettier": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,10 +53,7 @@
   },
   "devDependencies": {
     "eslint": "^7.2.0",
-    "eslint-config-airbnb-base": "14.2.1",
-    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "prettier": "^2.3.2"
   }
