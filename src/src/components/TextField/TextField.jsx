@@ -13,7 +13,7 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
   if (multiline) classes.push("multiline");
   const className = classes.join(" ");
 
-  const handleOnInput = () => {
+  const handleOnChange = () => {
     const cur = ref.current;
     if (disabled) return;
     if (!cur) return;
@@ -43,7 +43,7 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
       ref={ref}
       rows={1}
       {...props}
-      onInput={handleOnInput}
+      onChange={handleOnChange}
       value={text || ""}
       disabled={disabled || !setText}
       placeholder={placeholder}
