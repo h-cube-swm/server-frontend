@@ -70,7 +70,6 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   const cover = (
     <div className="cover-box">
       <h1 className="title">{survey.title}</h1>
-
       {survey.description && <div className="description">{survey.description}</div>}
     </div>
   );
@@ -85,6 +84,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
         이전으로
       </button>,
     );
+    buttons.push(<p className="indicator">{`${index} / ${pages.length - 1}`}</p>);
   }
   if (index === 0) {
     buttons.push(

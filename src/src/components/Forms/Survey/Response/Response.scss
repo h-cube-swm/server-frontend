@@ -126,9 +126,10 @@
 
     .button-box-inner {
       max-width: 800px;
-      width: 60%;
+      width: 80%;
       display: flex;
       justify-content: space-around;
+      align-items: center;
       margin-bottom: 4rem;
     }
   }
