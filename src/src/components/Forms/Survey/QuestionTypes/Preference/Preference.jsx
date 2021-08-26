@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardStates } from "../../constants";
 import useDefault from "../../../../../hooks/useDefault";
 import setNestedState from "../../../../../utils/setNestedState";
@@ -6,14 +6,22 @@ import "./Preference.scss";
 import TextField from "../../../../TextField/TextField";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
 
-function PreferenceButton({ index, placeholder, description, setDescription, selected, onClick }) {
+function PreferenceButton({
+  index,
+  placeholder,
+  description,
+  setDescription,
+  selected,
+  onClick,
+  prevIndex,
+}) {
   const classes = ["preference-box"];
 
   if (onClick) {
     classes.push("cursor");
   }
 
-  if (index === selected) {
+  if (index === selected && prevIndex !== 0) {
     classes.push("selected");
   }
 
@@ -62,6 +70,7 @@ export default function Preference() {
   const setMaxPref = setNestedState(setQuestion, ["count"]); // 개수
   const setMinDes = setNestedState(setQuestion, ["minDes"]); // 왼쪽 설명
   const setMaxDes = setNestedState(setQuestion, ["maxDes"]); // 오른쪽 설명
+  const [prevIndex, setPrevIndex] = useState(0);
 
   const ia = useDefault(question, setQuestion, {
     answer: "",
@@ -91,8 +100,17 @@ export default function Preference() {
   };
 
   const getOnClick = (index) => {
+    console.log(index, prevIndex);
     if (isEditting) return null;
-    return () => setResponse(index);
+    return () => {
+      if (index !== prevIndex) {
+        setPrevIndex(index);
+        setResponse(index);
+      } else {
+        setPrevIndex(0);
+        setResponse(null);
+      }
+    };
   };
 
   const preferences = [];
@@ -107,13 +125,22 @@ export default function Preference() {
       description={question.minDes}
       onClick={getOnClick(1)}
       selected={response}
+      setPrevIndex={setPrevIndex}
+      prevIndex={prevIndex}
     />,
   );
 
   // Middle components
   for (let i = 2; i < trueCount; i++) {
     preferences.push(
-      <PreferenceButton key={i} index={i} onClick={getOnClick(i)} selected={response} />,
+      <PreferenceButton
+        key={i}
+        index={i}
+        onClick={getOnClick(i)}
+        selected={response}
+        setPrevIndex={setPrevIndex}
+        prevIndex={prevIndex}
+      />,
     );
   }
 
@@ -138,6 +165,7 @@ export default function Preference() {
         description={question.maxDes}
         onClick={getOnClick(question.count)}
         selected={response}
+        prevIndex={prevIndex}
       />,
     );
   }
