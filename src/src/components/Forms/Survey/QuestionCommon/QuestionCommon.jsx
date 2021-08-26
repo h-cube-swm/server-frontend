@@ -1,5 +1,5 @@
 import React from "react";
-import { CardStates, CardTypes } from "../constants";
+import { CardStates, CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
 // Hooks

@@ -1,5 +1,5 @@
 import React, { Redirect } from "react-router-dom";
-import { CardTypes } from "../components/Forms/Survey/constants";
+import { CardTypes } from "../constants";
 import getQuestion from "../components/Forms/Survey/getQuestion";
 import Loading from "../components/Loading/Loading";
 import API from "../utils/apis";

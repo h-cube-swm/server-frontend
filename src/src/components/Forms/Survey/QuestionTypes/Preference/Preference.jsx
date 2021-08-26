@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardStates } from "../../constants";
+import { CardStates } from "../../../../../constants";
 import useDefault from "../../../../../hooks/useDefault";
 import setNestedState from "../../../../../utils/setNestedState";
 import "./Preference.scss";

@@ -24,7 +24,7 @@ import useOnly from "../../../../hooks/useOnly";
 
 /* Others */
 import orderedMap from "../../../../utils/orderedMap";
-import { CardStates, CardStyle } from "../constants";
+import { CardStates, CardStyle } from "../../../../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
 import getQuestion from "../getQuestion";

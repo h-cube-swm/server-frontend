@@ -4,7 +4,7 @@ import { QuestionProvider } from "../../contexts/QuestionContext";
 import getQuestion from "../Forms/Survey/getQuestion";
 import QuestionCommon from "../Forms/Survey/QuestionCommon/QuestionCommon";
 import ChoiceView from "../Forms/Survey/Result/ViewTypes/ChoiceView/ChoiceView";
-import { CardStates, CardTypes } from "../Forms/Survey/constants";
+import { CardStates, CardTypes } from "../../constants";
 
 /* Assets */
 import "./Service.scss";

@@ -7,7 +7,7 @@ import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
 
-import { CardStates } from "../constants";
+import { CardStates } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
 import API from "../../../../utils/apis";

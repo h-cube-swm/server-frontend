@@ -8,7 +8,7 @@ import SentenceView from "./ViewTypes/SentenceView/SentenceView";
 import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
 import TextField from "../../../TextField/TextField";
 import Selection from "./Selection/Selection";
-import { CardTypes } from "../constants";
+import { CardTypes } from "../../../../constants";
 
 import Table from "../../../Table/Table";
 

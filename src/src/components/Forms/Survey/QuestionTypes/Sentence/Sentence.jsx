@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sentence.scss";
-import { CardStates } from "../../constants";
+import { CardStates } from "../../../../../constants";
 import setNestedState from "../../../../../utils/setNestedState";
 
 // Hooks
