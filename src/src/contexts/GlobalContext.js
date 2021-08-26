@@ -1,20 +1,43 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
+function getParams() {
+  const params = new URLSearchParams(window.location.search);
+  return Object.fromEntries(params.entries());
+}
+
+function getCookies() {
+  const cookies = document.cookie.split(";").map((x) => x.trim().split("="));
+  return Object.fromEntries(cookies);
+}
+
+function logout() {
+  localStorage.token = "";
+}
+
 const GlobalContext = createContext();
 
 export function GlobalStateProvider({ children }) {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const params = Object.fromEntries(urlSearchParams.entries());
+  const params = getParams();
+  const cookies = getCookies();
 
-  const [embedState, setEmbedState] = useState(false);
+  const [embedState, setEmbedState] = useState(cookies.token);
   const isEmbed = (params.embed && true) || embedState;
 
-  // If isEmbed is set once, then it will be set forever.
-  useEffect(() => {
-    setEmbedState(isEmbed);
-  }, [isEmbed]);
+  // It token is in cookie, store it into local storage and remove.
+  if (cookies.token) {
+    localStorage.token = cookies.token;
+    document.cookie = "token=; Max-Age=0; domain=the-form.io";
+  }
 
-  return <GlobalContext.Provider value={{ isEmbed }}>{children}</GlobalContext.Provider>;
+  // Get token from local storage.
+  const { token } = localStorage;
+
+  // If isEmbed is set once, then it will be set forever.
+  useEffect(() => setEmbedState(isEmbed), [isEmbed]);
+
+  return (
+    <GlobalContext.Provider value={{ isEmbed, token, logout }}>{children}</GlobalContext.Provider>
+  );
 }
 
 export function useGlobalState() {

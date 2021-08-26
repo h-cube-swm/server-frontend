@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { DOMAIN } from "../constants";
 
-const ROOT =
-  process.env.NODE_ENV === "development"
-    ? "https://api.dev.the-form.io"
-    : "https://api.the-form.io";
+const ROOT = `https://api.${DOMAIN}`;
 
 function useFetch(path) {
   const [data, setData] = useState([null, null]);
