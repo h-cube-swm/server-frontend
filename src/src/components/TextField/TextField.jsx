@@ -23,9 +23,17 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
 
   if (!setText) {
     if (text) {
-      return <div className={className}>{text}</div>;
+      return (
+        <div tabIndex="-1" className={className}>
+          {text}
+        </div>
+      );
     }
-    return <div className={className}>{placeholder}</div>;
+    return (
+      <div tabIndex="-1" className={className}>
+        {placeholder}
+      </div>
+    );
   }
 
   /**

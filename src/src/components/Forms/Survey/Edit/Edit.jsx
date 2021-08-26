@@ -47,7 +47,9 @@ function Preview({ survey }) {
       survey={survey}
       responses={responses}
       setResponses={setResponses}
-      onSubmit={resetResponse}></Response>
+      onSubmit={resetResponse}
+      tabIndex="-1"
+    />
   );
 }
 
@@ -195,7 +197,10 @@ function Edit({ survey: init, updateSurvey }) {
 
         {/* Ghost that appears when card moves */}
         <div ref={item}>
-          <QuestionProvider state={CardStates.GHOST} question={questions[selectedIndex]}>
+          <QuestionProvider
+            state={CardStates.GHOST}
+            question={questions[selectedIndex]}
+            tabIndex="-1">
             <Card slowAppear={false}>
               <QuestionCommon />
             </Card>
