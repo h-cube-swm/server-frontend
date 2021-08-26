@@ -41,6 +41,7 @@ export default function QuestionCommon() {
     <div className="question-common">
       <div className="question-common-box">
         <div className="question-title-box">
+          {isEditting && question.isRequired && <p className="requirement-tag">필수</p>}
           <TextField
             placeholder="더 폼 나는 질문"
             text={question.title}

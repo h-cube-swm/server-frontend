@@ -13,8 +13,22 @@
     margin-bottom: 1rem;
 
     .question-title-box {
+      display: flex;
+      align-items: flex-start;
       flex-grow: 1;
       margin-right: 1rem;
+      .requirement-tag {
+        display: flex;
+        font-size: $fs-sm;
+        font-weight: $fw-bold;
+        color: #fff;
+        background-color: #707070;
+        border-radius: 10px;
+        padding: 0.4rem 0.8rem;
+        margin-right: 1rem;
+        width: 3.2rem;
+        height: 1.6rem;
+      }
     }
 
     .required-toggle-box {
