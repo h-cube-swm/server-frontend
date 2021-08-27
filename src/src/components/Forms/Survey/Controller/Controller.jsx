@@ -1,5 +1,5 @@
 import React from "react";
-import { CardTypes } from "../constants";
+import { CardTypes } from "../../../../constants";
 
 import "./Controller.scss";
 import singleChoice from "../../../../assets/icons/single-choice.svg";

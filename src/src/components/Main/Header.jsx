@@ -1,12 +1,36 @@
 /* React elements */
 import React from "react";
+import { useLocation } from "react-router-dom";
+import { DOMAIN, IS_DEBUG } from "../../constants";
+import { useGlobalState } from "../../contexts/GlobalContext";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Header.scss";
 
 function Header() {
+  const { token, logout } = useGlobalState();
+  const location = `https://${DOMAIN}${useLocation().pathname}`;
+  const href = `https://auth.the-form.io?redirect=${location}`;
+
+  function handleLogout() {
+    logout();
+  }
+
   return (
     <div className="header">
       <FloatingLogo />
+      {IS_DEBUG && (
+        <div className="banner">
+          {token ? (
+            <a className="login" href="./" onClick={handleLogout}>
+              로그아웃
+            </a>
+          ) : (
+            <a className="login" href={href}>
+              로그인
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }

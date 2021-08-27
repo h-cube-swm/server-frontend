@@ -4,4 +4,10 @@
   position: relative;
   display: block;
   z-index: 2;
+
+  .banner {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+  }
 }

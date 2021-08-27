@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sentence.scss";
-import { CardStates } from "../../constants";
+import { CardStates } from "../../../../../constants";
 import setNestedState from "../../../../../utils/setNestedState";
 
 // Hooks
@@ -12,7 +12,7 @@ import TextField from "../../../../TextField/TextField";
 import IntegerField from "../../../../IntegerField/IntegerField";
 
 function Sentence({ isLong }) {
-  const { state, question, setQuestion, response, setResponse } = useQuestion();
+  const { state, question, setQuestion, response, setResponse, tabIndex } = useQuestion();
 
   const ia = useDefault(question, setQuestion, {
     answer: "",
@@ -63,6 +63,7 @@ function Sentence({ isLong }) {
         text={typeof response !== "string" ? "" : response}
         disabled={isEditting}
         multiline={isLong}
+        tabIndex={tabIndex}
       />
       <div className="extra">{extra}</div>
     </div>

@@ -7,7 +7,7 @@ import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
 
-import { CardStates } from "../constants";
+import { CardStates } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
 import API from "../../../../utils/apis";
@@ -58,7 +58,7 @@ function ResponseContainer({ survey }) {
  * @param {*} responseInfo
  * @returns
  */
-export function Response({ survey, responses, setResponses, onSubmit }) {
+export function Response({ survey, responses, setResponses, onSubmit, tabIndex }) {
   const { questions } = survey;
   const { index } = responses;
   const question = index > 0 && questions[index - 1];
@@ -70,7 +70,6 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   const cover = (
     <div className="cover-box">
       <h1 className="title">{survey.title}</h1>
-
       {survey.description && <div className="description">{survey.description}</div>}
     </div>
   );
@@ -81,14 +80,19 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
   const isAnswered = index === 0 || !question.isRequired || checkEntered(response);
   if (index > 0) {
     buttons.push(
-      <button key="previous" className="btn rg" onClick={getMove(index - 1)}>
+      <button key="previous" className="btn rg" onClick={getMove(index - 1)} tabIndex={tabIndex}>
         이전으로
       </button>,
     );
+    buttons.push(<p className="indicator">{`${index} / ${pages.length - 1}`}</p>);
   }
   if (index === 0) {
     buttons.push(
-      <button key="start" className="btn rg" onClick={isAnswered ? getMove(index + 1) : () => {}}>
+      <button
+        key="start"
+        className="btn rg"
+        onClick={isAnswered ? getMove(index + 1) : () => {}}
+        tabIndex={tabIndex}>
         시작하기
       </button>,
     );
@@ -97,7 +101,8 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
       <button
         key="next"
         className={"btn rg " + (isAnswered ? "" : "disabled")}
-        onClick={isAnswered ? getMove(index + 1) : () => {}}>
+        onClick={isAnswered ? getMove(index + 1) : () => {}}
+        tabIndex={tabIndex}>
         다음으로
       </button>,
     );
@@ -107,7 +112,8 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
       <button
         key="finished"
         className={"btn rg " + (isAnswered ? "" : "disabled")}
-        onClick={isAnswered ? onSubmit : () => {}}>
+        onClick={isAnswered ? onSubmit : () => {}}
+        tabIndex={tabIndex}>
         완료
       </button>,
     );
@@ -118,7 +124,7 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
       <Title>더 폼 - {survey.title}</Title>
       <div className={isEmbed ? "survey-header embed" : "survey-header"}>
         <span className="logo">
-          <Link to="/" target="_blank">
+          <Link to="/" target="_blank" tabIndex={tabIndex}>
             <span> Powered by</span>
             <em> the Form</em>
           </Link>
@@ -149,7 +155,8 @@ export function Response({ survey, responses, setResponses, onSubmit }) {
               question={page}
               key={id}
               response={responses[id]}
-              setResponse={setNestedState(setResponses, [id])}>
+              setResponse={setNestedState(setResponses, [id])}
+              tabIndex={i === index ? "1" : "-1"}>
               <div className={className}>
                 <div className="question-box-inner">
                   <QuestionCommon />

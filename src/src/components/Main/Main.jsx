@@ -10,7 +10,7 @@ import Title from "../Title/Title";
 const Main = () => {
   return (
     <>
-      <Title>모든 폼을 대신하는 폼나는 설문조사</Title>
+      <Title>더 폼 - 모든 폼을 대신하는 폼나는 설문조사</Title>
       <div className="main-page">
         <Header />
         <Intro />

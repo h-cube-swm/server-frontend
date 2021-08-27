@@ -33,16 +33,20 @@ button {
 
 a {
   text-decoration: none;
+  -webkit-text-decoration: none;
   font-weight: 700;
 
   :visited {
     text-decoration: none;
+    -webkit-text-decoration: none;
   }
   :link {
     text-decoration: none;
+    -webkit-text-decoration: none;
   }
   :active {
     text-decoration: none;
+    -webkit-text-decoration: none;
   }
 }
 

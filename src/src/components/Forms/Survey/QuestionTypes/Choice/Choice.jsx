@@ -4,7 +4,7 @@ import setNestedState from "../../../../../utils/setNestedState";
 import Hider from "../../../../Hider/Hider";
 import TextField from "../../../../TextField/TextField";
 import CheckField from "../../../../CheckField/CheckField";
-import { CardStates } from "../../constants";
+import { CardStates } from "../../../../../constants";
 
 import delBtn from "../../../../../assets/icons/del-btn.svg";
 import addBtn from "../../../../../assets/icons/add-btn.svg";

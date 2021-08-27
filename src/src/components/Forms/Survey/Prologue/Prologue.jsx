@@ -24,6 +24,7 @@ export default function Prologue({ survey, setSurvey, children }) {
         <div className="info">
           <div className="title-box">
             <TextField
+              tabIndex="1"
               text={survey.title}
               setText={setNestedState(setSurvey, ["title"])}
               placeholder="더 폼 나는 제목"
@@ -33,6 +34,7 @@ export default function Prologue({ survey, setSurvey, children }) {
           </div>
           <div className="description-box">
             <TextField
+              tabIndex="2"
               text={survey.description}
               setText={setNestedState(setSurvey, ["description"])}
               placeholder="더 폼 나는 설명"

@@ -1,4 +1,4 @@
-import { CardTypes } from "./constants";
+import { CardTypes } from "../../../constants";
 
 export default function getQuestion(counter) {
   return [

@@ -35,3 +35,7 @@ export const CardStyle = {
   FRAME_HEIGHT: SURVEY_HEIGHT + SURVEY_DISTANCE,
   FRAME_WIDTH: SURVEY_WIDTH + SURVEY_DISTANCE,
 };
+
+export const IS_DEBUG = process.env.NODE_ENV === "development";
+export const IS_PRODUCTION = !IS_DEBUG;
+export const DOMAIN = IS_DEBUG ? "dev.the-form.io" : "the-form.io";
