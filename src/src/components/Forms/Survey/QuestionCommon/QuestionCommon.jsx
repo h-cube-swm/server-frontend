@@ -38,10 +38,14 @@ export default function QuestionCommon() {
   const isEditting = state !== CardStates.EDITTING;
 
   return (
-    <div className="question-common">
+    <div className={isEditting ? "question-common edit" : "question-common"}>
       <div className="question-common-box">
         <div className="question-title-box">
-          {isEditting && question.isRequired && <p className="requirement-tag">필수</p>}
+          {isEditting && question.isRequired && (
+            <span className="requirement-tag">
+              <p>필수</p>
+            </span>
+          )}
           <TextField
             placeholder="더 폼 나는 질문"
             text={question.title}
