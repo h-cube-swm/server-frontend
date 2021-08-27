@@ -83,6 +83,12 @@
       align-items: center;
       margin: 3rem auto;
       margin-bottom: 10rem;
+      .hello {
+        margin-bottom: 5rem;
+        strong {
+          color: #2b44ff;
+        }
+      }
       h1 {
         font-size: $fs-lg;
         font-weight: $fw-bold;
@@ -97,8 +103,7 @@
         }
       }
       img {
-        width: 50%;
-        font-family: "Noto Sans KR";
+        height: 100%;
       }
       .description {
         text-align: left;
@@ -235,6 +240,62 @@
       h1 {
         font-size: $fs-rg;
         font-weight: 500;
+      }
+    }
+
+    .user-set {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      width: 60%;
+      margin-top: 8rem;
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 2rem;
+        width: 12rem;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+        img {
+          margin-bottom: 1rem;
+        }
+        h1 {
+          font-weight: $fw-bold;
+          margin-bottom: 1rem;
+        }
+        &.one {
+          grid-row: 1;
+          grid-column: 1;
+        }
+        &.two {
+          grid-row: 1;
+          grid-column: 2;
+        }
+        &.three {
+          grid-row: 2;
+          grid-column: 1;
+        }
+        &.four {
+          grid-row: 2;
+          grid-column: 2;
+        }
+        &.five {
+          grid-row: 3;
+          grid-column: 1;
+        }
+        &.six {
+          grid-row: 3;
+          grid-column: 2;
+        }
+      }
+    }
+
+    .key-function {
+      width: 70%;
+      img {
+        width: 100%;
       }
     }
 

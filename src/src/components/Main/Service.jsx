@@ -68,10 +68,12 @@ function Service() {
       </div>
       <div className="key-function">
         <div className="page zero">
-          <h1>
+          <h1 className="hello">
             안녕하세요.
-            <br />더 폼 나는 설문조사
-            <br />더 폼 입니다.
+            <br />
+            <strong>더 폼</strong> 나는 설문조사
+            <br />
+            <strong>더 폼</strong>입니다.
           </h1>
           <img src={editingPage} alt="editing page" />
         </div>
@@ -118,6 +120,9 @@ function Service() {
           </div>
           <img src={sharingPage} alt="sharing page" />
         </div>
+      </div>
+      <div className="phrase">
+        <h1>아래에서 간단히 체험해보세요.</h1>
       </div>
       <div className="section">
         <div className="text two">
