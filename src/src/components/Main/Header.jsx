@@ -1,7 +1,7 @@
 /* React elements */
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { DOMAIN } from "../../constants";
+import { DOMAIN, IS_DEBUG } from "../../constants";
 import { useGlobalState } from "../../contexts/GlobalContext";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Header.scss";
@@ -18,14 +18,18 @@ function Header() {
   return (
     <div className="header">
       <FloatingLogo />
-      {token ? (
-        <a className="login" href="./" onClick={handleLogout}>
-          Logout
-        </a>
-      ) : (
-        <a className="login" href={href}>
-          Login
-        </a>
+      {IS_DEBUG && (
+        <div className="banner">
+          {token ? (
+            <a className="login" href="./" onClick={handleLogout}>
+              로그아웃
+            </a>
+          ) : (
+            <a className="login" href={href}>
+              로그인
+            </a>
+          )}
+        </div>
       )}
     </div>
   );
