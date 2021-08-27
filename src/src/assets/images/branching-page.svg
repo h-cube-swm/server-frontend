@@ -1,0 +1,512 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1078" viewBox="0 0 1920 1078">
+  <defs>
+    <filter id="선_55" x="-4.5" y="55" width="1938" height="19" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.373"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_136" x="61" y="234" width="296" height="203" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_137" x="444" y="234" width="296" height="203" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_138" x="61" y="457" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_139" x="61" y="556" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-5"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_143" x="444" y="457" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-6"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_144" x="444" y="556" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-7"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-7"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_145" x="444" y="655" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-8"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-8"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_146" x="444" y="754" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-9"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-9"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_148" x="827" y="234" width="296" height="203" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-10"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-10"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_149" x="1210" y="234" width="296" height="203" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-11"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-11"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_150" x="827" y="457" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-12"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-12"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_151" x="827" y="556" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-13"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-13"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_152" x="827" y="655" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-14"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-14"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_153" x="827" y="754" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-15"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-15"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_154" x="827" y="857" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-16"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-16"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_160" x="1593" y="234" width="296" height="203" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-17"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-17"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_162" x="1593" y="457" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-18"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-18"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_163" x="1593" y="556" width="296" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-19"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-19"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_42" x="708" y="676" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-20"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-20"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_43" x="710" y="775" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-21"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-21"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_45" x="1091" y="478" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-22"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-22"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_46" x="1091" y="577" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-23"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-23"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_47" x="1091" y="676" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-24"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-24"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_48" x="1093" y="775" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-25"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-25"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_49" x="1093" y="878" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-26"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-26"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_50" x="1857" y="478" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-27"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-27"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_51" x="1857" y="577" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-28"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-28"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_54" x="1582" y="317" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-29"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-29"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_56" x="47" y="317" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-30"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-30"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_57" x="433" y="317" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-31"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-31"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_58" x="816" y="317" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-32"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-32"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_55" x="1197" y="317" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-33"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-33"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_59" x="1251" y="460" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-34"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-34"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="사각형_135" data-name="사각형 135" width="69" height="39" rx="19.5" transform="translate(0 0)" fill="#f4f4f4" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <filter id="타원_35" x="324" y="478" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-35"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-35"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_40" x="708" y="478" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-36"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-36"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_41" x="708" y="577" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-37"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-37"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_166" x="722" y="966" width="506" height="79" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-38"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-38"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_36" x="324" y="577" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-39"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-39"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="타원_60" x="954" y="956" width="38" height="38" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-40"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-40"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-웹_1920_23">
+      <rect width="1920" height="1078"/>
+    </clipPath>
+  </defs>
+  <g id="웹_1920_23" data-name="웹 1920 – 23" clip-path="url(#clip-웹_1920_23)">
+    <g id="사각형_165" data-name="사각형 165" transform="translate(1)" fill="#f0f0f0" stroke="#707070" stroke-width="1">
+      <rect width="1919" height="1078" rx="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1918" height="1077" rx="14.5" fill="none"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#선_55)">
+      <line id="선_55-2" data-name="선 55" x2="1920" transform="translate(1.5 61.5)" fill="none" stroke="rgba(112,112,112,0.39)" stroke-width="1"/>
+    </g>
+    <circle id="타원_32" data-name="타원 32" cx="12" cy="12" r="12" transform="translate(43 18)" fill="#ed6b5f"/>
+    <circle id="타원_33" data-name="타원 33" cx="12" cy="12" r="12" transform="translate(87 18)" fill="#f4bf4f"/>
+    <circle id="타원_34" data-name="타원 34" cx="12" cy="12" r="12" transform="translate(131 18)" fill="#61c554"/>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_136)">
+      <g id="사각형_136-2" data-name="사각형 136" transform="translate(67 240)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="185" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="184" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_137)">
+      <g id="사각형_137-2" data-name="사각형 137" transform="translate(450 240)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="185" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="184" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_138)">
+      <g id="사각형_138-2" data-name="사각형 138" transform="translate(67 463)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_139)">
+      <g id="사각형_139-2" data-name="사각형 139" transform="translate(67 562)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_143)">
+      <g id="사각형_143-2" data-name="사각형 143" transform="translate(450 463)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_144)">
+      <g id="사각형_144-2" data-name="사각형 144" transform="translate(450 562)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_145)">
+      <g id="사각형_145-2" data-name="사각형 145" transform="translate(450 661)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_146)">
+      <g id="사각형_146-2" data-name="사각형 146" transform="translate(450 760)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_148)">
+      <g id="사각형_148-2" data-name="사각형 148" transform="translate(833 240)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="185" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="184" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_149)">
+      <g id="사각형_149-2" data-name="사각형 149" transform="translate(1216 240)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="185" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="184" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_150)">
+      <g id="사각형_150-2" data-name="사각형 150" transform="translate(833 463)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_151)">
+      <g id="사각형_151-2" data-name="사각형 151" transform="translate(833 562)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_152)">
+      <g id="사각형_152-2" data-name="사각형 152" transform="translate(833 661)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_153)">
+      <g id="사각형_153-2" data-name="사각형 153" transform="translate(833 760)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_154)">
+      <g id="사각형_154-2" data-name="사각형 154" transform="translate(833 863)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_160)">
+      <g id="사각형_160-2" data-name="사각형 160" transform="translate(1599 240)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="185" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="184" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_162)">
+      <g id="사각형_162-2" data-name="사각형 162" transform="translate(1599 463)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_163)">
+      <g id="사각형_163-2" data-name="사각형 163" transform="translate(1599 562)" fill="#fff" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="278" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="277" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_42)">
+      <circle id="타원_42-2" data-name="타원 42" cx="10" cy="10" r="10" transform="translate(717 682)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_43)">
+      <circle id="타원_43-2" data-name="타원 43" cx="10" cy="10" r="10" transform="translate(719 781)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_45)">
+      <circle id="타원_45-2" data-name="타원 45" cx="10" cy="10" r="10" transform="translate(1100 484)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_46)">
+      <circle id="타원_46-2" data-name="타원 46" cx="10" cy="10" r="10" transform="translate(1100 583)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_47)">
+      <circle id="타원_47-2" data-name="타원 47" cx="10" cy="10" r="10" transform="translate(1100 682)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_48)">
+      <circle id="타원_48-2" data-name="타원 48" cx="10" cy="10" r="10" transform="translate(1102 781)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_49)">
+      <circle id="타원_49-2" data-name="타원 49" cx="10" cy="10" r="10" transform="translate(1102 884)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_50)">
+      <circle id="타원_50-2" data-name="타원 50" cx="10" cy="10" r="10" transform="translate(1866 484)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_51)">
+      <circle id="타원_51-2" data-name="타원 51" cx="10" cy="10" r="10" transform="translate(1866 583)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_54)">
+      <circle id="타원_54-2" data-name="타원 54" cx="10" cy="10" r="10" transform="translate(1591 323)" fill="#bcbcbc"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_56)">
+      <circle id="타원_56-2" data-name="타원 56" cx="10" cy="10" r="10" transform="translate(56 323)" fill="#bcbcbc"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_57)">
+      <circle id="타원_57-2" data-name="타원 57" cx="10" cy="10" r="10" transform="translate(442 323)" fill="#bcbcbc"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_58)">
+      <circle id="타원_58-2" data-name="타원 58" cx="10" cy="10" r="10" transform="translate(825 323)" fill="#bcbcbc"/>
+    </g>
+    <path id="패스_62" data-name="패스 62" d="M6953.365-6209.352s163.061,11.523,223.672-77.1,265.755-85.216,265.755-85.216" transform="translate(-6226 6705)" fill="none" stroke="#707070" stroke-width="4"/>
+    <path id="패스_63" data-name="패스 63" d="M6951.508-6211.865s135.69,9.627,243.57-58.892,298.874-57.123,298.874-57.123" transform="translate(-6224 6804)" fill="none" stroke="#707070" stroke-width="4"/>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_55)">
+      <circle id="타원_55-2" data-name="타원 55" cx="10" cy="10" r="10" transform="translate(1206 323)" fill="#bcbcbc"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_59)">
+      <circle id="타원_59-2" data-name="타원 59" cx="10" cy="10" r="10" transform="translate(1260 466)" fill="#bcbcbc"/>
+    </g>
+    <g id="마스크_그룹_1" data-name="마스크 그룹 1" transform="translate(1246 472)" clip-path="url(#clip-path)">
+      <g id="cursor" transform="translate(22.071 0)">
+        <path id="패스_64" data-name="패스 64" d="M485.692,324.161v-33.93l24.6,24.6h-14.42l-.848.212Z" transform="translate(-485.692 -290.231)" fill="#fff"/>
+        <path id="패스_65" data-name="패스 65" d="M550.678,645.462l-7.634,3.181L533.077,625.1l7.846-3.181Z" transform="translate(-531.38 -610.048)" fill="#fff"/>
+        <rect id="사각형_164" data-name="사각형 164" width="4.241" height="16.966" transform="translate(6.002 19.918) rotate(-22.773)"/>
+        <path id="패스_66" data-name="패스 66" d="M544.923,432.385v23.751l6.362-6.15.848-.212h10.179Z" transform="translate(-542.802 -427.295)"/>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_35)">
+      <circle id="타원_35-2" data-name="타원 35" cx="10" cy="10" r="10" transform="translate(333 484)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_40)">
+      <circle id="타원_40-2" data-name="타원 40" cx="10" cy="10" r="10" transform="translate(717 484)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_41)">
+      <circle id="타원_41-2" data-name="타원 41" cx="10" cy="10" r="10" transform="translate(717 583)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_166)">
+      <g id="사각형_166-2" data-name="사각형 166" transform="translate(728 972)" fill="#e22f1b" stroke="rgba(112,112,112,0.24)" stroke-width="1">
+        <rect width="488" height="61" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="487" height="60" rx="9.5" fill="none"/>
+      </g>
+    </g>
+    <path id="패스_67" data-name="패스 67" d="M6953.365-6209.352s167.709-7.141,274.423,199.68,354.974,180.4,354.974,180.4" transform="translate(-6609.792 6801.271)" fill="none" stroke="#707070" stroke-width="4"/>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_36)">
+      <circle id="타원_36-2" data-name="타원 36" cx="10" cy="10" r="10" transform="translate(333 583)" fill="#2b44ff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#타원_60)">
+      <circle id="타원_60-2" data-name="타원 60" cx="10" cy="10" r="10" transform="translate(963 962)" fill="#bcbcbc"/>
+    </g>
+    <rect id="사각형_168" data-name="사각형 168" width="267" height="80" transform="translate(66 104)" fill="#707070"/>
+    <rect id="사각형_169" data-name="사각형 169" width="197" height="13" transform="translate(101 297)" fill="#707070"/>
+    <rect id="사각형_170" data-name="사각형 170" width="105" height="13" transform="translate(101 357)" fill="#707070"/>
+    <rect id="사각형_171" data-name="사각형 171" width="105" height="13" transform="translate(101 490)" fill="#707070"/>
+    <rect id="사각형_172" data-name="사각형 172" width="105" height="13" transform="translate(101 587)" fill="#707070"/>
+    <rect id="사각형_173" data-name="사각형 173" width="197" height="13" transform="translate(101 327)" fill="#707070"/>
+    <rect id="사각형_174" data-name="사각형 174" width="105" height="13" transform="translate(491 327)" fill="#707070"/>
+    <rect id="사각형_175" data-name="사각형 175" width="197" height="13" transform="translate(491 297)" fill="#707070"/>
+    <rect id="사각형_176" data-name="사각형 176" width="105" height="13" transform="translate(491 485)" fill="#707070"/>
+    <rect id="사각형_177" data-name="사각형 177" width="197" height="13" transform="translate(491 587)" fill="#707070"/>
+    <rect id="사각형_178" data-name="사각형 178" width="48" height="13" transform="translate(491 689)" fill="#707070"/>
+    <rect id="사각형_179" data-name="사각형 179" width="105" height="13" transform="translate(491 785)" fill="#707070"/>
+    <rect id="사각형_180" data-name="사각형 180" width="105" height="13" transform="translate(876 686)" fill="#707070"/>
+    <rect id="사각형_181" data-name="사각형 181" width="197" height="13" transform="translate(876 297)" fill="#707070"/>
+    <rect id="사각형_182" data-name="사각형 182" width="105" height="13" transform="translate(876 357)" fill="#707070"/>
+    <rect id="사각형_183" data-name="사각형 183" width="197" height="13" transform="translate(876 327)" fill="#707070"/>
+    <rect id="사각형_184" data-name="사각형 184" width="197" height="13" transform="translate(1257 326)" fill="#707070"/>
+    <rect id="사각형_185" data-name="사각형 185" width="105" height="13" transform="translate(1640 327)" fill="#707070"/>
+    <rect id="사각형_186" data-name="사각형 186" width="197" height="13" transform="translate(1640 297)" fill="#707070"/>
+    <rect id="사각형_187" data-name="사각형 187" width="48" height="13" transform="translate(876 487)" fill="#707070"/>
+    <rect id="사각형_188" data-name="사각형 188" width="197" height="13" transform="translate(876 587)" fill="#707070"/>
+    <rect id="사각형_189" data-name="사각형 189" width="148" height="13" transform="translate(876 785)" fill="#707070"/>
+    <rect id="사각형_190" data-name="사각형 190" width="148" height="13" transform="translate(876 887)" fill="#707070"/>
+    <rect id="사각형_191" data-name="사각형 191" width="48" height="13" transform="translate(1640 488)" fill="#707070"/>
+    <rect id="사각형_192" data-name="사각형 192" width="48" height="13" transform="translate(1640 587)" fill="#707070"/>
+  </g>
+</svg>

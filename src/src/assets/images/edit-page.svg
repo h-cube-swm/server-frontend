@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1078" viewBox="0 0 1920 1078">
+  <defs>
+    <filter id="사각형_203" x="640.5" y="341.5" width="613" height="401" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="선_56" x="-4.5" y="55" width="1938" height="19" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.373"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="사각형_204" x="1377.5" y="322.5" width="126" height="431" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="사각형_208" data-name="사각형 208" width="55" height="55"/>
+    </clipPath>
+    <clipPath id="clip-웹_1920_24">
+      <rect width="1920" height="1078"/>
+    </clipPath>
+  </defs>
+  <g id="웹_1920_24" data-name="웹 1920 – 24" clip-path="url(#clip-웹_1920_24)">
+    <g id="사각형_167" data-name="사각형 167" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="1920" height="1078" rx="15" stroke="none"/>
+      <rect x="0.5" y="0.5" width="1919" height="1077" rx="14.5" fill="none"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_203)">
+      <rect id="사각형_203-2" data-name="사각형 203" width="568" height="356" rx="15" transform="translate(660 361)" fill="#fff"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#선_56)">
+      <line id="선_56-2" data-name="선 56" x2="1920" transform="translate(1.5 61.5)" fill="none" stroke="rgba(112,112,112,0.39)" stroke-width="1"/>
+    </g>
+    <circle id="타원_61" data-name="타원 61" cx="12" cy="12" r="12" transform="translate(43 18)" fill="#ed6b5f"/>
+    <circle id="타원_62" data-name="타원 62" cx="12" cy="12" r="12" transform="translate(87 18)" fill="#f4bf4f"/>
+    <circle id="타원_63" data-name="타원 63" cx="12" cy="12" r="12" transform="translate(131 18)" fill="#61c554"/>
+    <rect id="사각형_197" data-name="사각형 197" width="439" height="32" transform="translate(687 853)" fill="#fff"/>
+    <rect id="사각형_199" data-name="사각형 199" width="284" height="23" transform="translate(703 402)" fill="#707070"/>
+    <rect id="사각형_200" data-name="사각형 200" width="135" height="18" transform="translate(737 502)" fill="#707070"/>
+    <rect id="사각형_201" data-name="사각형 201" width="135" height="18" transform="translate(737 533)" fill="#707070"/>
+    <rect id="사각형_202" data-name="사각형 202" width="46" height="6" transform="translate(1142 419)" fill="#707070"/>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#사각형_204)">
+      <rect id="사각형_204-2" data-name="사각형 204" width="81" height="386" rx="15" transform="translate(1397 342)" fill="#fff"/>
+    </g>
+    <line id="선_57" data-name="선 57" y2="220" transform="translate(438.5 533.5)" fill="none" stroke="#707070" stroke-width="2"/>
+    <circle id="타원_78" data-name="타원 78" cx="11.5" cy="11.5" r="11.5" transform="translate(427 522)" fill="#2b44ff"/>
+    <circle id="타원_79" data-name="타원 79" cx="9.5" cy="9.5" r="9.5" transform="translate(429 597)" fill="#989797"/>
+    <circle id="타원_80" data-name="타원 80" cx="9.5" cy="9.5" r="9.5" transform="translate(429 646)" fill="#989797"/>
+    <circle id="타원_81" data-name="타원 81" cx="9.5" cy="9.5" r="9.5" transform="translate(429 695)" fill="#989797"/>
+    <circle id="타원_82" data-name="타원 82" cx="9.5" cy="9.5" r="9.5" transform="translate(429 744)" fill="#989797"/>
+    <line id="선_58" data-name="선 58" x2="33" transform="translate(925.5 762.5)" fill="none" stroke="rgba(43,68,255,0.6)" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_59" data-name="선 59" x2="33" transform="translate(942 746) rotate(90)" fill="none" stroke="rgba(43,68,255,0.6)" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_60" data-name="선 60" x2="33" transform="translate(925.5 306.5)" fill="none" stroke="rgba(43,68,255,0.6)" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_61" data-name="선 61" x2="33" transform="translate(942 290) rotate(90)" fill="none" stroke="rgba(43,68,255,0.6)" stroke-linecap="round" stroke-width="3"/>
+    <g id="타원_83" data-name="타원 83" transform="translate(1250 522)" fill="#706f70" stroke="#707070" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="타원_84" data-name="타원 84" transform="translate(1259 522)" fill="#706f70" stroke="#707070" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="타원_85" data-name="타원 85" transform="translate(1250 533)" fill="#706f70" stroke="#707070" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="타원_86" data-name="타원 86" transform="translate(1259 533)" fill="#706f70" stroke="#707070" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="타원_87" data-name="타원 87" transform="translate(1250 544)" fill="#706f70" stroke="#707070" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="타원_88" data-name="타원 88" transform="translate(1259 544)" fill="#706f70" stroke="#707070" stroke-width="1">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.5" fill="none"/>
+    </g>
+    <g id="타원_89" data-name="타원 89" transform="translate(711 502)" fill="#fff" stroke="#707070" stroke-width="1">
+      <circle cx="9" cy="9" r="9" stroke="none"/>
+      <circle cx="9" cy="9" r="8.5" fill="none"/>
+    </g>
+    <g id="타원_90" data-name="타원 90" transform="translate(711 533)" fill="#fff" stroke="#707070" stroke-width="1">
+      <circle cx="9" cy="9" r="9" stroke="none"/>
+      <circle cx="9" cy="9" r="8.5" fill="none"/>
+    </g>
+    <rect id="사각형_205" data-name="사각형 205" width="77" height="18" transform="translate(737 564)" fill="rgba(43,68,255,0.5)"/>
+    <line id="선_62" data-name="선 62" x2="12.5" transform="translate(713.75 573)" fill="none" stroke="rgba(43,68,255,0.6)" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_63" data-name="선 63" x2="12.5" transform="translate(720 566.75) rotate(90)" fill="none" stroke="rgba(43,68,255,0.6)" stroke-linecap="round" stroke-width="3"/>
+    <g id="아트보드_1" data-name="아트보드 – 1" transform="translate(1410 432)" clip-path="url(#clip-path)">
+      <rect id="사각형_207" data-name="사각형 207" width="55" height="55" fill="rgba(255,255,255,0)"/>
+      <rect id="사각형_122" data-name="사각형 122" width="41" height="40" rx="15" transform="translate(7 8)" fill="#f9be19"/>
+      <g id="layer1" transform="translate(20.144 19.767)">
+        <g id="layer1-2">
+          <path id="path4068" d="M321.013-454.06l4.932,6.186a48.95,48.95,0,0,1,10.534-15.466c-3.7,2.257-7.78,6.543-11.264,11.846Z" transform="translate(-321.013 463.339)" fill="#fff" stroke="#fff" stroke-width="2"/>
+        </g>
+      </g>
+    </g>
+    <g id="아트보드_1-2" data-name="아트보드 – 1" transform="translate(1410 506)" clip-path="url(#clip-path)">
+      <rect id="사각형_209" data-name="사각형 209" width="55" height="55" fill="rgba(255,255,255,0)"/>
+      <path id="패스_52" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#ff4133"/>
+      <g id="그룹_83" data-name="그룹 83" transform="translate(0 1)">
+        <g id="타원_10" data-name="타원 10" transform="translate(13 24)" fill="#707070" stroke="#fff" stroke-width="3">
+          <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+          <circle cx="3.5" cy="3.5" r="2" fill="none"/>
+        </g>
+        <g id="타원_11" data-name="타원 11" transform="translate(24 24)" fill="#707070" stroke="#fff" stroke-width="3">
+          <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+          <circle cx="3.5" cy="3.5" r="2" fill="none"/>
+        </g>
+        <g id="타원_12" data-name="타원 12" transform="translate(35 24)" fill="#fff" stroke="#fff" stroke-width="3">
+          <circle cx="3.5" cy="3.5" r="3.5" stroke="none"/>
+          <circle cx="3.5" cy="3.5" r="2" fill="none"/>
+        </g>
+        <path id="패스_46" data-name="패스 46" d="M0,0H22.822" transform="translate(14.773 27.5)" fill="none" stroke="#fff" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="아트보드_1-3" data-name="아트보드 – 1" transform="translate(1410 580)" clip-path="url(#clip-path)">
+      <rect id="사각형_211" data-name="사각형 211" width="55" height="55" fill="rgba(255,255,255,0)"/>
+      <path id="패스_52-2" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#1ab936"/>
+      <path id="패스_48" data-name="패스 48" d="M0,0H26.02" transform="translate(14.49 24)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+      <path id="패스_53" data-name="패스 53" d="M0,0H12.93" transform="translate(14.49 32)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    </g>
+    <g id="아트보드_1-4" data-name="아트보드 – 1" transform="translate(1410 369)" clip-path="url(#clip-path)">
+      <path id="패스_52-3" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#2b44ff"/>
+      <path id="패스_60" data-name="패스 60" d="M-3.417-18.653a.562.562,0,0,1-.569.078.728.728,0,0,1-.368-.39.636.636,0,0,1-.033-.424.724.724,0,0,1,.3-.4l2.9-1.873a1,1,0,0,1,.847-.245.57.57,0,0,1,.346.335,1.4,1.4,0,0,1,.1.535L.2-4.916a.712.712,0,0,1-.256.558.71.71,0,0,1-.5.156.627.627,0,0,1-.39-.19.821.821,0,0,1-.212-.479q0-.847-.011-2.1t-.011-2.7q0-1.45-.022-2.977t-.022-2.944q0-1.416-.011-2.6T-1.254-20.1Z" transform="translate(28.795 41.123)" fill="#fff" stroke="#fff" stroke-width="1.7"/>
+    </g>
+    <g id="아트보드_1-5" data-name="아트보드 – 1" transform="translate(1410 654)" clip-path="url(#clip-path)">
+      <rect id="사각형_214" data-name="사각형 214" width="55" height="55" fill="rgba(255,255,255,0)"/>
+      <path id="패스_52-4" data-name="패스 52" d="M15,0H26A15,15,0,0,1,41,15V25A15,15,0,0,1,26,40H15A15,15,0,0,1,0,25V15A15,15,0,0,1,15,0Z" transform="translate(7 8)" fill="#b1b1b1"/>
+      <path id="패스_48-2" data-name="패스 48" d="M0,0H26.02" transform="translate(14.49 20)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+      <path id="패스_55" data-name="패스 55" d="M0,0H13" transform="translate(14.5 28)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+      <path id="패스_56" data-name="패스 56" d="M0,0H26.02" transform="translate(14.49 36)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+      <path id="패스_57" data-name="패스 57" d="M0,0H6" transform="translate(34.51 28)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>
