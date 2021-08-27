@@ -9,9 +9,11 @@ export function QuestionProvider({
   setQuestion,
   response,
   setResponse,
+  tabIndex,
 }) {
   return (
-    <QuestionContext.Provider value={{ state, question, response, setQuestion, setResponse }}>
+    <QuestionContext.Provider
+      value={{ state, question, response, setQuestion, setResponse, tabIndex }}>
       {children}
     </QuestionContext.Provider>
   );
@@ -22,6 +24,5 @@ export function useQuestion() {
   if (context === undefined) {
     throw new Error("useQuestion must be used within a QuestionProvider");
   }
-  const { state, question, setQuestion, response, setResponse } = context;
-  return { state, question, setQuestion, response, setResponse };
+  return context;
 }
