@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useMessage } from "../../contexts/MessageContext";
 import useOnly from "../../hooks/useOnly";
 import useTimeout from "../../hooks/useTimeout";
+import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Loading.scss";
 
-const SPINNER_NUM = 10;
+const SPINNER_NUM = 3;
 
 export default function Loading() {
   const isTimeout = useTimeout(500);
@@ -29,15 +30,17 @@ export default function Loading() {
 
   const text = new Array(SPINNER_NUM)
     .fill(null)
-    .map((_, i) => (i < spinner ? "■" : "□"))
-    .join(" ");
+    .map((_, i) => (i < spinner ? <div className="dot" /> : <div className="dot hide" />));
 
   return (
-    isTimeout && (
-      <div className="loading">
-        <h1>로딩 중입니다.</h1>
-        <div className="spinner">{text}</div>
-      </div>
-    )
+    <>
+      <FloatingLogo />
+      {isTimeout && (
+        <div className="loading">
+          <h1>로딩 중입니다.</h1>
+          <div className="spinner">{text}</div>
+        </div>
+      )}
+    </>
   );
 }
