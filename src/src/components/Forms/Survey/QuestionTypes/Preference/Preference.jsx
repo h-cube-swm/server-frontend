@@ -100,7 +100,6 @@ export default function Preference() {
   };
 
   const getOnClick = (index) => {
-    console.log(index, prevIndex);
     if (isEditting) return null;
     return () => {
       if (index !== prevIndex) {
