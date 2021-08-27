@@ -9,6 +9,25 @@ $background-color: #fff;
   flex-direction: column;
   background-color: $background-color;
 
+  .section {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    button {
+      color: #000;
+      font-size: $fs-rg;
+      background-color: transparent;
+      margin: 0 1rem;
+      &.selected {
+        border-bottom: 1.5px solid #707070;
+      }
+    }
+  }
+
   .view-edit {
     position: absolute;
     top: 0;
@@ -17,10 +36,6 @@ $background-color: #fff;
     height: 100%;
     transition-duration: 500ms;
     overflow: hidden;
-
-    &.left {
-      transform: translateX(-100%);
-    }
 
     .fade-out {
       position: absolute;
@@ -99,7 +114,7 @@ $background-color: #fff;
     }
   }
 
-  .view-preview {
+  .view {
     padding-top: 5rem;
     height: 100%;
     width: 100%;
@@ -108,6 +123,10 @@ $background-color: #fff;
     position: absolute;
     top: 0px;
     left: 0px;
+
+    &.left {
+      transform: translateX(-100%);
+    }
 
     &.right {
       transform: translateX(100%);
