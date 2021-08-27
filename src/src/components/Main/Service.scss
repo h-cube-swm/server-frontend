@@ -91,6 +91,10 @@
       p {
         font-size: $fs-rg;
         margin-bottom: 3rem;
+        em {
+          font-size: $fs-sm;
+          color: #b0b0b0;
+        }
       }
       img {
         width: 50%;

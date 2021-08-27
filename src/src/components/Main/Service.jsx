@@ -97,7 +97,8 @@ function Service() {
               그럴 때 저희에게 조금만 힌트를 주세요.
               <br />
               그럼 저희가 완성해드리겠습니다.
-              <br />* 해당 기능은 추후 제공될 예정입니다.
+              <br />
+              <em>* 해당 기능은 추후 제공될 예정입니다.</em>
             </p>
           </div>
           <img src={autoSuggestionPage} alt="auto suggestion page" />
@@ -111,7 +112,8 @@ function Service() {
               버튼 한 번이면 바로 당신의 손에 폼이 들려있습니다.
               <br />
               뿐만 아니라 다양한 API나 분석툴과도 연계해드립니다.
-              <br />* API 연동은 추후 제공될 예정입니다.
+              <br />
+              <em>* API 연동은 추후 제공될 예정입니다.</em>
             </p>
           </div>
           <img src={sharingPage} alt="sharing page" />
