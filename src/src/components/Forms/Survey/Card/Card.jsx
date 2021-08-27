@@ -6,6 +6,7 @@ import { useQuestion } from "../../../../contexts/QuestionContext";
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
 import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
+// import questionBranchButton from "../../../../assets/icons/branch-btn.svg";
 
 export default function Card({ onDelete, onGrab, children }) {
   const { state } = useQuestion();
@@ -57,6 +58,12 @@ export default function Card({ onDelete, onGrab, children }) {
       }}>
       <div className="content-box">{children}</div>
       <div className="button-box">
+        {/* <button
+          className={"branch " + (onDelete ? "" : "hidden")}
+          tabIndex={onDelete ? null : "-1"}
+          onClick={handleOnDelete}>
+          <img src={questionBranchButton} alt="Branch button"></img>
+        </button> */}
         <button
           className={"delete " + (onDelete ? "" : "hidden")}
           tabIndex={onDelete ? null : "-1"}

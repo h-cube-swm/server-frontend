@@ -30,6 +30,34 @@
     cursor: grab;
   }
 
+  .branch {
+    padding: 0;
+    right: $card-padding;
+    bottom: $card-padding;
+    border: 0;
+    background-color: transparent;
+    transition-duration: 500ms;
+    cursor: pointer;
+    width: 2.5rem;
+    height: 2.5rem;
+    opacity: 1;
+
+    img {
+      width: 100%;
+    }
+
+    &.disabled {
+      filter: grayscale(100%) brightness(1.8);
+      cursor: inherit;
+    }
+
+    &.hidden {
+      opacity: 0;
+      z-index: -1;
+      cursor: inherit;
+    }
+  }
+
   .delete {
     padding: 0;
     right: $card-padding;
