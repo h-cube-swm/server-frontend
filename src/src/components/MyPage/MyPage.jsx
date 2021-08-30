@@ -33,13 +33,16 @@ export default function MyPage() {
       </div>,
     );
   }
-  surveys.forEach((survey) => {
+  surveys.forEach((survey, i) => {
     contents.push(
       <div className="survey">
+        <Link className={"status " + survey.status} to={`/forms/survey/edit/${survey.id}`}>
+          {survey.status === "published" ? <p key={i}>배포됨</p> : <p key={i}>편집하기</p>}
+        </Link>
         <div className="title">
           <h3>{survey.title}</h3>
         </div>
-        <Link className="result" to={`/forms/survey/result/${survey.id}`}>
+        <Link className="link" to={`/forms/survey/result/${survey.id}`}>
           결과보기
         </Link>
         <button className="link" onClick={() => duplicateLink(survey.deployId)}>
