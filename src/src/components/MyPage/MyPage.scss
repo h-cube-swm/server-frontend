@@ -1,0 +1,81 @@
+@import "/src/scss/style.scss";
+
+.my-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .make-survey {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    width: 7rem;
+    height: 4rem;
+  }
+  .info {
+    margin-top: 10rem;
+    font-size: $fs-rg;
+  }
+  .partition {
+    width: 10rem;
+    height: 2px;
+    margin-top: 5rem;
+    background-color: #b0b0b0;
+  }
+  .no-survey {
+    @include round;
+    box-shadow: $shadow-default;
+    padding: 0.7rem 2rem;
+    width: 25rem;
+    margin-top: 2rem;
+    color: #fff;
+    background: linear-gradient(to right, #e22f1b, #eb5240);
+  }
+  .surveys {
+    margin-top: 10rem;
+    .survey {
+      display: flex;
+      align-items: center;
+      margin-top: 2rem;
+      .title {
+        @include round;
+        box-shadow: $shadow-default;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0.7rem 2rem;
+        width: 25rem;
+        height: auto;
+        overflow: scroll;
+        h3 {
+          font-size: $fs-rg;
+          font-weight: $fw-bold;
+        }
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include round;
+        box-shadow: $shadow-default;
+        font-size: $fs-sm;
+        width: 5rem;
+        height: 2.8rem;
+        margin-left: 1rem;
+        color: #fff;
+        background-color: #707070;
+      }
+
+      button {
+        @include round;
+        box-shadow: $shadow-default;
+        font-size: $fs-sm;
+        width: 5rem;
+        height: 2.8rem;
+        margin-left: 1rem;
+        color: #fff;
+        background-color: #707070;
+      }
+    }
+  }
+}
