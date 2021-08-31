@@ -35,7 +35,7 @@ function Intro() {
         <div className="message">
           <h1>
             모든 폼을 대신하는
-            <br />더 폼나는 설문조사
+            <br />더 폼 나는 설문조사
             <br />
             <strong>
               더 폼<p className="beta-tag">beta</p>
