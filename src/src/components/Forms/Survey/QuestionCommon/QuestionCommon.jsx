@@ -18,6 +18,7 @@ import { LongSentence, ShortSentence } from "../QuestionTypes/Sentence/Sentence"
 
 // Scss
 import "./QuestionCommon.scss";
+import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -33,15 +34,16 @@ function getQuestionDetail(type) {
 
 export default function QuestionCommon() {
   const { state, question, setQuestion } = useQuestion();
+  const scrollBlock = useScrollBlock();
 
   const QuestionDetail = getQuestionDetail(question.type);
-  const isEditting = state !== CardStates.EDITTING;
+  const isResponse = state !== CardStates.EDITTING;
 
   return (
-    <div className={isEditting ? "question-common edit" : "question-common"}>
+    <div className="question-common" {...scrollBlock}>
       <div className="question-common-box">
         <div className="question-title-box">
-          {isEditting && question.isRequired && (
+          {question.isRequired && (
             <span className="requirement-tag">
               <p>필수</p>
             </span>
@@ -54,7 +56,7 @@ export default function QuestionCommon() {
           />
         </div>
         <div className="required-toggle-box">
-          <Hider hide={isEditting}>
+          <Hider hide={isResponse}>
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
