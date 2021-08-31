@@ -35,6 +35,7 @@ export default function Table({ columns, rows }) {
           {columns.map((column, i) => (
             <div className="th" style={weightStyles[i]} key={i} onClick={getSetCriterion(i)}>
               {column}
+              {i === criterion[0] ? <p key={i}>{criterion[1] === ASC ? "▲" : "▼"}</p> : ""}
             </div>
           ))}
         </div>
