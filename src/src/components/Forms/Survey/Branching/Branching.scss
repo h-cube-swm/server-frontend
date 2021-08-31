@@ -1,0 +1,86 @@
+@import "/src/scss/style.scss";
+
+.branching {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+
+  .frame {
+    height: 100%;
+    min-width: 100%;
+    position: relative;
+
+    .curve {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      svg {
+        position: relative;
+        z-index: 0;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .branch-card {
+      position: absolute;
+      border-radius: 16px;
+      border: solid 0.1px rgba(0, 0, 0, 0.1);
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      padding: 1rem;
+      box-sizing: border-box;
+      background-color: white;
+    }
+
+    .anchor {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      box-shadow: $shadow-default;
+      .anchor-dot {
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #707070;
+        border-radius: 50%;
+      }
+    }
+
+    .choice {
+      position: absolute;
+      border: solid 0.1px rgba(0, 0, 0, 0.1);
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      border-radius: 16px;
+      padding: 1rem 1rem;
+      transform: translateY(-50%);
+      box-sizing: border-box;
+      background-color: white;
+
+      .text {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .handle {
+        vertical-align: middle;
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        transform: translate(50%, -50%);
+        box-shadow: $shadow-default;
+        cursor: grab;
+        z-index: 100;
+        .handle-dot {
+          width: 1.2rem;
+          height: 1.2rem;
+          background-color: #2b44ff;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
