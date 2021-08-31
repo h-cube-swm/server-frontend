@@ -294,9 +294,13 @@
 
     .key-function {
       width: 70%;
-      img {
-        width: auto;
-        height: 100%;
+      margin-top: 0;
+      margin-bottom: 5rem;
+      .page {
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
     }
 
