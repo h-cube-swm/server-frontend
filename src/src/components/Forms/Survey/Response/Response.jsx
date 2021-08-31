@@ -7,7 +7,7 @@ import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
 
-import { CardStates } from "../../../../constants";
+import { CardStates, CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Response.scss";
 import API from "../../../../utils/apis";
@@ -16,7 +16,40 @@ import API from "../../../../utils/apis";
 import withSurvey from "../../../../hocs/withSurvey";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
-function checkEntered(response) {
+/**
+ * Get index-based branching map (from question-id based branching map).
+ *
+ * Brancing map is initially dictionary of {question-choice tuple : next question}.
+ * In this case, question is described by question id instead of question index because of reordering.
+ * However, in response mode, question cannot be reordered.
+ * Therefore, using index instead of question id is much easier approach.
+ *
+ * @param {Object} survey
+ * @returns
+ */
+function getIndexBranchingMap(survey) {
+  const { questions, branching } = survey;
+  const idToIndex = Object.fromEntries(questions.map(({ id }, index) => [id, index]));
+
+  const branchingMap = {};
+  Object.entries(branching).forEach(([key, dest]) => {
+    const [questionId, choiceIndex] = key.split(" ");
+    const questionIndex = idToIndex[+questionId];
+    if (questionIndex === undefined) return;
+    if (!(questionIndex in branchingMap)) branchingMap[questionIndex] = {};
+    branchingMap[questionIndex][choiceIndex] = +idToIndex[dest];
+  });
+
+  return branchingMap;
+}
+
+/**
+ * Check if given response is properly responsed.
+ * Used when isRequired option is enabled.
+ * @param {Object} response
+ * @returns
+ */
+function isResponsed(response) {
   if (response === null) return false;
   if (typeof response === "undefined") return false;
   if (typeof response === "object") return Object.values(response).filter((x) => x).length > 0;
@@ -31,25 +64,28 @@ function checkEntered(response) {
  * @returns
  */
 function ResponseContainer({ survey }) {
-  const [responses, setResponses] = useState({ index: 0 });
+  const [responses, setResponses] = useState({ history: [] });
   const [redirect, setRedirect] = useState(null);
 
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const body = { answer: responses };
-    const err = await API.postResponse(survey.id, body)[1];
+    const body = { responses };
+    const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
     else setRedirect("/forms/survey/response/ending");
   };
 
   return (
-    <Response
-      survey={survey}
-      responses={responses}
-      setResponses={setResponses}
-      onSubmit={onSubmit}></Response>
+    <>
+      <Title>더 폼 - {survey.title}</Title>
+      <Response
+        survey={survey}
+        responses={responses}
+        setResponses={setResponses}
+        onSubmit={onSubmit}></Response>
+    </>
   );
 }
 
@@ -58,61 +94,113 @@ function ResponseContainer({ survey }) {
  * @param {*} responseInfo
  * @returns
  */
-export function Response({ survey, responses, setResponses, onSubmit, tabIndex }) {
-  const { questions } = survey;
-  const { index } = responses;
-  const question = index > 0 && questions[index - 1];
-  const response = index > 0 && responses[question.id];
-  const setIndex = setNestedState(setResponses, ["index"]);
-  const getMove = (index) => () => setIndex(index);
+export function Response({
+  survey,
+  responses,
+  setResponses,
+  onSubmit: handleSubmit,
+  tabIndex,
+  isPreview,
+}) {
+  // States
   const { isEmbed } = useGlobalState();
+  const setHistory = setNestedState(setResponses, ["history"]);
 
-  const cover = (
-    <div className="cover-box">
-      <h1 className="title">{survey.title}</h1>
-      {survey.description && <div className="description">{survey.description}</div>}
-    </div>
-  );
-  const pages = [cover, ...questions];
+  // Derivated states
+  const { questions } = survey;
+  const { history } = responses;
+  const isCover = history.length === 0;
+  const currentIndex = !isCover && history[history.length - 1];
+  const question = !isCover && questions[currentIndex];
+  const response = question && responses[question.id];
+  const indexBranchingMap = getIndexBranchingMap(survey);
+  const isPassable = isCover || !question.isRequired || isResponsed(response);
+
+  /**
+   *
+   * @returns {function} `next()`
+   */
+  const getNext = () => {
+    // If not passable, just return.
+    if (!isPassable) return;
+
+    // If it is cover screen, just go to first question
+    const push = (x) => setHistory((history) => [...history, x]);
+    if (isCover) {
+      push(0);
+      return;
+    }
+
+    if (
+      question.type !== CardTypes.SINGLE_CHOICE || // If it is not a single choice type question
+      !isResponsed(response) || // If it is not responsed
+      !(currentIndex in indexBranchingMap) // If branching is not configured for this question
+    ) {
+      // Go to next question
+      push(currentIndex + 1);
+      return;
+    }
+
+    // It is guaranteed to be answered because current question is single-choice question and responsed
+    const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
+
+    // If branching is not configured for this choice
+    if (!(selectedChoice in indexBranchingMap[currentIndex])) {
+      // Go to next question
+      push(currentIndex + 1);
+      return;
+    }
+
+    // Branching is configured for current question and current choice. Go to there.
+    push(indexBranchingMap[currentIndex][selectedChoice]);
+  };
+
+  const previous = () =>
+    setHistory((history) => {
+      const newHistory = [...history];
+      newHistory.pop();
+      return newHistory;
+    });
 
   const buttons = [];
 
-  const isAnswered = index === 0 || !question.isRequired || checkEntered(response);
-  if (index > 0) {
+  if (history.length > 0) {
+    // Which is identical to !isCover, but for clearity.
     buttons.push(
-      <button key="previous" className="btn rg" onClick={getMove(index - 1)} tabIndex={tabIndex}>
+      <button key="previous" className="btn rg" onClick={previous} tabIndex={tabIndex}>
         이전으로
       </button>,
     );
-    buttons.push(<p className="indicator">{`${index} / ${pages.length - 1}`}</p>);
   }
-  if (index === 0) {
+
+  if (!isCover) {
     buttons.push(
-      <button
-        key="start"
-        className="btn rg"
-        onClick={isAnswered ? getMove(index + 1) : () => {}}
-        tabIndex={tabIndex}>
+      <p key="indicator" className="indicator">{`${currentIndex + 1} / ${questions.length}`}</p>,
+    );
+  }
+
+  if (isCover) {
+    buttons.push(
+      <button key="start" className="btn rg" onClick={getNext} tabIndex={tabIndex}>
         시작하기
       </button>,
     );
-  } else if (index < pages.length - 1) {
+  } else if (currentIndex < questions.length - 1) {
     buttons.push(
       <button
         key="next"
-        className={"btn rg " + (isAnswered ? "" : "disabled")}
-        onClick={isAnswered ? getMove(index + 1) : () => {}}
+        className={"btn rg " + (isPassable ? "" : "disabled")}
+        onClick={getNext}
         tabIndex={tabIndex}>
         다음으로
       </button>,
     );
-  }
-  if (index === pages.length - 1) {
+  } else if (currentIndex === questions.length - 1) {
     buttons.push(
       <button
         key="finished"
-        className={"btn rg " + (isAnswered ? "" : "disabled")}
-        onClick={isAnswered ? onSubmit : () => {}}
+        className={"btn rg " + (isPassable ? "" : "disabled")}
+        onClick={isPassable ? handleSubmit : () => {}}
         tabIndex={tabIndex}>
         완료
       </button>,
@@ -121,8 +209,7 @@ export function Response({ survey, responses, setResponses, onSubmit, tabIndex }
 
   return (
     <div className="response">
-      <Title>더 폼 - {survey.title}</Title>
-      <div className={isEmbed ? "survey-header embed" : "survey-header"}>
+      <div className={isEmbed || isPreview ? "survey-header embed" : "survey-header"}>
         <span className="logo">
           <Link to="/" target="_blank" tabIndex={tabIndex}>
             <span> Powered by</span>
@@ -131,32 +218,33 @@ export function Response({ survey, responses, setResponses, onSubmit, tabIndex }
         </span>
       </div>
       <div className="contents-box">
-        {pages.map((page, i) => {
+        <div className={"question-box " + (!isCover && "left")}>
+          <div className="cover-box">
+            <h1 className="title">{survey.title}</h1>
+            {survey.description && <div className="description">{survey.description}</div>}
+          </div>
+        </div>
+
+        {questions.map((question, i) => {
           // Build class names
           const classes = ["question-box"];
-          if (i < index) classes.push("left");
-          if (i > index) classes.push("right");
+          if (i < currentIndex) classes.push("left");
+          if (isCover || i > currentIndex) classes.push("right");
           const className = classes.join(" ");
 
-          if (i === 0)
-            return (
-              <div key="cover" className={className}>
-                {page}
-              </div>
-            );
-
           // Get state
-          const state = i === index ? CardStates.RESPONSE : CardStates.PREVIEW;
+          const isSelected = i === currentIndex;
+          const state = isSelected ? CardStates.RESPONSE : CardStates.PREVIEW;
 
-          const { id } = page;
+          const { id } = question;
           return (
             <QuestionProvider
               state={state}
-              question={page}
+              question={question}
               key={id}
               response={responses[id]}
               setResponse={setNestedState(setResponses, [id])}
-              tabIndex={i === index ? "1" : "-1"}>
+              tabIndex={isSelected ? "1" : "-1"}>
               <div className={className}>
                 <div className="question-box-inner">
                   <QuestionCommon />
