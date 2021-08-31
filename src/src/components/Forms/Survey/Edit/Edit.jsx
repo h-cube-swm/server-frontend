@@ -39,7 +39,7 @@ function Preview({ survey }) {
   const [responses, setResponses] = useState(null);
 
   function resetResponse() {
-    setResponses((responses) => ({ ...responses, index: 0 }));
+    setResponses((responses) => ({ ...responses, history: [] }));
   }
 
   useOnly(resetResponse, [survey]);
