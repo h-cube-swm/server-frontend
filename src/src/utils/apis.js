@@ -48,13 +48,31 @@ async function sendData(method, path, body) {
   }
 }
 
+async function deleteData(path) {
+  const { token } = localStorage;
+
+  try {
+    const config = {
+      url: ROOT + path,
+      method: "delete",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const { status } = await axios(config);
+    return status;
+  } catch (error) {
+    return 400;
+  }
+}
+
 export default {
   // rid = Response ID, sid = Survey ID
 
   // Get
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
   useSurvey: (sid) => useFetch(`/surveys/${sid}`),
-  useUser: () => useFetch("/users/surveys"),
+  useUser: (hash) => useFetch(`/users/surveys/${hash ? "?hash=" + hash : ""}`),
 
   // PUT,POST
   postSurvey: () => sendData("POST", "/surveys"),
@@ -62,4 +80,7 @@ export default {
   putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
+
+  // DELETE
+  deleteSurvey: (sid) => deleteData(`/surveys/${sid}`),
 };
