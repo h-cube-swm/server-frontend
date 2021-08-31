@@ -8,6 +8,8 @@ export default function Table({ columns, rows }) {
 
   const [index, order] = criterion;
   const sortedRows = [...rows];
+
+  if (index !== 0) {
   sortedRows.sort((a, b) => {
     if (a[index] < b[index]) {
       return -order;
@@ -17,6 +19,10 @@ export default function Table({ columns, rows }) {
     }
     return 0;
   });
+  }
+  if (index === 0 && order === -1) {
+    sortedRows.reverse();
+  }
 
   const getSetCriterion = (nextIndex) => () => {
     if (nextIndex === index) {
