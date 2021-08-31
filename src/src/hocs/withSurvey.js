@@ -5,23 +5,21 @@ import Loading from "../components/Loading/Loading";
 import API from "../utils/apis";
 import { isUnhashable, unhash } from "../utils/hasher";
 
-// eslint-disable-next-line
 const withSurvey = (Component) => (props) => {
   let surveyId = props.match.params.link;
   if (isUnhashable(surveyId)) surveyId = unhash(surveyId);
 
   // Load survey data from server
-  const [result, err] = API.useSurvey(surveyId);
+  const [survey, err] = API.useSurvey(surveyId);
   if (err) return <Redirect to="/error/unexpected/cannot-load-survey" />;
-  if (!result) return <Loading></Loading>;
+  if (!survey) return <Loading></Loading>;
 
   // Reshape survey structure into one object
-  const { title, description, contents, ...meta } = result; // A
-  const survey = { title, description, meta, ...contents }; // B
-  survey.id = surveyId;
+  if (!survey.id) survey.id = surveyId;
   if (!survey.counter) survey.counter = 0;
   if (!survey.questions) survey.questions = [];
   if (!survey.selectedIndex) survey.selectedIndex = 0;
+  if (!survey.branching) survey.branching = {};
   if (survey.questions.length === 0) {
     const [counter, question] = getQuestion(survey.counter);
     survey.counter = counter;
@@ -43,12 +41,8 @@ const withSurvey = (Component) => (props) => {
       return filtered;
     });
 
-    // Reshape survey object
-    const { title, description, meta, ...contents } = survey; // B
-    const body = { title, description, contents, view: "slide" }; // A
-
     // Send data to server
-    return API.putSurvey(surveyId, body);
+    return API.putSurvey(surveyId, survey);
   }
 
   return <Component {...newProps} updateSurvey={updateSurvey} />;
