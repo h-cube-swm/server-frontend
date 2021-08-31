@@ -16,7 +16,7 @@
     font-size: $fs-rg;
   }
   .partition {
-    width: 15rem;
+    width: 10rem;
     height: 2px;
     margin-top: 5rem;
     background-color: #b0b0b0;
@@ -25,20 +25,23 @@
     @include round;
     box-shadow: $shadow-default;
     padding: 0.7rem 2rem;
-    width: 25rem;
-    margin-top: 5rem;
+    width: 20rem;
+    margin-top: 7rem;
     color: #fff;
-    background: linear-gradient(to right, #e22f1b, #eb5240);
+    background: linear-gradient(to right, #707070, #b0b0b0);
   }
   .surveys {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
+    margin-top: 7rem;
+    h2 {
+      margin-bottom: 1rem;
+    }
     .survey {
       display: flex;
       align-items: center;
-      margin-top: 3rem;
+      margin-top: 2.5rem;
       .status {
         display: flex;
         justify-content: center;
@@ -47,7 +50,7 @@
         box-shadow: $shadow-default;
         font-size: $fs-sm;
         width: 4rem;
-        height: 3rem;
+        height: 2.5rem;
         margin-right: 1rem;
         color: #fff;
         background-color: #b0b0b0;

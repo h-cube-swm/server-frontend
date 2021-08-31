@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useMessage } from "../../contexts/MessageContext";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
@@ -9,13 +9,16 @@ import Loading from "../Loading/Loading";
 import linkBtn from "../../assets/icons/link-btn.svg";
 import embedBtn from "../../assets/icons/embed-btn.svg";
 import resultBtn from "../../assets/icons/result-btn.svg";
+import delBtn from "../../assets/icons/del-btn-big.svg";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
 export default function MyPage() {
   const { publish } = useMessage();
+  const [timestmap, setTimestmap] = useState(null);
   // ToDo 함수 이름을 바꾸던가 함수 반환값을 바꾸던가
-  const [surveys, error] = API.useUser();
+  const [surveys, error] = API.useUser(timestmap);
+
   if (surveys === null) return <Loading></Loading>;
   if (error) return <Redirect to="/error/unexpected/cannot-get-user-info"></Redirect>;
 
@@ -27,7 +30,7 @@ export default function MyPage() {
     linkarea.select();
     document.execCommand("copy");
     document.body.removeChild(linkarea);
-    publish("📎 링크가 복사되었습니다 ✅");
+    publish("📎 배포 링크가 복사되었습니다 ✅");
   };
 
   const duplicateEmbedLink = (link) => {
@@ -41,7 +44,16 @@ export default function MyPage() {
     publish("🖥 임베드 코드가 복사되었습니다 ✅");
   };
 
+  const deleteSurvey = async (link) => {
+    const status = await API.deleteSurvey(link);
+    if (status === 200) {
+      publish("설문을 삭제하였습니다 🗑", "warning");
+    }
+    setTimestmap(Date.now());
+  };
+
   const contents = [];
+
   if (surveys.length === 0) {
     contents.push(
       <div className="no-survey">
@@ -50,6 +62,7 @@ export default function MyPage() {
       </div>,
     );
   }
+
   surveys.forEach((survey, i) => {
     contents.push(
       <div className="survey">
@@ -74,6 +87,9 @@ export default function MyPage() {
           }>
           <img src={embedBtn} alt="dublicate embed code button" />
         </button>
+        <button className="link" onClick={() => deleteSurvey(survey.id)}>
+          <img src={delBtn} alt="delete button" />
+        </button>
       </div>,
     );
   });
@@ -94,16 +110,11 @@ export default function MyPage() {
         만들기
       </Link>
       <div className="info">
-        <h1>
-          안녕하세요.
-          <br />더 폼 나는 <strong>동녘</strong>님
-        </h1>
+        <h1>마이페이지</h1>
       </div>
       <div className="partition" />
       <div className="surveys">
-        <h2>
-          <strong>동녘</strong>님의 폼
-        </h2>
+        <h2>내가 만든 폼</h2>
         {contents}
       </div>
     </div>
