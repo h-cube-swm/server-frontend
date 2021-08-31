@@ -1,15 +1,25 @@
 /* React elements */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../../utils/apis";
 import Loading from "../../Loading/Loading";
 
 const Survey = () => {
-  const [link, err] = API.useLink();
-  if (err && err.status === 400) return <Redirect to="/error/published" />;
+  const [state, setState] = useState([null, null, -1]);
+  const [response, err, status] = state;
+
+  useEffect(() => {
+    (async () => {
+      const result = await API.postSurvey();
+      setState(result);
+    })();
+  }, []);
+
+  if (err && status === 400) return <Redirect to="/error/published" />;
   if (err) return <Redirect to="/error/unexpected/cannot-get-link"></Redirect>;
-  if (!link) return <Loading />;
-  const url = "/forms/survey/edit/" + link;
+  if (!response) return <Loading />;
+  if (!response.result.id) return <Redirect to="/error/unexpected/wrong-link"></Redirect>;
+  const url = `/forms/survey/edit/${response.result.id}`;
   return <Redirect to={url} />;
 };
 

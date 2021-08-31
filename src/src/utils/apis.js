@@ -19,11 +19,7 @@ function useFetch(path) {
           },
         };
         const { data } = await axios(config);
-        if (data.success) {
-          setData([data.result, null]);
-        } else {
-          setData([data.result, data]);
-        }
+        setData([data.result, null]);
       } catch (error) {
         setData([error.response && error.response.data, error]);
       }
@@ -45,22 +41,25 @@ async function sendData(method, path, body) {
       },
     };
     if (body) config.data = body;
-    const { data } = await axios(config);
-    return [data, null];
+    const { status, data } = await axios(config);
+    return [data, null, status];
   } catch (error) {
-    return [error.response && error.response.data, error];
+    return [error.response && error.response.data, error, -1];
   }
 }
 
 export default {
-  // Get
-  useResponses: (resultId) => useFetch(`/surveys/${resultId}/responses`),
-  useLink: () => useFetch("/link"),
-  useSurvey: (surveyId) => useFetch(`/surveys/${surveyId}`),
+  // rid = Response ID, sid = Survey ID
 
-  putSurvey: (surveyId, survey) => sendData("PUT", `/surveys/${surveyId}`, survey),
-  putEmail: (surveyId, email) => sendData("PUT", `/surveys/${surveyId}/emails`, { email }),
-  endSurvey: (surveyId) => sendData("PUT", `/surveys/${surveyId}/end`),
-  postResponse: (surveyId, response) =>
-    sendData("POST", `/surveys/${surveyId}/responses`, response),
+  // Get
+  useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
+  useSurvey: (sid) => useFetch(`/surveys/${sid}`),
+  useUser: () => useFetch("/users/surveys"),
+
+  // PUT,POST
+  postSurvey: () => sendData("POST", "/surveys"),
+  putSurvey: (sid, survey) => sendData("PUT", `/surveys/${sid}`, survey),
+  putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
+  endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
+  postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
 };
