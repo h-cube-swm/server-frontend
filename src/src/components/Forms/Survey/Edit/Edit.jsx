@@ -28,7 +28,6 @@ import { CardStates, CardStyle } from "../../../../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
 import getQuestion from "../getQuestion";
-import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
 import { useMessage } from "../../../../contexts/MessageContext";
 import Branching from "../Branching/Branching";
 
@@ -181,7 +180,7 @@ function Edit({ survey: init, updateSurvey }) {
 
   return (
     <div className="edit" {...backgroundCallbacks}>
-      <Title>{`더 폼 - 설문 제작 ${survey.title ? " / " + survey.title : ""}`}</Title>
+      <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
       <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
         <button onClick={onSubmit} className="btn rg submit-button">
           완료
@@ -277,10 +276,11 @@ function Edit({ survey: init, updateSurvey }) {
         <Preview survey={survey}></Preview>
       </div>
       <div className={"view " + (isBranching || "left")}>
-        <Branching questions={questions}></Branching>
+        <Branching survey={survey} setSurvey={setSurvey}></Branching>
       </div>
     </div>
   );
 }
 
+// ToDo : Swagger를 써 볼 수도!
 export default withSurvey(Edit);
