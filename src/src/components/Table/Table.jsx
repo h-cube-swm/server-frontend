@@ -26,13 +26,7 @@ export default function Table({ columns, rows }) {
     }
   };
 
-  const weight = new Array(columns.length).fill(1);
-  // Weight assign comes here, if Required.
-
-  // eslint-disable-next-line
-  const weightSum = weight.reduce((pre, cur) => pre + cur, 0);
-  // eslint-disable-next-line
-  const weightStyles = weight.map((x) => ({ flexGrow: 1 }));
+  const weightStyles = new Array(columns.length).fill({ flexGrow: 1 });
 
   return (
     <div className="table">
