@@ -111,17 +111,18 @@ function Card({ index: questionIndex, question, onGrab }) {
       <div className="branch-card" style={{ left: x, top: y, width: CARD_W, height: CARD_H }}>
         {question.title}
       </div>
-      {choices.map((text, choiceIndex) => {
-        const [x, y] = getChoicePosition(questionIndex, choiceIndex);
-        return (
-          <div className="choice" key={choiceIndex} style={{ top: y, left: x, width: CARD_W }}>
-            <div className="text">{text}</div>
-            <div className="handle" onMouseDown={() => onGrab(question.id, choiceIndex)}>
-              <div className="handle-dot" />
+      {question.type === CardTypes.SINGLE_CHOICE &&
+        choices.map((text, choiceIndex) => {
+          const [x, y] = getChoicePosition(questionIndex, choiceIndex);
+          return (
+            <div className="choice" key={choiceIndex} style={{ top: y, left: x, width: CARD_W }}>
+              <div className="text">{text}</div>
+              <div className="handle" onMouseDown={() => onGrab(question.id, choiceIndex)}>
+                <div className="handle-dot" />
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
       <div className="anchor" style={{ left: x, top: y + CARD_H / 2 }}>
         <div className="anchor-dot" />
       </div>
@@ -233,11 +234,7 @@ export default function Branching({ survey, setSurvey }) {
               // Skip removed question
               if (questionIndex < 0) return null;
               // Skip non-choice question
-              if (
-                question.type !== CardTypes.SINGLE_CHOICE &&
-                question.type !== CardTypes.MULTIPLE_CHOICE
-              )
-                return null;
+              if (question.type !== CardTypes.SINGLE_CHOICE) return null;
               // Skip removed choice
               if (question.choices.length <= choiceIndex) return null;
               // Skip currently modifing branch
