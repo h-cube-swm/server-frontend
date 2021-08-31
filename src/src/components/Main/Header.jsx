@@ -10,10 +10,6 @@ function Header() {
   const { token, logout } = useGlobalState();
   const location = `https://${DOMAIN}${useLocation().pathname}`;
   const href = `https://auth.the-form.io?redirect=${location}`;
-  let isMobile = false;
-  if (document.getElementById("root").offsetWidth < 767) {
-    isMobile = true;
-  }
 
   function handleLogout() {
     logout();
