@@ -3,7 +3,9 @@ import { CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Branching.scss";
 
-const TOP = 100;
+const TOP = 200;
+const LEFT = 120;
+const RIGHT = 120;
 const QUESTION_DIST = 300; // Horizontal distance between each cards including its width
 const CARD_W = 240; // Width of cards
 const CARD_H = 150; // Height of cards
@@ -16,7 +18,7 @@ const CHOICE_H = 16 * 3;
  * @returns [x, y]
  */
 function getCardPosition(i) {
-  return [i * QUESTION_DIST + 32, TOP];
+  return [i * QUESTION_DIST + LEFT, TOP];
 }
 
 /**
@@ -219,7 +221,7 @@ export default function Branching({ survey, setSurvey }) {
         onMouseUp={handleRelease}
         onMouseLeave={handleRelease}
         onMouseMove={handleMove}
-        style={{ width: getCardPosition(questions.length - 1)[0] + CARD_W + 64 }}>
+        style={{ width: getCardPosition(questions.length - 1)[0] + CARD_W + RIGHT }}>
         {questions.map((question, index) => {
           return <Card key={index} index={index} question={question} onGrab={handleGrab} />;
         })}
@@ -268,6 +270,7 @@ export default function Branching({ survey, setSurvey }) {
             )}
           </svg>
         </div>
+        <p className="comment">아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.</p>
       </div>
     </div>
   );
