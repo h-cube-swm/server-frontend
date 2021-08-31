@@ -6,6 +6,12 @@ import "./MyPage.scss";
 import API from "../../utils/apis";
 import Loading from "../Loading/Loading";
 
+import linkBtn from "../../assets/icons/link-btn.svg";
+import embedBtn from "../../assets/icons/embed-btn.svg";
+import resultBtn from "../../assets/icons/result-btn.svg";
+
+const HOST = `${window.location.protocol}//${window.location.host}`;
+
 export default function MyPage() {
   const { publish } = useMessage();
   // ToDo 함수 이름을 바꾸던가 함수 반환값을 바꾸던가
@@ -16,12 +22,23 @@ export default function MyPage() {
   const duplicateLink = (link) => {
     const linkarea = document.createElement("textarea");
     document.body.appendChild(linkarea);
-    linkarea.value = `https://the-form.io/forms/survey/response/${link}`;
+    linkarea.value = `${HOST}/forms/survey/response/${link}`;
     linkarea.focus();
     linkarea.select();
     document.execCommand("copy");
     document.body.removeChild(linkarea);
     publish("📎 링크가 복사되었습니다 ✅");
+  };
+
+  const duplicateEmbedLink = (link) => {
+    const linkarea = document.createElement("textarea");
+    document.body.appendChild(linkarea);
+    linkarea.value = link;
+    linkarea.focus();
+    linkarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(linkarea);
+    publish("🖥 임베드 코드가 복사되었습니다 ✅");
   };
 
   const contents = [];
@@ -37,16 +54,25 @@ export default function MyPage() {
     contents.push(
       <div className="survey">
         <Link className={"status " + survey.status} to={`/forms/survey/edit/${survey.id}`}>
-          {survey.status === "published" ? <p key={i}>배포됨</p> : <p key={i}>편집하기</p>}
+          {survey.status === "published" ? <p key={i}>완성</p> : <p key={i}>편집하기</p>}
         </Link>
         <div className="title">
           <h3>{survey.title}</h3>
         </div>
         <Link className="link" to={`/forms/survey/result/${survey.id}`}>
-          결과보기
+          <img src={resultBtn} alt="open result page" />
         </Link>
         <button className="link" onClick={() => duplicateLink(survey.deployId)}>
-          응답링크
+          <img src={linkBtn} alt="dublicate deploy link button" />
+        </button>
+        <button
+          className="link"
+          onClick={() =>
+            duplicateEmbedLink(
+              `<iframe src="${HOST}/forms/survey/response/${survey.deployId}?embed=true"/>`,
+            )
+          }>
+          <img src={embedBtn} alt="dublicate embed code button" />
         </button>
       </div>,
     );

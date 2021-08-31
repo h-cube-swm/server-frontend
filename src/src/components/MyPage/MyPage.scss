@@ -16,7 +16,7 @@
     font-size: $fs-rg;
   }
   .partition {
-    width: 10rem;
+    width: 15rem;
     height: 2px;
     margin-top: 5rem;
     background-color: #b0b0b0;
@@ -66,6 +66,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         padding: 0.7rem 2rem;
+        margin-right: 1rem;
         width: 25rem;
         min-height: 2.8rem;
         height: auto;
@@ -77,17 +78,12 @@
       }
 
       .link {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include round;
-        box-shadow: $shadow-default;
-        font-size: $fs-sm;
-        width: 5rem;
-        height: 2.8rem;
-        margin-left: 1rem;
-        color: #fff;
-        background-color: #707070;
+        background-color: transparent;
+        padding: 0;
+        text-align: center;
+        img {
+          width: 80%;
+        }
       }
     }
   }
@@ -98,6 +94,9 @@
       height: 1px;
       opacity: 0;
       z-index: -100;
+    }
+    .no-survey {
+      width: 100%;
     }
     .surveys {
       margin-top: 3rem;
