@@ -7,5 +7,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Cache node node_modules
+        uses: actions/cache@v1
+        with:
+          path: src/node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('src/yarn.lock') }}
+
       - name: Build image
         run: docker build -t temp src
