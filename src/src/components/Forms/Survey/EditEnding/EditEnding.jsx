@@ -7,7 +7,7 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
-import embedBtn from "../../../../assets/icons/embed-btn.svg";
+import embedBtn from "../../../../assets/icons/embed.svg";
 import duplicate from "../../../../assets/icons/duplicate.svg";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
@@ -16,7 +16,7 @@ import useOnly from "../../../../hooks/useOnly";
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
 const Ending = ({ ending }) => {
-  const { surveyId, title, description, surveyLink, resultLink } = ending;
+  const { id: surveyId, title, description, deployId: surveyLink, id: resultLink } = ending;
 
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState("default");
@@ -26,16 +26,17 @@ const Ending = ({ ending }) => {
   const handleEmailSend = async () => {
     if (emailState === "loading") return;
     setEmailState("loading");
-    try {
-      const [json] = await API.putEmail(surveyId, email);
-      const { status } = json;
-      if (status === 200) {
-        setEmailState("success");
-      }
-      if (status === 400) {
-        setEmailState("error");
-      }
-    } catch (e) {
+    const response = await API.putEmail(surveyId, email);
+    const error = response[1];
+    const status = response[2];
+
+    if (status === 200) {
+      setEmailState("success");
+    }
+    if (status === 400) {
+      setEmailState("error");
+    }
+    if (error) {
       setEmailState("error");
     }
   };
@@ -132,13 +133,13 @@ const Ending = ({ ending }) => {
                 <button
                   onClick={() =>
                     duplicateEmbedLink(
-                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
+                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`,
                     )
                   }>
                   <img src={embedBtn} alt="" />
                 </button>
               </div>
-              <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`}</h3>
+              <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`}</h3>
             </div>
             <div className="email box three">
               <h1>

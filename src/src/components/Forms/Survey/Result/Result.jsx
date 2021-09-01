@@ -48,14 +48,15 @@ function reshapeAnswerTo2DArray(survey, answers) {
   });
 
   // Answers is just 2D array of answers.
-  answers.forEach(({ answer, submit_time: timestamp }) => {
+  answers.forEach(({ responses: answer, createdAt: timestamp }) => {
     const newAnswer = Array(questions.length).fill(null);
     Object.entries(answer).forEach(([key, value]) => {
       if (key === "index") return;
       const questionIndex = questionDict[key];
       newAnswer[questionIndex] = value;
     });
-    answerList.push([timestamp].concat(newAnswer));
+    // ToDo: 적절한 타입으로 파싱하기
+    answerList.push([new Date(timestamp).toLocaleString()].concat(newAnswer));
   });
 
   return [[{ title: "응답 시각", type: "timestamp" }].concat(questions), answerList];
@@ -103,7 +104,7 @@ export default function Result({ match, location }) {
   const isChart = !isTable && !isWinner;
 
   // Parse response data
-  const { survey, answers } = result;
+  const { survey, responses: answers } = result;
   const [columns, rows] = reshapeAnswerTo2DArray(survey, answers);
 
   // Get content from viewMode
