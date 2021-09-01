@@ -10,15 +10,15 @@ export default function Table({ columns, rows }) {
   const sortedRows = [...rows];
 
   if (index !== 0) {
-  sortedRows.sort((a, b) => {
-    if (a[index] < b[index]) {
-      return -order;
-    }
-    if (a[index] > b[index]) {
-      return order;
-    }
-    return 0;
-  });
+    sortedRows.sort((a, b) => {
+      if (a[index] < b[index]) {
+        return -order;
+      }
+      if (a[index] > b[index]) {
+        return order;
+      }
+      return 0;
+    });
   }
   if (index === 0 && order === -1) {
     sortedRows.reverse();
