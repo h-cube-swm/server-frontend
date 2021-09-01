@@ -270,8 +270,8 @@ export default function Branching({ survey, setSurvey }) {
             )}
           </svg>
         </div>
-        <p className="comment">아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.</p>
       </div>
+      <p className="comment">아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.</p>
     </div>
   );
 }
