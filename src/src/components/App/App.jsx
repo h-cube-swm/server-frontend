@@ -18,6 +18,7 @@ import ChannelService from "../ChannelService/ChannelService";
 
 // /* Lazy loaded components */
 const Main = lazy(() => import("../Main/Main"));
+const MyPage = lazy(() => import("../MyPage/MyPage"));
 const Survey = lazy(() => import("../Forms/Survey/Survey"));
 const Edit = lazy(() => import("../Forms/Survey/Edit/Edit"));
 const EditEnding = lazy(() => import("../Forms/Survey/EditEnding/EditEnding"));
@@ -45,6 +46,7 @@ function App() {
           <Suspense fallback={<Loading />}>
             <Switch>
               <Route path="/" component={Main} exact />
+              <Route path="/mypage" component={MyPage} exact />
               <Route path="/forms/survey" component={Survey} exact />
               <Route path="/forms/survey/mobile" component={EditCover} />
               <Route path="/forms/survey/edit/:link" component={Edit} />

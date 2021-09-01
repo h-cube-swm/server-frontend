@@ -17,6 +17,9 @@
   }
 
   .th {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     font-weight: 700;
     cursor: pointer;
     width: 0px;

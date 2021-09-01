@@ -6,7 +6,7 @@
 
 ```js
 state = {
-	choices: ["Choice 1", "Choice 2"],
+  choices: ["Choice 1", "Choice 2"],
 };
 ```
 
@@ -14,11 +14,11 @@ state = {
 
 ```js
 const setText = (newText) => {
-	setQuestion((question) => {
-		const choices = [...question.choices];
-		choices[i] = newText;
-		return { ...question, choices };
-	});
+  setQuestion((question) => {
+    const choices = [...question.choices];
+    choices[i] = newText;
+    return { ...question, choices };
+  });
 };
 ```
 

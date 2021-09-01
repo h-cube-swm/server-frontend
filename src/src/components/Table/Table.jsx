@@ -8,15 +8,21 @@ export default function Table({ columns, rows }) {
 
   const [index, order] = criterion;
   const sortedRows = [...rows];
-  sortedRows.sort((a, b) => {
-    if (a[index] < b[index]) {
-      return -order;
-    }
-    if (a[index] > b[index]) {
-      return order;
-    }
-    return 0;
-  });
+
+  if (index !== 0) {
+    sortedRows.sort((a, b) => {
+      if (a[index] < b[index]) {
+        return -order;
+      }
+      if (a[index] > b[index]) {
+        return order;
+      }
+      return 0;
+    });
+  }
+  if (index === 0 && order === -1) {
+    sortedRows.reverse();
+  }
 
   const getSetCriterion = (nextIndex) => () => {
     if (nextIndex === index) {
@@ -26,13 +32,7 @@ export default function Table({ columns, rows }) {
     }
   };
 
-  const weight = new Array(columns.length).fill(1);
-  // Weight assign comes here, if Required.
-
-  // eslint-disable-next-line
-  const weightSum = weight.reduce((pre, cur) => pre + cur, 0);
-  // eslint-disable-next-line
-  const weightStyles = weight.map((x) => ({ flexGrow: 1 }));
+  const weightStyles = new Array(columns.length).fill({ flexGrow: 1 });
 
   return (
     <div className="table">
@@ -41,6 +41,7 @@ export default function Table({ columns, rows }) {
           {columns.map((column, i) => (
             <div className="th" style={weightStyles[i]} key={i} onClick={getSetCriterion(i)}>
               {column}
+              {i === criterion[0] ? <p key={i}>{criterion[1] === ASC ? "▲" : "▼"}</p> : ""}
             </div>
           ))}
         </div>

@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
     padding: 5rem;
     background-color: transparent;
     background-image: url(../../assets/images/box.svg);
@@ -26,14 +26,102 @@
     }
   }
 
-  .section {
-    width: 60%;
+  .user-set {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 60%;
+    margin-top: 8rem;
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 2rem;
+      width: 20rem;
+      margin: 0 auto;
+      margin-bottom: 3rem;
+      img {
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-weight: $fw-bold;
+        margin-bottom: 1rem;
+      }
+      &.one {
+        grid-row: 1;
+        grid-column: 1;
+      }
+      &.two {
+        grid-row: 1;
+        grid-column: 2;
+      }
+      &.three {
+        grid-row: 1;
+        grid-column: 3;
+      }
+      &.four {
+        grid-row: 2;
+        grid-column: 1;
+      }
+      &.five {
+        grid-row: 2;
+        grid-column: 2;
+      }
+      &.six {
+        grid-row: 2;
+        grid-column: 3;
+      }
+    }
+  }
+
+  .key-function {
+    margin: 10rem auto;
+    .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 3rem auto;
+      margin-bottom: 10rem;
+      .hello {
+        margin-bottom: 5rem;
+        strong {
+          color: #2b44ff;
+        }
+      }
+      h1 {
+        font-size: $fs-lg;
+        font-weight: $fw-bold;
+        margin-bottom: 3rem;
+      }
+      p {
+        font-size: $fs-rg;
+        margin-bottom: 3rem;
+        em {
+          font-size: $fs-sm;
+          color: #b0b0b0;
+        }
+      }
+      img {
+        width: 50%;
+      }
+      .description {
+        text-align: left;
+      }
+      &.zero {
+        margin-bottom: 10rem;
+      }
+    }
+  }
+
+  .section {
+    display: grid;
+    justify-content: center;
     grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 3rem;
     margin: 10rem auto;
+    width: 60%;
 
     .box {
       @include round;
@@ -110,6 +198,14 @@
         font-weight: $fw-bold;
       }
     }
+    .user-set {
+      width: 45rem;
+      margin-bottom: 5rem;
+      .box {
+        width: 15rem;
+      }
+    }
+
     .section {
       width: 40rem;
       flex-direction: column;
@@ -117,7 +213,7 @@
       align-items: center;
       grid-gap: 3rem;
       margin: 0 auto;
-
+      margin-bottom: 5rem;
       .box {
         display: flex;
         align-items: center;
@@ -144,6 +240,67 @@
       h1 {
         font-size: $fs-rg;
         font-weight: 500;
+      }
+    }
+
+    .user-set {
+      display: grid;
+      justify-content: center;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      width: 60%;
+      margin-top: 8rem;
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 2rem;
+        width: 12rem;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+        img {
+          margin-bottom: 1rem;
+        }
+        h1 {
+          font-weight: $fw-bold;
+          margin-bottom: 1rem;
+        }
+        &.one {
+          grid-row: 1;
+          grid-column: 1;
+        }
+        &.two {
+          grid-row: 1;
+          grid-column: 2;
+        }
+        &.three {
+          grid-row: 2;
+          grid-column: 1;
+        }
+        &.four {
+          grid-row: 2;
+          grid-column: 2;
+        }
+        &.five {
+          grid-row: 3;
+          grid-column: 1;
+        }
+        &.six {
+          grid-row: 3;
+          grid-column: 2;
+        }
+      }
+    }
+
+    .key-function {
+      width: 70%;
+      margin-top: 0;
+      margin-bottom: 5rem;
+      .page {
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
     }
 

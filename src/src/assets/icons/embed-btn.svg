@@ -1,18 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="55" viewBox="0 0 55 55">
   <defs>
-    <clipPath id="clip-아트보드_5">
-      <rect width="100" height="100"/>
+    <clipPath id="clip-path">
+      <rect id="사각형_243" data-name="사각형 243" width="38" height="38" transform="translate(0.226 0.226)"/>
+    </clipPath>
+    <clipPath id="clip-아트보드_6">
+      <rect width="55" height="55"/>
     </clipPath>
   </defs>
-  <g id="아트보드_5" data-name="아트보드 – 5" clip-path="url(#clip-아트보드_5)">
-    <g id="그룹_85" data-name="그룹 85" transform="translate(-1)">
-      <line id="선_52" data-name="선 52" x1="21" y1="21.5" transform="translate(11.5 50)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
-      <line id="선_53" data-name="선 53" x1="21" y2="21.5" transform="translate(11.5 28.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  <g id="아트보드_6" data-name="아트보드 – 6" clip-path="url(#clip-아트보드_6)">
+    <path id="패스_52" data-name="패스 52" d="M18.293,0H31.707A18.526,18.526,0,0,1,50,18.75v12.5A18.526,18.526,0,0,1,31.707,50H18.293A18.526,18.526,0,0,1,0,31.25V18.75A18.526,18.526,0,0,1,18.293,0Z" transform="translate(3 3)" fill="#b0b0b0"/>
+    <g id="아트보드_5" data-name="아트보드 – 5" transform="translate(8.774 8.774)" clip-path="url(#clip-path)">
+      <g id="그룹_85" data-name="그룹 85" transform="translate(4.08 11.074)">
+        <line id="선_52" data-name="선 52" x1="8.16" y1="8.354" transform="translate(0 8.354)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.5"/>
+        <line id="선_53" data-name="선 53" x1="8.16" y2="8.354" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.5"/>
+      </g>
+      <g id="그룹_86" data-name="그룹 86" transform="translate(26.229 11.074)">
+        <line id="선_52-2" data-name="선 52" y1="8.354" x2="8.16" transform="translate(0 8.354)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.5"/>
+        <line id="선_53-2" data-name="선 53" x2="8.16" y2="8.354" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.5"/>
+      </g>
+      <line id="선_54" data-name="선 54" y1="16.709" x2="8.549" transform="translate(15.154 11.074)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2.5"/>
     </g>
-    <g id="그룹_86" data-name="그룹 86" transform="translate(67.5 28.5)">
-      <line id="선_52-2" data-name="선 52" y1="21.5" x2="21" transform="translate(0 21.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
-      <line id="선_53-2" data-name="선 53" x2="21" y2="21.5" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
-    </g>
-    <line id="선_54" data-name="선 54" y1="43" x2="22" transform="translate(39 28.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
   </g>
 </svg>

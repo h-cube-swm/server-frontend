@@ -28,14 +28,18 @@ import { CardStates, CardStyle } from "../../../../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
 import getQuestion from "../getQuestion";
-import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
 import { useMessage } from "../../../../contexts/MessageContext";
+import Branching from "../Branching/Branching";
+
+const MODE_EDIT = 0;
+const MODE_PREVEW = 1;
+const MODE_BRANCHING = 2;
 
 function Preview({ survey }) {
   const [responses, setResponses] = useState(null);
 
   function resetResponse() {
-    setResponses((responses) => ({ ...responses, index: 0 }));
+    setResponses((responses) => ({ ...responses, history: [] }));
   }
 
   useOnly(resetResponse, [survey]);
@@ -49,6 +53,7 @@ function Preview({ survey }) {
       setResponses={setResponses}
       onSubmit={resetResponse}
       tabIndex="-1"
+      isPreview={true}
     />
   );
 }
@@ -56,7 +61,11 @@ function Preview({ survey }) {
 function Edit({ survey: init, updateSurvey }) {
   const [survey, setSurvey] = useState(init);
   const [isEnded, setIsEnded] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
+  const [viewMode, setViewMode] = useState(MODE_EDIT);
+
+  const isPreview = viewMode === MODE_PREVEW;
+  const isEdit = viewMode === MODE_EDIT;
+  const isBranching = viewMode === MODE_BRANCHING;
 
   const { publish } = useMessage();
 
@@ -120,7 +129,7 @@ function Edit({ survey: init, updateSurvey }) {
   const onEvent = useThrottle(putSurvey);
   onEvent();
 
-  if (survey.meta.status === "published" || isEnded)
+  if (survey.status === "published" || isEnded)
     return <Redirect to={`/forms/survey/end/${survey.id}`} />;
 
   const { selectedIndex } = survey;
@@ -171,20 +180,34 @@ function Edit({ survey: init, updateSurvey }) {
 
   return (
     <div className="edit" {...backgroundCallbacks}>
-      <Title>{survey.title}</Title>
+      <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
       <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
-        <ToggleSwitch
-          isRequired={isPreview}
-          selectedLabel={"미리보기"}
-          unselectedLabel={"미리보기"}
-          setIsRequired={setIsPreview}
-        />
         <button onClick={onSubmit} className="btn rg submit-button">
           완료
         </button>
       </Prologue>
 
-      <div className={"view-edit " + (isPreview ? "left" : "")} onWheel={onWheel}>
+      <div className="section">
+        <button
+          className={"part " + (isBranching && "selected")}
+          onClick={() => setViewMode(MODE_BRANCHING)}>
+          분기처리
+        </button>
+
+        <button className={"part " + (isEdit && "selected")} onClick={() => setViewMode(MODE_EDIT)}>
+          편집
+        </button>
+
+        <button
+          className={"part " + (isPreview && "selected")}
+          onClick={() => setViewMode(MODE_PREVEW)}>
+          미리보기
+        </button>
+      </div>
+
+      <div
+        className={"view view-edit " + ((isPreview && "left") || (isBranching && "right"))}
+        onWheel={onWheel}>
         <div className="positioning-box">
           <div className="sidebar-box">
             <Sidebar
@@ -249,11 +272,15 @@ function Edit({ survey: init, updateSurvey }) {
 
         <Controller type={selectedSurveyType} setType={setQuesionType} />
       </div>
-      <div className={"view-preview " + (isPreview ? "" : "right")}>
+      <div className={"view " + (isPreview || "right")}>
         <Preview survey={survey}></Preview>
+      </div>
+      <div className={"view " + (isBranching || "left")}>
+        <Branching survey={survey} setSurvey={setSurvey}></Branching>
       </div>
     </div>
   );
 }
 
+// ToDo : Swagger를 써 볼 수도!
 export default withSurvey(Edit);
