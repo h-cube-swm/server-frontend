@@ -1,5 +1,7 @@
 # server-frontend
 
+![Build Test](https://github.com/h-cube-swm/server-frontend/actions/workflows/build-test.yaml/badge.svg)
+
 ## Note
 
 `setNestedState(setState,keys)` 함수는 Nested된 오브젝트의 업데이트를 간단하게 만들어준다. 첫 번째 인자는 다루고자 하는 state의 setState함수이며 두 번째 인자는 건드릴 속성에 접근하기 위한 키들이다. 예를 들어 아래와 state를 고려해보자.
