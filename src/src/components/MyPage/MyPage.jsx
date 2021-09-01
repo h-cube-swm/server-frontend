@@ -45,6 +45,7 @@ export default function MyPage() {
   };
 
   const deleteSurvey = async (link) => {
+    // eslint-disable-next-line
     const result = window.confirm("정말 삭제하시겠습니까?");
     if (result) {
       const status = await API.deleteSurvey(link);
@@ -73,7 +74,7 @@ export default function MyPage() {
 
   surveys.forEach((survey, i) => {
     contents.push(
-      <div className="survey">
+      <div key={i} className="survey">
         <Link
           className={"status " + survey.status}
           to={isMobile ? "/forms/survey/mobile" : `/forms/survey/edit/${survey.id}`}>
