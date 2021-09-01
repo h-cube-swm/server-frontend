@@ -45,11 +45,14 @@ export default function MyPage() {
   };
 
   const deleteSurvey = async (link) => {
-    const status = await API.deleteSurvey(link);
-    if (status === 200) {
-      publish("설문을 삭제하였습니다 🗑", "warning");
+    const result = window.confirm("정말 삭제하시겠습니까?");
+    if (result) {
+      const status = await API.deleteSurvey(link);
+      if (status === 200) {
+        publish("설문을 삭제하였습니다 🗑", "warning");
+      }
+      setTimestmap(Date.now());
     }
-    setTimestmap(Date.now());
   };
 
   const contents = [];
@@ -63,10 +66,17 @@ export default function MyPage() {
     );
   }
 
+  let isMobile = false;
+  if (document.getElementById("root").offsetWidth < 767) {
+    isMobile = true;
+  }
+
   surveys.forEach((survey, i) => {
     contents.push(
       <div className="survey">
-        <Link className={"status " + survey.status} to={`/forms/survey/edit/${survey.id}`}>
+        <Link
+          className={"status " + survey.status}
+          to={isMobile ? "/forms/survey/mobile" : `/forms/survey/edit/${survey.id}`}>
           {survey.status === "published" ? <p key={i}>완성</p> : <p key={i}>편집하기</p>}
         </Link>
         <div className="title">
@@ -87,17 +97,12 @@ export default function MyPage() {
           }>
           <img src={embedBtn} alt="dublicate embed code button" />
         </button>
-        <button className="link" onClick={() => deleteSurvey(survey.id)}>
+        <div className="link" onClick={() => deleteSurvey(survey.id)}>
           <img src={delBtn} alt="delete button" />
-        </button>
+        </div>
       </div>,
     );
   });
-
-  let isMobile = false;
-  if (document.getElementById("root").offsetWidth < 767) {
-    isMobile = true;
-  }
 
   return (
     <div className="my-page">
@@ -113,10 +118,8 @@ export default function MyPage() {
         <h1>마이페이지</h1>
       </div>
       <div className="partition" />
-      <div className="surveys">
-        <h2>내가 만든 폼</h2>
-        {contents}
-      </div>
+      <h2 className="my-form">내가 만든 폼</h2>
+      <div className="surveys">{contents}</div>
     </div>
   );
 }
