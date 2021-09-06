@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Branching.scss";
 
-const TOP = 200;
+const TOP = 275;
 const LEFT = 120;
 const RIGHT = 120;
 const QUESTION_DIST = 300; // Horizontal distance between each cards including its width
@@ -11,6 +11,7 @@ const CARD_W = 240; // Width of cards
 const CARD_H = 150; // Height of cards
 const CHOICE_DIST = 80; // Vertical distance between choices includig its height
 const CHOICE_H = 16 * 3;
+const SCROLL_DIST = 110;
 
 /**
  *
@@ -110,6 +111,12 @@ function Card({ index: questionIndex, question, onGrab }) {
   const choices = question.choices || [];
   return (
     <>
+      <div className="choice default-branch" style={{ top: y - CHOICE_H, left: x, width: CARD_W }}>
+        <div className="text">다음 질문</div>
+        <div className="handle">
+          <div className="handle-dot" onMouseDown={() => onGrab(question.id, -1, true)} />
+        </div>
+      </div>
       <div className="branch-card" style={{ left: x, top: y, width: CARD_W, height: CARD_H }}>
         {question.title}
       </div>
@@ -140,6 +147,9 @@ export default function Branching({ survey, setSurvey }) {
   // References
   const curve = useRef(null);
   const frameRef = useRef(null);
+  const contentRef = useRef(null);
+  const mouseRef = useRef([0, 0]);
+  const scrollRef = useRef(0);
 
   // Derived states
   const { questions } = survey;
@@ -152,30 +162,44 @@ export default function Branching({ survey, setSurvey }) {
   }
 
   function idToIndex(id) {
+    if (id < 0) return -1;
     for (let i = 0; i < questions.length; i++) {
       if (questions[i].id + "" === id + "") return i;
     }
     return -1;
   }
 
-  function handleGrab(i, j) {
-    setSelectedHandle([i, j]);
+  function handleGrab(i, j, isDefault) {
+    if (isDefault) {
+      setSelectedHandle([i, -1]);
+    } else {
+      setSelectedHandle([i, j]);
+    }
   }
 
-  function handleMove(e) {
-    if (!frameRef.current) return;
-    if (!selectedHandle) return;
-    e.preventDefault();
+  function handleConnecting() {
+    if (!curve.current) return;
+
+    const [cx, cy] = mouseRef.current;
 
     const [questionId, choiceIndex] = selectedHandle;
 
     // Get current handle position
     const [sx, sy] = getHandlePosition(idToIndex(questionId), choiceIndex);
-    const rect = frameRef.current.getBoundingClientRect();
+    const rect = contentRef.current.getBoundingClientRect();
 
     // Calculate relative mouse position
-    let mx = e.clientX - rect.left;
-    let my = e.clientY - rect.top;
+    let mx = cx - rect.left;
+    let my = cy - rect.top;
+
+    // Calculate scroll
+    let scrollDiff = 0;
+    if (cx < SCROLL_DIST) {
+      scrollDiff = cx - SCROLL_DIST;
+    } else if (cx > window.innerWidth - SCROLL_DIST) {
+      scrollDiff = cx - (window.innerWidth - SCROLL_DIST);
+    }
+    scrollRef.current = scrollDiff * 0.25;
 
     // Get nearest distance
     const [destIndex, distSquare] = getNearestAnchor(questions.length, mx, my);
@@ -187,7 +211,7 @@ export default function Branching({ survey, setSurvey }) {
       [mx, my] = getAnchorPosition(destIndex);
       // Update destination
       if (curDestId !== newDestId) setDestBody(newDestId);
-    } else if (curDestId > 0 && curDestId !== -1) setDestBody(-1);
+    } else if (curDestId !== -1) setDestBody(-1);
 
     // Calculate curve string and apply
     const curveString = getCurveString(sx, sy, mx, my);
@@ -201,23 +225,40 @@ export default function Branching({ survey, setSurvey }) {
     }
   }
 
-  function handleRelease() {
-    if (curDestId >= 0) {
-      const [questionId, choiceIndex] = selectedHandle;
-      setBranching({
-        ...branching,
-        [hashChoice(questionId, choiceIndex)]: curDestId,
-      });
-    }
+  function handleMove(e) {
+    mouseRef.current = [e.clientX, e.clientY];
+    if (!contentRef.current) return;
+    if (!selectedHandle) return;
+    e.preventDefault();
+    handleConnecting();
+  }
+
+  function handleRelease(e) {
+    if (!selectedHandle) return;
+    const [questionId, choiceIndex] = selectedHandle;
+    setBranching({
+      ...branching,
+      [hashChoice(questionId, choiceIndex)]: curDestId,
+    });
     setSelectedHandle(null);
     setDestBody(-1);
   }
 
+  useEffect(() => {
+    if (!selectedHandle) return null;
+    const id = setInterval(() => {
+      const diff = scrollRef.current;
+      frameRef.current.scrollLeft += diff;
+      handleConnecting();
+    }, 25);
+    return () => clearInterval(id);
+  }, [selectedHandle]);
+
   return (
-    <div className="branching">
+    <div className="branching" ref={frameRef}>
       <div
         className="frame"
-        ref={frameRef}
+        ref={contentRef}
         onMouseUp={handleRelease}
         onMouseLeave={handleRelease}
         onMouseMove={handleMove}
@@ -233,10 +274,10 @@ export default function Branching({ survey, setSurvey }) {
               const destIndex = idToIndex(destId);
               const question = questions[questionIndex];
 
+              // Skip unconnected line
+              if (destIndex < 0) return null;
               // Skip removed question
               if (questionIndex < 0) return null;
-              // Skip non-choice question
-              if (question.type !== CardTypes.SINGLE_CHOICE) return null;
               // Skip removed choice
               if (question.choices.length <= choiceIndex) return null;
               // Skip currently modifing branch
@@ -254,7 +295,7 @@ export default function Branching({ survey, setSurvey }) {
                   ref={curve}
                   fill="none"
                   stroke="#707070"
-                  strokeWidth="4"
+                  strokeWidth="3.5"
                 />
               );
             })}
@@ -271,6 +312,7 @@ export default function Branching({ survey, setSurvey }) {
           </svg>
         </div>
       </div>
+      <div className="ending">종료</div>
       <p className="comment">아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.</p>
     </div>
   );

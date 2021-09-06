@@ -42,10 +42,24 @@
       transform: translate(-50%, -50%);
       box-shadow: $shadow-default;
       .anchor-dot {
-        width: 1.2rem;
-        height: 1.2rem;
+        width: 1rem;
+        height: 1rem;
         background-color: #707070;
         border-radius: 5px;
+      }
+    }
+
+    .default-handle {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      box-shadow: $shadow-default;
+      cursor: grab;
+
+      .default-handle-dot {
+        width: 1rem;
+        height: 1rem;
+        background-color: #707070;
+        border-radius: 50%;
       }
     }
 
@@ -75,13 +89,34 @@
         cursor: grab;
         z-index: 100;
         .handle-dot {
-          width: 1.2rem;
-          height: 1.2rem;
+          width: 1rem;
+          height: 1rem;
           background-color: #707070;
           border-radius: 50%;
         }
       }
     }
+
+    .default-branch {
+      background-color: #2b44ff;
+      color: white;
+    }
+  }
+  .ending {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include round;
+    position: absolute;
+    width: 12rem;
+    height: 3rem;
+    background: linear-gradient(to right, #e22f1b, #eb5240);
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: $shadow-default;
+    color: #fff;
+    font-weight: $fw-bold;
   }
   .comment {
     position: absolute;
