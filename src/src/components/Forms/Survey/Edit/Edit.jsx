@@ -190,7 +190,7 @@ function Edit({ survey: init, updateSurvey, location }) {
       <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
       <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
         {isSaving ? (
-          <p className="save-indicator">편집중...</p>
+          <p className="save-indicator">저장중...</p>
         ) : (
           <p className="save-indicator">저장됨</p>
         )}
