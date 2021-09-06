@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import "./TextField.scss";
 
-function TextField({ text, setText, disabled, size, multiline, placeholder, ...props }) {
+function TextField({ text, setText, disabled, size, multiline, placeholder, ...props }, outerRef) {
   const ref = useRef(null);
 
   // Build classname
@@ -48,7 +48,11 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
   return (
     <textarea
       className={className}
-      ref={ref}
+      ref={(current) => {
+        ref.current = current;
+        // eslint-disable-next-line
+        if (outerRef) outerRef.current = current;
+      }}
       rows={1}
       {...props}
       onChange={handleOnChange}
@@ -59,4 +63,4 @@ function TextField({ text, setText, disabled, size, multiline, placeholder, ...p
   );
 }
 
-export default TextField;
+export default forwardRef(TextField);
