@@ -120,6 +120,7 @@ export function Response({
    *
    * @returns {function} `next()`
    */
+
   const getNext = () => {
     // If not passable, just return.
     if (!isPassable) return;
@@ -132,7 +133,6 @@ export function Response({
     }
 
     if (
-      question.type !== CardTypes.SINGLE_CHOICE || // If it is not a single choice type question
       !isResponsed(response) || // If it is not responsed
       !(currentIndex in indexBranchingMap) // If branching is not configured for this question
     ) {
@@ -141,18 +141,44 @@ export function Response({
       return;
     }
 
-    // It is guaranteed to be answered because current question is single-choice question and responsed
-    const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
+    if (
+      question.type === CardTypes.SINGLE_CHOICE // If it is a single choice type question
+    ) {
+      // It is guaranteed to be answered because current question is single-choice question and responsed
+      const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
 
-    // If branching is not configured for this choice
-    if (!(selectedChoice in indexBranchingMap[currentIndex])) {
-      // Go to next question
+      // If branching is not configured for this choice
+      if (!(selectedChoice in indexBranchingMap[currentIndex])) {
+        // If default next question is set
+        if (indexBranchingMap[currentIndex][-1]) {
+          // Go to default next question
+          push(indexBranchingMap[currentIndex][-1]);
+          return;
+        }
+        // Go to next question
+        push(currentIndex + 1);
+        return;
+      }
+
+      if (!indexBranchingMap[currentIndex][selectedChoice]) {
+        if (indexBranchingMap[currentIndex][-1]) {
+          push(indexBranchingMap[currentIndex][-1]);
+          return;
+        }
+        push(currentIndex + 1);
+        return;
+      }
+      // Branching is configured for current question and current choice. Go to there.
+      push(indexBranchingMap[currentIndex][selectedChoice]);
+    } // If it is not a single choice type question
+    else {
+      // Branching is configured for current question and current choice. Go to there.
+      if (indexBranchingMap[currentIndex][-1]) {
+        push(indexBranchingMap[currentIndex][-1]);
+        return;
+      }
       push(currentIndex + 1);
-      return;
     }
-
-    // Branching is configured for current question and current choice. Go to there.
-    push(indexBranchingMap[currentIndex][selectedChoice]);
   };
 
   const previous = () =>
