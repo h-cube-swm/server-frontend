@@ -120,6 +120,15 @@
     }
   }
 
+  .save-indicator {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    font-size: $fs-rg;
+    width: 5rem;
+    margin-right: 1rem;
+  }
+
   @include mobile {
     &.folded {
       height: 4rem;

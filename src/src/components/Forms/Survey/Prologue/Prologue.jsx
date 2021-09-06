@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import setNestedState from "../../../../utils/setNestedState";
 import TextField from "../../../TextField/TextField";
@@ -8,6 +8,14 @@ import arrow from "../../../../assets/icons/upward-arrow.svg";
 
 export default function Prologue({ survey, setSurvey, children }) {
   const [isFolded, setIsFolded] = useState(true);
+  const titleTextArea = useRef(null);
+
+  useEffect(() => {
+    if (!survey.title) {
+      titleTextArea.current.focus();
+    }
+  }, []);
+
   const classes = ["prologue-box"];
   if (isFolded) classes.push("folded");
   else classes.push("extended");
@@ -29,6 +37,7 @@ export default function Prologue({ survey, setSurvey, children }) {
               setText={setNestedState(setSurvey, ["title"])}
               placeholder="더 폼 나는 제목"
               size="title"
+              ref={titleTextArea}
               onFocus={() => setIsFolded(false)}
             />
           </div>
