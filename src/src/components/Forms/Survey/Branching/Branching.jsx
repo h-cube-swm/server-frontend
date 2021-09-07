@@ -256,7 +256,7 @@ export default function Branching({ survey, setSurvey }) {
     handleConnecting();
   }
 
-  function handleRelease(e) {
+  function handleRelease() {
     if (!selectedHandle) return;
     const [questionId, choiceIndex] = selectedHandle;
     setBranching({
