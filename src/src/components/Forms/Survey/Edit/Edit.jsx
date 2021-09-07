@@ -69,7 +69,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const viewMode = location.hash.replace("#", "");
   const isPreview = viewMode === MODE_PREVEW;
   const isBranching = viewMode === MODE_BRANCHING;
-  const isEdit = viewMode === !isPreview && !isBranching;
+  const isEdit = viewMode === MODE_EDIT;
 
   const { publish } = useMessage();
 
@@ -121,7 +121,7 @@ function Edit({ survey: init, updateSurvey, location }) {
 
     // Check range
     if (newIndex < 0) return;
-    if (newIndex >= survey.questions.length) return;
+    if (newIndex >= survey.questions.length - 1) return;
     if (newIndex === selectedIndex) return;
 
     // Swap two question
@@ -185,6 +185,8 @@ function Edit({ survey: init, updateSurvey, location }) {
     }
   };
 
+  const isLast = selectedIndex === questions.length - 1;
+
   return (
     <div className="edit" {...backgroundCallbacks}>
       <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
@@ -201,7 +203,7 @@ function Edit({ survey: init, updateSurvey, location }) {
 
       <div className="section">
         <Link className={"part " + (isBranching && "selected")} to={"#" + MODE_BRANCHING}>
-          분기처리
+          분기설정
         </Link>
 
         <Link className={"part " + (isEdit && "selected")} to={"#" + MODE_EDIT}>
@@ -254,7 +256,8 @@ function Edit({ survey: init, updateSurvey, location }) {
                   <QuestionProvider
                     state={state}
                     question={question}
-                    setQuestion={isSelected && setQuestion}>
+                    setQuestion={isSelected && setQuestion}
+                    isLast={isLast}>
                     <Card onDelete={onDelete} onGrab={onGrab} slowAppear={slowAppear}>
                       <QuestionCommon />
                     </Card>
@@ -276,9 +279,11 @@ function Edit({ survey: init, updateSurvey, location }) {
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
           y={+CardStyle.FRAME_HEIGHT / 2}
+          isLast={isLast}
         />
-
-        <Controller type={selectedSurveyType} setType={setQuesionType} />
+        <Hider hide={isLast}>
+          <Controller type={selectedSurveyType} setType={setQuesionType} />
+        </Hider>
       </div>
       <div className={"view " + (isPreview || "right")}>
         <Preview survey={survey}></Preview>

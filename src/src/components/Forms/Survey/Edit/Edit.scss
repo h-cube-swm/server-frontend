@@ -17,11 +17,12 @@ $background-color: #fff;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    a {
+    .part {
       color: #000;
       font-size: $fs-rg;
       background-color: transparent;
       margin: 0 1rem;
+      padding-bottom: 0.5rem;
       &.selected {
         border-bottom: 1.5px solid #707070;
       }
@@ -142,7 +143,7 @@ $background-color: #fff;
 
   @include laptop {
     .view {
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
   }
 }

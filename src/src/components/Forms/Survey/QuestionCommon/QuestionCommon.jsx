@@ -15,6 +15,7 @@ import Default from "../QuestionTypes/Default/Default";
 import { MultipleChoices, SingleChoices } from "../QuestionTypes/Choice/Choice";
 import Preference from "../QuestionTypes/Preference/Preference";
 import { LongSentence, ShortSentence } from "../QuestionTypes/Sentence/Sentence";
+import Empty from "../QuestionTypes/Empty/Empty";
 
 // Scss
 import "./QuestionCommon.scss";
@@ -27,6 +28,7 @@ function getQuestionDetail(type) {
     [CardTypes.PREFERENCE]: Preference,
     [CardTypes.SHORT_SENTENCE]: ShortSentence,
     [CardTypes.LONG_SENTENCE]: LongSentence,
+    [CardTypes.EMPTY]: Empty,
   };
   if (typeDict[type]) return typeDict[type];
   return Default;
@@ -56,7 +58,7 @@ export default function QuestionCommon() {
           />
         </div>
         <div className="required-toggle-box">
-          <Hider hide={isResponse}>
+          <Hider hide={isResponse || question.type === CardTypes.EMPTY}>
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
