@@ -33,6 +33,7 @@ function getIndexBranchingMap(survey) {
 
   const branchingMap = {};
   Object.entries(branching).forEach(([key, dest]) => {
+    if (!dest) return;
     const [questionId, choiceIndex] = key.split(" ");
     const questionIndex = idToIndex[+questionId];
     if (questionIndex === undefined) return;
@@ -120,6 +121,7 @@ export function Response({
    *
    * @returns {function} `next()`
    */
+
   const getNext = () => {
     // If not passable, just return.
     if (!isPassable) return;
@@ -131,28 +133,38 @@ export function Response({
       return;
     }
 
-    if (
-      question.type !== CardTypes.SINGLE_CHOICE || // If it is not a single choice type question
-      !isResponsed(response) || // If it is not responsed
-      !(currentIndex in indexBranchingMap) // If branching is not configured for this question
-    ) {
-      // Go to next question
-      push(currentIndex + 1);
-      return;
+    if (question.type === CardTypes.SINGLE_CHOICE) {
+      if (Object.entries(response).filter((tuple) => tuple[1])[0]) {
+        const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
+        if (isResponsed(response) && indexBranchingMap[currentIndex][selectedChoice]) {
+          // Go to selectedchoice's branch only if choice has its own branch
+          push(indexBranchingMap[currentIndex][selectedChoice]);
+          return;
+        }
+        if (indexBranchingMap[currentIndex][selectedChoice] === 0) {
+          // It would be falsy if checked in upper, exception
+          push(0);
+          return;
+        }
+      }
     }
 
-    // It is guaranteed to be answered because current question is single-choice question and responsed
-    const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
+    if (indexBranchingMap[currentIndex]) {
+      if (indexBranchingMap[currentIndex][-1]) {
+        // Go to default branch
+        push(indexBranchingMap[currentIndex][-1]);
+        return;
+      }
 
-    // If branching is not configured for this choice
-    if (!(selectedChoice in indexBranchingMap[currentIndex])) {
-      // Go to next question
-      push(currentIndex + 1);
-      return;
+      if (indexBranchingMap[currentIndex][-1] === 0) {
+        // It would be falsy if checked in upper, exception
+        push(0);
+        return;
+      }
     }
 
-    // Branching is configured for current question and current choice. Go to there.
-    push(indexBranchingMap[currentIndex][selectedChoice]);
+    // Go to next question
+    push(currentIndex + 1);
   };
 
   const previous = () =>

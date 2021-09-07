@@ -10,10 +10,11 @@ export function QuestionProvider({
   response,
   setResponse,
   tabIndex,
+  isLast,
 }) {
   return (
     <QuestionContext.Provider
-      value={{ state, question, response, setQuestion, setResponse, tabIndex }}>
+      value={{ state, question, response, setQuestion, setResponse, tabIndex, isLast }}>
       {children}
     </QuestionContext.Provider>
   );

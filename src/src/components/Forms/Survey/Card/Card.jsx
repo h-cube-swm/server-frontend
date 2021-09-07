@@ -1,6 +1,7 @@
 import React from "react";
 import { CardStates, CardStyle } from "../../../../constants";
 import { useQuestion } from "../../../../contexts/QuestionContext";
+import Hider from "../../../Hider/Hider";
 
 /* Assets */
 import "./Card.scss";
@@ -9,7 +10,7 @@ import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
 // import questionBranchButton from "../../../../assets/icons/branch-btn.svg";
 
 export default function Card({ onDelete, onGrab, children }) {
-  const { state } = useQuestion();
+  const { state, isLast } = useQuestion();
 
   const classes = ["survey-card"];
 
@@ -57,23 +58,19 @@ export default function Card({ onDelete, onGrab, children }) {
         width: CardStyle.WIDTH,
       }}>
       <div className="content-box">{children}</div>
-      <div className="button-box">
-        {/* <button
-          className={"branch " + (onDelete ? "" : "hidden")}
-          tabIndex={onDelete ? null : "-1"}
-          onClick={handleOnDelete}>
-          <img src={questionBranchButton} alt="Branch button"></img>
-        </button> */}
-        <button
-          className={"delete " + (onDelete ? "" : "hidden")}
-          tabIndex={onDelete ? null : "-1"}
-          onClick={handleOnDelete}>
-          <img src={imgDeleteButton} alt="Delete button"></img>
-        </button>
-      </div>
-      <div className="handle" onMouseDown={handleOnGrab}>
-        <img src={imgHandle} alt="Handle"></img>
-      </div>
+      <Hider hide={isLast}>
+        <div className="button-box">
+          <button
+            className={"delete " + (onDelete ? "" : "hidden")}
+            tabIndex={onDelete ? null : "-1"}
+            onClick={handleOnDelete}>
+            <img src={imgDeleteButton} alt="Delete button"></img>
+          </button>
+        </div>
+        <div className="handle" onMouseDown={handleOnGrab}>
+          <img src={imgHandle} alt="Handle"></img>
+        </div>
+      </Hider>
     </div>
   );
 }

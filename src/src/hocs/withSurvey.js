@@ -1,6 +1,7 @@
 import React, { Redirect } from "react-router-dom";
 import { CardTypes } from "../constants";
 import getQuestion from "../components/Forms/Survey/getQuestion";
+import getLastQuestion from "../components/Forms/Survey/getLastQuestion";
 import Loading from "../components/Loading/Loading";
 import API from "../utils/apis";
 import { isUnhashable, unhash } from "../utils/hasher";
@@ -24,6 +25,9 @@ const withSurvey = (Component) => (props) => {
     const [counter, question] = getQuestion(survey.counter);
     survey.counter = counter;
     survey.questions.push(question);
+    const [lastCounter, lastQuestion] = getLastQuestion(survey.counter);
+    survey.counter = lastCounter;
+    survey.questions.push(lastQuestion);
   }
   const newProps = { ...props, survey };
 

@@ -1,8 +1,9 @@
 /* React elements */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 /* Components */
 import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import Sidebar from "../Sidebar/Sidebar";
@@ -31,9 +32,9 @@ import getQuestion from "../getQuestion";
 import { useMessage } from "../../../../contexts/MessageContext";
 import Branching from "../Branching/Branching";
 
-const MODE_EDIT = 0;
-const MODE_PREVEW = 1;
-const MODE_BRANCHING = 2;
+const MODE_EDIT = "edit";
+const MODE_PREVEW = "preview";
+const MODE_BRANCHING = "branching";
 
 function Preview({ survey }) {
   const [responses, setResponses] = useState(null);
@@ -58,14 +59,17 @@ function Preview({ survey }) {
   );
 }
 
-function Edit({ survey: init, updateSurvey }) {
+function Edit({ survey: init, updateSurvey, location }) {
   const [survey, setSurvey] = useState(init);
   const [isEnded, setIsEnded] = useState(false);
-  const [viewMode, setViewMode] = useState(MODE_EDIT);
+  const [isSaving, setIsSaving] = useState(false);
 
+  useEffect(() => setIsSaving(true), [survey]);
+
+  const viewMode = location.hash.replace("#", "");
   const isPreview = viewMode === MODE_PREVEW;
-  const isEdit = viewMode === MODE_EDIT;
   const isBranching = viewMode === MODE_BRANCHING;
+  const isEdit = viewMode === MODE_EDIT;
 
   const { publish } = useMessage();
 
@@ -105,7 +109,10 @@ function Edit({ survey: init, updateSurvey }) {
     setSelectedIndex(newIndex);
   });
 
-  const putSurvey = () => updateSurvey(survey);
+  const putSurvey = async () => {
+    await updateSurvey(survey);
+    setIsSaving(false);
+  };
 
   const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging((delta) => {
     // Calculate new index
@@ -114,7 +121,7 @@ function Edit({ survey: init, updateSurvey }) {
 
     // Check range
     if (newIndex < 0) return;
-    if (newIndex >= survey.questions.length) return;
+    if (newIndex >= survey.questions.length - 1) return;
     if (newIndex === selectedIndex) return;
 
     // Swap two question
@@ -178,31 +185,34 @@ function Edit({ survey: init, updateSurvey }) {
     }
   };
 
+  const isLast = selectedIndex === questions.length - 1;
+
   return (
     <div className="edit" {...backgroundCallbacks}>
       <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
       <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
+        {isSaving ? (
+          <p className="save-indicator">저장중...</p>
+        ) : (
+          <p className="save-indicator">저장됨</p>
+        )}
         <button onClick={onSubmit} className="btn rg submit-button">
           완료
         </button>
       </Prologue>
 
       <div className="section">
-        <button
-          className={"part " + (isBranching && "selected")}
-          onClick={() => setViewMode(MODE_BRANCHING)}>
-          분기처리
-        </button>
+        <Link className={"part " + (isBranching && "selected")} to={"#" + MODE_BRANCHING}>
+          분기설정
+        </Link>
 
-        <button className={"part " + (isEdit && "selected")} onClick={() => setViewMode(MODE_EDIT)}>
+        <Link className={"part " + (isEdit && "selected")} to={"#" + MODE_EDIT}>
           편집
-        </button>
+        </Link>
 
-        <button
-          className={"part " + (isPreview && "selected")}
-          onClick={() => setViewMode(MODE_PREVEW)}>
+        <Link className={"part " + (isPreview && "selected")} to={"#" + MODE_PREVEW}>
           미리보기
-        </button>
+        </Link>
       </div>
 
       <div
@@ -246,7 +256,8 @@ function Edit({ survey: init, updateSurvey }) {
                   <QuestionProvider
                     state={state}
                     question={question}
-                    setQuestion={isSelected && setQuestion}>
+                    setQuestion={isSelected && setQuestion}
+                    isLast={isLast}>
                     <Card onDelete={onDelete} onGrab={onGrab} slowAppear={slowAppear}>
                       <QuestionCommon />
                     </Card>
@@ -268,9 +279,11 @@ function Edit({ survey: init, updateSurvey }) {
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
           y={+CardStyle.FRAME_HEIGHT / 2}
+          isLast={isLast}
         />
-
-        <Controller type={selectedSurveyType} setType={setQuesionType} />
+        <Hider hide={isLast}>
+          <Controller type={selectedSurveyType} setType={setQuesionType} />
+        </Hider>
       </div>
       <div className={"view " + (isPreview || "right")}>
         <Preview survey={survey}></Preview>
