@@ -35,6 +35,19 @@
       padding: 1rem;
       box-sizing: border-box;
       background-color: white;
+
+      .title {
+        height: 100%;
+        font-size: $fs-rg;
+        font-weight: $fw-bold;
+        overflow: scroll;
+      }
+      .end {
+        position: absolute;
+        bottom: 1rem;
+        right: 2rem;
+        font-weight: $fw-bold;
+      }
     }
 
     .anchor {
@@ -77,6 +90,10 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        padding-left: 0.5rem;
+        &.last {
+          opacity: 0;
+        }
       }
 
       .handle {
@@ -100,28 +117,19 @@
     .default-branch {
       background-color: #2b44ff;
       color: white;
+      &.last {
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        z-index: -100;
+      }
     }
-  }
-  .ending {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @include round;
-    position: absolute;
-    width: 12rem;
-    height: 3rem;
-    background: linear-gradient(to right, #e22f1b, #eb5240);
-    bottom: 4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: $shadow-default;
-    color: #fff;
-    font-weight: $fw-bold;
   }
   .comment {
     position: absolute;
-    bottom: 2rem;
+    bottom: 4rem;
     left: 50%;
     transform: translateX(-50%);
+    text-align: center;
   }
 }

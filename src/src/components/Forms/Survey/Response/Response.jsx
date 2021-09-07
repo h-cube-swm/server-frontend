@@ -33,6 +33,7 @@ function getIndexBranchingMap(survey) {
 
   const branchingMap = {};
   Object.entries(branching).forEach(([key, dest]) => {
+    if (!dest) return;
     const [questionId, choiceIndex] = key.split(" ");
     const questionIndex = idToIndex[+questionId];
     if (questionIndex === undefined) return;
@@ -132,53 +133,38 @@ export function Response({
       return;
     }
 
-    if (
-      !isResponsed(response) || // If it is not responsed
-      !(currentIndex in indexBranchingMap) // If branching is not configured for this question
-    ) {
-      // Go to next question
-      push(currentIndex + 1);
-      return;
+    if (question.type === CardTypes.SINGLE_CHOICE) {
+      if (Object.entries(response).filter((tuple) => tuple[1])[0]) {
+        const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
+        if (isResponsed(response) && indexBranchingMap[currentIndex][selectedChoice]) {
+          // Go to selectedchoice's branch only if choice has its own branch
+          push(indexBranchingMap[currentIndex][selectedChoice]);
+          return;
+        }
+        if (indexBranchingMap[currentIndex][selectedChoice] === 0) {
+          // It would be falsy if checked in upper, exception
+          push(0);
+          return;
+        }
+      }
     }
 
-    if (
-      question.type === CardTypes.SINGLE_CHOICE // If it is a single choice type question
-    ) {
-      // It is guaranteed to be answered because current question is single-choice question and responsed
-      const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
-
-      // If branching is not configured for this choice
-      if (!(selectedChoice in indexBranchingMap[currentIndex])) {
-        // If default next question is set
-        if (indexBranchingMap[currentIndex][-1]) {
-          // Go to default next question
-          push(indexBranchingMap[currentIndex][-1]);
-          return;
-        }
-        // Go to next question
-        push(currentIndex + 1);
-        return;
-      }
-
-      if (!indexBranchingMap[currentIndex][selectedChoice]) {
-        if (indexBranchingMap[currentIndex][-1]) {
-          push(indexBranchingMap[currentIndex][-1]);
-          return;
-        }
-        push(currentIndex + 1);
-        return;
-      }
-      // Branching is configured for current question and current choice. Go to there.
-      push(indexBranchingMap[currentIndex][selectedChoice]);
-    } // If it is not a single choice type question
-    else {
-      // Branching is configured for current question and current choice. Go to there.
+    if (indexBranchingMap[currentIndex]) {
       if (indexBranchingMap[currentIndex][-1]) {
+        // Go to default branch
         push(indexBranchingMap[currentIndex][-1]);
         return;
       }
-      push(currentIndex + 1);
+
+      if (indexBranchingMap[currentIndex][-1] === 0) {
+        // It would be falsy if checked in upper, exception
+        push(0);
+        return;
+      }
     }
+
+    // Go to next question
+    push(currentIndex + 1);
   };
 
   const previous = () =>

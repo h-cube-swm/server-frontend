@@ -3,13 +3,13 @@ import { CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Branching.scss";
 
-const TOP = 275;
+const TOP = 240;
 const LEFT = 120;
 const RIGHT = 120;
 const QUESTION_DIST = 300; // Horizontal distance between each cards including its width
 const CARD_W = 240; // Width of cards
 const CARD_H = 150; // Height of cards
-const CHOICE_DIST = 80; // Vertical distance between choices includig its height
+const CHOICE_DIST = 75; // Vertical distance between choices includig its height
 const CHOICE_H = 16 * 3;
 const SCROLL_DIST = 110;
 
@@ -28,7 +28,11 @@ function getCardPosition(i) {
  * @returns {Array} [x, y]
  */
 function getChoicePosition(i, j) {
-  return [getCardPosition(i)[0], TOP + CARD_H + CHOICE_DIST * (j + 0.5) + CHOICE_H / 2];
+  const [x, y] = getCardPosition(i);
+  if (j === -1) {
+    return [x, y + CARD_H - 4 * CHOICE_H];
+  }
+  return [x, TOP + CARD_H + CHOICE_DIST * (j + 0.5) + CHOICE_H / 2];
 }
 
 /** *
@@ -106,19 +110,37 @@ function unhashChoice(hashed) {
   return [+i, +j];
 }
 
-function Card({ index: questionIndex, question, onGrab }) {
+function Card({ index: questionIndex, question, onGrab, isLast }) {
   const [x, y] = getCardPosition(questionIndex);
   const choices = question.choices || [];
+  const backgroundColor = !isLast ? "#fff" : "linear-gradient(to right, #009611, #57b64b)";
+  const color = !isLast ? "#000" : "#fff";
   return (
     <>
-      <div className="choice default-branch" style={{ top: y - CHOICE_H, left: x, width: CARD_W }}>
-        <div className="text">다음 질문</div>
+      <div
+        className={!isLast ? "choice default-branch" : "choice default-branch last"}
+        style={{
+          top: y + CARD_H - 4 * CHOICE_H,
+          left: x,
+          width: CARD_W,
+        }}>
+        <div className="text">이 질문의 다음 질문</div>
         <div className="handle">
           <div className="handle-dot" onMouseDown={() => onGrab(question.id, -1, true)} />
         </div>
       </div>
-      <div className="branch-card" style={{ left: x, top: y, width: CARD_W, height: CARD_H }}>
-        {question.title}
+      <div
+        className="branch-card"
+        style={{
+          left: x,
+          top: y,
+          width: CARD_W,
+          height: CARD_H,
+          background: backgroundColor,
+          color,
+        }}>
+        <p className="title">{question.title}</p>
+        {isLast ? <p className="end">종료</p> : <></>}
       </div>
       {question.type === CardTypes.SINGLE_CHOICE &&
         choices.map((text, choiceIndex) => {
@@ -129,6 +151,7 @@ function Card({ index: questionIndex, question, onGrab }) {
               <div className="handle" onMouseDown={() => onGrab(question.id, choiceIndex)}>
                 <div className="handle-dot" />
               </div>
+              <p className="next-question">{}</p>
             </div>
           );
         })}
@@ -262,9 +285,19 @@ export default function Branching({ survey, setSurvey }) {
         onMouseUp={handleRelease}
         onMouseLeave={handleRelease}
         onMouseMove={handleMove}
-        style={{ width: getCardPosition(questions.length - 1)[0] + CARD_W + RIGHT }}>
+        style={{
+          width: getCardPosition(questions.length - 1)[0] + CARD_W + RIGHT,
+        }}>
         {questions.map((question, index) => {
-          return <Card key={index} index={index} question={question} onGrab={handleGrab} />;
+          return (
+            <Card
+              key={index}
+              index={index}
+              question={question}
+              onGrab={handleGrab}
+              isLast={index === questions.length - 1}
+            />
+          );
         })}
         <div className="curve">
           <svg>
@@ -274,10 +307,12 @@ export default function Branching({ survey, setSurvey }) {
               const destIndex = idToIndex(destId);
               const question = questions[questionIndex];
 
-              // Skip unconnected line
-              if (destIndex < 0) return null;
               // Skip removed question
               if (questionIndex < 0) return null;
+              // Skip choice of none-singe-choice-questions
+              if (question.type !== CardTypes.SINGLE_CHOICE && choiceIndex >= 0) return null;
+              // Skip unconnected line
+              if (destIndex < 0) return null;
               // Skip removed choice
               if (question.choices.length <= choiceIndex) return null;
               // Skip currently modifing branch
@@ -312,8 +347,13 @@ export default function Branching({ survey, setSurvey }) {
           </svg>
         </div>
       </div>
-      <div className="ending">종료</div>
-      <p className="comment">아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.</p>
+      <p className="comment">
+        <strong>&#34;선택지가 가리키는 다음 질문&#34;</strong>이&nbsp;
+        <strong>&#34;이 질문의 다음 질문&#34;</strong>에 우선합니다.
+        <br />
+        <br />
+        아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.
+      </p>
     </div>
   );
 }
