@@ -7,6 +7,7 @@ import multipleChoice from "../../../../assets/icons/multiple-choice.svg";
 import preference from "../../../../assets/icons/preference.svg";
 import shortSentence from "../../../../assets/icons/short-sentence.svg";
 import longSentence from "../../../../assets/icons/long-sentence.svg";
+import empty from "../../../../assets/icons/empty.svg";
 
 const BUTTONS = [
   [singleChoice, CardTypes.SINGLE_CHOICE, "단일선택"],
@@ -14,6 +15,7 @@ const BUTTONS = [
   [preference, CardTypes.PREFERENCE, "선호도"],
   [shortSentence, CardTypes.SHORT_SENTENCE, "단답형"],
   [longSentence, CardTypes.LONG_SENTENCE, "장문형"],
+  [empty, CardTypes.EMPTY, "빈 질문"],
 ];
 
 export default function Controller({ type: selectedType, setType }) {

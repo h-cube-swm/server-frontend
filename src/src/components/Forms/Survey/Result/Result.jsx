@@ -24,6 +24,7 @@ const VIEW_DICT = {
   [CardTypes.SHORT_SENTENCE]: SentenceView,
   [CardTypes.LONG_SENTENCE]: SentenceView,
   [CardTypes.PREFERENCE]: PreferenceView,
+  [CardTypes.EMPTY]: null,
 };
 
 function answerToString(answer) {

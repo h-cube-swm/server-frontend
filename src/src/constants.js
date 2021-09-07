@@ -4,6 +4,7 @@ export const CardTypes = {
   PREFERENCE: "preference",
   SHORT_SENTENCE: "short-sentence",
   LONG_SENTENCE: "long-sentence",
+  EMPTY: "empty",
 };
 
 export const CardStates = {
