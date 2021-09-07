@@ -120,7 +120,7 @@ export default function MyPage() {
       </div>
       <div className="partition" />
       <h2 className="my-form">내가 만든 폼</h2>
-      <div className="surveys">{contents}</div>
+      <div className="surveys">{contents.reverse()}</div>
     </div>
   );
 }
