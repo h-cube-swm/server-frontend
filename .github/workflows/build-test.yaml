@@ -14,7 +14,10 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: ap-northeast-2
             
-      - name: ECR Login, Build, Push
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+            
+      - name: ECR Build, Push
         env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_AUTH }}
