@@ -19,6 +19,7 @@
   .survey-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
 
     .children-box {
@@ -29,14 +30,17 @@
     }
 
     .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 80%;
     }
 
     .logo {
-      padding-left: (5rem-3.5rem)/2;
-      padding-right: 3rem;
+      padding-left: 2rem;
       height: 3.5rem;
       transition-duration: 500ms;
+      margin-right: 2rem;
       img {
         height: 100%;
       }
@@ -46,23 +50,19 @@
       flex-grow: 1;
       width: 100%;
       height: max-content;
-      margin-right: 1rem;
-    }
-  }
-
-  .fold-button-box {
-    width: 100;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    padding: 1rem;
-    transform: translateX(-50%);
-    button {
-      background-color: transparent;
-      img {
-        width: 70%;
+      &.fold {
+        * {
+          text-align: unset;
+        }
+      }
+      .title-intro {
+        font-weight: $fw-bold;
+        color: #2b44ff;
+        margin-top: 10rem;
+        margin-bottom: 1rem;
+      }
+      * {
+        text-align: center;
       }
     }
   }
@@ -70,11 +70,39 @@
   .description-box {
     width: 100%;
     height: auto;
+    &.full {
+      width: 50%;
+    }
+    .description-intro {
+      font-weight: $fw-bold;
+      color: #2b44ff;
+      margin-top: 6rem;
+    }
     textarea {
       width: 100%;
-      height: 10rem;
-      margin-top: 5rem;
+      height: 15rem;
+      margin-top: 2rem;
     }
+    * {
+      text-align: center;
+    }
+  }
+
+  .fold-btn {
+    @include round;
+    width: 5rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    padding: 1rem;
+    transform: translateX(-50%);
+    font-size: $fs-rg;
+    background-color: #2b44ff;
+    color: #fff;
   }
 
   &.folded {
@@ -127,6 +155,15 @@
     font-size: $fs-rg;
     width: 5rem;
     margin-right: 1rem;
+  }
+
+  .submit-btn {
+    background-color: #2b44ff;
+    cursor: pointer;
+    &.saving {
+      background-color: #707070;
+      cursor: default;
+    }
   }
 
   @include mobile {
