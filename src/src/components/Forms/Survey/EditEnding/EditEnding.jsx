@@ -136,7 +136,10 @@ const Ending = ({ ending }) => {
                       `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`,
                     )
                   }>
-                  <img src={embedBtn} alt="" />
+                  <div className="image-border">
+                    <img src={embedBtn} alt="" />
+                    <p>복사</p>
+                  </div>
                 </button>
               </div>
               <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`}</h3>
@@ -145,16 +148,17 @@ const Ending = ({ ending }) => {
               <h1>
                 이메일을 적어주시면
                 <br />
-                <strong>배포</strong>와 <strong>결과확인</strong> 링크를 보내드립니다.
+                <strong>공유</strong>와 <strong>결과</strong> 링크를 보내드립니다.
               </h1>
               <div className="email-input">
                 <div className="email-input-box">
                   <TextField
-                    placeholder="abcde@the-form.io"
+                    placeholder="이메일을 입력하세요"
                     size="lg"
                     setText={handleEmailInput}
                     text={email}
                   />
+                  <hr className="email-underline"></hr>
                 </div>
                 <button
                   onClick={handleEmailSend}
@@ -179,12 +183,15 @@ const Ending = ({ ending }) => {
                   <h1>
                     아래 링크를 통해
                     <br />
-                    <strong>배포</strong>하세요.
+                    <strong>공유</strong>하세요.
                   </h1>
-                  <button
-                    onClick={() => duplicateLink(`${HOST}/forms/survey/response/${surveyLink}`)}>
-                    <img src={duplicate} alt="duplicate button" />
-                  </button>
+                  <div className="button-box">
+                    <button
+                      onClick={() => duplicateLink(`${HOST}/forms/survey/response/${surveyLink}`)}>
+                      <img src={duplicate} alt="duplicate button" />
+                      <p>복사</p>
+                    </button>
+                  </div>
                 </div>
                 <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
               </div>
@@ -197,10 +204,13 @@ const Ending = ({ ending }) => {
                     <br />
                     <strong>결과</strong>를 확인하세요.
                   </h1>
-                  <button
-                    onClick={() => duplicateLink(`${HOST}/forms/survey/result/${resultLink}`)}>
-                    <img src={duplicate} alt="duplicate button" />
-                  </button>
+                  <div className="button-box">
+                    <button
+                      onClick={() => duplicateLink(`${HOST}/forms/survey/result/${resultLink}`)}>
+                      <img src={duplicate} alt="duplicate button" />
+                      <p>복사</p>
+                    </button>
+                  </div>
                 </div>
 
                 <h3>{`${HOST}/forms/survey/result/${resultLink}`}</h3>
