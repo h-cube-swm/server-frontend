@@ -113,6 +113,15 @@
           .embed-title {
             display: flex;
             align-items: flex-start;
+            .image-border {
+              width: 3rem;
+              height: 4rem;
+              border: 1px solid #fff;
+              border-radius: 10px;
+              p {
+                color: #fff;
+              }
+            }
             button {
               background-color: transparent;
               img {
@@ -137,6 +146,12 @@
               align-items: center;
               .email-input-box {
                 margin-right: 1rem;
+              }
+              .email-underline {
+                margin-top: 0.5rem;
+                background-color: #b1b1b1;
+                border: 0;
+                height: 2px;
               }
             }
             h1 {
@@ -186,11 +201,20 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            button {
-              width: 15%;
-              background-color: rgba($color: #000000, $alpha: 0);
-              img {
-                width: 50%;
+            .button-box {
+              width: 3rem;
+              height: 4rem;
+              border: 1px solid #fff;
+              border-radius: 10px;
+              button {
+                background-color: rgba($color: #000000, $alpha: 0);
+                p {
+                  color: #fff;
+                }
+                img {
+                  width: 50%;
+                  margin-top: 0.5rem;
+                }
               }
             }
           }
@@ -204,11 +228,20 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            button {
-              width: 15%;
-              background-color: rgba($color: #000000, $alpha: 0);
-              img {
-                width: 50%;
+            .button-box {
+              width: 3rem;
+              height: 4rem;
+              border: 1px solid #fff;
+              border-radius: 10px;
+              button {
+                background-color: rgba($color: #000000, $alpha: 0);
+                p {
+                  color: #fff;
+                }
+                img {
+                  width: 50%;
+                  margin-top: 0.5rem;
+                }
               }
             }
           }

@@ -33,7 +33,7 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import Branching from "../Branching/Branching";
 
 const MODE_EDIT = "edit";
-const MODE_PREVEW = "preview";
+const MODE_PREVIEW = "preview";
 const MODE_BRANCHING = "branching";
 
 function Preview({ survey }) {
@@ -67,9 +67,9 @@ function Edit({ survey: init, updateSurvey, location }) {
   useEffect(() => setIsSaving(true), [survey]);
 
   const viewMode = location.hash.replace("#", "");
-  const isPreview = viewMode === MODE_PREVEW;
+  const isPreview = viewMode === MODE_PREVIEW;
   const isBranching = viewMode === MODE_BRANCHING;
-  const isEdit = viewMode === MODE_EDIT;
+  const isEdit = viewMode !== MODE_PREVIEW && viewMode !== MODE_BRANCHING;
 
   const { publish } = useMessage();
 
@@ -192,25 +192,30 @@ function Edit({ survey: init, updateSurvey, location }) {
       <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
       <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
         {isSaving ? (
-          <p className="save-indicator">저장중...</p>
+          <>
+            <p className="save-indicator">저장중...</p>
+            <button className="btn rg submit-btn saving">완료</button>
+          </>
         ) : (
-          <p className="save-indicator">저장됨</p>
+          <>
+            <p className="save-indicator">저장됨</p>
+            <button onClick={onSubmit} className="btn rg submit-btn">
+              완료
+            </button>
+          </>
         )}
-        <button onClick={onSubmit} className="btn rg submit-button">
-          완료
-        </button>
       </Prologue>
 
       <div className="section">
         <Link className={"part " + (isBranching && "selected")} to={"#" + MODE_BRANCHING}>
-          분기설정
+          흐름설정
         </Link>
-
+        <div className="divider" />
         <Link className={"part " + (isEdit && "selected")} to={"#" + MODE_EDIT}>
-          편집
+          설문편집
         </Link>
-
-        <Link className={"part " + (isPreview && "selected")} to={"#" + MODE_PREVEW}>
+        <div className="divider" />
+        <Link className={"part " + (isPreview && "selected")} to={"#" + MODE_PREVIEW}>
           미리보기
         </Link>
       </div>

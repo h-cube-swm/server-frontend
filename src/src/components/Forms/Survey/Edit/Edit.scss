@@ -17,22 +17,24 @@ $background-color: #fff;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+    .divider {
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 50%;
+      background-color: #707070;
+      transform: translateY(-0.15rem);
+    }
     .part {
       color: #000;
       font-size: $fs-rg;
       background-color: transparent;
-      margin: 0 1rem;
+      margin: 0 2rem;
       padding-bottom: 0.5rem;
+      transition-duration: 300ms;
       &.selected {
-        border-bottom: 1.5px solid #707070;
-      }
-    }
-  }
-
-  .view {
-    .response {
-      .cover-box {
-        padding-top: 5rem;
+        transform: scale(1.2);
+        transition-duration: 300ms;
+        color: #2b44ff;
       }
     }
   }

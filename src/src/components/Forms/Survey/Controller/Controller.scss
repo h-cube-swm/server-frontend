@@ -24,12 +24,12 @@
 
     .element-detail {
       display: block;
-      width: 3rem;
+      width: 4rem;
       position: absolute;
       text-align: start;
-      font-size: $fs-sm;
+      font-size: $fs-rg;
       font-weight: $fw-bold;
-      left: 1.5rem;
+      left: 0.8rem;
       color: #000;
       transition-duration: 500ms;
       z-index: -1;
@@ -61,7 +61,7 @@
         animation-timing-function: ease-in;
         animation-fill-mode: forwards;
         .element-detail {
-          left: 6rem;
+          left: 5.5rem;
         }
       }
     }

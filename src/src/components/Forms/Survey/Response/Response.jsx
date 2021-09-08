@@ -16,6 +16,8 @@ import API from "../../../../utils/apis";
 import withSurvey from "../../../../hocs/withSurvey";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
+import logo from "../../../../assets/images/logo-banner.GIF";
+
 function isNumber(variable) {
   if (variable === undefined) return false;
   if (typeof variable === "boolean") return false;
@@ -234,7 +236,7 @@ export function Response({
         <span className="logo">
           <Link to="/" target="_blank" tabIndex={tabIndex}>
             <span> Powered by</span>
-            <em> the Form</em>
+            <img src={logo} alt="logo" />
           </Link>
         </span>
       </div>
@@ -242,7 +244,12 @@ export function Response({
         <div className={"question-box " + (!isCover && "left")}>
           <div className="cover-box">
             <h1 className="title">{survey.title}</h1>
-            {survey.description && <div className="description">{survey.description}</div>}
+            {survey.description && (
+              <>
+                <div className="partition" />
+                <div className="description">{survey.description}</div>
+              </>
+            )}
           </div>
         </div>
 

@@ -1,6 +1,4 @@
 import React from "react";
-import plusBtn from "../../assets/icons/add-btn.svg";
-import minusBtn from "../../assets/icons/minus-btn.svg";
 import TextField from "../TextField/TextField";
 import "./IntegerField.scss";
 
@@ -17,16 +15,6 @@ function IntegerField({ number, setNumber, disabled, label, max, min, ...props }
     return true;
   };
 
-  const plus = () => {
-    if (number >= maxNum) return;
-    setNumber(number + 1);
-  };
-
-  const minus = () => {
-    if (number <= minNum) return;
-    setNumber(number - 1);
-  };
-
   return (
     <span className="integer-field">
       <div className="text-set">
@@ -41,14 +29,6 @@ function IntegerField({ number, setNumber, disabled, label, max, min, ...props }
           min={minNum}
         />
       </div>
-      <span className="btn-set">
-        <button onClick={plus} disabled={disabled || !setNumber}>
-          <img src={plusBtn} alt="add max length button" />
-        </button>
-        <button onClick={minus} disabled={disabled || !setNumber}>
-          <img src={minusBtn} alt="minus max length button" />
-        </button>
-      </span>
     </span>
   );
 }

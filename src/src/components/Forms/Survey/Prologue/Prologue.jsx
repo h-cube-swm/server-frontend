@@ -4,7 +4,6 @@ import setNestedState from "../../../../utils/setNestedState";
 import TextField from "../../../TextField/TextField";
 import "./Prologue.scss";
 import logo from "../../../../assets/images/logo.png";
-import arrow from "../../../../assets/icons/upward-arrow.svg";
 
 export default function Prologue({ survey, setSurvey, children }) {
   const [isFolded, setIsFolded] = useState(true);
@@ -24,39 +23,45 @@ export default function Prologue({ survey, setSurvey, children }) {
   return (
     <div className={className}>
       <div className="survey-header">
-        <div className="logo">
-          <Link to="/" target="_blank">
-            <img src={logo} alt="logo" />
-          </Link>
-        </div>
+        {isFolded && (
+          <div className="logo">
+            <Link to="/" target="_blank">
+              <img src={logo} alt="logo" />
+            </Link>
+          </div>
+        )}
         <div className="info">
-          <div className="title-box">
+          <div className={isFolded ? "title-box fold" : "title-box"}>
+            {!isFolded && !survey.title && <h1 className="title-intro">당신만을 위한</h1>}
             <TextField
               tabIndex="1"
               text={survey.title}
               setText={setNestedState(setSurvey, ["title"])}
-              placeholder="더 폼 나는 제목"
+              placeholder="더 폼 나는 제목을 입력해보세요"
               size="title"
               ref={titleTextArea}
               onFocus={() => setIsFolded(false)}
             />
           </div>
-          <div className="description-box">
+          <div className={!survey.description ? "description-box" : "description-box full"}>
+            {!isFolded && !survey.description && (
+              <h3 className="description-intro">자세한 설명으로 참여를 유도해보세요.</h3>
+            )}
             <TextField
               tabIndex="2"
               text={survey.description}
               setText={setNestedState(setSurvey, ["description"])}
-              placeholder="더 폼 나는 설명"
+              placeholder="더 폼 나는 설명을 여기에 입력하세요"
               multiline
               onFocus={() => setIsFolded(false)}
             />
           </div>
         </div>
-        <div className="children-box">{children}</div>
+        {isFolded && <div className="children-box">{children}</div>}
       </div>
       <div className="fold-button-box">
-        <button onClick={() => setIsFolded(true)}>
-          <img src={arrow} alt="arrow to fold" />
+        <button className="fold-btn" onClick={() => setIsFolded(true)}>
+          다음
         </button>
       </div>
     </div>
