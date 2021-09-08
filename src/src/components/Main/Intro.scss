@@ -28,7 +28,7 @@
       display: flex;
       align-items: flex-start;
       margin-top: 1.6rem;
-      margin-bottom: 10rem;
+      margin-bottom: 7rem;
       p {
         display: flex;
         align-items: center;
@@ -43,9 +43,26 @@
       }
     }
   }
-
-  a {
-    line-height: 1.3;
+  .make-btn {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    .description {
+      padding: 0.2rem 1rem;
+      font-size: $fs-rg;
+      font-weight: $fw-bold;
+      color: #707070;
+      background-color: #fff;
+      border-radius: 20px;
+    }
+    .btn {
+      margin-right: 1rem;
+      &.once {
+        color: #2b44ff;
+        background-color: #fff;
+        border: 2px solid #2b44ff;
+      }
+    }
   }
 
   .fade-out {
@@ -77,6 +94,14 @@
       height: 3rem;
     }
 
+    .make-btn {
+      flex-direction: column;
+      align-items: flex-start;
+      .description {
+        margin-top: 2rem;
+      }
+    }
+
     .message {
       left: 8rem;
       h1 {
@@ -93,20 +118,38 @@
     flex-direction: column;
     justify-content: center;
 
+    a {
+      width: 0;
+      height: 0;
+    }
+
     .chaos {
       transform: translateX(0);
       width: 50%;
       height: 50%;
     }
 
-    a {
+    .button-box {
       position: fixed;
-      width: 9rem;
-      height: 3rem;
-      margin: 0 auto;
-      bottom: 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       left: 50%;
+      bottom: 2rem;
       transform: translateX(-50%);
+      .make-btn {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 0.5rem;
+        .description {
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+        }
+      }
+      .btn {
+        margin-right: 0;
+      }
     }
 
     .outer-box {
