@@ -6,7 +6,7 @@ import TextField from "../../../../TextField/TextField";
 import CheckField from "../../../../CheckField/CheckField";
 import { CardStates } from "../../../../../constants";
 
-import delBtn from "../../../../../assets/icons/del-btn.svg";
+import delBtn from "../../../../../assets/icons/del-btn1.svg";
 import addBtn from "../../../../../assets/icons/add-btn.svg";
 import "./Choice.scss";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
