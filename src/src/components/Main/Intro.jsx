@@ -8,10 +8,9 @@ import { useGlobalState } from "../../contexts/GlobalContext";
 import "./Intro.scss";
 import Chaos from "../Chaos/Chaos";
 import { useMessage } from "../../contexts/MessageContext";
-import { div } from "../Chaos/linalg";
 
 function Intro() {
-  const { token, logout } = useGlobalState();
+  const { token } = useGlobalState();
   const location = `https://${DOMAIN}${useLocation().pathname}`;
   const href = `https://auth.the-form.io?redirect=${location}`;
 

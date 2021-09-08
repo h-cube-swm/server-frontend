@@ -15,16 +15,6 @@ function IntegerField({ number, setNumber, disabled, label, max, min, ...props }
     return true;
   };
 
-  const plus = () => {
-    if (number >= maxNum) return;
-    setNumber(number + 1);
-  };
-
-  const minus = () => {
-    if (number <= minNum) return;
-    setNumber(number - 1);
-  };
-
   return (
     <span className="integer-field">
       <div className="text-set">

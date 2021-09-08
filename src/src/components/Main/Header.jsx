@@ -1,14 +1,12 @@
 /* React elements */
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { DOMAIN } from "../../constants";
+import { Link } from "react-router-dom";
 import { useGlobalState } from "../../contexts/GlobalContext";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Header.scss";
 
 function Header() {
   const { token, logout } = useGlobalState();
-  const location = `https://${DOMAIN}${useLocation().pathname}`;
 
   function handleLogout() {
     logout();
