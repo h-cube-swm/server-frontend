@@ -16,6 +16,14 @@ import API from "../../../../utils/apis";
 import withSurvey from "../../../../hocs/withSurvey";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
+function isNumber(variable) {
+  if (variable === undefined) return false;
+  if (typeof variable === "boolean") return false;
+  if (variable === null) return false;
+  if (Number.isNaN(+variable)) return false;
+  return true;
+}
+
 /**
  * Get index-based branching map (from question-id based branching map).
  *
@@ -30,13 +38,13 @@ import { useGlobalState } from "../../../../contexts/GlobalContext";
 function getIndexBranchingMap(survey) {
   const { questions, branching } = survey;
   const idToIndex = Object.fromEntries(questions.map(({ id }, index) => [id, index]));
-
   const branchingMap = {};
   Object.entries(branching).forEach(([key, dest]) => {
-    if (!dest) return;
+    if (!isNumber(dest)) return;
+    if (!(dest in idToIndex)) return;
     const [questionId, choiceIndex] = key.split(" ");
     const questionIndex = idToIndex[+questionId];
-    if (questionIndex === undefined) return;
+    if (!isNumber(questionIndex)) return;
     if (!(questionIndex in branchingMap)) branchingMap[questionIndex] = {};
     branchingMap[questionIndex][choiceIndex] = +idToIndex[dest];
   });
@@ -133,17 +141,18 @@ export function Response({
       return;
     }
 
-    if (question.type === CardTypes.SINGLE_CHOICE) {
-      if (Object.entries(response).filter((tuple) => tuple[1])[0]) {
-        const selectedChoice = Object.entries(response).filter((tuple) => tuple[1])[0][0];
-        if (isResponsed(response) && indexBranchingMap[currentIndex][selectedChoice]) {
+    // First, filter case [Answered, Has branch, Single]
+    if (isResponsed(response)) {
+      if (question.type === CardTypes.SINGLE_CHOICE) {
+        // Because it is responsed, it is guaranteed to have an selected choice
+        const selectedChoiceTuple = Object.entries(response).filter((tuple) => tuple[1])[0];
+        const selectedChoice = selectedChoiceTuple[0];
+        if (
+          currentIndex in indexBranchingMap &&
+          selectedChoice in indexBranchingMap[currentIndex]
+        ) {
           // Go to selectedchoice's branch only if choice has its own branch
           push(indexBranchingMap[currentIndex][selectedChoice]);
-          return;
-        }
-        if (indexBranchingMap[currentIndex][selectedChoice] === 0) {
-          // It would be falsy if checked in upper, exception
-          push(0);
           return;
         }
       }
