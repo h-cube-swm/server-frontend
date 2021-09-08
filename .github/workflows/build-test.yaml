@@ -7,15 +7,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
      
-      - name: Check secret value
-        run: echo ap-northeast-2; echo ${{ secrets.REGION }}
-     
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: ${{ secrets.REGION }}
+            aws-region: ${{ secrets.AWS_REGION }}
             
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
@@ -23,9 +20,9 @@ jobs:
       - name: ECR Build, Push
         env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-            ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_AUTH }}
+            ECR_REPOSITORY: ${{ github.event.repository.name }}
         run: |
-            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest src
-            docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-            echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
+            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA src
+            docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+            echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA"
         
