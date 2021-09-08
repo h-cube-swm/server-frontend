@@ -6,7 +6,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+     
+      - name: Check secret value
+        run: echo ap-northeast-2; echo ${{ secrets.REGION }}
+     
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
