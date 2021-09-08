@@ -62,4 +62,4 @@ jobs:
         env:
           RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
         with:
-          args: set image deployment/frontend app=${{ env.RELEASE_IMAGE }} --record -n $KUBE_NAMESPACE
+          args: set image deployment/frontend frontend=${{ env.RELEASE_IMAGE }} --record -n $KUBE_NAMESPACE
