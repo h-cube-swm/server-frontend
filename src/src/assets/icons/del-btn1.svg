@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="55" viewBox="0 0 55 55">
+  <defs>
+    <clipPath id="clip-아트보드_10">
+      <rect width="55" height="55"/>
+    </clipPath>
+  </defs>
+  <g id="아트보드_10" data-name="아트보드 – 10" clip-path="url(#clip-아트보드_10)">
+    <path id="패스_52" data-name="패스 52" d="M14.634,0H25.366A14.82,14.82,0,0,1,40,15V25A14.82,14.82,0,0,1,25.366,40H14.634A14.82,14.82,0,0,1,0,25V15A14.82,14.82,0,0,1,14.634,0Z" transform="translate(8 8)" fill="#B0B0B0"/>
+    <line id="선_70" data-name="선 70" y1="15.643" x2="15.643" transform="translate(19.679 19.679)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <line id="선_71" data-name="선 71" y1="15.643" x2="15.643" transform="translate(35.321 19.679) rotate(90)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>
