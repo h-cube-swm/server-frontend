@@ -43,24 +43,30 @@
       }
     }
   }
-  .make-btn {
+  .button-box {
     display: flex;
-    align-items: center;
-    margin-top: 2rem;
-    .description {
-      padding: 0.2rem 1rem;
-      font-size: $fs-rg;
-      font-weight: $fw-bold;
-      color: #707070;
-      background-color: #fff;
-      border-radius: 20px;
-    }
-    .btn {
-      margin-right: 1rem;
-      &.once {
-        color: #2b44ff;
+    height: 10rem;
+    flex-direction: column;
+    justify-content: flex-end;
+    .make-btn {
+      display: flex;
+      align-items: center;
+      margin-top: 2rem;
+      .description {
+        padding: 0.2rem 1rem;
+        font-size: $fs-rg;
+        font-weight: $fw-bold;
+        color: #707070;
         background-color: #fff;
-        border: 2px solid #2b44ff;
+        border-radius: 20px;
+      }
+      .btn {
+        margin-right: 1rem;
+        &.once {
+          color: #2b44ff;
+          background-color: #fff;
+          border: 2px solid #2b44ff;
+        }
       }
     }
   }
@@ -132,10 +138,12 @@
     .button-box {
       position: fixed;
       display: flex;
+      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       left: 50%;
       bottom: 2rem;
+      height: 5rem;
       transform: translateX(-50%);
       .make-btn {
         flex-direction: column;
