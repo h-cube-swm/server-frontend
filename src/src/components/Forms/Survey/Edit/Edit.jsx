@@ -189,7 +189,7 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   return (
     <div className="edit" {...backgroundCallbacks}>
-      <Title>{`더 폼 - ${survey.title ? survey.title : ""} : 편집중`}</Title>
+      <Title>{`${survey.title ? survey.title : ""} : 편집중`}</Title>
       <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
         {isSaving ? (
           <>
