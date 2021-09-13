@@ -60,6 +60,9 @@
         color: #2b44ff;
         margin-top: 10rem;
         margin-bottom: 1rem;
+        &.disabled {
+          opacity: 0;
+        }
       }
       * {
         text-align: center;
@@ -77,6 +80,9 @@
       font-weight: $fw-bold;
       color: #2b44ff;
       margin-top: 6rem;
+      &.disabled {
+        opacity: 0;
+      }
     }
     textarea {
       width: 100%;
