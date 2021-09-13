@@ -1,0 +1,33 @@
+@import "/src/scss/style.scss";
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  z-index: 100;
+  .tooltiptext {
+    visibility: hidden;
+    width: 4rem;
+    background-color: #707070;
+    color: #fff;
+    text-align: center;
+    padding: 5px 2px;
+    border-radius: 6px;
+    bottom: 30%;
+    position: absolute;
+    font-size: $fs-sm;
+    &.sm {
+      width: 4rem;
+    }
+    &.md {
+      width: 7rem;
+    }
+    &.lg {
+      width: 9rem;
+    }
+  }
+  &:hover {
+    .tooltiptext {
+      visibility: visible;
+    }
+  }
+}
