@@ -7,13 +7,23 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
   KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-  KUBE_NAMESPACE: default
   ECR_REPOSITORY: ${{ github.event.repository.name }}
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
+      - name: Set kubernetes namespace
+        id: kube-namespace
+        run: |
+          if [[ "${{github.base_ref}}" == "dev" || "${{github.ref}}" == "refs/heads/dev" ]]; then
+            echo "::set-output name=namespace::dev"
+          fi
+
+          if [[ "${{github.base_ref}}" == "production" || "${{github.ref}}" == "refs/heads/production" ]]; then
+            echo "::set-output name=namespace::prod"
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -41,6 +51,7 @@ jobs:
             ${{ runner.os }}-single-buildx
 
       - name: Build & Push Image
+        id: build
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
@@ -56,3 +67,11 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
           echo "::set-output name=image::${{ env.RELEASE_IMAGE }}"
+
+      - name: Deploy to Kubernetes Cluster
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          RELEASE_IMAGE: ${{ steps.build.outputs.image }}
+          KUBE_NAMESPACE: ${{ steps.kube-namespace.namespace }}
+        with:
+          args: set image deployment/frontend app=${{ env.RELEASE_IMAGE }} --record -n ${{ env.KUBE_NAMESPACE }}
