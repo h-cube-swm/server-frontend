@@ -74,4 +74,4 @@ jobs:
           RELEASE_IMAGE: ${{ steps.build.outputs.image }}
           KUBE_NAMESPACE: ${{ steps.kube-namespace.outputs.namespace }}
         with:
-          args: set image deployment/frontend app=${{ env.RELEASE_IMAGE }} --record -n ${{ env.KUBE_NAMESPACE }}
+          args: set image deployment/frontend frontend=${{ env.RELEASE_IMAGE }} --record -n ${{ env.KUBE_NAMESPACE }}
