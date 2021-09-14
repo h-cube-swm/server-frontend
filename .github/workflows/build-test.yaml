@@ -16,9 +16,6 @@ jobs:
       - name: Set kubernetes namespace
         id: kube-namespace
         run: |
-          echo "${{github.base_ref}}"
-          echo "${{github.ref}}"
-
           if [[ "${{github.base_ref}}" == "dev" || "${{github.ref}}" == "refs/heads/dev" ]]; then
             echo "::set-output name=namespace::dev"
           fi
@@ -75,6 +72,6 @@ jobs:
         uses: kodermax/kubectl-aws-eks@master
         env:
           RELEASE_IMAGE: ${{ steps.build.outputs.image }}
-          KUBE_NAMESPACE: ${{ steps.kube-namespace.namespace }}
+          KUBE_NAMESPACE: ${{ steps.kube-namespace.outputs.namespace }}
         with:
           args: set image deployment/frontend app=${{ env.RELEASE_IMAGE }} --record -n ${{ env.KUBE_NAMESPACE }}
