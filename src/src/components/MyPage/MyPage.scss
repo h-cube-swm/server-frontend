@@ -7,6 +7,10 @@
   height: 100%;
   overflow: scroll;
 
+  .floating-logo {
+    z-index: 10;
+  }
+
   .make-survey {
     width: 12rem;
     height: 15rem;
@@ -58,7 +62,7 @@
       position: relative;
       width: 12rem;
       margin: 0 5rem;
-      margin-top: 10rem;
+      margin-top: 5rem;
 
       .dot {
         position: absolute;
@@ -158,6 +162,7 @@
   }
 
   @include mobile {
+    width: 100%;
     .make-survey {
       width: 1px;
       height: 1px;
@@ -171,8 +176,10 @@
       width: 100%;
     }
     .surveys {
+      width: 100%;
       margin-top: 1rem;
       .survey {
+        width: 100%;
         .status {
           margin-right: 0.5rem;
           width: 3rem;
@@ -188,6 +195,54 @@
           height: 2.8rem;
           img {
             width: 90%;
+          }
+          &:nth-child(1) {
+            transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem) translateY(-6rem);
+          }
+
+          &:nth-child(2) {
+            transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem) translateY(-3rem);
+          }
+
+          &:nth-child(3) {
+            transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem);
+          }
+
+          &:nth-child(4) {
+            transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem) translateY(3rem);
+          }
+
+          &:nth-child(5) {
+            transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem) translateY(6rem);
+          }
+        }
+        &.appear {
+          .buttons {
+            .link {
+              &:nth-child(1) {
+                transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
+                  translateY(-6rem);
+              }
+
+              &:nth-child(2) {
+                transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
+                  translateY(-3rem);
+              }
+
+              &:nth-child(3) {
+                transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem);
+              }
+
+              &:nth-child(4) {
+                transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
+                  translateY(3rem);
+              }
+
+              &:nth-child(5) {
+                transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
+                  translateY(6rem);
+              }
+            }
           }
         }
       }
