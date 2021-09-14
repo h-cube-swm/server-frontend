@@ -178,6 +178,10 @@ export default function Branching({ survey, setSurvey }) {
   const { questions } = survey;
   const { branching } = survey;
   const setBranching = setNestedState(setSurvey, ["branching"]);
+  const defaultList = [];
+  for (let i = 0; i < questions.length - 1; i++) {
+    defaultList.push(i);
+  }
 
   function indexToId(index) {
     if (!questions[index]) return -1;
@@ -311,12 +315,14 @@ export default function Branching({ survey, setSurvey }) {
               if (questionIndex < 0) return null;
               // Skip choice of none-singe-choice-questions
               if (question.type !== CardTypes.SINGLE_CHOICE && choiceIndex >= 0) return null;
-              // Skip unconnected line
+              // Skip unconnected linev
               if (destIndex < 0) return null;
               // Skip removed choice
               if (question.choices.length <= choiceIndex) return null;
               // Skip currently modifing branch
               if (selectedHandle && hashChoice(...selectedHandle) === choiceHash) return null;
+              // Check if it has a default branching
+              if (choiceIndex === -1) defaultList.splice(defaultList.indexOf(questionIndex), 1);
 
               const [sx, sy] = getHandlePosition(questionIndex, choiceIndex);
               const [ex, ey] = getAnchorPosition(destIndex);
@@ -344,6 +350,28 @@ export default function Branching({ survey, setSurvey }) {
                 fillOpacity="1"
               />
             )}
+            {defaultList.map((questionIndex) => {
+              if (
+                selectedHandle &&
+                selectedHandle[0] === indexToId(questionIndex) &&
+                selectedHandle[1] === -1
+              )
+                return null;
+              const [sx, sy] = getHandlePosition(questionIndex, -1);
+              const [ex, ey] = getAnchorPosition(questionIndex + 1);
+              const curveString = getCurveString(sx, sy, ex, ey);
+              return (
+                <path
+                  d={curveString}
+                  id="curveCurrent"
+                  key={`${questionIndex} -1 / ${questionIndex + 1}`}
+                  ref={curve}
+                  fill="none"
+                  stroke="#707070"
+                  strokeWidth="3.5"
+                />
+              );
+            })}
           </svg>
         </div>
       </div>
