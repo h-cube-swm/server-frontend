@@ -13,7 +13,6 @@ import resultBtn from "../../assets/icons/result-btn.svg";
 import delBtn from "../../assets/icons/del-btn-big.svg";
 import addBtn from "../../assets/icons/add-btn.svg";
 import editBtn from "../../assets/icons/edit-btn.svg";
-import { div, dot } from "../Chaos/linalg";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
