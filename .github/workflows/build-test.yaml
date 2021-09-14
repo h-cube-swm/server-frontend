@@ -16,6 +16,9 @@ jobs:
       - name: Set kubernetes namespace
         id: kube-namespace
         run: |
+          echo "${{github.base_ref}}"
+          echo "${{github.ref}}"
+
           if [[ "${{github.base_ref}}" == "dev" || "${{github.ref}}" == "refs/heads/dev" ]]; then
             echo "::set-output name=namespace::dev"
           fi
