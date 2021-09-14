@@ -51,6 +51,14 @@
       width: 100%;
       height: max-content;
       &.fold {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .title-intro {
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+        }
         * {
           text-align: unset;
         }
