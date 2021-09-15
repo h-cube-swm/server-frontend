@@ -39,11 +39,11 @@
   }
 }
 
-// @mixin desktop {
-//   @media screen and (min-width: 1680px) {
-//     @content;
-//   }
-// }
+@mixin desktop {
+  @media screen and (max-width: 1960px) {
+    @content;
+  }
+}
 
 @mixin max-len-indicator {
   display: flex;
