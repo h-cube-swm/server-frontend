@@ -1,13 +1,11 @@
 /* React elements */
-import { React, useEffect } from "react";
+import { React } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { DOMAIN } from "../../constants";
 import { useGlobalState } from "../../contexts/GlobalContext";
 
 /* Styles */
 import "./Intro.scss";
-import Chaos from "../Chaos/Chaos";
-import { useMessage } from "../../contexts/MessageContext";
 
 function Intro() {
   const { token } = useGlobalState();
@@ -19,24 +17,8 @@ function Intro() {
     isMobile = true;
   }
 
-  const { publish } = useMessage();
-
-  useEffect(() => {
-    publish(
-      <div>
-        <p>
-          본 서비스는 <strong>베타 버전</strong>입니다 🚢 <br /> 문제가 발생할 경우 하단{" "}
-          <strong>채널톡</strong>을 통해 알려주시면 빠르게 개선하도록 하겠습니다.
-        </p>
-      </div>,
-      "warning",
-    );
-  }, []);
-
   return (
     <div className="intro">
-      <div className="fade-out" />
-      <Chaos />
       <div className="outer-box">
         <div className="message">
           <h1>
@@ -44,7 +26,7 @@ function Intro() {
             <br />더 폼 나는 설문조사
             <br />
             <strong>
-              더 폼<p className="beta-tag">beta</p>
+              더폼<p className="beta-tag">beta</p>
             </strong>
           </h1>
           <div className="button-box">
@@ -56,7 +38,9 @@ function Intro() {
                   한 번 만들어보기
                 </Link>
                 <p className="description">
-                  체험해보기, 대신 마지막에 나올 링크는 잘 갖고있기로해요 🤙
+                  체험해보기, 대신 마지막에 나올
+                  <br />
+                  링크는 잘 갖고있기로해요 🤙
                 </p>
               </div>
             )}
@@ -76,12 +60,27 @@ function Intro() {
                   <a className="btn long login" href={href}>
                     더 폼 나게 만들기
                   </a>
-                  <p className="description">1초 만에 로그인하고 내 설문을 안전하게 저장해요 🤩</p>
+                  <p className="description">
+                    1초 만에 로그인하고
+                    <br />내 설문을 안전하게 저장해요 🤩
+                  </p>
                 </>
               )}
             </div>
           </div>
         </div>
+      </div>
+      <div className="messages">
+        <div className="box one">더폼 써봤어?</div>
+        <div className="box two">👀</div>
+        <div className="box three">🤭</div>
+        <div className="box four">WOW</div>
+        <div className="box five">편리해</div>
+        <div className="box six">MZ세대라면 더 폼 나게</div>
+        <div className="box seven">쉬워</div>
+        <div className="box eight">모두의 목소리</div>
+        <div className="box nine">누구라도</div>
+        <div className="box eleven">😎</div>
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ function Service() {
             <br />
             <strong>더 폼</strong> 나는 설문조사
             <br />
-            <strong>더 폼</strong>입니다.
+            <strong>더폼</strong>입니다.
           </h1>
           <img src={editingPage} alt="editing page" />
         </div>

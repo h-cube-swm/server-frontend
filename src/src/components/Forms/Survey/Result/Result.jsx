@@ -17,6 +17,7 @@ import "./Result.scss";
 import logo from "../../../../assets/images/logo.png";
 import ViewFrame from "./ViewFrame/ViewFrame";
 import { useMessage } from "../../../../contexts/MessageContext";
+import Tooltip from "../../../Tooltip/Tooltip";
 
 const VIEW_DICT = {
   [CardTypes.SINGLE_CHOICE]: ChoiceView,
@@ -50,17 +51,51 @@ function reshapeAnswerTo2DArray(survey, answers) {
 
   // Answers is just 2D array of answers.
   answers.forEach(({ responses: answer, createdAt: timestamp }) => {
-    const newAnswer = Array(questions.length).fill(null);
+    let newAnswer = Array(questions.length).fill(null);
     Object.entries(answer).forEach(([key, value]) => {
       if (key === "index") return;
+      if (key === undefined || key === null) return;
       const questionIndex = questionDict[key];
+      if (questionIndex === undefined || questionIndex === null) return;
       newAnswer[questionIndex] = value;
     });
     // ToDo: 적절한 타입으로 파싱하기
-    answerList.push([new Date(timestamp).toLocaleString()].concat(newAnswer));
+
+    // Insert timestamp
+    newAnswer = [new Date(timestamp).toLocaleString()].concat(newAnswer);
+    // Insert query params
+    newAnswer.push("query" in answer ? JSON.stringify(answer.query) : "");
+    answerList.push(newAnswer);
   });
 
-  return [[{ title: "응답 시각", type: "timestamp" }].concat(questions), answerList];
+  return [
+    [{ title: "응답 시각", type: "timestamp" }].concat(questions).concat([
+      {
+        title: (
+          <span>
+            쿼리 파라미터
+            <Tooltip text="클릭해서 쿼리 파라매터에 대해 알아보세요!" size="md">
+              <a
+                href="/help/query-params"
+                style={{
+                  // Todo : 여기 scss로 빼기
+                  borderRadius: "16px",
+                  width: "1rem",
+                  height: "1rem",
+                  marginLeft: "1rem",
+                  padding: "0.2rem",
+                  backgroundColor: "#aaa",
+                }}>
+                ?
+              </a>
+            </Tooltip>
+          </span>
+        ),
+        type: "query",
+      },
+    ]),
+    answerList,
+  ];
 }
 
 function ChartView({ columns, rows }) {

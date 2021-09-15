@@ -17,6 +17,7 @@ import withSurvey from "../../../../hocs/withSurvey";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import logo from "../../../../assets/images/logo-banner.GIF";
+import Linkify from "../../../Linkify/Linkify";
 
 function isNumber(variable) {
   if (variable === undefined) return false;
@@ -82,7 +83,9 @@ function ResponseContainer({ survey }) {
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const body = { responses };
+    const urlQueryParams = new URLSearchParams(window.location.search);
+    const query = Object.fromEntries(urlQueryParams.entries());
+    const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
     else setRedirect("/forms/survey/response/ending");
@@ -90,7 +93,7 @@ function ResponseContainer({ survey }) {
 
   return (
     <>
-      <Title>더 폼 - {survey.title}</Title>
+      <Title>더폼 - {survey.title}</Title>
       <Response
         survey={survey}
         responses={responses}
@@ -243,11 +246,15 @@ export function Response({
       <div className="contents-box">
         <div className={"question-box " + (!isCover && "left")}>
           <div className="cover-box">
-            <h1 className="title">{survey.title}</h1>
+            <h1 className="title">
+              <Linkify>{survey.title}</Linkify>
+            </h1>
             {survey.description && (
               <>
                 <div className="partition" />
-                <div className="description">{survey.description}</div>
+                <div className="description">
+                  <Linkify>{survey.description}</Linkify>
+                </div>
               </>
             )}
           </div>

@@ -1,23 +1,104 @@
 @import "/src/scss/style.scss";
 
 .intro {
+  width: 100%;
+  height: 100%;
   position: relative;
   z-index: 1;
   overflow: hidden;
+
+  .messages {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+    position: absolute;
+    top: 15rem;
+    right: 20rem;
+    width: 40rem;
+    height: 35rem;
+    grid-gap: 2rem;
+    padding: 1.5rem;
+    .box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      border-radius: 99px;
+      font-size: $fs-lg;
+      font-weight: $fw-bold;
+      color: #fff;
+      background-color: #a0a0a0;
+      box-shadow: $shadow-default;
+      &.one {
+        grid-row: 1;
+        grid-column: 1/6;
+        background: linear-gradient(to right, #6239ff, #68d4e8);
+      }
+      &.two {
+        grid-row: 1;
+        grid-column: 6/8;
+        font-size: $fs-lg;
+      }
+      &.three {
+        grid-row: 2;
+        grid-column: 1/2;
+        font-size: $fs-lg;
+      }
+      &.four {
+        grid-row: 2;
+        grid-column: 2/5;
+        background: linear-gradient(to right, #3043f6 20%, #c400ff);
+      }
+      &.five {
+        grid-row: 2;
+        grid-column: 5/8;
+        background-color: #00cb3e;
+      }
+      &.six {
+        grid-row: 3;
+        grid-column: 1/8;
+        // background: linear-gradient(to right, #3043f6, #b0b0b0);
+        background-color: #3043f6;
+      }
+      &.seven {
+        grid-row: 4;
+        grid-column: 1/3;
+      }
+      &.eight {
+        grid-row: 4;
+        grid-column: 3/8;
+        background: linear-gradient(to right, #3043f6 20%, #c400ff);
+      }
+      &.nine {
+        grid-row: 5;
+        grid-column: 1/4;
+        background: linear-gradient(to right, #00cb3e 20%, #2b44ff);
+      }
+      &.ten {
+        grid-row: 5;
+        grid-column: 4/7;
+        background: linear-gradient(to left, #6239ff, #68d4e8);
+      }
+      &.eleven {
+        grid-row: 5;
+        grid-column: 6/8;
+        font-size: $fs-lg;
+      }
+    }
+  }
 
   .outer-box {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10rem;
-    width: 100%;
     height: auto;
   }
 
   .message {
     font-size: 1.5rem;
     position: absolute;
-    top: 13rem;
+    top: 10rem;
     left: 20rem;
     h1 {
       margin-top: 8rem;
@@ -53,12 +134,10 @@
       align-items: center;
       margin-top: 2rem;
       .description {
-        padding: 0.2rem 1rem;
         font-size: $fs-rg;
         font-weight: $fw-bold;
         color: #707070;
-        background-color: #fff;
-        border-radius: 20px;
+        background-color: transparent;
       }
       .btn {
         margin-right: 1rem;
@@ -71,132 +150,160 @@
     }
   }
 
-  .fade-out {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0) 60%,
-      rgba(255, 255, 255, 1) 80%,
-      rgba(255, 255, 255, 1)
-    );
+  @include desktop {
+    height: 160%;
+    .messages {
+      right: 10rem;
+    }
   }
 
   @include laptop {
+    .messages {
+      top: 25rem;
+    }
     .message {
       h1 {
         font-size: 2.5rem;
-        margin-top: 0;
+        margin-top: 3rem;
         margin-bottom: 5rem;
-        line-height: 3.5rem;
+        line-height: 5rem;
+      }
+    }
+    .button-box {
+      height: 15rem;
+      .make-btn {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 1rem 0.5rem;
+        h1 {
+          width: 100%;
+        }
+        .description {
+          margin-top: 1rem;
+        }
       }
     }
   }
 
-  @include tablet {
+  @media screen and (max-width: 1340px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5rem 0;
+    height: auto;
+    .message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      left: unset;
+      position: relative;
+      strong {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 0;
+        transform: translateX(5%);
+      }
+    }
+    .button-box {
+      flex-direction: row;
+      margin-top: 5rem;
+      .make-btn {
+        align-items: center;
+        margin: 1rem 1rem;
+      }
+    }
+
     a {
       width: 9rem;
       height: 3rem;
     }
-
-    .make-btn {
-      flex-direction: column;
-      align-items: flex-start;
-      .description {
-        margin-top: 2rem;
-      }
+    .outer-box {
+      margin-top: 0;
     }
-
-    .message {
-      left: 8rem;
-      h1 {
-        font-size: $fs-lg;
-        margin-top: 5rem;
-        margin-bottom: 3rem;
-        line-height: 3.5rem;
+    .messages {
+      width: 35rem;
+      position: relative;
+      top: unset;
+      right: unset;
+      margin-top: 13rem;
+      margin-bottom: 3rem;
+      padding: 1rem;
+      grid-gap: 1rem;
+      .box {
+        padding: 1rem;
+        font-size: $fs-md;
       }
     }
   }
 
   @include mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    a {
-      width: 0;
-      height: 0;
+    justify-content: flex-start;
+    margin-top: 2rem;
+    height: 150%;
+    .outer-box {
+      width: 90%;
+      text-align: left;
     }
-
-    .chaos {
-      transform: translateX(0);
-      width: 50%;
-      height: 50%;
+    .message {
+      align-items: flex-start;
+      h1 {
+        font-size: $fs-lg;
+      }
     }
-
     .button-box {
       position: fixed;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      flex-direction: row-reverse;
+      justify-content: space-evenly;
       align-items: center;
       left: 50%;
-      bottom: 2rem;
-      height: 5rem;
+      bottom: 0;
+      width: 100%;
+      height: 10%;
       transform: translateX(-50%);
+      background-color: transparent;
+      z-index: 5;
       .make-btn {
         flex-direction: column;
         justify-content: center;
-        margin: 0 0.5rem;
+        width: 50%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        .btn.long {
+          width: 100%;
+          height: 100%;
+          border: 0;
+          border-radius: 0;
+          margin: 0;
+          border-top-right-radius: 10px;
+          border-top-left-radius: 10px;
+          &.login {
+            background-color: #707070;
+          }
+          &.once {
+            color: #707070;
+          }
+        }
         .description {
+          position: absolute;
           width: 1px;
           height: 1px;
           opacity: 0;
         }
       }
-      .btn {
-        margin-right: 0;
-      }
     }
 
-    .outer-box {
-      margin-top: 2rem;
+    .messages {
+      align-items: flex-start;
+      width: 23rem;
+      height: 15rem;
+      grid-gap: 1.2rem;
       margin-bottom: 2rem;
-    }
-
-    .message {
-      position: absolute;
-      top: 15rem;
-      left: 5rem;
-      h1 {
-        font-size: $fs-lg;
-        margin-top: 0;
-        margin-bottom: 2rem;
-        line-height: 3.5rem;
+      .box {
+        border-radius: 30px;
       }
-    }
-  }
-
-  @keyframes move-character-1 {
-    0% {
-      transform: translate(0, 0);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(50px, 0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes move-character-2 {
-    0% {
-      transform: translate(0, 0);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(-50px, 0);
-      opacity: 1;
     }
   }
 }

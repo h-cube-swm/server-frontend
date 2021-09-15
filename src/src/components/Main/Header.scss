@@ -7,13 +7,20 @@
 
   .banner {
     position: absolute;
-    right: 2rem;
-    top: 2rem;
+    right: 6rem;
+    top: 4rem;
     a {
       color: #000;
+      margin-left: 2rem;
     }
     .login {
       margin-left: 2rem;
+    }
+  }
+  @include mobile {
+    .banner {
+      right: 2rem;
+      top: 2rem;
     }
   }
 }

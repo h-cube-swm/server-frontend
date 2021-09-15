@@ -11,7 +11,7 @@
     justify-content: flex-end;
     padding: 0 3rem;
     width: 100%;
-    height: 8rem;
+    height: 10rem;
     color: #fff;
     font-size: $fs-rg;
     font-weight: $fw-bold;
@@ -25,6 +25,7 @@
     }
     h4 {
       font-size: $fs-sm;
+      margin-top: 0.5rem;
       a {
         color: #fff;
       }
@@ -37,10 +38,10 @@
 
   @include mobile {
     .footer {
-      height: 12rem;
+      height: 18rem;
       .copyright {
         margin-top: 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 6rem;
       }
     }
   }
