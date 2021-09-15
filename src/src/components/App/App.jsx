@@ -19,6 +19,7 @@ import ChannelService from "../ChannelService/ChannelService";
 // /* Lazy loaded components */
 const Main = lazy(() => import("../Main/Main"));
 const MyPage = lazy(() => import("../MyPage/MyPage"));
+const Pricing = lazy(() => import("../Pricing/Pricing"));
 const Survey = lazy(() => import("../Forms/Survey/Survey"));
 const Edit = lazy(() => import("../Forms/Survey/Edit/Edit"));
 const EditEnding = lazy(() => import("../Forms/Survey/EditEnding/EditEnding"));
@@ -47,6 +48,7 @@ function App() {
             <Switch>
               <Route path="/" component={Main} exact />
               <Route path="/mypage" component={MyPage} exact />
+              <Route path="/pricing" component={Pricing} exact />
               <Route path="/forms/survey" component={Survey} exact />
               <Route path="/forms/survey/mobile" component={EditCover} />
               <Route path="/forms/survey/edit/:link" component={Edit} />

@@ -29,7 +29,7 @@ export default function ResponseEnding() {
           <Firework />
           {!isEmbed && (
             <Link className="btn lg make-survey-btn" to="/">
-              더 폼 홈으로
+              더폼 홈으로
             </Link>
           )}
         </div>

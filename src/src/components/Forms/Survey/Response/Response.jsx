@@ -93,7 +93,7 @@ function ResponseContainer({ survey }) {
 
   return (
     <>
-      <Title>더 폼 - {survey.title}</Title>
+      <Title>더폼 - {survey.title}</Title>
       <Response
         survey={survey}
         responses={responses}
