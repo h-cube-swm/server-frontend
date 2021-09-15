@@ -17,11 +17,11 @@ jobs:
         id: kube-namespace
         run: |
           if [[ "${{github.base_ref}}" == "dev" || "${{github.ref}}" == "refs/heads/dev" ]]; then
-            echo "::set-output name=namespace::dev"
+            echo "::set-output name=namespace::staging"
           fi
 
-          if [[ "${{github.base_ref}}" == "production" || "${{github.ref}}" == "refs/heads/production" ]]; then
-            echo "::set-output name=namespace::prod"
+          if [[ "${{github.base_ref}}" == "master" || "${{github.ref}}" == "refs/heads/master" ]]; then
+            echo "::set-output name=namespace::production"
           fi
 
       - name: Checkout repository
