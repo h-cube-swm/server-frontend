@@ -83,7 +83,9 @@ function ResponseContainer({ survey }) {
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const body = { responses };
+    const urlQueryParams = new URLSearchParams(window.location.search);
+    const query = Object.fromEntries(urlQueryParams.entries());
+    const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
     else setRedirect("/forms/survey/response/ending");
