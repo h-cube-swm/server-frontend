@@ -35,8 +35,6 @@ function Intro() {
 
   return (
     <div className="intro">
-      <div className="fade-out" />
-      <Chaos />
       <div className="outer-box">
         <div className="message">
           <h1>
@@ -56,7 +54,9 @@ function Intro() {
                   한 번 만들어보기
                 </Link>
                 <p className="description">
-                  체험해보기, 대신 마지막에 나올 링크는 잘 갖고있기로해요 🤙
+                  체험해보기, 대신 마지막에 나올
+                  <br />
+                  링크는 잘 갖고있기로해요 🤙
                 </p>
               </div>
             )}
@@ -76,12 +76,27 @@ function Intro() {
                   <a className="btn long login" href={href}>
                     더 폼 나게 만들기
                   </a>
-                  <p className="description">1초 만에 로그인하고 내 설문을 안전하게 저장해요 🤩</p>
+                  <p className="description">
+                    1초 만에 로그인하고
+                    <br />내 설문을 안전하게 저장해요 🤩
+                  </p>
                 </>
               )}
             </div>
           </div>
         </div>
+      </div>
+      <div className="messages">
+        <div className="box one">더 폼 써봤어?</div>
+        <div className="box two">👀 🤩</div>
+        <div className="box three">🥳</div>
+        <div className="box four">WOW</div>
+        <div className="box five">편리해</div>
+        <div className="box six">MZ세대라면 더 폼 나게</div>
+        <div className="box seven">쉬워</div>
+        <div className="box eight">모두의 목소리</div>
+        <div className="box nine">누구라도</div>
+        <div className="box eleven">😎</div>
       </div>
     </div>
   );
