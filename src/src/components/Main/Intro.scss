@@ -23,7 +23,7 @@
       justify-content: center;
       align-items: center;
       padding: 1.5rem;
-      border-radius: 50px;
+      border-radius: 99px;
       font-size: $fs-lg;
       font-weight: $fw-bold;
       color: #fff;
@@ -58,7 +58,7 @@
         grid-row: 3;
         grid-column: 1/8;
         // background: linear-gradient(to right, #3043f6, #b0b0b0);
-        background-color: #2b44ff;
+        background-color: #3043f6;
       }
       &.seven {
         grid-row: 4;
@@ -81,7 +81,7 @@
       }
       &.eleven {
         grid-row: 5;
-        grid-column: 7/8;
+        grid-column: 6/8;
         font-size: $fs-lg;
       }
     }
@@ -190,7 +190,7 @@
     align-items: center;
     justify-content: flex-start;
     margin: 5rem 0;
-    height: 130%;
+    height: auto;
     .message {
       display: flex;
       flex-direction: column;
@@ -201,10 +201,12 @@
         justify-content: center;
         text-align: center;
         margin-bottom: 0;
+        transform: translateX(5%);
       }
     }
     .button-box {
       flex-direction: row;
+      margin-top: 5rem;
       .make-btn {
         align-items: center;
         margin: 1rem 1rem;
@@ -219,32 +221,25 @@
       margin-top: 0;
     }
     .messages {
-      width: 32rem;
+      width: 35rem;
       position: relative;
       top: unset;
       right: unset;
-      margin-top: 10rem;
-      padding: 1.5rem;
+      margin-top: 13rem;
+      margin-bottom: 3rem;
+      padding: 1rem;
+      grid-gap: 1rem;
       .box {
         padding: 1rem;
-        font-size: $fs-rg;
-        &.two {
-          font-size: $fs-rg;
-        }
-        &.three {
-          font-size: $fs-rg;
-        }
-        &.eleven {
-          font-size: $fs-rg;
-        }
+        font-size: $fs-md;
       }
     }
   }
 
   @include mobile {
-    height: 135%;
     justify-content: flex-start;
     margin-top: 2rem;
+    height: 150%;
     .outer-box {
       width: 90%;
       text-align: left;
@@ -258,7 +253,7 @@
     .button-box {
       position: fixed;
       display: flex;
-      flex-direction: row;
+      flex-direction: row-reverse;
       justify-content: space-evenly;
       align-items: center;
       left: 50%;
@@ -266,7 +261,7 @@
       width: 100%;
       height: 10%;
       transform: translateX(-50%);
-      background-color: #fff;
+      background-color: transparent;
       z-index: 5;
       .make-btn {
         flex-direction: column;
@@ -283,6 +278,9 @@
           margin: 0;
           border-top-right-radius: 10px;
           border-top-left-radius: 10px;
+          &.login {
+            background-color: #707070;
+          }
           &.once {
             color: #707070;
           }
@@ -298,9 +296,13 @@
 
     .messages {
       align-items: flex-start;
-      width: 20rem;
+      width: 23rem;
       height: 15rem;
       grid-gap: 1.2rem;
+      margin-bottom: 2rem;
+      .box {
+        border-radius: 30px;
+      }
     }
   }
 }
