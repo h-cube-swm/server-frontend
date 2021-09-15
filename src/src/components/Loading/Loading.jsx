@@ -31,7 +31,9 @@ export default function Loading() {
 
   const text = new Array(SPINNER_NUM)
     .fill(null)
-    .map((_, i) => (i < spinner ? <div className="dot" /> : <div className="dot hide" />));
+    .map((_, i) =>
+      i < spinner ? <div className="dot" key={i} /> : <div className="dot hide" key={i} />,
+    );
 
   return (
     <>

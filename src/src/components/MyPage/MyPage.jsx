@@ -5,11 +5,14 @@ import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./MyPage.scss";
 import API from "../../utils/apis";
 import Loading from "../Loading/Loading";
+import Tooltip from "../Tooltip/Tooltip";
 
 import linkBtn from "../../assets/icons/link-btn.svg";
 import embedBtn from "../../assets/icons/embed-btn.svg";
 import resultBtn from "../../assets/icons/result-btn.svg";
 import delBtn from "../../assets/icons/del-btn-big.svg";
+import addBtn from "../../assets/icons/add-btn.svg";
+import editBtn from "../../assets/icons/edit-btn.svg";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
@@ -18,6 +21,7 @@ export default function MyPage() {
   const [timestmap, setTimestmap] = useState(null);
   // ToDo 함수 이름을 바꾸던가 함수 반환값을 바꾸던가
   const [surveys, error] = API.useUser(timestmap);
+  const contents = [];
 
   if (surveys === null) return <Loading></Loading>;
   if (error) return <Redirect to="/error/unexpected/cannot-get-user-info"></Redirect>;
@@ -56,7 +60,13 @@ export default function MyPage() {
     }
   };
 
-  const contents = [];
+  const onMouse = (e) => {
+    e.currentTarget.className = "survey appear";
+  };
+
+  const outMouse = (e) => {
+    e.currentTarget.className = "survey";
+  };
 
   if (surveys.length === 0) {
     contents.push(
@@ -74,52 +84,84 @@ export default function MyPage() {
 
   surveys.forEach((survey, i) => {
     contents.push(
-      <div key={i} className="survey">
-        <Link
-          className={"status " + survey.status}
-          to={isMobile ? "/forms/survey/mobile" : `/forms/survey/edit/${survey.id}`}>
-          {survey.status === "published" ? <p key={i}>완성</p> : <p key={i}>편집하기</p>}
-        </Link>
+      <div key={i} className="survey" onMouseEnter={onMouse} onMouseLeave={outMouse}>
+        {survey.status !== "published" && (
+          <div className="dot-position">
+            <Tooltip text="아직 설문 작성이 완료되지 않았습니다 🤓" size="md">
+              <div className="dot" />
+            </Tooltip>
+          </div>
+        )}
         <div className="title">
           <h3>{survey.title}</h3>
+          <p>{survey.description}</p>
         </div>
-        <Link className="link" to={`/forms/survey/result/${survey.id}`}>
-          <img src={resultBtn} alt="open result page" />
-        </Link>
-        <button className="link" onClick={() => duplicateLink(survey.deployId)}>
-          <img src={linkBtn} alt="dublicate deploy link button" />
-        </button>
-        <button
-          className="link"
-          onClick={() =>
-            duplicateEmbedLink(
-              `<iframe src="${HOST}/forms/survey/response/${survey.deployId}?embed=true"/>`,
-            )
-          }>
-          <img src={embedBtn} alt="dublicate embed code button" />
-        </button>
-        <div className="link" onClick={() => deleteSurvey(survey.id)}>
-          <img src={delBtn} alt="delete button" />
+        <div className="buttons">
+          {survey.status === "published" ? (
+            <button className="link published">
+              <div key={i} className="tooltip">
+                <img src={editBtn} alt="edit survey" />
+                <span className="tooltiptext">배포됨</span>
+              </div>
+            </button>
+          ) : (
+            <Link
+              className="link "
+              to={isMobile ? "/forms/survey/mobile" : `/forms/survey/edit/${survey.id}`}>
+              <Tooltip text={"편집하기"} size="sm">
+                <img src={editBtn} alt="edit survey" />
+              </Tooltip>
+            </Link>
+          )}
+          <Link className="link" to={`/forms/survey/result/${survey.id}`}>
+            <Tooltip text={"결과보기"} size="sm">
+              <img src={resultBtn} alt="open result page" />
+            </Tooltip>
+          </Link>
+          <button className="link" onClick={() => duplicateLink(survey.deployId)}>
+            <Tooltip text={"배포링크"} size="sm">
+              <img src={linkBtn} alt="dublicate deploy link button" />
+            </Tooltip>
+          </button>
+          <button
+            className="link"
+            onClick={() =>
+              duplicateEmbedLink(
+                `<iframe src="${HOST}/forms/survey/response/${survey.deployId}?embed=true"/>`,
+              )
+            }>
+            <Tooltip text={"임베드코드"} size="sm">
+              <img src={embedBtn} alt="dublicate embed code button" />
+            </Tooltip>
+          </button>
+          <div className="link" onClick={() => deleteSurvey(survey.id)}>
+            <Tooltip text={"삭제하기"} size="sm">
+              <img src={delBtn} alt="delete button" />
+            </Tooltip>
+          </div>
         </div>
       </div>,
     );
   });
 
-  return (
-    <div className="my-page">
-      <FloatingLogo />
+  contents.push(
+    <div className="survey">
       <Link
         className="btn long make-survey"
         to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
-        설문조사
-        <br />
-        만들기
+        <img src={addBtn} alt="" />
+        <h3>설문 만들기</h3>
       </Link>
+    </div>,
+  );
+
+  return (
+    <div className="my-page">
+      <FloatingLogo />
+
       <div className="info">
         <h1>마이페이지</h1>
       </div>
-      <div className="partition" />
-      <h2 className="my-form">내가 만든 폼</h2>
       <div className="surveys">{contents.reverse()}</div>
     </div>
   );

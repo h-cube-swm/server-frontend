@@ -32,7 +32,9 @@ export default function Prologue({ survey, setSurvey, children }) {
         )}
         <div className="info">
           <div className={isFolded ? "title-box fold" : "title-box"}>
-            {!isFolded && !survey.title && <h1 className="title-intro">당신만을 위한</h1>}
+            <h1 className={!isFolded && !survey.title ? "title-intro" : "title-intro disabled"}>
+              당신만을 위한
+            </h1>
             <TextField
               tabIndex="1"
               text={survey.title}
@@ -44,9 +46,14 @@ export default function Prologue({ survey, setSurvey, children }) {
             />
           </div>
           <div className={!survey.description ? "description-box" : "description-box full"}>
-            {!isFolded && !survey.description && (
-              <h3 className="description-intro">자세한 설명으로 참여를 유도해보세요.</h3>
-            )}
+            <h3
+              className={
+                !isFolded && !survey.description
+                  ? "description-intro"
+                  : "description-intro disabled"
+              }>
+              자세한 설명으로 참여를 유도해보세요.
+            </h3>
             <TextField
               tabIndex="2"
               text={survey.description}
