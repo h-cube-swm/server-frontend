@@ -1,5 +1,4 @@
 import React from "react";
-import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import Header from "../Main/Header";
 
 import "./Pricing.scss";

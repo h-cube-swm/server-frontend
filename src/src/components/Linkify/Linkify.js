@@ -8,7 +8,7 @@ export default function Linkify({ children }) {
   if (typeof children === "string") {
     let str = children;
     const list = [];
-    while (true) {
+    for (;;) {
       const match = str.match(REGEX_URL);
       if (match === null) break;
       const url = match[0];

@@ -1,13 +1,11 @@
 /* React elements */
-import { React, useEffect } from "react";
+import { React } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { DOMAIN } from "../../constants";
 import { useGlobalState } from "../../contexts/GlobalContext";
 
 /* Styles */
 import "./Intro.scss";
-import Chaos from "../Chaos/Chaos";
-import { useMessage } from "../../contexts/MessageContext";
 
 function Intro() {
   const { token } = useGlobalState();
