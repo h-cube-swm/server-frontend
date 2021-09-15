@@ -19,6 +19,7 @@ function Header() {
     <div className="header">
       <FloatingLogo />
       <div className="banner">
+        <Link to="/pricing">가격안내</Link>
         {token ? (
           <>
             <Link to="/mypage">마이페이지</Link>
