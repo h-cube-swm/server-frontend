@@ -17,6 +17,7 @@ import withSurvey from "../../../../hocs/withSurvey";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import logo from "../../../../assets/images/logo-banner.GIF";
+import Linkify from "../../../Linkify/Linkify";
 
 function isNumber(variable) {
   if (variable === undefined) return false;
@@ -243,11 +244,15 @@ export function Response({
       <div className="contents-box">
         <div className={"question-box " + (!isCover && "left")}>
           <div className="cover-box">
-            <h1 className="title">{survey.title}</h1>
+            <h1 className="title">
+              <Linkify>{survey.title}</Linkify>
+            </h1>
             {survey.description && (
               <>
                 <div className="partition" />
-                <div className="description">{survey.description}</div>
+                <div className="description">
+                  <Linkify>{survey.description}</Linkify>
+                </div>
               </>
             )}
           </div>
