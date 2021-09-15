@@ -91,11 +91,13 @@
           padding: 1rem;
           font-size: $fs-rg;
           font-weight: $fw-bold;
+          word-break: break-all;
         }
         p {
           padding: 1rem;
           font-size: $fs-sm;
           text-overflow: ellipsis;
+          word-break: break-all;
         }
       }
 
