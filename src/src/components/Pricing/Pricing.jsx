@@ -35,6 +35,7 @@ export default function Pricing() {
           <li>.</li>
           <li>.</li>
         </ul>
+        <p className="free">이 모든 것이 무료</p>
         <span className="comment">
           <p>
             * 기업 및 단체 고객의 경우 문의를 통한 자사 서비스 이용 시 홍보에 사용될 수 있습니다.
