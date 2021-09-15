@@ -38,4 +38,4 @@ export const CardStyle = {
 };
 
 export const IS_DEBUG = window.location.hostname !== "the-form.io";
-export const DOMAIN = IS_DEBUG ? "dev.the-form.io" : "the-form.io";
+export const DOMAIN = window.location.hostname;
