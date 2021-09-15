@@ -151,7 +151,7 @@
   }
 
   @include desktop {
-    height: 180%;
+    height: 160%;
     .messages {
       right: 10rem;
     }
@@ -164,9 +164,9 @@
     .message {
       h1 {
         font-size: 2.5rem;
-        margin-top: 0;
+        margin-top: 3rem;
         margin-bottom: 5rem;
-        line-height: 3.5rem;
+        line-height: 5rem;
       }
     }
     .button-box {
