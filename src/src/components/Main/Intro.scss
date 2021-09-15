@@ -151,6 +151,7 @@
   }
 
   @include desktop {
+    height: 180%;
     .messages {
       right: 10rem;
     }
