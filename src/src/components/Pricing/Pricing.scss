@@ -88,4 +88,15 @@
       }
     }
   }
+
+  @include mobile {
+    .message {
+      .welcome {
+        margin-top: 90rem;
+      }
+      .comment {
+        width: 80%;
+      }
+    }
+  }
 }
