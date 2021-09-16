@@ -17,7 +17,7 @@ import "./Result.scss";
 import logo from "../../../../assets/images/logo.png";
 import ViewFrame from "./ViewFrame/ViewFrame";
 import { useMessage } from "../../../../contexts/MessageContext";
-import Tooltip from "../../../Tooltip/Tooltip";
+// import Tooltip from "../../../Tooltip/Tooltip";
 
 const VIEW_DICT = {
   [CardTypes.SINGLE_CHOICE]: ChoiceView,
