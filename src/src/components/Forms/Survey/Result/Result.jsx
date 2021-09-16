@@ -74,7 +74,7 @@ function reshapeAnswerTo2DArray(survey, answers) {
         title: (
           <span>
             쿼리 파라미터
-            <Tooltip text="클릭해서 쿼리 파라매터에 대해 알아보세요!" size="md">
+            {/* <Tooltip text="클릭해서 쿼리 파라매터에 대해 알아보세요!" size="md">
               <a
                 href="/help/query-params"
                 style={{
@@ -88,7 +88,7 @@ function reshapeAnswerTo2DArray(survey, answers) {
                 }}>
                 ?
               </a>
-            </Tooltip>
+            </Tooltip> */}
           </span>
         ),
         type: "query",
