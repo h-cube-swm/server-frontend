@@ -47,6 +47,11 @@
       h1 {
         font-weight: $fw-bold;
         margin-bottom: 1rem;
+        word-break: keep-all;
+      }
+      p {
+        word-break: keep-all;
+        text-align: center;
       }
       &.one {
         grid-row: 1;
@@ -83,6 +88,9 @@
       align-items: center;
       margin: 3rem auto;
       margin-bottom: 10rem;
+      p {
+        word-break: keep-all;
+      }
       .hello {
         margin-bottom: 5rem;
         strong {

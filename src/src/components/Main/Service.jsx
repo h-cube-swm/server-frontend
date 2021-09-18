@@ -38,12 +38,12 @@ function Service() {
         <div className="box one">
           <img src={circle1} alt="circle" />
           <h1>학생도</h1>
-          <p>자료조사하고, 동아리 신청서를 받거나, 친구들의 의견을 구해요.</p>
+          <p>자료 조사하고, 동아리 신청서를 받거나, 친구들의 의견을 구해요.</p>
         </div>
         <div className="box two">
           <img src={circle2} alt="circle" />
           <h1>마케터도</h1>
-          <p>시장을 분석하고, 다양한 자료분석 도구를 통해 날카로운 인사이트를 얻어봐요.</p>
+          <p>다양한 자료 분석 도구를 통해 날카로운 인사이트를 얻어봐요.</p>
         </div>
         <div className="box three">
           <img src={circle3} alt="circle" />
@@ -53,12 +53,12 @@ function Service() {
         <div className="box four">
           <img src={circle4} alt="circle" />
           <h1>제작자도</h1>
-          <p>사람들에게 자신이 만든 물건을 멋지게 팔 수 있는 주문서를 만들 수 있어요.</p>
+          <p>사람들에게 자신의 물건을 멋지게 팔 수 있는 주문서를 만들 수 있어요.</p>
         </div>
         <div className="box five">
           <img src={circle5} alt="circle" />
           <h1>기획자도</h1>
-          <p>기획한 행사나 제품에 대해 피드백을 구하고 더 좋은 다음을 만들어 보세요.</p>
+          <p>기획한 행사나 제품의 피드백을 구하고 더 좋은 다음을 만들어 보세요.</p>
         </div>
         <div className="box six">
           <img src={circle6} alt="circle" />
@@ -94,7 +94,7 @@ function Service() {
           <div className="description">
             <h1>2. 막막해하지 않아도 됩니다. 쉽게 만드세요.</h1>
             <p>
-              폼을 만들 때, 우리는 어떤 질문이 맞는 질문인지 참 햇갈립니다.
+              폼을 만들 때, 우리는 어떤 질문이 맞는 질문인지 참 헷갈립니다.
               <br />
               그럴 때 저희에게 조금만 힌트를 주세요.
               <br />
@@ -109,11 +109,11 @@ function Service() {
           <div className="description">
             <h1>3. 널리 이롭게 퍼뜨리세요.</h1>
             <p>
-              당연히 제공되는 링크 공유와 임베드코드.
+              당연히 제공되는 링크 공유와 임베드 코드.
               <br />
               버튼 한 번이면 바로 당신의 손에 폼이 들려있습니다.
               <br />
-              뿐만 아니라 다양한 API나 분석툴과도 연계해드립니다.
+              뿐만 아니라 다양한 API나 분석 툴과도 연계해드립니다.
               <br />
               <em>* API 연동은 추후 제공될 예정입니다.</em>
             </p>
