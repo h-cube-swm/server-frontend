@@ -25,7 +25,7 @@
       font-size: $fs-xl;
       font-weight: $fw-bold;
       text-align: center;
-      word-break: break-all;
+      word-break: keep-all;
       color: #000;
       overflow: scroll;
     }
@@ -50,7 +50,7 @@
       white-space: pre-wrap;
       line-height: 1.5;
       color: #000;
-      word-break: break-all;
+      word-break: keep-all;
     }
   }
 
