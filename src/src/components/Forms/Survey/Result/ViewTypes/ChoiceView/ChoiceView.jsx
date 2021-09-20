@@ -24,9 +24,11 @@ export default function ChoiceView({ question, answers }) {
   const values = new Array(labels.length).fill(0);
 
   answers.forEach((answer) => {
-    Object.entries(answer).forEach(([key, value]) => {
-      values[key] += value;
-    });
+    if (answer) {
+      Object.entries(answer).forEach(([key, value]) => {
+        values[key] += value;
+      });
+    }
   });
 
   const colors = [];
