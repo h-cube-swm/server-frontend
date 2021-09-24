@@ -10,6 +10,7 @@
     background-color: #707070;
     color: #fff;
     text-align: center;
+    word-break: keep-all;
     padding: 5px 2px;
     border-radius: 6px;
     bottom: 30%;
@@ -23,6 +24,9 @@
     }
     &.lg {
       width: 9rem;
+    }
+    &.left {
+      transform: translateX(-100%);
     }
   }
   &:hover {
