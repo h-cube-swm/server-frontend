@@ -51,22 +51,15 @@ export default function Card({ onDelete, onGrab, children }) {
 
   const className = classes.join(" ");
   return (
-    <div
-      className={className}
-      style={{
-        height: state === CardStates.RESPONSE ? null : CardStyle.HEIGHT,
-        width: CardStyle.WIDTH,
-      }}>
+    <div className={className}>
       <div className="content-box">{children}</div>
       <Hider hide={isLast}>
-        <div className="button-box">
-          <button
-            className={"delete " + (onDelete ? "" : "hidden")}
-            tabIndex={onDelete ? null : "-1"}
-            onClick={handleOnDelete}>
-            <img src={imgDeleteButton} alt="Delete button"></img>
-          </button>
-        </div>
+        <button
+          className={"delete " + (onDelete ? "" : "hidden")}
+          tabIndex={onDelete ? null : "-1"}
+          onClick={handleOnDelete}>
+          <img src={imgDeleteButton} alt="Delete button"></img>
+        </button>
         <div className="handle" onMouseDown={handleOnGrab}>
           <img src={imgHandle} alt="Handle"></img>
         </div>

@@ -98,7 +98,7 @@ function Edit({ survey: init, updateSurvey, location }) {
     });
   };
 
-  const [onWheel] = useScrollPaging((delta) => {
+  const events = useScrollPaging((delta) => {
     const index = survey.selectedIndex;
     const { length } = survey.questions;
 
@@ -222,7 +222,7 @@ function Edit({ survey: init, updateSurvey, location }) {
 
       <div
         className={"view view-edit " + ((isPreview && "left") || (isBranching && "right"))}
-        onWheel={onWheel}>
+        {...events}>
         <div className="positioning-box">
           <div className="sidebar-box">
             <Sidebar
@@ -276,14 +276,11 @@ function Edit({ survey: init, updateSurvey, location }) {
         <div className="fade-out top" />
         <div className="fade-out bottom" />
 
-        <QuestionAddButton
-          onClick={getInsertQuestion(selectedIndex)}
-          y={-CardStyle.FRAME_HEIGHT / 2}
-        />
+        <QuestionAddButton onClick={getInsertQuestion(selectedIndex)} y={"-30vh"} />
 
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
-          y={+CardStyle.FRAME_HEIGHT / 2}
+          y={"30vh"}
           isLast={isLast}
         />
         <Hider hide={isLast}>
