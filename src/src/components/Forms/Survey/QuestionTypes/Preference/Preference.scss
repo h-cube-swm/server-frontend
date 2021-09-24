@@ -5,31 +5,56 @@
   float: left;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+
+  .count {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+    p {
+      width: 2rem;
+      font-size: $fs-rg;
+      font-weight: $fw-bold;
+    }
+    input {
+      border: 1.5px solid rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      width: 3rem;
+      height: 2rem;
+      margin-left: 0.5rem;
+      text-align: center;
+      font-size: $fs-rg;
+      transition-duration: 500ms;
+      &:focus {
+        border: 2px solid #2b44ff;
+        transition-duration: 500ms;
+      }
+    }
+  }
 
   .preference-elements {
     display: flex;
-    height: 3rem;
     justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    flex-shrink: 1;
-    height: auto;
+    width: 100%;
+    height: 3.5rem;
   }
 
   .preference-box {
     @include text-center;
-    margin-bottom: 1rem;
     font-size: $fs-rg;
     font-weight: $fw-bold;
-    min-width: 2rem;
+    min-width: 3rem;
+    width: 100%;
     height: 3.5rem;
-    border-radius: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 0.7px solid rgba(0, 0, 0, 0.1);
     color: black;
     box-shadow: $shadow-default-shallow;
     transition-duration: 200ms;
+    margin: 0.2rem;
 
     &.cursor {
       cursor: pointer;
@@ -42,13 +67,39 @@
     }
 
     &.end {
-      border: 1.5px dashed rgba(0, 0, 0, 0.4);
+      border: 1.5px dashed rgba(0, 0, 0, 1);
       width: 3.5rem;
       opacity: 0.4;
     }
+
+    @include laptop {
+      min-width: 2.5rem;
+    }
   }
 
-  .text-box {
-    width: 3.5rem;
+  .des {
+    display: flex;
+    margin-bottom: 2rem;
+    .indicator {
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+      p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4em;
+        background-color: #2b44ff;
+        color: #fff;
+        padding: 0.5rem 0.5rem;
+        margin-right: 1rem;
+        font-size: $fs-sm;
+        font-weight: $fw-bold;
+        border-radius: 5px;
+      }
+      input {
+        width: 10rem;
+      }
+    }
   }
 }
