@@ -114,32 +114,32 @@ export default function QuestionCommon() {
               <p>필수</p>
             </span>
           )}
-          {question.type !== CardTypes.EMPTY && (
-            <div className="basic">
-              <div className="question">
-                <TextField
-                  placeholder="더 폼 나는 질문"
-                  text={question.title}
-                  setText={setNestedState(setQuestion, ["title"])}
-                  size="title"
-                  // onFocus={onFocus}
-                />
-              </div>
-              {(isEditing || question.description) && (
-                <>
-                  <div className="description">
-                    <TextField
-                      placeholder="더 폼 나는 설명 (선택)"
-                      text={question.description}
-                      setText={setNestedState(setQuestion, ["description"])}
-                      size="rg"
-                      // onFocus={onFocus}
-                    />
-                  </div>
-                </>
-              )}
+          <div className={question.type !== CardTypes.EMPTY ? "basic" : "basic empty"}>
+            <div className="question">
+              <TextField
+                placeholder={
+                  question.type !== CardTypes.EMPTY ? "더 폼 나는 질문" : "더 폼 나는 문구"
+                }
+                text={question.title}
+                setText={setNestedState(setQuestion, ["title"])}
+                size="title"
+                // onFocus={onFocus}
+              />
             </div>
-          )}
+            {(isEditing || question.description) && (
+              <>
+                <div className="description">
+                  <TextField
+                    placeholder="더 폼 나는 설명 (선택)"
+                    text={question.description}
+                    setText={setNestedState(setQuestion, ["description"])}
+                    size="rg"
+                    // onFocus={onFocus}
+                  />
+                </div>
+              </>
+            )}
+          </div>
           {/* <Hider
             hide={!isTyping || !question.title || (question.title && question.title.length <= 3)}>
             <div className="suggestions">
