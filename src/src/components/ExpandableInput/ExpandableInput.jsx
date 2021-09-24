@@ -13,15 +13,18 @@ function ExpandableInput({ text, setText, placeholder, size }, outterRef) {
     innerRef.current.innerHTML = text || "";
 
   return (
-    <div
-      ref={(ref) => {
-        innerRef.current = ref;
-        // eslint-disable-next-line
-        if (outterRef) outterRef.current = ref;
-      }}
-      className="expandable-input"
-      onInput={(e) => setText(e.target.innerHTML)}
-      contentEditable={isEditable ? "true" : "false"}></div>
+    <div className="expandable-input">
+      <div
+        ref={(ref) => {
+          innerRef.current = ref;
+          // eslint-disable-next-line
+          if (outterRef) outterRef.current = ref;
+        }}
+        className="input-field"
+        onInput={(e) => setText(e.target.innerHTML)}
+        contentEditable={isEditable ? "true" : "false"}></div>
+      {!text && <div className="placeholder">{placeholder}</div>}
+    </div>
   );
 }
 

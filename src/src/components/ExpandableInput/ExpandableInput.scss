@@ -8,9 +8,23 @@
   min-height: 1rem;
   color: #16248d;
   font-weight: $fw-bold;
-  div {
-    color: $bi-color;
+  position: relative;
+  .input-field {
     font-weight: $fw-bold;
-    color: #16248d;
+    * {
+      font-weight: inherit;
+    }
+  }
+
+  .placeholder {
+    pointer-events: none;
+    width: max-content;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #b0b0b0;
+    font-weight: $fw-bold;
+    opacity: 0.6;
   }
 }
