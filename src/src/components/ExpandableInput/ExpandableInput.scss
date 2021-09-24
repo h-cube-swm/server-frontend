@@ -1,0 +1,16 @@
+@import "/src/scss/style.scss";
+
+.expandable-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 7rem;
+  min-height: 1rem;
+  color: #16248d;
+  font-weight: $fw-bold;
+  div {
+    color: $bi-color;
+    font-weight: $fw-bold;
+    color: #16248d;
+  }
+}
