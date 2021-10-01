@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useDefault from "../../../../../hooks/useDefault";
 import setNestedState from "../../../../../utils/setNestedState";
 import Hider from "../../../../Hider/Hider";
-import TextField from "../../../../TextField/TextField";
-import CheckField from "../../../../CheckField/CheckField";
 import { CardStates } from "../../../../../constants";
 
 import delBtn from "../../../../../assets/icons/del-btn1.svg";
-import addBtn from "../../../../../assets/icons/add-btn.svg";
 import "./Choice.scss";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
-import useScrollBlock from "../../../../../hooks/useScrollBlock";
+import ExpandableInput from "../../../../ExpandableInput/ExpandableInput";
 
 function Choice({
   text,
@@ -20,32 +17,30 @@ function Choice({
   setChecked,
 
   onDelete,
-  multipleSelect,
+  choiceRef,
 }) {
   const { state } = useQuestion();
   const isEditing = state === CardStates.EDITTING;
 
   return (
     <div className="choice-box">
-      <div className="check-box">
-        <CheckField
-          className="check-box"
-          checked={checked}
-          setChecked={setChecked}
-          radio={!multipleSelect}
-        />
-      </div>
       <div
-        className="text-box"
+        className={checked ? "text-box checked" : "text-box"}
         onClick={setChecked && (() => setChecked(!checked))}
         style={{
           cursor: setChecked ? "pointer" : null,
         }}>
-        <TextField text={text} setText={setText} placeholder="더 폼 나는 선택지" size="rg" />
+        <ExpandableInput
+          ref={choiceRef}
+          text={text}
+          setText={setText}
+          placeholder="선택지를 입력해주세요."
+          size="rg"
+        />
       </div>
       <div className="delete-button-box">
         <Hider hide={!isEditing}>
-          <button className="del-btn" onClick={onDelete}>
+          <button className="del-btn" onClick={onDelete} tabIndex="-1">
             <img src={delBtn} alt="delete button" />
           </button>
         </Hider>
@@ -54,27 +49,22 @@ function Choice({
   );
 }
 
-function Choices({ multipleSelect }) {
+function Choices({ multipleSelect, scrollToBottom }) {
   const { state, question, setQuestion, response, setResponse } = useQuestion();
   const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });
   const responseInitialized = useDefault(response, setResponse, {});
-  const scrollRef = useRef(0);
-  const { ref, ...scrollBlock } = useScrollBlock();
+  const choicesRef = useRef(null);
+  const [shouldRefocus, setShouldRefocus] = useState(false);
+
   useEffect(() => {
-    if (!ref.current) return;
-    if (state === CardStates.EDITTING) {
-      if (scrollRef.current < ref.current.scrollHeight) {
-        ref.current.scroll({
-          top: 999999,
-          left: 0,
-          behavior: "smooth",
-        });
-      }
-      scrollRef.current = ref.current.scrollHeight;
+    if (shouldRefocus) {
+      choicesRef.current?.focus();
+      scrollToBottom();
+      setShouldRefocus(false);
     }
-  });
+  }, [choicesRef.current, shouldRefocus]);
 
   if (!questionInitialized || !responseInitialized) return null;
   const { choices } = question;
@@ -86,6 +76,7 @@ function Choices({ multipleSelect }) {
   const addChoice = () => {
     if (!isEditting) return;
     setNestedState(setQuestion, ["choices"])((choices) => [...choices, ""]);
+    setShouldRefocus(true);
   };
 
   const removeChoice = (i) => {
@@ -107,8 +98,9 @@ function Choices({ multipleSelect }) {
   };
 
   return (
-    <div className="multiple-choice" ref={ref} {...scrollBlock}>
+    <div className="multiple-choice">
       <div className="multiple-choice-inner">
+        {multipleSelect && <em className="explain">원하는 만큼 선택하세요!</em>}
         {choices.map((choice, i) => {
           const setText = setNestedState(setQuestion, ["choices", i]);
           return (
@@ -120,19 +112,19 @@ function Choices({ multipleSelect }) {
               checked={typeof response === "object" && response[i]}
               setChecked={onSelect(i)}
               multipleSelect={multipleSelect}
+              choiceRef={i === choices.length - 1 ? choicesRef : null}
             />
           );
         })}
-        <div>
-          <Hider hide={!isEditting}>
-            <button className="add-btn" onClick={addChoice}>
-              <div className="button-box">
-                <img src={addBtn} alt="delete button" />
-                <span>더 폼 나는 선택지 추가하기</span>
-              </div>
-            </button>
-          </Hider>
-        </div>
+      </div>
+      <div>
+        <Hider hide={!isEditting}>
+          <button className="add-btn" onClick={addChoice}>
+            <div className="button-box">
+              <span>선택지 추가하기</span>
+            </div>
+          </button>
+        </Hider>
       </div>
     </div>
   );

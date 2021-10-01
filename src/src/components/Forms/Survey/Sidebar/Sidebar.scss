@@ -8,6 +8,7 @@
     height: 4rem;
     width: 5rem;
     font-size: $fs-rg;
+    position: relative;
 
     background-color: none;
     background: none;
@@ -25,6 +26,19 @@
         filter: grayscale(100%) brightness(2);
         transform: scale(0.8);
       }
+    }
+
+    .title {
+      position: absolute;
+      width: 8rem;
+      left: 4rem;
+      top: 50%;
+      text-align: left;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      transform: translateY(-80%);
+      font-size: $fs-sm;
     }
   }
 

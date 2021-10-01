@@ -36,6 +36,7 @@ export default function Sidebar({ questions, currentIndex, onSelect }) {
           }}
           className={"dot " + (selected ? "selected" : "unselected")}>
           <img src={selectedDot} alt="dot" />
+          <div className="title">{question.title}</div>
         </button>
       </Positioner>
     );

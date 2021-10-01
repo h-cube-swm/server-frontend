@@ -5,16 +5,9 @@ import setNestedState from "../../../../../utils/setNestedState";
 import "./Preference.scss";
 import TextField from "../../../../TextField/TextField";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
+import Tooltip from "../../../../Tooltip/Tooltip";
 
-function PreferenceButton({
-  index,
-  placeholder,
-  description,
-  setDescription,
-  selected,
-  onClick,
-  prevIndex,
-}) {
+function PreferenceButton({ index, selected, onClick, prevIndex }) {
   const classes = ["preference-box"];
 
   if (onClick) {
@@ -26,40 +19,8 @@ function PreferenceButton({
   }
 
   return (
-    <div className="prefence-btn">
-      <div className={classes.join(" ")} onClick={onClick}>
-        {index}
-      </div>
-      <div className="text-box">
-        <TextField
-          placeholder={placeholder}
-          size="sm"
-          setText={setDescription}
-          text={description}
-        />
-      </div>
-    </div>
-  );
-}
-
-function LastButton({ count, onCountChange, onBlur, isError, description, setDescription }) {
-  return (
-    <div className="prefence-btn" key="last">
-      <input
-        type="text"
-        className="preference-box end"
-        value={count}
-        onChange={(e) => onCountChange(e.target.value)}
-        onBlur={onBlur}
-        onClick={(e) => e.target.select()}
-        maxLength="2"
-        style={{
-          color: isError ? "red" : "black",
-        }}
-      />
-      <div className="text-box">
-        <TextField placeholder="설명 추가" size="sm" text={description} setText={setDescription} />
-      </div>
+    <div className={classes.join(" ")} onClick={onClick}>
+      {index}
     </div>
   );
 }
@@ -113,24 +74,33 @@ export default function Preference() {
   };
 
   const preferences = [];
+  const elementsClasses = ["preference-elements"];
 
-  // First component
-  preferences.push(
-    <PreferenceButton
-      key={"first"}
-      index={1}
-      placeholder={isEditting && "설명 추가"}
-      setDescription={setMinDes}
-      description={question.minDes}
-      onClick={getOnClick(1)}
-      selected={response}
-      setPrevIndex={setPrevIndex}
-      prevIndex={prevIndex}
-    />,
-  );
+  switch (trueCount) {
+    case 5:
+      elementsClasses.push("five");
+      break;
+    case 6:
+      elementsClasses.push("six");
+      break;
+    case 7:
+      elementsClasses.push("seven");
+      break;
+    case 8:
+      elementsClasses.push("eight");
+      break;
+    case 9:
+      elementsClasses.push("nine");
+      break;
+    case 10:
+      elementsClasses.push("ten");
+      break;
+    default:
+      break;
+  }
 
   // Middle components
-  for (let i = 2; i < trueCount; i++) {
+  for (let i = 1; i < trueCount + 1; i++) {
     preferences.push(
       <PreferenceButton
         key={i}
@@ -143,35 +113,50 @@ export default function Preference() {
     );
   }
 
-  // Last component
-  if (isEditting) {
-    preferences.push(
-      <LastButton
-        key="last"
-        count={question.count}
-        onCountChange={handleOnCountChange}
-        onBlur={handleOnBlur}
-        isError={question.count !== trueCount}
-        description={question.maxDes}
-        setDescription={setMaxDes}
-      />,
-    );
-  } else {
-    preferences.push(
-      <PreferenceButton
-        key="last"
-        index={question.count}
-        description={question.maxDes}
-        onClick={getOnClick(question.count)}
-        selected={response}
-        prevIndex={prevIndex}
-      />,
-    );
-  }
-
   return (
     <div className="preference">
-      <div className="preference-elements">{preferences}</div>
+      <div className="des">
+        <div className="indicator">
+          <p>1</p>
+          <TextField
+            placeholder="최소 (선택)"
+            size="rg"
+            text={isEditting || question.minDes ? question.minDes : "최소"}
+            setText={setMinDes}
+          />
+        </div>
+        <div className="indicator">
+          <p>{trueCount}</p>
+          <TextField
+            placeholder="최대 (선택)"
+            size="rg"
+            text={isEditting || question.maxDes ? question.maxDes : "최대"}
+            setText={setMaxDes}
+          />
+        </div>
+      </div>
+      <div className={elementsClasses.join(" ")}>{preferences}</div>
+      {isEditting && (
+        <div className="count">
+          <Tooltip
+            text="최소 5개, 최대 10개까지 설정할 수 있습니다. 리커트 척도 상 홀수가 좋습니다 👍"
+            size="lg"
+            pos="left">
+            <p>개수</p>
+          </Tooltip>
+          <input
+            type="text"
+            value={question.count}
+            onChange={(e) => handleOnCountChange(e.target.value)}
+            onBlur={handleOnBlur}
+            onClick={(e) => e.target.select()}
+            maxLength="2"
+            style={{
+              color: question.count !== trueCount ? "red" : "black",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

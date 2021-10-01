@@ -2,7 +2,7 @@
 
 .controller {
   position: absolute;
-  right: 33rem;
+  right: 20vw;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
@@ -68,15 +68,7 @@
   }
 
   @media screen and (max-width: 1890px) {
-    right: 25rem;
-  }
-
-  @include laptop {
-    right: 13rem;
-  }
-
-  @media screen and (max-width: 1210px) {
-    right: 7rem;
+    right: 12vw;
   }
 
   @include tablet {
