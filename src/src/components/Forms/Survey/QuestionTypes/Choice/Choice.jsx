@@ -36,7 +36,7 @@ function Choice({
           ref={choiceRef}
           text={text}
           setText={setText}
-          placeholder="더 폼 나는 선택지"
+          placeholder="선택지를 입력해주세요."
           size="rg"
         />
       </div>
@@ -123,8 +123,7 @@ function Choices({ multipleSelect, scrollToBottom }) {
         <Hider hide={!isEditting}>
           <button className="add-btn" onClick={addChoice}>
             <div className="button-box">
-              <img src={addBtn} alt="add choice button" />
-              <span>더 폼 나는 선택지 추가하기</span>
+              <span>선택지 추가하기</span>
             </div>
           </button>
         </Hider>
