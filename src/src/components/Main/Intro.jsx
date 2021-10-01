@@ -32,7 +32,9 @@ function Intro() {
           <div className="button-box">
             {!token && (
               <div className="make-btn">
-                <Link className="btn long once" to={"/forms/survey"}>
+                <Link
+                  className="btn long once"
+                  to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
                   한 번 만들어보기
                 </Link>
                 <p className="description">
