@@ -82,6 +82,30 @@ export default function Preference() {
   };
 
   const preferences = [];
+  const elementsClasses = ["preference-elements"];
+
+  switch (trueCount) {
+    case 5:
+      elementsClasses.push("five");
+      break;
+    case 6:
+      elementsClasses.push("six");
+      break;
+    case 7:
+      elementsClasses.push("seven");
+      break;
+    case 8:
+      elementsClasses.push("eight");
+      break;
+    case 9:
+      elementsClasses.push("nine");
+      break;
+    case 10:
+      elementsClasses.push("ten");
+      break;
+    default:
+      break;
+  }
 
   // Middle components
   for (let i = 1; i < trueCount + 1; i++) {
@@ -100,30 +124,26 @@ export default function Preference() {
   return (
     <div className="preference">
       <div className="des">
-        {(isEditting || question.minDes) && (
-          <div className="indicator">
-            <p>1</p>
-            <TextField
-              placeholder="최소 설명 추가 (선택)"
-              size="rg"
-              text={question.minDes}
-              setText={setMinDes}
-            />
-          </div>
-        )}
-        {(isEditting || question.maxDes) && (
-          <div className="indicator">
-            <p>{trueCount}</p>
-            <TextField
-              placeholder="최대 설명 추가 (선택)"
-              size="rg"
-              text={question.maxDes}
-              setText={setMaxDes}
-            />
-          </div>
-        )}
+        <div className="indicator">
+          <p>1</p>
+          <TextField
+            placeholder="최소 (선택)"
+            size="rg"
+            text={isEditting || question.minDes ? question.minDes : "최소"}
+            setText={setMinDes}
+          />
+        </div>
+        <div className="indicator">
+          <p>{trueCount}</p>
+          <TextField
+            placeholder="최대 (선택)"
+            size="rg"
+            text={isEditting || question.maxDes ? question.maxDes : "최대"}
+            setText={setMaxDes}
+          />
+        </div>
       </div>
-      <div className="preference-elements">{preferences}</div>
+      <div className={elementsClasses.join(" ")}>{preferences}</div>
       {isEditting && (
         <div className="count">
           <Tooltip

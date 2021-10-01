@@ -84,6 +84,7 @@
       display: flex;
       align-items: center;
       margin-top: 0.5rem;
+      margin-right: 0.5rem;
       p {
         display: flex;
         justify-content: center;
@@ -100,6 +101,46 @@
       input {
         width: 10rem;
       }
+    }
+  }
+
+  @include tablet {
+    .preference-elements {
+      display: grid;
+      height: 8rem;
+      text-align: center;
+      &.five {
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(10, 1fr);
+      }
+      &.six {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+      }
+      &.seven {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+      }
+      &.eight {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(8, 1fr);
+      }
+      &.nine {
+        grid-template-rows: 2;
+        grid-template-columns: repeat(10, 1fr);
+      }
+      &.ten {
+        grid-template-rows: 2;
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+    .preference-box {
+      min-width: 2rem;
+      margin: 0.2rem;
+      grid-column: span 2;
+    }
+    .des {
+      flex-direction: column;
     }
   }
 }
