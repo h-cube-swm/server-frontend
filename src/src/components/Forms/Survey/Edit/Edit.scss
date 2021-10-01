@@ -77,7 +77,7 @@ $background-color: #fff;
       position: absolute;
       .sidebar-box {
         position: absolute;
-        left: 35rem;
+        left: 20vw;
         top: 50vh;
         z-index: 2;
       }
@@ -86,23 +86,7 @@ $background-color: #fff;
     @media screen and (max-width: 1890px) {
       .positioning-box {
         .sidebar-box {
-          left: 25rem;
-        }
-      }
-    }
-
-    @include laptop {
-      .positioning-box {
-        .sidebar-box {
-          left: 15rem;
-        }
-      }
-    }
-
-    @media screen and (max-width: 1210px) {
-      .positioning-box {
-        .sidebar-box {
-          left: 7rem;
+          left: 12vw;
         }
       }
     }
@@ -146,6 +130,14 @@ $background-color: #fff;
   @include laptop {
     .view {
       margin-top: 2rem;
+    }
+  }
+
+  @include tablet {
+    .section {
+      .part {
+        font-size: $fs-sm;
+      }
     }
   }
 }
