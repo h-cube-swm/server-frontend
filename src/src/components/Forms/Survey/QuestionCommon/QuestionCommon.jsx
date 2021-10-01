@@ -40,7 +40,7 @@ function getQuestionDetail(type) {
 }
 
 export default function QuestionCommon() {
-  const { state, question, setQuestion } = useQuestion();
+  const { state, question, setQuestion, isLast } = useQuestion();
   const { ref, ...scrollBlock } = useScrollBlock();
 
   function scrollToBottom() {
@@ -92,12 +92,13 @@ export default function QuestionCommon() {
   const QuestionDetail = getQuestionDetail(question.type);
   const isResponse = state !== CardStates.EDITTING;
   const isEditing = state === CardStates.EDITTING;
+  const isEmpty = question.type === CardTypes.EMPTY;
 
   return (
     <div className="question-common" ref={ref} {...scrollBlock}>
       <div className="question-common-box">
         <div className="required-toggle-box">
-          <Hider hide={isResponse || question.type === CardTypes.EMPTY}>
+          <Hider hide={isResponse || isEmpty}>
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
@@ -114,12 +115,10 @@ export default function QuestionCommon() {
               <p>필수</p>
             </span>
           )}
-          <div className={question.type !== CardTypes.EMPTY ? "basic" : "basic empty"}>
+          <div className={!isEmpty ? "basic" : "basic empty"}>
             <div className="question">
               <TextField
-                placeholder={
-                  question.type !== CardTypes.EMPTY ? "더 폼 나는 질문" : "더 폼 나는 문구"
-                }
+                placeholder={!isLast ? "더 폼 나는 질문" : "종료 메시지를 작성해주세요."}
                 text={question.title}
                 setText={setNestedState(setQuestion, ["title"])}
                 size="title"

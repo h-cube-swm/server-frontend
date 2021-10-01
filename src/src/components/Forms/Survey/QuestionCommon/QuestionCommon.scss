@@ -35,10 +35,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
     flex-grow: 1;
     margin-left: 10%;
-    // padding: 0 4rem 0 7rem;
     .question-title-box {
       margin-bottom: 2rem;
       .basic {
@@ -47,6 +45,11 @@
         flex-direction: column;
         .description {
           margin-top: 1rem;
+        }
+        &.empty {
+          * {
+            text-align: center;
+          }
         }
       }
 
