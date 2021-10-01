@@ -1,5 +1,5 @@
 import React from "react";
-import { CardStates, CardStyle } from "../../../../constants";
+import { CardStates } from "../../../../constants";
 import { useQuestion } from "../../../../contexts/QuestionContext";
 import Hider from "../../../Hider/Hider";
 

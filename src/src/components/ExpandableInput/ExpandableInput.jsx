@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import "./ExpandableInput.scss";
 
-function ExpandableInput({ text, setText, placeholder, size }, outterRef) {
+function ExpandableInput({ text, setText, placeholder }, outterRef) {
   const innerRef = useRef(null);
   const isEditable = setText;
 

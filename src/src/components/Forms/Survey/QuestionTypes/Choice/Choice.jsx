@@ -5,10 +5,8 @@ import Hider from "../../../../Hider/Hider";
 import { CardStates } from "../../../../../constants";
 
 import delBtn from "../../../../../assets/icons/del-btn1.svg";
-import addBtn from "../../../../../assets/icons/add-btn.svg";
 import "./Choice.scss";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
-import useScrollBlock from "../../../../../hooks/useScrollBlock";
 import ExpandableInput from "../../../../ExpandableInput/ExpandableInput";
 
 function Choice({

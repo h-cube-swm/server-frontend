@@ -7,15 +7,7 @@ import TextField from "../../../../TextField/TextField";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
 import Tooltip from "../../../../Tooltip/Tooltip";
 
-function PreferenceButton({
-  index,
-  placeholder,
-  description,
-  setDescription,
-  selected,
-  onClick,
-  prevIndex,
-}) {
+function PreferenceButton({ index, selected, onClick, prevIndex }) {
   const classes = ["preference-box"];
 
   if (onClick) {

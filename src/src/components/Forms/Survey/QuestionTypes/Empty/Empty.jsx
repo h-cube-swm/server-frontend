@@ -6,7 +6,7 @@ import "./Empty.scss";
 import setNestedState from "../../../../../utils/setNestedState";
 
 export default function Empty() {
-  const { state, setQuestion, isLast } = useQuestion();
+  const { state, setQuestion } = useQuestion();
   const isEditting = state === CardStates.EDITTING;
   if (isEditting) {
     useEffect(() => {
