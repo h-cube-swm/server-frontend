@@ -48,6 +48,20 @@ async function sendData(method, path, body) {
   }
 }
 
+async function tempSendData(method, body) {
+  try {
+    const config = {
+      url: `https://suggestion.dev.the-form.io/test`,
+      method: method.toLowerCase(),
+    };
+    if (body) config.data = { text: body };
+    const { status, data } = await axios(config);
+    return [data, null, status];
+  } catch (error) {
+    return [error.response && error.response.data, error, -1];
+  }
+}
+
 async function deleteData(path) {
   const { token } = localStorage;
 
@@ -80,6 +94,8 @@ export default {
   putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
+  // temporal
+  postSuggestion: (body) => tempSendData("POST", body),
 
   // DELETE
   deleteSurvey: (sid) => deleteData(`/surveys/${sid}`),
