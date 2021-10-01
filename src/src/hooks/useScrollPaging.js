@@ -26,7 +26,7 @@ const useScrollPaging = (onPaging) => {
     scrollRef.current = currentScroll;
   };
 
-  return [onWheel];
+  return { onWheel };
 };
 
 export default useScrollPaging;
