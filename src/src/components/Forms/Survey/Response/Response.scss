@@ -168,6 +168,9 @@
         overflow: scroll;
         .question-box-inner {
           width: 100%;
+          .question-detail-box {
+            width: 100%;
+          }
         }
       }
     }
