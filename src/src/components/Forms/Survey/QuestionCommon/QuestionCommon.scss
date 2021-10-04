@@ -8,8 +8,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   overflow: scroll;
-  width: 80%;
-  margin: 0 auto;
+  padding-left: 15%;
+  padding-right: 15%;
   .question-common-box {
     width: 100%;
     display: flex;
@@ -18,7 +18,7 @@
 
     .required-toggle-box {
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       position: absolute;
@@ -26,6 +26,19 @@
       height: auto;
       top: $card-padding;
       right: $card-padding;
+      .img-btn {
+        background-color: transparent;
+        cursor: pointer;
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-right: 1rem;
+        img {
+          width: 100%;
+        }
+        input {
+          display: none;
+        }
+      }
     }
   }
 
@@ -51,6 +64,10 @@
             text-align: center;
           }
         }
+      }
+      .question-img {
+        max-width: 100%;
+        margin-top: 1rem;
       }
 
       .suggestions {
