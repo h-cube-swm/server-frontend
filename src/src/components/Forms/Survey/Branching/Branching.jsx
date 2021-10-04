@@ -305,7 +305,7 @@ export default function Branching({ survey, setSurvey }) {
         onMouseMove={handleMove}
         style={{
           width: getCardPosition(questions.length - 1)[0] + CARD_W + RIGHT,
-          minHeight: TOP + CARD_H + (CHOICE_DIST + CHOICE_H) * maxChoices,
+          minHeight: TOP + CARD_H + CHOICE_DIST * maxChoices,
         }}>
         {questions.map((question, index) => {
           return (
