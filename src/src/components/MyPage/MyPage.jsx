@@ -83,12 +83,22 @@ export default function MyPage() {
   }
 
   surveys.forEach((survey, i) => {
+    const createdDate = new Date(survey.createdAt);
+    const updatedDate = new Date(survey.updatedAt);
     contents.push(
       <div key={i} className="survey" onMouseEnter={onMouse} onMouseLeave={outMouse}>
-        {survey.status !== "published" && (
+        {survey.status === "published" ? (
           <div className="dot-position">
-            <Tooltip text="아직 설문 작성이 완료되지 않았습니다 🤓" size="md">
+            <p className="timestamp published">
+              {updatedDate.toLocaleString("ko-KR")}
+              {"  배포됨"}
+            </p>
+          </div>
+        ) : (
+          <div className="dot-position">
+            <Tooltip text="아직 설문 작성이 완료되지 않았습니다 🤓" size="lg">
               <div className="dot" />
+              <p className="timestamp editing">{createdDate.toLocaleString("ko-KR")}</p>
             </Tooltip>
           </div>
         )}
@@ -161,6 +171,7 @@ export default function MyPage() {
 
       <div className="info">
         <h1>마이페이지</h1>
+        <p>제작중이거나 배포중인 설문을 관리하는 곳입니다.</p>
       </div>
       <div className="surveys">{contents.reverse()}</div>
     </div>

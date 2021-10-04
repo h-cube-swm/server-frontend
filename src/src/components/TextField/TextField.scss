@@ -39,6 +39,9 @@
   &.title {
     display: flex;
     font-size: $fs-lg;
+    @include mobile {
+      font-size: $fs-md;
+    }
   }
 
   &.xl {

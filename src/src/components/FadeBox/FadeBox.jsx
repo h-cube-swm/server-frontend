@@ -1,14 +1,13 @@
 import React from "react";
 import "./FadeBox.scss";
 
-export default function FadeBox({ children }) {
+export default function FadeBox({ height, children }) {
+  const h = `${height}rem`;
   return (
-    <div>
-      <div className="input-box">
-        {children}
-        <div className="fade-in"></div>
-        <div className="fade-out"></div>
-      </div>
-    </div>
+    <>
+      <div className="fade-box top" style={{ height: h }} />
+      {children}
+      <div className="fade-box bottom" style={{ height: h }} />
+    </>
   );
 }

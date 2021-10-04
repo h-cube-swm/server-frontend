@@ -23,8 +23,19 @@
     }
   }
   .info {
+    display: flex;
+    flex-direction: column;
     margin-top: 10rem;
     font-size: $fs-rg;
+    align-items: center;
+    h1 {
+      font-weight: $fw-bold;
+    }
+    p {
+      margin-top: 1rem;
+      color: #707070;
+      font-weight: $fw-bold;
+    }
   }
   .partition {
     width: 10rem;
@@ -76,6 +87,21 @@
 
       .dot-position {
         transform: translateY(-9.5rem);
+        .timestamp {
+          position: absolute;
+          width: 12rem;
+          font-size: $fs-sm;
+          font-weight: $fw-bold;
+          color: #707070;
+          opacity: 0.8;
+          &.published {
+            transform: translate(0.2rem, 0.5rem);
+            color: #2b44ff;
+          }
+          &.editing {
+            transform: translateX(1.5rem);
+          }
+        }
       }
 
       .title {
