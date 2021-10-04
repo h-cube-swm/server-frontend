@@ -6,6 +6,7 @@ import Title from "../../../Title/Title";
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
 import QuestionCommon from "../QuestionCommon/QuestionCommon";
 import Loading from "../../../Loading/Loading";
+import FadeBox from "../../../FadeBox/FadeBox";
 
 import { CardStates, CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
@@ -193,8 +194,8 @@ export function Response({
   if (history.length > 0) {
     // Which is identical to !isCover, but for clearity.
     buttons.push(
-      <button key="previous" className="btn rg" onClick={previous} tabIndex={tabIndex}>
-        이전으로
+      <button key="previous" className="btn sm" onClick={previous} tabIndex={tabIndex}>
+        이전
       </button>,
     );
   }
@@ -215,17 +216,17 @@ export function Response({
     buttons.push(
       <button
         key="next"
-        className={"btn rg " + (isPassable ? "" : "disabled")}
+        className={"btn sm " + (isPassable ? "" : "disabled")}
         onClick={getNext}
         tabIndex={tabIndex}>
-        다음으로
+        다음
       </button>,
     );
   } else if (currentIndex === questions.length - 1) {
     buttons.push(
       <button
         key="finished"
-        className={"btn rg " + (isPassable ? "" : "disabled")}
+        className={"btn sm " + (isPassable ? "" : "disabled")}
         onClick={isPassable ? handleSubmit : () => {}}
         tabIndex={tabIndex}>
         완료
@@ -280,11 +281,13 @@ export function Response({
               response={responses[id]}
               setResponse={setNestedState(setResponses, [id])}
               tabIndex={isSelected ? "1" : "-1"}>
-              <div className={className}>
-                <div className="question-box-inner">
-                  <QuestionCommon />
+              <FadeBox height={3}>
+                <div className={className}>
+                  <div className="question-box-inner">
+                    <QuestionCommon />
+                  </div>
                 </div>
-              </div>
+              </FadeBox>
             </QuestionProvider>
           );
         })}
