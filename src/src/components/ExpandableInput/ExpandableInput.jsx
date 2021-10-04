@@ -1,9 +1,14 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import "./ExpandableInput.scss";
 
-function ExpandableInput({ text, setText, placeholder }, outterRef) {
+function escapeScript(text) {
+  return text?.replace(/(S|s)(C|c)(R|r)(I|i)(P|p)(T|t)/g, '"script"');
+}
+
+function ExpandableInput({ text: _text, setText, placeholder }, outterRef) {
   const innerRef = useRef(null);
   const isEditable = setText;
+  const text = escapeScript(_text);
 
   useEffect(() => {
     innerRef.current.innerHTML = text || "";
