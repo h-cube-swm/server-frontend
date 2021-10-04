@@ -115,8 +115,8 @@ export default function QuestionCommon() {
         );
       }
       setQuestionImg(data[0].result);
-    } catch (e) {
-      console.log(e);
+    } catch {
+      //
     }
   };
 
