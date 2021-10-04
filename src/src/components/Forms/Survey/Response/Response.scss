@@ -21,12 +21,12 @@
       min-height: 6rem;
       height: auto;
       padding: 1.5rem;
-      margin-top: 30%;
+      margin-top: 20vh;
       margin-bottom: 1.5rem;
       font-size: $fs-xl;
       font-weight: $fw-bold;
       text-align: center;
-      word-break: keep-all;
+      word-break: break-all;
       color: #000;
     }
 
@@ -49,7 +49,7 @@
       white-space: pre-wrap;
       line-height: 1.5;
       color: #000;
-      word-break: keep-all;
+      word-break: break-all;
     }
   }
 
