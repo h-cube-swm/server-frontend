@@ -3,15 +3,15 @@ import { CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 import "./Branching.scss";
 
-const TOP = 240;
-const LEFT = 120;
-const RIGHT = 120;
+const TOP = 240; // Distance between frame top and card top
+const LEFT = 120; // Distance between frame left and card left
+const RIGHT = 120; // Distance between frame right and card right
 const QUESTION_DIST = 300; // Horizontal distance between each cards including its width
 const CARD_W = 240; // Width of cards
 const CARD_H = 150; // Height of cards
 const CHOICE_DIST = 75; // Vertical distance between choices includig its height
-const CHOICE_H = 16 * 3;
-const SCROLL_DIST = 110;
+const CHOICE_H = 48; // Vertical size of choices
+const SCROLL_DIST = 110; // Distance from frame edge that scrolling is enabled when connecting branch
 
 /**
  *
@@ -110,6 +110,13 @@ function unhashChoice(hashed) {
   return [+i, +j];
 }
 
+/**
+ * Calculate how much scroll should be moved.
+ * @param {*} pos x or y
+ * @param {*} length width or height
+ * @param {*} scrollDist Distance from frame edge that scrolling is enabled
+ * @returns
+ */
 function getScrollDiff(pos, length, scrollDist) {
   let diff = 0;
   if (pos < scrollDist) diff = pos - scrollDist;
