@@ -178,8 +178,15 @@ export default function Branching({ survey, setSurvey }) {
   const { questions } = survey;
   const { branching } = survey;
   const setBranching = setNestedState(setSurvey, ["branching"]);
+
+  // List if indexes of questions that does not have the 'Next question' settings,
+  // So that branch to the next question should be shown.
   const defaultList = [];
   for (let i = 0; i < questions.length - 1; i++) {
+    const { id } = questions[i];
+    const defaultNextHash = hashChoice(id, -1);
+    if (selectedHandle && selectedHandle[0] === id && selectedHandle[1] === -1) continue;
+    if (!branching[defaultNextHash] || branching[defaultNextHash] >= 0) continue;
     defaultList.push(i);
   }
 
@@ -321,8 +328,6 @@ export default function Branching({ survey, setSurvey }) {
               if (question.choices.length <= choiceIndex) return null;
               // Skip currently modifing branch
               if (selectedHandle && hashChoice(...selectedHandle) === choiceHash) return null;
-              // Check if it has a default branching
-              if (choiceIndex === -1) defaultList.splice(defaultList.indexOf(questionIndex), 1);
 
               const [sx, sy] = getHandlePosition(questionIndex, choiceIndex);
               const [ex, ey] = getAnchorPosition(destIndex);
@@ -351,12 +356,6 @@ export default function Branching({ survey, setSurvey }) {
               />
             )}
             {defaultList.map((questionIndex) => {
-              if (
-                selectedHandle &&
-                selectedHandle[0] === indexToId(questionIndex) &&
-                selectedHandle[1] === -1
-              )
-                return null;
               const [sx, sy] = getHandlePosition(questionIndex, -1);
               const [ex, ey] = getAnchorPosition(questionIndex + 1);
               const curveString = getCurveString(sx, sy, ex, ey);

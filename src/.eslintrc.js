@@ -28,10 +28,11 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    "prefer-template": "off",
     "no-shadow": "off",
-    "react/prop-types": "off",
+    "no-continue": "off",
     "no-plusplus": "off",
+    "prefer-template": "off",
+    "react/prop-types": "off",
     "react/display-name": "off",
     "no-console": errorAtProduction,
     "no-unused-vars": errorAtProduction,
