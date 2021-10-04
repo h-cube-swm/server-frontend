@@ -96,7 +96,7 @@ export default function MyPage() {
           </div>
         ) : (
           <div className="dot-position">
-            <Tooltip text="아직 설문 작성이 완료되지 않았습니다 🤓" size="md">
+            <Tooltip text="아직 설문 작성이 완료되지 않았습니다 🤓" size="lg">
               <div className="dot" />
               <p className="timestamp editing">{createdDate.toLocaleString("ko-KR")}</p>
             </Tooltip>

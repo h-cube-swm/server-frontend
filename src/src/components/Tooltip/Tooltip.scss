@@ -28,6 +28,9 @@
     &.left {
       transform: translateX(-100%);
     }
+    &.bottom {
+      transform: translate(-120%, 120%);
+    }
   }
   &:hover {
     .tooltiptext {
