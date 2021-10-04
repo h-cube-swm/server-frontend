@@ -111,13 +111,14 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-
       &.left {
         transform: translateX(-100%);
+        opacity: 0;
       }
 
       &.right {
         transform: translateX(100%);
+        opacity: 0;
       }
 
       .question-box-inner {
