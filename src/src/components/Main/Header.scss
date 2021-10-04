@@ -20,7 +20,13 @@
   @include mobile {
     .banner {
       right: 2rem;
-      top: 2rem;
+      top: 3rem;
+      a {
+        margin-left: 1rem;
+      }
+      .login {
+        margin-left: 1rem;
+      }
     }
   }
 }
