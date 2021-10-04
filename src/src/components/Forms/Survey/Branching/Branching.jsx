@@ -110,6 +110,14 @@ function unhashChoice(hashed) {
   return [+i, +j];
 }
 
+function getScrollDiff(pos, length, scrollDist) {
+  let diff = 0;
+  if (pos < scrollDist) diff = pos - scrollDist;
+  else if (pos > length - scrollDist) diff = pos - (length - scrollDist);
+  diff *= 0.25;
+  return diff;
+}
+
 function Card({ index: questionIndex, question, onGrab, isLast }) {
   const [x, y] = getCardPosition(questionIndex);
   const choices = question.choices || [];
@@ -172,14 +180,14 @@ export default function Branching({ survey, setSurvey }) {
   const frameRef = useRef(null);
   const contentRef = useRef(null);
   const mouseRef = useRef([0, 0]);
-  const scrollRef = useRef(0);
+  const scrollRef = useRef([0, 0]);
 
   // Derived states
   const { questions } = survey;
   const { branching } = survey;
   const setBranching = setNestedState(setSurvey, ["branching"]);
 
-  // List if indexes of questions that does not have the 'Next question' settings,
+  // List of indexes of questions that does not have the 'Next question' settings,
   // So that branch to the next question should be shown.
   const defaultList = [];
   for (let i = 0; i < questions.length - 1; i++) {
@@ -189,6 +197,9 @@ export default function Branching({ survey, setSurvey }) {
     if (!branching[defaultNextHash] || branching[defaultNextHash] >= 0) continue;
     defaultList.push(i);
   }
+
+  // Maximum length of chocies
+  const maxChoices = Math.max(...questions.map((x) => (x.choices ? x.choices.length : 0)));
 
   function indexToId(index) {
     if (!questions[index]) return -1;
@@ -227,13 +238,9 @@ export default function Branching({ survey, setSurvey }) {
     let my = cy - rect.top;
 
     // Calculate scroll
-    let scrollDiff = 0;
-    if (cx < SCROLL_DIST) {
-      scrollDiff = cx - SCROLL_DIST;
-    } else if (cx > window.innerWidth - SCROLL_DIST) {
-      scrollDiff = cx - (window.innerWidth - SCROLL_DIST);
-    }
-    scrollRef.current = scrollDiff * 0.25;
+    const scrollDiffX = getScrollDiff(cx, window.innerWidth, SCROLL_DIST);
+    const scrollDiffY = getScrollDiff(cy, window.innerHeight, SCROLL_DIST);
+    scrollRef.current = [scrollDiffX, scrollDiffY];
 
     // Get nearest distance
     const [destIndex, distSquare] = getNearestAnchor(questions.length, mx, my);
@@ -281,8 +288,9 @@ export default function Branching({ survey, setSurvey }) {
   useEffect(() => {
     if (!selectedHandle) return null;
     const id = setInterval(() => {
-      const diff = scrollRef.current;
-      frameRef.current.scrollLeft += diff;
+      const [diffX, diffY] = scrollRef.current;
+      frameRef.current.scrollLeft += diffX;
+      frameRef.current.scrollTop += diffY;
       handleConnecting();
     }, 25);
     return () => clearInterval(id);
@@ -294,10 +302,10 @@ export default function Branching({ survey, setSurvey }) {
         className="frame"
         ref={contentRef}
         onMouseUp={handleRelease}
-        onMouseLeave={handleRelease}
         onMouseMove={handleMove}
         style={{
           width: getCardPosition(questions.length - 1)[0] + CARD_W + RIGHT,
+          minHeight: TOP + CARD_H + (CHOICE_DIST + CHOICE_H) * maxChoices,
         }}>
         {questions.map((question, index) => {
           return (
