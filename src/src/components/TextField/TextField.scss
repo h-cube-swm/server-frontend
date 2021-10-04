@@ -73,5 +73,9 @@
     height: 100%;
     padding: 1rem;
     border: 1.5px solid #0001;
+    @include mobile {
+      min-height: 8rem;
+      font-size: $fs-sm;
+    }
   }
 }

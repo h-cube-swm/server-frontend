@@ -61,7 +61,7 @@
     }
   }
 
-  .delete {
+  .delete-btn {
     position: absolute;
     padding: 0;
     right: $card-padding;
@@ -87,6 +87,10 @@
       opacity: 0;
       z-index: -1;
       cursor: inherit;
+    }
+
+    &.img {
+      right: $card-padding * 2.5;
     }
   }
 

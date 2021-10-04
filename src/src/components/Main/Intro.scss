@@ -153,7 +153,10 @@
   @include desktop {
     height: 160%;
     .messages {
-      right: 10rem;
+      right: 15rem;
+    }
+    .message {
+      left: 15rem;
     }
   }
 

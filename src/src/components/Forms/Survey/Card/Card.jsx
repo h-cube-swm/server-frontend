@@ -6,8 +6,7 @@ import Hider from "../../../Hider/Hider";
 /* Assets */
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
-import imgDeleteButton from "../../../../assets/icons/del-btn.svg";
-// import questionBranchButton from "../../../../assets/icons/branch-btn.svg";
+import deleteButton from "../../../../assets/icons/del-btn.svg";
 
 export default function Card({ onDelete, onGrab, children }) {
   const { state, isLast } = useQuestion();
@@ -55,13 +54,13 @@ export default function Card({ onDelete, onGrab, children }) {
       <div className="content-box">{children}</div>
       <Hider hide={isLast}>
         <button
-          className={"delete " + (onDelete ? "" : "hidden")}
+          className={"delete-btn " + (onDelete ? "" : "hidden")}
           tabIndex={onDelete ? null : "-1"}
           onClick={handleOnDelete}>
-          <img src={imgDeleteButton} alt="Delete button"></img>
+          <img src={deleteButton} alt="delete button"></img>
         </button>
         <div className="handle" onMouseDown={handleOnGrab}>
-          <img src={imgHandle} alt="Handle"></img>
+          <img src={imgHandle} alt="handle"></img>
         </div>
       </Hider>
     </div>
