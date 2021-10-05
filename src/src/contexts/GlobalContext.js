@@ -23,7 +23,7 @@ export function GlobalStateProvider({ children }) {
   const [embedState, setEmbedState] = useState(cookies.token);
   const isEmbed = (params.embed && true) || embedState;
 
-  // It token is in cookie, store it into local storage and remove.
+  // It token is in cookie, store the token into local storage and remove token in cookie.
   if (cookies.token) {
     localStorage.token = cookies.token;
     document.cookie = "token=; Max-Age=0; domain=the-form.io";
@@ -32,7 +32,7 @@ export function GlobalStateProvider({ children }) {
   // Get token from local storage.
   const { token } = localStorage;
 
-  // If isEmbed is set once, then it will be set forever.
+  // If isEmbed is set once, then it would be set forever.
   useEffect(() => setEmbedState(isEmbed), [isEmbed]);
 
   return (
