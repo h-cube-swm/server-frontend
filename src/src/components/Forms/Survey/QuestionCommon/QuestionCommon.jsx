@@ -230,12 +230,14 @@ export default function QuestionCommon() {
               </>
             )}
           </div>
-          {!isEditing && questionImg && (
+          {questionImg && (
             <div className="img-card">
               <img className="question-img" src={questionImg} alt="" />
-              <button className="del-btn" onClick={onDelete} tabIndex="-1">
-                <img src={delBtn} alt="delete button" />
-              </button>
+              {isEditing && (
+                <button className="del-btn" onClick={onDelete} tabIndex="-1">
+                  <img src={delBtn} alt="delete button" />
+                </button>
+              )}
             </div>
           )}
 
