@@ -16,27 +16,39 @@
     margin-bottom: 1rem;
     flex-direction: row-reverse;
 
-    .required-toggle-box {
+    .control-box {
       display: flex;
-      // flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-start;
       position: absolute;
       width: auto;
-      height: auto;
+      height: 4rem;
       top: $card-padding;
       right: $card-padding;
-      .img-btn {
-        background-color: transparent;
-        cursor: pointer;
-        width: 3.5rem;
-        height: 3.5rem;
+      .toggle-box {
+        margin-top: 0.5rem;
+      }
+      .img-btn-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin-right: 1rem;
-        img {
-          width: 100%;
+        .img-btn {
+          background-color: transparent;
+          cursor: pointer;
+          width: 3.5rem;
+          height: 3.5rem;
+          img {
+            width: 100%;
+          }
+          input {
+            display: none;
+          }
         }
-        input {
-          display: none;
+        .loading-indicator {
+          font-size: $fs-sm;
+          font-weight: $fw-bold;
+          color: #707070;
         }
       }
     }
@@ -65,9 +77,20 @@
           }
         }
       }
-      .question-img {
-        max-width: 100%;
-        margin-top: 1rem;
+      .img-card {
+        display: flex;
+        align-items: flex-end;
+        width: 100%;
+        .question-img {
+          max-width: 100%;
+          margin-top: 1rem;
+        }
+        .del-btn {
+          background-color: transparent;
+          img {
+            width: 2rem;
+          }
+        }
       }
 
       .suggestions {
