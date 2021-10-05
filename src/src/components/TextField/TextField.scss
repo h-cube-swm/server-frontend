@@ -71,10 +71,10 @@
     @include round;
     font-size: $fs-rg;
     height: 100%;
+    min-height: 8rem;
     padding: 1rem;
     border: 1.5px solid #0001;
     @include mobile {
-      min-height: 8rem;
       font-size: $fs-sm;
     }
   }
