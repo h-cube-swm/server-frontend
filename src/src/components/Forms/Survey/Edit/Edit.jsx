@@ -237,6 +237,7 @@ function Edit({ survey: init, updateSurvey, location }) {
         <div ref={item}>
           <QuestionProvider
             state={CardStates.GHOST}
+            surveyId={survey.id}
             question={questions[selectedIndex]}
             tabIndex="-1">
             <Card slowAppear={false}>
@@ -260,6 +261,7 @@ function Edit({ survey: init, updateSurvey, location }) {
                 <Hider hide={isHide} animation={false} appearDelay={400}>
                   <QuestionProvider
                     state={state}
+                    surveyId={survey.id}
                     question={question}
                     setQuestion={isSelected && setQuestion}
                     isLast={isLast}>

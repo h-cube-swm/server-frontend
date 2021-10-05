@@ -134,6 +134,7 @@ function Service() {
         <div className="box one">
           <QuestionProvider
             question={question}
+            surveyId={"test"}
             setQuestion={setQuestion}
             state={CardStates.EDITTING}>
             <QuestionCommon />
@@ -148,6 +149,7 @@ function Service() {
         <div className="box four">
           <QuestionProvider
             question={question}
+            surveyId={"test"}
             state={CardStates.RESPONSE}
             response={response}
             setResponse={setResponse}>

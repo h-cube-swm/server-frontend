@@ -276,6 +276,7 @@ export function Response({
           return (
             <QuestionProvider
               state={state}
+              surveyId={survey.id}
               question={question}
               key={id}
               response={responses[id]}

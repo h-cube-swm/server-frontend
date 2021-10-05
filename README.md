@@ -1,6 +1,6 @@
 # server-frontend
 
-![Build Test](https://github.com/h-cube-swm/server-frontend/actions/workflows/build-test.yaml/badge.svg)
+![Build Test](https://github.com/h-cube-swm/server-frontend/actions/workflows/build-deploy.yaml/badge.svg)
 
 ## Note
 

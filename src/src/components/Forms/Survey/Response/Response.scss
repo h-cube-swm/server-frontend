@@ -18,27 +18,27 @@
     overflow: scroll;
 
     .title {
-      min-height: 6rem;
       height: auto;
-      padding: 1.5rem;
+      padding-right: 10%;
+      padding-left: 10%;
       margin-top: 20vh;
-      margin-bottom: 1.5rem;
       font-size: $fs-xl;
       font-weight: $fw-bold;
       text-align: center;
-      word-break: break-all;
+      word-break: keep-all;
       color: #000;
     }
 
     .partition {
       width: 10rem;
       height: 1.5px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
       background-color: #707070;
     }
 
     .description {
-      padding: 1.5rem;
-      margin-top: 2rem;
+      padding: 10%;
       margin-bottom: 2rem;
       width: 60%;
       height: auto;
@@ -103,12 +103,9 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      padding-left: 3rem;
-      padding-right: 3rem;
       transition-duration: 500ms;
       display: flex;
       align-items: center;
-      overflow: hidden;
       &.left {
         transform: translateX(-100%);
         opacity: 0;
@@ -128,7 +125,6 @@
         max-width: 800px;
         margin: 0 auto;
         height: 100%;
-        overflow: scroll;
         .question-detail-box {
           margin: 40% auto;
         }
@@ -168,6 +164,7 @@
         overflow: scroll;
         .question-box-inner {
           width: 100%;
+          margin-bottom: 3rem;
           .question-detail-box {
             width: 100%;
           }

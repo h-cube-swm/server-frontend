@@ -6,11 +6,11 @@ function ExpandableInput({ text, setText, placeholder }, outterRef) {
   const isEditable = setText;
 
   useEffect(() => {
-    innerRef.current.innerHTML = text || "";
+    innerRef.current.innerText = text || "";
   }, [innerRef.current]);
 
   if (innerRef.current && innerRef.current !== document.activeElement)
-    innerRef.current.innerHTML = text || "";
+    innerRef.current.innerText = text || "";
 
   return (
     <div className="expandable-input">
@@ -21,7 +21,7 @@ function ExpandableInput({ text, setText, placeholder }, outterRef) {
           if (outterRef) outterRef.current = ref;
         }}
         className="input-field"
-        onInput={(e) => setText(e.target.innerHTML)}
+        onInput={(e) => setText(e.target.innerText)}
         contentEditable={isEditable ? "true" : "false"}></div>
       {!text && <div className="placeholder">{placeholder}</div>}
     </div>

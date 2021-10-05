@@ -1,19 +1,22 @@
-import React from "react";
-import { CardStates, CardTypes } from "../../../../constants";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { CardStates, CardTypes, DOMAIN } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
-// import API from "../../../../utils/apis";
+import API from "../../../../utils/apis";
 // import { useThrottleWithTimeout } from "../../../../hooks/useThrottle";
 // import { useState, useEffect } from "react"
 // 질문 자동 추천 관련 import
 
 // Hooks
 import { useQuestion } from "../../../../contexts/QuestionContext";
+import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
 import TextField from "../../../TextField/TextField";
 import Hider from "../../../Hider/Hider";
+import Tooltip from "../../../Tooltip/Tooltip";
 
 // Question types
 import Default from "../QuestionTypes/Default/Default";
@@ -24,7 +27,9 @@ import Empty from "../QuestionTypes/Empty/Empty";
 
 // Scss
 import "./QuestionCommon.scss";
-import useScrollBlock from "../../../../hooks/useScrollBlock";
+import imgAddBtn from "../../../../assets/icons/img-btn.svg";
+import delBtn from "../../../../assets/icons/del-btn1.svg";
+import { useMessage } from "../../../../contexts/MessageContext";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -40,8 +45,15 @@ function getQuestionDetail(type) {
 }
 
 export default function QuestionCommon() {
-  const { state, question, setQuestion, isLast } = useQuestion();
+  const { state, surveyId, question, setQuestion, isLast } = useQuestion();
   const { ref, ...scrollBlock } = useScrollBlock();
+  const setQuestionImg = setNestedState(setQuestion, ["img"]);
+  const [isLoading, setIsLoading] = useState(false);
+  const questionImg = question.img;
+  const { publish } = useMessage();
+  const location = `https://${DOMAIN}${useLocation().pathname}`;
+  const href = `https://auth.the-form.io?redirect=${location}`;
+  const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
 
   function scrollToBottom() {
     if (ref.current)
@@ -89,6 +101,75 @@ export default function QuestionCommon() {
   //   setIsTyping(false);
   // }
 
+  const getImage = async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    const img = e.target.files[0];
+    if (!img) {
+      setIsLoading(false);
+      return;
+    }
+    if (img.size > 5242880) {
+      publish("🤭 사진 용량이 너무 큽니다. 5MB 이하로 용량을 줄여주세요 ✂️", "warning");
+      setIsLoading(false);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("sid", surveyId);
+    formData.append("qid", question.id);
+    formData.append("file", img);
+    try {
+      const data = await API.postImg(formData);
+      if (data[2] === 400) {
+        publish(
+          <div
+            className="publish-login"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+            <p
+              style={{
+                color: "#000",
+                fontSize: "1em",
+                fontWeight: "700",
+              }}>
+              🗝 유저만 사용할 수 있는 기능입니다. 로그인하고 더 폼 나게 만들어보세요 🎉
+            </p>
+            <a
+              className="login"
+              href={href}
+              style={{
+                color: "#000",
+                backgroundColor: "transparent",
+                border: "1.5px solid #000",
+                borderRadius: "5px",
+                marginLeft: "3rem",
+                padding: "0.2rem 0.5rem",
+                fontSize: "1rem",
+                fontWeight: "700",
+              }}>
+              로그인
+            </a>
+          </div>,
+          "warning",
+        );
+        setIsLoading(false);
+        return;
+      }
+      setQuestionImg(`${data[0].result}?=${Date.now()}`);
+      setIsLoading(false);
+    } catch {
+      setIsLoading(false);
+    }
+  };
+
+  const onDelete = () => {
+    setQuestionImg(null);
+  };
+
   const QuestionDetail = getQuestionDetail(question.type);
   const isResponse = state !== CardStates.EDITTING;
   const isEditing = state === CardStates.EDITTING;
@@ -97,8 +178,19 @@ export default function QuestionCommon() {
   return (
     <div className="question-common" ref={ref} {...scrollBlock}>
       <div className="question-common-box">
-        <div className="required-toggle-box">
+        <div className="control-box">
           <Hider hide={isResponse || isEmpty}>
+            {!isRoot && (
+              <div className="img-btn-box">
+                <label className="img-btn">
+                  <Tooltip text="이미지는 최대 5MB까지 업로드 가능합니다." size="lg">
+                    <img src={imgAddBtn} alt="image add button"></img>
+                  </Tooltip>
+                  <input type="file" accept="image/*" onChange={getImage}></input>
+                </label>
+                {isLoading && <p className="loading-indicator">업로드중</p>}
+              </div>
+            )}
             <ToggleSwitch
               isRequired={question.isRequired}
               setIsRequired={setNestedState(setQuestion, ["isRequired"])}
@@ -133,12 +225,20 @@ export default function QuestionCommon() {
                     text={question.description}
                     setText={setNestedState(setQuestion, ["description"])}
                     size="rg"
-                    // onFocus={onFocus}
                   />
                 </div>
               </>
             )}
           </div>
+          {questionImg && (
+            <div className="img-card">
+              <img className="question-img" src={questionImg} alt="" />
+              <button className="del-btn" onClick={onDelete} tabIndex="-1">
+                <img src={delBtn} alt="delete button" />
+              </button>
+            </div>
+          )}
+
           {/* <Hider
             hide={!isTyping || !question.title || (question.title && question.title.length <= 3)}>
             <div className="suggestions">

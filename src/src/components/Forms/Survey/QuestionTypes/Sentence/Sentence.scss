@@ -14,12 +14,13 @@
     flex-direction: column;
     .extra {
       position: absolute;
-      right: 1rem;
       bottom: 1rem;
-
       width: 100%;
       display: flex;
       justify-content: flex-end;
+      @include mobile {
+        bottom: -2rem;
+      }
     }
   }
 
@@ -34,5 +35,6 @@
   .max-len-indicator {
     width: 6rem;
     text-align: right;
+    margin-right: 1rem;
   }
 }

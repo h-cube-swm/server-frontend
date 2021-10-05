@@ -48,6 +48,26 @@ async function sendData(method, path, body) {
   }
 }
 
+async function sendImg(body) {
+  const { token } = localStorage;
+
+  try {
+    const res = await axios({
+      method: "post",
+      url: `https://images.${DOMAIN}/images`,
+      data: body,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${token}`,
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    return [res.data, null, res.status];
+  } catch (error) {
+    return [error.response && error.response.data, error, error.response.status];
+  }
+}
+
 async function tempSendData(method, body) {
   try {
     const config = {
@@ -81,7 +101,7 @@ async function deleteData(path) {
 }
 
 export default {
-  // rid = Response ID, sid = Survey ID
+  // rid = Response ID, sid = Survey ID, qid = Question ID
 
   // Get
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
@@ -94,6 +114,8 @@ export default {
   putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
+  postImg: (data) => sendImg(data),
+
   // temporal
   postSuggestion: (body) => tempSendData("POST", body),
 
