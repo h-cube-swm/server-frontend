@@ -201,7 +201,7 @@ export default function Branching({ survey, setSurvey }) {
     const { id } = questions[i];
     const defaultNextHash = hashChoice(id, -1);
     if (selectedHandle && selectedHandle[0] === id && selectedHandle[1] === -1) continue;
-    if (!branching[defaultNextHash] || branching[defaultNextHash] >= 0) continue;
+    if (defaultNextHash in branching && branching[defaultNextHash] >= 0) continue;
     defaultList.push(i);
   }
 
