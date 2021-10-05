@@ -230,7 +230,7 @@ export default function QuestionCommon() {
               </>
             )}
           </div>
-          {questionImg && (
+          {!isEditing && questionImg && (
             <div className="img-card">
               <img className="question-img" src={questionImg} alt="" />
               <button className="del-btn" onClick={onDelete} tabIndex="-1">
