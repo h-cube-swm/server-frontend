@@ -101,7 +101,7 @@ async function deleteData(path) {
 }
 
 export default {
-  // rid = Response ID, sid = Survey ID
+  // rid = Response ID, sid = Survey ID, qid = Question ID
 
   // Get
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
@@ -114,7 +114,7 @@ export default {
   putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
-  postImg: (img) => sendImg(img),
+  postImg: (data) => sendImg(data),
 
   // temporal
   postSuggestion: (body) => tempSendData("POST", body),

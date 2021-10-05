@@ -5,6 +5,7 @@ const QuestionContext = createContext();
 export function QuestionProvider({
   children,
   state,
+  surveyId,
   question,
   setQuestion,
   response,
@@ -14,7 +15,7 @@ export function QuestionProvider({
 }) {
   return (
     <QuestionContext.Provider
-      value={{ state, question, response, setQuestion, setResponse, tabIndex, isLast }}>
+      value={{ state, question, surveyId, response, setQuestion, setResponse, tabIndex, isLast }}>
       {children}
     </QuestionContext.Provider>
   );
