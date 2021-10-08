@@ -117,7 +117,7 @@ function ChartView({ columns, rows }) {
 }
 
 function TableView({ columns, rows }) {
-  const stringRows = rows.map((row) => row.map((cell) => answerToString(cell)));
+  const stringRows = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
   return <Table columns={columns} rows={stringRows} />;
 }
 
