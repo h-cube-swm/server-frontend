@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 /* Components */
-import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import Sidebar from "../Sidebar/Sidebar";
@@ -25,12 +24,14 @@ import useOnly from "../../../../hooks/useOnly";
 
 /* Others */
 import orderedMap from "../../../../utils/orderedMap";
-import { CardStates, CardStyle } from "../../../../constants";
+import { CardStates, CardStyle, DOMAIN } from "../../../../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
 import getQuestion from "../getQuestion";
 import { useMessage } from "../../../../contexts/MessageContext";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
 import Branching from "../Branching/Branching";
+import { useModal } from "../../../../contexts/ModalContext";
 
 const MODE_EDIT = "edit";
 const MODE_PREVIEW = "preview";
@@ -71,7 +72,11 @@ function Edit({ survey: init, updateSurvey, location }) {
   const isBranching = viewMode === MODE_BRANCHING;
   const isEdit = viewMode !== MODE_PREVIEW && viewMode !== MODE_BRANCHING;
 
+  const { load } = useModal();
   const { publish } = useMessage();
+  const current = `https://${DOMAIN}${useLocation().pathname}`;
+  const href = `https://auth.the-form.io?redirect=${current}`;
+  const { token } = useGlobalState();
 
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
 
@@ -168,6 +173,15 @@ function Edit({ survey: init, updateSurvey, location }) {
   }
 
   const onSubmit = async () => {
+    try {
+      await putSurvey();
+      setIsEnded(true);
+    } catch {
+      /* */
+    }
+  };
+
+  const onClick = () => {
     if (survey.title.length === 0) {
       publish("주의❗️ 설문 제목을 입력해야 설문 제작을 완료할 수 있습니다.", "warning");
       return;
@@ -177,11 +191,32 @@ function Edit({ survey: init, updateSurvey, location }) {
       return;
     }
 
-    try {
-      await putSurvey();
-      setIsEnded(true);
-    } catch {
-      /* */
+    if (!token) {
+      load(
+        <>
+          <h2 style={{ fontWeight: "700", marginBottom: "2rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+            로그인을 하지 않으면, 수정이 불가능합니다 🔨
+          </p>
+          <p style={{ fontWeight: "500" }}>1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏</p>
+        </>,
+        href,
+        onSubmit,
+      );
+    } else {
+      load(
+        <>
+          <h2 style={{ fontWeight: "700", marginBottom: "2rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+            설문 제작을 마치고 배포하려면 &quot;완료&quot;를 눌러주세요 👏
+          </p>
+          <p style={{ fontWeight: "500" }}>
+            혹시 수정할 내용이 있다면 &quot;닫기&quot;를 눌러 수정해주세요 🤔
+          </p>
+        </>,
+        null,
+        onSubmit,
+      );
     }
   };
 
@@ -199,7 +234,7 @@ function Edit({ survey: init, updateSurvey, location }) {
         ) : (
           <>
             <p className="save-indicator">저장됨</p>
-            <button onClick={onSubmit} className="btn rg submit-btn">
+            <button onClick={onClick} className="btn rg submit-btn">
               완료
             </button>
           </>

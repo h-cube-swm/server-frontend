@@ -30,6 +30,7 @@ import "./QuestionCommon.scss";
 import imgAddBtn from "../../../../assets/icons/img-btn.svg";
 import delBtn from "../../../../assets/icons/del-btn1.svg";
 import { useMessage } from "../../../../contexts/MessageContext";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -54,6 +55,7 @@ export default function QuestionCommon() {
   const location = `https://${DOMAIN}${useLocation().pathname}`;
   const href = `https://auth.the-form.io?redirect=${location}`;
   const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
+  const { token } = useGlobalState();
 
   function scrollToBottom() {
     if (ref.current)
@@ -104,6 +106,15 @@ export default function QuestionCommon() {
   const getImage = async (e) => {
     setIsLoading(true);
     e.preventDefault();
+    if (!token) {
+      publish(
+        "🗝 유저만 사용할 수 있는 기능입니다. 1초 만에 로그인하고 더 폼 나게 만들어보세요 🎉",
+        "warning",
+        <a href={href}>로그인</a>,
+      );
+      setIsLoading(false);
+      return;
+    }
     const img = e.target.files[0];
     if (!img) {
       setIsLoading(false);
@@ -123,38 +134,9 @@ export default function QuestionCommon() {
       const data = await API.postImg(formData);
       if (data[2] === 400) {
         publish(
-          <div
-            className="publish-login"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-            <p
-              style={{
-                color: "#000",
-                fontSize: "1em",
-                fontWeight: "700",
-              }}>
-              🗝 유저만 사용할 수 있는 기능입니다. 로그인하고 더 폼 나게 만들어보세요 🎉
-            </p>
-            <a
-              className="login"
-              href={href}
-              style={{
-                color: "#000",
-                backgroundColor: "transparent",
-                border: "1.5px solid #000",
-                borderRadius: "5px",
-                marginLeft: "3rem",
-                padding: "0.2rem 0.5rem",
-                fontSize: "1rem",
-                fontWeight: "700",
-              }}>
-              로그인
-            </a>
-          </div>,
+          "🗝 유저만 사용할 수 있는 기능입니다. 로그인하고 더 폼 나게 만들어보세요 🎉",
           "warning",
+          <a href={href}>로그인</a>,
         );
         setIsLoading(false);
         return;
