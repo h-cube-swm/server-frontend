@@ -115,6 +115,7 @@ export default {
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
   postImg: (data) => sendImg(data),
+  postCopySurvey: (sid) => sendData("POST", "/surveys/copy", { sid }),
 
   // temporal
   postSuggestion: (body) => tempSendData("POST", body),

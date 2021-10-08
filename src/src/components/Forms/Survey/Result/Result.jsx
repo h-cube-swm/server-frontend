@@ -117,7 +117,7 @@ function ChartView({ columns, rows }) {
 }
 
 function TableView({ columns, rows }) {
-  const stringRows = rows.map((row) => row.map((cell) => answerToString(cell)));
+  const stringRows = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
   return <Table columns={columns} rows={stringRows} />;
 }
 
@@ -151,7 +151,7 @@ export default function Result({ match, location }) {
 
   // Export to xlsx file
   const exportToXlsx = async () => {
-    const cells = rows.map((row) => row.map((cell) => answerToString(cell)));
+    const cells = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
     const xlsxColumn = columns.map(({ title }) => title);
     const workSheetData = [xlsxColumn, ...cells];
     const wb = utils.book_new();

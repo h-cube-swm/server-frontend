@@ -10,6 +10,8 @@ import "./App.scss";
 import Loading from "../Loading/Loading";
 import ResponseContainer from "../Forms/Survey/Response/Response";
 import { MessageProvider } from "../../contexts/MessageContext";
+import { ModalProvider } from "../../contexts/ModalContext";
+import ModalSystem from "../Modal/ModalSystem";
 import MessageSystem from "../Message/MessageSystem";
 import EditCover from "../Forms/Survey/Edit/EditCover";
 import useGaTracker from "../../utils/useGaTracker";
@@ -42,27 +44,30 @@ function App() {
   return (
     <>
       <GlobalStateProvider>
-        <MessageProvider>
-          <MessageSystem />
-          <Suspense fallback={<Loading />}>
-            <Switch>
-              <Route path="/" component={Main} exact />
-              <Route path="/mypage" component={MyPage} exact />
-              <Route path="/pricing" component={Pricing} exact />
-              <Route path="/forms/survey" component={Survey} exact />
-              <Route path="/forms/survey/mobile" component={EditCover} />
-              <Route path="/forms/survey/edit/:link" component={Edit} />
-              <Route path="/forms/survey/end/:link" component={EditEnding} />
-              <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
-              <Route path="/forms/survey/response/:link" component={ResponseContainer} />
-              <Route path="/forms/survey/result/:link" component={Result} />
-              <Route path="/error/:type" component={Error} />
-              <Route path="/loading" component={Loading}></Route>
-              <Route component={Error} />
-            </Switch>
-          </Suspense>
-          <ChannelService pluginKey="91cb6c42-6533-4d7a-b925-f223dde1fe16" />
-        </MessageProvider>
+        <ModalProvider>
+          <MessageProvider>
+            <ModalSystem />
+            <MessageSystem />
+            <Suspense fallback={<Loading />}>
+              <Switch>
+                <Route path="/" component={Main} exact />
+                <Route path="/mypage" component={MyPage} exact />
+                <Route path="/pricing" component={Pricing} exact />
+                <Route path="/forms/survey" component={Survey} exact />
+                <Route path="/forms/survey/mobile" component={EditCover} />
+                <Route path="/forms/survey/edit/:link" component={Edit} />
+                <Route path="/forms/survey/end/:link" component={EditEnding} />
+                <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
+                <Route path="/forms/survey/response/:link" component={ResponseContainer} />
+                <Route path="/forms/survey/result/:link" component={Result} />
+                <Route path="/error/:type" component={Error} />
+                <Route path="/loading" component={Loading}></Route>
+                <Route component={Error} />
+              </Switch>
+            </Suspense>
+            <ChannelService pluginKey="91cb6c42-6533-4d7a-b925-f223dde1fe16" />
+          </MessageProvider>
+        </ModalProvider>
       </GlobalStateProvider>
     </>
   );

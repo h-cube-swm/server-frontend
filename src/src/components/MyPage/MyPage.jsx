@@ -13,6 +13,7 @@ import resultBtn from "../../assets/icons/result-btn.svg";
 import delBtn from "../../assets/icons/del-btn-big.svg";
 import addBtn from "../../assets/icons/add-btn.svg";
 import editBtn from "../../assets/icons/edit-btn.svg";
+import duplicateBtn from "../../assets/icons/duplicate-btn.svg";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
@@ -46,6 +47,14 @@ export default function MyPage() {
     document.execCommand("copy");
     document.body.removeChild(linkarea);
     publish("🖥 임베드 코드가 복사되었습니다 ✅");
+  };
+
+  const duplicateSurvey = async (link) => {
+    const status = await API.postCopySurvey(link);
+    if (status[2] === 200) {
+      publish("📄 설문 사본 생성이 되었습니다 ✅");
+    }
+    setTimestmap(Date.now());
   };
 
   const deleteSurvey = async (link) => {
@@ -144,6 +153,11 @@ export default function MyPage() {
               <img src={embedBtn} alt="dublicate embed code button" />
             </Tooltip>
           </button>
+          <button className="link" onClick={() => duplicateSurvey(survey.id)}>
+            <Tooltip text={"사본 만들기"} size="sm">
+              <img src={duplicateBtn} alt="dublicate deploy link button" />
+            </Tooltip>
+          </button>
           <div className="link" onClick={() => deleteSurvey(survey.id)}>
             <Tooltip text={"삭제하기"} size="sm">
               <img src={delBtn} alt="delete button" />
@@ -171,7 +185,11 @@ export default function MyPage() {
 
       <div className="info">
         <h1>마이페이지</h1>
-        <p>제작중이거나 배포중인 설문을 관리하는 곳입니다.</p>
+        <p>제작 중이거나 배포 중인 설문을 관리하는 곳입니다.</p>
+        <p>
+          배포된 설문을 수정하고 싶으시다면, <em>사본 만들기 기능</em> 을 활용하거나{" "}
+          <em>우측 하단 채널톡</em> 을 통해 문의주세요.
+        </p>
       </div>
       <div className="surveys">{contents.reverse()}</div>
     </div>

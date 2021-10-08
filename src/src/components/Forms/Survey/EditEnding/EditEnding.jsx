@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 import API from "../../../../utils/apis";
 import { useMessage } from "../../../../contexts/MessageContext";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import "./EditEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
@@ -20,6 +21,7 @@ const Ending = ({ ending }) => {
 
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState("default");
+  const { token } = useGlobalState();
 
   const { publish } = useMessage();
 
@@ -70,12 +72,13 @@ const Ending = ({ ending }) => {
     publish("🖥 임베드 코드가 복사되었습니다 ✅");
   };
 
-  useOnly(() => {
-    publish(
-      "주의❗️ 메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
-      "warning",
-    );
-  });
+  if (!token)
+    useOnly(() => {
+      publish(
+        "주의❗️ 메일을 보내지 않거나, 링크를 저장해두지 않을 경우 해당 설문에 대한 접근이 불가능합니다.",
+        "warning",
+      );
+    });
 
   const buttonClasses = ["btn", "rg", "submit-btn"];
   let buttonText = "";
@@ -120,6 +123,11 @@ const Ending = ({ ending }) => {
           <Link className="btn rg home-btn" to="/">
             홈으로
           </Link>
+          {/* {token && (
+            <Link className="btn rg home-btn" to="/">
+              마이페이지로
+            </Link>
+          )} */}
         </div>
         <div className="service-box">
           <div className="section">
