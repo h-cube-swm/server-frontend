@@ -50,7 +50,11 @@ export default function MyPage() {
   };
 
   const duplicateSurvey = async (link) => {
-    console.log(link);
+    const status = await API.postCopySurvey(link);
+    if (status[2] === 200) {
+      publish("📄 설문 사본 생성이 되었습니다 ✅");
+    }
+    setTimestmap(Date.now());
   };
 
   const deleteSurvey = async (link) => {
