@@ -120,14 +120,16 @@ const Ending = ({ ending }) => {
             </h1>
           </div>
           <Firework />
-          <Link className="btn rg home-btn" to="/">
-            홈으로
-          </Link>
-          {/* {token && (
-            <Link className="btn rg home-btn" to="/">
+
+          {token ? (
+            <Link className="btn lg home-btn" to="/mypage">
               마이페이지로
             </Link>
-          )} */}
+          ) : (
+            <Link className="btn lg home-btn" to="/">
+              홈으로
+            </Link>
+          )}
         </div>
         <div className="service-box">
           <div className="section">
