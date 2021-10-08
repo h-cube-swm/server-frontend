@@ -165,23 +165,27 @@
           .link {
             top: 50%;
             &:nth-child(1) {
-              transform: translateX(-32rem) translate(-50%, -50%) rotate(-10deg) translateX(40rem);
+              transform: translateX(-32rem) translate(-50%, -50%) rotate(-13deg) translateX(40rem);
             }
 
             &:nth-child(2) {
-              transform: translateX(-32rem) translate(-50%, -50%) rotate(-5deg) translateX(40rem);
+              transform: translateX(-32rem) translate(-50%, -50%) rotate(-8deg) translateX(40rem);
             }
 
             &:nth-child(3) {
-              transform: translateX(-32rem) translate(-50%, -50%) translateX(40rem);
+              transform: translateX(-32rem) translate(-50%, -50%) rotate(-3deg) translateX(40rem);
             }
 
             &:nth-child(4) {
-              transform: translateX(-32rem) translate(-50%, -50%) rotate(5deg) translateX(40rem);
+              transform: translateX(-32rem) translate(-50%, -50%) rotate(2deg) translateX(40rem);
             }
 
             &:nth-child(5) {
-              transform: translateX(-32rem) translate(-50%, -50%) rotate(10deg) translateX(40rem);
+              transform: translateX(-32rem) translate(-50%, -50%) rotate(7deg) translateX(40rem);
+            }
+
+            &:nth-child(6) {
+              transform: translateX(-32rem) translate(-50%, -50%) rotate(12deg) translateX(40rem);
             }
           }
         }

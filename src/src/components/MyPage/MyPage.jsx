@@ -13,6 +13,7 @@ import resultBtn from "../../assets/icons/result-btn.svg";
 import delBtn from "../../assets/icons/del-btn-big.svg";
 import addBtn from "../../assets/icons/add-btn.svg";
 import editBtn from "../../assets/icons/edit-btn.svg";
+import duplicateBtn from "../../assets/icons/duplicate-btn.svg";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
@@ -46,6 +47,10 @@ export default function MyPage() {
     document.execCommand("copy");
     document.body.removeChild(linkarea);
     publish("🖥 임베드 코드가 복사되었습니다 ✅");
+  };
+
+  const duplicateSurvey = async (link) => {
+    console.log(link);
   };
 
   const deleteSurvey = async (link) => {
@@ -142,6 +147,11 @@ export default function MyPage() {
             }>
             <Tooltip text={"임베드코드"} size="sm">
               <img src={embedBtn} alt="dublicate embed code button" />
+            </Tooltip>
+          </button>
+          <button className="link" onClick={() => duplicateSurvey(survey.id)}>
+            <Tooltip text={"사본 만들기"} size="sm">
+              <img src={duplicateBtn} alt="dublicate deploy link button" />
             </Tooltip>
           </button>
           <div className="link" onClick={() => deleteSurvey(survey.id)}>
