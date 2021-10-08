@@ -185,7 +185,11 @@ export default function MyPage() {
 
       <div className="info">
         <h1>마이페이지</h1>
-        <p>제작중이거나 배포중인 설문을 관리하는 곳입니다.</p>
+        <p>제작 중이거나 배포 중인 설문을 관리하는 곳입니다.</p>
+        <p>
+          배포된 설문을 수정하고 싶으시다면, <em>사본 만들기 기능</em> 을 활용하거나{" "}
+          <em>우측 하단 채널톡</em> 을 통해 문의주세요.
+        </p>
       </div>
       <div className="surveys">{contents.reverse()}</div>
     </div>
