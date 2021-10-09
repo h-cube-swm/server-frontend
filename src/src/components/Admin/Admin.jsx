@@ -8,6 +8,22 @@ function beautifyTime(date) {
   return new Date(date).toLocaleString().replace(/ /g, "");
 }
 
+function escapeID(id) {
+  let newId = id;
+  if (newId.indexOf("/") >= 0) newId = newId.split("/").pop();
+  if (newId.indexOf("?") >= 0) [newId] = newId.split("?");
+  if (newId.indexOf("#") >= 0) [newId] = newId.split("?");
+  return newId;
+}
+
+function Tab({ to, children, ...props }) {
+  return (
+    <a target="_blank" rel="noreferrer" href={to} {...props}>
+      {children}
+    </a>
+  );
+}
+
 function Surveys({ offset = 0, condition, order }) {
   const [data, err] = API.admin.useSurveys(offset, LIMIT, condition, order);
   if (err) return <div>{err + ""}</div>;
@@ -24,26 +40,16 @@ function Surveys({ offset = 0, condition, order }) {
               <div className="index">{offset + i + 1}</div>
               <div className="title">
                 {survey.status === "published" ? (
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={`/forms/survey/response/${survey.deployId}`}>
-                    {title}
-                  </a>
+                  <Tab to={`/forms/survey/response/${survey.deployId}`}>{title}</Tab>
                 ) : (
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={`/forms/survey/edit/${survey.deployId}`}>
-                    {title}
-                  </a>
+                  <Tab to={`/forms/survey/edit/${survey.deployId}`}>{title}</Tab>
                 )}
               </div>
               <div className="published" hidden={survey.status !== "published"}>
                 Published
               </div>
               <div className="result" hidden={survey.status !== "published"}>
-                <a href={`/forms/survey/result/${survey.id}`}>결과</a>
+                <Tab to={`/forms/survey/result/${survey.id}`}>결과</Tab>
               </div>
             </div>
             <div className="lower">
@@ -53,7 +59,7 @@ function Surveys({ offset = 0, condition, order }) {
               <div className={"count " + (survey.responseCount > 0 && "strong")}>
                 (응답 {survey.responseCount}건)
               </div>
-              /<div>User : {survey.userId}</div>
+              <div hidden={!survey.userId}> / User : {survey.userId}</div>
             </div>
           </div>
         );
@@ -95,8 +101,9 @@ export default function Admin() {
               value={surveyId}
               autoComplete="off"
               onChange={(e) => {
-                setSurveyId(e.target.value);
+                setSurveyId(escapeID(e.target.value));
                 setDeployId("");
+                setOffset(0);
               }}
             />
           </div>
@@ -108,8 +115,9 @@ export default function Admin() {
               value={deployId}
               autoComplete="off"
               onChange={(e) => {
-                setDeployId(e.target.value);
+                setDeployId(escapeID(e.target.value));
                 setSurveyId("");
+                setOffset(0);
               }}
             />
           </div>
@@ -119,7 +127,11 @@ export default function Admin() {
               id="order"
               type="text"
               value={orderBy}
-              onChange={(e) => setOrderBy(e.target.value)}
+              placeholder="e.g. -responseCount"
+              onChange={(e) => {
+                setOrderBy(e.target.value);
+                setOffset(0);
+              }}
             />
           </div>
           <hr />
