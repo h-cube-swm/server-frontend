@@ -4,36 +4,92 @@
   overflow: scroll;
   font-weight: 300;
 
+  @mixin border {
+    border: solid 1px #eee;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
   .container {
     max-width: 800px;
     margin: 2rem auto;
   }
 
-  .row {
-    padding: 0.5rem;
+  hr {
+    margin: 0.5rem;
+  }
 
-    .title {
+  .conditions {
+    @include border;
+
+    .row {
       display: flex;
-
-      .index {
-        width: 3rem;
-      }
     }
 
-    .info {
-      display: flex;
-      font-size: 0.8rem;
+    label {
+      width: 5rem;
+      display: block;
+    }
+  }
 
-      .date {
-        color: #888;
+  .controller {
+    @include border;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .survey-list {
+    .row {
+      @include border;
+
+      .upper {
+        display: flex;
+        align-items: center;
+
+        .index {
+          width: 3rem;
+        }
+
+        .title {
+          max-width: 50%;
+          word-break: keep-all;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .published {
+          color: #fff;
+          background-color: #888;
+          padding: 0.1rem;
+          border-radius: 0.2rem;
+          font-size: 0.5rem;
+          height: min-content;
+          margin-left: 1rem;
+        }
+
+        .result {
+          margin-left: auto;
+        }
       }
 
-      .count {
-        color: #888;
-      }
+      .lower {
+        display: flex;
+        font-size: 0.8rem;
 
-      .strong {
-        color: #000;
+        .date {
+          color: #888;
+        }
+
+        .count {
+          color: #888;
+        }
+
+        .strong {
+          color: #000;
+        }
       }
     }
   }
