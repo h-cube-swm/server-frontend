@@ -11,7 +11,6 @@ function useFetch(path) {
   useEffect(() => {
     (async () => {
       try {
-        setData([null, null]);
         const config = {
           url: ROOT + path,
           method: "GET",
@@ -127,7 +126,10 @@ export default {
   // Admin API
   admin: {
     useIsLoggedIn: () => useFetch("/admin/isLoggedIn"),
-    useSurveys: (offset, limit) => useFetch(`/admin/surveys?offset=${offset}&limit=${limit}`),
+    useSurveys: (offset, limit, condition, order) =>
+      useFetch(
+        `/admin/surveys?offset=${offset}&limit=${limit}&condition=${condition}&order=${order}`,
+      ),
     useSurveysWithCount: (offset, limit) =>
       useFetch(`/admin/surveys/count?offset=${offset}&limit=${limit}`),
   },
