@@ -11,6 +11,7 @@ function useFetch(path) {
   useEffect(() => {
     (async () => {
       try {
+        setData([null, null]);
         const config = {
           url: ROOT + path,
           method: "GET",
@@ -68,7 +69,7 @@ async function sendImg(body) {
   }
 }
 
-async function tempSendData(method, body) {
+async function TEMPSendData(method, body) {
   try {
     const config = {
       url: `https://suggestion.dev.the-form.io/test`,
@@ -103,7 +104,7 @@ async function deleteData(path) {
 export default {
   // rid = Response ID, sid = Survey ID, qid = Question ID
 
-  // Get
+  // GET
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
   useSurvey: (sid) => useFetch(`/surveys/${sid}`),
   useUser: (hash) => useFetch(`/users/surveys/${hash ? "?hash=" + hash : ""}`),
@@ -117,9 +118,17 @@ export default {
   postImg: (data) => sendImg(data),
   postCopySurvey: (sid) => sendData("POST", "/surveys/copy", { sid }),
 
-  // temporal
-  postSuggestion: (body) => tempSendData("POST", body),
-
   // DELETE
   deleteSurvey: (sid) => deleteData(`/surveys/${sid}`),
+
+  // temporal
+  postSuggestion: (body) => TEMPSendData("POST", body),
+
+  // Admin API
+  admin: {
+    useIsLoggedIn: () => useFetch("/admin/isLoggedIn"),
+    useSurveys: (offset, limit) => useFetch(`/admin/surveys?offset=${offset}&limit=${limit}`),
+    useSurveysWithCount: (offset, limit) =>
+      useFetch(`/admin/surveys/count?offset=${offset}&limit=${limit}`),
+  },
 };

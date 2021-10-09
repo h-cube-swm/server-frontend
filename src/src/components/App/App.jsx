@@ -17,6 +17,7 @@ import EditCover from "../Forms/Survey/Edit/EditCover";
 import useGaTracker from "../../utils/useGaTracker";
 import { GlobalStateProvider } from "../../contexts/GlobalContext";
 import ChannelService from "../ChannelService/ChannelService";
+import Admin from "../Admin/Admin";
 
 // /* Lazy loaded components */
 const Main = lazy(() => import("../Main/Main"));
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/forms/survey/result/:link" component={Result} />
                 <Route path="/error/:type" component={Error} />
                 <Route path="/loading" component={Loading}></Route>
+                <Route path="/admin" component={Admin}></Route>
                 <Route component={Error} />
               </Switch>
             </Suspense>
