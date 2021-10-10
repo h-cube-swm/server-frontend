@@ -23,7 +23,8 @@ export default function Viewer({ match }) {
                   state={CardStates.RESPONSE}
                   surveyId={survey.id}
                   question={question}
-                  isLast={false}>
+                  isLast={false}
+                  setResponse={() => {}}>
                   <QuestionCommon></QuestionCommon>
                 </QuestionProvider>
               </div>
