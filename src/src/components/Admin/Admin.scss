@@ -78,8 +78,16 @@
           }
         }
 
+        .spacer {
+          flex-grow: 1;
+        }
+
+        .edit {
+          margin-left: 1rem;
+        }
+
         .result {
-          margin-left: auto;
+          margin-left: 1rem;
         }
       }
 

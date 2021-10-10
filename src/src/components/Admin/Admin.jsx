@@ -42,11 +42,15 @@ function Surveys({ offset = 0, condition, order }) {
                 {survey.status === "published" ? (
                   <Tab to={`/forms/survey/response/${survey.deployId}`}>{title}</Tab>
                 ) : (
-                  <Tab to={`/forms/survey/edit/${survey.deployId}`}>{title}</Tab>
+                  <Tab to={`/admin/view/${survey.deployId}`}>{title}</Tab>
                 )}
               </div>
               <div className={"tag " + survey.status} hidden={survey.status === "editting"}>
                 {survey.status}
+              </div>
+              <div className="spacer"></div>
+              <div className="edit">
+                <Tab to={`/forms/survey/edit/${survey.id}`}>수정</Tab>
               </div>
               <div className="result" hidden={survey.status !== "published"}>
                 <Tab to={`/forms/survey/result/${survey.id}`}>결과</Tab>
