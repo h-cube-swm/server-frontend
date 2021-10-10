@@ -45,8 +45,8 @@ function Surveys({ offset = 0, condition, order }) {
                   <Tab to={`/forms/survey/edit/${survey.deployId}`}>{title}</Tab>
                 )}
               </div>
-              <div className="published" hidden={survey.status !== "published"}>
-                Published
+              <div className={"tag " + survey.status} hidden={survey.status === "editting"}>
+                {survey.status}
               </div>
               <div className="result" hidden={survey.status !== "published"}>
                 <Tab to={`/forms/survey/result/${survey.id}`}>결과</Tab>

@@ -3,6 +3,7 @@
   height: 100%;
   overflow: scroll;
   font-weight: 300;
+  padding: 1rem;
 
   @mixin border {
     border: solid 1px #eee;
@@ -60,14 +61,21 @@
           text-overflow: ellipsis;
         }
 
-        .published {
+        .tag {
           color: #fff;
-          background-color: #888;
-          padding: 0.1rem;
+          padding: 0.1rem 0.2rem;
           border-radius: 0.2rem;
           font-size: 0.5rem;
           height: min-content;
           margin-left: 1rem;
+
+          &.published {
+            background-color: #5b5;
+          }
+
+          &.deleted {
+            background-color: #b55;
+          }
         }
 
         .result {
