@@ -126,6 +126,7 @@ export default {
   // Admin API
   admin: {
     useIsLoggedIn: () => useFetch("/admin/isLoggedIn"),
+    useSurvey: (id) => useFetch(`/admin/surveys/${id}`),
     useSurveys: (offset, limit, condition, order) =>
       useFetch(
         `/admin/surveys?offset=${offset}&limit=${limit}&condition=${condition}&order=${order}`,
