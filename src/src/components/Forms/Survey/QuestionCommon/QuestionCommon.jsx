@@ -30,6 +30,7 @@ import imgAddBtn from "../../../../assets/icons/img-btn.svg";
 import delBtn from "../../../../assets/icons/del-btn1.svg";
 import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
+import { useModal } from "../../../../contexts/ModalContext";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -51,6 +52,7 @@ export default function QuestionCommon() {
   const [isLoading, setIsLoading] = useState(false);
   const questionImg = question.img;
   const { publish } = useMessage();
+  const { load } = useModal();
   const location = `https://${DOMAIN}${useLocation().pathname}`;
   const href = `https://auth.the-form.io?redirect=${location}`;
   const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
@@ -98,10 +100,16 @@ export default function QuestionCommon() {
     setIsLoading(true);
     e.preventDefault();
     if (!token) {
-      publish(
-        "🗝 유저만 사용할 수 있는 기능입니다. 1초 만에 로그인하고 더 폼 나게 만들어보세요 🎉",
-        "warning",
-        <a href={href}>로그인</a>,
+      load(
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+            🗝 유저만 사용할 수 있는 기능입니다🗝
+          </h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem" }}>
+            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+          </p>
+        </>,
+        href,
       );
       setIsLoading(false);
       return;
@@ -124,10 +132,16 @@ export default function QuestionCommon() {
     try {
       const data = await API.postImg(formData);
       if (data[2] === 400) {
-        publish(
-          "🗝 유저만 사용할 수 있는 기능입니다. 로그인하고 더 폼 나게 만들어보세요 🎉",
-          "warning",
-          <a href={href}>로그인</a>,
+        load(
+          <>
+            <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+              🗝 유저만 사용할 수 있는 기능입니다🗝
+            </h2>
+            <p style={{ fontWeight: "500", marginTop: "2rem" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>,
+          href,
         );
         setIsLoading(false);
         return;
@@ -150,35 +164,7 @@ export default function QuestionCommon() {
 
   return (
     <div className="question-common" ref={ref}>
-      <div className="question-common-box">
-        <div className="control-box">
-          <Hider hide={isResponse || isEmpty}>
-            {!isRoot && (
-              <div className="img-btn-box">
-                <label className="img-btn">
-                  <Tooltip text="이미지는 최대 5MB까지 업로드 가능합니다." size="lg">
-                    <img src={imgAddBtn} alt="image add button"></img>
-                  </Tooltip>
-                  <input type="file" accept="image/*" onChange={getImage}></input>
-                </label>
-                {isLoading && <p className="loading-indicator">업로드중</p>}
-              </div>
-            )}
-            <ToggleSwitch
-              isRequired={question.isRequired}
-              setIsRequired={setNestedState(setQuestion, ["isRequired"])}
-              selectedLabel="필수응답"
-              unselectedLabel="선택응답"
-            />
-          </Hider>
-        </div>
-      </div>
-      <div
-        className="question-detail-box"
-        style={{
-          // paddingLeft: isEditing ? "8rem" : null,
-          paddingRight: isEditing ? "9rem" : null,
-        }}>
+      <div className="question-detail-box">
         <div className="question-title-box">
           {question.isRequired && (
             <span className="requirement-tag">
@@ -235,6 +221,29 @@ export default function QuestionCommon() {
           </Hider> */}
         </div>
         <QuestionDetail />
+      </div>
+      <div className="question-common-box">
+        <div className="control-box">
+          <Hider hide={isResponse || isEmpty}>
+            <ToggleSwitch
+              isRequired={question.isRequired}
+              setIsRequired={setNestedState(setQuestion, ["isRequired"])}
+              selectedLabel="필수응답"
+              unselectedLabel="선택응답"
+            />
+            {!isRoot && (
+              <div className="img-btn-box">
+                <label className="img-btn">
+                  <Tooltip text="이미지는 최대 5MB까지 업로드 가능합니다." size="lg">
+                    <img src={imgAddBtn} alt="image add button"></img>
+                  </Tooltip>
+                  <input type="file" accept="image/*" onChange={getImage}></input>
+                </label>
+                {isLoading && <p className="loading-indicator">업로드중</p>}
+              </div>
+            )}
+          </Hider>
+        </div>
       </div>
     </div>
   );
