@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useRef } from "react";
 
 const QuestionContext = createContext();
 
@@ -13,9 +13,29 @@ export function QuestionProvider({
   tabIndex,
   isLast,
 }) {
+  const scrollRef = useRef(null);
+  function scrollToBottom() {
+    if (scrollRef.current)
+      scrollRef.current.scrollTo({
+        top: 999999999,
+        behavior: "smooth",
+      });
+  }
+
   return (
     <QuestionContext.Provider
-      value={{ state, question, surveyId, response, setQuestion, setResponse, tabIndex, isLast }}>
+      value={{
+        state,
+        question,
+        surveyId,
+        response,
+        setQuestion,
+        setResponse,
+        tabIndex,
+        isLast,
+        scrollRef,
+        scrollToBottom,
+      }}>
       {children}
     </QuestionContext.Provider>
   );

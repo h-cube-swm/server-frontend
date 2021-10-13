@@ -10,8 +10,8 @@ import imgHandle from "../../../../assets/icons/handle.svg";
 import deleteButton from "../../../../assets/icons/del-btn.svg";
 
 function Card({ onDelete, onGrab, children }) {
-  const { state, isLast } = useQuestion();
-  const scrollBlock = useScrollBlock();
+  const { state, isLast, scrollRef } = useQuestion();
+  const { ref, ...others } = useScrollBlock();
 
   const classes = ["survey-card"];
 
@@ -53,7 +53,13 @@ function Card({ onDelete, onGrab, children }) {
   const className = classes.join(" ");
   return (
     <div className={className}>
-      <div className="content-box" {...scrollBlock}>
+      <div
+        className="content-box"
+        ref={(dom) => {
+          ref.current = dom;
+          scrollRef.current = dom;
+        }}
+        {...others}>
         {children}
       </div>
       <Hider hide={isLast}>

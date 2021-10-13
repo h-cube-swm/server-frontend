@@ -49,8 +49,8 @@ function Choice({
   );
 }
 
-function Choices({ multipleSelect, scrollToBottom }) {
-  const { state, question, setQuestion, response, setResponse } = useQuestion();
+function Choices({ multipleSelect }) {
+  const { state, question, setQuestion, response, setResponse, scrollToBottom } = useQuestion();
   const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });

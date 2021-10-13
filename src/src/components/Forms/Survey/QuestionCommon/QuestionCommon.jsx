@@ -56,14 +56,6 @@ export default function QuestionCommon() {
   const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
   const { token } = useGlobalState();
 
-  function scrollToBottom() {
-    if (ref.current)
-      ref.current.scrollTo({
-        top: 999999999,
-        behavior: "smooth",
-      });
-  }
-
   // const [suggestionList, setSuggestionList] = useState([""]);
   // const [isTyping, setIsTyping] = useState(false);
   // const suggestQuestion = useThrottleWithTimeout(async () => {
@@ -242,7 +234,7 @@ export default function QuestionCommon() {
             </div>
           </Hider> */}
         </div>
-        <QuestionDetail scrollToBottom={scrollToBottom} />
+        <QuestionDetail />
       </div>
     </div>
   );
