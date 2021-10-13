@@ -77,18 +77,20 @@ function isResponsed(response) {
  * @returns
  */
 function ResponseContainer({ survey }) {
+  const KEY_NEXT = "_next";
+
   const [responses, setResponses] = useState({ history: [] });
   const [redirect, setRedirect] = useState(null);
+  const { params: query } = useGlobalState();
 
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const urlQueryParams = new URLSearchParams(window.location.search);
-    const query = Object.fromEntries(urlQueryParams.entries());
     const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
+    else if (query[KEY_NEXT]) window.location.href = query[KEY_NEXT];
     else setRedirect("/forms/survey/response/ending");
   };
 
@@ -118,7 +120,7 @@ export function Response({
   isPreview,
 }) {
   // States
-  const { isEmbed } = useGlobalState();
+  const { isEmbed, themeColor, setThemeColor } = useGlobalState();
   const setHistory = setNestedState(setResponses, ["history"]);
 
   // Derivated states
@@ -197,7 +199,12 @@ export function Response({
   if (history.length > 0) {
     // Which is identical to !isCover, but for clearity.
     buttons.push(
-      <button key="previous" className="btn sm" onClick={getPrevious} tabIndex={tabIndex}>
+      <button
+        key="previous"
+        style={{ backgroundColor: themeColor }}
+        className="btn sm"
+        onClick={getPrevious}
+        tabIndex={tabIndex}>
         이전
       </button>,
     );
@@ -211,7 +218,12 @@ export function Response({
 
   if (isCover) {
     buttons.push(
-      <button key="start" className="btn rg" onClick={getNext} tabIndex={tabIndex}>
+      <button
+        key="start"
+        style={{ backgroundColor: themeColor }}
+        className="btn rg"
+        onClick={getNext}
+        tabIndex={tabIndex}>
         시작하기
       </button>,
     );
@@ -219,6 +231,7 @@ export function Response({
     buttons.push(
       <button
         key="next"
+        style={{ backgroundColor: isPassable ? themeColor : "#b0b0b0" }}
         className={"btn sm " + (isPassable ? "" : "disabled")}
         onClick={getNext}
         tabIndex={tabIndex}>
@@ -229,6 +242,7 @@ export function Response({
     buttons.push(
       <button
         key="finished"
+        style={{ backgroundColor: isPassable ? themeColor : "#b0b0b0" }}
         className={"btn sm " + (isPassable ? "" : "disabled")}
         onClick={isPassable ? handleSubmit : () => {}}
         tabIndex={tabIndex}>
