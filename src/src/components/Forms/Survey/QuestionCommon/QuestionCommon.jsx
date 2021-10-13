@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { CardStates, CardTypes, DOMAIN } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
@@ -10,7 +10,6 @@ import API from "../../../../utils/apis";
 
 // Hooks
 import { useQuestion } from "../../../../contexts/QuestionContext";
-import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
@@ -47,7 +46,7 @@ function getQuestionDetail(type) {
 
 export default function QuestionCommon() {
   const { state, surveyId, question, setQuestion, isLast } = useQuestion();
-  const { ref, ...scrollBlock } = useScrollBlock();
+  const ref = useRef(null);
   const setQuestionImg = setNestedState(setQuestion, ["img"]);
   const [isLoading, setIsLoading] = useState(false);
   const questionImg = question.img;
@@ -158,7 +157,7 @@ export default function QuestionCommon() {
   const isEmpty = question.type === CardTypes.EMPTY;
 
   return (
-    <div className="question-common" ref={ref} {...scrollBlock}>
+    <div className="question-common" ref={ref}>
       <div className="question-common-box">
         <div className="control-box">
           <Hider hide={isResponse || isEmpty}>
@@ -182,7 +181,12 @@ export default function QuestionCommon() {
           </Hider>
         </div>
       </div>
-      <div className="question-detail-box">
+      <div
+        className="question-detail-box"
+        style={{
+          // paddingLeft: isEditing ? "8rem" : null,
+          paddingRight: isEditing ? "9rem" : null,
+        }}>
         <div className="question-title-box">
           {question.isRequired && (
             <span className="requirement-tag">

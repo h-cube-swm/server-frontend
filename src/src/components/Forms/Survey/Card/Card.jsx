@@ -2,14 +2,16 @@ import React from "react";
 import { CardStates } from "../../../../constants";
 import { useQuestion } from "../../../../contexts/QuestionContext";
 import Hider from "../../../Hider/Hider";
+import useScrollBlock from "../../../../hooks/useScrollBlock";
 
 /* Assets */
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
 import deleteButton from "../../../../assets/icons/del-btn.svg";
 
-export default function Card({ onDelete, onGrab, children }) {
+function Card({ onDelete, onGrab, children }) {
   const { state, isLast } = useQuestion();
+  const scrollBlock = useScrollBlock();
 
   const classes = ["survey-card"];
 
@@ -51,7 +53,9 @@ export default function Card({ onDelete, onGrab, children }) {
   const className = classes.join(" ");
   return (
     <div className={className}>
-      <div className="content-box">{children}</div>
+      <div className="content-box" {...scrollBlock}>
+        {children}
+      </div>
       <Hider hide={isLast}>
         <button
           className={"delete-btn " + (onDelete ? "" : "hidden")}
@@ -66,3 +70,5 @@ export default function Card({ onDelete, onGrab, children }) {
     </div>
   );
 }
+
+export default Card;

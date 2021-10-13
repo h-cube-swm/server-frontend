@@ -135,7 +135,6 @@ export function Response({
    *
    * @returns {function} `next()`
    */
-
   const getNext = () => {
     // If not passable, just return.
     if (!isPassable) return;
@@ -182,7 +181,11 @@ export function Response({
     push(currentIndex + 1);
   };
 
-  const previous = () =>
+  /**
+   *
+   * @returns {function} previous()
+   */
+  const getPrevious = () =>
     setHistory((history) => {
       const newHistory = [...history];
       newHistory.pop();
@@ -194,7 +197,7 @@ export function Response({
   if (history.length > 0) {
     // Which is identical to !isCover, but for clearity.
     buttons.push(
-      <button key="previous" className="btn sm" onClick={previous} tabIndex={tabIndex}>
+      <button key="previous" className="btn sm" onClick={getPrevious} tabIndex={tabIndex}>
         이전
       </button>,
     );
@@ -246,18 +249,20 @@ export function Response({
       </div>
       <div className="contents-box">
         <div className={"question-box " + (!isCover && "left")}>
-          <div className="cover-box">
-            <h1 className="title">
-              <Linkify>{survey.title}</Linkify>
-            </h1>
-            {survey.description && (
-              <>
-                <div className="partition" />
-                <div className="description">
-                  <Linkify>{survey.description}</Linkify>
-                </div>
-              </>
-            )}
+          <div className="question-box-inner">
+            <div className="cover-box">
+              <h1 className="title">
+                <Linkify>{survey.title}</Linkify>
+              </h1>
+              {survey.description && (
+                <>
+                  <div className="partition" />
+                  <div className="description">
+                    <Linkify>{survey.description}</Linkify>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -282,16 +287,15 @@ export function Response({
               response={responses[id]}
               setResponse={setNestedState(setResponses, [id])}
               tabIndex={isSelected ? "1" : "-1"}>
-              <FadeBox height={3}>
-                <div className={className}>
-                  <div className="question-box-inner">
-                    <QuestionCommon />
-                  </div>
+              <div className={className}>
+                <div className="question-box-inner">
+                  <QuestionCommon />
                 </div>
-              </FadeBox>
+              </div>
             </QuestionProvider>
           );
         })}
+        <FadeBox height={3} />
       </div>
       <div className="button-box">
         <div className="button-box-inner">{buttons}</div>

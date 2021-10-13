@@ -2,14 +2,7 @@
 
 .question-common {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  overflow: scroll;
-  padding-left: 15%;
-  padding-right: 15%;
+
   .question-common-box {
     width: 100%;
     display: flex;
@@ -25,9 +18,11 @@
       height: 4rem;
       top: $card-padding;
       right: $card-padding;
+
       .toggle-box {
         margin-top: 0.5rem;
       }
+
       .img-btn-box {
         display: flex;
         flex-direction: column;
@@ -55,13 +50,27 @@
   }
 
   .question-detail-box {
-    width: 80%;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
-    margin-left: 10%;
+    padding: 0 2rem;
+
+    /*
+    ToDo: 다음과 같은 상황에서 어떻게 렌더링되어야 하는가?
+    1. 데스크톱 환경이면서
+    2. 설문 제목은 짧은 단어 여러 개로 이루어진 긴 문장이며
+    3. 각 설문 문항은 매우 짧다.
+
+    이때 문항이 적당히 가운데정렬된다고 하자.
+    A. 문항의 가로 길이를 설문 제목의 content-max 에 맞출 수 있다. 그러나 설문 문항이 왼쪽으로 치우친 것처럼 보일 것이다.
+    B. 반대로 설문 문항의 content-max 에 맞출 수도 있다. 그러나 설문 제목이 너무 짧아질 것이다.
+    C. 설문 문항의 content-max에 맞춘 후 설문 제목이 설문 문항보다 오른쪽으로 빠지게 할 수도 있다.
+       그러나 반대로 오른쪼긍로 치우친 것으로 보일 것이다.
+    이때 이 문제를 해결하는 방법은 A 설문 문항까지 가운데정렬하는 것이다.
+    */
+
     .question-title-box {
       margin-bottom: 2rem;
       .basic {
@@ -77,6 +86,7 @@
           }
         }
       }
+
       .img-card {
         display: flex;
         align-items: flex-end;
