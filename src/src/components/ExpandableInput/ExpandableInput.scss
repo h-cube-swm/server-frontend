@@ -6,7 +6,7 @@
   justify-content: center;
   min-width: 10rem;
   min-height: 1rem;
-  color: #16248d;
+  color: #000;
   font-weight: $fw-bold;
   position: relative;
   .input-field {
@@ -14,6 +14,15 @@
     * {
       font-weight: inherit;
     }
+  }
+  &.title {
+    font-size: $fs-lg;
+  }
+  &.description {
+    font-size: $fs-rg;
+  }
+  &.choice {
+    color: #16248d;
   }
 
   .placeholder {
