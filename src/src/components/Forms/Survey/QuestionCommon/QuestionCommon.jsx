@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { CardStates, CardTypes, DOMAIN } from "../../../../constants";
+import React, { useRef } from "react";
+
+import { CardStates, CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
-import API from "../../../../utils/apis";
 // import { useThrottleWithTimeout } from "../../../../hooks/useThrottle";
 // import { useState, useEffect } from "react"
 // 질문 자동 추천 관련 import
@@ -13,9 +12,7 @@ import { useQuestion } from "../../../../contexts/QuestionContext";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
-import TextField from "../../../TextField/TextField";
 import Hider from "../../../Hider/Hider";
-import Tooltip from "../../../Tooltip/Tooltip";
 
 // Question types
 import Default from "../QuestionTypes/Default/Default";
@@ -26,11 +23,8 @@ import Empty from "../QuestionTypes/Empty/Empty";
 
 // Scss
 import "./QuestionCommon.scss";
-import imgAddBtn from "../../../../assets/icons/img-btn.svg";
 import delBtn from "../../../../assets/icons/del-btn1.svg";
-import { useMessage } from "../../../../contexts/MessageContext";
-import { useGlobalState } from "../../../../contexts/GlobalContext";
-import { useModal } from "../../../../contexts/ModalContext";
+import ExpandableInput from "../../../ExpandableInput/ExpandableInput";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -46,17 +40,10 @@ function getQuestionDetail(type) {
 }
 
 export default function QuestionCommon() {
-  const { state, surveyId, question, setQuestion, isLast } = useQuestion();
+  const { state, question, setQuestion, isLast } = useQuestion();
   const ref = useRef(null);
-  const setQuestionImg = setNestedState(setQuestion, ["img"]);
-  const [isLoading, setIsLoading] = useState(false);
   const questionImg = question.img;
-  const { publish } = useMessage();
-  const { load } = useModal();
-  const location = `https://${DOMAIN}${useLocation().pathname}`;
-  const href = `https://auth.the-form.io?redirect=${location}`;
-  const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
-  const { token } = useGlobalState();
+  const setQuestionImg = setNestedState(setQuestion, ["img"]);
 
   // const [suggestionList, setSuggestionList] = useState([""]);
   // const [isTyping, setIsTyping] = useState(false);
@@ -96,71 +83,14 @@ export default function QuestionCommon() {
   //   setIsTyping(false);
   // }
 
-  const getImage = async (e) => {
-    setIsLoading(true);
-    e.preventDefault();
-    if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
-            🗝 유저만 사용할 수 있는 기능입니다🗝
-          </h2>
-          <p style={{ fontWeight: "500", marginTop: "2rem" }}>
-            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-          </p>
-        </>,
-        href,
-      );
-      setIsLoading(false);
-      return;
-    }
-    const img = e.target.files[0];
-    if (!img) {
-      setIsLoading(false);
-      return;
-    }
-    if (img.size > 5242880) {
-      publish("🤭 사진 용량이 너무 큽니다. 5MB 이하로 용량을 줄여주세요 ✂️", "warning");
-      setIsLoading(false);
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("sid", surveyId);
-    formData.append("qid", question.id);
-    formData.append("file", img);
-    try {
-      const data = await API.postImg(formData);
-      if (data[2] === 400) {
-        load(
-          <>
-            <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
-              🗝 유저만 사용할 수 있는 기능입니다🗝
-            </h2>
-            <p style={{ fontWeight: "500", marginTop: "2rem" }}>
-              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-            </p>
-          </>,
-          href,
-        );
-        setIsLoading(false);
-        return;
-      }
-      setQuestionImg(`${data[0].result}?=${Date.now()}`);
-      setIsLoading(false);
-    } catch {
-      setIsLoading(false);
-    }
-  };
-
-  const onDelete = () => {
-    setQuestionImg(null);
-  };
-
   const QuestionDetail = getQuestionDetail(question.type);
   const isResponse = state !== CardStates.EDITTING;
   const isEditing = state === CardStates.EDITTING;
   const isEmpty = question.type === CardTypes.EMPTY;
+
+  const onDelete = () => {
+    setQuestionImg(null);
+  };
 
   return (
     <div className="question-common" ref={ref}>
@@ -173,22 +103,22 @@ export default function QuestionCommon() {
           )}
           <div className={!isEmpty ? "basic" : "basic empty"}>
             <div className="question">
-              <TextField
+              <ExpandableInput
                 placeholder={!isLast ? "더 폼 나는 질문" : "종료 메시지를 작성해주세요."}
                 text={question.title}
                 setText={setNestedState(setQuestion, ["title"])}
-                size="title"
+                type="title"
                 // onFocus={onFocus}
               />
             </div>
             {(isEditing || question.description) && (
               <>
                 <div className="description">
-                  <TextField
+                  <ExpandableInput
                     placeholder="더 폼 나는 설명 (선택)"
                     text={question.description}
                     setText={setNestedState(setQuestion, ["description"])}
-                    size="rg"
+                    type="description"
                   />
                 </div>
               </>
@@ -231,17 +161,6 @@ export default function QuestionCommon() {
               selectedLabel="필수응답"
               unselectedLabel="선택응답"
             />
-            {!isRoot && (
-              <div className="img-btn-box">
-                <label className="img-btn">
-                  <Tooltip text="이미지는 최대 5MB까지 업로드 가능합니다." size="lg">
-                    <img src={imgAddBtn} alt="image add button"></img>
-                  </Tooltip>
-                  <input type="file" accept="image/*" onChange={getImage}></input>
-                </label>
-                {isLoading && <p className="loading-indicator">업로드중</p>}
-              </div>
-            )}
           </Hider>
         </div>
       </div>
