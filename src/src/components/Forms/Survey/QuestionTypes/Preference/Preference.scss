@@ -13,7 +13,6 @@
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    margin-top: 1rem;
     p {
       width: 2rem;
       font-size: $fs-rg;
@@ -40,6 +39,8 @@
     justify-content: center;
     width: 100%;
     height: 3.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   .preference-box {
@@ -79,11 +80,11 @@
 
   .des {
     display: flex;
-    margin-bottom: 2rem;
+    align-items: center;
+    margin-bottom: 1rem;
     .indicator {
       display: flex;
       align-items: center;
-      margin-top: 0.5rem;
       margin-right: 0.5rem;
       p {
         display: flex;
@@ -99,7 +100,7 @@
         border-radius: 5px;
       }
       input {
-        width: 10rem;
+        width: 8rem;
       }
     }
   }

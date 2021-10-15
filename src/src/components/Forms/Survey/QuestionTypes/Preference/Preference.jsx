@@ -134,29 +134,29 @@ export default function Preference() {
             setText={setMaxDes}
           />
         </div>
+        {isEditting && (
+          <div className="count">
+            <Tooltip
+              text="최소 5개, 최대 10개까지 설정할 수 있습니다. 리커트 척도 상 홀수가 좋습니다 👍"
+              size="lg"
+              pos="left">
+              <p>개수</p>
+            </Tooltip>
+            <input
+              type="text"
+              value={question.count}
+              onChange={(e) => handleOnCountChange(e.target.value)}
+              onBlur={handleOnBlur}
+              onClick={(e) => e.target.select()}
+              maxLength="2"
+              style={{
+                color: question.count !== trueCount ? "red" : "black",
+              }}
+            />
+          </div>
+        )}
       </div>
       <div className={elementsClasses.join(" ")}>{preferences}</div>
-      {isEditting && (
-        <div className="count">
-          <Tooltip
-            text="최소 5개, 최대 10개까지 설정할 수 있습니다. 리커트 척도 상 홀수가 좋습니다 👍"
-            size="lg"
-            pos="left">
-            <p>개수</p>
-          </Tooltip>
-          <input
-            type="text"
-            value={question.count}
-            onChange={(e) => handleOnCountChange(e.target.value)}
-            onBlur={handleOnBlur}
-            onClick={(e) => e.target.select()}
-            maxLength="2"
-            style={{
-              color: question.count !== trueCount ? "red" : "black",
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 }
