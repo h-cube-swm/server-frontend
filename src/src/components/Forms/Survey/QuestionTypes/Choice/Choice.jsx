@@ -35,7 +35,7 @@ function Choice({
           text={text}
           setText={setText}
           placeholder="선택지를 입력해주세요."
-          size="rg"
+          type="choice"
         />
       </div>
       <div className="delete-button-box">
