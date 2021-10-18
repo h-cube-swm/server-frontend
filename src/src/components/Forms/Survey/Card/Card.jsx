@@ -2,15 +2,16 @@ import React from "react";
 import { useQuestion } from "../../../../contexts/QuestionContext";
 import Hider from "../../../Hider/Hider";
 import useScrollBlock from "../../../../hooks/useScrollBlock";
-import { CardStates } from "../../../../constants";
+import { CardStates, CardTypes } from "../../../../constants";
 
 /* Assets */
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
 
-function Card({ onDelete, onGrab, children }) {
-  const { state, isLast, scrollRef } = useQuestion();
+function Card({ onGrab, children }) {
+  const { question, state, isLast, scrollRef } = useQuestion();
   const { ref, ...others } = useScrollBlock();
+  const isEmpty = question.type === CardTypes.EMPTY;
 
   const classes = ["survey-card"];
 
@@ -53,7 +54,7 @@ function Card({ onDelete, onGrab, children }) {
   return (
     <div className={className}>
       <div
-        className="content-box"
+        className={!isEmpty ? "content-box" : "content-box empty"}
         ref={(dom) => {
           ref.current = dom;
           scrollRef.current = dom;

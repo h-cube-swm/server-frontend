@@ -40,9 +40,9 @@ function answerToString(answer) {
 
 function queryToString(query) {
   if (!query) return "";
-  let queryList = Object.entries(query).filter(([key, _]) => !key.startsWith("_"));
+  const queryList = Object.entries(query).filter(([key]) => !key.startsWith("_"));
   if (queryList.length === 0) return "";
-  let filteredQuery = Object.fromEntries(queryList);
+  const filteredQuery = Object.fromEntries(queryList);
   return JSON.stringify(filteredQuery);
 }
 
