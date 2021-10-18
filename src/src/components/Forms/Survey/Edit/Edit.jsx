@@ -197,7 +197,7 @@ function Edit({ survey: init, updateSurvey, location }) {
         <>
           <h2 style={{ fontWeight: "700", marginBottom: "2rem" }}>🎉 설문을 완성했습니다 🎉</h2>
           <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            로그인을 하지 않으면, 수정이 불가능합니다 🔨
+            잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
           </p>
           <p style={{ fontWeight: "500" }}>1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏</p>
         </>,
@@ -209,10 +209,14 @@ function Edit({ survey: init, updateSurvey, location }) {
         <>
           <h2 style={{ fontWeight: "700", marginBottom: "2rem" }}>🎉 설문을 완성했습니다 🎉</h2>
           <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            설문 제작을 마치고 배포하려면 &quot;완료&quot;를 눌러주세요 👏
-          </p>
-          <p style={{ fontWeight: "500" }}>
-            혹시 수정할 내용이 있다면 &quot;닫기&quot;를 눌러 수정해주세요 🤔
+            잠깐! <span style={{ color: "#2b44ff", fontWeight: "bold" }}>[미리보기]</span> 또는
+            설문의 <span style={{ color: "#2b44ff", fontWeight: "bold" }}>[흐름설정]</span>을
+            확인하셨나요?
+            <br />
+            <br />
+            혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
+            <br />
+            설문 제작을 모두 마치셨다면 아래의 &quot;완료&quot; 버튼을 눌러주세요 👏
           </p>
         </>,
         null,
