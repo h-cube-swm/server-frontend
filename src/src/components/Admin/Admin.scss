@@ -1,0 +1,120 @@
+.admin {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  font-weight: 300;
+  padding: 1rem;
+
+  @mixin border {
+    border: solid 1px #eee;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 2rem auto;
+  }
+
+  hr {
+    margin: 0.5rem;
+  }
+
+  .conditions {
+    @include border;
+
+    .row {
+      display: flex;
+    }
+
+    label {
+      width: 5rem;
+      display: block;
+    }
+  }
+
+  .controller {
+    @include border;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .survey-list {
+    .row {
+      @include border;
+
+      .upper {
+        display: flex;
+        align-items: center;
+
+        .index {
+          width: 3rem;
+        }
+
+        .title {
+          max-width: 50%;
+          word-break: keep-all;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .tag {
+          color: #fff;
+          padding: 0.1rem 0.2rem;
+          border-radius: 0.2rem;
+          font-size: 0.5rem;
+          height: min-content;
+          margin-left: 1rem;
+
+          &.published {
+            background-color: #5b5;
+          }
+
+          &.deleted {
+            background-color: #b55;
+          }
+        }
+
+        .spacer {
+          flex-grow: 1;
+        }
+
+        .edit {
+          margin-left: 1rem;
+        }
+
+        .result {
+          margin-left: 1rem;
+        }
+      }
+
+      .lower {
+        display: flex;
+        font-size: 0.8rem;
+
+        .date {
+          color: #888;
+        }
+
+        .count {
+          color: #888;
+        }
+
+        .strong {
+          color: #000;
+        }
+      }
+
+      .button {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        background-color: #eee;
+        border-radius: 0.2rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+  }
+}

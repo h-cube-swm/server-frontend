@@ -17,10 +17,14 @@ function logout() {
 const GlobalContext = createContext();
 
 export function GlobalStateProvider({ children }) {
+  const location = window.location.href;
   const params = getParams();
   const cookies = getCookies();
 
   const [embedState, setEmbedState] = useState(cookies.token);
+  const [themeColor, setThemeColor] = useState("#2b44ff");
+  const enableChannelIO = !(location.indexOf("/response/") >= 0 || location.indexOf("/admin") >= 0);
+
   const isEmbed = (params.embed && true) || embedState;
 
   // It token is in cookie, store the token into local storage and remove token in cookie.
@@ -36,7 +40,10 @@ export function GlobalStateProvider({ children }) {
   useEffect(() => setEmbedState(isEmbed), [isEmbed]);
 
   return (
-    <GlobalContext.Provider value={{ isEmbed, token, logout }}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider
+      value={{ isEmbed, token, logout, themeColor, setThemeColor, enableChannelIO, params }}>
+      {children}
+    </GlobalContext.Provider>
   );
 }
 

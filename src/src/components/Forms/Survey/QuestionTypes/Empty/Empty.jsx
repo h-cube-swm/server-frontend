@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
 import { CardStates } from "../../../../../constants";
 
@@ -8,11 +8,10 @@ import setNestedState from "../../../../../utils/setNestedState";
 export default function Empty() {
   const { state, setQuestion } = useQuestion();
   const isEditting = state === CardStates.EDITTING;
-  if (isEditting) {
-    useEffect(() => {
-      const setIsRequired = setNestedState(setQuestion, ["isRequired"]);
-      setIsRequired(false);
-    }, []);
-  }
-  return <div />;
+  useEffect(() => {
+    if (!isEditting) return;
+    const setIsRequired = setNestedState(setQuestion, ["isRequired"]);
+    setIsRequired(false);
+  }, []);
+  return null;
 }

@@ -35,7 +35,7 @@ function Choice({
           text={text}
           setText={setText}
           placeholder="선택지를 입력해주세요."
-          size="rg"
+          type="choice"
         />
       </div>
       <div className="delete-button-box">
@@ -49,8 +49,8 @@ function Choice({
   );
 }
 
-function Choices({ multipleSelect, scrollToBottom }) {
-  const { state, question, setQuestion, response, setResponse } = useQuestion();
+function Choices({ multipleSelect }) {
+  const { state, question, setQuestion, response, setResponse, scrollToBottom } = useQuestion();
   const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });

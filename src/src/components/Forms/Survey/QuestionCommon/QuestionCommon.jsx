@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { CardStates, CardTypes, DOMAIN } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
 
 import API from "../../../../utils/apis";
+
 // import { useThrottleWithTimeout } from "../../../../hooks/useThrottle";
 // import { useState, useEffect } from "react"
 // 질문 자동 추천 관련 import
 
 // Hooks
 import { useQuestion } from "../../../../contexts/QuestionContext";
-import useScrollBlock from "../../../../hooks/useScrollBlock";
+import { useMessage } from "../../../../contexts/MessageContext";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
+import { useModal } from "../../../../contexts/ModalContext";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
-import TextField from "../../../TextField/TextField";
 import Hider from "../../../Hider/Hider";
 import Tooltip from "../../../Tooltip/Tooltip";
 
@@ -27,10 +29,10 @@ import Empty from "../QuestionTypes/Empty/Empty";
 
 // Scss
 import "./QuestionCommon.scss";
-import imgAddBtn from "../../../../assets/icons/img-btn.svg";
 import delBtn from "../../../../assets/icons/del-btn1.svg";
-import { useMessage } from "../../../../contexts/MessageContext";
-import { useGlobalState } from "../../../../contexts/GlobalContext";
+import ExpandableInput from "../../../ExpandableInput/ExpandableInput";
+import deleteButton from "../../../../assets/icons/del-btn.svg";
+import imgAddBtn from "../../../../assets/icons/img-btn.svg";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -45,25 +47,18 @@ function getQuestionDetail(type) {
   return Default;
 }
 
-export default function QuestionCommon() {
+export default function QuestionCommon({ handleOnDelete }) {
   const { state, surveyId, question, setQuestion, isLast } = useQuestion();
-  const { ref, ...scrollBlock } = useScrollBlock();
-  const setQuestionImg = setNestedState(setQuestion, ["img"]);
   const [isLoading, setIsLoading] = useState(false);
+  const ref = useRef(null);
   const questionImg = question.img;
+  const setQuestionImg = setNestedState(setQuestion, ["img"]);
   const { publish } = useMessage();
+  const { load } = useModal();
   const location = `https://${DOMAIN}${useLocation().pathname}`;
   const href = `https://auth.the-form.io?redirect=${location}`;
-  const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
   const { token } = useGlobalState();
-
-  function scrollToBottom() {
-    if (ref.current)
-      ref.current.scrollTo({
-        top: 999999999,
-        behavior: "smooth",
-      });
-  }
+  const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
 
   // const [suggestionList, setSuggestionList] = useState([""]);
   // const [isTyping, setIsTyping] = useState(false);
@@ -103,14 +98,25 @@ export default function QuestionCommon() {
   //   setIsTyping(false);
   // }
 
+  const QuestionDetail = getQuestionDetail(question.type);
+  const isResponse = state !== CardStates.EDITTING;
+  const isEditing = state === CardStates.EDITTING;
+  const isEmpty = question.type === CardTypes.EMPTY;
+
   const getImage = async (e) => {
     setIsLoading(true);
     e.preventDefault();
     if (!token) {
-      publish(
-        "🗝 유저만 사용할 수 있는 기능입니다. 1초 만에 로그인하고 더 폼 나게 만들어보세요 🎉",
-        "warning",
-        <a href={href}>로그인</a>,
+      load(
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+            🗝 유저만 사용할 수 있는 기능입니다🗝
+          </h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem" }}>
+            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+          </p>
+        </>,
+        href,
       );
       setIsLoading(false);
       return;
@@ -133,10 +139,16 @@ export default function QuestionCommon() {
     try {
       const data = await API.postImg(formData);
       if (data[2] === 400) {
-        publish(
-          "🗝 유저만 사용할 수 있는 기능입니다. 로그인하고 더 폼 나게 만들어보세요 🎉",
-          "warning",
-          <a href={href}>로그인</a>,
+        load(
+          <>
+            <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+              🗝 유저만 사용할 수 있는 기능입니다🗝
+            </h2>
+            <p style={{ fontWeight: "500", marginTop: "2rem" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>,
+          href,
         );
         setIsLoading(false);
         return;
@@ -152,36 +164,8 @@ export default function QuestionCommon() {
     setQuestionImg(null);
   };
 
-  const QuestionDetail = getQuestionDetail(question.type);
-  const isResponse = state !== CardStates.EDITTING;
-  const isEditing = state === CardStates.EDITTING;
-  const isEmpty = question.type === CardTypes.EMPTY;
-
   return (
-    <div className="question-common" ref={ref} {...scrollBlock}>
-      <div className="question-common-box">
-        <div className="control-box">
-          <Hider hide={isResponse || isEmpty}>
-            {!isRoot && (
-              <div className="img-btn-box">
-                <label className="img-btn">
-                  <Tooltip text="이미지는 최대 5MB까지 업로드 가능합니다." size="lg">
-                    <img src={imgAddBtn} alt="image add button"></img>
-                  </Tooltip>
-                  <input type="file" accept="image/*" onChange={getImage}></input>
-                </label>
-                {isLoading && <p className="loading-indicator">업로드중</p>}
-              </div>
-            )}
-            <ToggleSwitch
-              isRequired={question.isRequired}
-              setIsRequired={setNestedState(setQuestion, ["isRequired"])}
-              selectedLabel="필수응답"
-              unselectedLabel="선택응답"
-            />
-          </Hider>
-        </div>
-      </div>
+    <div className="question-common" ref={ref}>
       <div className="question-detail-box">
         <div className="question-title-box">
           {question.isRequired && (
@@ -191,22 +175,23 @@ export default function QuestionCommon() {
           )}
           <div className={!isEmpty ? "basic" : "basic empty"}>
             <div className="question">
-              <TextField
+              <ExpandableInput
                 placeholder={!isLast ? "더 폼 나는 질문" : "종료 메시지를 작성해주세요."}
                 text={question.title}
                 setText={setNestedState(setQuestion, ["title"])}
-                size="title"
-                // onFocus={onFocus}
+                type="title"
+                center={isEmpty}
               />
             </div>
             {(isEditing || question.description) && (
               <>
                 <div className="description">
-                  <TextField
+                  <ExpandableInput
                     placeholder="더 폼 나는 설명 (선택)"
                     text={question.description}
                     setText={setNestedState(setQuestion, ["description"])}
-                    size="rg"
+                    type="description"
+                    center={isEmpty}
                   />
                 </div>
               </>
@@ -238,7 +223,40 @@ export default function QuestionCommon() {
             </div>
           </Hider> */}
         </div>
-        <QuestionDetail scrollToBottom={scrollToBottom} />
+        <QuestionDetail />
+      </div>
+      <div className="question-common-box">
+        <div className="control-box">
+          <Hider hide={isResponse || isEmpty || isLast}>
+            <ToggleSwitch
+              isRequired={question.isRequired}
+              setIsRequired={setNestedState(setQuestion, ["isRequired"])}
+              selectedLabel="필수응답"
+              unselectedLabel="선택응답"
+            />
+            <div className="btn-box">
+              {!isRoot && (
+                <div className="img-btn-box">
+                  <label className="img-btn">
+                    <Tooltip text="이미지는 최대 5MB까지 업로드 가능합니다." size="lg" pos="bottom">
+                      <img src={imgAddBtn} alt="image add button"></img>
+                    </Tooltip>
+                    <input type="file" accept="image/*" onChange={getImage}></input>
+                  </label>
+                  {isLoading && <p className="loading-indicator">업로드중</p>}
+                </div>
+              )}
+              <Tooltip text="이 질문을 삭제합니다." size="lg" pos="bottom" d>
+                <button
+                  className={"delete-btn " + (isEditing ? "" : "hidden")}
+                  tabIndex={isEditing ? null : "-1"}
+                  onClick={handleOnDelete}>
+                  <img src={deleteButton} alt="delete button" />
+                </button>
+              </Tooltip>
+            </div>
+          </Hider>
+        </div>
       </div>
     </div>
   );

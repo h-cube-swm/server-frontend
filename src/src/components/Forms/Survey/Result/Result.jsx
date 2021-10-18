@@ -38,6 +38,14 @@ function answerToString(answer) {
   return answer + "";
 }
 
+function queryToString(query) {
+  if (!query) return "";
+  const queryList = Object.entries(query).filter(([key]) => !key.startsWith("_"));
+  if (queryList.length === 0) return "";
+  const filteredQuery = Object.fromEntries(queryList);
+  return JSON.stringify(filteredQuery);
+}
+
 function reshapeAnswerTo2DArray(survey, answers) {
   const { questions } = survey;
   const questionDict = {};
@@ -64,7 +72,8 @@ function reshapeAnswerTo2DArray(survey, answers) {
     // Insert timestamp
     newAnswer = [new Date(timestamp).toLocaleString()].concat(newAnswer);
     // Insert query params
-    newAnswer.push("query" in answer ? JSON.stringify(answer.query) : "");
+    const queryString = queryToString(answer.query);
+    newAnswer.push(queryString);
     answerList.push(newAnswer);
   });
 

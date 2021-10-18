@@ -1,15 +1,17 @@
 import React from "react";
-import { CardStates } from "../../../../constants";
 import { useQuestion } from "../../../../contexts/QuestionContext";
 import Hider from "../../../Hider/Hider";
+import useScrollBlock from "../../../../hooks/useScrollBlock";
+import { CardStates, CardTypes } from "../../../../constants";
 
 /* Assets */
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
-import deleteButton from "../../../../assets/icons/del-btn.svg";
 
-export default function Card({ onDelete, onGrab, children }) {
-  const { state, isLast } = useQuestion();
+function Card({ onGrab, children }) {
+  const { question, state, isLast, scrollRef } = useQuestion();
+  const { ref, ...others } = useScrollBlock();
+  const isEmpty = question.type === CardTypes.EMPTY;
 
   const classes = ["survey-card"];
 
@@ -43,22 +45,24 @@ export default function Card({ onDelete, onGrab, children }) {
     if (onGrab) onGrab();
   };
 
-  const handleOnDelete = (event) => {
-    event.preventDefault();
-    if (onDelete) onDelete();
-  };
+  // const handleOnDelete = (event) => {
+  //   event.preventDefault();
+  //   if (onDelete) onDelete();
+  // };
 
   const className = classes.join(" ");
   return (
     <div className={className}>
-      <div className="content-box">{children}</div>
+      <div
+        className={!isEmpty ? "content-box" : "content-box empty"}
+        ref={(dom) => {
+          ref.current = dom;
+          scrollRef.current = dom;
+        }}
+        {...others}>
+        {children}
+      </div>
       <Hider hide={isLast}>
-        <button
-          className={"delete-btn " + (onDelete ? "" : "hidden")}
-          tabIndex={onDelete ? null : "-1"}
-          onClick={handleOnDelete}>
-          <img src={deleteButton} alt="delete button"></img>
-        </button>
         <div className="handle" onMouseDown={handleOnGrab}>
           <img src={imgHandle} alt="handle"></img>
         </div>
@@ -66,3 +70,5 @@ export default function Card({ onDelete, onGrab, children }) {
     </div>
   );
 }
+
+export default Card;

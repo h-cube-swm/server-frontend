@@ -63,6 +63,19 @@ export default function Prologue({ survey, setSurvey, children }) {
               onFocus={() => setIsFolded(false)}
             />
           </div>
+          {/* <div className="color-box">
+            <h3 className={!isFolded ? "color-intro" : "color-intro disabled"}>
+              당신만의 색으로 만들어보세요
+            </h3>
+            <TextField
+              tabIndex="2"
+              text={survey.themeColor}
+              setText={setNestedState(setSurvey, ["themeColor"])}
+              placeholder="hex코드를 입력해주세요(#000000)"
+              multiline
+              onFocus={() => setIsFolded(false)}
+            />
+          </div> */}
         </div>
         {isFolded && <div className="children-box">{children}</div>}
       </div>

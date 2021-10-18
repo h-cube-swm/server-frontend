@@ -77,18 +77,20 @@ function isResponsed(response) {
  * @returns
  */
 function ResponseContainer({ survey }) {
+  const KEY_NEXT = "_next";
+
   const [responses, setResponses] = useState({ history: [] });
   const [redirect, setRedirect] = useState(null);
+  const { params: query } = useGlobalState();
 
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const urlQueryParams = new URLSearchParams(window.location.search);
-    const query = Object.fromEntries(urlQueryParams.entries());
     const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
+    else if (query[KEY_NEXT]) window.location.href = query[KEY_NEXT];
     else setRedirect("/forms/survey/response/ending");
   };
 
@@ -118,7 +120,8 @@ export function Response({
   isPreview,
 }) {
   // States
-  const { isEmbed } = useGlobalState();
+  const { isEmbed, themeColor } = useGlobalState();
+  // {setThemeColor}
   const setHistory = setNestedState(setResponses, ["history"]);
 
   // Derivated states
@@ -135,7 +138,6 @@ export function Response({
    *
    * @returns {function} `next()`
    */
-
   const getNext = () => {
     // If not passable, just return.
     if (!isPassable) return;
@@ -182,7 +184,11 @@ export function Response({
     push(currentIndex + 1);
   };
 
-  const previous = () =>
+  /**
+   *
+   * @returns {function} previous()
+   */
+  const getPrevious = () =>
     setHistory((history) => {
       const newHistory = [...history];
       newHistory.pop();
@@ -194,7 +200,12 @@ export function Response({
   if (history.length > 0) {
     // Which is identical to !isCover, but for clearity.
     buttons.push(
-      <button key="previous" className="btn sm" onClick={previous} tabIndex={tabIndex}>
+      <button
+        key="previous"
+        style={{ backgroundColor: themeColor }}
+        className="btn sm"
+        onClick={getPrevious}
+        tabIndex={tabIndex}>
         이전
       </button>,
     );
@@ -208,7 +219,12 @@ export function Response({
 
   if (isCover) {
     buttons.push(
-      <button key="start" className="btn rg" onClick={getNext} tabIndex={tabIndex}>
+      <button
+        key="start"
+        style={{ backgroundColor: themeColor }}
+        className="btn rg"
+        onClick={getNext}
+        tabIndex={tabIndex}>
         시작하기
       </button>,
     );
@@ -216,6 +232,7 @@ export function Response({
     buttons.push(
       <button
         key="next"
+        style={{ backgroundColor: isPassable ? themeColor : "#b0b0b0" }}
         className={"btn sm " + (isPassable ? "" : "disabled")}
         onClick={getNext}
         tabIndex={tabIndex}>
@@ -226,6 +243,7 @@ export function Response({
     buttons.push(
       <button
         key="finished"
+        style={{ backgroundColor: isPassable ? themeColor : "#b0b0b0" }}
         className={"btn sm " + (isPassable ? "" : "disabled")}
         onClick={isPassable ? handleSubmit : () => {}}
         tabIndex={tabIndex}>
@@ -246,18 +264,20 @@ export function Response({
       </div>
       <div className="contents-box">
         <div className={"question-box " + (!isCover && "left")}>
-          <div className="cover-box">
-            <h1 className="title">
-              <Linkify>{survey.title}</Linkify>
-            </h1>
-            {survey.description && (
-              <>
-                <div className="partition" />
-                <div className="description">
-                  <Linkify>{survey.description}</Linkify>
-                </div>
-              </>
-            )}
+          <div className="question-box-inner">
+            <div className="cover-box">
+              <h1 className="title">
+                <Linkify>{survey.title}</Linkify>
+              </h1>
+              {survey.description && (
+                <>
+                  <div className="partition" />
+                  <div className="description">
+                    <Linkify>{survey.description}</Linkify>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -282,16 +302,15 @@ export function Response({
               response={responses[id]}
               setResponse={setNestedState(setResponses, [id])}
               tabIndex={isSelected ? "1" : "-1"}>
-              <FadeBox height={3}>
-                <div className={className}>
-                  <div className="question-box-inner">
-                    <QuestionCommon />
-                  </div>
+              <div className={className}>
+                <div className="question-box-inner">
+                  <QuestionCommon />
                 </div>
-              </FadeBox>
+              </div>
             </QuestionProvider>
           );
         })}
+        <FadeBox height={3} />
       </div>
       <div className="button-box">
         <div className="button-box-inner">{buttons}</div>

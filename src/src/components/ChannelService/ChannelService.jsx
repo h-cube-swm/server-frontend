@@ -3,10 +3,11 @@ import { useGlobalState } from "../../contexts/GlobalContext";
 
 export default function ChannelService({ pluginKey, ...ohters }) {
   const isInit = useRef(false);
-  const { isEmbed } = useGlobalState();
+  const { isEmbed, enableChannelIO } = useGlobalState();
 
   useEffect(() => {
     if (isEmbed) return;
+    if (!enableChannelIO) return;
 
     const channelIO = {
       q: [
@@ -44,5 +45,6 @@ export default function ChannelService({ pluginKey, ...ohters }) {
       window.addEventListener("load", onLoad, false);
     }
   }, []);
+
   return null;
 }
