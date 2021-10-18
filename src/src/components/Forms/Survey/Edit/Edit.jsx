@@ -149,6 +149,7 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   const selectedSurveyType = survey.questions[selectedIndex].type;
   const { questions } = survey;
+  const isLast = questions[selectedIndex].id === "1";
 
   function detectQuestion() {
     for (let i = 0; i < questions.length; i++) {
@@ -219,8 +220,6 @@ function Edit({ survey: init, updateSurvey, location }) {
       );
     }
   };
-
-  const isLast = selectedIndex === questions.length - 1;
 
   return (
     <div className="edit" {...backgroundCallbacks}>
@@ -300,8 +299,8 @@ function Edit({ survey: init, updateSurvey, location }) {
                     question={question}
                     setQuestion={isSelected && setQuestion}
                     isLast={isLast}>
-                    <Card onDelete={onDelete} onGrab={onGrab} slowAppear={slowAppear}>
-                      <QuestionCommon />
+                    <Card onGrab={onGrab} slowAppear={slowAppear}>
+                      <QuestionCommon handleOnDelete={onDelete} />
                     </Card>
                   </QuestionProvider>
                 </Hider>

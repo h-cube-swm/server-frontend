@@ -16,7 +16,7 @@
     }
   }
   &.title {
-    font-size: $fs-lg;
+    font-size: $fs-md;
   }
   &.description {
     font-size: $fs-rg;
@@ -35,5 +35,9 @@
     color: #b0b0b0;
     font-weight: $fw-bold;
     opacity: 0.6;
+    &.center {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 }

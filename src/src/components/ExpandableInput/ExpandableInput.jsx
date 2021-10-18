@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import "./ExpandableInput.scss";
 
-function ExpandableInput({ text, setText, placeholder, type }, outterRef) {
+function ExpandableInput({ text, setText, placeholder, type, center }, outterRef) {
   const innerRef = useRef(null);
   const isEditable = setText;
 
@@ -38,9 +38,9 @@ function ExpandableInput({ text, setText, placeholder, type }, outterRef) {
         onInput={(e) => setText(e.target.innerText)}
         onPaste={(e) => onPaste(e)}
         contentEditable={isEditable ? "true" : "false"}></div>
-      {!text && <div className="placeholder">{placeholder}</div>}
+      {!text && <div className={center ? "placeholder center" : "placeholder"}>{placeholder}</div>}
     </div>
   );
 }
 
-export default forwardRef(ExpandableInput);
+export default React.memo(forwardRef(ExpandableInput));

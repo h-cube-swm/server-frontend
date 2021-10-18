@@ -180,7 +180,7 @@ export default function QuestionCommon({ handleOnDelete }) {
                 text={question.title}
                 setText={setNestedState(setQuestion, ["title"])}
                 type="title"
-                // onFocus={onFocus}
+                center={isEmpty}
               />
             </div>
             {(isEditing || question.description) && (
@@ -191,6 +191,7 @@ export default function QuestionCommon({ handleOnDelete }) {
                     text={question.description}
                     setText={setNestedState(setQuestion, ["description"])}
                     type="description"
+                    center={isEmpty}
                   />
                 </div>
               </>
