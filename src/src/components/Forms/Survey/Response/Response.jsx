@@ -77,7 +77,7 @@ function isResponsed(response) {
  * @returns
  */
 function ResponseContainer({ survey }) {
-  // const KEY_NEXT = "_next";
+  const KEY_NEXT = "_next";
 
   const [responses, setResponses] = useState({ history: [] });
   const [redirect, setRedirect] = useState(null);
@@ -90,7 +90,8 @@ function ResponseContainer({ survey }) {
     const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
-    else if (survey.redirectURL) window.location.href = survey.redirectURL;
+    else if (query[KEY_NEXT] && true && survey.redirectURL)
+      window.location.href = survey.redirectURL;
     else setRedirect("/forms/survey/response/ending");
   };
 
