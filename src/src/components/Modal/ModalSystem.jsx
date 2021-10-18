@@ -25,7 +25,7 @@ function Modal({ children, href, onSubmit, onClose }) {
             </button>
           )}
           <button className="gray" onClick={onClose}>
-            닫기
+            돌아가기
           </button>
         </div>
       </div>
