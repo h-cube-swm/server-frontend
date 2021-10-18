@@ -120,7 +120,8 @@ export function Response({
   isPreview,
 }) {
   // States
-  const { isEmbed, themeColor, setThemeColor } = useGlobalState();
+  const { isEmbed, themeColor } = useGlobalState();
+  // {setThemeColor}
   const setHistory = setNestedState(setResponses, ["history"]);
 
   // Derivated states
