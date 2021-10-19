@@ -11,8 +11,8 @@ const Main = () => {
   return (
     <>
       <Title>더폼 - 모든 폼을 대신하는 폼 나는 설문조사</Title>
+      <Header />
       <div className="main-page">
-        <Header />
         <Intro />
         <Service />
         <div className="footer">
