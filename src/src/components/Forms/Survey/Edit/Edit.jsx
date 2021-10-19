@@ -149,7 +149,6 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   const selectedSurveyType = survey.questions[selectedIndex].type;
   const { questions } = survey;
-  const isLast = questions[selectedIndex].id === "1";
 
   function detectQuestion() {
     for (let i = 0; i < questions.length; i++) {
@@ -302,7 +301,7 @@ function Edit({ survey: init, updateSurvey, location }) {
                     surveyId={survey.id}
                     question={question}
                     setQuestion={isSelected && setQuestion}
-                    isLast={isLast}>
+                    isLast={question.id === "1"}>
                     <Card onGrab={onGrab} slowAppear={slowAppear}>
                       <QuestionCommon handleOnDelete={onDelete} />
                     </Card>
@@ -321,9 +320,9 @@ function Edit({ survey: init, updateSurvey, location }) {
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
           y={"30vh"}
-          isLast={isLast}
+          isLast={questions[selectedIndex].id === "1"}
         />
-        <Hider hide={isLast}>
+        <Hider hide={questions[selectedIndex].id === "1"}>
           <Controller type={selectedSurveyType} setType={setQuesionType} />
         </Hider>
       </div>

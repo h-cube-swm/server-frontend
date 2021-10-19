@@ -227,13 +227,15 @@ export default function QuestionCommon({ handleOnDelete }) {
       </div>
       <div className="question-common-box">
         <div className="control-box">
-          <Hider hide={isResponse || isEmpty || isLast}>
-            <ToggleSwitch
-              isRequired={question.isRequired}
-              setIsRequired={setNestedState(setQuestion, ["isRequired"])}
-              selectedLabel="필수응답"
-              unselectedLabel="선택응답"
-            />
+          <Hider hide={isResponse || isLast || isRoot}>
+            <Hider hide={isEmpty}>
+              <ToggleSwitch
+                isRequired={question.isRequired}
+                setIsRequired={setNestedState(setQuestion, ["isRequired"])}
+                selectedLabel="필수응답"
+                unselectedLabel="선택응답"
+              />
+            </Hider>
             <div className="btn-box">
               {!isRoot && (
                 <div className="img-btn-box">
