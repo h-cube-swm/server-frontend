@@ -17,21 +17,23 @@ function Header() {
 
   return (
     <div className="header">
-      <FloatingLogo />
-      <div className="banner">
-        <Link to="/pricing">가격안내</Link>
-        {token ? (
-          <>
-            <Link to="/mypage">마이페이지</Link>
-            <a className="login" href="./" onClick={handleLogout}>
-              로그아웃
+      <div className="header-box">
+        <FloatingLogo />
+        <div className="banner">
+          <Link to="/pricing">가격안내</Link>
+          {token ? (
+            <>
+              <Link to="/mypage">마이페이지</Link>
+              <a className="login" href="./" onClick={handleLogout}>
+                로그아웃
+              </a>
+            </>
+          ) : (
+            <a className="login" href={href}>
+              로그인
             </a>
-          </>
-        ) : (
-          <a className="login" href={href}>
-            로그인
-          </a>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

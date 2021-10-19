@@ -90,7 +90,8 @@ function ResponseContainer({ survey }) {
     const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
-    else if (query[KEY_NEXT]) window.location.href = query[KEY_NEXT];
+    else if (query[KEY_NEXT] && true && survey.redirectURL)
+      window.location.href = survey.redirectURL;
     else setRedirect("/forms/survey/response/ending");
   };
 
@@ -121,7 +122,6 @@ export function Response({
 }) {
   // States
   const { isEmbed, themeColor } = useGlobalState();
-  // {setThemeColor}
   const setHistory = setNestedState(setResponses, ["history"]);
 
   // Derivated states
@@ -225,7 +225,7 @@ export function Response({
         className="btn rg"
         onClick={getNext}
         tabIndex={tabIndex}>
-        시작하기
+        시작
       </button>,
     );
   } else if (currentIndex < questions.length - 1) {

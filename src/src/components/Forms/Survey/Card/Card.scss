@@ -18,8 +18,9 @@
     overflow: scroll;
     &.empty {
       display: flex;
-      justify-content: flex-start;
       align-items: center;
+      margin-top: 2rem;
+      min-height: 100%;
     }
   }
 
