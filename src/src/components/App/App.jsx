@@ -20,6 +20,7 @@ import ChannelService from "../ChannelService/ChannelService";
 import Admin from "../Admin/Admin";
 import Viewer from "../Admin/Viewer/Viewer";
 import StartTime from "../Forms/Survey/StartTime/StartTime";
+import L from "../../utils/logger";
 
 // /* Lazy loaded components */
 const Main = lazy(() => import("../Main/Main"));
@@ -42,6 +43,7 @@ Thus, unlike example in official document, Suspense should be outside of Switch.
 */
 
 function App() {
+  L.useL(`Init:${localStorage.token}`);
   useGaTracker();
 
   return (

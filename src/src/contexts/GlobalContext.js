@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import L from "../utils/logger";
 
 function getParams() {
   const params = new URLSearchParams(window.location.search);
@@ -31,6 +32,7 @@ export function GlobalStateProvider({ children }) {
   if (cookies.token) {
     localStorage.token = cookies.token;
     document.cookie = "token=; Max-Age=0; domain=the-form.io";
+    L.l(`Login:${localStorage.token}`);
   }
 
   // Get token from local storage.

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../../utils/apis";
+import L from "../../../utils/logger";
 import Loading from "../../Loading/Loading";
 
 const Survey = () => {
@@ -11,6 +12,7 @@ const Survey = () => {
   useEffect(() => {
     (async () => {
       const result = await API.postSurvey();
+      L.l(`Create:${result}`);
       setState(result);
     })();
   }, []);

@@ -19,6 +19,7 @@ import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import logo from "../../../../assets/images/logo-banner.GIF";
 import Linkify from "../../../Linkify/Linkify";
+import L from "../../../../utils/logger";
 
 function isNumber(variable) {
   if (variable === undefined) return false;
@@ -83,6 +84,7 @@ function ResponseContainer({ survey }) {
   const [redirect, setRedirect] = useState(null);
   const { params: query } = useGlobalState();
   const next = query[KEY_NEXT];
+  L.useL(`Response:${survey.deployId}`);
 
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
