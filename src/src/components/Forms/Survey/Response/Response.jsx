@@ -82,6 +82,7 @@ function ResponseContainer({ survey }) {
   const [responses, setResponses] = useState({ history: [] });
   const [redirect, setRedirect] = useState(null);
   const { params: query } = useGlobalState();
+  const next = query[KEY_NEXT];
 
   if (!survey) return <Loading />;
   if (redirect) return <Redirect to={redirect} />;
@@ -90,9 +91,11 @@ function ResponseContainer({ survey }) {
     const body = { responses: { ...responses, query } };
     const err = await API.postResponse(survey.deployId, body)[1];
     if (err) setRedirect("/error/unexpected/cannot-submit-data");
-    else if (query[KEY_NEXT] && true && survey.redirectURL)
-      window.location.href = survey.redirectURL;
-    else setRedirect("/forms/survey/response/ending");
+    else if (next === "event") {
+      window.parent?.postMessage("surveyEnd", "*");
+    } else if (next) {
+      window.location.href = next;
+    } else setRedirect("/forms/survey/response/ending");
   };
 
   return (
