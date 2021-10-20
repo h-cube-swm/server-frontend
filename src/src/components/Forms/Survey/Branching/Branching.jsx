@@ -395,6 +395,8 @@ export default function Branching({ survey, setSurvey }) {
         <br />
         <br />
         아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.
+        <br />
+        좌우 방향키를 누르거나 Shift 키를 누른 상태로 스크롤하면 좌우 방향으로 스크롤됩니다.
       </p>
     </div>
   );
