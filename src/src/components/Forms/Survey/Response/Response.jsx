@@ -124,7 +124,7 @@ export function Response({
   isPreview,
 }) {
   // States
-  const { isEmbed, themeColor } = useGlobalState();
+  const { isEmbed, themeColor, setThemeColor } = useGlobalState();
   const setHistory = setNestedState(setResponses, ["history"]);
 
   // Derivated states
@@ -137,6 +137,8 @@ export function Response({
   const indexBranchingMap = getIndexBranchingMap(survey);
   const isPassable = isCover || !question.isRequired || isResponsed(response);
 
+  // Set ThemeColor
+  setThemeColor(survey.themeColor);
   /**
    *
    * @returns {function} `next()`
