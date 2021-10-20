@@ -19,16 +19,44 @@ function Choice({
   onDelete,
   choiceRef,
 }) {
-  const { state } = useQuestion();
+  const { state, themeColor } = useQuestion();
   const isEditing = state === CardStates.EDITTING;
+
+  function shadeHexColor(color, percent) {
+    const num = color.slice(1);
+    let f = parseInt(num, 16);
+    let t = percent < 0 ? 0 : 255;
+    let p = percent < 0 ? percent * -1 : percent;
+    let R = f >> 16; // eslint-disable-line no-bitwise
+    let G = (f >> 8) & 0x00ff; // eslint-disable-line no-bitwise
+    let B = f & 0x0000ff; // eslint-disable-line no-bitwise
+    return (
+      "#" +
+      (
+        0x1000000 +
+        (Math.round((t - R) * p) + R) * 0x10000 +
+        (Math.round((t - G) * p) + G) * 0x100 +
+        (Math.round((t - B) * p) + B)
+      )
+        .toString(16)
+        .slice(1)
+    );
+  }
+
+  const bgColor = checked
+    ? `${shadeHexColor(themeColor, 0.4)}`
+    : `${shadeHexColor(themeColor, 0.85)}`;
 
   return (
     <div className="choice-box">
       <div
-        className={checked ? "text-box checked" : "text-box"}
+        className="text-box"
         onClick={setChecked && (() => setChecked(!checked))}
         style={{
           cursor: setChecked ? "pointer" : null,
+          backgroundColor: bgColor,
+          transitionDuration: "300ms",
+          border: `1.5px solid ${themeColor}`,
         }}>
         <ExpandableInput
           ref={choiceRef}
@@ -36,6 +64,7 @@ function Choice({
           setText={setText}
           placeholder="선택지를 입력해주세요."
           type="choice"
+          themeColor={`${shadeHexColor(themeColor, -0.35)}`}
         />
       </div>
       <div className="delete-button-box">
@@ -50,7 +79,8 @@ function Choice({
 }
 
 function Choices({ multipleSelect }) {
-  const { state, question, setQuestion, response, setResponse, scrollToBottom } = useQuestion();
+  const { state, question, setQuestion, response, setResponse, scrollToBottom, themeColor } =
+    useQuestion();
   const questionInitialized = useDefault(question, setQuestion, {
     choices: [""],
   });
@@ -100,7 +130,11 @@ function Choices({ multipleSelect }) {
   return (
     <div className="multiple-choice">
       <div className="multiple-choice-inner">
-        {multipleSelect && <em className="explain">원하는 만큼 선택하세요!</em>}
+        {multipleSelect && (
+          <em className="explain" style={{ color: themeColor }}>
+            원하는 만큼 선택하세요!
+          </em>
+        )}
         {choices.map((choice, i) => {
           const setText = setNestedState(setQuestion, ["choices", i]);
           return (
@@ -121,7 +155,7 @@ function Choices({ multipleSelect }) {
         <Hider hide={!isEditting}>
           <button className="add-btn" onClick={addChoice}>
             <div className="button-box">
-              <span>선택지 추가하기</span>
+              <span style={{ color: themeColor }}>선택지 추가하기</span>
             </div>
           </button>
         </Hider>

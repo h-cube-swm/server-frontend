@@ -1,7 +1,10 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 import "./ExpandableInput.scss";
 
-function ExpandableInput({ text, setText, placeholder, type, center }, outterRef) {
+function ExpandableInput(
+  { text, setText, placeholder, type, center, themeColor, ...props },
+  outterRef,
+) {
   const innerRef = useRef(null);
   const isEditable = setText;
 
@@ -27,7 +30,7 @@ function ExpandableInput({ text, setText, placeholder, type, center }, outterRef
   };
 
   return (
-    <div className={"expandable-input " + type}>
+    <div className={"expandable-input " + type} style={{ color: themeColor }}>
       <div
         ref={(ref) => {
           innerRef.current = ref;
@@ -37,6 +40,7 @@ function ExpandableInput({ text, setText, placeholder, type, center }, outterRef
         className="input-field"
         onInput={(e) => setText(e.target.innerText)}
         onPaste={(e) => onPaste(e)}
+        {...props}
         contentEditable={isEditable ? "true" : "false"}></div>
       {!text && <div className={center ? "placeholder center" : "placeholder"}>{placeholder}</div>}
     </div>

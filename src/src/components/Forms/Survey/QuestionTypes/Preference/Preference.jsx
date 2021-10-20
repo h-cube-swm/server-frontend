@@ -7,18 +7,21 @@ import TextField from "../../../../TextField/TextField";
 import { useQuestion } from "../../../../../contexts/QuestionContext";
 import Tooltip from "../../../../Tooltip/Tooltip";
 
-function PreferenceButton({ index, selected, onClick, prevIndex }) {
+function PreferenceButton({ index, selected, onClick, prevIndex, themeColor }) {
   const classes = ["preference-box"];
 
   if (onClick) {
     classes.push("cursor");
   }
 
-  if (index === selected && prevIndex !== 0) {
-    classes.push("selected");
-  }
-
-  return (
+  return index === selected && prevIndex !== 0 ? (
+    <div
+      className={classes.join(" ")}
+      onClick={onClick}
+      style={{ backgroundColor: themeColor, color: "#fff" }}>
+      {index}
+    </div>
+  ) : (
     <div className={classes.join(" ")} onClick={onClick}>
       {index}
     </div>
@@ -26,7 +29,7 @@ function PreferenceButton({ index, selected, onClick, prevIndex }) {
 }
 
 export default function Preference() {
-  const { state, question, setQuestion, response, setResponse } = useQuestion();
+  const { state, question, setQuestion, response, setResponse, themeColor } = useQuestion();
 
   const setMaxPref = setNestedState(setQuestion, ["count"]); // 개수
   const setMinDes = setNestedState(setQuestion, ["minDes"]); // 왼쪽 설명
@@ -99,7 +102,6 @@ export default function Preference() {
       break;
   }
 
-  // Middle components
   for (let i = 1; i < trueCount + 1; i++) {
     preferences.push(
       <PreferenceButton
@@ -109,6 +111,7 @@ export default function Preference() {
         selected={response}
         setPrevIndex={setPrevIndex}
         prevIndex={prevIndex}
+        themeColor={themeColor}
       />,
     );
   }
@@ -117,7 +120,7 @@ export default function Preference() {
     <div className="preference">
       <div className="des">
         <div className="indicator">
-          <p>1</p>
+          <p style={{ backgroundColor: themeColor }}>1</p>
           <TextField
             placeholder="최소 (선택)"
             size="rg"
@@ -126,7 +129,7 @@ export default function Preference() {
           />
         </div>
         <div className="indicator">
-          <p>{trueCount}</p>
+          <p style={{ backgroundColor: themeColor }}>{trueCount}</p>
           <TextField
             placeholder="최대 (선택)"
             size="rg"

@@ -126,11 +126,11 @@ export function Response({
   isPreview,
 }) {
   // States
-  const { isEmbed, themeColor, setThemeColor } = useGlobalState();
+  const { isEmbed } = useGlobalState();
   const setHistory = setNestedState(setResponses, ["history"]);
 
   // Derivated states
-  const { questions } = survey;
+  const { questions, themeColor } = survey;
   const { history } = responses;
   const isCover = history.length === 0;
   const currentIndex = !isCover && history[history.length - 1];
@@ -139,8 +139,6 @@ export function Response({
   const indexBranchingMap = getIndexBranchingMap(survey);
   const isPassable = isCover || !question.isRequired || isResponsed(response);
 
-  // Set ThemeColor
-  setThemeColor(survey.themeColor);
   /**
    *
    * @returns {function} `next()`
@@ -278,7 +276,6 @@ export function Response({
               </h1>
               {survey.description && (
                 <>
-                  <div className="partition" />
                   <div className="description">
                     <Linkify>{survey.description}</Linkify>
                   </div>
@@ -308,7 +305,8 @@ export function Response({
               key={id}
               response={responses[id]}
               setResponse={setNestedState(setResponses, [id])}
-              tabIndex={isSelected ? "1" : "-1"}>
+              tabIndex={isSelected ? "1" : "-1"}
+              themeColor={survey.themeColor}>
               <div className={className}>
                 <div className="question-box-inner">
                   <QuestionCommon />
