@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="55" viewBox="0 0 55 55">
   <defs>
     <clipPath id="clip-path">
-      <rect id="사각형_256" data-name="사각형 256" width="28" height="34" transform="translate(1387 384)" fill="none"/>
+      <rect id="사각형_256" data-name="사각형 256" width="31" height="37" transform="translate(1387 384.282)" fill="none"/>
     </clipPath>
     <clipPath id="clip-아트보드_13">
       <rect width="55" height="55"/>
     </clipPath>
   </defs>
   <g id="아트보드_13" data-name="아트보드 – 13" clip-path="url(#clip-아트보드_13)">
-    <path id="패스_52" data-name="패스 52" d="M18.293,0H31.707A18.526,18.526,0,0,1,50,18.75v12.5A18.526,18.526,0,0,1,31.707,50H18.293A18.526,18.526,0,0,1,0,31.25V18.75A18.526,18.526,0,0,1,18.293,0Z" transform="translate(3 3)" fill="#b0b0b0"/>
-    <g id="duplicate" transform="translate(-1373 -373)" clip-path="url(#clip-path)">
-      <path id="패스_118" data-name="패스 118" d="M1808,403a3.535,3.535,0,0,1,3.522,3.548" transform="translate(-397.986 -17.116)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_119" data-name="패스 119" d="M1875,470v18.624" transform="translate(-461.464 -80.594)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_120" data-name="패스 120" d="M0,0H12.811" transform="translate(1410 385.884) rotate(180)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_121" data-name="패스 121" d="M1497,406.548a3.548,3.548,0,0,1,3.548-3.548" transform="translate(-103.333 -17.116)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_122" data-name="패스 122" d="M1497,470v1.633" transform="translate(-103.333 -80.594)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_123" data-name="패스 123" d="M1784,892h1.292" transform="translate(-375.247 -480.413)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_124" data-name="패스 124" d="M1811.522,825a3.522,3.522,0,0,1-3.522,3.522" transform="translate(-397.986 -416.935)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_125" data-name="패스 125" d="M1716.5,495a3.548,3.548,0,0,1,3.548,3.548" transform="translate(-311.295 -104.28)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_126" data-name="패스 126" d="M1784,562v18.624" transform="translate(-375.247 -167.759)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_127" data-name="패스 127" d="M0,0H12.811" transform="translate(1405.217 390.72) rotate(180)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_128" data-name="패스 128" d="M1405,498.548a3.548,3.548,0,0,1,3.548-3.548" transform="translate(-16.169 -104.28)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_129" data-name="패스 129" d="M1405,562v18.624" transform="translate(-16.169 -167.759)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_130" data-name="패스 130" d="M1408.548,920.522A3.535,3.535,0,0,1,1405,917" transform="translate(-16.169 -504.099)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_131" data-name="패스 131" d="M1473,984h12.811" transform="translate(-80.594 -567.577)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
-      <path id="패스_132" data-name="패스 132" d="M1720.048,917a3.535,3.535,0,0,1-3.548,3.522" transform="translate(-311.295 -504.099)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+    <path id="패스_52" data-name="패스 52" d="M20.122,0H34.878A20.378,20.378,0,0,1,55,20.625v13.75A20.378,20.378,0,0,1,34.878,55H20.122A20.378,20.378,0,0,1,0,34.375V20.625A20.378,20.378,0,0,1,20.122,0Z" fill="#b0b0b0"/>
+    <g id="duplicate" transform="translate(-1375 -375.282)" clip-path="url(#clip-path)">
+      <path id="패스_118" data-name="패스 118" d="M1808,403a3.876,3.876,0,0,1,3.862,3.89" transform="translate(-395.764 -16.934)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_119" data-name="패스 119" d="M1875,470v20.421" transform="translate(-458.903 -80.073)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_120" data-name="패스 120" d="M0,0H14.048" transform="translate(1412.221 386.066) rotate(180)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_121" data-name="패스 121" d="M1497,406.89a3.89,3.89,0,0,1,3.89-3.89" transform="translate(-102.689 -16.934)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_122" data-name="패스 122" d="M1497,470v1.791" transform="translate(-102.689 -80.073)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_123" data-name="패스 123" d="M1784,892h1.417" transform="translate(-373.148 -477.75)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_124" data-name="패스 124" d="M1811.862,825a3.862,3.862,0,0,1-3.862,3.862" transform="translate(-395.764 -414.612)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_125" data-name="패스 125" d="M1716.5,495a3.89,3.89,0,0,1,3.89,3.89" transform="translate(-309.538 -103.632)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_126" data-name="패스 126" d="M1784,562v20.421" transform="translate(-373.148 -166.77)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_127" data-name="패스 127" d="M0,0H14.048" transform="translate(1406.976 391.368) rotate(180)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_128" data-name="패스 128" d="M1405,498.89a3.89,3.89,0,0,1,3.89-3.89" transform="translate(-15.992 -103.632)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_129" data-name="패스 129" d="M1405,562v20.421" transform="translate(-15.992 -166.77)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_130" data-name="패스 130" d="M1408.89,920.862A3.876,3.876,0,0,1,1405,917" transform="translate(-15.992 -501.309)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_131" data-name="패스 131" d="M1473,984h14.048" transform="translate(-80.073 -564.448)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
+      <path id="패스_132" data-name="패스 132" d="M1720.39,917a3.876,3.876,0,0,1-3.89,3.862" transform="translate(-309.538 -501.309)" fill="rgba(0,0,0,0)" stroke="#fff" stroke-miterlimit="8" stroke-width="3" fill-rule="evenodd"/>
     </g>
   </g>
 </svg>

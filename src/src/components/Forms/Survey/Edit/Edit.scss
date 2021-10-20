@@ -127,12 +127,6 @@ $background-color: #fff;
     }
   }
 
-  @include laptop {
-    .view {
-      margin-top: 2rem;
-    }
-  }
-
   @include tablet {
     .section {
       .part {

@@ -8,36 +8,26 @@
   overflow: hidden;
 
   .cover-box {
-    margin: 0 auto;
+    margin: 3rem auto;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    overflow: scroll;
 
     .title {
       height: auto;
-      padding-right: 10%;
-      padding-left: 10%;
-      font-size: $fs-xl;
+      font-size: $fs-lg;
       font-weight: $fw-bold;
       text-align: center;
-      word-break: keep-all;
+      word-break: break-all;
+      white-space: pre-wrap;
       color: #000;
-    }
-
-    .partition {
-      width: 10rem;
-      height: 1.5px;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-      background-color: #707070;
     }
 
     .description {
       padding: 10%;
-      width: 60%;
       height: auto;
       font-size: $fs-rg;
       font-weight: $fw-bold;

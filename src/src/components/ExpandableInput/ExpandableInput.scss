@@ -15,14 +15,14 @@
       font-weight: inherit;
     }
   }
+  &.lg {
+    font-size: $fs-lg;
+  }
   &.title {
     font-size: $fs-md;
   }
   &.description {
     font-size: $fs-rg;
-  }
-  &.choice {
-    color: #16248d;
   }
 
   .placeholder {

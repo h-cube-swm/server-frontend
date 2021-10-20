@@ -24,7 +24,8 @@ export default function Viewer({ match }) {
                   surveyId={survey.id}
                   question={question}
                   isLast={false}
-                  setResponse={() => {}}>
+                  setResponse={() => {}}
+                  themeColor="2b44ff">
                   <QuestionCommon></QuestionCommon>
                 </QuestionProvider>
               </div>

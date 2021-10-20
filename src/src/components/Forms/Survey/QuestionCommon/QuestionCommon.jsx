@@ -33,6 +33,7 @@ import delBtn from "../../../../assets/icons/del-btn1.svg";
 import ExpandableInput from "../../../ExpandableInput/ExpandableInput";
 import deleteButton from "../../../../assets/icons/del-btn.svg";
 import imgAddBtn from "../../../../assets/icons/img-btn.svg";
+import duplicateButton from "../../../../assets/icons/duplicate-btn.svg";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -47,7 +48,7 @@ function getQuestionDetail(type) {
   return Default;
 }
 
-export default function QuestionCommon({ handleOnDelete }) {
+export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
   const { state, surveyId, question, setQuestion, isLast } = useQuestion();
   const [isLoading, setIsLoading] = useState(false);
   const ref = useRef(null);
@@ -248,9 +249,17 @@ export default function QuestionCommon({ handleOnDelete }) {
                   {isLoading && <p className="loading-indicator">업로드중</p>}
                 </div>
               )}
-              <Tooltip text="이 질문을 삭제합니다." size="lg" pos="bottom" d>
+              <Tooltip text="이 질문을 복사합니다." size="lg" pos="bottom">
                 <button
-                  className={"delete-btn " + (isEditing ? "" : "hidden")}
+                  className={"common-btn dup " + (isEditing ? "" : "hidden")}
+                  tabIndex={isEditing ? null : "-1"}
+                  onClick={handleOnDuplicate}>
+                  <img src={duplicateButton} alt="duplicate button" />
+                </button>
+              </Tooltip>
+              <Tooltip text="이 질문을 삭제합니다." size="lg" pos="bottom">
+                <button
+                  className={"common-btn del " + (isEditing ? "" : "hidden")}
                   tabIndex={isEditing ? null : "-1"}
                   onClick={handleOnDelete}>
                   <img src={deleteButton} alt="delete button" />

@@ -155,6 +155,13 @@
               width: 3rem;
             }
 
+            // should remove by increasing other buttons' size
+            &.temp {
+              img {
+                width: 2.7rem;
+              }
+            }
+
             &.published {
               cursor: default;
               opacity: 0.2;

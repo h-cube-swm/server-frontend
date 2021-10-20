@@ -12,6 +12,7 @@ export function QuestionProvider({
   setResponse,
   tabIndex,
   isLast,
+  themeColor,
 }) {
   const scrollRef = useRef(null);
   function scrollToBottom() {
@@ -33,6 +34,7 @@ export function QuestionProvider({
         setResponse,
         tabIndex,
         isLast,
+        themeColor,
         scrollRef,
         scrollToBottom,
       }}>

@@ -23,7 +23,6 @@ export function GlobalStateProvider({ children }) {
   const cookies = getCookies();
 
   const [embedState, setEmbedState] = useState(cookies.token);
-  const [themeColor, setThemeColor] = useState("#2b44ff");
   const enableChannelIO = !(location.indexOf("/response/") >= 0 || location.indexOf("/admin") >= 0);
 
   const isEmbed = (params.embed && true) || embedState;
@@ -42,8 +41,7 @@ export function GlobalStateProvider({ children }) {
   useEffect(() => setEmbedState(isEmbed), [isEmbed]);
 
   return (
-    <GlobalContext.Provider
-      value={{ isEmbed, token, logout, themeColor, setThemeColor, enableChannelIO, params }}>
+    <GlobalContext.Provider value={{ isEmbed, token, logout, enableChannelIO, params }}>
       {children}
     </GlobalContext.Provider>
   );
