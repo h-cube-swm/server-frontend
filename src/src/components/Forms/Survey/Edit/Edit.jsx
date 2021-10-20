@@ -103,6 +103,20 @@ function Edit({ survey: init, updateSurvey, location }) {
     });
   };
 
+  const getCopyQuestion = (index) => () => {
+    setSurvey((_survey) => {
+      // ToDo : Use efficient deepcopy library instead of tricky copy
+      const survey = JSON.parse(JSON.stringify(_survey));
+      const questions = [...survey.questions];
+      let { selectedIndex } = survey;
+      const id = ++survey.counter + "";
+      const newQuestion = { ...questions[selectedIndex], id };
+      questions.splice(index + 1, 0, newQuestion);
+      selectedIndex = index + 1;
+      return { ...survey, selectedIndex, questions };
+    });
+  };
+
   const events = useScrollPaging((delta) => {
     const index = survey.selectedIndex;
     const { length } = survey.questions;
@@ -194,7 +208,9 @@ function Edit({ survey: init, updateSurvey, location }) {
     if (!token) {
       load(
         <>
-          <h2 style={{ fontWeight: "700", marginBottom: "2rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem", marginBottom: "2rem" }}>
+            🎉 설문을 완성했습니다 🎉
+          </h2>
           <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
             잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
           </p>
@@ -206,11 +222,20 @@ function Edit({ survey: init, updateSurvey, location }) {
     } else {
       load(
         <>
-          <h2 style={{ fontWeight: "700", marginBottom: "2rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+          <br />
+          <h2 style={{ fontWeight: "700", marginTop: "2rem", marginBottom: "2rem" }}>
+            🎉 설문을 완성했습니다 🎉
+          </h2>
           <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            잠깐! <span style={{ color: "#2b44ff", fontWeight: "bold" }}>[미리보기]</span> 또는
-            설문의 <span style={{ color: "#2b44ff", fontWeight: "bold" }}>[흐름설정]</span>을
-            확인하셨나요?
+            잠깐!{" "}
+            <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+              [미리보기]
+            </Link>{" "}
+            또는 설문의{" "}
+            <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+              [흐름설정]
+            </Link>
+            을 확인하셨나요?
             <br />
             <br />
             혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
@@ -276,7 +301,8 @@ function Edit({ survey: init, updateSurvey, location }) {
             state={CardStates.GHOST}
             surveyId={survey.id}
             question={questions[selectedIndex]}
-            tabIndex="-1">
+            tabIndex="-1"
+            themeColor={survey.themeColor}>
             <Card slowAppear={false}>
               <QuestionCommon />
             </Card>
@@ -291,6 +317,7 @@ function Edit({ survey: init, updateSurvey, location }) {
             const isHide = isDragging && isSelected;
             const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
             const onDelete = questions.length > 1 && isSelected && getRemoveQuestion(index);
+            const onDuplicate = isSelected && getCopyQuestion(index);
             const setQuestion = setNestedState(setSurvey, ["questions", index]);
 
             return (
@@ -301,9 +328,10 @@ function Edit({ survey: init, updateSurvey, location }) {
                     surveyId={survey.id}
                     question={question}
                     setQuestion={isSelected && setQuestion}
-                    isLast={question.id === "1"}>
+                    isLast={question.id === "1"}
+                    themeColor={survey.themeColor}>
                     <Card onGrab={onGrab} slowAppear={slowAppear}>
-                      <QuestionCommon handleOnDelete={onDelete} />
+                      <QuestionCommon handleOnDelete={onDelete} handleOnDuplicate={onDuplicate} />
                     </Card>
                   </QuestionProvider>
                 </Hider>

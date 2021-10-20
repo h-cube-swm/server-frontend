@@ -130,10 +130,12 @@
             width: 2.5rem;
             height: 2.5rem;
             img {
-              width: 100%;
+              width: 90%;
             }
             input {
               display: none;
+              width: 1px;
+              height: 1px;
             }
           }
           .loading-indicator {
@@ -142,10 +144,13 @@
             font-weight: $fw-bold;
             color: #707070;
             bottom: -0.8rem;
+            width: 3rem;
           }
         }
 
-        .delete-btn {
+        .common-btn {
+          display: flex;
+          align-items: flex-start;
           border: 0;
           background-color: transparent;
           transition-duration: 500ms;
@@ -154,8 +159,9 @@
           height: 2.5rem;
           opacity: 1;
           padding: 0;
+          margin-left: 0.3rem;
           img {
-            width: 100%;
+            width: 90%;
           }
 
           &.disabled {
