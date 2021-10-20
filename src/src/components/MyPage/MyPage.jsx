@@ -154,12 +154,12 @@ export default function MyPage() {
               <img src={embedBtn} alt="dublicate embed code button" />
             </Tooltip>
           </button>
-          <button className="link" onClick={() => duplicateSurvey(survey.id)}>
+          <button className="link temp" onClick={() => duplicateSurvey(survey.id)}>
             <Tooltip text={"사본 만들기"} size="sm">
               <img src={duplicateBtn} alt="dublicate deploy link button" />
             </Tooltip>
           </button>
-          <div className="link" onClick={() => deleteSurvey(survey.id)}>
+          <div className="link temp" onClick={() => deleteSurvey(survey.id)}>
             <Tooltip text={"삭제하기"} size="sm">
               <img src={delBtn} alt="delete button" />
             </Tooltip>
