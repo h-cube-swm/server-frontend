@@ -136,7 +136,8 @@ function Service() {
             question={question}
             surveyId={"test"}
             setQuestion={setQuestion}
-            state={CardStates.EDITTING}>
+            state={CardStates.EDITTING}
+            themeColor="2b44ff">
             <QuestionCommon />
           </QuestionProvider>
         </div>
@@ -152,7 +153,8 @@ function Service() {
             surveyId={"test"}
             state={CardStates.RESPONSE}
             response={response}
-            setResponse={setResponse}>
+            setResponse={setResponse}
+            themeColor="2b44ff">
             <QuestionCommon />
           </QuestionProvider>
         </div>
