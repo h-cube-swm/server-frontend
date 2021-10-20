@@ -24,12 +24,12 @@ function Choice({
 
   function shadeHexColor(color, percent) {
     const num = color.slice(1);
-    let f = parseInt(num, 16);
-    let t = percent < 0 ? 0 : 255;
-    let p = percent < 0 ? percent * -1 : percent;
-    let R = f >> 16; // eslint-disable-line no-bitwise
-    let G = (f >> 8) & 0x00ff; // eslint-disable-line no-bitwise
-    let B = f & 0x0000ff; // eslint-disable-line no-bitwise
+    const f = parseInt(num, 16);
+    const t = percent < 0 ? 0 : 255;
+    const p = percent < 0 ? percent * -1 : percent;
+    const R = f >> 16; // eslint-disable-line no-bitwise
+    const G = (f >> 8) & 0x00ff; // eslint-disable-line no-bitwise
+    const B = f & 0x0000ff; // eslint-disable-line no-bitwise
     return (
       "#" +
       (
