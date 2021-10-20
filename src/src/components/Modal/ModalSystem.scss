@@ -32,7 +32,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      flex-grow: 1;
     }
 
     .btn-children {
@@ -40,6 +39,7 @@
       margin: 1rem auto;
       padding: 1rem;
       width: 50%;
+      margin-bottom: 2rem;
       button {
         @include center;
         width: 6rem;
