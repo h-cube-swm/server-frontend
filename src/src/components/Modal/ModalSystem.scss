@@ -23,6 +23,7 @@
     width: 40rem;
     height: 20rem;
     margin: 0 auto;
+    padding-bottom: 4rem;
     background: #fff;
     border-radius: 15px;
     box-shadow: $shadow-default;
@@ -36,10 +37,11 @@
 
     .btn-children {
       @include center;
-      margin: 1rem auto;
+      position: absolute;
       padding: 1rem;
       width: 50%;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
+      bottom: 0;
       button {
         @include center;
         width: 6rem;

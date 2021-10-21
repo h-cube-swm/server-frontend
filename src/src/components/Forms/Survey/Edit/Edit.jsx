@@ -192,6 +192,7 @@ function Edit({ survey: init, updateSurvey, location }) {
         index = i;
       }
     }
+
     if (index >= 0) {
       publish(...message);
       setSelectedIndex(index);
