@@ -64,6 +64,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const [survey, setSurvey] = useState(init);
   const [isEnded, setIsEnded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isFolded, setIsFolded] = useState(true);
 
   useEffect(() => setIsSaving(true), [survey]);
 
@@ -252,7 +253,12 @@ function Edit({ survey: init, updateSurvey, location }) {
   return (
     <div className="edit" {...backgroundCallbacks}>
       <Title>{`${survey.title ? survey.title : ""} : 편집중`}</Title>
-      <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
+      <Prologue
+        survey={survey}
+        setSurvey={setSurvey}
+        isFolded={isFolded}
+        setIsFolded={setIsFolded}
+        setIsEnded={setIsEnded}>
         {isSaving ? (
           <>
             <p className="save-indicator">저장중...</p>

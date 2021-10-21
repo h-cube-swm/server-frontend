@@ -8,8 +8,7 @@ import logo from "../../../../assets/images/logo.png";
 import delBtn from "../../../../assets/icons/del-btn1.svg";
 import ExpandableInput from "../../../ExpandableInput/ExpandableInput";
 
-export default function Prologue({ survey, setSurvey, children }) {
-  const [isFolded, setIsFolded] = useState(true);
+export default function Prologue({ survey, setSurvey, isFolded, setIsFolded, children }) {
   const [isClosed, setIsClosed] = useState(true);
   const titleTextArea = useRef(null);
   const { themeColor } = survey;
