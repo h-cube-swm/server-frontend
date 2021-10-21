@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="208" height="75" viewBox="0 0 208 75">
+  <defs>
+    <clipPath id="clip-아트보드_16">
+      <rect width="208" height="75"/>
+    </clipPath>
+  </defs>
+  <g id="아트보드_16" data-name="아트보드 – 16" clip-path="url(#clip-아트보드_16)">
+    <g id="그룹_96" data-name="그룹 96" transform="translate(-166 -238)">
+      <rect id="사각형_270" data-name="사각형 270" width="27" height="27" rx="5" transform="translate(347 263)" fill="#707070"/>
+      <circle id="타원_91" data-name="타원 91" cx="15" cy="15" r="15" transform="translate(166 261)" fill="#707070"/>
+      <line id="선_72" data-name="선 72" x2="182" transform="translate(178.5 276)" fill="none" stroke="#707070" stroke-width="6"/>
+    </g>
+  </g>
+</svg>

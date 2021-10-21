@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 /* Components */
-import { Link, Redirect, useLocation } from "react-router-dom";
+import { Link, Redirect, useLocation, useHistory } from "react-router-dom";
 import Card from "../Card/Card";
 import Controller from "../Controller/Controller";
 import Sidebar from "../Sidebar/Sidebar";
@@ -64,6 +64,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const [survey, setSurvey] = useState(init);
   const [isEnded, setIsEnded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isFolded, setIsFolded] = useState(true);
 
   useEffect(() => setIsSaving(true), [survey]);
 
@@ -79,6 +80,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const { token } = useGlobalState();
 
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
+  const history = useHistory();
 
   const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
@@ -165,24 +167,39 @@ function Edit({ survey: init, updateSurvey, location }) {
   const { questions } = survey;
 
   function detectQuestion() {
-    for (let i = 0; i < questions.length; i++) {
-      if (!questions[i].title) {
-        publish("주의❗️ 제목이 비어있는 질문이 있습니다.", "warning");
-        return false;
+    let index = -1;
+    let message = [];
+
+    for (let i = 0; i < questions.length && index < 0; i++) {
+      if (i === questions.length - 1 && !questions[i].title) {
+        message = ["주의❗️ 설문의 종료 메시지를 작성해주세요.", "warning"];
+        index = i;
       }
       if (questions[i].type === "single-choice" || questions[i].type === "multiple-choice") {
         if (questions[i].choices.length === 0) {
-          publish("주의❗️ 선택지가 없는 질문이 있습니다.", "warning");
-          return false;
+          message = ["주의❗️ 선택지가 없는 질문이 있습니다.", "warning"];
+          index = i;
         }
         for (let j = 0; j < questions[i].choices.length; j++) {
           if (questions[i].choices[j].length === 0) {
-            publish("주의❗️ 선택지가 입력되지 않은 질문이 있습니다.", "warning");
-            return false;
+            message = ["주의❗️ 선택지의 내용이 입력되지 않은 질문이 있습니다.", "warning"];
+            index = i;
           }
         }
       }
+      if (!questions[i].title) {
+        message = ["주의❗️ 제목이 비어있는 질문이 있습니다.", "warning"];
+        index = i;
+      }
     }
+
+    if (index >= 0) {
+      publish(...message);
+      setSelectedIndex(index);
+      history.push("#edit");
+      return false;
+    }
+
     return true;
   }
 
@@ -198,19 +215,16 @@ function Edit({ survey: init, updateSurvey, location }) {
   const onClick = () => {
     if (survey.title.length === 0) {
       publish("주의❗️ 설문 제목을 입력해야 설문 제작을 완료할 수 있습니다.", "warning");
+      setIsFolded(false);
       return;
     }
 
-    if (!detectQuestion()) {
-      return;
-    }
+    if (!detectQuestion()) return;
 
     if (!token) {
       load(
         <>
-          <h2 style={{ fontWeight: "700", marginTop: "2rem", marginBottom: "2rem" }}>
-            🎉 설문을 완성했습니다 🎉
-          </h2>
+          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
           <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
             잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
           </p>
@@ -223,9 +237,7 @@ function Edit({ survey: init, updateSurvey, location }) {
       load(
         <>
           <br />
-          <h2 style={{ fontWeight: "700", marginTop: "2rem", marginBottom: "2rem" }}>
-            🎉 설문을 완성했습니다 🎉
-          </h2>
+          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
           <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
             잠깐!{" "}
             <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
@@ -252,7 +264,12 @@ function Edit({ survey: init, updateSurvey, location }) {
   return (
     <div className="edit" {...backgroundCallbacks}>
       <Title>{`${survey.title ? survey.title : ""} : 편집중`}</Title>
-      <Prologue survey={survey} setSurvey={setSurvey} setIsEnded={setIsEnded}>
+      <Prologue
+        survey={survey}
+        setSurvey={setSurvey}
+        isFolded={isFolded}
+        setIsFolded={setIsFolded}
+        setIsEnded={setIsEnded}>
         {isSaving ? (
           <>
             <p className="save-indicator">저장중...</p>

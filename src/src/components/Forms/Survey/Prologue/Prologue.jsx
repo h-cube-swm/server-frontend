@@ -1,17 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HexColorPicker } from "react-colorful";
 import setNestedState from "../../../../utils/setNestedState";
+import { useModal } from "../../../../contexts/ModalContext";
+import { useGlobalState } from "../../../../contexts/GlobalContext";
+import { DOMAIN } from "../../../../constants";
+
+/* Components */
 import TextField from "../../../TextField/TextField";
+import ExpandableInput from "../../../ExpandableInput/ExpandableInput";
+
+/* Styles */
 import "./Prologue.scss";
 import logo from "../../../../assets/images/logo.png";
 import delBtn from "../../../../assets/icons/del-btn1.svg";
-import ExpandableInput from "../../../ExpandableInput/ExpandableInput";
 
-export default function Prologue({ survey, setSurvey, children }) {
-  const [isFolded, setIsFolded] = useState(true);
+export default function Prologue({ survey, setSurvey, isFolded, setIsFolded, children }) {
   const [isClosed, setIsClosed] = useState(true);
   const titleTextArea = useRef(null);
+  const { load } = useModal();
+  const location = `https://${DOMAIN}${useLocation().pathname}`;
+  const href = `https://auth.the-form.io?redirect=${location}`;
+  const { token } = useGlobalState();
   const { themeColor } = survey;
   const setSurveyThemeColor = setNestedState(setSurvey, ["themeColor"]);
   const colorBoxClasses = ["color-picker-box"];
@@ -27,6 +37,18 @@ export default function Prologue({ survey, setSurvey, children }) {
   };
 
   const onOpen = () => {
+    if (!token) {
+      load(
+        <>
+          <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+          </p>
+        </>,
+        href,
+      );
+      return;
+    }
     setIsClosed(false);
   };
 

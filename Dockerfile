@@ -3,10 +3,10 @@
 # Build environment
 FROM node:14 as build
 WORKDIR /app
-COPY package.json ./
-COPY yarn.lock ./
+COPY src/package.json ./
+COPY src/yarn.lock ./
 RUN yarn install --production
-COPY . ./
+COPY src/. ./
 RUN yarn build
 
 # Production environment

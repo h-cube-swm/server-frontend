@@ -12,7 +12,7 @@ const Survey = () => {
   useEffect(() => {
     (async () => {
       const result = await API.postSurvey();
-      L.l(`Create:${result}`);
+      L.l(`Create:${JSON.stringify(result)}`);
       setState(result);
     })();
   }, []);
