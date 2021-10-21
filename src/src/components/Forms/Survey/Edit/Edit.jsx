@@ -80,7 +80,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const { token } = useGlobalState();
 
   const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
-  let history = useHistory();
+  const history = useHistory();
 
   const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
