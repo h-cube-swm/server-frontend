@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CardTypes } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
-import "./Branching.scss";
 
-const TOP = 240; // Distance between frame top and card top
+import "./Branching.scss";
+import example from "../../../../assets/images/branching-example.svg";
+
+const TOP = 200; // Distance between frame top and card top
 const LEFT = 120; // Distance between frame left and card left
 const RIGHT = 120; // Distance between frame right and card right
 const QUESTION_DIST = 300; // Horizontal distance between each cards including its width
@@ -305,6 +307,24 @@ export default function Branching({ survey, setSurvey }) {
 
   return (
     <div className="branching" ref={frameRef}>
+      <div className="section-title-box">
+        <h1 className="section-title">흐름설정</h1>
+        <button className="howto-btn">어떻게 하는건가요?</button>
+        <div className="explain">
+          <img src={example} alt="circle, departure, box, destination" />
+          <p className="comment">
+            아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.
+            <br />
+            <br />
+            <strong>&#34;선택지가 가리키는 다음 질문&#34;</strong>이&nbsp;
+            <strong>&#34;이 질문의 다음 질문&#34;</strong>에 우선합니다.
+            <br />
+            <br />
+            <strong>좌우 방향키</strong>를 누르거나 <strong>Shift 키를 누른 상태로 스크롤</strong>
+            하면 좌우 방향으로 스크롤됩니다.
+          </p>
+        </div>
+      </div>
       <div
         className="frame"
         ref={contentRef}
@@ -389,15 +409,6 @@ export default function Branching({ survey, setSurvey }) {
           </svg>
         </div>
       </div>
-      <p className="comment">
-        <strong>&#34;선택지가 가리키는 다음 질문&#34;</strong>이&nbsp;
-        <strong>&#34;이 질문의 다음 질문&#34;</strong>에 우선합니다.
-        <br />
-        <br />
-        아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.
-        <br />
-        좌우 방향키를 누르거나 Shift 키를 누른 상태로 스크롤하면 좌우 방향으로 스크롤됩니다.
-      </p>
     </div>
   );
 }
