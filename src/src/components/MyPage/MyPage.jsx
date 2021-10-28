@@ -70,13 +70,9 @@ export default function MyPage() {
     }
   };
 
-  const onMouse = (e) => {
-    e.currentTarget.className = "survey appear";
-  };
-
-  const outMouse = (e) => {
-    e.currentTarget.className = "survey";
-  };
+  const handleMouse = (e) => {
+    e
+  }
 
   if (surveys.length === 0) {
     contents.push(

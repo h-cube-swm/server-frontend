@@ -143,7 +143,7 @@ const Ending = ({ ending }) => {
                 <button
                   onClick={() =>
                     duplicateEmbedLink(
-                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`,
+                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
                     )
                   }>
                   <div className="image-border">
