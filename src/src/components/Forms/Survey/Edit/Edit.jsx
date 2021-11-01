@@ -24,7 +24,7 @@ import useOnly from "../../../../hooks/useOnly";
 
 /* Others */
 import orderedMap from "../../../../utils/orderedMap";
-import { CardStates, CardStyle, DOMAIN } from "../../../../constants";
+import { CardStates, CardStyle, CardTypes, DOMAIN } from "../../../../constants";
 import "./Edit.scss";
 import setNestedState from "../../../../utils/setNestedState";
 import getQuestion from "../getQuestion";
@@ -171,24 +171,27 @@ function Edit({ survey: init, updateSurvey, location }) {
     let message = [];
 
     for (let i = 0; i < questions.length && index < 0; i++) {
-      if (i === questions.length - 1 && !questions[i].title) {
-        message = ["주의❗️ 설문의 종료 메시지를 작성해주세요.", "warning"];
-        index = i;
-      }
-      if (questions[i].type === "single-choice" || questions[i].type === "multiple-choice") {
+      if (
+        questions[i].type === CardTypes.SINGLE_CHOICE ||
+        questions[i].type === CardTypes.MULTIPLE_CHOICE
+      ) {
         if (questions[i].choices.length === 0) {
-          message = ["주의❗️ 선택지가 없는 질문이 있습니다.", "warning"];
+          message = ["주의❗️ 아래 질문에 선택지가 없습니다.", "warning"];
           index = i;
         }
         for (let j = 0; j < questions[i].choices.length; j++) {
           if (questions[i].choices[j].length === 0) {
-            message = ["주의❗️ 선택지의 내용이 입력되지 않은 질문이 있습니다.", "warning"];
+            message = ["주의❗️ 아래 질문에 빈 선택지가 있습니다.", "warning"];
             index = i;
           }
         }
       }
       if (!questions[i].title) {
-        message = ["주의❗️ 제목이 비어있는 질문이 있습니다.", "warning"];
+        message = ["주의❗️ 아래 질문의 제목이 비어있습니다.", "warning"];
+        index = i;
+      }
+      if (i === questions.length - 1 && !questions[i].title) {
+        message = ["주의❗️ 설문의 종료 메시지를 작성해주세요.", "warning"];
         index = i;
       }
     }
