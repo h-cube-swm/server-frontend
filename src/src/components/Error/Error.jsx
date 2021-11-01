@@ -3,17 +3,18 @@ import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import Title from "../Title/Title";
 import "./Error.scss";
 
-export default function Error({ match }) {
-  const { type } = match.params;
-
+export default function Error({ type }) {
   let contents = null;
+
   switch (type) {
     case "published": // published 된 설문을 edit으로 들어갈 때
       contents = <h1>이미 배포된 설문입니다.</h1>;
       break;
+
     case "404": // 404
       contents = <h1>404</h1>;
       break;
+
     case "wrongResultId":
       contents = (
         <>
@@ -22,7 +23,12 @@ export default function Error({ match }) {
         </>
       );
       break;
-    case "unexpected":
+
+    case "not-found":
+      contents = <h1>존재하지 않는 경로입니다.</h1>;
+      break;
+
+    default:
       contents = (
         <>
           <h1>예상치 못한 에러가 발생하였습니다. </h1>
@@ -32,10 +38,6 @@ export default function Error({ match }) {
         </>
       );
       break;
-
-    default:
-      contents = <h1>존재하지 않는 경로입니다.</h1>;
-      break;
   }
 
   return (
@@ -44,6 +46,7 @@ export default function Error({ match }) {
       <div className="error">
         <FloatingLogo />
         <div className="container">{contents}</div>
+        <div className="error-code">Error Code : {type}</div>
       </div>
     </>
   );

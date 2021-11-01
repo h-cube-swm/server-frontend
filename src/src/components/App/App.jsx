@@ -29,7 +29,7 @@ const Pricing = lazy(() => import("../Pricing/Pricing"));
 const Survey = lazy(() => import("../Forms/Survey/Survey"));
 const Edit = lazy(() => import("../Forms/Survey/Edit/Edit"));
 const EditEnding = lazy(() => import("../Forms/Survey/EditEnding/EditEnding"));
-const Error = lazy(() => import("../Error/Error"));
+const NotFound = lazy(() => import("../Error/NotFound"));
 const Result = lazy(() => import("../Forms/Survey/Result/Result"));
 const ResponseEnding = lazy(() => import("../Forms/Survey/ResponseEnding/ResponseEnding"));
 
@@ -65,13 +65,13 @@ function App() {
                 <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
                 <Route path="/forms/survey/response/:link" component={ResponseContainer} />
                 <Route path="/forms/survey/result/:link" component={Result} />
-                <Route path="/error/:type" component={Error} />
                 <Route path="/loading" component={Loading}></Route>
                 <Route path="/start/:link" component={StartTime}></Route>
 
+                {/* Admin-page related pathes */}
                 <Route path="/admin/view/:id" component={Viewer}></Route>
                 <Route path="/admin" component={Admin}></Route>
-                <Route component={Error} />
+                <Route component={NotFound} />
               </Switch>
             </Suspense>
             <ChannelService pluginKey="91cb6c42-6533-4d7a-b925-f223dde1fe16" />

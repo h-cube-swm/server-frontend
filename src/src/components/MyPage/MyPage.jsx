@@ -6,15 +6,7 @@ import Header from "../Main/Header";
 import "./MyPage.scss";
 import API from "../../utils/apis";
 import Loading from "../Loading/Loading";
-import Tooltip from "../Tooltip/Tooltip";
-
-import linkBtn from "../../assets/icons/link-btn.svg";
-import embedBtn from "../../assets/icons/embed-btn.svg";
-import resultBtn from "../../assets/icons/result-btn.svg";
-import delBtn from "../../assets/icons/del-btn-big.svg";
-import addBtn from "../../assets/icons/add-btn.svg";
-import editBtn from "../../assets/icons/edit-btn.svg";
-import duplicateBtn from "../../assets/icons/duplicate-btn.svg";
+import Error from "../Error/Error";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
@@ -26,7 +18,7 @@ export default function MyPage() {
   const contents = [];
 
   if (surveys === null) return <Loading></Loading>;
-  if (error) return <Redirect to="/error/unexpected/cannot-get-user-info"></Redirect>;
+  if (error) return <Error type="cannot-get-user-info" />;
 
   const duplicateLink = (link) => {
     const linkarea = document.createElement("textarea");
