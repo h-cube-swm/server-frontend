@@ -105,7 +105,7 @@ export default {
 
   // GET
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
-  useSurvey: (sid) => useFetch(`/surveys/${sid}`),
+  useSurvey: (sid, mode = "edit") => useFetch(`/surveys/${sid}?mode=${mode}`),
   useUser: (hash) => useFetch(`/users/surveys/${hash ? "?hash=" + hash : ""}`),
 
   // PUT,POST
