@@ -3,11 +3,11 @@ import { CardTypes } from "../constants";
 import getQuestion from "../components/Forms/Survey/getQuestion";
 import Loading from "../components/Loading/Loading";
 import API from "../utils/apis";
-import { isUnhashable, unhash } from "../utils/hasher";
+import { tryUnhash } from "../utils/hasher";
 
 const withSurvey = (Component) => (props) => {
   let surveyId = props.match.params.link;
-  if (isUnhashable(surveyId)) surveyId = unhash(surveyId);
+  surveyId = tryUnhash(surveyId);
 
   // Load survey data from server
   const [survey, err] = API.useSurvey(surveyId);
