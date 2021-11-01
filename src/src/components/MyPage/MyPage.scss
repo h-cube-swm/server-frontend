@@ -1,294 +1,170 @@
 @import "/src/scss/style.scss";
 
-.my-page-top {
+.my-page {
   width: 100%;
   height: 100%;
   position: relative;
-  .my-page {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .side-bar {
+    position: absolute;
+    right: 0;
+    width: 20%;
     height: 100%;
-    overflow: scroll;
-
-    .make-survey {
-      width: 12rem;
-      height: 15rem;
-      border-radius: 10px;
-      background-color: #fff;
-      h3 {
-        font-size: $fs-sm;
-        font-weight: $fw-bold;
-        color: #2b44ff;
-      }
-    }
-    .info {
+    background-color: transparent;
+    padding-top: 10rem;
+    padding-left: 2rem;
+    .section {
       display: flex;
-      flex-direction: column;
-      margin-top: 15rem;
-      font-size: $fs-rg;
       align-items: center;
-      h1 {
-        font-weight: $fw-bold;
-      }
-      p {
-        margin-top: 1rem;
-        color: #707070;
-        font-weight: $fw-bold;
-      }
-    }
-    .partition {
-      width: 10rem;
-      height: 2px;
-      margin-top: 5rem;
-      background-color: #b0b0b0;
-    }
-    .my-form {
-      margin-top: 7rem;
-    }
-    .no-survey {
-      @include round;
-      box-shadow: $shadow-default;
-      padding: 0.7rem 2rem;
-      width: 20rem;
-      margin-top: 3rem;
       color: #fff;
-      background: linear-gradient(to right, #707070, #b0b0b0);
-    }
-    .surveys {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 3rem;
-      margin-bottom: 10rem;
-      width: 80%;
-      height: 100%;
-
-      h2 {
-        margin-bottom: 1rem;
+      width: 60%;
+      height: 3rem;
+      margin-bottom: 1rem;
+      padding: 1.2rem 1.5rem;
+      border-radius: 15px;
+      font-weight: $fw-bold;
+      background: linear-gradient(to right, #2b44ff, #2b44ff);
+      transition-duration: 300ms;
+      &:hover {
+        color: #fff;
+        background: linear-gradient(to right, #2b44ff, #68d4e8);
+        transition-duration: 300ms;
       }
+      &.selected {
+        color: #fff;
+        background: linear-gradient(to right, #2b44ff, #68d4e8);
+        transition-duration: 300ms;
+      }
+    }
+  }
+
+  .surveys {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 85%;
+    height: 100%;
+    padding-top: 10rem;
+    left: 0;
+    overflow: scroll;
+    .surveys-inner-box {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      flex-wrap: wrap;
       .survey {
         display: flex;
-        align-items: center;
         position: relative;
+        justify-content: center;
+        align-items: center;
         width: 12rem;
-        margin: 0 5rem;
-        margin-top: 5rem;
-
-        .dot {
-          position: absolute;
-          width: 1rem;
-          height: 1rem;
-          border-radius: 50%;
+        height: 15rem;
+        border: 1.5px solid #ebebebb0;
+        border-radius: 10px;
+        box-shadow: $shadow-default-shallow;
+        font-weight: $fw-bold;
+        margin: 0 1rem;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        transition-duration: 300ms;
+        overflow: hidden;
+        word-break: break-all;
+        text-overflow: ellipsis;
+        &:hover {
           box-shadow: $shadow-default;
-          background-color: #e22f1b;
-          z-index: 3;
+          transition-duration: 300ms;
+          border: 1.5px solid #2b44ff;
         }
-
-        .dot-position {
-          transform: translateY(-9.5rem);
-          .timestamp {
-            position: absolute;
-            width: 12rem;
-            font-size: $fs-sm;
-            font-weight: $fw-bold;
-            color: #707070;
-            opacity: 0.8;
-            &.published {
-              transform: translate(0.2rem, 0.5rem);
-              color: #2b44ff;
-            }
-            &.editing {
-              transform: translateX(1.5rem);
-            }
-          }
-        }
-
-        .title {
-          position: relative;
-          box-shadow: $shadow-default;
-          width: 12rem;
-          height: 15rem;
-          overflow: scroll;
-          z-index: 2;
-          background-color: #fff;
-          border-radius: 10px;
+        &.make-survey {
+          flex-direction: column;
+          font-size: $fs-sm;
+          background: linear-gradient(to right, #2b44ff, #2b44ff);
+          transition-duration: 500ms;
           h3 {
-            padding: 1rem;
-            font-size: $fs-rg;
-            font-weight: $fw-bold;
-            word-break: break-all;
+            color: #fff;
           }
-          p {
-            padding: 1rem;
-            font-size: $fs-sm;
-            text-overflow: ellipsis;
-            word-break: break-all;
-          }
-        }
-
-        .buttons {
-          position: absolute;
-          transform: translateX(7rem);
-          margin-left: 1rem;
-          z-index: 0;
-          width: 10rem;
-          height: 20rem;
-
-          .link {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            display: flex;
-            align-items: center;
-            background-color: transparent;
-            padding: 0;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            cursor: pointer;
+          &:hover {
+            box-shadow: $shadow-default;
+            background: linear-gradient(to right, #2b44ff, #68d4e8);
             transition-duration: 500ms;
-            transform: translate(1rem, -50%);
+            border: none;
+          }
+        }
+        .main {
+          .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 20%;
+            display: flex;
+            justify-content: flex-end;
 
-            img {
-              width: 3rem;
-            }
-
-            // should remove by increasing other buttons' size
-            &.temp {
+            .etc-btn {
+              background-color: transparent;
+              width: 20%;
               img {
-                width: 2.7rem;
+                width: 100%;
               }
-            }
-
-            &.published {
-              cursor: default;
-              opacity: 0.2;
             }
           }
         }
-
-        &.appear {
-          .buttons {
-            .link {
-              top: 50%;
-              &:nth-child(1) {
-                transform: translateX(-32rem) translate(-50%, -50%) rotate(-13deg) translateX(40rem);
-              }
-
-              &:nth-child(2) {
-                transform: translateX(-32rem) translate(-50%, -50%) rotate(-8deg) translateX(40rem);
-              }
-
-              &:nth-child(3) {
-                transform: translateX(-32rem) translate(-50%, -50%) rotate(-3deg) translateX(40rem);
-              }
-
-              &:nth-child(4) {
-                transform: translateX(-32rem) translate(-50%, -50%) rotate(2deg) translateX(40rem);
-              }
-
-              &:nth-child(5) {
-                transform: translateX(-32rem) translate(-50%, -50%) rotate(7deg) translateX(40rem);
-              }
-
-              &:nth-child(6) {
-                transform: translateX(-32rem) translate(-50%, -50%) rotate(12deg) translateX(40rem);
+        .options {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #fff;
+          transform: translateX(100%);
+          transition-duration: 500ms;
+          border-radius: 10px;
+          .option-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 2rem;
+            padding-left: 1rem;
+            .option-btn {
+              display: flex;
+              position: relative;
+              justify-content: space-between;
+              align-items: center;
+              width: 90%;
+              font-size: $fs-rg;
+              font-weight: $fw-bold;
+              background-color: transparent;
+              color: #000;
+              img {
+                width: 0.7rem;
               }
             }
+            .option-default {
+              width: 100%;
+              margin-bottom: 0.5rem;
+            }
+            .option-advanced {
+              width: 100%;
+              margin-top: 0.5rem;
+            }
+            .partition {
+              height: 1px;
+              width: 80%;
+              margin-left: 0.3rem;
+              background-color: #b0b0b0;
+            }
+          }
+        }
+        &.selected {
+          .options {
+            transform: translateX(0);
+            transition-duration: 500ms;
           }
         }
       }
     }
+  }
 
-    @include mobile {
-      width: 100%;
-      .make-survey {
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        z-index: -100;
-      }
-      .my-form {
-        margin-top: 2rem;
-      }
-      .no-survey {
-        width: 100%;
-      }
-      .surveys {
-        width: 100%;
-        margin-top: 1rem;
-        .survey {
-          width: 100%;
-          .status {
-            margin-right: 0.5rem;
-            width: 3rem;
-          }
-          .title {
-            width: 10rem;
-          }
-          .link {
-            display: flex;
-            align-items: center;
-            margin-left: 0;
-            width: 2.3rem;
-            height: 2.8rem;
-            img {
-              width: 90%;
-            }
-            &:nth-child(1) {
-              transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
-                translateY(-6rem);
-            }
-
-            &:nth-child(2) {
-              transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
-                translateY(-3rem);
-            }
-
-            &:nth-child(3) {
-              transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem);
-            }
-
-            &:nth-child(4) {
-              transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem) translateY(3rem);
-            }
-
-            &:nth-child(5) {
-              transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem) translateY(6rem);
-            }
-          }
-          &.appear {
-            .buttons {
-              .link {
-                &:nth-child(1) {
-                  transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
-                    translateY(-6rem);
-                }
-
-                &:nth-child(2) {
-                  transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
-                    translateY(-3rem);
-                }
-
-                &:nth-child(3) {
-                  transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem);
-                }
-
-                &:nth-child(4) {
-                  transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
-                    translateY(3rem);
-                }
-
-                &:nth-child(5) {
-                  transform: translateX(-32rem) translate(-50%, -50%) translateX(38rem)
-                    translateY(6rem);
-                }
-              }
-            }
-          }
-        }
+  @include laptop {
+    .surveys {
+      .surveys-inner-box {
+        grid-template-columns: repeat(5, 1fr);
       }
     }
   }

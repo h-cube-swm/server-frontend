@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useMessage } from "../../contexts/MessageContext";
-// import FloatingLogo from "../FloatingLogo/FloatingLogo";
-import Header from "../Main/Header";
-import "./MyPage.scss";
 import API from "../../utils/apis";
+
+// Components
+import Header from "../Main/Header";
+
+// SCSS
+import "./MyPage.scss";
 import Loading from "../Loading/Loading";
+import addBtn from "../../assets/icons/add-btn-white.svg";
+import etcBtn from "../../assets/icons/etc-btn.svg";
+import nextBtn from "../../assets/icons/next-btn.svg";
 import Error from "../Error/Error";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
@@ -16,6 +22,21 @@ export default function MyPage() {
   // ToDo 함수 이름을 바꾸던가 함수 반환값을 바꾸던가
   const [surveys, error] = API.useUser(timestmap);
   const contents = [];
+  const [isScolled, setIsScolled] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const onClick = (i) => {
+    setSelectedId(i);
+  };
+
+  const onWheel = (e) => {
+    const currentScroll = e.deltaY;
+    if (currentScroll > 0) {
+      setIsScolled(true);
+    } else {
+      setIsScolled(false);
+    }
+  };
 
   if (surveys === null) return <Loading></Loading>;
   if (error) return <Error type="cannot-get-user-info" />;
@@ -60,11 +81,8 @@ export default function MyPage() {
       }
       setTimestmap(Date.now());
     }
+    setSelectedId(null);
   };
-
-  const handleMouse = (e) => {
-    e
-  }
 
   if (surveys.length === 0) {
     contents.push(
@@ -84,73 +102,44 @@ export default function MyPage() {
     const createdDate = new Date(survey.createdAt);
     const updatedDate = new Date(survey.updatedAt);
     contents.push(
-      <div key={i} className="survey" onMouseEnter={onMouse} onMouseLeave={outMouse}>
-        {survey.status === "published" ? (
-          <div className="dot-position">
-            <p className="timestamp published">
-              {updatedDate.toLocaleString("ko-KR")}
-              {"  배포됨"}
-            </p>
-          </div>
-        ) : (
-          <div className="dot-position">
-            <Tooltip text="아직 설문 작성이 완료되지 않았습니다 🤓" size="lg">
-              <div className="dot" />
-              <p className="timestamp editing">{createdDate.toLocaleString("ko-KR")}</p>
-            </Tooltip>
-          </div>
-        )}
-        <div className="title">
-          <h3>{survey.title}</h3>
-          <p>{survey.description}</p>
-        </div>
-        <div className="buttons">
-          {survey.status === "published" ? (
-            <button className="link published">
-              <div key={i} className="tooltip">
-                <img src={editBtn} alt="edit survey" />
-                <span className="tooltiptext">배포됨</span>
-              </div>
+      // TODO: 컴포넌트화하기
+      <div className={i === selectedId ? "survey selected" : "survey"} key={i}>
+        <div className="main">
+          {survey.title}
+          <div className="bottom-bar">
+            <button onClick={() => onClick(i)} className="etc-btn">
+              <img src={etcBtn} alt="etc button" />
             </button>
-          ) : (
-            <Link
-              className="link "
-              to={isMobile ? "/forms/survey/mobile" : `/forms/survey/edit/${survey.id}`}>
-              <Tooltip text={"편집하기"} size="sm">
-                <img src={editBtn} alt="edit survey" />
-              </Tooltip>
-            </Link>
-          )}
-          <Link className="link" to={`/forms/survey/result/${survey.id}`}>
-            <Tooltip text={"결과보기"} size="sm">
-              <img src={resultBtn} alt="open result page" />
-            </Tooltip>
-          </Link>
-          <button className="link" onClick={() => duplicateLink(survey.deployId)}>
-            <Tooltip text={"배포링크"} size="sm">
-              <img src={linkBtn} alt="dublicate deploy link button" />
-            </Tooltip>
-          </button>
-          <button
-            className="link"
-            onClick={() =>
-              duplicateEmbedLink(
-                `<iframe src="${HOST}/forms/survey/response/${survey.deployId}?embed=true"/>`,
-              )
-            }>
-            <Tooltip text={"임베드코드"} size="sm">
-              <img src={embedBtn} alt="dublicate embed code button" />
-            </Tooltip>
-          </button>
-          <button className="link temp" onClick={() => duplicateSurvey(survey.id)}>
-            <Tooltip text={"사본 만들기"} size="sm">
-              <img src={duplicateBtn} alt="dublicate deploy link button" />
-            </Tooltip>
-          </button>
-          <div className="link temp" onClick={() => deleteSurvey(survey.id)}>
-            <Tooltip text={"삭제하기"} size="sm">
-              <img src={delBtn} alt="delete button" />
-            </Tooltip>
+          </div>
+        </div>
+        <div className="options">
+          <div className="option-buttons">
+            <div className="option-default">
+              <button className="option-btn">
+                설문 제어하기
+                <img src={nextBtn} alt="go to survey control" />
+              </button>
+              <Link className="option-btn" to={`/forms/survey/result/${survey.id}`}>
+                설문 결과보기
+              </Link>
+              <button className="option-btn" onClick={() => duplicateSurvey(survey.id)}>
+                설문 사본 만들기
+              </button>
+              <button className="option-btn" onClick={() => deleteSurvey(survey.id)}>
+                설문 삭제하기
+              </button>
+            </div>
+            <div className="partition" />
+            <div className="option-advanced">
+              <button className="option-btn">
+                공유하기
+                <img src={nextBtn} alt="go to survey control" />
+              </button>
+              <button className="option-btn">
+                연동하기
+                <img src={nextBtn} alt="go to survey control" />
+              </button>
+            </div>
           </div>
         </div>
       </div>,
@@ -158,29 +147,21 @@ export default function MyPage() {
   });
 
   contents.push(
-    <div className="survey">
-      <Link
-        className="btn long make-survey"
-        to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
-        <img src={addBtn} alt="" />
-        <h3>설문 만들기</h3>
-      </Link>
-    </div>,
+    <Link className="survey make-survey" to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
+      <img src={addBtn} alt="" />
+      <h3>설문 만들기</h3>
+    </Link>,
   );
 
   return (
-    <div className="my-page-top">
-      <Header />
-      <div className="my-page">
-        <div className="info">
-          <h1>마이페이지</h1>
-          <p>제작 중이거나 배포 중인 설문을 관리하는 곳입니다.</p>
-          <p>
-            배포된 설문을 수정하고 싶으시다면, <em>사본 만들기 기능</em> 을 활용하거나{" "}
-            <em>우측 하단 채널톡</em> 을 통해 문의주세요.
-          </p>
-        </div>
-        <div className="surveys">{contents.reverse()}</div>
+    <div className="my-page" onWheel={onWheel}>
+      <Header isScolled={isScolled} />
+      <div className="side-bar">
+        <div className="section">설문 모아보기</div>
+        <div className="section">프로필 설정</div>
+      </div>
+      <div className="surveys">
+        <div className="surveys-inner-box">{contents.reverse()}</div>
       </div>
     </div>
   );
