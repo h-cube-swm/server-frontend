@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useMessage } from "../../contexts/MessageContext";
 import API from "../../utils/apis";
+import { SurveyStatus } from "../../constants";
 
 // Components
 import Header from "../Main/Header";
@@ -64,11 +65,18 @@ export default function MyPage() {
   };
 
   const duplicateSurvey = async (link) => {
-    const status = await API.postCopySurvey(link);
-    if (status[2] === 200) {
+    const result = await API.postCopySurvey(link);
+    if (result[2] === 200) {
       publish("📄 설문 사본 생성이 되었습니다 ✅");
     }
     setTimestmap(Date.now());
+  };
+
+  const finishSurvey = async (link, status) => {
+    const result = await API.putSurveyStatus(link, status);
+    if (result[2] === 200) {
+      publish("📄 설문이 종료 되었습니다 ✅");
+    }
   };
 
   const deleteSurvey = async (link) => {
@@ -118,6 +126,11 @@ export default function MyPage() {
               <button className="option-btn">
                 설문 제어하기
                 <img src={nextBtn} alt="go to survey control" />
+              </button>
+              <button
+                className="option-btn"
+                onClick={() => finishSurvey(survey.id, SurveyStatus.FINISHED)}>
+                설문 종료하기
               </button>
               <Link className="option-btn" to={`/forms/survey/result/${survey.id}`}>
                 설문 결과보기
