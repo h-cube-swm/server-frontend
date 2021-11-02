@@ -111,6 +111,7 @@ export default {
   // PUT,POST
   postSurvey: () => sendData("POST", "/surveys"),
   putSurvey: (sid, survey) => sendData("PUT", `/surveys/${sid}`, survey),
+  putSurveyStatus: (sid, status) => sendData("PUT", `/surveys/${sid}/status`, { status }),
   putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
