@@ -14,7 +14,7 @@ import "./Response.scss";
 import API from "../../../../utils/apis";
 
 // HOCs
-import withSurvey from "../../../../hocs/withSurvey";
+import withSurveyForResponse from "../../../../hocs/withSurveyForResponse";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import logo from "../../../../assets/images/logo-banner.GIF";
@@ -329,4 +329,4 @@ export function Response({
   );
 }
 
-export default withSurvey(ResponseContainer);
+export default withSurveyForResponse(ResponseContainer);
