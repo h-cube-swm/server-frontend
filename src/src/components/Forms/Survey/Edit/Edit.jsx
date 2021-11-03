@@ -154,8 +154,7 @@ function Edit({ survey: init, updateSurvey, location }) {
     setSurvey({ ...survey, selectedIndex: newIndex, questions });
   });
 
-  const onEvent = useThrottle(putSurvey);
-  onEvent();
+  useThrottle(putSurvey, [survey]);
 
   if (survey.status === "published" || isEnded)
     return <Redirect to={`/forms/survey/end/${survey.id}`} />;

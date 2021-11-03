@@ -1,19 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function useThrottle(callback) {
+export default function useThrottle(callback, dependencies, timeout = 1000) {
   const timeoutHandle = useRef(0);
-
-  function onEvent() {
+  useEffect(() => {
     const handle = setTimeout(() => {
-      if (timeoutHandle.current === handle) {
-        callback();
-      }
-    }, 1000);
-
+      if (timeoutHandle.current !== handle) return;
+      callback();
+    }, timeout);
     timeoutHandle.current = handle;
-  }
-
-  return onEvent;
+  }, dependencies);
 }
 
 export function useThrottleWithTimeout(callback, timeout = 1000) {
