@@ -9,16 +9,21 @@ import Tooltip from "../../../../Tooltip/Tooltip";
 
 function PreferenceButton({ index, selected, onClick, prevIndex, themeColor }) {
   const classes = ["preference-box"];
+  let bgColor = themeColor;
 
   if (onClick) {
     classes.push("cursor");
+  }
+
+  if (themeColor === "" || !themeColor) {
+    bgColor = "#2b44ff";
   }
 
   return index === selected && prevIndex !== 0 ? (
     <div
       className={classes.join(" ")}
       onClick={onClick}
-      style={{ backgroundColor: themeColor, color: "#fff" }}>
+      style={{ backgroundColor: bgColor, color: "#fff" }}>
       {index}
     </div>
   ) : (
