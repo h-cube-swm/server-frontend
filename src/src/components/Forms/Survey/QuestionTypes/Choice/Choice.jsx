@@ -23,6 +23,8 @@ function Choice({
   const isEditing = state === CardStates.EDITTING;
 
   function shadeHexColor(color, percent) {
+    if (!color || color.length < 0) return "#2b44ff";
+
     const num = color.slice(1);
     const f = parseInt(num, 16);
     const t = percent < 0 ? 0 : 255;
