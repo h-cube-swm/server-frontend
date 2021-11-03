@@ -184,7 +184,6 @@ export default function Branching({ survey, setSurvey }) {
   // States
   const [selectedHandle, setSelectedHandle] = useState(null);
   const [curDestId, setDestBody] = useState(-1);
-  const [isHowToOpen, setIsHowToOpen] = useState(false);
   const { load } = useModal();
 
   // References

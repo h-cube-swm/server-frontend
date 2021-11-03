@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMessage } from "../../contexts/MessageContext";
 import { SurveyStatus } from "../../constants";
 import API from "../../utils/apis";
@@ -15,7 +15,6 @@ const HOST = `${window.location.protocol}//${window.location.host}`;
 export default function SurveyCard({ survey, setTimestamp }) {
   const { publish } = useMessage();
   const [selectedOption, setSelectedOption] = useState(null);
-  const createdDate = new Date(survey.createdAt).toLocaleDateString("ko-KR");
   const updatedDate = new Date(survey.updatedAt).toLocaleDateString("ko-KR");
   const surveyId = survey.id;
   const surveyStatus = survey.status;
@@ -67,8 +66,9 @@ export default function SurveyCard({ survey, setTimestamp }) {
   };
 
   const finishSurvey = async (link, status) => {
-    const alert = window.confirm("정말 종료하시겠습니까?");
-    if (alert) {
+    // eslint-disable-next-line
+    const confirm = window.confirm("정말 종료하시겠습니까?");
+    if (confirm) {
       const result = await API.putSurveyStatus(link, status);
       if (result[2] === 200) {
         publish("📄 설문이 종료 되었습니다 ✅");
@@ -79,8 +79,9 @@ export default function SurveyCard({ survey, setTimestamp }) {
   };
 
   const deleteSurvey = async (link) => {
-    const alert = window.confirm("정말 삭제하시겠습니까?");
-    if (alert) {
+    // eslint-disable-next-line
+    const confirm = window.confirm("정말 삭제하시겠습니까?");
+    if (confirm) {
       const result = await API.deleteSurvey(link);
       if (result === 200) {
         publish("설문을 삭제하였습니다 🗑", "warning");
