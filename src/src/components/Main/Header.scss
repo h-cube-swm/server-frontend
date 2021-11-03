@@ -1,20 +1,40 @@
 @import "/src/scss/style.scss";
 
 .header {
-  position: relative;
+  position: absolute;
   display: block;
-  z-index: 2;
   width: 100%;
+  box-shadow: rgba(136, 136, 145, 0) 0px 3px 10px 0px;
+
+  * {
+    transition-duration: 300ms;
+  }
 
   .header-box {
     position: absolute;
     width: 100%;
     height: 8rem;
     background-color: #fff;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      height: 4rem;
+      margin-left: 2rem;
+      a {
+        height: 100%;
+        display: block;
+      }
+      img {
+        height: 100%;
+      }
+    }
+
     .banner {
-      position: absolute;
-      right: 6rem;
-      top: 3rem;
+      margin-right: 6rem;
+
       a {
         color: #000;
         margin-left: 2rem;
@@ -23,16 +43,26 @@
         margin-left: 2rem;
       }
     }
+
     @include mobile {
       .banner {
-        right: 2rem;
-        top: 3rem;
+        margin-right: 2rem;
+
         a {
           margin-left: 1rem;
         }
         .login {
           margin-left: 1rem;
         }
+      }
+    }
+
+    &.scrolled {
+      box-shadow: $shadow-default;
+      height: 4rem;
+      .logo {
+        margin-left: 1rem;
+        height: 3rem;
       }
     }
   }
