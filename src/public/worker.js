@@ -1,5 +1,5 @@
-const CACHE_NAME = "the-from-pwa-task-manager";
-const URLS_TO_CACHE = ["/"];
+const CACHE_NAME = "the-from-pwa-task-manager-v1";
+const URLS_TO_PRECACHE = ["/"];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
@@ -7,7 +7,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       console.log("Opened cache");
-      return cache.addAll(URLS_TO_CACHE);
+      return cache.addAll(URLS_TO_PRECACHE);
     }),
   );
 });
@@ -15,13 +15,16 @@ self.addEventListener("install", (event) => {
 // Cache and return requests
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then(function (response) {
-      // Cache hit - return response
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
-    }),
+    caches
+      .match(event.request)
+      .then(function (response) {
+        // Cache hit - return response
+        if (response) return response;
+        return fetch(event.request);
+      })
+      .catch((err) => {
+        console.log("Failed to fetch :", event.request, "Because of :", err);
+      }),
   );
 });
 
