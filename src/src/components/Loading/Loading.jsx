@@ -37,7 +37,6 @@ export default function Loading() {
 
   return (
     <>
-      <FloatingLogo />
       {isTimeout && (
         <div className="loading">
           <h1>로딩 중입니다.</h1>
