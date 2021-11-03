@@ -19,152 +19,30 @@
       width: 60%;
       height: 3rem;
       margin-bottom: 1rem;
-      padding: 1.2rem 1.5rem;
+      padding: 1.5rem 1.5rem;
       border-radius: 15px;
       font-weight: $fw-bold;
       background: linear-gradient(to right, #2b44ff, #2b44ff);
       transition-duration: 300ms;
-      &:hover {
-        color: #fff;
-        background: linear-gradient(to right, #2b44ff, #68d4e8);
-        transition-duration: 300ms;
-      }
-      &.selected {
-        color: #fff;
-        background: linear-gradient(to right, #2b44ff, #68d4e8);
-        transition-duration: 300ms;
-      }
     }
   }
-
-  .surveys {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    width: 85%;
-    height: 100%;
-    padding-top: 10rem;
-    left: 0;
-    overflow: scroll;
-    .surveys-inner-box {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      flex-wrap: wrap;
-      .survey {
-        display: flex;
-        position: relative;
-        justify-content: center;
-        align-items: center;
-        width: 12rem;
-        height: 15rem;
-        border: 1.5px solid #ebebebb0;
-        border-radius: 10px;
-        box-shadow: $shadow-default-shallow;
-        font-weight: $fw-bold;
-        margin: 0 1rem;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        transition-duration: 300ms;
-        overflow: hidden;
-        word-break: break-all;
-        text-overflow: ellipsis;
-        &:hover {
-          box-shadow: $shadow-default;
-          transition-duration: 300ms;
-          border: 1.5px solid #2b44ff;
-        }
-        &.make-survey {
-          flex-direction: column;
-          font-size: $fs-sm;
-          background: linear-gradient(to right, #2b44ff, #2b44ff);
-          transition-duration: 500ms;
-          h3 {
-            color: #fff;
-          }
-          &:hover {
-            box-shadow: $shadow-default;
-            background: linear-gradient(to right, #2b44ff, #68d4e8);
-            transition-duration: 500ms;
-            border: none;
-          }
-        }
-        .main {
-          .bottom-bar {
-            position: absolute;
-            bottom: 0;
-            left: 10%;
-            width: 80%;
-            height: 20%;
-            display: flex;
-            justify-content: flex-end;
-
-            .etc-btn {
-              background-color: transparent;
-              width: 20%;
-              img {
-                width: 100%;
-              }
-            }
-          }
-        }
-        .options {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-color: #fff;
-          transform: translateX(100%);
-          transition-duration: 500ms;
-          border-radius: 10px;
-          .option-buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding-top: 2rem;
-            padding-left: 1rem;
-            .option-btn {
-              display: flex;
-              position: relative;
-              justify-content: space-between;
-              align-items: center;
-              width: 90%;
-              font-size: $fs-rg;
-              font-weight: $fw-bold;
-              background-color: transparent;
-              color: #000;
-              img {
-                width: 0.7rem;
-              }
-            }
-            .option-default {
-              width: 100%;
-              margin-bottom: 0.5rem;
-            }
-            .option-advanced {
-              width: 100%;
-              margin-top: 0.5rem;
-            }
-            .partition {
-              height: 1px;
-              width: 80%;
-              margin-left: 0.3rem;
-              background-color: #b0b0b0;
-            }
-          }
-        }
-        &.selected {
-          .options {
-            transform: translateX(0);
-            transition-duration: 500ms;
-          }
-        }
-      }
-    }
-  }
-
   @include laptop {
     .surveys {
       .surveys-inner-box {
         grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  }
+  @include tablet {
+    .side-bar {
+      .section {
+        width: 85%;
+        font-size: $fs-sm;
+      }
+    }
+    .surveys {
+      .surveys-inner-box {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }
