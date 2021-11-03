@@ -23,6 +23,21 @@ export default function Error({ type }) {
         </>
       );
       break;
+    case "finished-survey":
+      contents = (
+        <>
+          <h1>이미 종료된 설문입니다.</h1>
+        </>
+      );
+      break;
+
+    case "editing-survey":
+      contents = (
+        <>
+          <h1>수정 중인 설문입니다.</h1>
+        </>
+      );
+      break;
 
     case "not-found":
       contents = <h1>존재하지 않는 경로입니다.</h1>;
