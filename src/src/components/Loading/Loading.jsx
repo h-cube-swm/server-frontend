@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useMessage } from "../../contexts/MessageContext";
 import useOnly from "../../hooks/useOnly";
 import useTimeout from "../../hooks/useTimeout";
-import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Loading.scss";
 
 const SPINNER_NUM = 3;

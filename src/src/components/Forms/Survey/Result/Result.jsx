@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
 import API from "../../../../utils/apis";
 import Loading from "../../../Loading/Loading";

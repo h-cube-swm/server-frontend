@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
 import Error from "../components/Error/Error";
 import Loading from "../components/Loading/Loading";
 import API from "../utils/apis";
