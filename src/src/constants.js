@@ -15,6 +15,13 @@ export const CardStates = {
   GHOST: "ghost",
 };
 
+export const SurveyStatus = {
+  EDITING: "editing",
+  PUBLISHED: "published",
+  FINISHED: "finished",
+  DELETED: "deleted",
+};
+
 let SURVEY_DISTANCE;
 
 if (document.getElementById("root").offsetWidth <= 767) {
