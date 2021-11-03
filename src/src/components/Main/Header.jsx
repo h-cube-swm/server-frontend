@@ -20,7 +20,7 @@ function Header() {
       }
     };
     window.addEventListener("wheel", onWheel, true);
-    return () => window.removeEventListener("wheel", onWheel);
+    return () => window.removeEventListener("wheel", onWheel, true);
   });
 
   function handleLogout() {
