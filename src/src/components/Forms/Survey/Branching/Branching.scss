@@ -12,19 +12,11 @@
     .section-title {
       font-size: $fs-lg;
       font-weight: $fw-bold;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
-    .howto-btn {
+    .how-to-btn {
       background-color: transparent;
       color: #2b44ff;
-    }
-    .explain {
-      position: absolute;
-      padding: 2rem;
-      background-color: #fff;
-      box-shadow: $shadow-default;
-      z-index: 3;
-      border-radius: 15px;
     }
   }
 
