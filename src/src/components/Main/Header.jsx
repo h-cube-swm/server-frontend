@@ -1,15 +1,27 @@
 /* React elements */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGlobalState } from "../../contexts/GlobalContext";
 import { DOMAIN } from "../../constants";
 import "./Header.scss";
 import logo from "../../assets/images/logo.png";
 
-function Header({ isScolled }) {
+function Header() {
   const { token, logout } = useGlobalState();
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = `https://${DOMAIN}${useLocation().pathname}`;
   const loginHref = `https://auth.the-form.io?redirect=${location}`;
+
+  useEffect(() => {
+    const onWheel = (e) => {
+      const currentIsScrolled = e.deltaY > 0;
+      if (currentIsScrolled !== isScrolled) {
+        setIsScrolled(currentIsScrolled);
+      }
+    };
+    window.addEventListener("wheel", onWheel, true);
+    return () => window.removeEventListener("wheel", onWheel);
+  });
 
   function handleLogout() {
     logout();
@@ -17,7 +29,7 @@ function Header({ isScolled }) {
 
   return (
     <div className="header">
-      <div className={isScolled ? "header-box scrolled" : "header-box"}>
+      <div className={isScrolled ? "header-box scrolled" : "header-box"}>
         <div className="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
