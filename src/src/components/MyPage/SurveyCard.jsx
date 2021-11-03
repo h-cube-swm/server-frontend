@@ -17,6 +17,7 @@ export default function SurveyCard({ survey, setTimestamp }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const updatedDate = new Date(survey.updatedAt).toLocaleDateString("ko-KR");
   const surveyId = survey.id;
+  const surveyDeployId = survey.deployId;
   const surveyStatus = survey.status;
   let mention = `${updatedDate} 생성됨`;
 
@@ -162,10 +163,10 @@ export default function SurveyCard({ survey, setTimestamp }) {
           <button className="prev-btn" onClick={onPrev}>
             <img src={prevBtn} alt="previous step" />
           </button>
-          <button className="option-btn" onClick={() => duplicateLink(surveyId)}>
+          <button className="option-btn" onClick={() => duplicateLink(surveyDeployId)}>
             링크 복사하기
           </button>
-          <button className="option-btn" onClick={() => duplicateEmbedLink(surveyId)}>
+          <button className="option-btn" onClick={() => duplicateEmbedLink(surveyDeployId)}>
             임베드코드 복사하기
           </button>
         </div>
