@@ -87,7 +87,6 @@ export default function Prologue({ survey, setSurvey, isFolded, setIsFolded, chi
                 placeholder="더 폼 나는 제목을 입력해보세요"
                 size="title"
                 ref={titleTextArea}
-                center={true}
                 onFocus={() => setIsFolded(false)}
               />
             ) : (

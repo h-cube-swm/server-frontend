@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
 import API from "../../../../utils/apis";
 import Loading from "../../../Loading/Loading";
@@ -17,6 +17,7 @@ import "./Result.scss";
 import logo from "../../../../assets/images/logo.png";
 import ViewFrame from "./ViewFrame/ViewFrame";
 import { useMessage } from "../../../../contexts/MessageContext";
+import Error from "../../../Error/Error";
 // import Tooltip from "../../../Tooltip/Tooltip";
 
 const VIEW_DICT = {
@@ -139,8 +140,8 @@ export default function Result({ match, location }) {
 
   // Load response data
   const [result, err] = API.useResponses(resultId);
-  if (err && result.status === 400) return <Redirect to="/error/wrongResultId" />;
-  if (err) return <Redirect to="/error/unexpected/cannot-get-result" />;
+  if (err && result.status === 400) return <Error type="wrong-result-id" />;
+  if (err) return <Error type="cannot-get-result" />;
   if (!result) return <Loading />;
 
   // Check view mode

@@ -68,7 +68,7 @@ async function sendImg(body) {
   }
 }
 
-async function TEMPSendData(method, body) {
+async function SendSuggestionData(method, body) {
   try {
     const config = {
       url: `https://suggestion.dev.the-form.io/test`,
@@ -105,12 +105,13 @@ export default {
 
   // GET
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
-  useSurvey: (sid) => useFetch(`/surveys/${sid}`),
+  useSurvey: (sid, mode = "edit") => useFetch(`/surveys/${sid}?mode=${mode}`),
   useUser: (hash) => useFetch(`/users/surveys/${hash ? "?hash=" + hash : ""}`),
 
   // PUT,POST
   postSurvey: () => sendData("POST", "/surveys"),
   putSurvey: (sid, survey) => sendData("PUT", `/surveys/${sid}`, survey),
+  putSurveyStatus: (sid, status) => sendData("PUT", `/surveys/${sid}/status`, { status }),
   putEmail: (sid, email) => sendData("PUT", `/surveys/${sid}/emails`, { email }),
   endSurvey: (sid) => sendData("PUT", `/surveys/${sid}/end`),
   postResponse: (sid, response) => sendData("POST", `/surveys/${sid}/responses`, response),
@@ -121,7 +122,7 @@ export default {
   deleteSurvey: (sid) => deleteData(`/surveys/${sid}`),
 
   // temporal
-  postSuggestion: (body) => TEMPSendData("POST", body),
+  postSuggestion: (body) => SendSuggestionData("POST", body),
 
   // Admin API
   admin: {

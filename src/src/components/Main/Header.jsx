@@ -1,15 +1,27 @@
 /* React elements */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useGlobalState } from "../../contexts/GlobalContext";
 import { DOMAIN } from "../../constants";
-import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Header.scss";
+import logo from "../../assets/images/logo.png";
 
 function Header() {
   const { token, logout } = useGlobalState();
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = `https://${DOMAIN}${useLocation().pathname}`;
-  const href = `https://auth.the-form.io?redirect=${location}`;
+  const loginHref = `https://auth.the-form.io?redirect=${location}`;
+
+  useEffect(() => {
+    const onWheel = (e) => {
+      const currentIsScrolled = e.deltaY > 0;
+      if (currentIsScrolled !== isScrolled) {
+        setIsScrolled(currentIsScrolled);
+      }
+    };
+    window.addEventListener("wheel", onWheel, true);
+    return () => window.removeEventListener("wheel", onWheel);
+  });
 
   function handleLogout() {
     logout();
@@ -17,8 +29,12 @@ function Header() {
 
   return (
     <div className="header">
-      <div className="header-box">
-        <FloatingLogo />
+      <div className={isScrolled ? "header-box scrolled" : "header-box"}>
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+        </div>
         <div className="banner">
           <Link to="/pricing">가격안내</Link>
           {token ? (
@@ -29,7 +45,7 @@ function Header() {
               </a>
             </>
           ) : (
-            <a className="login" href={href}>
+            <a className="login" href={loginHref}>
               로그인
             </a>
           )}

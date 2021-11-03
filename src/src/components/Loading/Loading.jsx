@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useMessage } from "../../contexts/MessageContext";
 import useOnly from "../../hooks/useOnly";
 import useTimeout from "../../hooks/useTimeout";
-import FloatingLogo from "../FloatingLogo/FloatingLogo";
 import "./Loading.scss";
 
 const SPINNER_NUM = 3;
@@ -37,7 +36,6 @@ export default function Loading() {
 
   return (
     <>
-      <FloatingLogo />
       {isTimeout && (
         <div className="loading">
           <h1>로딩 중입니다.</h1>

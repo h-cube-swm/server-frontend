@@ -119,6 +119,14 @@
     }
   }
 
+  .draw-box {
+    padding: 0.5rem 1rem;
+    background-color: #d0dfff;
+    border-radius: 5px;
+    border: 1.5px solid #7494ff;
+    color: #2b44ff;
+  }
+
   .color-box {
     position: relative;
     width: 100%;
@@ -247,6 +255,12 @@
     &.saving {
       background-color: #707070;
       cursor: default;
+    }
+  }
+
+  @include laptop {
+    .color-box {
+      height: 15rem;
     }
   }
 

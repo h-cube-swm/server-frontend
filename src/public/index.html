@@ -139,8 +139,20 @@
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- PWA Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("worker.js").catch(function (err) {
+            console.log(err);
+          });
+        });
+      }
+    </script>
   </body>
   <script src="/inspector.js"></script>
 </html>

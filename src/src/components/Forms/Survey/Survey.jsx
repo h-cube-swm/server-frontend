@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../../utils/apis";
 import L from "../../../utils/logger";
+import Error from "../../Error/Error";
 import Loading from "../../Loading/Loading";
 
 const Survey = () => {
@@ -17,10 +18,10 @@ const Survey = () => {
     })();
   }, []);
 
-  if (err && status === 400) return <Redirect to="/error/published" />;
-  if (err) return <Redirect to="/error/unexpected/cannot-get-link"></Redirect>;
+  if (err && status === 400) return <Error type="not-published" />;
+  if (err) return <Error type="cannot-get-link" />;
   if (!response) return <Loading />;
-  if (!response.result.id) return <Redirect to="/error/unexpected/wrong-link"></Redirect>;
+  if (!response.result.id) return <Error type="wrong-link" />;
   const url = `/forms/survey/edit/${response.result.id}`;
   return <Redirect to={url} />;
 };

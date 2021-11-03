@@ -41,17 +41,6 @@ function hash(str) {
   return hashString;
 }
 
-// Reverse hash original string
-function unhash(hashStr) {
-  let str = "";
-  for (let i = 0; i < hashStr.length; i += count) {
-    const hashIndex = hashUnits.indexOf(hashStr.substr(i, count));
-    const charIndex = hashIndex % textChars.length;
-    str += textChars.charAt(charIndex);
-  }
-  return str;
-}
-
 // Check if given string is unhashable.
 function isUnhashable(str) {
   // Length check
@@ -65,8 +54,22 @@ function isUnhashable(str) {
       break;
     }
   }
-
   return unhashable;
 }
 
-export { hash, unhash, isUnhashable };
+// Reverse hash original string
+function tryUnhash(hashStr) {
+  if (!isUnhashable(hashStr)) {
+    return hashStr;
+  }
+
+  let str = "";
+  for (let i = 0; i < hashStr.length; i += count) {
+    const hashIndex = hashUnits.indexOf(hashStr.substr(i, count));
+    const charIndex = hashIndex % textChars.length;
+    str += textChars.charAt(charIndex);
+  }
+  return str;
+}
+
+export { hash, tryUnhash };

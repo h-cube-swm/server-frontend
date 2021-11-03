@@ -4,14 +4,14 @@ import Positioner from "../Positioner/Positioner";
 
 import "./ModalSystem.scss";
 
-function Modal({ children, href, onSubmit, onClose }) {
+function Modal({ children, href, onSubmit, onClose, width, height }) {
   const onClick = () => {
     onSubmit();
     onClose();
   };
   return (
     <Positioner>
-      <div className="modal-box">
+      <div className="modal-box" style={{ width: { width }, height: { height } }}>
         <div className="modal-inner-box">{children}</div>
         <div className="btn-children">
           {href && (
