@@ -17,19 +17,16 @@ const withSurvey = (Component) => (props) => {
 
   // Reshape survey structure into one object
   if (!survey.id) survey.id = surveyId;
-  if (!survey.counter) survey.counter = 0;
   if (!survey.questions) survey.questions = [];
   if (!survey.selectedIndex) survey.selectedIndex = 0;
   if (!survey.branching) survey.branching = {};
   if (!survey.themeColor) survey.themeColor = "#2b44ff";
   if (survey.questions.length === 0) {
-    const [counter, question] = getQuestion(survey.counter);
-    survey.counter = counter;
+    const question = getQuestion();
     survey.questions.push(question);
-    const [lastCounter, lastQuestion] = getQuestion(survey.counter);
+    const lastQuestion = getQuestion();
     lastQuestion.type = CardTypes.EMPTY;
     lastQuestion.isRequired = false;
-    survey.counter = lastCounter;
     survey.questions.push(lastQuestion);
   }
   const newProps = { ...props, survey };

@@ -110,7 +110,7 @@ function hashChoice(i, j) {
  */
 function unhashChoice(hashed) {
   const [i, j] = hashed.split(" ");
-  return [+i, +j];
+  return [i + "", +j];
 }
 
 /**

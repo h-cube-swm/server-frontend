@@ -45,10 +45,10 @@ function getIndexBranchingMap(survey) {
   const idToIndex = Object.fromEntries(questions.map(({ id }, index) => [id, index]));
   const branchingMap = {};
   Object.entries(branching).forEach(([key, dest]) => {
-    if (!isNumber(dest)) return;
+    if (!dest) return;
     if (!(dest in idToIndex)) return;
     const [questionId, choiceIndex] = key.split(" ");
-    const questionIndex = idToIndex[+questionId];
+    const questionIndex = idToIndex[questionId];
     if (!isNumber(questionIndex)) return;
     if (!(questionIndex in branchingMap)) branchingMap[questionIndex] = {};
     branchingMap[questionIndex][choiceIndex] = +idToIndex[dest];
@@ -149,11 +149,15 @@ export function Response({
    * @returns {function} `next()`
    */
   const getNext = () => {
-    // If not passable, just return.
+    // If not passable, just return, blocking moving
     if (!isPassable) return;
 
     // If it is cover screen, just go to first question
-    const push = (x) => setHistory((history) => [...history, x]);
+    const push = (x) => {
+      if (history[history.length - 1] === x) return;
+      setHistory((history) => [...history, x]);
+    };
+
     if (isCover) {
       push(0);
       return;

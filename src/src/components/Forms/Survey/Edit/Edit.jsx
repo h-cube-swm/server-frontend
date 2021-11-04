@@ -84,10 +84,10 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
-      const [counter, question] = getQuestion(survey.counter);
+      const question = getQuestion();
       const questions = [...survey.questions];
       questions.splice(index, 0, question);
-      return { ...survey, counter, questions };
+      return { ...survey, questions };
     });
     setSelectedIndex(index);
   };
@@ -111,8 +111,8 @@ function Edit({ survey: init, updateSurvey, location }) {
       const survey = JSON.parse(JSON.stringify(_survey));
       const questions = [...survey.questions];
       let { selectedIndex } = survey;
-      const id = ++survey.counter + "";
-      const newQuestion = { ...questions[selectedIndex], id };
+      const newQuestion = getQuestion();
+      // const newQuestion = { ...questions[selectedIndex], id };
       questions.splice(index + 1, 0, newQuestion);
       selectedIndex = index + 1;
       return { ...survey, selectedIndex, questions };

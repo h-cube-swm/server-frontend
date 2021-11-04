@@ -25,6 +25,7 @@
     "react-virtualized": "^9.22.3",
     "sass-loader": "^12.1.0",
     "test-react-chartjs-2": "^3.0.4",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1",
     "xlsx": "^0.17.0"
   },
