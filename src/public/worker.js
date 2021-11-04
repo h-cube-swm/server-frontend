@@ -1,6 +1,6 @@
-const CACHE_NAME = "the-form-pwa-task-manager-v1.1.0";
-const URLS_TO_PRECACHE = ["/"];
-const URLS_TO_CACHE = [/\/?static\/.+/];
+const CACHE_NAME = "the-form-pwa-task-manager-v1.1.3";
+const URLS_TO_PRECACHE = [];
+const URLS_TO_CACHE = [];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
@@ -21,26 +21,41 @@ self.addEventListener("install", (event) => {
 
 // Cache and return requests
 self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  const { method } = request;
+  if (method !== "GET") return;
+
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(request).then((cached) => {
       // Cache hit - return response
       if (cached) return cached;
       // Cache miss
-      return fetch(event.request).then((response) => {
-        // Check if this content should be cached
-        for (let i = 0; i < URLS_TO_CACHE.length; i++) {
-          if (event.request.url.match(URLS_TO_CACHE[i])) {
-            // If it should be cached, cache it.
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone);
-            });
-            break;
+      return fetch(request)
+        .then((response) => {
+          // Check if this content should be cached
+          for (let i = 0; i < URLS_TO_CACHE.length; i++) {
+            if (request.url.match(URLS_TO_CACHE[i])) {
+              // If it should be cached, cache it.
+              const responseClone = response.clone();
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(request, responseClone);
+              });
+              break;
+            }
           }
-        }
-        // Then response original response
-        return response;
-      });
+          // Then response original response
+          return response;
+        })
+        .catch(
+          () =>
+            new Response(
+              "<h1>Network connection error</h1><div><p>Could not load data.</p></div>",
+              {
+                status: 503,
+                headers: { "Content-Type": "text/html" },
+              },
+            ),
+        );
     }),
   );
 });
