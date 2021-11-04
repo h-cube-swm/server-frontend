@@ -2,20 +2,24 @@ const CACHE_NAME = "the-form-pwa-task-manager-v1.1.3";
 const URLS_TO_PRECACHE = [];
 const URLS_TO_CACHE = [];
 
+function log(x) {
+  // console.log(x);
+}
+
 // Install a service worker
 self.addEventListener("install", (event) => {
-  console.log("Installing service worker " + CACHE_NAME);
+  log("Installing service worker " + CACHE_NAME);
   // Skip wating even if previous worker is running.
   self.skipWaiting();
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then((cache) => {
-        console.log("Opened cache " + CACHE_NAME);
+        log("Opened cache " + CACHE_NAME);
         return cache.addAll(URLS_TO_PRECACHE);
       })
-      .then(() => console.log("All required urls are precached."))
-      .catch((err) => console.log("Could not install service worker because of ", err)),
+      .then(() => log("All required urls are precached."))
+      .catch((err) => log("Could not install service worker because of " + err)),
   );
 });
 
@@ -62,7 +66,7 @@ self.addEventListener("fetch", (event) => {
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-  console.log("Activated service worker " + CACHE_NAME);
+  log("Activated service worker " + CACHE_NAME);
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -70,7 +74,7 @@ self.addEventListener("activate", (event) => {
         cacheNames.map(async (cacheName) => {
           if (cacheWhitelist.indexOf(cacheName) < 0) {
             await caches.delete(cacheName);
-            console.log("Previous service worker " + cacheName + " deleted.");
+            log("Previous service worker " + cacheName + " deleted.");
           }
         }),
       );
