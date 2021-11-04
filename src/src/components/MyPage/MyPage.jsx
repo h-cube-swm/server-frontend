@@ -14,6 +14,7 @@ import SurveyCard from "./SurveyCard";
 
 export default function MyPage() {
   const [timestamp, setTimestamp] = useState(null);
+
   // ToDo 함수 이름을 바꾸던가 함수 반환값을 바꾸던가
   const [surveys, error] = API.useUser(timestamp);
   const contents = [];
@@ -23,7 +24,7 @@ export default function MyPage() {
 
   if (surveys.length === 0) {
     contents.push(
-      <div className="no-survey">
+      <div className="no-survey" key="no-form-exists">
         아직 작성된 폼이 없습니다.
         <br />
       </div>,
@@ -40,7 +41,10 @@ export default function MyPage() {
   });
 
   contents.push(
-    <Link className="survey make-survey" to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
+    <Link
+      key="create-survey"
+      className="survey make-survey"
+      to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
       <img src={addBtn} alt="" />
       <h3>설문 만들기</h3>
     </Link>,
