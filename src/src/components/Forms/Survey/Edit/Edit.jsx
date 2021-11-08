@@ -110,11 +110,14 @@ function Edit({ survey: init, updateSurvey, location }) {
       // ToDo : Use efficient deepcopy library instead of tricky copy
       const survey = JSON.parse(JSON.stringify(_survey));
       const questions = [...survey.questions];
-      let { selectedIndex } = survey;
-      const newQuestion = getQuestion();
-      // const newQuestion = { ...questions[selectedIndex], id };
+
+      // Copy question with new id
+      const { id } = getQuestion();
+      const newQuestion = { ...questions[index], id };
       questions.splice(index + 1, 0, newQuestion);
-      selectedIndex = index + 1;
+
+      // Update selectedIndex
+      const selectedIndex = index + 1;
       return { ...survey, selectedIndex, questions };
     });
   };
@@ -347,7 +350,7 @@ function Edit({ survey: init, updateSurvey, location }) {
                     surveyId={survey.id}
                     question={question}
                     setQuestion={isSelected && setQuestion}
-                    isLast={question.id === "1"}
+                    isLast={index === questions.length - 1}
                     themeColor={survey.themeColor}>
                     <Card onGrab={onGrab} slowAppear={slowAppear}>
                       <QuestionCommon handleOnDelete={onDelete} handleOnDuplicate={onDuplicate} />
@@ -367,9 +370,9 @@ function Edit({ survey: init, updateSurvey, location }) {
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
           y={"30vh"}
-          isLast={questions[selectedIndex].id === "1"}
+          isLast={selectedIndex === questions.length - 1}
         />
-        <Hider hide={questions[selectedIndex].id === "1"}>
+        <Hider hide={selectedIndex === questions.length - 1}>
           <Controller type={selectedSurveyType} setType={setQuesionType} />
         </Hider>
       </div>
