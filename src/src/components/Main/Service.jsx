@@ -136,7 +136,7 @@ function Service() {
             question={question}
             surveyId={"test"}
             setQuestion={setQuestion}
-            state={CardStates.EDITTING}
+            state={CardStates.EDITING}
             themeColor="2b44ff">
             <QuestionCommon />
           </QuestionProvider>

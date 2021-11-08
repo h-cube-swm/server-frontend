@@ -6,7 +6,7 @@ import setNestedState from "../../../../../utils/setNestedState";
 
 export default function Empty() {
   const { state, setQuestion } = useQuestion();
-  const isEditting = state === CardStates.EDITTING;
+  const isEditting = state === CardStates.EDITING;
   useEffect(() => {
     if (!isEditting) return;
     const setIsRequired = setNestedState(setQuestion, ["isRequired"]);

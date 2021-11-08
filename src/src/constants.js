@@ -10,7 +10,7 @@ export const CardTypes = {
 export const CardStates = {
   RESPONSE: "response",
   PREVIEW: "preview",
-  EDITTING: "editting",
+  EDITING: "editing",
   ORDERING: "ordering",
   GHOST: "ghost",
 };

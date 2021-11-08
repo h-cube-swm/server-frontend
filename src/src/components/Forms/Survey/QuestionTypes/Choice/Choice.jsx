@@ -20,7 +20,7 @@ function Choice({
   choiceRef,
 }) {
   const { state, themeColor } = useQuestion();
-  const isEditing = state === CardStates.EDITTING;
+  const isEditing = state === CardStates.EDITING;
 
   function shadeHexColor(color, percent) {
     let colorTemp = color;
@@ -100,7 +100,7 @@ function Choices({ multipleSelect }) {
 
   if (!questionInitialized || !responseInitialized) return null;
   const { choices } = question;
-  const isEditting = state === CardStates.EDITTING;
+  const isEditting = state === CardStates.EDITING;
   const isResponse = state === CardStates.RESPONSE;
 
   if (state === CardStates.GHOST && !choices) return null;

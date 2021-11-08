@@ -337,7 +337,7 @@ function Edit({ survey: init, updateSurvey, location }) {
             const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
             const slowAppear = questions.length > 1;
             const isHide = isDragging && isSelected;
-            const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
+            const state = isSelected ? CardStates.EDITING : CardStates.PREVIEW;
             const onDelete = questions.length > 1 && isSelected && getRemoveQuestion(index);
             const onDuplicate = isSelected && getCopyQuestion(index);
             const setQuestion = setNestedState(setSurvey, ["questions", index]);

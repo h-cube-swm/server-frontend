@@ -51,7 +51,7 @@ export default function Preference() {
 
   if (!ia || !ib) return null;
 
-  const isEditting = state === CardStates.EDITTING;
+  const isEditting = state === CardStates.EDITING;
 
   let trueCount = question.count;
   if (trueCount < 5) trueCount = 5;

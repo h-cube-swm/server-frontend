@@ -16,7 +16,7 @@ function Card({ onGrab, children }) {
   const classes = ["survey-card"];
 
   switch (state) {
-    case CardStates.EDITTING:
+    case CardStates.EDITING:
       classes.push("highlight");
       break;
 
@@ -41,7 +41,7 @@ function Card({ onGrab, children }) {
 
   const handleOnGrab = (event) => {
     event.preventDefault();
-    if (state !== CardStates.EDITTING) return;
+    if (state !== CardStates.EDITING) return;
     if (onGrab) onGrab();
   };
 
