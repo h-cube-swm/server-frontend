@@ -107,6 +107,7 @@ export default {
   useResponses: (rid) => useFetch(`/surveys/${rid}/responses`),
   useSurvey: (sid, mode = "edit") => useFetch(`/surveys/${sid}?mode=${mode}`),
   useUser: (hash) => useFetch(`/users/surveys/${hash ? "?hash=" + hash : ""}`),
+  useDraw: (sid) => useFetch(`/surveys/${sid}/draw`),
 
   // PUT,POST
   postSurvey: () => sendData("POST", "/surveys"),

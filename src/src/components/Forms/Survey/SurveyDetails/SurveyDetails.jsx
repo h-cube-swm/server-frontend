@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 import API from "../../../../utils/apis";
 import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
@@ -13,15 +12,17 @@ import duplicate from "../../../../assets/icons/duplicate.svg";
 import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import useOnly from "../../../../hooks/useOnly";
+import withSurvey from "../../../../hocs/withSurvey";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
-const Ending = ({ ending }) => {
-  const { id: surveyId, title, description, deployId: surveyLink, id: resultLink } = ending;
+const SurveyDetails = ({ survey }) => {
+  const { id: surveyId, title, description, deployId } = survey;
 
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState("default");
   const { token } = useGlobalState();
+  const [drawResult, drawError] = API.useDraw(surveyId);
 
   const { publish } = useMessage();
 
@@ -102,8 +103,33 @@ const Ending = ({ ending }) => {
       throw new Error("Unexpected button state");
   }
 
+  let drawContent = <div>추첨 진행 중...</div>;
+  if (drawError) {
+    drawContent = <div>추첨 진행 중 오류 발생 : {drawError}</div>;
+  } else if (drawResult) {
+    drawContent = (
+      <div>
+        <h2>
+          <em>Unboxing</em> blockchain information
+        </h2>
+        <ul>
+          {Object.entries(drawResult.drawResult).map(([key, value]) => (
+            <li key={key}>
+              {key} : {JSON.stringify(value)}
+            </li>
+          ))}
+        </ul>
+        <h2>Selected responses</h2>
+        <ul>
+          {drawResult.selectedResponses.map((value, i) => (
+            <li key={i}>{JSON.stringify(value.responses)}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
   return (
-    <div className="edit-ending">
+    <div className="survey-details">
       <div className="logo">
         <Link to="/" target="_blank">
           <img src={logo} alt="logo" />
@@ -143,7 +169,7 @@ const Ending = ({ ending }) => {
                 <button
                   onClick={() =>
                     duplicateEmbedLink(
-                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
+                      `<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`,
                     )
                   }>
                   <div className="image-border">
@@ -152,7 +178,7 @@ const Ending = ({ ending }) => {
                   </div>
                 </button>
               </div>
-              <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`}</h3>
+              <h3>{`<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"/>`}</h3>
             </div>
             <div className="email box three">
               <h1>
@@ -197,13 +223,13 @@ const Ending = ({ ending }) => {
                   </h1>
                   <div className="button-box">
                     <button
-                      onClick={() => duplicateLink(`${HOST}/forms/survey/response/${surveyLink}`)}>
+                      onClick={() => duplicateLink(`${HOST}/forms/survey/response/${deployId}`)}>
                       <img src={duplicate} alt="duplicate button" />
                       <p>복사</p>
                     </button>
                   </div>
                 </div>
-                <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
+                <h3>{`${HOST}/forms/survey/response/${deployId}`}</h3>
               </div>
             </div>
             <div className="box six">
@@ -216,21 +242,34 @@ const Ending = ({ ending }) => {
                   </h1>
                   <div className="button-box">
                     <button
-                      onClick={() => duplicateLink(`${HOST}/forms/survey/result/${resultLink}`)}>
+                      onClick={() => duplicateLink(`${HOST}/forms/survey/result/${surveyId}`)}>
                       <img src={duplicate} alt="duplicate button" />
                       <p>복사</p>
                     </button>
                   </div>
                 </div>
-
-                <h3>{`${HOST}/forms/survey/result/${resultLink}`}</h3>
+                <h3>{`${HOST}/forms/survey/result/${surveyId}`}</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <hr />
+      <div className="draw">
+        <h1>Draw</h1>
+        <div>
+          <p>
+            Information related to draw is shown below. This information is provided by the
+            <i>
+              <a href="https://unboxing.monster/">Unboxing Monster</a>
+            </i>
+            .
+          </p>
+        </div>
+        <div>{drawContent}</div>
+      </div>
     </div>
   );
 };
 
-export default withSurveyEnding(Ending);
+export default withSurvey(SurveyDetails);

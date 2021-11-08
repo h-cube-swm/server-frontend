@@ -61,7 +61,7 @@ function App() {
                 <Route path="/forms/survey" component={Survey} exact />
                 <Route path="/forms/survey/mobile" component={EditCover} />
                 <Route path="/forms/survey/edit/:link" component={Edit} />
-                <Route path="/forms/survey/end/:link" component={SurveyDetails} />
+                <Route path="/forms/survey/details/:link" component={SurveyDetails} />
                 <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
                 <Route path="/forms/survey/response/:link" component={ResponseContainer} />
                 <Route path="/forms/survey/result/:link" component={Result} />

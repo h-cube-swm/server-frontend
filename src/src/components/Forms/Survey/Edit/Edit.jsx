@@ -16,7 +16,7 @@ import { Response } from "../Response/Response";
 
 /* HOC, Context, Hooks */
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import withSurvey from "../../../../hocs/withSurvey";
+import withSurveyForEdit from "../../../../hocs/withSurveyForEdit";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
 import useThrottle from "../../../../hooks/useThrottle";
@@ -32,6 +32,7 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 import Branching from "../Branching/Branching";
 import { useModal } from "../../../../contexts/ModalContext";
+import apis from "../../../../utils/apis";
 
 const MODE_EDIT = "edit";
 const MODE_PREVIEW = "preview";
@@ -159,8 +160,8 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   useThrottle(putSurvey, [survey]);
 
-  if (survey.status === "published" || isEnded)
-    return <Redirect to={`/forms/survey/end/${survey.id}`} />;
+  if (survey.status !== "editing" || isEnded)
+    return <Redirect to={`/forms/survey/details/${survey.id}`} />;
 
   const { selectedIndex } = survey;
   const setQuesionType = setNestedState(setSurvey, ["questions", selectedIndex, "type"]);
@@ -211,6 +212,9 @@ function Edit({ survey: init, updateSurvey, location }) {
   const onSubmit = async () => {
     try {
       await putSurvey();
+      const [json] = await apis.endSurvey(survey.id);
+      const { result } = json;
+      console.log(result);
       setIsEnded(true);
     } catch {
       /* */
@@ -387,4 +391,4 @@ function Edit({ survey: init, updateSurvey, location }) {
 }
 
 // ToDo : Swagger를 써 볼 수도!
-export default withSurvey(Edit);
+export default withSurveyForEdit(Edit);
