@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMessage } from "../../contexts/MessageContext";
+import { useModal } from "../../contexts/ModalContext";
 import { SurveyStatus } from "../../constants";
 import API from "../../utils/apis";
 
@@ -19,6 +20,7 @@ export default function SurveyCard({ survey, setTimestamp }) {
   const surveyId = survey.id;
   const surveyDeployId = survey.deployId;
   const surveyStatus = survey.status;
+  const { load } = useModal();
   let mention = `${updatedDate} 생성됨`;
 
   const Options = {
@@ -66,17 +68,27 @@ export default function SurveyCard({ survey, setTimestamp }) {
     setSelectedOption(null);
   };
 
-  const finishSurvey = async (link, status) => {
-    // eslint-disable-next-line
-    const confirm = window.confirm("정말 종료하시겠습니까?");
-    if (confirm) {
-      const result = await API.putSurveyStatus(link, status);
-      if (result[2] === 200) {
-        publish("📄 설문이 종료 되었습니다 ✅");
-        setTimestamp(Date.now());
-        setSelectedOption(null);
-      }
+  const onSubmit = async (link, status) => {
+    const result = await API.putSurveyStatus(link, status);
+    if (result[2] === 200) {
+      publish("📄 설문이 종료 되었습니다 ✅");
+      setTimestamp(Date.now());
+      setSelectedOption(null);
     }
+  };
+
+  const finishSurvey = (link, status) => {
+    // eslint-disable-next-line
+    load(
+      <>
+        <h2 style={{ fontWeight: "700" }}>정말 설문을 종료하시겠습니까?</h2>
+        <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+          설문을 종료하면 더이상 응답을 받을 수 없습니다 👏 신중하게 결정해주세요 🤔
+        </p>
+      </>,
+      null,
+      () => onSubmit(link, status),
+    );
   };
 
   const deleteSurvey = async (link) => {

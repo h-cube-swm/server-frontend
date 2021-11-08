@@ -40,24 +40,28 @@ export default function MyPage() {
     contents.push(<SurveyCard key={survey.id} survey={survey} setTimestamp={setTimestamp} />);
   });
 
-  contents.push(
-    <Link
-      key="create-survey"
-      className="survey make-survey"
-      to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
-      <img src={addBtn} alt="" />
-      <h3>설문 만들기</h3>
-    </Link>,
-  );
+  if (!isMobile) {
+    contents.push(
+      <Link
+        key="create-survey"
+        className="survey make-survey"
+        to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
+        <img src={addBtn} alt="" />
+        <h3>설문 만들기</h3>
+      </Link>,
+    );
+  }
 
   return (
     <div className="my-page">
       <Header />
-      <div className="side-bar">
-        <div className="section">설문 모아보기</div>
-      </div>
-      <div className="surveys">
-        <div className="surveys-inner-box">{contents.reverse()}</div>
+      <div className="my-page-inner">
+        <div className="surveys">
+          <div className="surveys-inner-box">{contents.reverse()}</div>
+        </div>
+        <div className="side-bar">
+          <div className="section">설문 모아보기</div>
+        </div>
       </div>
     </div>
   );
