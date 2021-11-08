@@ -5,7 +5,7 @@ import API from "../../../../utils/apis";
 import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
-import "./EditEnding.scss";
+import "./SurveyDetails.scss";
 import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
 import embedBtn from "../../../../assets/icons/embed.svg";
