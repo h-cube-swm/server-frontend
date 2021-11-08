@@ -200,7 +200,7 @@ export function Response({
 
   /**
    *
-   * @returns {function} previous()
+   * @returns {function} `previous()`
    */
   const getPrevious = () =>
     setHistory((history) => {

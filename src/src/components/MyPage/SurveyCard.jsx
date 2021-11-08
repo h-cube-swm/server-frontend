@@ -118,7 +118,7 @@ export default function SurveyCard({ survey, setTimestamp }) {
           to={
             surveyStatus !== SurveyStatus.FINISHED
               ? `/forms/survey/edit/${surveyId}`
-              : `/forms/survey/result/${surveyId}`
+              : `/forms/survey/edit/${surveyId}`
           }>
           {survey.title}
         </Link>
