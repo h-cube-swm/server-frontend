@@ -105,7 +105,7 @@ const SurveyDetails = ({ survey }) => {
 
   let drawContent = <div>추첨 진행 중...</div>;
   if (drawError) {
-    drawContent = <div>추첨 진행 중 오류 발생 : {drawError}</div>;
+    drawContent = <div>추첨 진행 중 오류 발생 : {drawError.message}</div>;
   } else if (drawResult) {
     drawContent = (
       <div>
