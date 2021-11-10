@@ -19,6 +19,7 @@ import withSurveyForResponse from "../../../../hocs/withSurveyForResponse";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import logo from "../../../../assets/images/logo-banner.GIF";
+import unboxingBadge from "../../../../assets/images/unboxing-badge.png";
 import Linkify from "../../../Linkify/Linkify";
 import L from "../../../../utils/logger";
 
@@ -298,6 +299,12 @@ export function Response({
         <div className={"question-box " + (!isCover && "left")}>
           <div className="question-box-inner">
             <div className="cover-box">
+              {survey.draw.isEnabled && (
+                <div className="draw-badge-box">
+                  <img className="badge" src={unboxingBadge} alt="verified survey mark" />
+                  <p>블록체인 기술을 통해 응답자 추첨의 공정성이 보장받는 설문입니다 🔒</p>
+                </div>
+              )}
               <h1 className="title">
                 <Linkify>{survey.title}</Linkify>
               </h1>

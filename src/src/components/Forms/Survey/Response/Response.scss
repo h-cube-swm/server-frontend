@@ -8,14 +8,12 @@
   overflow: hidden;
 
   .cover-box {
-    margin: 3rem auto;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
     .title {
       height: auto;
       font-size: $fs-lg;
@@ -115,6 +113,23 @@
         min-height: 100%;
         padding: 3rem 0;
         margin: 0 auto;
+        .draw-badge-box {
+          display: flex;
+          align-items: center;
+          width: 85%;
+          border-radius: 10px;
+          background-color: #363636;
+          padding: 0.5rem;
+          img {
+            width: 15%;
+            margin: 0 0.5rem;
+          }
+          p {
+            font-size: $fs-sm;
+            color: #fff;
+            word-break: keep-all;
+          }
+        }
       }
     }
   }
