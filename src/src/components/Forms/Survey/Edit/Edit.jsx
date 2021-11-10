@@ -278,7 +278,6 @@ function Edit({ survey: init, updateSurvey, location }) {
             </p>
           </>
         ),
-        href,
         onSubmit,
       });
     } else {

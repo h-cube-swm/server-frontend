@@ -294,7 +294,7 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
               <button className={isDrawOpen ? "box nine open" : "box nine"} onClick={onDraw}>
                 {isDrawOpen ? (
                   <div className="draw">
-                    <h1>추첨결과</h1>
+                    <h1>추첨 결과</h1>
                     <div>{drawContent}</div>
                     <p className="source">
                       해당 설문은{" "}

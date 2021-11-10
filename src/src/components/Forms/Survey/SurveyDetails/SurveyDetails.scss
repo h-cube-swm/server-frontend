@@ -300,6 +300,7 @@
             }
             .source {
               position: absolute;
+              word-break: keep-all;
               text-align: center;
               bottom: 1rem;
               left: 50%;
