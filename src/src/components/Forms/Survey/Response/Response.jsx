@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 
 // Components
 import { Link, Redirect } from "react-router-dom";
@@ -90,19 +91,36 @@ function ResponseContainer({ survey }) {
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const body = { responses: { ...responses, query } };
+    L.l(`ResponseEnd:${survey.deployId}`);
+    const uuid = v4();
+    const body = { responses: { ...responses, query, uuid } };
     const err = await API.postResponse(survey.deployId, body)[1];
+
+    // If error occurrs
     if (err) {
       setRedirect("/error/unexpected/cannot-submit-data");
       return;
     }
 
-    L.l(`ResponseEnd:${survey.deployId}`);
+    // If it should invoke event
     if (next === "event") {
       window.parent?.postMessage("surveyEnd", "*");
-    } else if (next) {
+      return;
+    }
+
+    // If it should be redirected
+    if (next) {
       window.location.href = next;
-    } else setRedirect("/forms/survey/response/ending");
+      return;
+    }
+
+    // If survey has draw option
+    if (survey.draw.isEnabled) {
+      setRedirect(`/forms/survey/response/ending#${survey.deployId}#${uuid}`);
+      return;
+    }
+
+    setRedirect(`/forms/survey/response/ending`);
   };
 
   return (
