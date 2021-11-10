@@ -80,6 +80,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    width: 100%;
     .indicator {
       display: flex;
       align-items: center;
@@ -92,13 +93,13 @@
         background-color: #2b44ff;
         color: #fff;
         padding: 0.5rem 0.5rem;
-        margin-right: 1rem;
+        margin-right: 0.5rem;
         font-size: $fs-sm;
         font-weight: $fw-bold;
         border-radius: 5px;
       }
       input {
-        width: 8rem;
+        width: 6rem;
       }
     }
   }
@@ -140,6 +141,10 @@
     }
     .des {
       flex-direction: column;
+      align-items: flex-start;
+      .indicator {
+        margin-bottom: 0.5rem;
+      }
     }
   }
 }
