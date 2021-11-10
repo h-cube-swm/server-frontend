@@ -212,9 +212,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const onSubmit = async () => {
     try {
       await putSurvey();
-      const [json] = await apis.endSurvey(survey.id);
-      const { result } = json;
-      console.log(result);
+      await apis.endSurvey(survey.id);
       setIsEnded(true);
     } catch {
       /* */
