@@ -5,27 +5,29 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import "./SurveyDetails.scss";
-import firework from "../../../../assets/icons/firework.png";
 import logo from "../../../../assets/images/logo.png";
 import embedBtn from "../../../../assets/icons/embed.svg";
 import duplicate from "../../../../assets/icons/duplicate.svg";
-import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import useOnly from "../../../../hooks/useOnly";
 import withSurvey from "../../../../hocs/withSurvey";
 import { answerToString, reshapeAnswerTo2DArray } from "../../../../utils/responseTools";
 import Table from "../../../Table/Table";
+import { SurveyStatus } from "../../../../constants";
+import { useModal } from "../../../../contexts/ModalContext";
+import Tooltip from "../../../Tooltip/Tooltip";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
-const SurveyDetails = ({ survey }) => {
-  const { id: surveyId, title, description, deployId } = survey;
-
+const SurveyDetails = ({ survey, setTimestamp }) => {
+  const { id: surveyId, status: surveyStatus, title, description, deployId } = survey;
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState("default");
+  const [isDrawOpen, setIsDrawOpen] = useState(false);
   const { token } = useGlobalState();
   const [drawResult, drawError] = API.useDraw(surveyId);
   const { publish } = useMessage();
+  const { load } = useModal();
 
   const handleEmailSend = async () => {
     if (emailState === "loading") return;
@@ -52,6 +54,14 @@ const SurveyDetails = ({ survey }) => {
     }
   };
 
+  const onDraw = () => {
+    if (surveyStatus !== SurveyStatus.FINISHED) {
+      publish("주의❗️ 먼저 설문을 종료해야 추첨을 진행할 수 있습니다.", "warning");
+      return;
+    }
+    setIsDrawOpen(!isDrawOpen);
+  };
+
   const duplicateLink = (link) => {
     const linkarea = document.createElement("textarea");
     document.body.appendChild(linkarea);
@@ -72,6 +82,29 @@ const SurveyDetails = ({ survey }) => {
     document.execCommand("copy");
     document.body.removeChild(linkarea);
     publish("🖥 임베드 코드가 복사되었습니다 ✅");
+  };
+
+  const onSubmit = async (link, status) => {
+    const result = await API.putSurveyStatus(link, status);
+    if (result[2] === 200) {
+      publish("📄 설문이 종료 되었습니다 ✅");
+    }
+    setTimestamp(Date.now());
+  };
+
+  const finishSurvey = (link, status) => {
+    // eslint-disable-next-line
+    load(
+      <>
+        <h2 style={{ fontWeight: "700" }}>정말 설문을 종료하시겠습니까?</h2>
+        <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "1rem" }}>
+          설문을 종료하면 더이상 응답을 받을 수 없습니다👏
+        </p>
+        <p style={{ fontWeight: "500", marginBottom: "2rem" }}>신중하게 결정해주세요🤔</p>
+      </>,
+      null,
+      () => onSubmit(link, status),
+    );
   };
 
   if (!token)
@@ -104,27 +137,36 @@ const SurveyDetails = ({ survey }) => {
       throw new Error("Unexpected button state");
   }
 
-  let drawContent = <div>추첨 진행 중...</div>;
+  let drawContent = (
+    <div className="draw-content">
+      <div className="draw-loading">
+        <div className="loading-dot one" />
+        <div className="loading-dot two" />
+        <div className="loading-dot three" />
+      </div>
+    </div>
+  );
   if (drawError) {
-    drawContent = <div>추첨 진행 중 오류 발생 : {drawError.message}</div>;
+    if (drawError.response.status === 400) {
+      drawContent = (
+        <div className="draw-content">
+          <div className="draw-message">현재 응답인원이 부족하여 추첨을 진행할 수 없습니다.</div>
+        </div>
+      );
+    } else {
+      drawContent = (
+        <div className="draw-content">
+          <div className="error-message">추첨 진행 중 오류 발생 : {drawError.message}</div>
+        </div>
+      );
+    }
   } else if (drawResult) {
     const [columns, rows] = reshapeAnswerTo2DArray(survey, drawResult.selectedResponses);
     const stringCols = columns.map((x) => x.title);
     const stringRows = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
 
     drawContent = (
-      <div>
-        <h2>
-          <em>Unboxing</em> blockchain information
-        </h2>
-        <ul>
-          {Object.entries(drawResult.drawResult).map(([key, value]) => (
-            <li key={key}>
-              {key} : {JSON.stringify(value)}
-            </li>
-          ))}
-        </ul>
-        <h2>Selected responses</h2>
+      <div className="draw-content">
         <Table columns={stringCols} rows={stringRows} />
       </div>
     );
@@ -137,27 +179,6 @@ const SurveyDetails = ({ survey }) => {
         </Link>
       </div>
       <div className="contents-box">
-        <div className="celebrate-box">
-          <div className="celebrate-sentence">
-            <img src={firework} alt="celebrating firework" />
-            <h1>
-              축하합니다. <br />
-              설문을 완성했습니다. <br />
-              <br />
-            </h1>
-          </div>
-          <Firework />
-
-          {token ? (
-            <Link className="btn lg home-btn" to="/mypage">
-              마이페이지로
-            </Link>
-          ) : (
-            <Link className="btn lg home-btn" to="/">
-              홈으로
-            </Link>
-          )}
-        </div>
         <div className="service-box">
           <div className="section">
             <div className="box one">
@@ -252,22 +273,44 @@ const SurveyDetails = ({ survey }) => {
                 <h3>{`${HOST}/forms/survey/result/${surveyId}`}</h3>
               </div>
             </div>
+            <div className="box seven">
+              <Tooltip text="곧 배포 예정인 기능입니다🤩" size="lg" pos="bottom">
+                <h1>연동하기</h1>
+              </Tooltip>
+            </div>
+            <div className="box eight">
+              <Tooltip text="곧 배포 예정인 기능입니다🤩" size="lg" pos="bottom">
+                <h1>수정하기</h1>
+              </Tooltip>
+            </div>
+            {survey.draw.isEnabled && (
+              <button className={isDrawOpen ? "box nine open" : "box nine"} onClick={onDraw}>
+                {isDrawOpen ? (
+                  <div className="draw">
+                    <h1>추첨결과</h1>
+                    <div>{drawContent}</div>
+                    <p className="source">
+                      해당 설문은{" "}
+                      <i>
+                        <a href="https://unboxing.monster/">Unboxing Monster</a>
+                      </i>
+                      의 블록체인 기술을 통해 공정성이 보장된 설문입니다.
+                    </p>
+                  </div>
+                ) : (
+                  <h1>추첨하기</h1>
+                )}
+              </button>
+            )}
+            {surveyStatus !== SurveyStatus.FINISHED && (
+              <button
+                className="box ten"
+                onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
+                <h1>종료하기</h1>
+              </button>
+            )}
           </div>
         </div>
-      </div>
-      <hr />
-      <div className="draw">
-        <h1>Draw</h1>
-        <div>
-          <p>
-            Information related to draw is shown below. This information is provided by the
-            <i>
-              <a href="https://unboxing.monster/">Unboxing Monster</a>
-            </i>
-            .
-          </p>
-        </div>
-        <div>{drawContent}</div>
       </div>
     </div>
   );
