@@ -1,5 +1,4 @@
 import React from "react";
-import addBtn from "../../../../../assets/icons/add-btn.svg";
 import Hider from "../../../../Hider/Hider";
 import "./QuestionAddButton.scss";
 

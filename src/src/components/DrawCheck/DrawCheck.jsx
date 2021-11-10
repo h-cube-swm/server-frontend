@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import API from "../../utils/apis";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
 
