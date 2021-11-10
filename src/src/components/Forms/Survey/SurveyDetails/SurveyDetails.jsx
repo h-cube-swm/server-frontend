@@ -178,7 +178,7 @@ const SurveyDetails = ({ survey }) => {
                   </div>
                 </button>
               </div>
-              <h3>{`<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"/>`}</h3>
+              <h3>{`<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`}</h3>
             </div>
             <div className="email box three">
               <h1>
