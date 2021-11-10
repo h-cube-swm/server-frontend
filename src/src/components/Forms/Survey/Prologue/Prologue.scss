@@ -3,9 +3,9 @@
 .prologue-box {
   width: 100%;
   height: 100%;
-  z-index: 4;
   overflow: hidden;
   position: relative;
+  z-index: 4;
 
   display: flex;
   flex-direction: column;
@@ -120,11 +120,35 @@
   }
 
   .draw-box {
-    padding: 0.5rem 1rem;
-    background-color: #d0dfff;
-    border-radius: 5px;
-    border: 1.5px solid #7494ff;
-    color: #2b44ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 3rem;
+    width: 100%;
+    .draw-btn {
+      width: 18%;
+      height: 3rem;
+      font-size: $fs-rg;
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+      background-color: #d0dfff;
+      border-radius: 5px;
+      border: 1.5px solid #7494ff;
+      color: #2b44ff;
+      &.selected {
+        background-color: #7494ff;
+      }
+    }
+    h3 {
+      font-size: $fs-rg;
+      font-weight: $fw-bold;
+      margin-left: 0.5rem;
+    }
+  }
+  .draw-description {
+    font-size: $fs-sm;
+    margin-top: 1rem;
   }
 
   .color-box {
@@ -133,7 +157,7 @@
     height: 20rem;
     .color-intro {
       font-weight: $fw-bold;
-      margin-top: 6rem;
+      margin-top: 3rem;
     }
     .color-picker-box {
       position: absolute;
@@ -169,10 +193,9 @@
         height: 2rem;
         border-radius: 5px;
       }
-      textarea {
-        width: 10rem;
+      .text-field {
+        width: 8rem;
         height: 2.5rem;
-        font-size: $fs-md;
       }
     }
     * {
