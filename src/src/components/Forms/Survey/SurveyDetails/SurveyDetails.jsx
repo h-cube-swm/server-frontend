@@ -94,17 +94,24 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
 
   const finishSurvey = (link, status) => {
     // eslint-disable-next-line
-    load(
-      <>
-        <h2 style={{ fontWeight: "700" }}>정말 설문을 종료하시겠습니까?</h2>
-        <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "1rem" }}>
-          설문을 종료하면 더이상 응답을 받을 수 없습니다👏
-        </p>
-        <p style={{ fontWeight: "500", marginBottom: "2rem" }}>신중하게 결정해주세요🤔</p>
-      </>,
-      null,
-      () => onSubmit(link, status),
-    );
+    load({
+      children: (
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+            주의❗️ 정말 설문을 종료하시겠습니까?
+          </h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+            설문을 종료하면 더이상 응답을 받을 수 없습니다.
+            <br />
+            <br />
+            신중하게 결정해주세요 🤔
+          </p>
+        </>
+      ),
+      onSubmit: () => onSubmit(link, status),
+      type: "warning",
+      submitMessage: "종료",
+    });
   };
 
   if (!token)

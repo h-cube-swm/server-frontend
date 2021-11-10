@@ -84,15 +84,17 @@ export default function Prologue({ survey, setSurvey, isFolded, setIsFolded, chi
 
   const onOpen = () => {
     if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
-          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
-            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-          </p>
-        </>,
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
+            <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
         href,
-      );
+      });
       return;
     }
     setIsClosed(false);
@@ -104,15 +106,17 @@ export default function Prologue({ survey, setSurvey, isFolded, setIsFolded, chi
 
   const onDraw = () => {
     if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
-          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
-            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-          </p>
-        </>,
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
+            <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
         href,
-      );
+      });
       return;
     }
     const newDraw = { isEnabled: !survey.draw.isEnabled, number: survey.draw.number };

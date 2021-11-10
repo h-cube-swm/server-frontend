@@ -106,15 +106,17 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
     setIsLoading(true);
     e.preventDefault();
     if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
-          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
-            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-          </p>
-        </>,
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
+            <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
         href,
-      );
+      });
       setIsLoading(false);
       return;
     }
@@ -136,17 +138,19 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
     try {
       const data = await API.postImg(formData);
       if (data[2] === 400) {
-        load(
-          <>
-            <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
-              🗝 유저만 사용할 수 있는 기능입니다🗝
-            </h2>
-            <p style={{ fontWeight: "500", marginTop: "2rem" }}>
-              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-            </p>
-          </>,
+        load({
+          children: (
+            <>
+              <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+                🗝 유저만 사용할 수 있는 기능입니다🗝
+              </h2>
+              <p style={{ fontWeight: "500", marginTop: "2rem" }}>
+                1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+              </p>
+            </>
+          ),
           href,
-        );
+        });
         setIsLoading(false);
         return;
       }

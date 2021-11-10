@@ -229,77 +229,84 @@ function Edit({ survey: init, updateSurvey, location }) {
     if (!detectQuestion()) return;
 
     if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
-          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
-          </p>
-          <p style={{ fontWeight: "500" }}>1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏</p>
-        </>,
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
+            </p>
+            <p style={{ fontWeight: "500" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
         href,
         onSubmit,
-      );
+      });
     } else if (token && survey.draw.isEnabled) {
-      load(
-        <>
-          <br />
-          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
-          <p
-            style={{
-              display: "block",
-              backgroundColor: "#f6c344",
-              borderRadius: "15px",
-              padding: "1.5rem",
-            }}>
-            잠깐 <b style={{ fontWeight: "bold" }}>설문의 추첨 기능</b>을 원할하게 진행하시려면
+      load({
+        children: (
+          <>
             <br />
-            <br />
-            <b style={{ color: "#2b44ff", fontWeight: "bold" }}>이메일, 전화번호 등</b> 응답자를
-            특정할 수 있는 질문이 필요해요!
-          </p>
-          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            <br />
-            마지막 완료를 하기 전에 아래의 &quot;돌아가기&quot; 버튼을 눌러 검토해보세요 🤔
-            <br />
-            <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
-              [흐름설정]
-            </Link>{" "}
-            또는
-            <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
-              [미리보기]
-            </Link>
-            도 꼭 확인해보세요 👏
-          </p>
-        </>,
-        null,
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p
+              style={{
+                display: "block",
+                backgroundColor: "#f6c344",
+                borderRadius: "15px",
+                padding: "1.5rem",
+              }}>
+              잠깐 <b style={{ fontWeight: "bold" }}>설문의 추첨 기능</b>을 원할하게 진행하시려면
+              <br />
+              <br />
+              <b style={{ color: "#2b44ff", fontWeight: "bold" }}>이메일, 전화번호 등</b> 응답자를
+              특정할 수 있는 질문이 필요해요!
+            </p>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              <br />
+              마지막 완료를 하기 전에 아래의 &quot;돌아가기&quot; 버튼을 눌러 검토해보세요 🤔
+              <br />
+              <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [흐름설정]
+              </Link>{" "}
+              또는
+              <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [미리보기]
+              </Link>
+              도 꼭 확인해보세요 👏
+            </p>
+          </>
+        ),
+        href,
         onSubmit,
-      );
+      });
     } else {
-      load(
-        <>
-          <br />
-          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
-          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            잠깐⚠️ 설문의{" "}
-            <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
-              [흐름설정]
-            </Link>{" "}
-            또는
-            <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
-              [미리보기]
-            </Link>
-            을 확인하셨나요?
+      load({
+        children: (
+          <>
             <br />
-            <br />
-            혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
-            <br />
-            설문 제작을 모두 마치셨다면 아래의 &quot;완료&quot; 버튼을 눌러주세요 👏
-          </p>
-        </>,
-        null,
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              잠깐⚠️ 설문의{" "}
+              <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [흐름설정]
+              </Link>{" "}
+              또는
+              <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [미리보기]
+              </Link>
+              을 확인하셨나요?
+              <br />
+              <br />
+              혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
+              <br />
+              설문 제작을 모두 마치셨다면 아래의 &quot;완료&quot; 버튼을 눌러주세요 👏
+            </p>
+          </>
+        ),
         onSubmit,
-      );
+      });
     }
   };
 
