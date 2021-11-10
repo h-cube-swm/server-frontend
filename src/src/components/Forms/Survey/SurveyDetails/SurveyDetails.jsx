@@ -13,6 +13,8 @@ import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import useOnly from "../../../../hooks/useOnly";
 import withSurvey from "../../../../hocs/withSurvey";
+import { answerToString, reshapeAnswerTo2DArray } from "../../../../utils/responseTools";
+import Table from "../../../Table/Table";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
@@ -23,7 +25,6 @@ const SurveyDetails = ({ survey }) => {
   const [emailState, setEmailState] = useState("default");
   const { token } = useGlobalState();
   const [drawResult, drawError] = API.useDraw(surveyId);
-
   const { publish } = useMessage();
 
   const handleEmailSend = async () => {
@@ -107,6 +108,10 @@ const SurveyDetails = ({ survey }) => {
   if (drawError) {
     drawContent = <div>추첨 진행 중 오류 발생 : {drawError.message}</div>;
   } else if (drawResult) {
+    const [columns, rows] = reshapeAnswerTo2DArray(survey, drawResult.selectedResponses);
+    const stringCols = columns.map((x) => x.title);
+    const stringRows = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
+
     drawContent = (
       <div>
         <h2>
@@ -120,11 +125,7 @@ const SurveyDetails = ({ survey }) => {
           ))}
         </ul>
         <h2>Selected responses</h2>
-        <ul>
-          {drawResult.selectedResponses.map((value, i) => (
-            <li key={i}>{JSON.stringify(value.responses)}</li>
-          ))}
-        </ul>
+        <Table columns={stringCols} rows={stringRows} />
       </div>
     );
   }
