@@ -97,7 +97,6 @@
       flex-direction: column;
       align-items: flex-start;
       padding-top: 1rem;
-      padding-left: 1rem;
 
       a {
         font-size: 0.8rem;
@@ -106,13 +105,25 @@
       .option-btn {
         display: block;
         position: relative;
-        padding: 0.15rem 0.4rem 0.1rem 0.4rem;
-        width: 90%;
+        padding: 0.15rem 0.4rem 0.1rem 1.4rem;
+        width: 100%;
         font-size: $fs-rg;
         font-weight: $fw-bold;
         text-align: left;
         background-color: transparent;
         color: #000;
+        &:hover {
+          background-color: #f0f0f1;
+          border-radius: 5px;
+        }
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.4;
+          &:hover {
+            background-color: transparent;
+          }
+        }
+
         img {
           width: 0.7rem;
         }
