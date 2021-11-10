@@ -1,0 +1,79 @@
+@import "/src/scss/style.scss";
+
+$font-color: #fff;
+
+.draw-check {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .draw-inner-box {
+    margin: 1rem;
+    height: 60%;
+    max-width: 800px;
+    padding: 1rem;
+
+    background: linear-gradient(to right, #ffae00, #ffc400);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: $shadow-default;
+    .draw-result {
+      color: $font-color;
+      font-size: $fs-lg;
+      font-weight: $fw-bold;
+      margin-bottom: 1rem;
+    }
+    &.loose {
+      background: linear-gradient(to right, #707070, #b1b1b1);
+    }
+    .draw-content {
+      color: $font-color;
+      text-align: center;
+      p {
+        color: $font-color;
+
+        &.selected {
+          font-size: $fs-md;
+          font-weight: 500;
+          padding: 1rem;
+          border-radius: 10px;
+          border: 2px solid $font-color;
+          margin: 1rem 0;
+        }
+      }
+      h2 {
+        color: $font-color;
+        font-size: $fs-md;
+        font-weight: $fw-bold;
+        margin: 1rem 0;
+      }
+      .draw-loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 7rem;
+        .loading-dot {
+          width: 1rem;
+          height: 1rem;
+          border-radius: 50%;
+          background-color: #fff;
+          margin: 0 1rem;
+          &.one {
+            animation: blink 1s infinite;
+          }
+          &.two {
+            animation: blink 2s infinite;
+          }
+          &.three {
+            animation: blink 3s infinite;
+          }
+        }
+      }
+    }
+  }
+}

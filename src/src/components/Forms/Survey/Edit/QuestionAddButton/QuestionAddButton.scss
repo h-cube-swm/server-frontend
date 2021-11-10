@@ -2,25 +2,34 @@
 
 .question-add-box {
   display: block;
-  width: 600px;
-  height: 4.5rem;
-  text-align: center;
+  position: absolute;
+  width: 100vw;
+  height: 45vh;
   transition-duration: 200ms;
   opacity: 0.25;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  &.top {
+    height: 35vh;
+    top: 5rem;
+    bottom: unset;
+    &:hover {
+      background: linear-gradient(to bottom, #c0c7ff, #fff);
+    }
+  }
 
   &:hover {
     opacity: 1;
+    background-color: #2b44ff;
+    background: linear-gradient(to top, #c0c7ff, #fff);
   }
-
   button {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
     width: 100%;
     height: 100%;
-    cursor: pointer;
-
+    background-color: transparent;
     img {
-      height: 100%;
+      width: 50%;
     }
   }
 }

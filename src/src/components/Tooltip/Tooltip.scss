@@ -3,7 +3,6 @@
 .tooltip {
   position: relative;
   display: inline-block;
-  z-index: 100;
   width: auto;
   height: auto;
   .tooltiptext {
@@ -29,6 +28,9 @@
     }
     &.left {
       transform: translateX(-100%);
+    }
+    &.direct {
+      transform: translate(10%, 40%);
     }
     &.bottom {
       transform: translate(-60%, 120%);

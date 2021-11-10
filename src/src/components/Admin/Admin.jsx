@@ -41,11 +41,11 @@ function Surveys({ offset = 0, condition, order }) {
               <div className="title">
                 <Tab to={`/admin/view/${survey.deployId}`}>{title}</Tab>
               </div>
-              <div className={"tag " + survey.status} hidden={survey.status === "editting"}>
+              <div className={"tag " + survey.status} hidden={survey.status === "editing"}>
                 {survey.status}
               </div>
               <div className="spacer"></div>
-              <div className="edit" hidden={survey.status !== "editting" && survey.status}>
+              <div className="edit" hidden={survey.status !== "editing" && survey.status}>
                 <Tab className="button" to={`/forms/survey/edit/${survey.id}`}>
                   수정
                 </Tab>

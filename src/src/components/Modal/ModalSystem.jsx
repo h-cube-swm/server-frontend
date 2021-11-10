@@ -4,14 +4,28 @@ import Positioner from "../Positioner/Positioner";
 
 import "./ModalSystem.scss";
 
-function Modal({ children, href, onSubmit, onClose, width, height }) {
+function Modal({
+  children,
+  href,
+  onSubmit,
+  onClose,
+  width,
+  height,
+  type,
+  submitMessage,
+  isVisible,
+}) {
   const onClick = () => {
     onSubmit();
     onClose();
   };
+  let buttonColor = "#2b44ff";
+  if (type) {
+    buttonColor = "#E22F1B";
+  }
   return (
-    <Positioner>
-      <div className="modal-box" style={{ width: { width }, height: { height } }}>
+    <Positioner y={isVisible ? 0 : "-200%"}>
+      <div className={"modal-box " + type} style={{ width, height }}>
         <div className="modal-inner-box">{children}</div>
         <div className="btn-children">
           {href && (
@@ -20,8 +34,8 @@ function Modal({ children, href, onSubmit, onClose, width, height }) {
             </a>
           )}
           {onSubmit && (
-            <button className="default" onClick={onClick}>
-              완료
+            <button className="default" onClick={onClick} style={{ backgroundColor: buttonColor }}>
+              {submitMessage}
             </button>
           )}
           <button className="gray" onClick={onClose}>
@@ -35,19 +49,26 @@ function Modal({ children, href, onSubmit, onClose, width, height }) {
 
 export default function ModalSystem() {
   const { modal, remove } = useModal();
-  const [children, href, onSubmit] = modal;
+  const { children, href, onSubmit, type, submitMessage } = modal;
+  const isVisible = Object.keys(modal).length > 0;
   return (
     <>
-      {modal.length !== 0 && (
+      {
         <>
-          <div className="black-board" onClick={() => remove()} />
+          {isVisible && <div className="black-board" onClick={() => remove()} />}
           <div className="modal-system">
-            <Modal href={href} onSubmit={onSubmit} onClose={() => remove()}>
+            <Modal
+              isVisible={isVisible}
+              href={href}
+              onSubmit={onSubmit}
+              onClose={() => remove()}
+              type={type}
+              submitMessage={submitMessage}>
               {children}
             </Modal>
           </div>
         </>
-      )}
+      }
     </>
   );
 }

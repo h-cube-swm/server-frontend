@@ -16,7 +16,7 @@ import { Response } from "../Response/Response";
 
 /* HOC, Context, Hooks */
 import { QuestionProvider } from "../../../../contexts/QuestionContext";
-import withSurvey from "../../../../hocs/withSurvey";
+import withSurveyForEdit from "../../../../hocs/withSurveyForEdit";
 import useScrollPaging from "../../../../hooks/useScrollPaging";
 import useDragPaging from "../../../../hooks/useDragPaging";
 import useThrottle from "../../../../hooks/useThrottle";
@@ -32,6 +32,7 @@ import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 import Branching from "../Branching/Branching";
 import { useModal } from "../../../../contexts/ModalContext";
+import apis from "../../../../utils/apis";
 
 const MODE_EDIT = "edit";
 const MODE_PREVIEW = "preview";
@@ -84,10 +85,10 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   const getInsertQuestion = (index) => () => {
     setSurvey((survey) => {
-      const [counter, question] = getQuestion(survey.counter);
+      const question = getQuestion();
       const questions = [...survey.questions];
       questions.splice(index, 0, question);
-      return { ...survey, counter, questions };
+      return { ...survey, questions };
     });
     setSelectedIndex(index);
   };
@@ -110,11 +111,14 @@ function Edit({ survey: init, updateSurvey, location }) {
       // ToDo : Use efficient deepcopy library instead of tricky copy
       const survey = JSON.parse(JSON.stringify(_survey));
       const questions = [...survey.questions];
-      let { selectedIndex } = survey;
-      const id = ++survey.counter + "";
-      const newQuestion = { ...questions[selectedIndex], id };
+
+      // Copy question with new id
+      const { id } = getQuestion();
+      const newQuestion = { ...questions[index], id };
       questions.splice(index + 1, 0, newQuestion);
-      selectedIndex = index + 1;
+
+      // Update selectedIndex
+      const selectedIndex = index + 1;
       return { ...survey, selectedIndex, questions };
     });
   };
@@ -156,8 +160,8 @@ function Edit({ survey: init, updateSurvey, location }) {
 
   useThrottle(putSurvey, [survey]);
 
-  if (survey.status === "published" || isEnded)
-    return <Redirect to={`/forms/survey/end/${survey.id}`} />;
+  if (survey.status !== "editing" || isEnded)
+    return <Redirect to={`/forms/survey/details/${survey.id}`} />;
 
   const { selectedIndex } = survey;
   const setQuesionType = setNestedState(setSurvey, ["questions", selectedIndex, "type"]);
@@ -208,6 +212,7 @@ function Edit({ survey: init, updateSurvey, location }) {
   const onSubmit = async () => {
     try {
       await putSurvey();
+      await apis.endSurvey(survey.id);
       setIsEnded(true);
     } catch {
       /* */
@@ -224,42 +229,83 @@ function Edit({ survey: init, updateSurvey, location }) {
     if (!detectQuestion()) return;
 
     if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
-          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
-          </p>
-          <p style={{ fontWeight: "500" }}>1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏</p>
-        </>,
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
+            </p>
+            <p style={{ fontWeight: "500" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
         href,
         onSubmit,
-      );
-    } else {
-      load(
-        <>
-          <br />
-          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
-          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-            잠깐⚠️ 설문의{" "}
-            <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
-              [흐름설정]
-            </Link>{" "}
-            또는
-            <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
-              [미리보기]
-            </Link>
-            을 확인하셨나요?
+      });
+    } else if (token && survey.draw.isEnabled) {
+      load({
+        children: (
+          <>
             <br />
-            <br />
-            혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
-            <br />
-            설문 제작을 모두 마치셨다면 아래의 &quot;완료&quot; 버튼을 눌러주세요 👏
-          </p>
-        </>,
-        null,
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p
+              style={{
+                display: "block",
+                backgroundColor: "#f6c344",
+                borderRadius: "15px",
+                padding: "1.5rem",
+              }}>
+              잠깐 <b style={{ fontWeight: "bold" }}>설문의 추첨 기능</b>을 원할하게 진행하시려면
+              <br />
+              <br />
+              <b style={{ color: "#2b44ff", fontWeight: "bold" }}>이메일, 전화번호 등</b> 응답자를
+              특정할 수 있는 질문이 필요해요!
+            </p>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              <br />
+              마지막 완료를 하기 전에 아래의 &quot;돌아가기&quot; 버튼을 눌러 검토해보세요 🤔
+              <br />
+              <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [흐름설정]
+              </Link>{" "}
+              또는
+              <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [미리보기]
+              </Link>
+              도 꼭 확인해보세요 👏
+            </p>
+          </>
+        ),
         onSubmit,
-      );
+      });
+    } else {
+      load({
+        children: (
+          <>
+            <br />
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              잠깐⚠️ 설문의{" "}
+              <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [흐름설정]
+              </Link>{" "}
+              또는
+              <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [미리보기]
+              </Link>
+              을 확인하셨나요?
+              <br />
+              <br />
+              혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
+              <br />
+              설문 제작을 모두 마치셨다면 아래의 &quot;완료&quot; 버튼을 눌러주세요 👏
+            </p>
+          </>
+        ),
+        onSubmit,
+      });
     }
   };
 
@@ -334,20 +380,20 @@ function Edit({ survey: init, updateSurvey, location }) {
             const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
             const slowAppear = questions.length > 1;
             const isHide = isDragging && isSelected;
-            const state = isSelected ? CardStates.EDITTING : CardStates.PREVIEW;
+            const state = isSelected ? CardStates.EDITING : CardStates.PREVIEW;
             const onDelete = questions.length > 1 && isSelected && getRemoveQuestion(index);
             const onDuplicate = isSelected && getCopyQuestion(index);
             const setQuestion = setNestedState(setSurvey, ["questions", index]);
 
             return (
-              <Positioner key={question.id} y={y}>
+              <Positioner key={question.id} y={y} zIndex={3}>
                 <Hider hide={isHide} animation={false} appearDelay={400}>
                   <QuestionProvider
                     state={state}
                     surveyId={survey.id}
                     question={question}
                     setQuestion={isSelected && setQuestion}
-                    isLast={question.id === "1"}
+                    isLast={index === questions.length - 1}
                     themeColor={survey.themeColor}>
                     <Card onGrab={onGrab} slowAppear={slowAppear}>
                       <QuestionCommon handleOnDelete={onDelete} handleOnDuplicate={onDuplicate} />
@@ -362,14 +408,13 @@ function Edit({ survey: init, updateSurvey, location }) {
         <div className="fade-out top" />
         <div className="fade-out bottom" />
 
-        <QuestionAddButton onClick={getInsertQuestion(selectedIndex)} y={"-30vh"} />
+        <QuestionAddButton onClick={getInsertQuestion(selectedIndex)} top />
 
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
-          y={"30vh"}
-          isLast={questions[selectedIndex].id === "1"}
+          isLast={selectedIndex === questions.length - 1}
         />
-        <Hider hide={questions[selectedIndex].id === "1"}>
+        <Hider hide={selectedIndex === questions.length - 1}>
           <Controller type={selectedSurveyType} setType={setQuesionType} />
         </Hider>
       </div>
@@ -384,4 +429,4 @@ function Edit({ survey: init, updateSurvey, location }) {
 }
 
 // ToDo : Swagger를 써 볼 수도!
-export default withSurvey(Edit);
+export default withSurveyForEdit(Edit);

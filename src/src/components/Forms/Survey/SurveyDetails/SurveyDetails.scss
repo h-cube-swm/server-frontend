@@ -1,76 +1,61 @@
 @import "/src/scss/style.scss";
 
-.edit-ending {
+.survey-details {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
+  overflow: scroll;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+
+    h1 {
+      font-size: $fs-lg;
+      font-weight: $fw-bold;
+    }
+    img {
+      width: 4rem;
+      height: auto;
+      margin-right: 2rem;
+    }
+  }
+
   .contents-box {
     display: flex;
     justify-content: center;
     align-content: flex-end;
-    .celebrate-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      margin-right: 10rem;
-      margin-top: 5rem;
-      .celebrate-sentence {
-        text-align: start;
-        margin-bottom: 2rem;
-
-        img {
-          width: 6rem;
-          &.right {
-            opacity: 0;
-          }
-        }
-
-        textarea {
-          width: 70%;
-          margin-right: 1rem;
-        }
-
-        h1 {
-          font-size: $fs-lg;
-          font-weight: 700;
-          text-align: start;
-          line-height: 1.6;
-          strong {
-            color: #2b44ff;
-          }
-        }
-      }
-      .firework {
-        position: absolute;
-      }
-    }
-
+    width: 100%;
+    height: 100%;
     .section {
-      height: 100%;
       display: grid;
       justify-content: center;
       align-items: center;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      grid-gap: 2rem;
-      padding: 2rem;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      grid-gap: 1rem;
+      margin-top: 7rem;
+      margin-left: 0;
+      width: 90%;
+      height: 77%;
 
       .box {
-        @include round;
         padding: 1.5rem;
         padding-bottom: 0.5rem;
-        width: 24rem;
-        height: 12rem;
+        width: 100%;
+        height: 100%;
         box-shadow: $shadow-default;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-
+        border-radius: 10px;
         h1 {
-          font-size: $fs-lg;
+          font-size: $fs-rg;
           font-weight: $fw-bold;
           color: white;
           word-break: keep-all;
@@ -80,7 +65,7 @@
         }
         h2 {
           display: block;
-          font-size: $fs-md;
+          font-size: $fs-sm;
           font-weight: $fw-bold;
           margin: 0.5rem 0;
           color: white;
@@ -91,7 +76,7 @@
         }
         h3 {
           display: block;
-          font-size: $fs-rg;
+          font-size: $fs-sm;
           font-weight: $fw-bold;
           margin: 0.5rem 0;
           color: white;
@@ -101,14 +86,14 @@
           overflow: scroll;
         }
         &.one {
-          grid-row: 1;
-          grid-column: 1;
+          grid-row: 1/3;
+          grid-column: 1/3;
           background: linear-gradient(to right, #2b44ff, #1dff0a);
         }
 
         &.two {
-          grid-row: 1;
-          grid-column: 2;
+          grid-row: 1/3;
+          grid-column: 3/5;
           background: linear-gradient(to right, #707070, #b1b1b1);
           .embed-title {
             display: flex;
@@ -132,10 +117,9 @@
         }
 
         &.three {
-          grid-row: 2 / 4;
-          grid-column: 2;
+          grid-row: 3/6;
+          grid-column: 3/5;
           flex-direction: column;
-          height: 24rem;
           &.email {
             display: flex;
             flex-direction: column;
@@ -187,15 +171,14 @@
         }
 
         &.four {
-          height: 24rem;
-          grid-row: 2 / 4;
-          grid-column: 1;
+          grid-row: 3/6;
+          grid-column: 1/3;
           background: linear-gradient(to right, #2b44ff, #0afff6);
         }
 
         &.five {
-          grid-row: 4;
-          grid-column: 1;
+          grid-row: 6/8;
+          grid-column: 1/3;
           background: linear-gradient(to right, #2b44ff, #707070);
           .explain {
             display: flex;
@@ -221,8 +204,8 @@
         }
 
         &.six {
-          grid-row: 4;
-          grid-column: 2;
+          grid-row: 6/8;
+          grid-column: 3/5;
           background: linear-gradient(to right, #2b44ff, #707070);
           .explain {
             display: flex;
@@ -246,95 +229,131 @@
             }
           }
         }
+        &.seven {
+          grid-row: 1/3;
+          grid-column: 5/6;
+          background: linear-gradient(to right, #e22f1b, #eb5240);
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+        }
+        &.eight {
+          grid-row: 3;
+          grid-column: 5/6;
+          position: relative;
+          background: linear-gradient(to right, #ffae00, #ffc400);
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+          .draw {
+            width: 100%;
+            height: 100%;
+            h1 {
+              font-size: $fs-md;
+              margin-bottom: 1rem;
+            }
+            .draw-content {
+              padding: 1rem;
+              font-size: $fs-rg;
+              color: #fff;
+              border-radius: 15px;
+              margin-top: 1rem;
+              width: 100%;
+              height: 20rem;
+              overflow: scroll;
+              .draw-loading {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 7rem;
+                .loading-dot {
+                  width: 1rem;
+                  height: 1rem;
+                  border-radius: 50%;
+                  background-color: #fff;
+                  margin: 0 1rem;
+                  &.one {
+                    animation: blink 1s infinite;
+                  }
+                  &.two {
+                    animation: blink 2s infinite;
+                  }
+                  &.three {
+                    animation: blink 3s infinite;
+                  }
+                }
+              }
+              .error-message {
+                font-size: $fs-sm;
+              }
+              .table {
+                margin-bottom: 2rem;
+              }
+              ul {
+                list-style-type: none;
+                li {
+                  font-size: $fs-sm;
+                }
+              }
+            }
+            .source {
+              position: absolute;
+              word-break: keep-all;
+              text-align: center;
+              bottom: 1rem;
+              left: 50%;
+              transform: translateX(-50%);
+              color: #fff;
+              font-weight: $fw-bold;
+              a {
+                color: #fff;
+              }
+            }
+          }
+          &.open {
+            grid-row: 3/8;
+            grid-column: 5/9;
+            display: unset;
+            justify-content: unset;
+            align-items: unset;
+            text-align: unset;
+            padding: 2rem;
+          }
+        }
+        &.nine {
+          grid-row: 6;
+          grid-column: 5/6;
+          background: linear-gradient(to right, #2b44ff, #7278a1);
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+          a {
+            color: #fff;
+          }
+        }
+        &.ten {
+          grid-row: 7;
+          grid-column: 5/6;
+          background: linear-gradient(to right, #707070, #b0b0b0);
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+          a {
+            color: #fff;
+          }
+        }
       }
     }
   }
 
-  .logo {
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
-
-    img {
-      width: 6rem;
-      height: auto;
-    }
+  hr {
+    width: 100%;
   }
-
-  .link-btn-xl {
-    position: fixed;
-    bottom: 5rem;
-  }
-
-  overflow: scroll;
 
   @include laptop {
     .contents-box {
       justify-content: space-around;
       max-width: 1200px;
-      .celebrate-box {
-        margin-right: 3rem;
-        .celebrate-sentence {
-          h1 {
-            font-size: $fs-md;
-          }
-          img {
-            width: 5rem;
-          }
-        }
-      }
-      .section {
-        grid-gap: 1rem;
-        grid-row-gap: 0.5rem;
-        .box {
-          width: 20rem;
-          height: 10rem;
-          padding: 1.2rem;
-          padding-bottom: 0.5rem;
-          h1 {
-            font-size: $fs-md;
-          }
-          h2 {
-            font-size: $fs-rg;
-          }
-          h3 {
-            display: block;
-            font-size: $fs-sm;
-            width: 90%;
-          }
-          &.three {
-            height: 20rem;
-            &.email {
-              .email-input {
-                textarea {
-                  font-size: $fs-rg;
-                }
-              }
-            }
-          }
-          &.four {
-            height: 20rem;
-          }
-          &.five {
-            .explain {
-              button {
-                img {
-                  width: 70%;
-                }
-              }
-            }
-          }
-          &.six {
-            .explain {
-              button {
-                img {
-                  width: 70%;
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 
@@ -343,57 +362,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      .celebrate-box {
-        align-items: center;
-        margin: 0 auto;
-        margin-top: 15rem;
-        .celebrate-sentence {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          h1 {
-            font-size: $fs-md;
-            text-align: center;
-          }
-          img {
-            width: 4rem;
-            margin-bottom: 1rem;
-          }
-        }
-        a {
-          &.home-btn {
-            position: absolute;
-            bottom: 3rem;
-          }
-        }
-      }
+    }
+  }
 
-      .section {
-        padding: 0;
-        margin-bottom: 10rem;
-        .box {
-          padding: 1rem;
-          padding-bottom: 0.5rem;
-          &.five {
-            .explain {
-              button {
-                img {
-                  width: 100%;
-                }
-              }
-            }
-          }
-          &.six {
-            .explain {
-              button {
-                img {
-                  width: 100%;
-                }
-              }
-            }
-          }
-        }
-      }
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 }

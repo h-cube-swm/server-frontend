@@ -2,11 +2,8 @@ import React, { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { CardStates, CardTypes, DOMAIN } from "../../../../constants";
 import setNestedState from "../../../../utils/setNestedState";
-
 import API from "../../../../utils/apis";
 
-// import { useThrottleWithTimeout } from "../../../../hooks/useThrottle";
-// import { useState, useEffect } from "react"
 // 질문 자동 추천 관련 import
 
 // Hooks
@@ -14,6 +11,7 @@ import { useQuestion } from "../../../../contexts/QuestionContext";
 import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 import { useModal } from "../../../../contexts/ModalContext";
+// import { useThrottleWithTimeout } from "../../../../hooks/useThrottle";
 
 // Components
 import ToggleSwitch from "../../../ToggleSwitch/ToggleSwitch";
@@ -100,23 +98,25 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
   // }
 
   const QuestionDetail = getQuestionDetail(question.type);
-  const isResponse = state !== CardStates.EDITTING;
-  const isEditing = state === CardStates.EDITTING;
+  const isResponse = state !== CardStates.EDITING;
+  const isEditing = state === CardStates.EDITING;
   const isEmpty = question.type === CardTypes.EMPTY;
 
   const getImage = async (e) => {
     setIsLoading(true);
     e.preventDefault();
     if (!token) {
-      load(
-        <>
-          <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
-          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
-            1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-          </p>
-        </>,
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700" }}>🗝 유저만 사용할 수 있는 기능입니다🗝</h2>
+            <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
         href,
-      );
+      });
       setIsLoading(false);
       return;
     }
@@ -138,17 +138,19 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
     try {
       const data = await API.postImg(formData);
       if (data[2] === 400) {
-        load(
-          <>
-            <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
-              🗝 유저만 사용할 수 있는 기능입니다🗝
-            </h2>
-            <p style={{ fontWeight: "500", marginTop: "2rem" }}>
-              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
-            </p>
-          </>,
+        load({
+          children: (
+            <>
+              <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+                🗝 유저만 사용할 수 있는 기능입니다🗝
+              </h2>
+              <p style={{ fontWeight: "500", marginTop: "2rem" }}>
+                1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+              </p>
+            </>
+          ),
           href,
-        );
+        });
         setIsLoading(false);
         return;
       }
@@ -172,6 +174,18 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
               <p>필수</p>
             </span>
           )}
+          {/* <Hider hide={!question.title || (question.title && question.title.length <= 3)}>
+            <div className="suggestions">
+              {suggestionList.map((suggestion, i) => {
+                if (i >= 1) return false;
+                return (
+                  <div key={i} className="suggestion" onClick={() => onSuggestion(suggestion)}>
+                    {suggestion}
+                  </div>
+                );
+              })}
+            </div>
+          </Hider> */}
           <div className={!isEmpty ? "basic" : "basic empty"}>
             <div className="question">
               <ExpandableInput
@@ -206,21 +220,6 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
               )}
             </div>
           )}
-
-          {/* <Hider
-            hide={!isTyping || !question.title || (question.title && question.title.length <= 3)}>
-            <div className="suggestions">
-              {suggestionList.map((suggestion, i) => {
-                if (i <= 3)
-                  return (
-                    <div key={i} className="suggestion" onClick={() => onSuggestion(suggestion)}>
-                      {suggestion}
-                    </div>
-                  );
-                return false;
-              })}
-            </div>
-          </Hider> */}
         </div>
         <QuestionDetail />
       </div>

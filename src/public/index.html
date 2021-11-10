@@ -73,7 +73,7 @@
     <meta name="naver-site-verification" content="1b52b0bcdfd6f6cfb3d22d9650d6760be67ca465" />
 
     <!-- Manifest file for PWA -->
-    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBV22WM0L8"></script>
@@ -142,6 +142,19 @@
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <!-- PWA Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("/worker.js").catch(function (err) {
+            console.log(err);
+          });
+        });
+      } else {
+        console.log("Service Worker is not supported by browser.");
+      }
+    </script>
   </body>
   <script src="/inspector.js"></script>
 </html>

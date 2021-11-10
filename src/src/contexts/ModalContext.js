@@ -6,14 +6,14 @@ export function ModalProvider({ children }) {
   /**
    * ModalQueue is list of tuple [ModalId, Modal]
    */
-  const [modal, setModal] = useState([]);
+  const [modal, setModal] = useState({});
 
-  function load(children, href, onSubmit) {
-    setModal([children, href, onSubmit]);
+  function load({ children, href, onSubmit, type, submitMessage = "완료" }) {
+    setModal({ children, href, onSubmit, type, submitMessage });
   }
 
   function remove() {
-    setModal([]);
+    setModal({});
   }
 
   return <ModalContext.Provider value={{ modal, load, remove }}>{children}</ModalContext.Provider>;

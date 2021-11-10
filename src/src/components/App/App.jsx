@@ -28,10 +28,11 @@ const MyPage = lazy(() => import("../MyPage/MyPage"));
 const Pricing = lazy(() => import("../Pricing/Pricing"));
 const Survey = lazy(() => import("../Forms/Survey/Survey"));
 const Edit = lazy(() => import("../Forms/Survey/Edit/Edit"));
-const EditEnding = lazy(() => import("../Forms/Survey/EditEnding/EditEnding"));
+const SurveyDetails = lazy(() => import("../Forms/Survey/SurveyDetails/SurveyDetails"));
 const NotFound = lazy(() => import("../Error/NotFound"));
 const Result = lazy(() => import("../Forms/Survey/Result/Result"));
 const ResponseEnding = lazy(() => import("../Forms/Survey/ResponseEnding/ResponseEnding"));
+const DrawCheck = lazy(() => import("../DrawCheck/DrawCheck"));
 
 /*
 Only directly loaded components, which is Response and Loading, are loaded directly.
@@ -61,10 +62,11 @@ function App() {
                 <Route path="/forms/survey" component={Survey} exact />
                 <Route path="/forms/survey/mobile" component={EditCover} />
                 <Route path="/forms/survey/edit/:link" component={Edit} />
-                <Route path="/forms/survey/end/:link" component={EditEnding} />
+                <Route path="/forms/survey/details/:link" component={SurveyDetails} />
                 <Route path="/forms/survey/response/ending" component={ResponseEnding} exact />
                 <Route path="/forms/survey/response/:link" component={ResponseContainer} />
                 <Route path="/forms/survey/result/:link" component={Result} />
+                <Route path="/forms/survey/draw/:link" component={DrawCheck} />
                 <Route path="/loading" component={Loading}></Route>
                 <Route path="/start/:link" component={StartTime}></Route>
 

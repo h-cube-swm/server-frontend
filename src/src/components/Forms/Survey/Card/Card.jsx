@@ -7,6 +7,7 @@ import { CardStates, CardTypes } from "../../../../constants";
 /* Assets */
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
+import addBtn from "../../../../assets/icons/add-btn-gray.svg";
 
 function Card({ onGrab, children }) {
   const { question, state, isLast, scrollRef } = useQuestion();
@@ -16,7 +17,7 @@ function Card({ onGrab, children }) {
   const classes = ["survey-card"];
 
   switch (state) {
-    case CardStates.EDITTING:
+    case CardStates.EDITING:
       classes.push("highlight");
       break;
 
@@ -41,7 +42,7 @@ function Card({ onGrab, children }) {
 
   const handleOnGrab = (event) => {
     event.preventDefault();
-    if (state !== CardStates.EDITTING) return;
+    if (state !== CardStates.EDITING) return;
     if (onGrab) onGrab();
   };
 
@@ -65,6 +66,14 @@ function Card({ onGrab, children }) {
       <Hider hide={isLast}>
         <div className="handle" onMouseDown={handleOnGrab}>
           <img src={imgHandle} alt="handle"></img>
+        </div>
+      </Hider>
+      <div className="add-question-btn prev">
+        <img src={addBtn} alt="add question to previous index" />
+      </div>
+      <Hider hide={isLast}>
+        <div className="add-question-btn next">
+          <img src={addBtn} alt="add question to next index" />
         </div>
       </Hider>
     </div>

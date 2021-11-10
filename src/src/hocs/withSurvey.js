@@ -1,58 +1,20 @@
-import React from "react-router-dom";
-import { CardTypes } from "../constants";
-import getQuestion from "../components/Forms/Survey/getQuestion";
+import React, { useState } from "react";
 import Loading from "../components/Loading/Loading";
 import API from "../utils/apis";
 import { tryUnhash } from "../utils/hasher";
 import Error from "../components/Error/Error";
 
 const withSurvey = (Component) => (props) => {
+  const [timestamp, setTimestamp] = useState(Date.now());
   let surveyId = props.match.params.link;
   surveyId = tryUnhash(surveyId);
 
   // Load survey data from server
-  const [survey, err] = API.useSurvey(surveyId, "edit");
+  const [survey, err] = API.useSurvey(surveyId, "edit", timestamp);
   if (err) return <Error type="cannot-load-survey" />;
   if (!survey) return <Loading />;
-
-  // Reshape survey structure into one object
-  if (!survey.id) survey.id = surveyId;
-  if (!survey.counter) survey.counter = 0;
-  if (!survey.questions) survey.questions = [];
-  if (!survey.selectedIndex) survey.selectedIndex = 0;
-  if (!survey.branching) survey.branching = {};
-  if (!survey.themeColor) survey.themeColor = "#2b44ff";
-  if (survey.questions.length === 0) {
-    const [counter, question] = getQuestion(survey.counter);
-    survey.counter = counter;
-    survey.questions.push(question);
-    const [lastCounter, lastQuestion] = getQuestion(survey.counter);
-    lastQuestion.type = CardTypes.EMPTY;
-    lastQuestion.isRequired = false;
-    survey.counter = lastCounter;
-    survey.questions.push(lastQuestion);
-  }
-  const newProps = { ...props, survey };
-
-  async function updateSurvey(_survey) {
-    // Copy survey
-    const survey = JSON.parse(JSON.stringify(_survey));
-
-    // Filter empty choices of single choice or multiple choice
-    survey.questions = survey.questions.map((question) => {
-      const { type } = question;
-      const filtered = { ...question };
-      if (type === CardTypes.SINGLE_CHOICE || type === CardTypes.MULTIPLE_CHOICE) {
-        if (filtered.choices) filtered.choices = filtered.choices.filter((x) => x);
-      }
-      return filtered;
-    });
-
-    // Send data to server
-    return API.putSurvey(surveyId, survey);
-  }
-
-  return <Component {...newProps} updateSurvey={updateSurvey} />;
+  const newProps = { ...props, survey, setTimestamp };
+  return <Component {...newProps} />;
 };
 
 export default withSurvey;

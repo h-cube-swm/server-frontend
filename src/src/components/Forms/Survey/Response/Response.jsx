@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 } from "uuid";
 
 // Components
 import { Link, Redirect } from "react-router-dom";
@@ -18,6 +19,7 @@ import withSurveyForResponse from "../../../../hocs/withSurveyForResponse";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
 import logo from "../../../../assets/images/logo-banner.GIF";
+import unboxingBadge from "../../../../assets/images/unboxing-badge.png";
 import Linkify from "../../../Linkify/Linkify";
 import L from "../../../../utils/logger";
 
@@ -45,10 +47,10 @@ function getIndexBranchingMap(survey) {
   const idToIndex = Object.fromEntries(questions.map(({ id }, index) => [id, index]));
   const branchingMap = {};
   Object.entries(branching).forEach(([key, dest]) => {
-    if (!isNumber(dest)) return;
+    if (!dest) return;
     if (!(dest in idToIndex)) return;
     const [questionId, choiceIndex] = key.split(" ");
-    const questionIndex = idToIndex[+questionId];
+    const questionIndex = idToIndex[questionId];
     if (!isNumber(questionIndex)) return;
     if (!(questionIndex in branchingMap)) branchingMap[questionIndex] = {};
     branchingMap[questionIndex][choiceIndex] = +idToIndex[dest];
@@ -90,19 +92,36 @@ function ResponseContainer({ survey }) {
   if (redirect) return <Redirect to={redirect} />;
 
   const onSubmit = async () => {
-    const body = { responses: { ...responses, query } };
+    L.l(`ResponseEnd:${survey.deployId}`);
+    const uuid = v4();
+    const body = { responses: { ...responses, query, uuid } };
     const err = await API.postResponse(survey.deployId, body)[1];
+
+    // If error occurrs
     if (err) {
       setRedirect("/error/unexpected/cannot-submit-data");
       return;
     }
 
-    L.l(`ResponseEnd:${survey.deployId}`);
+    // If it should invoke event
     if (next === "event") {
       window.parent?.postMessage("surveyEnd", "*");
-    } else if (next) {
+      return;
+    }
+
+    // If it should be redirected
+    if (next) {
       window.location.href = next;
-    } else setRedirect("/forms/survey/response/ending");
+      return;
+    }
+
+    // If survey has draw option
+    if (survey.draw.isEnabled) {
+      setRedirect(`/forms/survey/response/ending#${survey.deployId}#${uuid}`);
+      return;
+    }
+
+    setRedirect(`/forms/survey/response/ending`);
   };
 
   return (
@@ -149,11 +168,15 @@ export function Response({
    * @returns {function} `next()`
    */
   const getNext = () => {
-    // If not passable, just return.
+    // If not passable, just return, blocking moving
     if (!isPassable) return;
 
     // If it is cover screen, just go to first question
-    const push = (x) => setHistory((history) => [...history, x]);
+    const push = (x) => {
+      if (history[history.length - 1] === x) return;
+      setHistory((history) => [...history, x]);
+    };
+
     if (isCover) {
       push(0);
       return;
@@ -196,7 +219,7 @@ export function Response({
 
   /**
    *
-   * @returns {function} previous()
+   * @returns {function} `previous()`
    */
   const getPrevious = () =>
     setHistory((history) => {
@@ -276,6 +299,12 @@ export function Response({
         <div className={"question-box " + (!isCover && "left")}>
           <div className="question-box-inner">
             <div className="cover-box">
+              {survey.draw.isEnabled && (
+                <div className="draw-badge-box">
+                  <img className="badge" src={unboxingBadge} alt="verified survey mark" />
+                  <p>블록체인 기술을 통해 응답자 추첨의 공정성이 보장받는 설문입니다 🔒</p>
+                </div>
+              )}
               <h1 className="title">
                 <Linkify>{survey.title}</Linkify>
               </h1>

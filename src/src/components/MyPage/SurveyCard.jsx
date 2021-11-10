@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMessage } from "../../contexts/MessageContext";
+import { useModal } from "../../contexts/ModalContext";
 import { SurveyStatus } from "../../constants";
 import API from "../../utils/apis";
+import Tooltip from "../Tooltip/Tooltip";
 
 import "./SurveyCard.scss";
 import etcBtn from "../../assets/icons/etc-btn.svg";
@@ -19,6 +21,7 @@ export default function SurveyCard({ survey, setTimestamp }) {
   const surveyId = survey.id;
   const surveyDeployId = survey.deployId;
   const surveyStatus = survey.status;
+  const { load } = useModal();
   let mention = `${updatedDate} 생성됨`;
 
   const Options = {
@@ -66,30 +69,66 @@ export default function SurveyCard({ survey, setTimestamp }) {
     setSelectedOption(null);
   };
 
-  const finishSurvey = async (link, status) => {
-    // eslint-disable-next-line
-    const confirm = window.confirm("정말 종료하시겠습니까?");
-    if (confirm) {
+  const onSubmit = async (link, status) => {
+    if (status === SurveyStatus.FINISHED) {
       const result = await API.putSurveyStatus(link, status);
       if (result[2] === 200) {
         publish("📄 설문이 종료 되었습니다 ✅");
-        setTimestamp(Date.now());
-        setSelectedOption(null);
       }
     }
-  };
 
-  const deleteSurvey = async (link) => {
-    // eslint-disable-next-line
-    const confirm = window.confirm("정말 삭제하시겠습니까?");
-    if (confirm) {
+    if (status === SurveyStatus.DELETED) {
       const result = await API.deleteSurvey(link);
-      if (result === 200) {
+      if (result[2] === 200) {
         publish("설문을 삭제하였습니다 🗑", "warning");
       }
-      setTimestamp(Date.now());
-      setSelectedOption(null);
     }
+    setTimestamp(Date.now());
+    setSelectedOption(null);
+  };
+
+  const finishSurvey = (link, status) => {
+    // eslint-disable-next-line
+    load({
+      children: (
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+            주의❗️ 정말 설문을 종료하시겠습니까?
+          </h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+            설문을 종료하면 더이상 응답을 받을 수 없습니다.
+            <br />
+            <br />
+            신중하게 결정해주세요 🤔
+          </p>
+        </>
+      ),
+      onSubmit: () => onSubmit(link, status),
+      type: "warning",
+      submitMessage: "종료",
+    });
+  };
+
+  const deleteSurvey = async (link, status) => {
+    // eslint-disable-next-line
+    load({
+      children: (
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+            주의❗️ 정말 설문을 삭제하시겠습니까?
+          </h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+            설문을 삭제하면 돌이킬 수 없습니다.
+            <br />
+            <br />
+            신중하게 결정해주세요 🤔
+          </p>
+        </>
+      ),
+      onSubmit: () => onSubmit(link, status),
+      type: "warning",
+      submitMessage: "삭제",
+    });
   };
 
   if (surveyStatus === SurveyStatus.FINISHED) {
@@ -106,7 +145,7 @@ export default function SurveyCard({ survey, setTimestamp }) {
           to={
             surveyStatus !== SurveyStatus.FINISHED
               ? `/forms/survey/edit/${surveyId}`
-              : `/forms/survey/result/${surveyId}`
+              : `/forms/survey/edit/${surveyId}`
           }>
           {survey.title}
         </Link>
@@ -134,14 +173,22 @@ export default function SurveyCard({ survey, setTimestamp }) {
             <button className="option-btn" onClick={() => duplicateSurvey(surveyId)}>
               사본 만들기
             </button>
-            {surveyStatus !== SurveyStatus.FINISHED && (
+            {surveyStatus !== SurveyStatus.FINISHED ? (
               <button
                 className="option-btn"
                 onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
                 종료하기
               </button>
+            ) : (
+              <Tooltip text="이미 종료된 설문입니다 👋" size="lg" pos="direct">
+                <button className="option-btn" disabled>
+                  종료하기
+                </button>
+              </Tooltip>
             )}
-            <button className="option-btn delete" onClick={() => deleteSurvey(surveyId)}>
+            <button
+              className="option-btn delete"
+              onClick={() => deleteSurvey(surveyId, SurveyStatus.DELETED)}>
               삭제하기
             </button>
           </div>
@@ -151,10 +198,15 @@ export default function SurveyCard({ survey, setTimestamp }) {
               공유하기
               <img src={nextBtn} alt="go to survey control" />
             </button>
-            <button className="option-btn" onClick={() => setSelectedOption(Options.EXPANDING)}>
-              연동하기
-              <img src={nextBtn} alt="go to survey control" />
-            </button>
+            <Tooltip text="곧 배포 예정인 기능입니다 👏" size="lg" pos="direct">
+              <button
+                className="option-btn"
+                disabled
+                onClick={() => setSelectedOption(Options.EXPANDING)}>
+                연동하기
+                <img src={nextBtn} alt="go to survey control" />
+              </button>
+            </Tooltip>
           </div>
         </div>
       </div>

@@ -26,6 +26,7 @@
     */
 
     .question-title-box {
+      position: relative;
       margin-bottom: 2rem;
       .basic {
         width: 100%;
@@ -60,14 +61,15 @@
       .suggestions {
         @include round;
         position: absolute;
+        top: 6rem;
+        left: -1rem;
         padding: 1rem 2rem;
-        top: 5.5rem;
-        left: 5rem;
-        color: 000;
+        color: #000;
+        font-size: $fs-md;
         background-color: #fff;
         box-shadow: $shadow-default;
+        z-index: 5;
         .suggestion {
-          margin: 0.5rem 0;
           font-weight: $fw-bold;
           cursor: pointer;
         }

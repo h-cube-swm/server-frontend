@@ -3,15 +3,31 @@
 .my-page {
   width: 100%;
   height: 100%;
-  position: relative;
-  .side-bar {
-    position: absolute;
-    right: 0;
-    width: 20%;
+
+  .my-page-inner {
+    width: 100%;
     height: 100%;
-    background-color: transparent;
+    position: relative;
+    display: flex;
+  }
+
+  .surveys {
     padding-top: 10rem;
-    padding-left: 2rem;
+    height: 100%;
+    overflow: scroll;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .side-bar {
+    padding-top: 10rem;
+    height: 100%;
+    width: 20%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+
     .section {
       display: flex;
       align-items: center;
@@ -20,12 +36,22 @@
       height: 3rem;
       margin-bottom: 1rem;
       padding: 1.5rem 1.5rem;
-      border-radius: 15px;
+      border-radius: 10px;
       font-weight: $fw-bold;
       background: linear-gradient(to right, #2b44ff, #2b44ff);
       transition-duration: 300ms;
     }
   }
+
+  .surveys-inner-box {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 0 1rem;
+    margin-bottom: 5rem;
+    height: max-content;
+  }
+
   @include laptop {
     .surveys {
       .surveys-inner-box {
@@ -36,13 +62,41 @@
   @include tablet {
     .side-bar {
       .section {
-        width: 85%;
+        width: 90%;
         font-size: $fs-sm;
       }
     }
     .surveys {
       .surveys-inner-box {
         grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
+  @include mobile {
+    .side-bar {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 3rem;
+      z-index: 3;
+      bottom: 0;
+      padding: 0;
+      margin-bottom: 2rem;
+
+      .section {
+        width: 30%;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .surveys {
+      .surveys-inner-box {
+        grid-template-columns: repeat(1, 1fr);
       }
     }
   }

@@ -14,6 +14,7 @@ import SurveyCard from "./SurveyCard";
 
 export default function MyPage() {
   const [timestamp, setTimestamp] = useState(null);
+
   // ToDo 함수 이름을 바꾸던가 함수 반환값을 바꾸던가
   const [surveys, error] = API.useUser(timestamp);
   const contents = [];
@@ -23,7 +24,7 @@ export default function MyPage() {
 
   if (surveys.length === 0) {
     contents.push(
-      <div className="no-survey">
+      <div className="no-survey" key="no-form-exists">
         아직 작성된 폼이 없습니다.
         <br />
       </div>,
@@ -39,21 +40,28 @@ export default function MyPage() {
     contents.push(<SurveyCard key={survey.id} survey={survey} setTimestamp={setTimestamp} />);
   });
 
-  contents.push(
-    <Link className="survey make-survey" to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
-      <img src={addBtn} alt="" />
-      <h3>설문 만들기</h3>
-    </Link>,
-  );
+  if (!isMobile) {
+    contents.push(
+      <Link
+        key="create-survey"
+        className="survey make-survey"
+        to={isMobile ? "/forms/survey/mobile" : "/forms/survey"}>
+        <img src={addBtn} alt="" />
+        <h3>설문 만들기</h3>
+      </Link>,
+    );
+  }
 
   return (
     <div className="my-page">
       <Header />
-      <div className="side-bar">
-        <div className="section">설문 모아보기</div>
-      </div>
-      <div className="surveys">
-        <div className="surveys-inner-box">{contents.reverse()}</div>
+      <div className="my-page-inner">
+        <div className="surveys">
+          <div className="surveys-inner-box">{contents.reverse()}</div>
+        </div>
+        <div className="side-bar">
+          <div className="section">설문 모아보기</div>
+        </div>
       </div>
     </div>
   );

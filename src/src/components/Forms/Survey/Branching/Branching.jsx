@@ -110,7 +110,7 @@ function hashChoice(i, j) {
  */
 function unhashChoice(hashed) {
   const [i, j] = hashed.split(" ");
-  return [+i, +j];
+  return [i + "", +j];
 }
 
 /**
@@ -308,48 +308,54 @@ export default function Branching({ survey, setSurvey }) {
   }, [selectedHandle]);
 
   const onOpen = () => {
-    load(
-      <div
-        className="explain"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}>
+    load({
+      children: (
         <div
-          className="example-box"
+          className="explain"
           style={{
-            width: "20%",
-            marginBottom: "1.5rem",
-            padding: "1rem",
-            borderRadius: "10px",
-            border: "1.5px solid #000",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}>
-          <img src={example} alt="circle, departure, box, destination" style={{ width: "100%" }} />
           <div
-            className="example-text"
-            style={{ display: "flex", justifyContent: "space-between" }}>
-            <p>출발</p>
-            <p>도착</p>
+            className="example-box"
+            style={{
+              width: "20%",
+              marginBottom: "1.5rem",
+              padding: "1rem",
+              borderRadius: "10px",
+              border: "1.5px solid #000",
+            }}>
+            <img
+              src={example}
+              alt="circle, departure, box, destination"
+              style={{ width: "100%" }}
+            />
+            <div
+              className="example-text"
+              style={{ display: "flex", justifyContent: "space-between" }}>
+              <p>출발</p>
+              <p>도착</p>
+            </div>
           </div>
+          <p
+            className="comment"
+            style={{
+              marginBottom: "2rem",
+            }}>
+            아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.
+            <br />
+            <br />
+            <strong>&#34;선택지가 가리키는 다음 질문&#34;</strong>이&nbsp;
+            <strong>&#34;이 질문의 다음 질문&#34;</strong>에 우선합니다.
+            <br />
+            <br />
+            <strong>좌우 방향키</strong>를 누르거나 <strong>Shift 키를 누른 상태로 스크롤</strong>
+            하면 좌우 방향으로 스크롤됩니다.
+          </p>
         </div>
-        <p
-          className="comment"
-          style={{
-            marginBottom: "2rem",
-          }}>
-          아무것도 연결하지 않으면 바로 다음 질문으로 넘어갑니다.
-          <br />
-          <br />
-          <strong>&#34;선택지가 가리키는 다음 질문&#34;</strong>이&nbsp;
-          <strong>&#34;이 질문의 다음 질문&#34;</strong>에 우선합니다.
-          <br />
-          <br />
-          <strong>좌우 방향키</strong>를 누르거나 <strong>Shift 키를 누른 상태로 스크롤</strong>
-          하면 좌우 방향으로 스크롤됩니다.
-        </p>
-      </div>,
-    );
+      ),
+    });
   };
 
   return (

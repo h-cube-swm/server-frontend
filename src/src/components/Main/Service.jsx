@@ -19,7 +19,7 @@ import editingPage from "../../assets/images/edit-page.svg";
 import autoSuggestionPage from "../../assets/images/auto-suggestion-page.svg";
 import sharingPage from "../../assets/images/sharing-page.svg";
 
-const initQuestion = getQuestion(0)[1];
+const initQuestion = getQuestion();
 const defaultAnswers = [{ 0: true }, { 0: true }, { 1: true }, { 1: true }, { 2: true }];
 initQuestion.type = CardTypes.MULTIPLE_CHOICE;
 initQuestion.choices = ["마음껏", "테스트", "해보세요"];
@@ -136,7 +136,7 @@ function Service() {
             question={question}
             surveyId={"test"}
             setQuestion={setQuestion}
-            state={CardStates.EDITTING}
+            state={CardStates.EDITING}
             themeColor="2b44ff">
             <QuestionCommon />
           </QuestionProvider>

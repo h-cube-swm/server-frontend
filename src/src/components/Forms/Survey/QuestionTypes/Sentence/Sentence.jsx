@@ -23,7 +23,7 @@ function Sentence({ isLong }) {
 
   if (!ia || !ib) return null;
 
-  const isEditting = state === CardStates.EDITTING;
+  const isEditting = state === CardStates.EDITING;
   const maxLen = isLong ? question.maxLenLong : question.maxLenShort;
   const setMaxLen = setNestedState(setQuestion, [isLong ? "maxLenLong" : "maxLenShort"]);
   const setText = (text) => {

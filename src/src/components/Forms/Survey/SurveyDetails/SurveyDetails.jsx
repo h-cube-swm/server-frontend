@@ -1,29 +1,32 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import withSurveyEnding from "../../../../hocs/withSurveyEnding";
 import API from "../../../../utils/apis";
 import { useMessage } from "../../../../contexts/MessageContext";
 import { useGlobalState } from "../../../../contexts/GlobalContext";
 
-import "./EditEnding.scss";
-import firework from "../../../../assets/icons/firework.png";
+import "./SurveyDetails.scss";
 import logo from "../../../../assets/images/logo.png";
 import embedBtn from "../../../../assets/icons/embed.svg";
 import duplicate from "../../../../assets/icons/duplicate.svg";
-import Firework from "../ResponseEnding/Firework/Firework";
 import TextField from "../../../TextField/TextField";
 import useOnly from "../../../../hooks/useOnly";
+import withSurvey from "../../../../hocs/withSurvey";
+import { answerToString, reshapeAnswerTo2DArray } from "../../../../utils/responseTools";
+import Table from "../../../Table/Table";
+import { SurveyStatus } from "../../../../constants";
+import { useModal } from "../../../../contexts/ModalContext";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
-const Ending = ({ ending }) => {
-  const { id: surveyId, title, description, deployId: surveyLink, id: resultLink } = ending;
-
+const SurveyDetails = ({ survey, setTimestamp }) => {
+  const { id: surveyId, status: surveyStatus, title, description, deployId } = survey;
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState("default");
+  const [isDrawOpen, setIsDrawOpen] = useState(false);
   const { token } = useGlobalState();
-
+  const [drawResult, drawError] = API.useDraw(surveyId);
   const { publish } = useMessage();
+  const { load } = useModal();
 
   const handleEmailSend = async () => {
     if (emailState === "loading") return;
@@ -50,6 +53,14 @@ const Ending = ({ ending }) => {
     }
   };
 
+  const onDraw = () => {
+    if (surveyStatus !== SurveyStatus.FINISHED) {
+      publish("주의❗️ 먼저 설문을 종료해야 추첨을 진행할 수 있습니다.", "warning");
+      return;
+    }
+    setIsDrawOpen(!isDrawOpen);
+  };
+
   const duplicateLink = (link) => {
     const linkarea = document.createElement("textarea");
     document.body.appendChild(linkarea);
@@ -70,6 +81,36 @@ const Ending = ({ ending }) => {
     document.execCommand("copy");
     document.body.removeChild(linkarea);
     publish("🖥 임베드 코드가 복사되었습니다 ✅");
+  };
+
+  const onSubmit = async (link, status) => {
+    const result = await API.putSurveyStatus(link, status);
+    if (result[2] === 200) {
+      publish("📄 설문이 종료 되었습니다 ✅");
+    }
+    setTimestamp(Date.now());
+  };
+
+  const finishSurvey = (link, status) => {
+    // eslint-disable-next-line
+    load({
+      children: (
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>
+            주의❗️ 정말 설문을 종료하시겠습니까?
+          </h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+            설문을 종료하면 더이상 응답을 받을 수 없습니다.
+            <br />
+            <br />
+            신중하게 결정해주세요 🤔
+          </p>
+        </>
+      ),
+      onSubmit: () => onSubmit(link, status),
+      type: "warning",
+      submitMessage: "종료",
+    });
   };
 
   if (!token)
@@ -102,35 +143,49 @@ const Ending = ({ ending }) => {
       throw new Error("Unexpected button state");
   }
 
+  let drawContent = (
+    <div className="draw-content">
+      <div className="draw-loading">
+        <div className="loading-dot one" />
+        <div className="loading-dot two" />
+        <div className="loading-dot three" />
+      </div>
+    </div>
+  );
+  if (drawError) {
+    if (drawError.response.status === 400) {
+      drawContent = (
+        <div className="draw-content">
+          <div className="draw-message">현재 응답인원이 부족하여 추첨을 진행할 수 없습니다.</div>
+        </div>
+      );
+    } else {
+      drawContent = (
+        <div className="draw-content">
+          <div className="error-message">추첨 진행 중 오류 발생 : {drawError.message}</div>
+        </div>
+      );
+    }
+  } else if (drawResult) {
+    const [columns, rows] = reshapeAnswerTo2DArray(survey, drawResult.selectedResponses);
+    const stringCols = columns.map((x) => x.title);
+    const stringRows = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
+
+    drawContent = (
+      <div className="draw-content">
+        <Table columns={stringCols} rows={stringRows} />
+      </div>
+    );
+  }
   return (
-    <div className="edit-ending">
+    <div className="survey-details">
       <div className="logo">
         <Link to="/" target="_blank">
           <img src={logo} alt="logo" />
         </Link>
+        <h1>설문 세부설정</h1>
       </div>
       <div className="contents-box">
-        <div className="celebrate-box">
-          <div className="celebrate-sentence">
-            <img src={firework} alt="celebrating firework" />
-            <h1>
-              축하합니다. <br />
-              설문을 완성했습니다. <br />
-              <br />
-            </h1>
-          </div>
-          <Firework />
-
-          {token ? (
-            <Link className="btn lg home-btn" to="/mypage">
-              마이페이지로
-            </Link>
-          ) : (
-            <Link className="btn lg home-btn" to="/">
-              홈으로
-            </Link>
-          )}
-        </div>
         <div className="service-box">
           <div className="section">
             <div className="box one">
@@ -143,7 +198,7 @@ const Ending = ({ ending }) => {
                 <button
                   onClick={() =>
                     duplicateEmbedLink(
-                      `<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"></iframe>`,
+                      `<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`,
                     )
                   }>
                   <div className="image-border">
@@ -152,7 +207,7 @@ const Ending = ({ ending }) => {
                   </div>
                 </button>
               </div>
-              <h3>{`<iframe src="${HOST}/forms/survey/response/${surveyLink}?embed=true"/>`}</h3>
+              <h3>{`<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`}</h3>
             </div>
             <div className="email box three">
               <h1>
@@ -197,13 +252,13 @@ const Ending = ({ ending }) => {
                   </h1>
                   <div className="button-box">
                     <button
-                      onClick={() => duplicateLink(`${HOST}/forms/survey/response/${surveyLink}`)}>
+                      onClick={() => duplicateLink(`${HOST}/forms/survey/response/${deployId}`)}>
                       <img src={duplicate} alt="duplicate button" />
                       <p>복사</p>
                     </button>
                   </div>
                 </div>
-                <h3>{`${HOST}/forms/survey/response/${surveyLink}`}</h3>
+                <h3>{`${HOST}/forms/survey/response/${deployId}`}</h3>
               </div>
             </div>
             <div className="box six">
@@ -216,15 +271,49 @@ const Ending = ({ ending }) => {
                   </h1>
                   <div className="button-box">
                     <button
-                      onClick={() => duplicateLink(`${HOST}/forms/survey/result/${resultLink}`)}>
+                      onClick={() => duplicateLink(`${HOST}/forms/survey/result/${surveyId}`)}>
                       <img src={duplicate} alt="duplicate button" />
                       <p>복사</p>
                     </button>
                   </div>
                 </div>
-
-                <h3>{`${HOST}/forms/survey/result/${resultLink}`}</h3>
+                <h3>{`${HOST}/forms/survey/result/${surveyId}`}</h3>
               </div>
+            </div>
+            {surveyStatus !== SurveyStatus.FINISHED && (
+              <button
+                className="box seven"
+                onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
+                <h1>종료하기</h1>
+              </button>
+            )}
+            {survey.draw.isEnabled && (
+              <button className={isDrawOpen ? "box eight open" : "box eight"} onClick={onDraw}>
+                {isDrawOpen ? (
+                  <div className="draw">
+                    <h1>추첨 결과</h1>
+                    <div>{drawContent}</div>
+                    <p className="source">
+                      해당 설문은{" "}
+                      <i>
+                        <a href="https://unboxing.monster/">Unboxing Monster</a>
+                      </i>
+                      의 블록체인 기술을 통해 공정성이 보장된 설문입니다.
+                    </p>
+                  </div>
+                ) : (
+                  <h1>추첨하기</h1>
+                )}
+              </button>
+            )}
+
+            <div className="box nine">
+              <Link className="option-btn" to={`/forms/survey/result/${surveyId}`}>
+                결과보기
+              </Link>
+            </div>
+            <div className="box ten">
+              <Link to="/mypage">마이페이지</Link>
             </div>
           </div>
         </div>
@@ -233,4 +322,4 @@ const Ending = ({ ending }) => {
   );
 };
 
-export default withSurveyEnding(Ending);
+export default withSurvey(SurveyDetails);
