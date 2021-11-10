@@ -24,7 +24,7 @@ function Choice({
 
   function shadeHexColor(color, percent) {
     let colorTemp = color;
-    if (!color || color.length < 0) colorTemp = "#2b44ff";
+    if (!color) colorTemp = "#2b44ff";
     const num = colorTemp.slice(1);
     const f = parseInt(num, 16);
     const t = percent < 0 ? 0 : 255;
