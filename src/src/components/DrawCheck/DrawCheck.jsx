@@ -7,11 +7,16 @@ import "./DrawCheck.scss";
 export default function DrawCheck({ match, location }) {
   const hash = location.hash.replace("#", "");
   const [draw, error] = API.useDraw(match.params.link, "response");
+
   let drawContent = null;
   let isWinner = false;
+  const isDrawAvailable = !error && draw;
+
   if (error) {
     drawContent = (
-      <div>Survey is not finished yet. Please visit here again after survey is finished.</div>
+      <div className="draw-content">
+        설문이 아직 종료되지 않았습니다. 설문이 종료된 후에 다시 방문해주시기 바랍니다.
+      </div>
     );
   } else if (!draw) {
     drawContent = (
@@ -26,7 +31,7 @@ export default function DrawCheck({ match, location }) {
   } else {
     drawContent = (
       <div className="draw-content">
-        <h2 className-="draw-result-title">당첨자 고유값</h2>
+        <h2 className="draw-result-title">당첨자 고유값</h2>
         {draw.selectedResponses.map((x) => {
           if (x === hash) {
             isWinner = true;
@@ -46,7 +51,7 @@ export default function DrawCheck({ match, location }) {
     <div className="draw-check">
       <FloatingLogo />
       <div className={isWinner ? "draw-inner-box" : "draw-inner-box loose"}>
-        {draw &&
+        {isDrawAvailable &&
           (isWinner ? (
             <p className="draw-result">🤩 당첨되었습니다 🤩</p>
           ) : (
