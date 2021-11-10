@@ -29,6 +29,10 @@
     box-shadow: $shadow-default;
     color: #000;
 
+    &.warning {
+      background: linear-gradient(to right, #ffae00, #ffc400);
+    }
+
     .modal-inner-box {
       display: flex;
       flex-direction: column;
