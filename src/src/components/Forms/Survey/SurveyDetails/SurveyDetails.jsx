@@ -15,7 +15,6 @@ import { answerToString, reshapeAnswerTo2DArray } from "../../../../utils/respon
 import Table from "../../../Table/Table";
 import { SurveyStatus } from "../../../../constants";
 import { useModal } from "../../../../contexts/ModalContext";
-import Tooltip from "../../../Tooltip/Tooltip";
 
 const HOST = `${window.location.protocol}//${window.location.host}`;
 
