@@ -7,6 +7,7 @@ import { CardStates, CardTypes } from "../../../../constants";
 /* Assets */
 import "./Card.scss";
 import imgHandle from "../../../../assets/icons/handle.svg";
+import addBtn from "../../../../assets/icons/add-btn-gray.svg";
 
 function Card({ onGrab, children }) {
   const { question, state, isLast, scrollRef } = useQuestion();
@@ -67,6 +68,12 @@ function Card({ onGrab, children }) {
           <img src={imgHandle} alt="handle"></img>
         </div>
       </Hider>
+      <div className="add-question-btn prev">
+        <img src={addBtn} alt="add question to previous index" />
+      </div>
+      <div className="add-question-btn next">
+        <img src={addBtn} alt="add question to next index" />
+      </div>
     </div>
   );
 }

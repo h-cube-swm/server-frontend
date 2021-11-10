@@ -240,6 +240,41 @@ function Edit({ survey: init, updateSurvey, location }) {
         href,
         onSubmit,
       );
+    } else if (token && survey.draw.isEnabled) {
+      load(
+        <>
+          <br />
+          <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+          <p
+            style={{
+              display: "block",
+              backgroundColor: "#f6c344",
+              borderRadius: "15px",
+              padding: "1.5rem",
+            }}>
+            잠깐 <b style={{ fontWeight: "bold" }}>설문의 추첨 기능</b>을 원할하게 진행하시려면
+            <br />
+            <br />
+            <b style={{ color: "#2b44ff", fontWeight: "bold" }}>이메일, 전화번호 등</b> 응답자를
+            특정할 수 있는 질문이 필요해요!
+          </p>
+          <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+            <br />
+            마지막 완료를 하기 전에 아래의 &quot;돌아가기&quot; 버튼을 눌러 검토해보세요 🤔
+            <br />
+            <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+              [흐름설정]
+            </Link>{" "}
+            또는
+            <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+              [미리보기]
+            </Link>
+            도 꼭 확인해보세요 👏
+          </p>
+        </>,
+        null,
+        onSubmit,
+      );
     } else {
       load(
         <>
@@ -345,7 +380,7 @@ function Edit({ survey: init, updateSurvey, location }) {
             const setQuestion = setNestedState(setSurvey, ["questions", index]);
 
             return (
-              <Positioner key={question.id} y={y}>
+              <Positioner key={question.id} y={y} zIndex={3}>
                 <Hider hide={isHide} animation={false} appearDelay={400}>
                   <QuestionProvider
                     state={state}
@@ -367,11 +402,10 @@ function Edit({ survey: init, updateSurvey, location }) {
         <div className="fade-out top" />
         <div className="fade-out bottom" />
 
-        <QuestionAddButton onClick={getInsertQuestion(selectedIndex)} y={"-30vh"} />
+        <QuestionAddButton onClick={getInsertQuestion(selectedIndex)} top />
 
         <QuestionAddButton
           onClick={getInsertQuestion(selectedIndex + 1)}
-          y={"30vh"}
           isLast={selectedIndex === questions.length - 1}
         />
         <Hider hide={selectedIndex === questions.length - 1}>

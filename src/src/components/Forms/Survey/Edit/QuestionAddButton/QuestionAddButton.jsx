@@ -1,19 +1,18 @@
 import React from "react";
 import addBtn from "../../../../../assets/icons/add-btn.svg";
-import Positioner from "../../../../Positioner/Positioner";
 import Hider from "../../../../Hider/Hider";
 import "./QuestionAddButton.scss";
 
-export default function QuestionAddButton({ y, onClick, isLast }) {
+export default function QuestionAddButton({ onClick, isLast, top }) {
+  const classes = ["question-add-box"];
+  if (top) {
+    classes.push("top");
+  }
   return (
-    <Positioner y={y}>
-      <Hider hide={isLast}>
-        <div className="question-add-box">
-          <button onClick={onClick}>
-            <img src={addBtn} alt="add button" />
-          </button>
-        </div>
-      </Hider>
-    </Positioner>
+    <Hider hide={isLast}>
+      <div className={classes.join(" ")}>
+        <button onClick={onClick} />
+      </div>
+    </Hider>
   );
 }
