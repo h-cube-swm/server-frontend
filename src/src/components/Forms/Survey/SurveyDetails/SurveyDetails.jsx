@@ -184,6 +184,7 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
         <Link to="/" target="_blank">
           <img src={logo} alt="logo" />
         </Link>
+        <h1>설문 세부설정</h1>
       </div>
       <div className="contents-box">
         <div className="service-box">
@@ -280,18 +281,15 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
                 <h3>{`${HOST}/forms/survey/result/${surveyId}`}</h3>
               </div>
             </div>
-            <div className="box seven">
-              <Tooltip text="곧 배포 예정인 기능입니다🤩" size="lg" pos="bottom">
-                <h1>연동하기</h1>
-              </Tooltip>
-            </div>
-            <div className="box eight">
-              <Tooltip text="곧 배포 예정인 기능입니다🤩" size="lg" pos="bottom">
-                <h1>수정하기</h1>
-              </Tooltip>
-            </div>
+            {surveyStatus !== SurveyStatus.FINISHED && (
+              <button
+                className="box seven"
+                onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
+                <h1>종료하기</h1>
+              </button>
+            )}
             {survey.draw.isEnabled && (
-              <button className={isDrawOpen ? "box nine open" : "box nine"} onClick={onDraw}>
+              <button className={isDrawOpen ? "box eight open" : "box eight"} onClick={onDraw}>
                 {isDrawOpen ? (
                   <div className="draw">
                     <h1>추첨 결과</h1>
@@ -309,13 +307,15 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
                 )}
               </button>
             )}
-            {surveyStatus !== SurveyStatus.FINISHED && (
-              <button
-                className="box ten"
-                onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
-                <h1>종료하기</h1>
-              </button>
-            )}
+
+            <div className="box nine">
+              <Link className="option-btn" to={`/forms/survey/result/${surveyId}`}>
+                결과보기
+              </Link>
+            </div>
+            <div className="box ten">
+              <Link to="/mypage">마이페이지</Link>
+            </div>
           </div>
         </div>
       </div>
