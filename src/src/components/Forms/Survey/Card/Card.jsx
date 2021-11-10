@@ -71,9 +71,11 @@ function Card({ onGrab, children }) {
       <div className="add-question-btn prev">
         <img src={addBtn} alt="add question to previous index" />
       </div>
-      <div className="add-question-btn next">
-        <img src={addBtn} alt="add question to next index" />
-      </div>
+      <Hider hide={isLast}>
+        <div className="add-question-btn next">
+          <img src={addBtn} alt="add question to next index" />
+        </div>
+      </Hider>
     </div>
   );
 }
