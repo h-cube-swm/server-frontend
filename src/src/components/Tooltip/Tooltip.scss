@@ -30,6 +30,9 @@
     &.left {
       transform: translateX(-100%);
     }
+    &.direct {
+      transform: translate(10%, 30%);
+    }
     &.bottom {
       transform: translate(-60%, 120%);
     }
