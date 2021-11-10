@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/* Hooks */
+import { useGlobalState } from "../../../../contexts/GlobalContext";
+import { useMessage } from "../../../../contexts/MessageContext";
+
 /* Styles */
 import "./ResponseEnding.scss";
 import firework from "../../../../assets/icons/firework.png";
@@ -9,10 +13,26 @@ import pencil from "../../../../assets/images/pencil.png";
 import books from "../../../../assets/images/books.png";
 import wand from "../../../../assets/images/wand.png";
 import FloatingLogo from "../../../FloatingLogo/FloatingLogo";
-import { useGlobalState } from "../../../../contexts/GlobalContext";
+import duplicate from "../../../../assets/icons/duplicate.svg";
 
-export default function ResponseEnding() {
+const HOST = `${window.location.protocol}//${window.location.host}`;
+
+export default function ResponseEnding({ location }) {
   const { isEmbed } = useGlobalState();
+  const hash = location.hash.replace("#", "");
+  const drawResultLink = `${HOST}/forms/survey/draw/${hash}`;
+  const { publish } = useMessage();
+
+  const duplicateLink = (link) => {
+    const linkarea = document.createElement("textarea");
+    document.body.appendChild(linkarea);
+    linkarea.value = link;
+    linkarea.focus();
+    linkarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(linkarea);
+    publish("📎 링크가 복사되었습니다 ✅");
+  };
 
   return (
     <div className="response-ending">
@@ -38,12 +58,33 @@ export default function ResponseEnding() {
             <div className="section">
               <div className="box one">
                 <div className="description">
-                  <h1>편하게,</h1>
-                  <h1>쉽게,</h1>
-                  <h1>빠르게,</h1>
-                  <h1>응답하고</h1>
+                  {hash ? (
+                    <>
+                      <div className="explain">
+                        <h1>
+                          아래 링크를 통해
+                          <br />
+                          <strong>추첨 결과</strong>를 확인하세요.
+                        </h1>
+                        <div className="button-box">
+                          <button onClick={() => duplicateLink(`${drawResultLink}`)}>
+                            <img src={duplicate} alt="duplicate button" />
+                            <p>복사</p>
+                          </button>
+                        </div>
+                      </div>
+                      <h3>{`${drawResultLink}`}</h3>
+                    </>
+                  ) : (
+                    <>
+                      <h1>편하게,</h1>
+                      <h1>쉽게,</h1>
+                      <h1>빠르게,</h1>
+                      <h1>응답하고</h1>
+                    </>
+                  )}
                 </div>
-                <img src={pencil} alt="pencil" />
+                {!hash && <img className="pencil" src={pencil} alt="pencil" />}
               </div>
               <div className="box four">
                 <img src={wand} alt="wand" />

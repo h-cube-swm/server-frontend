@@ -62,14 +62,50 @@
         h1 {
           font-size: $fs-md;
           font-weight: $fw-bold;
-          line-height: 1.5;
           color: white;
+          word-break: keep-all;
+          strong {
+            color: #1dff0a;
+          }
+        }
+        h3 {
+          display: block;
+          font-size: $fs-sm;
+          font-weight: $fw-bold;
+          margin: 0.5rem 0;
+          color: white;
+          width: 100%;
+          height: 100%;
+          word-break: break-all;
+          overflow: scroll;
         }
         &.one {
           grid-row: 1;
           grid-column: 1;
-          background: linear-gradient(to right, #2b44ff, #e33723);
-          img {
+          background: linear-gradient(to right, #2b44ff, #707070);
+          .explain {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            .button-box {
+              width: 3rem;
+              height: 4rem;
+              border: 1px solid #fff;
+              border-radius: 10px;
+              button {
+                background-color: rgba($color: #000000, $alpha: 0);
+                p {
+                  color: #fff;
+                }
+                img {
+                  width: 50%;
+                  margin-top: 0.5rem;
+                }
+              }
+            }
+          }
+          .pencil {
             width: 40%;
           }
         }
@@ -103,11 +139,16 @@
       max-width: 1200px;
       .celebrate-sentence {
         h1 {
-          font-size: $fs-lg;
+          font-size: $fs-md;
         }
       }
       .celebrate-box {
         margin-right: 3rem;
+        .celebrate-sentence {
+          img {
+            width: 4rem;
+          }
+        }
       }
       .section {
         .box {
@@ -117,6 +158,14 @@
           h1 {
             font-size: $fs-rg;
             line-height: 1.5;
+          }
+          h3 {
+            margin: 0;
+          }
+          &.one {
+            .explain {
+              margin-bottom: 0;
+            }
           }
         }
       }
