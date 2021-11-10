@@ -51,26 +51,7 @@ export function reshapeAnswerTo2DArray(survey, answers) {
   return [
     [{ title: "응답 시각", type: "timestamp" }].concat(questions).concat([
       {
-        title: (
-          <span>
-            쿼리 파라미터
-            {/* <Tooltip text="클릭해서 쿼리 파라매터에 대해 알아보세요!" size="md">
-                          <a
-                            href="/help/query-params"
-                            style={{
-                              // Todo : 여기 scss로 빼기
-                              borderRadius: "16px",
-                              width: "1rem",
-                              height: "1rem",
-                              marginLeft: "1rem",
-                              padding: "0.2rem",
-                              backgroundColor: "#aaa",
-                            }}>
-                            ?
-                          </a>
-                        </Tooltip> */}
-          </span>
-        ),
+        title: <span>쿼리 파라미터</span>,
         type: "query",
       },
     ]),
