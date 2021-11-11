@@ -29,9 +29,10 @@
   .contents-box {
     display: flex;
     justify-content: center;
-    align-content: flex-end;
+    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 95%;
+    margin-top: 3rem;
     .section {
       display: grid;
       justify-content: center;
@@ -39,10 +40,11 @@
       grid-template-columns: repeat(8, 1fr);
       grid-template-rows: repeat(7, 1fr);
       grid-gap: 1rem;
-      margin-top: 7rem;
-      margin-left: 0;
+      margin: 0 5rem;
       width: 90%;
-      height: 77%;
+      height: 80%;
+      max-width: 1200px;
+      max-height: 600px;
 
       .box {
         padding: 1.5rem;
@@ -78,10 +80,9 @@
           display: block;
           font-size: $fs-sm;
           font-weight: $fw-bold;
-          margin: 0.5rem 0;
           color: white;
           width: 100%;
-          height: 100%;
+          height: 40%;
           word-break: break-all;
           overflow: scroll;
         }
@@ -97,7 +98,9 @@
           background: linear-gradient(to right, #707070, #b1b1b1);
           .embed-title {
             display: flex;
+            justify-content: space-between;
             align-items: flex-start;
+            width: 100%;
             .image-border {
               width: 3rem;
               height: 4rem;
