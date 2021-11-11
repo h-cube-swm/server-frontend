@@ -3,6 +3,7 @@ import API from "../../utils/apis";
 import FloatingLogo from "../FloatingLogo/FloatingLogo";
 
 import "./DrawCheck.scss";
+import unboxingBadge from "../../assets/images/unboxing-badge.png";
 
 export default function DrawCheck({ match, location }) {
   const hash = location.hash.replace("#", "");
@@ -15,7 +16,8 @@ export default function DrawCheck({ match, location }) {
   if (error) {
     drawContent = (
       <div className="draw-content">
-        설문이 아직 종료되지 않았습니다. 설문이 종료된 후에 다시 방문해주시기 바랍니다.
+        <p className="not-finished">설문이 아직 종료되지 않았습니다.</p>
+        <p className="not-finished">설문이 종료된 후에 다시 방문해주시기 바랍니다.</p>
       </div>
     );
   } else if (!draw) {
@@ -50,14 +52,20 @@ export default function DrawCheck({ match, location }) {
   return (
     <div className="draw-check">
       <FloatingLogo />
-      <div className={isWinner ? "draw-inner-box" : "draw-inner-box loose"}>
-        {isDrawAvailable &&
-          (isWinner ? (
-            <p className="draw-result">🤩 당첨되었습니다 🤩</p>
-          ) : (
-            <p className="draw-result">😭 당첨되지 못했습니다 😭</p>
-          ))}
-        {drawContent}
+      <div className="draw-box">
+        <div className="draw-badge-box">
+          <img className="badge" src={unboxingBadge} alt="verified survey mark" />
+          <p>블록체인 기술을 통해 응답자 추첨의 공정성이 보장받는 설문입니다 🔒</p>
+        </div>
+        <div className={isWinner ? "draw-inner-box" : "draw-inner-box loose"}>
+          {isDrawAvailable &&
+            (isWinner ? (
+              <p className="draw-result">🤩 당첨되었습니다 🤩</p>
+            ) : (
+              <p className="draw-result">😭 당첨되지 못했습니다 😭</p>
+            ))}
+          {drawContent}
+        </div>
       </div>
     </div>
   );

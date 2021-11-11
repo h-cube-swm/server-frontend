@@ -186,135 +186,133 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
         <h1>설문 세부설정</h1>
       </div>
       <div className="contents-box">
-        <div className="service-box">
-          <div className="section">
-            <div className="box one">
-              <h1>설문 제목</h1>
-              <h2>{title}</h2>
-            </div>
-            <div className="box two">
-              <div className="embed-title">
-                <h1>홈페이지에 직접 삽입해보세요.</h1>
-                <button
-                  onClick={() =>
-                    duplicateEmbedLink(
-                      `<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`,
-                    )
-                  }>
-                  <div className="image-border">
-                    <img src={embedBtn} alt="" />
-                    <p>복사</p>
-                  </div>
-                </button>
-              </div>
-              <h3>{`<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`}</h3>
-            </div>
-            <div className="email box three">
-              <h1>
-                이메일을 적어주시면
-                <br />
-                <strong>공유</strong>와 <strong>결과</strong> 링크를 보내드립니다.
-              </h1>
-              <div className="email-input">
-                <div className="email-input-box">
-                  <TextField
-                    placeholder="이메일을 입력하세요"
-                    size="lg"
-                    setText={handleEmailInput}
-                    text={email}
-                  />
-                  <hr className="email-underline"></hr>
-                </div>
-                <button
-                  onClick={handleEmailSend}
-                  className={buttonClasses.join(" ")}
-                  to="/forms/survey"
-                  disabled={emailState !== "default"}>
-                  {buttonText}
-                </button>
-              </div>
-              <p>
-                * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당 설문에 접근할 수
-                없습니다.
-              </p>
-            </div>
-            <div className="box four">
-              <h1>설문 설명</h1>
-              <h3>{description}</h3>
-            </div>
-            <div className="box five">
-              <div className="description">
-                <div className="explain">
-                  <h1>
-                    아래 링크를 통해
-                    <br />
-                    <strong>공유</strong>하세요.
-                  </h1>
-                  <div className="button-box">
-                    <button
-                      onClick={() => duplicateLink(`${HOST}/forms/survey/response/${deployId}`)}>
-                      <img src={duplicate} alt="duplicate button" />
-                      <p>복사</p>
-                    </button>
-                  </div>
-                </div>
-                <h3>{`${HOST}/forms/survey/response/${deployId}`}</h3>
-              </div>
-            </div>
-            <div className="box six">
-              <div className="description">
-                <div className="explain">
-                  <h1>
-                    아래 링크를 통해
-                    <br />
-                    <strong>결과</strong>를 확인하세요.
-                  </h1>
-                  <div className="button-box">
-                    <button
-                      onClick={() => duplicateLink(`${HOST}/forms/survey/result/${surveyId}`)}>
-                      <img src={duplicate} alt="duplicate button" />
-                      <p>복사</p>
-                    </button>
-                  </div>
-                </div>
-                <h3>{`${HOST}/forms/survey/result/${surveyId}`}</h3>
-              </div>
-            </div>
-            {surveyStatus !== SurveyStatus.FINISHED && (
+        <div className="section">
+          <div className="box one">
+            <h1>설문 제목</h1>
+            <h2>{title}</h2>
+          </div>
+          <div className="box two">
+            <div className="embed-title">
+              <h1>홈페이지에 직접 삽입해보세요.</h1>
               <button
-                className="box seven"
-                onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
-                <h1>종료하기</h1>
+                onClick={() =>
+                  duplicateEmbedLink(
+                    `<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`,
+                  )
+                }>
+                <div className="image-border">
+                  <img src={embedBtn} alt="" />
+                  <p>복사</p>
+                </div>
               </button>
-            )}
-            {survey.draw.isEnabled && (
-              <button className={isDrawOpen ? "box eight open" : "box eight"} onClick={onDraw}>
-                {isDrawOpen ? (
-                  <div className="draw">
-                    <h1>추첨 결과</h1>
-                    <div>{drawContent}</div>
-                    <p className="source">
-                      해당 설문은{" "}
-                      <i>
-                        <a href="https://unboxing.monster/">Unboxing Monster</a>
-                      </i>
-                      의 블록체인 기술을 통해 공정성이 보장된 설문입니다.
-                    </p>
-                  </div>
-                ) : (
-                  <h1>추첨하기</h1>
-                )}
+            </div>
+            <h3>{`<iframe src="${HOST}/forms/survey/response/${deployId}?embed=true"></iframe>`}</h3>
+          </div>
+          <div className="email box three">
+            <h1>
+              이메일을 적어주시면
+              <br />
+              <strong>공유</strong>와 <strong>결과</strong> 링크를 보내드립니다.
+            </h1>
+            <div className="email-input">
+              <div className="email-input-box">
+                <TextField
+                  placeholder="이메일을 입력하세요"
+                  size="lg"
+                  setText={handleEmailInput}
+                  text={email}
+                />
+                <hr className="email-underline"></hr>
+              </div>
+              <button
+                onClick={handleEmailSend}
+                className={buttonClasses.join(" ")}
+                to="/forms/survey"
+                disabled={emailState !== "default"}>
+                {buttonText}
               </button>
-            )}
+            </div>
+            <p>
+              * 이메일을 보내지 않거나, 링크를 저장해두지 않는 경우 해당 설문에 접근할 수 없습니다.
+            </p>
+          </div>
+          <div className="box four">
+            <h1>설문 설명</h1>
+            <h3>{description}</h3>
+          </div>
+          <div className="box five">
+            <div className="description">
+              <div className="explain">
+                <h1>
+                  아래 링크를 통해
+                  <br />
+                  <strong>공유</strong>하세요.
+                </h1>
+                <div className="button-box">
+                  <button
+                    onClick={() => duplicateLink(`${HOST}/forms/survey/response/${deployId}`)}>
+                    <img src={duplicate} alt="duplicate button" />
+                    <p>복사</p>
+                  </button>
+                </div>
+              </div>
+              <h3>{`${HOST}/forms/survey/response/${deployId}`}</h3>
+            </div>
+          </div>
+          <div className="box six">
+            <div className="description">
+              <div className="explain">
+                <h1>
+                  아래 링크를 통해
+                  <br />
+                  <strong>결과</strong>를 확인하세요.
+                </h1>
+                <div className="button-box">
+                  <button onClick={() => duplicateLink(`${HOST}/forms/survey/result/${surveyId}`)}>
+                    <img src={duplicate} alt="duplicate button" />
+                    <p>복사</p>
+                  </button>
+                </div>
+              </div>
+              <h3>{`${HOST}/forms/survey/result/${surveyId}`}</h3>
+            </div>
+          </div>
+          {surveyStatus !== SurveyStatus.FINISHED && (
+            <button
+              className="box seven"
+              onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
+              <h1>종료하기</h1>
+            </button>
+          )}
+          {survey.draw.isEnabled && (
+            <button className={isDrawOpen ? "box eight open" : "box eight"} onClick={onDraw}>
+              {isDrawOpen ? (
+                <div className="draw">
+                  <h1>추첨 결과</h1>
+                  <div>{drawContent}</div>
+                  <p className="source">
+                    해당 설문은{" "}
+                    <i>
+                      <a href="https://unboxing.monster/" target="_blank" rel="noopener noreferrer">
+                        Unboxing Monster
+                      </a>
+                    </i>
+                    의 블록체인 기술을 통해 공정성이 보장된 설문입니다.
+                  </p>
+                </div>
+              ) : (
+                <h1>추첨하기</h1>
+              )}
+            </button>
+          )}
 
-            <div className="box nine">
-              <Link className="option-btn" to={`/forms/survey/result/${surveyId}`}>
-                결과보기
-              </Link>
-            </div>
-            <div className="box ten">
-              <Link to="/mypage">마이페이지</Link>
-            </div>
+          <div className="box nine">
+            <Link className="option-btn" to={`/forms/survey/result/${surveyId}`}>
+              결과보기
+            </Link>
+          </div>
+          <div className="box ten">
+            <Link to="/mypage">마이페이지</Link>
           </div>
         </div>
       </div>
