@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Loading from "../components/Loading/Loading";
-import API from "../utils/apis";
-import { tryUnhash } from "../utils/hasher";
-import Error from "../components/Error/Error";
+import Loading from "pages/Loading/Loading";
+import API from "utils/apis";
+import { tryUnhash } from "utils/hasher";
+import Error from "pages/Error/Error";
 
 const withSurvey = (Component) => (props) => {
   const [timestamp, setTimestamp] = useState(Date.now());

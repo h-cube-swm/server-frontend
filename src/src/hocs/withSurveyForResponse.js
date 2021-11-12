@@ -1,9 +1,9 @@
 import React from "react-router-dom";
-import Loading from "../components/Loading/Loading";
-import API from "../utils/apis";
-import { tryUnhash } from "../utils/hasher";
-import Error from "../components/Error/Error";
-import { SurveyStatus } from "../constants";
+import Loading from "pages/Loading/Loading";
+import API from "utils/apis";
+import { tryUnhash } from "utils/hasher";
+import Error from "pages/Error/Error";
+import { SurveyStatus } from "constants.js";
 
 const withSurvey = (Component) => (props) => {
   let surveyId = props.match.params.link;

@@ -1,0 +1,429 @@
+/* React elements */
+import React, { useEffect, useState } from "react";
+import { Link, Redirect, useLocation, useHistory } from "react-router-dom";
+
+/* HOC, Context, Hooks */
+import { QuestionProvider } from "contexts/QuestionContext";
+import withSurveyForEdit from "hocs/withSurveyForEdit";
+import useScrollPaging from "hooks/useScrollPaging";
+import useDragPaging from "hooks/useDragPaging";
+import useThrottle from "hooks/useThrottle";
+import useOnly from "hooks/useOnly";
+import orderedMap from "utils/orderedMap";
+import { CardStates, CardStyle, CardTypes, DOMAIN } from "constants.js";
+import setNestedState from "utils/setNestedState";
+import getQuestion from "utils/getQuestion";
+import { useMessage } from "contexts/MessageContext";
+import { useGlobalState } from "contexts/GlobalContext";
+import { useModal } from "contexts/ModalContext";
+import apis from "utils/apis";
+import Positioner from "components/Positioner/Positioner";
+import Hider from "components/Hider/Hider";
+import QuestionCommon from "components/QuestionCommon/QuestionCommon";
+import Title from "components/Title/Title";
+import { Response } from "pages/Response/Response";
+
+import Card from "./Card/Card";
+import Controller from "./Controller/Controller";
+import Sidebar from "./Sidebar/Sidebar";
+import Prologue from "./Prologue/Prologue";
+import QuestionAddButton from "./QuestionAddButton/QuestionAddButton";
+import "./Edit.scss";
+import Branching from "./Branching/Branching";
+
+const MODE_EDIT = "edit";
+const MODE_PREVIEW = "preview";
+const MODE_BRANCHING = "branching";
+
+function Preview({ survey }) {
+  const [responses, setResponses] = useState(null);
+
+  function resetResponse() {
+    setResponses((responses) => ({ ...responses, history: [] }));
+  }
+
+  useOnly(resetResponse, [survey]);
+
+  if (!responses) return null;
+
+  return (
+    <Response
+      survey={survey}
+      responses={responses}
+      setResponses={setResponses}
+      onSubmit={resetResponse}
+      tabIndex="-1"
+      isPreview={true}
+    />
+  );
+}
+
+function Edit({ survey: init, updateSurvey, location }) {
+  const [survey, setSurvey] = useState(init);
+  const [isEnded, setIsEnded] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isFolded, setIsFolded] = useState(true);
+
+  useEffect(() => setIsSaving(true), [survey]);
+
+  const viewMode = location.hash.replace("#", "");
+  const isPreview = viewMode === MODE_PREVIEW;
+  const isBranching = viewMode === MODE_BRANCHING;
+  const isEdit = viewMode !== MODE_PREVIEW && viewMode !== MODE_BRANCHING;
+
+  const { load } = useModal();
+  const { publish } = useMessage();
+  const current = `https://${DOMAIN}${useLocation().pathname}`;
+  const href = `https://auth.the-form.io?redirect=${current}`;
+  const { token } = useGlobalState();
+
+  const setSelectedIndex = setNestedState(setSurvey, ["selectedIndex"]);
+  const history = useHistory();
+
+  const getInsertQuestion = (index) => () => {
+    setSurvey((survey) => {
+      const question = getQuestion();
+      const questions = [...survey.questions];
+      questions.splice(index, 0, question);
+      return { ...survey, questions };
+    });
+    setSelectedIndex(index);
+  };
+
+  const getRemoveQuestion = (index) => () => {
+    if (survey.questions.length <= 1) return;
+    setSurvey((survey) => {
+      const questions = [...survey.questions];
+      let { selectedIndex } = survey;
+      questions.splice(index, 1);
+      if (index === survey.questions.length - 1) {
+        selectedIndex = index - 1;
+      }
+      return { ...survey, selectedIndex, questions };
+    });
+  };
+
+  const getCopyQuestion = (index) => () => {
+    setSurvey((_survey) => {
+      // ToDo : Use efficient deepcopy library instead of tricky copy
+      const survey = JSON.parse(JSON.stringify(_survey));
+      const questions = [...survey.questions];
+
+      // Copy question with new id
+      const { id } = getQuestion();
+      const newQuestion = { ...questions[index], id };
+      questions.splice(index + 1, 0, newQuestion);
+
+      // Update selectedIndex
+      const selectedIndex = index + 1;
+      return { ...survey, selectedIndex, questions };
+    });
+  };
+
+  const events = useScrollPaging((delta) => {
+    const index = survey.selectedIndex;
+    const { length } = survey.questions;
+
+    let newIndex = index + delta;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= length) newIndex = length - 1;
+    if (newIndex === index) return;
+    setSelectedIndex(newIndex);
+  });
+
+  const putSurvey = async () => {
+    await updateSurvey(survey);
+    setIsSaving(false);
+  };
+
+  const [onGrab, backgroundCallbacks, item, isDragging] = useDragPaging((delta) => {
+    // Calculate new index
+    const { selectedIndex } = survey;
+    const newIndex = selectedIndex + delta;
+
+    // Check range
+    if (newIndex < 0) return;
+    if (newIndex >= survey.questions.length - 1) return;
+    if (newIndex === selectedIndex) return;
+
+    // Swap two question
+    const questions = [...survey.questions];
+    const tmp = questions[selectedIndex];
+    questions[selectedIndex] = questions[newIndex];
+    questions[newIndex] = tmp;
+
+    setSurvey({ ...survey, selectedIndex: newIndex, questions });
+  });
+
+  useThrottle(putSurvey, [survey]);
+
+  if (survey.status !== "editing" || isEnded)
+    return <Redirect to={`/forms/survey/details/${survey.id}`} />;
+
+  const { selectedIndex } = survey;
+  const setQuesionType = setNestedState(setSurvey, ["questions", selectedIndex, "type"]);
+
+  const selectedSurveyType = survey.questions[selectedIndex].type;
+  const { questions } = survey;
+
+  function detectQuestion() {
+    let index = -1;
+    let message = [];
+
+    for (let i = 0; i < questions.length && index < 0; i++) {
+      if (
+        questions[i].type === CardTypes.SINGLE_CHOICE ||
+        questions[i].type === CardTypes.MULTIPLE_CHOICE
+      ) {
+        if (questions[i].choices.length === 0) {
+          message = ["주의❗️ 아래 질문에 선택지가 없습니다.", "warning"];
+          index = i;
+        }
+        for (let j = 0; j < questions[i].choices.length; j++) {
+          if (questions[i].choices[j].length === 0) {
+            message = ["주의❗️ 아래 질문에 빈 선택지가 있습니다.", "warning"];
+            index = i;
+          }
+        }
+      }
+      if (!questions[i].title) {
+        message = ["주의❗️ 아래 질문의 제목이 비어있습니다.", "warning"];
+        index = i;
+      }
+      if (i === questions.length - 1 && !questions[i].title) {
+        message = ["주의❗️ 설문의 종료 메시지를 작성해주세요.", "warning"];
+        index = i;
+      }
+    }
+
+    if (index >= 0) {
+      publish(...message);
+      setSelectedIndex(index);
+      history.push("#edit");
+      return false;
+    }
+
+    return true;
+  }
+
+  const onSubmit = async () => {
+    try {
+      await putSurvey();
+      await apis.endSurvey(survey.id);
+      setIsEnded(true);
+    } catch {
+      /* */
+    }
+  };
+
+  const onClick = () => {
+    if (survey.title.length === 0) {
+      publish("주의❗️ 설문 제목을 입력해야 설문 제작을 완료할 수 있습니다.", "warning");
+      setIsFolded(false);
+      return;
+    }
+
+    if (!detectQuestion()) return;
+
+    if (!token) {
+      load({
+        children: (
+          <>
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              잠깐! 로그인을 하지 않으면, 수정이 불가능합니다 🔨
+            </p>
+            <p style={{ fontWeight: "500" }}>
+              1초만에 로그인하고 더 폼 나게 설문을 만들어보세요 👏
+            </p>
+          </>
+        ),
+        href,
+        onSubmit,
+      });
+    } else if (token && survey.draw.isEnabled) {
+      load({
+        children: (
+          <>
+            <br />
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p
+              style={{
+                display: "block",
+                backgroundColor: "#f6c344",
+                borderRadius: "15px",
+                padding: "1.5rem",
+              }}>
+              잠깐 <b style={{ fontWeight: "bold" }}>설문의 추첨 기능</b>을 원할하게 진행하시려면
+              <br />
+              <br />
+              <b style={{ color: "#2b44ff", fontWeight: "bold" }}>이메일, 전화번호 등</b> 응답자를
+              특정할 수 있는 질문이 필요해요!
+            </p>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              <br />
+              마지막 완료를 하기 전에 아래의 &quot;돌아가기&quot; 버튼을 눌러 검토해보세요 🤔
+              <br />
+              <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [흐름설정]
+              </Link>{" "}
+              또는
+              <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [미리보기]
+              </Link>
+              도 꼭 확인해보세요 👏
+            </p>
+          </>
+        ),
+        onSubmit,
+      });
+    } else {
+      load({
+        children: (
+          <>
+            <br />
+            <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
+            <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
+              잠깐⚠️ 설문의{" "}
+              <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [흐름설정]
+              </Link>{" "}
+              또는
+              <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
+                [미리보기]
+              </Link>
+              을 확인하셨나요?
+              <br />
+              <br />
+              혹시 놓치셨다면 아래의 &quot;돌아가기&quot; 버튼을 눌러 더 다듬어주시고 🤔 <br />
+              <br />
+              설문 제작을 모두 마치셨다면 아래의 &quot;완료&quot; 버튼을 눌러주세요 👏
+            </p>
+          </>
+        ),
+        onSubmit,
+      });
+    }
+  };
+
+  return (
+    <div className="edit" {...backgroundCallbacks}>
+      <Title>{`${survey.title ? survey.title : ""} : 편집중`}</Title>
+      <Prologue
+        survey={survey}
+        setSurvey={setSurvey}
+        isFolded={isFolded}
+        setIsFolded={setIsFolded}
+        setIsEnded={setIsEnded}>
+        {isSaving ? (
+          <>
+            <p className="save-indicator">저장중...</p>
+            <button className="btn rg submit-btn saving">완료</button>
+          </>
+        ) : (
+          <>
+            <p className="save-indicator">저장됨</p>
+            <button onClick={onClick} className="btn rg submit-btn">
+              완료
+            </button>
+          </>
+        )}
+      </Prologue>
+
+      <div className="section">
+        <Link className={"part " + (isBranching && "selected")} to={"#" + MODE_BRANCHING}>
+          흐름설정
+        </Link>
+        <div className="divider" />
+        <Link className={"part " + (isEdit && "selected")} to={"#" + MODE_EDIT}>
+          설문편집
+        </Link>
+        <div className="divider" />
+        <Link className={"part " + (isPreview && "selected")} to={"#" + MODE_PREVIEW}>
+          미리보기
+        </Link>
+      </div>
+
+      <div
+        className={"view view-edit " + ((isPreview && "left") || (isBranching && "right"))}
+        {...events}>
+        <div className="positioning-box">
+          <div className="sidebar-box">
+            <Sidebar
+              questions={questions}
+              currentIndex={selectedIndex}
+              onSelect={setSelectedIndex}
+            />
+          </div>
+        </div>
+
+        {/* Ghost that appears when card moves */}
+        <div ref={item}>
+          <QuestionProvider
+            state={CardStates.GHOST}
+            surveyId={survey.id}
+            question={questions[selectedIndex]}
+            tabIndex="-1"
+            themeColor={survey.themeColor}>
+            <Card slowAppear={false}>
+              <QuestionCommon />
+            </Card>
+          </QuestionProvider>
+        </div>
+
+        <div className="question-box">
+          {orderedMap(questions, (question, index) => {
+            const isSelected = index === selectedIndex;
+            const y = (index - selectedIndex) * CardStyle.FRAME_HEIGHT;
+            const slowAppear = questions.length > 1;
+            const isHide = isDragging && isSelected;
+            const state = isSelected ? CardStates.EDITING : CardStates.PREVIEW;
+            const onDelete = questions.length > 1 && isSelected && getRemoveQuestion(index);
+            const onDuplicate = isSelected && getCopyQuestion(index);
+            const setQuestion = setNestedState(setSurvey, ["questions", index]);
+
+            return (
+              <Positioner key={question.id} y={y} zIndex={3}>
+                <Hider hide={isHide} animation={false} appearDelay={400}>
+                  <QuestionProvider
+                    state={state}
+                    surveyId={survey.id}
+                    question={question}
+                    setQuestion={isSelected && setQuestion}
+                    isLast={index === questions.length - 1}
+                    themeColor={survey.themeColor}>
+                    <Card onGrab={onGrab} slowAppear={slowAppear}>
+                      <QuestionCommon handleOnDelete={onDelete} handleOnDuplicate={onDuplicate} />
+                    </Card>
+                  </QuestionProvider>
+                </Hider>
+              </Positioner>
+            );
+          })}
+        </div>
+
+        <div className="fade-out top" />
+        <div className="fade-out bottom" />
+
+        <QuestionAddButton onClick={getInsertQuestion(selectedIndex)} top />
+
+        <QuestionAddButton
+          onClick={getInsertQuestion(selectedIndex + 1)}
+          isLast={selectedIndex === questions.length - 1}
+        />
+        <Hider hide={selectedIndex === questions.length - 1}>
+          <Controller type={selectedSurveyType} setType={setQuesionType} />
+        </Hider>
+      </div>
+      <div className={"view " + (isPreview || "right")}>
+        <Preview survey={survey}></Preview>
+      </div>
+      <div className={"view " + (isBranching || "left")}>
+        <Branching survey={survey} setSurvey={setSurvey}></Branching>
+      </div>
+    </div>
+  );
+}
+
+// ToDo : Swagger를 써 볼 수도!
+export default withSurveyForEdit(Edit);
