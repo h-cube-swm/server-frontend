@@ -10,6 +10,7 @@ module.exports = {
     "import/resolver": {
       node: {
         extensions: [".js", ".jsx"],
+        paths: ["src"],
       },
     },
   },
