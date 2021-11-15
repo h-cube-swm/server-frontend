@@ -291,7 +291,7 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
                   <h1>추첨 결과</h1>
                   <div>{drawContent}</div>
                   <p className="source">
-                    해당 설문은{" "}
+                    해당 설문은
                     <i>
                       <a href="https://unboxing.monster/" target="_blank" rel="noopener noreferrer">
                         Unboxing Monster

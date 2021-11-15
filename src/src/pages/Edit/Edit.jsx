@@ -227,7 +227,7 @@ function Edit({ survey: init, updateSurvey, location }) {
       await apis.endSurvey(survey.id);
       setIsEnded(true);
     } catch {
-      /* */
+      // ToDo : Error handling
     }
   };
 
@@ -281,7 +281,7 @@ function Edit({ survey: init, updateSurvey, location }) {
               <br />
               <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
                 [흐름설정]
-              </Link>{" "}
+              </Link>
               또는
               <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
                 [미리보기]
@@ -299,10 +299,10 @@ function Edit({ survey: init, updateSurvey, location }) {
             <br />
             <h2 style={{ fontWeight: "700", marginBottom: "1rem" }}>🎉 설문을 완성했습니다 🎉</h2>
             <p style={{ fontWeight: "500", marginBottom: "1rem" }}>
-              잠깐⚠️ 설문의{" "}
+              잠깐⚠️ 설문의
               <Link to={"#" + MODE_BRANCHING} style={{ color: "#2b44ff", fontWeight: "bold" }}>
                 [흐름설정]
-              </Link>{" "}
+              </Link>
               또는
               <Link to={"#" + MODE_PREVIEW} style={{ color: "#2b44ff", fontWeight: "bold" }}>
                 [미리보기]

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function useThrottle(callback, dependencies, timeout = 1000) {
-  const timeoutHandle = useRef(0);
+  const timeoutHandle = useRef(null);
   useEffect(() => {
     const handle = setTimeout(() => {
       if (timeoutHandle.current !== handle) return;
