@@ -1,35 +1,50 @@
-/* React elements */
+// React elements
 import React, { useEffect, useState } from "react";
 import { Link, Redirect, useLocation, useHistory } from "react-router-dom";
 
-/* HOC, Context, Hooks */
-import { QuestionProvider } from "contexts/QuestionContext";
+// Hocs
 import withSurveyForEdit from "hocs/withSurveyForEdit";
-import useScrollPaging from "hooks/useScrollPaging";
-import useDragPaging from "hooks/useDragPaging";
-import useThrottle from "hooks/useThrottle";
+
+// Hooks
 import useOnly from "hooks/useOnly";
+import useThrottle from "hooks/useThrottle";
+import useDragPaging from "hooks/useDragPaging";
+import useScrollPaging from "hooks/useScrollPaging";
+
+// Utils
+import apis from "utils/apis";
 import orderedMap from "utils/orderedMap";
-import { CardStates, CardStyle, CardTypes, DOMAIN } from "constants.js";
-import setNestedState from "utils/setNestedState";
 import getQuestion from "utils/getQuestion";
+import setNestedState from "utils/setNestedState";
+
+// Contexts
+import { useModal } from "contexts/ModalContext";
 import { useMessage } from "contexts/MessageContext";
 import { useGlobalState } from "contexts/GlobalContext";
-import { useModal } from "contexts/ModalContext";
-import apis from "utils/apis";
-import Positioner from "components/Positioner/Positioner";
-import Hider from "components/Hider/Hider";
-import QuestionCommon from "components/QuestionCommon/QuestionCommon";
+import { QuestionProvider } from "contexts/QuestionContext";
+
+// Components
 import Title from "components/Title/Title";
+import Hider from "components/Hider/Hider";
+import Positioner from "components/Positioner/Positioner";
+import QuestionCommon from "components/QuestionCommon/QuestionCommon";
+
+// Pages
 import { Response } from "pages/Response/Response";
 
+// Constants
+import { CardStates, CardStyle, CardTypes, DOMAIN } from "constants.js";
+
+// Sub-components
 import Card from "./Card/Card";
-import Controller from "./Controller/Controller";
 import Sidebar from "./Sidebar/Sidebar";
 import Prologue from "./Prologue/Prologue";
-import QuestionAddButton from "./QuestionAddButton/QuestionAddButton";
-import "./Edit.scss";
 import Branching from "./Branching/Branching";
+import Controller from "./Controller/Controller";
+import QuestionAddButton from "./QuestionAddButton/QuestionAddButton";
+
+// Style
+import "./Edit.scss";
 
 const MODE_EDIT = "edit";
 const MODE_PREVIEW = "preview";
