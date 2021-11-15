@@ -1,8 +1,8 @@
 import React from "react";
-import { CardStates } from "../../../constants";
-import { QuestionProvider } from "../../../contexts/QuestionContext";
-import apis from "../../../utils/apis";
-import QuestionCommon from "../../../components/QuestionCommon/QuestionCommon";
+import { CardStates } from "constants.js";
+import { QuestionProvider } from "contexts/QuestionContext";
+import apis from "utils/apis";
+import QuestionCommon from "components/QuestionCommon/QuestionCommon";
 import "./Viewer.scss";
 
 export default function Viewer({ match }) {

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useGlobalState } from "../../contexts/GlobalContext";
+import { useGlobalState } from "contexts/GlobalContext";
 
 export default function ChannelService({ pluginKey, ...ohters }) {
   const isInit = useRef(false);

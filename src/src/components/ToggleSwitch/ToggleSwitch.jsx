@@ -1,7 +1,7 @@
 import React from "react";
 import "./ToggleSwitch.scss";
-import selectedDot from "../../assets/icons/selected-dot.svg";
-import unselectedDot from "../../assets/icons/unselected-dot.svg";
+import selectedDot from "assets/icons/selected-dot.svg";
+import unselectedDot from "assets/icons/unselected-dot.svg";
 
 export default function ToggleSwitch({
   isRequired,

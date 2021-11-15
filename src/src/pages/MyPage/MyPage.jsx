@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import API from "../../utils/apis";
+import API from "utils/apis";
 
 // Components
-import Header from "../Main/Header";
+import Header from "pages/Main/Header";
 
 // SCSS
 import "./MyPage.scss";
-import Loading from "../Loading/Loading";
-import addBtn from "../../assets/icons/add-btn-white.svg";
-import Error from "../Error/Error";
+import Loading from "pages/Loading/Loading";
+import addBtn from "assets/icons/add-btn-white.svg";
+import Error from "pages/Error/Error";
 import SurveyCard from "./SurveyCard";
 
 export default function MyPage() {

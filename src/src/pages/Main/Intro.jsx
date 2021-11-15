@@ -1,8 +1,8 @@
 /* React elements */
 import { React } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { DOMAIN } from "../../constants";
-import { useGlobalState } from "../../contexts/GlobalContext";
+import { DOMAIN } from "constants.js";
+import { useGlobalState } from "contexts/GlobalContext";
 
 /* Styles */
 import "./Intro.scss";

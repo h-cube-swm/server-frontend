@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
-import { useGlobalState } from "../../contexts/GlobalContext";
+import logo from "assets/images/logo.png";
+import { useGlobalState } from "contexts/GlobalContext";
 import "./FloatingLogo.scss";
 
 export default function FloatingLogo() {

@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Main/Header";
+import Header from "pages/Main/Header";
 
 import "./Pricing.scss";
 

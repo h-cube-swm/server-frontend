@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { DOMAIN } from "../constants";
+import { DOMAIN } from "constants.js";
 
 const ROOT = `https://api.${DOMAIN}`;
 

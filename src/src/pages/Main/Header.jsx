@@ -1,10 +1,10 @@
 /* React elements */
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useGlobalState } from "../../contexts/GlobalContext";
-import { DOMAIN } from "../../constants";
+import { useGlobalState } from "contexts/GlobalContext";
+import { DOMAIN } from "constants.js";
 import "./Header.scss";
-import logo from "../../assets/images/logo.png";
+import logo from "assets/images/logo.png";
 
 function Header() {
   const { token, logout } = useGlobalState();

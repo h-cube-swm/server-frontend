@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Admin.scss";
-import API from "../../utils/apis";
+import API from "utils/apis";
 
 const LIMIT = 25;
 

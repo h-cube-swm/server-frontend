@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useMessage } from "../../contexts/MessageContext";
-import useOnly from "../../hooks/useOnly";
-import useTimeout from "../../hooks/useTimeout";
+import { useMessage } from "contexts/MessageContext";
+import useOnly from "hooks/useOnly";
+import useTimeout from "hooks/useTimeout";
 import "./Loading.scss";
 
 const SPINNER_NUM = 3;
