@@ -32,7 +32,7 @@ import ExpandableInput from "components/ExpandableInput/ExpandableInput";
 // Others
 import { CardStates, CardTypes, DOMAIN } from "constants.js";
 import "./QuestionCommon.scss";
-import useThrottle from "hooks/useThrottle";
+import { useThrottle } from "hooks/useThrottle";
 
 function getQuestionDetail(type) {
   const typeDict = {

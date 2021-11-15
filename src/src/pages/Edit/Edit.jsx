@@ -7,7 +7,7 @@ import withSurveyForEdit from "hocs/withSurveyForEdit";
 
 // Hooks
 import useOnly from "hooks/useOnly";
-import useThrottle from "hooks/useThrottle";
+import { useDebounce } from "hooks/useThrottle";
 import useDragPaging from "hooks/useDragPaging";
 import useScrollPaging from "hooks/useScrollPaging";
 
@@ -170,7 +170,7 @@ function Edit({ survey: init, updateSurvey, location }) {
     setSurvey({ ...survey, selectedIndex: newIndex, questions });
   });
 
-  useThrottle(putSurvey, [survey]);
+  useDebounce(putSurvey, [survey]);
 
   if (survey.status !== "editing" || isEnded)
     return <Redirect to={`/forms/survey/details/${survey.id}`} />;
