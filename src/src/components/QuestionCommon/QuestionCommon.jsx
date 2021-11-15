@@ -63,7 +63,16 @@ function SuggestionDropdown({ visible, query, onSelect, n = 3 }) {
   useEffect(() => {
     const handleClick = (e) => {
       if (!ref.current) return;
-      if (e.path.indexOf(ref.current) < 0) onSelect(null);
+      let node = e.target;
+      let isOutside = true;
+      while (node) {
+        if (node === ref.current) {
+          isOutside = false;
+          break;
+        }
+        node = node.parentNode;
+      }
+      if (isOutside) onSelect(null);
     };
     window.addEventListener("click", handleClick, true);
     return () => window.removeEventListener("click", handleClick, true);
