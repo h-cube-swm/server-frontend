@@ -47,11 +47,12 @@ function getQuestionDetail(type) {
   return Default;
 }
 
-function SuggestionDropdown({ visible, query, onSelect, n = 3 }) {
+function SuggestionDropdown({ visible, query, onSelect, n = 1 }) {
   const [suggestionList, setSuggestionList] = useState([]);
   const ref = useRef(null);
 
   useThrottle(async () => {
+    if (!visible) return;
     try {
       const [data] = await API.getSuggestion(query);
       setSuggestionList(data.map((x) => x[1]));
@@ -63,16 +64,16 @@ function SuggestionDropdown({ visible, query, onSelect, n = 3 }) {
   useEffect(() => {
     const handleClick = (e) => {
       if (!ref.current) return;
+
+      // Return if sugestion is clicked.
       let node = e.target;
-      let isOutside = true;
       while (node) {
-        if (node === ref.current) {
-          isOutside = false;
-          break;
-        }
+        if (node === ref.current) return;
         node = node.parentNode;
       }
-      if (isOutside) onSelect(null);
+
+      // If somewhere outside of suggestion is clicked, unselect.
+      onSelect(null);
     };
     window.addEventListener("click", handleClick, true);
     return () => window.removeEventListener("click", handleClick, true);
