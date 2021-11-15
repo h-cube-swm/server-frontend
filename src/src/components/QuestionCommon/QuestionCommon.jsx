@@ -1,5 +1,5 @@
 // React elements
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 // Utils
@@ -32,6 +32,7 @@ import ExpandableInput from "components/ExpandableInput/ExpandableInput";
 // Others
 import { CardStates, CardTypes, DOMAIN } from "constants.js";
 import "./QuestionCommon.scss";
+import useThrottle from "hooks/useThrottle";
 
 function getQuestionDetail(type) {
   const typeDict = {
@@ -46,6 +47,44 @@ function getQuestionDetail(type) {
   return Default;
 }
 
+function SuggestionDropdown({ visible, query, onSelect, n = 3 }) {
+  const [suggestionList, setSuggestionList] = useState([]);
+  const ref = useRef(null);
+
+  useThrottle(async () => {
+    try {
+      const [data] = await API.getSuggestion(query);
+      setSuggestionList(data.map((x) => x[1]));
+    } catch {
+      // Ignore error
+    }
+  }, [query]);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (!ref.current) return;
+      if (e.path.indexOf(ref.current) < 0) onSelect(null);
+    };
+    window.addEventListener("click", handleClick, true);
+    return () => window.removeEventListener("click", handleClick, true);
+  });
+
+  if (!visible || suggestionList.length === 0) return null;
+
+  return (
+    <div className="suggestions" ref={ref}>
+      {suggestionList.map((suggestion, i) => {
+        if (i >= n) return null;
+        return (
+          <div key={i} className="suggestion" onClick={() => onSelect(suggestion)}>
+            {suggestion.title}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
   const { state, surveyId, question, setQuestion, isLast } = useQuestion();
   const [isLoading, setIsLoading] = useState(false);
@@ -58,44 +97,18 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
   const href = `https://auth.the-form.io?redirect=${location}`;
   const { token } = useGlobalState();
   const isRoot = location === "https://the-form.io/" || location === "https://dev.the-form.io/";
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
-  // const [suggestionList, setSuggestionList] = useState([""]);
-  // const [isTyping, setIsTyping] = useState(false);
-  // const suggestQuestion = useThrottleWithTimeout(async () => {
-  //   try {
-  //     const [data] = await API.postSuggestion(question.title);
-  //     const temp = [];
-  //     if (data) {
-  //       for (let i = 0; i < data.length; i++) {
-  //         temp.push(JSON.parse(data[i][1]).title);
-  //       }
-  //       setSuggestionList(temp);
-  //     }
-  //   } catch {
-  //     // Ignore error
-  //   }
-  // }, 500);
+  const handleFocus = (e) => {
+    e.stopPropagation();
+    setShowSuggestion(true);
+  };
 
-  // useEffect(() => {
-  //   suggestQuestion();
-  // }, [question.title]);
-
-  // const onFocus = () => {
-  //   setIsTyping(true);
-  // };
-
-  // const outFocus = () => {
-  //   setTimeout(() => {
-  //     setIsTyping(false);
-  //   }, 100);
-  // };
-
-  // function onSuggestion(suggestion) {
-  //   const newQuestion = question;
-  //   newQuestion.title = suggestion;
-  //   setQuestion(newQuestion);
-  //   setIsTyping(false);
-  // }
+  const handleSuggestionSelection = (suggestion) => {
+    setShowSuggestion(false);
+    if (!suggestion) return;
+    setQuestion((question) => ({ ...question, ...suggestion }));
+  };
 
   const QuestionDetail = getQuestionDetail(question.type);
   const isResponse = state !== CardStates.EDITING;
@@ -174,21 +187,15 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
               <p>필수</p>
             </span>
           )}
-          {/* <Hider hide={!question.title || (question.title && question.title.length <= 3)}>
-            <div className="suggestions">
-              {suggestionList.map((suggestion, i) => {
-                if (i >= 1) return false;
-                return (
-                  <div key={i} className="suggestion" onClick={() => onSuggestion(suggestion)}>
-                    {suggestion}
-                  </div>
-                );
-              })}
-            </div>
-          </Hider> */}
+          <SuggestionDropdown
+            query={question.title}
+            visible={showSuggestion}
+            onSelect={handleSuggestionSelection}
+          />
           <div className={!isEmpty ? "basic" : "basic empty"}>
             <div className="question">
               <ExpandableInput
+                onClick={handleFocus}
                 placeholder={!isLast ? "더 폼 나는 질문" : "종료 메시지를 작성해주세요."}
                 text={question.title}
                 setText={setNestedState(setQuestion, ["title"])}

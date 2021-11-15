@@ -68,17 +68,16 @@ async function sendImg(body) {
   }
 }
 
-async function SendSuggestionData(method, body) {
+async function getSuggestion(text) {
   try {
     const config = {
-      url: `https://suggestion.dev.the-form.io/test`,
-      method: method.toLowerCase(),
+      url: `https://suggestion.dev.the-form.io/test?text=${text}`,
+      method: "GET",
     };
-    if (body) config.data = { text: body };
-    const { status, data } = await axios(config);
-    return [data, null, status];
+    const { data } = await axios(config);
+    return [data, null];
   } catch (error) {
-    return [error.response && error.response.data, error, -1];
+    return [error.response && error.response.data, error];
   }
 }
 
@@ -124,7 +123,7 @@ export default {
   deleteSurvey: (sid) => deleteData(`/surveys/${sid}`),
 
   // temporal
-  postSuggestion: (body) => SendSuggestionData("POST", body),
+  getSuggestion,
 
   // Admin API
   admin: {
