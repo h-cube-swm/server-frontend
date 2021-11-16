@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-export default function useThrottle(callback, dependencies, timeout = 1000) {
-  const timeoutHandle = useRef(0);
+export function useDebounce(callback, dependencies, timeout = 1000) {
+  const timeoutHandle = useRef(null);
+
   useEffect(() => {
     const handle = setTimeout(() => {
       if (timeoutHandle.current !== handle) return;
@@ -11,30 +12,21 @@ export default function useThrottle(callback, dependencies, timeout = 1000) {
   }, dependencies);
 }
 
-export function useThrottleWithTimeout(callback, timeout = 1000) {
-  const timeoutHandle = useRef(0);
-  const [isFirst, setIsFirst] = useState(true);
+export function useThrottle(callback, dependencies, timeout = 500) {
+  const callbackRef = useRef(null);
+  const isWaitingRef = useRef(null);
 
-  function onEvent() {
-    const previous = timeoutHandle.current;
-
-    if (previous) {
-      return;
-    }
-    if (isFirst) {
+  useEffect(() => {
+    if (isWaitingRef.current) {
+      callbackRef.current = callback;
+    } else {
       callback();
-      setIsFirst(false);
+      isWaitingRef.current = true;
+      setTimeout(() => {
+        if (callbackRef.current) callbackRef.current();
+        callbackRef.current = null;
+        isWaitingRef.current = false;
+      }, timeout);
     }
-
-    const handle = setTimeout(() => {
-      if (timeoutHandle.current === handle) {
-        callback();
-      }
-      timeoutHandle.current = 0;
-    }, timeout);
-
-    timeoutHandle.current = handle;
-  }
-
-  return onEvent;
+  }, dependencies);
 }

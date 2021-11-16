@@ -1,10 +1,10 @@
 import React from "react-router-dom";
-import { CardTypes } from "../constants";
-import getQuestion from "../components/Forms/Survey/getQuestion";
-import Loading from "../components/Loading/Loading";
-import API from "../utils/apis";
-import { tryUnhash } from "../utils/hasher";
-import Error from "../components/Error/Error";
+import { CardTypes } from "constants.js";
+import getQuestion from "utils/getQuestion";
+import Loading from "pages/Loading/Loading";
+import API from "utils/apis";
+import { tryUnhash } from "utils/hasher";
+import Error from "pages/Error/Error";
 
 const withSurveyForEdit = (Component) => (props) => {
   let surveyId = props.match.params.link;

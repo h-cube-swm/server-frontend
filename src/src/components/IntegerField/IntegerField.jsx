@@ -1,5 +1,5 @@
 import React from "react";
-import TextField from "../TextField/TextField";
+import TextField from "components/TextField/TextField";
 import "./IntegerField.scss";
 
 function IntegerField({ number, setNumber, disabled, label, max, min, ...props }) {

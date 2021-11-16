@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useMessage } from "../../contexts/MessageContext";
+import { useMessage } from "contexts/MessageContext";
 import "./MessageSystem.scss";
-import delIcon from "../../assets/icons/del-btn2.svg";
-import delIconWhite from "../../assets/icons/del-btn3.svg";
-import Positioner from "../Positioner/Positioner";
-import useTimeout from "../../hooks/useTimeout";
+import delIcon from "assets/icons/del-btn2.svg";
+import delIconWhite from "assets/icons/del-btn3.svg";
+import Positioner from "components/Positioner/Positioner";
+import useTimeout from "hooks/useTimeout";
 
 const MESSAGE_LIFE = 5000;
 

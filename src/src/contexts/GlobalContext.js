@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import L from "../utils/logger";
+import L from "utils/logger";
 
 function getParams() {
   const params = new URLSearchParams(window.location.search);

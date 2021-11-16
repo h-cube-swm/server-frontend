@@ -1,4 +1,4 @@
-import useTimeout from "../../hooks/useTimeout";
+import useTimeout from "hooks/useTimeout";
 import "./Hider.scss";
 
 function Hider({ hide, children, appearDelay = 0 }) {

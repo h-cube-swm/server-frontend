@@ -1,6 +1,6 @@
 import React from "react";
-import { useModal } from "../../contexts/ModalContext";
-import Positioner from "../Positioner/Positioner";
+import { useModal } from "contexts/ModalContext";
+import Positioner from "components/Positioner/Positioner";
 
 import "./ModalSystem.scss";
 
