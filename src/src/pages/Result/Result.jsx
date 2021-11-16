@@ -1,21 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { utils, writeFile } from "xlsx";
-import API from "utils/apis";
-import Loading from "pages/Loading/Loading";
-import TextField from "components/TextField/TextField";
-import Table from "components/Table/Table";
 import { CardTypes } from "constants.js";
-import logo from "assets/images/logo.png";
-import { useMessage } from "contexts/MessageContext";
-import Error from "pages/Error/Error";
+
+import Table from "components/Table/Table";
+import TextField from "components/TextField/TextField";
+
+import API from "utils/apis";
 import { answerToString, reshapeAnswerTo2DArray } from "utils/responseTools";
+
+import Error from "pages/Error/Error";
+import Loading from "pages/Loading/Loading";
+
+import { useMessage } from "contexts/MessageContext";
+
+import logo from "assets/images/logo.png";
+
 import ViewFrame from "./ViewFrame/ViewFrame";
-import "./Result.scss";
+import Selection from "./Selection/Selection";
 import ChoiceView from "./ViewTypes/ChoiceView/ChoiceView";
 import SentenceView from "./ViewTypes/SentenceView/SentenceView";
 import PreferenceView from "./ViewTypes/PreferenceView/PreferenceView";
-import Selection from "./Selection/Selection";
+
+import "./Result.scss";
 
 const VIEW_DICT = {
   [CardTypes.SINGLE_CHOICE]: ChoiceView,
@@ -79,12 +87,12 @@ export default function Result({ match, location }) {
 
   // Export to xlsx file
   const exportToXlsx = async () => {
-    const cells = rows.map((row) => row.map((cell) => (cell ? answerToString(cell) : "-")));
+    const cells = rows.map((row) => row.map((cell) => (cell ? answerToString(cell, true) : "-")));
     const xlsxColumn = columns.map(({ title }) => title);
     const workSheetData = [xlsxColumn, ...cells];
     const wb = utils.book_new();
     const ws = utils.aoa_to_sheet(workSheetData);
-    utils.book_append_sheet(wb, ws, "Sheet 1");
+    utils.book_append_sheet(wb, ws, "Survey Result");
     await writeFile(wb, survey.title + ".xlsx");
   };
 
@@ -124,11 +132,13 @@ export default function Result({ match, location }) {
       <div className="content">{answers.length === 0 ? noAnswers : content}</div>
       <div className="btn-box">
         <div className="export-button">
-          <button className="btn rg png" onClick={exportToImg}>
-            .png
-            <br />
-            <strong>다운로드</strong>
-          </button>
+          {isChart && (
+            <button className="btn rg png" onClick={exportToImg}>
+              .png
+              <br />
+              <strong>다운로드</strong>
+            </button>
+          )}
           <button className="btn rg xlsx" onClick={exportToXlsx}>
             .xlsx
             <br />

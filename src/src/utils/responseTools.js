@@ -8,13 +8,23 @@ function queryToString(query) {
   return JSON.stringify(filteredQuery);
 }
 
-export function answerToString(answer) {
+function isNumeric(str) {
+  if (typeof str !== "string") return false;
+  const isNumeric = !Number.isNaN(str) && !Number.isNaN(parseFloat(str)) && !Number.isNaN(+str);
+  return isNumeric;
+}
+
+export function answerToString(answer, preserveNumbers = false) {
+  let ret = null;
   if (answer instanceof Object) {
-    return Object.entries(answer)
+    ret = Object.entries(answer)
       .filter((value) => value[1])
       .map((x) => +x[0] + 1 + "")
       .join(", ");
   }
+  if (preserveNumbers && isNumeric(ret)) return +ret;
+  if (ret) return ret;
+  if (preserveNumbers && isNumeric(answer)) return +answer;
   return answer + "";
 }
 
