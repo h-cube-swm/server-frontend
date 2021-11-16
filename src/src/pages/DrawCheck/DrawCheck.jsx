@@ -54,7 +54,9 @@ export default function DrawCheck({ match, location }) {
       <FloatingLogo />
       <div className="draw-box">
         <div className="draw-badge-box">
-          <img className="badge" src={unboxingBadge} alt="verified survey mark" />
+          <a href="https://unboxing.monster/" target="blank">
+            <img className="badge" src={unboxingBadge} alt="verified survey mark" />
+          </a>
           <p>블록체인 기술을 통해 응답자 추첨의 공정성이 보장받는 설문입니다 🔒</p>
         </div>
         <div className={isWinner ? "draw-inner-box" : "draw-inner-box loose"}>

@@ -21,14 +21,18 @@ $font-color: #fff;
       align-items: center;
       width: 60vh;
       border-radius: 10px;
-      background-color: #363636;
+      background-color: #8c8c8d;
       padding: 0.5rem;
       margin-bottom: 2rem;
-      img {
+      a {
         width: 15%;
-        margin: 0 0.5rem;
+        margin: 0 1rem;
+        img {
+          width: 100%;
+        }
       }
       p {
+        font-weight: bold;
         font-size: $fs-sm;
         color: #fff;
         word-break: keep-all;
