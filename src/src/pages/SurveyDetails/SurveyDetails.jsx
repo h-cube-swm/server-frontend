@@ -183,7 +183,7 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
         <Link to="/" target="_blank">
           <img src={logo} alt="logo" />
         </Link>
-        <h1>설문 세부설정</h1>
+        <h1>&lt;{title}&gt; 세부설정</h1>
       </div>
       <div className="contents-box">
         <div className="section">
