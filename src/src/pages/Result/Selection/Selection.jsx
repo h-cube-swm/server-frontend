@@ -24,7 +24,11 @@ function isColumnCriteria(question) {
       question.title.indexOf("mail") >= 0 ||
       question.title.indexOf("번호") >= 0 ||
       question.title.indexOf("휴대폰") >= 0 ||
+      question.title.indexOf("연락처") >= 0 ||
+      question.title.indexOf("주소") >= 0 ||
       question.title.indexOf("이름") >= 0 ||
+      question.title.indexOf("성함") >= 0 ||
+      question.title.indexOf("성명") >= 0 ||
       question.title.indexOf("나이") >= 0 ||
       question.title.indexOf("취미") >= 0 ||
       question.title.indexOf("별명") >= 0 ||

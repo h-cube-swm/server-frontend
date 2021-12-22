@@ -10,26 +10,37 @@
   bottom: 0;
   left: 0;
   z-index: 0;
+  button {
+    width: 15%;
+    height: 40%;
+    background-color: transparent;
+    position: absolute;
+    right: 15vw;
+    top: 25%;
+    img {
+      width: 50%;
+    }
+    &:hover {
+      width: 100%;
+      height: 100%;
+      right: 0;
+      top: 0;
+      opacity: 1;
+      background: linear-gradient(to top, #8f9cff, #fff);
+    }
+  }
   &.top {
     height: 35vh;
     top: 5rem;
-    bottom: unset;
-    &:hover {
-      background: linear-gradient(to bottom, #c0c7ff, #fff);
-    }
-  }
 
-  &:hover {
-    opacity: 1;
-    background-color: #2b44ff;
-    background: linear-gradient(to top, #c0c7ff, #fff);
-  }
-  button {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    img {
-      width: 50%;
+    button {
+      bottom: 25%;
+      &:hover {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        background: linear-gradient(to bottom, #8f9cff, #fff);
+      }
     }
   }
 }
