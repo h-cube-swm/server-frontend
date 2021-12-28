@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import API from "utils/apis";
 import { useMessage } from "contexts/MessageContext";
 import { useGlobalState } from "contexts/GlobalContext";
@@ -27,6 +27,9 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
   const [drawResult, drawError] = API.useDraw(surveyId);
   const { publish } = useMessage();
   const { load } = useModal();
+  const [redirect, setRedirect] = useState(null);
+
+  if (redirect) return <Redirect to={redirect} />;
 
   const handleEmailSend = async () => {
     if (emailState === "loading") return;
@@ -86,7 +89,11 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
   const onSubmit = async (link, status) => {
     const result = await API.putSurveyStatus(link, status);
     if (result[2] === 200) {
-      publish("📄 설문이 종료 되었습니다 ✅");
+      if (status === SurveyStatus.FINISHED) publish("📄 설문이 종료 되었습니다 ✅");
+      if (status === SurveyStatus.EDITING) {
+        setRedirect(`/forms/survey/edit/${surveyId}`);
+        publish("📄 설문을 수정할 수 있게 합니다 ✅");
+      }
     }
     setTimestamp(Date.now());
   };
@@ -110,6 +117,26 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
       onSubmit: () => onSubmit(link, status),
       type: "warning",
       submitMessage: "종료",
+    });
+  };
+
+  const modifySurvey = (link, status) => {
+    // eslint-disable-next-line
+    load({
+      children: (
+        <>
+          <h2 style={{ fontWeight: "700", marginTop: "2rem" }}>주의❗️ 이미 배포된 설문입니다</h2>
+          <p style={{ fontWeight: "500", marginTop: "2rem", marginBottom: "2rem" }}>
+            기존 응답이 있을 경우, 응답이 사라지거나 설문이 올바르게 작동하지 않을 수 있습니다.
+            <br />
+            <br />
+            신중하게 결정해주세요 🤔
+          </p>
+        </>
+      ),
+      onSubmit: () => onSubmit(link, status),
+      type: "warning",
+      submitMessage: "확인",
     });
   };
 
@@ -279,7 +306,7 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
           </div>
           {surveyStatus !== SurveyStatus.FINISHED && (
             <button
-              className="box seven"
+              className="box eleven"
               onClick={() => finishSurvey(surveyId, SurveyStatus.FINISHED)}>
               <h1>종료하기</h1>
             </button>
@@ -306,14 +333,21 @@ const SurveyDetails = ({ survey, setTimestamp }) => {
             </button>
           )}
 
-          <div className="box nine">
+          <button className="box nine">
             <Link className="option-btn" to={`/forms/survey/result/${surveyId}`}>
               결과보기
             </Link>
-          </div>
-          <div className="box ten">
+          </button>
+          <button className="box ten">
             <Link to="/mypage">마이페이지</Link>
-          </div>
+          </button>
+          {surveyStatus === SurveyStatus.PUBLISHED && (
+            <button
+              className="box seven"
+              onClick={() => modifySurvey(surveyId, SurveyStatus.EDITING)}>
+              <h1>수정하기</h1>
+            </button>
+          )}
         </div>
       </div>
     </div>
