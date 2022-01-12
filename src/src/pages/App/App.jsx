@@ -40,12 +40,13 @@ const ResponseEnding = lazy(() => import("pages/ResponseEnding/ResponseEnding"))
 const DrawCheck = lazy(() => import("pages/DrawCheck/DrawCheck"));
 
 /*
-Only directly loaded components, which is Response and Loading, are loaded directly.
+Only direct-loading required components, which is `Response` and `Loading`, are loaded directly.
+Other components are not loaded when frontend started.
 Therefore, when user response, other heavy componets including Edit are not loaded.
 Consequantly, response page is loaded faster.
-
-It seems like Switch is only applied to renders its direct children.
-Thus, unlike example in official document, Suspense should be outside of Switch.
+---
+It seems like `Switch` is only applied to renders its direct children.
+Thus, unlike example in official document, `Suspense` should be outside of `Switch`.
 */
 
 function App() {
@@ -78,6 +79,8 @@ function App() {
                 {/* Admin-page related pathes */}
                 <Route path="/admin/view/:id" component={Viewer}></Route>
                 <Route path="/admin" component={Admin}></Route>
+
+                {/* 404 Handling */}
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
