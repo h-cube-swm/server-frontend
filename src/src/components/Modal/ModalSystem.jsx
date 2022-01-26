@@ -24,7 +24,7 @@ function Modal({
     buttonColor = "#E22F1B";
   }
   return (
-    <Positioner y={isVisible ? 0 : "-200%"}>
+    <Positioner y={isVisible ? 0 : "-100vh"}>
       <div className={"modal-box " + type} style={{ width, height }}>
         <div className="modal-inner-box">{children}</div>
         <div className="btn-children">
