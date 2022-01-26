@@ -199,7 +199,7 @@ export default function QuestionCommon({ handleOnDelete, handleOnDuplicate }) {
           )}
           <SuggestionDropdown
             query={question.title}
-            visible={showSuggestion && !isLast}
+            visible={showSuggestion && !isLast && false} // && false: Disable, none: Enable
             onSelect={handleSuggestionSelection}
           />
           <div className={!isEmpty ? "basic" : "basic empty"}>
