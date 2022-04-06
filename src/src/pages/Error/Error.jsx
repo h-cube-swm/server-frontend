@@ -47,9 +47,15 @@ export default function Error({ type }) {
       contents = (
         <>
           <h1>예상치 못한 에러가 발생하였습니다. </h1>
-          <p>
-            하단 <strong>채널톡</strong>을 통해 문의주시면 감사드리겠습니다.
-          </p>
+          {type === "cannot-get-user-info" ? (
+            <p>
+              로그아웃 후에 다시 한번 <strong>로그인</strong>해 보시겠어요? :)
+            </p>
+          ) : (
+            <p>
+              에러가 지속된다면 하단 <strong>채널톡</strong>을 통해 문의주시면 감사드리겠습니다.
+            </p>
+          )}
         </>
       );
       break;
