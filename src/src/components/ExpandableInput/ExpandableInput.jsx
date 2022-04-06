@@ -39,7 +39,7 @@ function ExpandableInput(
         }}
         className="input-field"
         onInput={(e) => setText(e.target.innerText)}
-        onPaste={(e) => onPaste(e)}
+        onPaste={isEditable ? (e) => onPaste(e) : null}
         {...props}
         contentEditable={isEditable ? "true" : "false"}></div>
       {!text && <div className={center ? "placeholder center" : "placeholder"}>{placeholder}</div>}
